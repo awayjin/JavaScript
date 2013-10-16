@@ -1,0 +1,252 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="/js/jquery-1.10.2.js"></script>
+    <!--<script src="/js/jquery-1.7.2.js"></script>-->
+</head>
+<style type="text/css">
+    form ~ input{}
+    form:nth-child(0){ background-color:pink; }
+</style>
+<body>
+<form target="_blank" method="get" name="formData" action="02xhrLevel2.php" enctype=""> <!-- enctype="application/x-www-form-urlencoded multipart/form-data text/plain"-->
+    name: <input type="text" name="userName">
+    email: <input type="text" name="email">
+    <input type="submit" value="subbit">
+</form>
+
+<div id="status">status</div>
+
+<script>
+/*
+5.0 其他跨域技术 alternate cross-domian techniques
+    5.1 图像ping
+        onload src
+
+    5.2 JSONP
+        5.2.1 原生JSONP
+        不足:a. 别的域加载过来,安全性未知
+             b. 计时器指定时间内是否收到响应
+        5.2.2 jQ JSONP
+
+4.0 跨域资源共享 CROS
+    header("Access-Control-Allow-Origin:*");
+
+3.0 进度事件 progress events
+    3.1  load事件
+      xhr.onload = function(){}
+
+    3.2 progress事件
+
+2.0 XMLHttpRequest Lever 2
+    2.1 FormData
+        2.1.1 使用GET方法 将要提交参数写到open方法的URL中
+
+        2.1.2 表单数据序列化 jq serialize()
+             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        2.2.3 FormData序列化 new FormData(forms[0])
+
+    2.2 重写MIME类型 overrideMimeType方法
+         xhr.overrideMimeType("text/xml");
+
+
+
+ */
+//5.0 其他跨域技术 alternate cross-domian techniques
+(function(window, undefined){
+    //5.1 图像ping
+    var image = new Image();
+    image.onload = function(){
+        console.log("5.1 Image Pings.Done!")
+    }
+//    image.src = "http://codegoing.com/jinwei.php";
+    image.src = "/xsPHPCompany/tejia.jpg";
+
+    // 5.2.1 JSONP
+    var script = document.createElement("script");
+//    script.src = "05_2jsonp.php?callback=jwTest";
+    script.src = "http://www.codegoing.com/jwTest/jsonp.php?callback=jwTest";
+    document.body.insertBefore(script, document.body.firstChild);
+//    document.body.appendChild(script);
+
+    function createXHR(){
+        if(typeof XMLHttpRequest !== 'undefined'){
+            return new XMLHttpRequest();
+        }else if(typeof ActiveXObject != 'undefined'){
+            return new ActiveXObject("MSXML2.XMLHttp.6.0");
+        }
+    }
+
+    //5.2.2 jQ
+    $.ajax({
+        url: "05_2jsonp.php?callback=jqJSONResponse",
+//        type: "jsonp",
+        success: function(obj){
+            console.log("5.2.2 ajax:", obj);
+        },
+        error: function(obj){
+            console.log("5.2 error:", obj);
+        }
+
+    });
+
+
+
+
+})(window);
+function handleResponseFunc(obj){
+    console.log("5.2.1 原生JSONP:", obj.name)
+}
+
+
+//5.2.2 jQ JSONP
+$.get(
+      "05_2jsonp.php?callback=jqJSONResponse", function(json){
+            //     "05_2_2.json", function(json){
+            console.log("5.2.2 jQ JSONP:", json)
+        });
+function jqJSONResponse(obj){
+    console.log("5.2.2 jQ JSONP:", obj.sky)
+}
+
+//4.0 跨域资源共享 CROS
+(function(window, undefined){
+/*    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState = 4){
+            if(xhr.status >=200 && xhr.status <300 || xhr.status === 304){
+//                isSuccess = status >= 200 && status < 300 || status === 304;
+                console.log("4.0 CORS:" + xhr.responseText)
+            }else{
+//               console.log("4.1 Request was unsuccessful:", xhr.status);
+            }
+        }
+    };
+//    xhr.open("open", "04CORS.php", true);
+    xhr.open("post", "http://codegoing.com/jinwei.php", true);
+    xhr.send(null);*/
+})(window);
+
+//3.0 进度事件 progress events
+(function(window, undefined){
+    //3.1 load事件
+/*
+    var xhr = new XMLHttpRequest("MSXML2.XMLHttp.6.0");
+    xhr.onload = function(){
+        if(xhr.status >= 200 && xhr.status <300 || xhr.status == 304){
+            console.log("3.1 load事件:", xhr.responseText);
+        }else{
+            console.log("3.1 Request was unsuccessful:", xhr.status);
+        }
+    }
+
+    //3.2 progress事件
+    xhr.onprogress = function(event){
+       var status = document.querySelector("#status");
+        if(event.lengthComputable){
+            status.innerHTML = "Received:" + event.position + " of " +event.totalSize+ " bytes. ";
+        }
+    }
+
+    xhr.open("get", "03progress.php", true);
+    xhr.send(null);
+*/
+
+})(window);
+
+
+//2.1 FormData
+!(function($, undefine){
+/*
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState = 4){
+            if(xhr.status >=200 && xhr.status <300 || xhr.status == 304){
+                console.log("02.1 FormData:", xhr.responseText)
+            }
+        }
+    };
+*/
+
+//    2.1.1 使用GET方法 将要提交参数写到open方法的URL中
+//    var jqSerialize = $("form[name='formData']").serialize();
+//    xhr.open("get", "02.1FormData.php?"+jqSerialize, true);
+//      xhr.send(null);
+
+//    2.1.2 表单数据序列化 jq serialize()
+/*
+    xhr.open("post", "02.1FormData.php", true);
+    var form = document.forms['formData'];
+    var formData = new FormData(form);
+    var jqSerialize = $("form[name='formData']").serialize();
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+     //使用send方法传递参数使用的是POST方法
+     xhr.send(jqSerialize );*/
+
+     //2.1.3 FormData序列化 new FormData(forms[0])
+/*    xhr.open("POST", "02.1FormData.php", true);
+    var form = document.forms['formData'];
+    var formData = new FormData(form);
+    xhr.send(formData);*/
+
+})(window.jQuery);
+
+//2.2 重写MIME类型 overrideMimeType方法
+!(function(window, undefined){
+/*    var xhr = new XMLHttpRequest("MSXML2.XMLHttp.6.0");
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            if(xhr.status >= 200 && xhr.status <300 || xhr.status == 304){
+                console.log("2.2.1responseText:", xhr.responseText);
+                console.log("2.2.1responseXML:", xhr.responseXML);
+            }
+        }
+    };
+    xhr.open("get", "02.2overideMimeType.php", true);
+    xhr.overrideMimeType("text/xml");
+    xhr.send(null);*/
+})(window);
+
+
+
+
+
+</script>
+
+<p id="results"><b>Results: </b> </p>
+<!--<form class="second-form" method="get">-->
+    <form method="get" class="second-form" name="formDaata" action="02xhrLevel2.php" enctype=""> <!-- enctype="application/x-www-form-urlencoded multipart/form-data text/plain"-->
+
+        <select name="single">
+        <option>Single</option>
+        <option>Single2</option>
+    </select>
+    <select name="multiple" multiple="multiple">
+        <option selected="selected">Multiple</option>
+        <option>Multiple2</option>
+        <option selected="selected">Multiple3</option>
+    </select><br/>
+    <input type="checkbox" name="check" value="check1"/> check1
+    <input type="checkbox" name="check" value="check2" checked="checked"/> check2
+    <input type="radio" name="radio" value="radio1" checked="checked"/> radio1
+    <input type="radio" name="radio" value="radio2"/> radio2
+</form>
+
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+
+<script>
+    $("li:nth-child(2)").css("color", "red")
+    $("li:nth-last-child(3)").css("color", "green")
+
+    $("#results").append("<p>"+$("form:nth-child(2)").serialize()+"</p>");
+    $("#results").append("<p>"+$(".second-form").serialize()+"</p>");
+//    console.log($(".second-form").serialize());
+</script>
+</body>
+</html>

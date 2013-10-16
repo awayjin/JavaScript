@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=gb2312">
+<title></title>
+<style>
+* {margin:0;}
+body {font-size:12px;}
+</style>
+<script type="text/javascript" src="jquery-1.4.2.js"></script>
+<script type="text/javascript" src="jquery-levelSelect-ajax.js"></script>
+<script type="text/javascript">
+
+
+$(function(){
+	$("#test").click(function(){
+		$.openLayer({
+			maxItems : 5,
+			pid : "0",
+			//oneLevel : false,
+			returnText : "restxts",
+			returnValue : "resvals",
+			span_width : {d1:120,d2:150,d3:150},
+			index : 1
+		});
+	});
+	$("#test2").click(function(){
+		$.openLayer({
+			maxItems : 1,
+			pid : "0",
+			returnText : "restxts",
+			returnValue : "resvals",
+			span_width : {d1:120,d2:150,d3:150},
+			//shared : false,
+			index : 3
+		});
+	});
+});
+</script>
+</head>
+<body>
+<div style="margin-top:00px;"></div>
+
+
+<div style="margin-top:150px;"><input name="test"  id="test" value="多选例子" type="button"/><input name="test2"  id="test2" value="单选例子" type="button"/></div>
+<div>结果id：<input type='text' id='resvals' value='这里存放结果id' size=50></div>
+<div>结果文本：<input type='text' id='restxts' value='这里存放结果文本' size=50></div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+
+<script>
+
+    var xhr = createXHR();
+    xhr.open("get", "https://github.com/awayjin/test/blob/master/xdr.php", true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            if(xhr.status >=200 && xhr.status <300 || xhr.status == 304){
+                alert(xhr.responseText);
+            }else{
+                alert(xhr.status);
+            }
+        }
+    };
+    xhr.send(null);
+
+
+    //惰性载入函数
+    function createXHR(){
+        //alert("第一次执行函数弹出，后面就不弹出了");
+        if(typeof XMLHttpRequest !== 'undefined'){
+            createXHR = function(){
+                return new XMLHttpRequest();
+            };
+        }else if(typeof ActiveXObject !== "undefined"){
+            createXHR = function(){
+                return new ActiveXObject("MSXML2.XMLHttp.6.0");
+            };
+        }
+        return createXHR();
+    }
+
+
+
+</script>
+</body>
+</html>

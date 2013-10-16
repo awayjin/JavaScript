@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="./Sjax-1.0.js"></script>
+</head>
+<body>
+<button  onclick="btn()">click me</button>
+
+<p id="p1" class="selector">p1</p>
+
+<script>
+    Pjax =
+            function(win){
+
+                var isIE = /*@cc_on!@*/!1,
+                        doc = win.document,
+                        head = doc.getElementsByTagName('head')[0],
+                        script;
+
+                function request(url, success, timestamp){
+                    script = doc.createElement('script');
+
+                    function callback(){
+                        if(typeof jsonp != 'undefined'){
+                            success(jsonp);
+                        }else{
+                            alert('warning: jsonp did not return.');
+                        }
+                        // Handle memory leak in IE
+                        script.onload = script.onreadystatechange = null;
+                        if( head && script.parentNode ){
+                            head.removeChild(script);
+                        }
+                    }
+                    if(isIE){
+                        script.onreadystatechange = function(){
+                            var readyState = this.readyState;
+                            if(readyState == 'loaded' || readyState == 'complete'){
+                                callback();
+                            }
+                        }
+                    }else{
+                        script.onload = function(){
+                            callback();
+                        }
+                    }
+                    if(timestamp){
+                        url += '?ts=' + (new Date).getTime();
+                    }
+                    script.src = url;
+                    head.insertBefore(script, head.firstChild);
+                }
+
+                return {load:request};
+            }(this);
+function btn(){
+//    window.print();
+
+    Sjax.load(
+        "jsonp.php?callback=jsonp",
+        function(obj){
+            document.getElementById("p1").innerHTML = obj.name;
+       }
+    )
+}
+</script>
+</body>
+</html>

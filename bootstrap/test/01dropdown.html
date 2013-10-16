@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/jQuery-1.10.2.js"></script>
+    <!--<script src="01bootstrap_dropdown2.js"></script>-->
+</head>
+<body>
+
+
+
+<div class="dropdown">
+    <button data-toggle="dropdown" class="ca">data-toggle dropdown</button>
+    <ul class="dropdown-menu">
+        <li><a href="#">1</a> </li>
+        <li><a href="#">2</a> </li>
+        <li><a href="#">3</a> </li>
+    </ul>
+</div>
+
+
+
+<script>
+
+
+
+!function($){
+    //严格模式
+    "use strict";
+
+
+    var toggle = "[data-toggle=dropdown]";
+
+    var Dropdown = function(element){
+
+     };
+
+
+    Dropdown.prototype = {
+        constructor: Dropdown,
+
+        toggle: function(e){
+            var $this = $(this),
+                $parent,
+                $isActive;
+
+            $parent = getParent($this);
+
+            $isActive = $parent.hasClass("open");
+
+            clearMenus();
+
+            if(!$isActive){
+                $parent.toggleClass("open");
+            }
+
+
+            e.stopPropagation();
+//            return false;
+
+        }
+
+    };
+
+    function clearMenus() {
+        $(toggle).parent().removeClass("open")
+    }
+
+    function getParent($this){
+        var $parent;
+
+        $parent = $this.parent();
+        return $parent;
+    }
+
+
+
+    $(document)
+        .on("click.dropdown", clearMenus)
+        .on("click.dropdown", toggle, Dropdown.prototype.toggle)
+
+
+}(window.jQuery);
+
+
+</script>
+
+<br>
+<br>
+
+
+</body>
+</html>

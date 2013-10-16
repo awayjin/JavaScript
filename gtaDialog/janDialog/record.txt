@@ -1,0 +1,4 @@
+1.0 闭包
+(function (window, undefined)｛｝)（window）
+	1.1  Ecmascript 执行JS代码是从里到外.	
+1.2 因此把全局变量window或jQuery对象传进来，就避免了到外层去寻找，提高效率。undefined在老一辈的浏览器是不被支持的，直接使用会报错，js框架要考虑到兼容性，因此增加一个形参undefined

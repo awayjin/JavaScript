@@ -1,0 +1,163 @@
+<<<<<<< HEAD
+=======
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>表单序列化</title>
+<script src="../js/jw-EventUtil.js"></script>
+</head>
+
+<body>
+<div class="editable" id="cc" contenteditable>qwqwqw
+</div>
+
+<script>
+function isNumberFloat(inputString)
+
+{
+
+  return (!isNaN(parseInt(inputString))) ? true : false;
+
+}
+
+
+// * Dependencies * 
+// this function requires the following snippets:
+// JavaScript/Randomizers/randomNumber
+// JavaScript/conversions/base_conversion/decToHex
+function randomBgColor()
+{
+  var r,g,b;
+  r = decToHex(randomNumber(256)-1);
+  g = decToHex(randomNumber(256)-1);
+  b = decToHex(randomNumber(256)-1);
+  document.bgColor = "#" + r + g + b;
+}
+function randomNumber(limit){
+  return Math.floor(Math.random()*limit);
+}
+
+
+</script>
+
+<form method="get" action="ds" id="myForm">
+<ul>
+            <li><input type="radio" name="color" value="red">Red</li>
+            <li><input type="radio" name="color" value="green">Green</li>
+            <li><input type="radio" name="color" value="blue">Blue</li>
+        </ul>
+        <input type="submit">
+</form>
+
+
+<form method="get" action="javascript:alert('Form submitted!')" id="myForm">
+        <ul>
+            <li><input type="radio" name="color" value="red">Red</li>
+            <li><input type="radio" name="color" value="green">Green</li>
+            <li><input type="radio" name="color" value="blue">Blue</li>
+        </ul>
+        <fieldset>
+            <legend>Locations</legend>
+            <div>
+                <label for="selLocation">Where do you want to live?</label>
+                <select name="location" id="selLocation">
+                    <option value="Sunnyvale, CA">Sunnyvale</option>
+                    <option value="Los Angeles, CA">Los Angeles</option>
+                    <option value="Mountain View, CA">Mountain View</option>
+                    <option value="">China</option>
+                    <option>Australia</option>
+                </select>
+            </div>
+            <div>
+                <label for="selLocation2">Where do you want to work?</label>
+                <select name="location2" id="selLocation2" multiple size="5">
+                    <option value="Sunnyvale, CA">Sunnyvale</option>
+                    <option value="Los Angeles, CA">Los Angeles</option>
+                    <option value="Mountain View, CA">Mountain View</option>
+                    <option value="">China</option>
+                    <option>Australia</option>
+                </select>
+            </div>
+        </fieldset>
+        <div>
+            <label for="comments">Any other comments?</label><br>
+            <textarea rows="10" cols="50" id="comments" name="comments"></textarea>
+        </div>
+        <input type="button" value="Serialize Form" id="serialize-btn">
+    </form>
+	
+<script>
+var selmenu = document.forms[0].elements['select_menu'];
+
+function serialize(form){
+	var	parts = [],
+	field = null,
+		i,
+		len,
+		j,
+		optLen,
+		option,
+		optValue;
+	
+	for(var i=0, len=form.elements.length; i<len; i++){
+		field = form.elements[i];
+		
+		switch(field.type){
+			case "select-one": 
+			case "select-multiple":
+				if(field.name.length){
+					for (j=0, optLen = field.options.length; j<optLen; j++){
+						option = field.options[j];
+						if(option.selected){
+							optValue = "";
+							if(option.hasAttribute){
+								optValue = option.hasAttribute("value") ? option.value : option.text;
+							}else{
+								optValue = option.attributes("value").specified ? option.value : option.text;
+							}
+							parts.push(encodeURIComponent(field.name) + "=" + encodeURIComponent(optValue));
+						}
+					}
+				}
+				break;
+			
+			case undefined: //字段集
+			case "file":	//文件输入
+			case "submit":	//提交按钮
+			case "reset":	//重置按钮
+			case "button":	//自定义按钮
+				break;
+				
+			case "radio":
+			case "checkbox":
+				if(!field.checked){
+					break;
+				}
+				
+				/*执行默认操作*/
+			
+			default:
+				//不包含没有名字的表单字段
+				if(field.name.length){
+					parts.push(encodeURIComponent(field.name) + "=" +
+					encodeURIComponent(field.value));
+				}
+				
+		}
+	}
+	return parts.join("&")
+}
+
+//表单序列化
+var btn = document.getElementById("serialize-btn");
+        EventUtil.addHandler(btn, "click", function(event){
+            var form = document.forms[0];
+            alert(serialize(form));
+        });
+
+</script>
+
+</body>
+</html>
+>>>>>>> 707646eb6d1de71aa3298d4aa50c758145faa798
