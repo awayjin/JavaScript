@@ -15,16 +15,17 @@
     //长轮询
 function test(){
 //    "use strict";
-    var recursion = arguments.callee;
+    var recursion = arguments.callee,
+        xhr;
     if(typeof XMLHttpRequest !== 'undefined'){
-        var xhr = new XMLHttpRequest();
+         xhr = new XMLHttpRequest();
     }else if(typeof ActiveXObject !== 'undefined'){
-        var xhr = new ActiveXObject("MSXML2.XMLHttp.6.0");
+         xhr = new ActiveXObject("MSXML2.XMLHttp.6.0");
     }
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4){
-            var ele = document.createElement("div");
-            var txt = document.createTextNode(xhr.responseText);
+            var ele = document.createElement("div"),
+                txt = document.createTextNode(xhr.responseText);
             ele.appendChild(txt);
             document.body.appendChild(ele);
             recursion();

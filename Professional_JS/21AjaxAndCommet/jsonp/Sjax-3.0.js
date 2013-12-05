@@ -76,11 +76,75 @@
 var Sjax = function(win){
     "use strict";
     var doc = window.document,
-        script,
         head = doc.head || doc.getElementsByTagName("head")[0];
 
     function request(url, params){
-        script = doc.createElement('script');
+        var script = doc.createElement('script'),
+            success = params.success,
+            failure = params.failure,
+            scope = params.scope || win,
+            ie678 = !-[1, ],
+            isIE =/*@cc_on!@*/!1,
+            readyState,
+            data = params.data;
+
+        if(data && data == 'object'){
+            data = _serialize(data);
+        }
+
+        if(data){
+            url += "?" + data;
+        }
+
+        function _serialize(obj){
+            var arr, key, val;
+            for(key in obj){
+                val = obj[key];
+                if(val.constructor == Array){
+                    for(var i= 0, len=val.length; i<len; i++){
+                        arr.push(key + "=" + val[i]);
+                    }
+                }else{
+                    arr.push(key + "=" + val);
+                }
+            }
+            return arr.join("&");
+        }
+
+        function callback(isTrue){
+            if(isTrue){
+                if(typeof jsonp !==  'undefined'){
+                    success.call(scope, jsonp);
+                }else{
+                    failure.call(scope);
+                }
+            }else{
+                failure.call(scope);
+            }
+            script.onreadystatechange = script.onload = script.onerror = null;
+            if(head && script.parentNode){
+                head.removeChild(script);
+            }
+
+        }
+
+        if(ie678){
+            script.onreadystatechange = function(){
+                readyState = this.readyState;
+                if(readyState == 'loaded' || readyState == 'complete'){
+                    callback(true);
+                }
+            };
+        }else{
+            script.onload = function(){
+                callback(true);
+            }
+            script.onerror = function(){
+                callback();
+            }
+        }
+
+
 
         script.src = url;
         head.insertBefore(script, head.lastChild);
@@ -98,8 +162,8 @@ var Sjax = function(win){
  */
 var Sjax2 = (function(win, undefined){
     "use strict"
-    var isIE = /*@cc_on!@*/!1,
-        doc = win.document,
+    var doc = window.document,
+        isIE = /*@cc_on!@*/!1,
         head = doc.getElementsByTagName('head')[0];
 
     function request(url, params){

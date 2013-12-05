@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+/*
+* 模仿系统弹出框
+* */
+
+(function(window, undefined){
+     var q = window.Dialog = function(){
+
+     };
+    Dialog.prototype ={
+        constructor: Dialog,
+
+        style: function(){
+
+            return 111;
+        },
+
+        alert: function(){
+
+        }
+    }
+
+})(window);
+    console.log(Dialog);
+
+</script>
+
+</body>
+</html>
