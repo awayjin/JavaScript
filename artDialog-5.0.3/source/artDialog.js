@@ -698,7 +698,7 @@ artDialog.fn = artDialog.prototype = {
         this.zIndex();
         config.lock && this.lock();
         
-        this._addEvent();
+        this._addEvent();f
         this[config.visible ? 'visible' : 'hidden']().focus();
         
         _singleton = null;

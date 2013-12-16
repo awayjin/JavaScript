@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style type="text/css">
+        .wrap{ width: 100px; height: 100px; position: relative;}
+        .wrap img{ position: absolute;  width: 100px; height: 100px; z-index: 1;}
+        .wrap img:target{z-index: 2;}
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <img src="./TotalJS/1.jpg" id="img1">
+    <img src="./TotalJS/2.jpg" id="img2">
+</div>
+<div>
+    <a href="#img1">img1</a>
+    <a href="#img2">img2</a>
+</div>
+</body>
+</html>

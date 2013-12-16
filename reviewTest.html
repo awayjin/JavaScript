@@ -5,13 +5,38 @@
     <title></title>
 </head>
 <body>
+<div id="outHTML">
+    <h2>outerHTML test tile</h2>
+</div>
+
 <script>
+    //5.0  outerHTML
+    function getOuterHTML(id){
+        var el  = document.getElementById(id);
+        var newNode = document.createElement("div");
+        el.appendChild(newNode);
+
+        var clone = el.cloneNode(true);
+
+        newNode.appendChild(clone);
+        var cc = newNode.innerHTML;
+        var dd=el.removeChild(newNode);
+        return cc;
+    }
+    var outHTML = getOuterHTML("outHTML");
+    alert(outHTML);
+
+//    var outer = document.getElementById("outHTML");
+//    var outerHtml = outer.outerHTML;
+//    var innerHtml = outer.innerHTML;
+//    alert(outerHtml+"\n"+ innerHtml);
+
     //4.0 ie和非ie的兼容性
     document.onclick = function(e){
         var e = e || window.event;
         //1.2 获取事件源
        var target = e.target || e.srcElement;
-        alert(target)
+//        alert(target)
     }
 
     //3，判断一个字符串中出现次数最多的字符，统计这个次数

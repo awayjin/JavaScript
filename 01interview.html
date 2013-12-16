@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<h2 id="eventListener">3.0 事件监听，能力检测</h2>
+<h2 id="ajax">4.0 Ajax操作</h2>
+<script src="./TotalJS/EventUtil.js"></script>
+
+<h2 id="optimize">5.0 优化js</h2>
+<input type="button" value="字符串拼接,效率低" onclick="func1()" />
+<input type="button" value="字符串拼接,效率高" onclick="func2()" />
+<input type="button" value="页面重绘,效率低" onclick="func3()" />
+<input type="button" value="页面重绘,效率高" onclick="func4()" />
+
+<div class="one" id="one1"></div>
+<div class="one" id="one2"></div>
+<div class="one" id="one3"></div>
+<div class="one" id="one4"></div>
+
+
+<script>
+//5.0 优化js
+//5.2 页面的重给
+function func3(){//效率低
+    var start,
+            end,
+            executeTime,
+            obj,
+            str;
+    str = "<div>这是一个字符串:</div>";
+    obj = document.getElementById("one3");
+    start = new Date().getTime();
+    for(var i=0; i<200; i++){
+
+        obj.innerHTML += str + i;
+    }
+    end = new Date().getTime();
+    executeTime = end - start;
+    alert("用时"+executeTime+"毫秒");
+}
+
+function func4(){//效率低
+    var start,
+            end,
+            executeTime,
+            obj,
+            str,
+            arr = [];
+    str = "<div>这是一个字符串:</div>";
+    obj = document.getElementById("one4");
+    start = new Date().getTime();
+    for(var i=0; i<200; i++){
+
+        arr[i] = str + i;
+    }
+    obj.innerHTML = arr.join("");
+    end = new Date().getTime();
+    executeTime = end - start;
+    alert("用时"+executeTime+"毫秒");
+}
+
+//5.1 字符串的拼接 效率低
+function func1(){
+    var start,
+        end,
+        template = "",
+        ecuTime;
+    start = new Date().getTime();
+    for(var i=0; i<30000; i++){
+        template += "<input type='button' value='a1'>";
+    }
+    end = new Date().getTime();
+    document.getElementById("one1").innerHTML = template;
+    ecuTime = end - start;
+    alert("用时"+ecuTime+"毫秒");
+}
+//效率高的
+function func2(){
+    var start,
+            end,
+            array = [],
+            ecuTime;
+    start = new Date().getTime();
+    for(var i=0; i<30000; i++){
+        array[i] = "<input type='button' value='a2'>";
+    }
+    end = new Date().getTime();
+    document.getElementById("one2").innerHTML = array.join("");
+    ecuTime = end - start;
+    alert("用时"+ecuTime+"毫秒");
+}
+
+
+
+//5.2 页面的重绘
+
+//4.0 Ajax的步骤
+(function(){
+    function _id(id){
+        return document.getElementById(id);
+    }
+
+    function createXHR(){
+        var xhr;
+        if(typeof XMLHttpRequest !=  'undefined'){
+            xhr = new XMLHttpRequest();
+        }else if(typeof ActiveXObject !=  'undefined'){
+            xhr = new ActiveXObject("MSXML2.XMLHttp.6.0");
+        }else{
+            alert("浏览器不支持ajax");
+        }
+        return xhr;
+    }
+
+
+    var ajaxId = _id("ajax");
+    EventUtil.addHandler(ajaxId, "click", function(event){
+        var xhr = createXHR();
+        xhr.open("get", "./TotalJS/04ajax.php", true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if(xhr.status >= 200  && xhr.status <300 || xhr.status == 304){
+                    alert(xhr.responseText);
+                }else{
+                    alert("Request was unsuccessful:" + xhr.status);
+                }
+            }
+        };
+        xhr.send(null);
+
+    });
+})();
+
+
+/*
+ 3.0 事件监听，能力检测
+*/
+
+// 3.0 事件监听，能力检测
+function EventListener(element, event, callback){
+    if(element.addEventListener){
+        element.addEventListener(event, callback, false);
+    }else if(element.attachEvent){
+        element.attachEvent("on"+event, callback);
+    }
+}
+var eLis = document.getElementById("eventListener");
+EventListener(eLis, "click", function(event){
+    var e = event || window.event;
+    var target = e.target || e.srcElement;
+//    alert(target);
+});
+
+EventUtil.addHandler(eLis, "click", handler);
+function handler(event){
+    var event = EventUtil.getEvent(event);
+    var target = EventUtil.getTarget(event);
+    alert(target);
+}
+
+</script>
+
+</body>
+</html>
