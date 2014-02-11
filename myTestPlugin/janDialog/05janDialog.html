@@ -82,8 +82,11 @@
 
     janDialog.fn = janDialog.prototype ={
         _create: function(config){
-            var body = document.body;
-            body.insertBefore(this._innerHTML(), body.firstChild);
+            var body = document.body,
+                div = document.createElement("div");
+
+            div.innerHTML = this._innerHTML();
+            body.insertBefore(div, body.firstChild);
 
             return this;
         },
