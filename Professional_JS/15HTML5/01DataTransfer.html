@@ -118,23 +118,27 @@
 
 
 
-<a href="http://www.wrox.com" id="droptarget2">Wrox homepage</a>
-<div draggable="true" style="width: 100px; height: 100px; float: right; background: red" id="droptarget">eewr</div>
-
+<a href="http://www.wrox.com" id="droptarget2" draggable="true">Wrox homepage</a>
+<div   style="width: 100px; height: 100px; float: right; background: red" id="droptarget">eewr</div>
+draggable="true"
 <script>
-    var dropTarget = document.getElementById("droptarget2");
-    function handleEvent(event){
-        console.log(11+ event)
-    }
-    EventUtil.addHandler(dropTarget, "dragstart", handleEvent);
-
     var dropTarget = document.getElementById("droptarget");
-    EventUtil.addHandler(dropTarget, "dragenter", function(){
-        console.log(this)
-    });
-    EventUtil.addHandler(dropTarget, "dragstart", function(){
-        console.log(11411)
-    });
+    dropTarget.addEventListener("dragenter", function(e){
+       console.log(111)
+        e.preventDefault;
+   }, false);
+    dropTarget.addEventListener("dragover", function(e){
+       console.log(222)
+        e.preventDefault;
+   }, false);
+//    dropTarget.addEventListener("dragleave", function(e){
+//       console.log(333)
+//        e.preventDefault;
+//   }, false);
+    dropTarget.addEventListener("drop", function(e){
+       console.log(444)
+        e.preventDefault;
+   }, false);
 
 
 </script>
