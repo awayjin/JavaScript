@@ -6,5 +6,5 @@
  * Time: 上午11:21
  * To change this template use File | Settings | File Templates.
  */
-
-echo "jinwei text";
+header("Content-type:text/json;");
+echo ('{ "title": "js",   "author": "away",      "date": "ss"   }');
