@@ -1404,7 +1404,6 @@ $(window).bind('resize', function () {
 });
 
 
-
 // XHTML 模板
 // 使用 uglifyjs 压缩能够预先处理"+"号合并字符串
 // @see	http://marijnhaverbeke.nl/uglifyjs

@@ -7,7 +7,9 @@
 <body>
 <script>
     var isArr = top.arr instanceof Array;
+    var isArr2 = top.arr instanceof top.Array;
     var objIsArr = Object.prototype.toString.call(top.arr);
+    alert(isArr + ", "  +isArr2);
 //    alert(isArr + ", "+ objIsArr + ", " + typeof top.arr + ", "+ top.arr.length)
 </script>
 </body>

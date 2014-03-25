@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 ;(function(window, undefined){
+    if(typeof A){}
+
     var $ = window.AJAX = function (params){
         var config = {
             url: "",
