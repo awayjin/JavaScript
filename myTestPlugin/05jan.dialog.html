@@ -97,7 +97,30 @@
                 }
             }
 
+
+
+            // !$.isArray(config.button)
+            if (!config.button || !config.button.push) {
+                config.button = [];
+            };
+
+
+            // 确定按钮
+            if (ok !== undefined) {
+                config.ok = ok;
+            };
+
+            if (config.ok) {
+                config.button.push({
+                    id: 'ok',
+                    value: config.okValue,
+                    callback: config.ok,
+                    focus: true
+                });
+            };
+
             config.id = _expando+_count;
+
 
             return new janDialog.fn._create(config, ok, cancle);
         }
@@ -110,9 +133,56 @@
 
                 dom.wrap.css({"position":"absolute"});
 
+
+                this.button.apply(this, config.button)
+
                 this.title(config.title)
                         .content(config.content);
 
+
+                this._event();
+
+            },
+
+            _event: function(){
+                var dom = this.dom,
+                        ele = dom.wrap[0];
+
+                dom.close[0].addEventListener("click", function(){
+                    ele.style.display = 'none';
+                }, true);
+            },
+
+            button: function(){
+              var dom = this.dom,
+                      $button = dom.buttons,
+                      ele = $button[0],
+                      args = [].slice.call(arguments);
+
+                var i = 0, value, button,
+                        strongButton = "d-state-highlight";
+
+                for(; i<args.length; i++){
+                    value = args[i];
+
+                    button = document.createElement("input");
+                    button.type = "button";
+                    button.className = "d-button"
+
+                    button.value = args[i].value;
+
+                    if(args[i].focus){
+                        button.className = button.className + ' '+strongButton;
+                    }
+
+                    ele.insertBefore(button, null);
+                }
+
+
+
+
+
+              return this;
             },
 
             content: function(msg){
@@ -132,6 +202,15 @@
                 return this;
             },
 
+            title: function(msg){
+                var i = 0,
+                        dom = this.dom,
+                        $title = dom.title;
+
+                $title.html(msg)
+                return this;
+            },
+
             position: function(){
                 var dom = this.dom,
                         scrollTop = document.body.scrollTop,
@@ -139,12 +218,12 @@
                         docHeight = document.documentElement.clientHeight,
                         wrapWidth = dom.wrap[0].offsetWidth,
                         wrapHeight = dom.wrap[0].offsetHeight,
-                        left = (docWidth - wrapWidth)/ 2,
-                        top = scrollTop + 50;
+                        left = parseInt(docWidth - wrapWidth)/ 2,
+                        top = parseInt(scrollTop) + 50;
 
                 dom.wrap.css({
-                    "left": parseInt(left)+ "px",
-                    "top": parseInt(top) + "px"
+                    "left": left+ "px",
+                    "top": top + "px"
                 });
 
             },
@@ -176,15 +255,6 @@
                 dom.wrap = $(wrap);
 
                 return dom;
-            },
-
-            title: function(msg){
-                var i = 0,
-                        dom = this.dom,
-                        $title = dom.title;
-
-                    $title.html(msg)
-                return this;
             }
 
         }
@@ -199,7 +269,19 @@
 
             skin: null,
 
-            title: "message"
+            title: "message",
+
+            ok: null,
+
+            okValue: "ok",
+
+            cancel: null,
+
+            value: "ok",
+
+            callback: function(){
+
+            }
         };
 
 

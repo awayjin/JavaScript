@@ -15,6 +15,14 @@
 <div class="a1"></div>
 <div class="a1"></div>
 <script>
+    var obj = {a: 1, b:2};
+//    aa(obj);
+    function aa(obj){
+        var args = [].slice.call(obj)
+        alert(Object.prototype.toString.call(args))
+    };
+
+
 //    $.dialog('artDialog: I Love You!', function () {alert('Thank you!')}, "heha");
 //    $.dialog({
 //        lock: true,
@@ -30,7 +38,9 @@
 //    alert(document.getElementsByClassName("a1").length)
 //} );
 $.dialog({
-    ok: 11
+    ok: function(){
+        alert(11);
+    }
 });
 
 </script>
@@ -52,7 +62,7 @@ j&quot;w
         var midIndex = Math.floor((leftIndex+rightIndex)/2);
         var midval=arr[midIndex];
 
-        console.log( midval );
+//        console.log( midval );
         //防止无穷递归
         if( leftIndex > rightIndex ){
 
@@ -125,7 +135,7 @@ j&quot;w
             }
         });
     }
-    console.log(htmlEscape("<p class=\"greeting\">Hello world!</p>"));
+//    console.log(htmlEscape("<p class=\"greeting\">Hello world!</p>"));
 </script>
 
 </body>
