@@ -68,6 +68,10 @@
                     }
                 }
                 return this;
+            },
+
+            bind: function(){
+
             }
         }
         $.fn.constructor.prototype = $.fn;
@@ -140,26 +144,28 @@
                         .content(config.content);
 
 
-                this._event();
+                this._addEvent();
 
             },
 
-            _event: function(){
+            _addEvent: function(){
                 var dom = this.dom,
-                        ele = dom.wrap[0];
+                        _this = this;
 
-                dom.close[0].addEventListener("click", function(){
-                    ele.style.display = 'none';
-                }, true);
+                dom.wrap.bind("click", function(event){
+
+                });
+
             },
 
             button: function(){
               var dom = this.dom,
                       $button = dom.buttons,
                       ele = $button[0],
-                      args = [].slice.call(arguments);
+                      args = [].slice.call(arguments),
+                      listener = this._listener = {};
 
-                var i = 0, value, button,
+                var i = 0, value, button, id,
                         strongButton = "d-state-highlight";
 
                 for(; i<args.length; i++){
@@ -167,13 +173,18 @@
 
                     button = document.createElement("input");
                     button.type = "button";
-                    button.className = "d-button"
+                    button.className = "d-button";
 
                     button.value = args[i].value;
 
                     if(args[i].focus){
                         button.className = button.className + ' '+strongButton;
                     }
+
+                    id = value.id;
+                    listener[id] = {}
+                    listener[id].callback =  value.callback;
+                    listener[id].ele = button;
 
                     ele.insertBefore(button, null);
                 }
@@ -182,7 +193,7 @@
 
 
 
-              return this;
+              return this;q
             },
 
             content: function(msg){
@@ -279,9 +290,7 @@
 
             value: "ok",
 
-            callback: function(){
-
-            }
+            callback: null
         };
 
 

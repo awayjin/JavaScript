@@ -14,6 +14,9 @@
 </ul>
 
 <script>
+    var top = typeof window.screenTop == 'number' ? window.screenTop : window.screenY;
+//    alert(top)
+
     $("ul").on("click", "li", function(){
         var index= $(this).index();
         console.log('2:', index);
@@ -26,7 +29,14 @@
 
 $("ul").append("<li>3333</li>")
 
-
+    function Class1(){
+        Class1.method = function(){
+            alert(111);
+        }
+//        Class.a1 = 'a111'
+    }
+    var c1 = new Class1();
+    Class1.method();
 
 </script>
 </body>
