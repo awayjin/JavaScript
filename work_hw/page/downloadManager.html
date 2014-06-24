@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title localString="download_manager">下载管理</title>
+        <script src="../plugin/reflash.js"></script>
+        <script>
+            checkReflash();
+        </script>
+	</head>
+	<body>
+        <div id="dialog" class="infobox_side" style="display: none;">
+            <div class="infobox ">
+                <div class="line"><h4 localString="download_manager_ask_del_opt">确定删除选项</h4><a id="isDelFile" href="#"><div></div><span localString="download_manager_del_local_file">删除本地文件</span></a></div>
+                <ul class="btrn_list btn2"><li><a href="#" localString="common_cancel">取消</a></li><li><a href="#" localString="common_confirm">确定</a></li></ul>
+            </div>
+
+
+            <div class="black_mask"></div>
+        </div>
+
+		<div data-role="page" id="navDownloadMgr" class="pageBg">
+			<div class="header_page">
+				<a href="#" data-rel="back" id="homeBtn" class="btn_left"></a>
+				<a id="backBtn"  class="btn_left"></a>
+				<a id="delAllBtn" class="btn_right" localString="download_delAll">清空</a>
+				<a id="editBtn" class="btn_right" localString="download_edit">编辑</a>
+				<h1 class="commonH1" localString="download_manager">下载管理</h1>
+			</div>
+			<!--end header-->
+
+            <div class="navbar_ltt">
+                <ul class="">
+                    <li class="">
+                        <a id="menu_01"  class="on"><!--span></span--><b localString="download_finish">已完成</b>(<label id="finishTotal">0</label>)</a>
+                    </li>
+                    <li class="">
+                        <a id="menu_02" ><!--span></span--><b localString="download_loading">正在下载</b>(<label id="downloadingTotal">0</label>)</a>
+                    </li>
+                </ul>
+            </div>
+            <!--navbar end-->
+
+			<div data-role="content" class="login-box content_pro ui-content nopadding">
+                <div class="pro_search_ltt">
+                    <div data-role="fieldcontain" id="search">
+                        <span class="search-icon_ltt"><a class="" data-inline="true" localString="bulletin_search_tip">在当前栏目中搜索</a></span>
+                        <input class="search-text_ltt f-l" id="downloadManagerSearchKey" value="" type="text">
+                        <!--<span class="close search-close hide"></span>-->
+                    </div>
+                </div>
+                <!-- search --end-->
+
+			<h2 id="downloadPath" class="down-title" style="visibility: hidden;">文档路径 </h2>
+
+				<div id="finishPart">
+					<div id="finishWrapper" class="finishWrapperStyle">
+						<div id="finish_outter">
+							<ul data-role="listview" id="finishList" class="list-download_ltt"></ul>
+						</div>
+					</div>
+				</div>
+				<div id="downloadingPart">
+					<div id="downloadingWrapper">
+						<div id="downloading_outter">
+							<ul data-role="listview" id="downloadingList" class="list-download-now_ltt"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--end content-->
+
+
+
+            <!--  对话框  -->
+            <!--<div class="hide">-->
+                <!--<div id="dialogBody">-->
+                    <!--<p align="center" class="m-t20">确定删除选择项？</p>-->
+                    <!--<p align="center" class="rel"><span id="isDelFile" class="ck-box del-ck-box"></span>删除本地文件</p>-->
+                    <!---->
+                    <!--<p align="center" class="m-t20">-->
+                    	<!--<a id="popup_cancel" data-role="none" class="close-bt-nativ">取消</a>-->
+                        <!--<a id="popup_del" data-role="none" class="down-ok-nativ">删除</a>-->
+                      <!--&lt;!&ndash;    <input name="" id=popup_cancel type="button" class="close-bt-nativ" value="取消">-->
+                        <!--<input name="" id=popup_del type="button" class="down-ok-nativ" value="删除">&ndash;&gt;-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+		</div>
+		<!-- end page -->
+
+
+	</body>
+</html>

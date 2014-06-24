@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title localString="myFavorites_title">我的收藏</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+</head>
+
+<body>
+<div data-role="page" id="navMyFav" class="mainBg">
+
+    <div class="title header">
+        <a id="homeBtn" href="#" data-rel="back" class="btn-left btn-home" localString="common_home">返回</a>
+        <!--<a id="backBtn" class="f-l btn-left btn-home" localString="common_back">返回</a>-->
+        <!--<a id="editBtn" class="f-r btn-right" localString="myFavorites_manage">管理</a>-->
+
+        <h1><a class="down-bt rel" localString="myFavorites_title">我的收藏</a></h1>
+    </div>
+    <!--end header-->
+
+    <div data-role="content" class="login-box content_pro">
+        <div id="myFavoritesWrapper">
+            <div id="myFavorites_outter">
+                <dl id="favoriteList" class="doc-list"></dl>
+            </div>
+        </div>
+    </div>
+    <!--end content-->
+</div>
+
+
+
+</body>
+</html>

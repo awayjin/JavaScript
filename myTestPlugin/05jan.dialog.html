@@ -11,71 +11,28 @@
         .dialog-title{ height: 32px; line-height: 32px; text-indent: 1em; background-color: #000; }
         .dialog-content{ height: 100px;}
         .dialog-button{ height: 60px;}
-
-/*        //        janDialog._templates =
-        //                '<div class="base-dialog">'
-        //                        +      '<div class="dialog-title">标题</div>'
-        //                        +      '<div class="dialog-content">'
-        //                        +            '内容'
-        //                        +      '</div>'
-        //                        +      '<div class="dialog-button">'
-        //                        +          '<button class="button-text"><span>确定</span></button>'
-        //                        +         '<button class="button-text"><span>取消</span></button>'
-        //                        +    '</div>'
-        //                        + '</div>';*/
     </style>
 </head>
 <body>
-<div style="height: 1200px"></div>
+
 <script>
     ;(function(window, undefined){
         var $ = window.jan = function(selector){
             return new $.prototype.constructor(selector);
         };
 
-        if(window.$ === undefined){
-            window.$ = $
-        }
-
         $.fn = $.prototype = {
             constructor: function(selector){
                 if(selector.nodeType == 1){
-                    this[0] = selector;
-                    return this;
+
                 }
-            },
-
-            hasClass: function(){
-
-            },
-
-            html: function(content){
-                var ele = this[0];
-                ele.innerHTML = content;
-                return this;
-            },
-
-            css: function(name, value){
-//                this[0].style.name = value;
-
-                var ele = this[0]
-
-                if(typeof name == "string"){
-                    ele.style[name] = value;
-                }else{
-                    for(var i in name){
-                        ele.style[i] = name[i];
-                    }
-                }
-                return this;
-            },
-
-            bind: function(){
-
             }
         }
-        $.fn.constructor.prototype = $.fn;
+        $.fn.constructor.protottype = $.fn;
 
+        if(window.$ === undefined){
+            window.$ = $
+        }
 
 
 
@@ -101,30 +58,7 @@
                 }
             }
 
-
-
-            // !$.isArray(config.button)
-            if (!config.button || !config.button.push) {
-                config.button = [];
-            };
-
-
-            // 确定按钮
-            if (ok !== undefined) {
-                config.ok = ok;
-            };
-
-            if (config.ok) {
-                config.button.push({
-                    id: 'ok',
-                    value: config.okValue,
-                    callback: config.ok,
-                    focus: true
-                });
-            };
-
             config.id = _expando+_count;
-
 
             return new janDialog.fn._create(config, ok, cancle);
         }
@@ -133,109 +67,10 @@
             _create: function(config, ok, cancle){
                 var dom;
 
+                this.jinwei = "hello";
                 this.dom = dom = this.dom || this._innerHTML(config);
 
-                dom.wrap.css({"position":"absolute"});
-
-
-                this.button.apply(this, config.button)
-
-                this.title(config.title)
-                        .content(config.content);
-
-
-                this._addEvent();
-
-            },
-
-            _addEvent: function(){
-                var dom = this.dom,
-                        _this = this;
-
-                dom.wrap.bind("click", function(event){
-
-                });
-
-            },
-
-            button: function(){
-              var dom = this.dom,
-                      $button = dom.buttons,
-                      ele = $button[0],
-                      args = [].slice.call(arguments),
-                      listener = this._listener = {};
-
-                var i = 0, value, button, id,
-                        strongButton = "d-state-highlight";
-
-                for(; i<args.length; i++){
-                    value = args[i];
-
-                    button = document.createElement("input");
-                    button.type = "button";
-                    button.className = "d-button";
-
-                    button.value = args[i].value;
-
-                    if(args[i].focus){
-                        button.className = button.className + ' '+strongButton;
-                    }
-
-                    id = value.id;
-                    listener[id] = {}
-                    listener[id].callback =  value.callback;
-                    listener[id].ele = button;
-
-                    ele.insertBefore(button, null);
-                }
-
-
-
-
-
-              return this;q
-            },
-
-            content: function(msg){
-                var dom = this.dom,
-                        $content = dom.content;
-
-                $content.html(msg)
-
-                this._reset();
-
-                return this;
-            },
-
-            _reset: function(){
-                this.position()
-
-                return this;
-            },
-
-            title: function(msg){
-                var i = 0,
-                        dom = this.dom,
-                        $title = dom.title;
-
-                $title.html(msg)
-                return this;
-            },
-
-            position: function(){
-                var dom = this.dom,
-                        scrollTop = document.body.scrollTop,
-                        docWidth = document.documentElement.clientWidth,
-                        docHeight = document.documentElement.clientHeight,
-                        wrapWidth = dom.wrap[0].offsetWidth,
-                        wrapHeight = dom.wrap[0].offsetHeight,
-                        left = parseInt(docWidth - wrapWidth)/ 2,
-                        top = parseInt(scrollTop) + 50;
-
-                dom.wrap.css({
-                    "left": left+ "px",
-                    "top": top + "px"
-                });
+                this.title(config.title);
 
             },
 
@@ -251,21 +86,16 @@
 
                 document.body.insertBefore(wrap, document.body.firstChild);
 
-                var i = 0,
-                        dom = {},
+                var dom = {},
                         name,
-                        eles = wrap.getElementsByTagName("*");
-
-                for( ; i<eles.length; i++){
-                    name = eles[i].className.split("d-")[1];
-                    if(name){
-                        dom[name] = $(eles[i]);
-                    }
-                }
-
-                dom.wrap = $(wrap);
+                        elsLen = wrap.getElementsByTagName("*");
 
                 return dom;
+            },
+
+            title: function(msg){
+                var dom = this.dom;
+
             }
 
         }
@@ -274,26 +104,26 @@
 
 
         janDialog.defaults = {
-            content: "<div class='d-loading'><span>loading..</span></div> ",
+            content: "",
 
             lock: false,
 
             skin: null,
 
-            title: "message",
-
-            ok: null,
-
-            okValue: "ok",
-
-            cancel: null,
-
-            value: "ok",
-
-            callback: null
+            title: "message"
         };
 
-
+//        janDialog._templates =
+//                '<div class="base-dialog">'
+//                        +      '<div class="dialog-title">标题</div>'
+//                        +      '<div class="dialog-content">'
+//                        +            '内容'
+//                        +      '</div>'
+//                        +      '<div class="dialog-button">'
+//                        +          '<button class="button-text"><span>确定</span></button>'
+//                        +         '<button class="button-text"><span>取消</span></button>'
+//                        +    '</div>'
+//                        + '</div>';
 
         janDialog._templates =
                 '<div class="d-outer" role="dialog" tabindex="-1" aria-labelledby="d-title-{id}" aria-describedby="d-content-{id}">'
@@ -348,18 +178,17 @@
     })();
 
     $.dialog({
-        ok: function(){
-            alert(111)
-        },
         lock: true
     })
 
-
+    function Person(){
+        alert(11)
+    }
 </script>
 
 
 <script>
-    $.dialog()
+    $.dialog("cc", function(){})
 //    (function(window, undefine){
 //        var $ = window.jan = function(){
 //

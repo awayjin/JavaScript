@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>意见反馈</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+</head>
+<body>
+<div data-role="page" id="backfeedProduct" class="mainBg">
+            <div class="title header">
+                <a href="#"  data-rel="back" class="f-l btn-left btn-home" localString="common_back" id="backfeedProBack">返回</a>
+                <a href="#" class="f-r btn-back" id="backfeedProList" localString="Recently">最近反馈</a>
+                <h1 localString="case_feedback">意见反馈</h1>
+            </div>
+            <!--end header-->
+
+            <div data-role="content" class="login-box">
+
+                <div class="signpadding" id="backfeedProductCont">
+
+                    <form id="frombackFeedProduct" method="post">
+                    <div class="item-box">
+                        <ul class="item-list">
+                            <li class="rel"><textarea name="backfeedProCont" class="hw-texts" localString="feedback_textarea" placeholder="请输入您的意见" id="backfeedProCont" maxlength="1000"></textarea>
+                                <div class="font26 text-alt" ><span localString="feedback_tip2">最大可输入</span><span id="backfeedProTextCont">1000</span><span localString="feedback_tip3">个字符</span></div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="font26 color-6 pad-title  m-t20" localString="feedback_tip0">请您为该文章评分</div>
+                    <div class="item-box">
+                    	<ul class="item-list">
+                        	<li>
+                                <div class="pl-nums f-l m-r20" id="backfeedProStar">
+                                   <!-- <i style="display:block;float:left;margin-right:20px;font-style: normal;" localString="feedback_bad">很差</i>-->
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span ></span>
+                                    <span></span>
+                                    <!--<i style="margin-left: 20px;display:block;float:left;font-style: normal;" localString="feedback_good">非常好</i>-->
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+					
+                    <div class="font26 color-6 m-t20 pad-title" localString="feedback_tip1">该文章是否解决了您的问题</div>
+                    <div class="item-box">
+                    	<ul class="item-list">
+                        	<li id="backfeedProRadio">
+                            	<label><span class="radio-box cur"></span><b localString="feedback_yes" style="font-weight: normal">是</b></label>
+                                <label><span class="radio-box "></span><b localString="feedback_no" style="font-weight: normal">否</b></label>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+                   <!-- <div id="backfeedProductIsSign"><a href="#"> 登录</a>后，您可以提交用户反馈。</div>-->
+
+                     <div class="submitBtn"><input class="submit" type="button" localString="feedback_submit" value="提交"   id="backfeedProOk" /></div>
+                    </form>
+
+                </div>
+            </div>
+           <!--end content-->
+            
+
+    </div>
+<!-- end page -->
+
+</body>
+</html>

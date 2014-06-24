@@ -4,43 +4,18 @@
     <meta charset="utf-8">
     <title>多个全局作用域类型检测</title>
     <script src="js/json2.js"></script>
-    <!--<script src="jquery-1.8.2.js"></script>-->
-    <script src="../Package/ajax.js"></script>
 </head>
 <body>
-
-<script>
-//    请根据每个元素的i属性，由小到大，排序如下数组
-(function(){
-    var arr = [{i: 5,v: 1}, {i: 2,v: 4}, {i: 3,v: 2}, {i: 1,v: 5}, {i: 4,v: 3}];
-
-    arr
-})()
-</script>
-
 <script>
     var arr = [1, 2, 3];
     var isArr = arr instanceof Array;
 //    alert(isArr);
 
-
-
     var book = {
-        "title": "js",
-        "author": "away",
-        "date": +new Date()
+        title: "js"
     }
-    var jsonText = JSON.stringify(book, ["author", "date"]);
-//    alert(Object.prototype.toString.call(book) + ", " +jsonText);
-
-
-    AJAX({
-        url: "06AJAX.php",
-        success: function(msg){
-//           var reObj = JSON.stringify(JSON.parse(msg));
-            alert(msg['author']);
-        }
-    });
+    var jsonText = JSON.stringify(book);
+    alert(jsonText)
 </script>
 
 <iframe src="iframe1.html"></iframe>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>产品文档</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+
+</head>
+<body>
+<div data-role="page" id="doc_index" class="pageBg">
+    <div id="page_maskdoc" class="page_mask"></div>
+    <div class="abReLeft shadow" id="doc_index_left_Sidebar">
+        <div id="document_content" >
+            <div class="header_page" >
+                <a href="../index.html" data-rel="back" class="btn_left"></a>
+
+                <h1 class="commonH1"><span id="docment_content_title"></span></h1>
+
+                <span class="btn_right" id="docment_content_screenings" localString="common_filter">筛选</span>
+            </div>
+            <div class="history-title" id="document_title" >
+                <a class="active" href="#" mid="SUP_DOC" localString="doc_list_file">产品文档</a>
+                <a href="#" mid="SUP_KB" localString="doc_list_cases">知识库</a>
+            </div>
+
+            <!-- 文档内容 开始-->
+            <div data-role="content" class="content-box" >
+                <!--文档列表-->
+               <div id="doc_list_scroll">
+                    <ul class="list-word top_line" id="docs_list">
+
+                    </ul>
+                    <div  id="pullUpDoc" class="pullUp" style="display: none;">
+                        <span class="pullUpIcon"></span><span class="pullUpLabel" localString="gs_load_more">向上拉加载更多...</span>
+                    </div>
+               </div>
+            </div>
+            <!-- 文档内容 结束-->
+        </div>
+    </div>
+    <div class="abReRight hide" id="doc_index_right_Sidebar">
+
+        <div class="cePage" id="version_menu" >
+
+            <div class="ctrl_box"><a href="#" class="btn_left_sort" localString="common_clear">清除条件</a><a href="#" class="btn_right_sort" localString="common_confirm">确定</a></div>
+            <dl class="sort_list" id="version_title">
+                <dt><a href="#" ><span localString="doc_version">版本号</span>：<b id="version_name"  versionid="" localString="entire">全部</b><span></span></a></dt>
+            </dl>
+            <dl class="sort_open sort_list" id="version_type">
+                <dt><a href="#"><b localString="doc_type">文档类型</b>：<b id="version_type_name" localString="entire">全部</b><span></span></a></dt>
+                <dd class="on"><a href="#"><b localstring="entire">全部</b><span></span></a></dd>
+
+            </dl>
+        </div>
+    </div>
+
+    <!-- 选择版本 开始-->
+    <div id="versions" class="hide" style="position: relative;z-index: 10002;height: 100%">
+        <div class="pageBg">
+            <div class="header_page">
+                <a href="#" class="btn_left" ></a>
+
+                <h1 class="commonH1" localString="doc_version"><span>版本号</span></h1>
+
+                <a href="#" class="btn_right" localString="common_confirm">确定</a>
+            </div>
+
+
+            <!--筛选列表-->
+            <div class="sort_page" id="version_sort_page">
+                <!--a href="#" class="all_sort">全部版本<span class="btn"></span></a>
+                <dl>
+                    <dt><a href="#">V100R001<span class="btn"></span></a></dt>
+                    <dd><a href="#">全部<span class="btn"></span></a></dd>
+                    <dd><a href="#">V100R001C01<span class="btn on"></span></a></dd>
+                </dl-->
+
+            </div>
+
+
+        </div>
+    </div>
+    <!-- 选择版本 结束-->
+</div>
+<!-- end page -->
+
+</body>
+</html>

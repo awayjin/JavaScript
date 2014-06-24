@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>语言设置</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+</head>
+<body>
+<div data-role="page" class="pageBg" id="setupLanguage">
+    <div class="header_page">
+        <a href="config.html" data-rel="back"  class="btn_left"></a>
+        <h1 class="commonH1" localString="setuplanguage_header_h1">语言</h1>
+        <a href="#" id="btnComplete" class="btn_right" localString="setuplanguage_header_right_btn">完成</a>
+    </div>
+    <div data-role="content" class="content-box">
+
+        <div id="setupLanguageCont" class="setting_side">
+            <ul class="settingLa" id="langList">
+                <li data-val="zh">
+                    <a href="#" class="color-b">
+                        <b localString="setuplanguage_lang_zh">简单中文</b><span class="f-r"></span>
+                    </a>
+                </li>
+                <li data-val="en">
+                    <a href="#" class="color-b">
+                        <b localString="setuplanguage_lang_en">English</b><span class="f-r"></span>
+                    </a>
+                </li>
+            </ul>
+          </div>
+
+    </div>
+    <!--end content-->
+
+</div>
+<!-- end page -->
+</body>
+</html>

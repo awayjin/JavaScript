@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>登录后页面跳转设置，跳转到首页还是关注页</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+</head>
+<body>
+<div data-role="page" class="pageBg" id="setupPage">
+    <div class="header_page">
+        <a href="config.html" data-rel="back"  class="btn_left"></a>
+        <h1 localString="config_header_jumpPagea" class="commonH1">登录首页</h1>
+        <a href="#"  id="btnComplete2" class="btn_right" localString="setupPage_header_right_btn">完成</a>
+    </div>
+    <div data-role="content" class="content-box">
+
+        <div class="signpadding" id="setupPageCont">
+            <ul class="item-list item-box" id="setupPageList">
+                <li data-val="index"><a href="#" class="color-b"><b localString="common_homeH">首页</b><span class="f-r"></span></a></li>
+                <li data-val="attention.html"><a href="#" class="color-b"><b localString="setupPage_attention">我的关注</b><span class="f-r"></span></a></li>
+            </ul>
+        </div>
+
+    </div>
+    <!--end content-->
+
+</div>
+<!-- end page -->
+</body>
+</html>

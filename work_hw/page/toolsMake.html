@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title localString="index_tools">工具</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+</head>
+<body>
+<div data-role="page" id="toolsMake" class="pageBg">
+    <div class="page_mask hide" id="page_maskT"></div>
+    <div class="abReLeft" id="tool_left_Sidebar">
+        <div class="header_page">
+
+            <a href="siteSearchList.html?isSearch=false"  class="search_left"></a>
+            <!--<a href="#" data-rel="back" class="btn_left"></a>-->
+            <h1 class="commonH1"><span localString="index_tools">工具</span></h1>
+            <span class="csIndex" id="tool_bulAAs"></span>
+        </div>
+        <div data-role="content" class="content-box">
+            <div id="toolsMakeDataBox">
+                <dl class="list-tools list120">
+                    <dd>
+                        <a href="orderSearch.html" class="sel-icon" id="selIcon">
+                            <span class="selIcon icon_ml"></span><hgroup localString="index_command">命令查询</hgroup><!--<span class="goPage goToN"></span>-->
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="warningSearch.html" class="gjx-icon" id="gjxIcon">
+                            <span class="gjxIcon icon_gj"></span><hgroup localString="index_alarm">告警查询</hgroup><!--<span class="goPage goToN"></span>-->
+                        </a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="abReRight hide" id="tool_right_Sidebar">
+        <div class="cePage">
+            <a href="signIn.html?from=index" class="login_go" id="signInBtn">
+                <span class="login_ico"></span>
+                <span class="login_font"></span>
+            </a>
+
+            <div class="listFrom">
+                <dl>
+                    <dd>
+                        <a href="myAttention.html" id="attentionLinks">
+                            <span class="fai_ico"></span>
+                            <b localString="index_favorites">我的收藏</b>
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="downloadManager.html" id="downloadManager">
+                            <span class="down_ico"></span><b localString="index_download">下载管理</b>
+                        </a>
+                    </dd>
+                    <!--<dd>
+                        <a href="#" id="myHistory">
+                            <span class="his_ico"></span><b localString="">历史浏览</b>
+                        </a>
+                    </dd>-->
+                    <dd>
+                        <a href="country.html" id="contactHW">
+                            <span class="contact_ico"></span><b localString="index_contact">联系我们</b>
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="asendEmail.html" id="asendEmail">
+                            <span class="mail_ico"></span><b localString="config_header_asendEmail">意见反馈</b>
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="config.html" id="deve4">
+                            <span class="set_ico"></span>
+                            <b localString="index_setting">设置</b>
+                        </a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title localString="signIn_title">登录</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+</head>
+<body>
+<div data-role="page" id="signIn" data-title="登录" class="pageBgs">
+    <div class="header_page">
+        <a href="javascript:void(0);" data-rel="back" data-transition="slide" data-direction="reverse" id="signIn_back" class="btn_left"></a>
+        <h1 class="commonH1" localString="signIn_header"  id="signIn_headerText">登录</h1>
+        <a href="reg.html" class="btn_right" id="reg" localString="signIn_sign">注册</a>
+    </div>
+    <div data-role="content" class="login-box">
+        <form id="uGo" class="signpadding" action="" method="post">
+            <div class="signInContent">
+                <div class="sigName">
+                    <input type="text" name="uid" id="uid" localString="signIn_uid" placeholder="帐 号" maxlength="50" />
+                    <span class="uidIco"></span>
+                    <p class="errInfo" id="errName"></p>
+                </div>
+                <div class="sigName noBorder">
+                    <input type="password" name="password" id="password" maxlength="60" localString="signIn_password" placeholder="密 码" />
+                    <span class="passIco"></span>
+                    <p class="errInfo" id="errPwd"></p>
+                </div>
+            </div>
+			<div class="auto_sign">
+			    <a class="fogot_btn" href="#" localString="signIn_forget_password" id="signIn_forget_passwords">忘记密码？</a>
+            	<input class="checkBox" checked="checked" type="checkbox" name="savepwd" id="savepwd" />
+           		<label class="savepwd" for="savepwd"><b localString="signIn_savepwd">记住密码</b></label>　
+                <input type="checkbox" checked="checked" name="autoSignIn" id="autoSignIn" />
+                <label class="savepwd" for="autoSignIn"><b localString="signIn_auto">自动登录</b></label>
+            </div>
+            <div class="submitBtn">
+                <input class="" type="submit" localString="signIn_submit" value="登录" id="submitBtnGo" />
+            </div>
+			<!--<div class="submittip" localString="signIn_tip">提示：若未勾选自动登录，30分钟后将自动退出</div>-->
+        </form>
+    </div>
+</div>
+</body>
+</html>

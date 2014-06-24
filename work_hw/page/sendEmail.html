@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title localString="sendEmail_title">发送邮件</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+</head>
+<body>
+<div data-role="page" id="navSendEmail" class="pageBg">
+
+    <div class="header_page">
+        <a href="#" data-rel="back" class="btn_left"></a>
+
+        <h1 class="commonH1" localString="sendEmail_title">发送邮件</h1>
+        <a href="#" class="btn_right" id="sendBtn" localString="sendEmail_submit">提交</a>
+    </div>
+    <!--end header-->
+
+    <div data-role="content" class="login-box">
+        <div id="sendEmailWrapper">
+            <div id="sendEmail_outter">
+
+                <div class="sendmail_paddingTop_ltt">
+                    <ul class="sendmail_ltt">
+                        <li>
+                            <a class="color-b">
+                                <span class="lab_ltt" localString="contactHW_country">国家:</span>
+
+                                <span id="countryText" class=""></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="color-b"><span class="lab_ltt mlab_ltt" localString="contactHW_email">服务邮箱</span>
+
+                                <span id="serverEmails" class=""></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sendmail_box_ltt">
+                    <ul class="sendmail_text_ltt">
+                        <li class="in_box_ltt">
+                            <textarea id="emailContent" data-role="none" name=""
+                                      localString="sendEmail_content" class="hw-texts"
+                                      placeholder="请输入你的信息"></textarea>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="">
+                    <ul class="sendmail_ltt">
+                        <li>
+                            <a class="color-b"><span class="lab_ltt" localString="myZone_name">姓名</span><span id="userName"
+                                                                                                          class=""></span></a>
+                        </li>
+                        <li>
+                            <span class="lab_ltt" localString="myZone_tel">电话</span><span id="userMobile" class=""></span>
+                        </li>
+                        <li>
+                            <span class="lab_ltt" localString="myZone_Email">E-mail </span><span id="userEmail"
+                                                                                             class=""></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--end content-->
+
+</div>
+<!-- end page -->
+</body>
+</html>

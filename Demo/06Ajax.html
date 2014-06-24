@@ -6,24 +6,27 @@
 </head>
 <body>
 <script>
-//    var xhr
-//    if(typeof XMLHttpRequest  !== "undefined"){
-//        xhr = new XMLHttpRequest()
-//    }else{
-//        xhr = new ActiveXObject("MSXML2.XMLHTTP")
-//    }
-//    xhr.onreadystatechange = function(){
-//        if(xhr.readyState == 4){
-//            var status = xhr.status;
-//            if(status >=200 && status<300 || status == 304 ){
-//                alert(xhr.responseText);
-//            }else{
-//                alert("请求失败:" + status);
-//            }
-//        }
-//    }
-//    xhr.open("get", "06AJAX.php", true);
-//    xhr.send(null);
+
+        var xhr
+        if(typeof XMLHttpRequest  !== "undefined"){
+            xhr = new XMLHttpRequest()
+        }else{
+            xhr = new ActiveXObject("MSXML2.XMLHTTP")
+        }
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                var status = xhr.status;
+                console.log("status:", status)
+                if(status >=200 && status<300 || status == 304 ){
+                    console.log(status, " ",  xhr.responseText);
+                }else{
+                    console.log("请求失败:" + status);
+                }
+            }
+        }
+        xhr.open("get", "06Ajax.htm", true);
+        xhr.send(null);
+
 
     ;(function(window, undefined){
         var $ = window.AJAX = function (params){
@@ -61,11 +64,11 @@
                         var status = xhr.status;
                         if(status >=200 && status<300 || status == 304 ){
                             var header = xhr.getAllResponseHeaders();
-                            console.log('1.0:', header);
+//                            console.log('1.0:', header);
                             var date = xhr.getResponseHeader('date');
                             var yearMonth = new Date(date).toLocaleDateString();
                             var time = new Date(date).toLocaleTimeString();
-                            console.log(yearMonth, time);
+//                            console.log(yearMonth, time);
                         }else{
                             config.abort(status);
                         }
@@ -75,11 +78,11 @@
                         var status = xhr.status;
                         if(status >=200 && status<300 || status == 304 ){
                             var header = xhr.getAllResponseHeaders();
-                            console.log('1.0:', header);
+//                            console.log('1.0:', header);
                             var date = xhr.getResponseHeader('date');
                             var yearMonth = new Date(date).toLocaleDateString();
                             var time = new Date(date).toLocaleTimeString();
-                            console.log(yearMonth, time);
+//                            console.log(yearMonth, time);
                             config.success(xhr.responseText);
                         }else{
                             config.abort(status);
@@ -109,12 +112,12 @@
 
     })(window);
 
-AJAX({
+/*AJAX({
     url: "06AJAX.php",
     success: function(msg){
         console.log(msg)
     }
-})
+})*/
 </script>
 2323
 </body>

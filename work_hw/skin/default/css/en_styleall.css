@@ -1,0 +1,111 @@
+.header .logo{background:url(../images/logoi.png) no-repeat;width:434px;height:66px;margin:30px 0 0 10px;}
+.title .btn-home, .btns, .btns-log, .btns-logs ,.title .btn-right{font-size:16px;}
+.contentImg3 {width:525px;height:400px;background:url(../images/en_help1.png) no-repeat;margin:46px auto;}
+.contentImg1 {width:528px;height:448px;background:url(../images/en_help2.png) no-repeat;margin:46px auto;}
+.contentImg {width:608px;height:528px;background:url(../images/en_help3.png) no-repeat 0px -45px;margin:46px auto;}
+.contentImg2 {width:531px;height:498px;background:url(../images/en_help4.png) no-repeat;margin:46px auto;}
+.contentFont {background:url(../images/en_contentfot.png) no-repeat;height: 227px;left: 108px;top: 87px;width: 386px;}
+.contentFont1 {background:url(../images/en_help2font.png) no-repeat;width:384px;height:328px;left:128px;top:152px;}
+.contentFont2 {background:url(../images/en_help4font.png) no-repeat;width:368px;height:190px;left:57px;top:9px;}
+
+.helpHome a {width:225px;height:49px;background:url(../images/join.png) no-repeat;display:block;position:absolute;bottom:-62px;left:50%;margin-left:-112px;}
+.title  #btnComplete2 {font-size:12px;}
+.title .setupH1 {width:60%;margin:0 auto;height:90px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.about_Txts { margin: 0 auto;margin-bottom: 20px; padding: 0 2px;width:420px;}
+.en_help1 {background:url(../images/help1_en.png) no-repeat;background-size:100% 100%;}
+.en_help2 {background:url(../images/help2_en.png) no-repeat;background-size:100% 100%;}
+.en_help3 {background:url(../images/help3_en.png) no-repeat;background-size:100% 100%;}
+.en_help4 {background:url(../images/help4_en.png) no-repeat;background-size:100% 100%;}
+
+/*标题修正*/
+.commonH1{margin: 0px 156px;}
+
+/*登录忘记密码修正*/
+.auto_sign{ position:relative; overflow:hidden; margin-bottom:20px; height:100px}
+.auto_sign .ui-checkbox{ width:auto; padding-right:20px;}
+.auto_sign .ui-checkbox:nth-child(3){ float:right; padding-right:0px}
+.fogot_btn{ position:absolute; display:block; bottom:0px; margin-top:40px;right: 20px;}
+
+@media screen and (min-width:10px) and (max-width:480px){ 
+      
+
+    .header .logo {background:url(../images/logoi4.png) no-repeat;height:34px;margin-left:10px;margin-top:15px;width:219px;}
+    .title .btn-home, .btns, .btns-log, .btns-logs ,.title .btn-right{font-size:11px;}
+    .contentImg3 {width:263px;height:200px;background:url(../images/en_help1480.png) no-repeat;margin:46px auto;}
+    .contentImg1 {width:264px;height:224px;background:url(../images/en_help2480.png) no-repeat;margin:46px auto;}
+    .contentImg  {width:304px;height:264px;background:url(../images/en_help3480.png) no-repeat -15px -28px;margin:46px auto;}
+    .contentImg2 {width:266px;height:249px;background:url(../images/en_help4480.png) no-repeat;margin:46px auto;}
+    .helpHome a {width:150px;height:30px;background:url(../images/en_join.png) no-repeat;bottom:-53px;margin-left:-76px;}
+    .btn-back {font-size:14px;}
+    .applyFor li {line-height:normal;}
+    .ordTr, .ordTl {font-size:14px;}
+    .list-li li .tip {width:150px;}
+    .contentFont {background:url(../images/en_contentfot4.png) no-repeat;width:227px;height: 95px;left:19px;top:45px;}
+    .contentFont1 {background:url(../images/en_help2font4.png) no-repeat;width:266px;height:172px;left:20px;top:90px;}
+    .contentFont2 {background:url(../images/en_help4font4.png) no-repeat;width:201px;height:100px;left:12px;top:5px;}
+    .signInContent input {font-size:16px;}
+    .about_Txts { margin: 0 auto 20px; padding: 0 2px;width: 285px;}
+	.content_jump .mld{ width:114px; text-align:right}
+	.en_help1 {background:url(../images/help1_en.png) no-repeat;background-size:100% 100%;}
+    .en_help2 {background:url(../images/help2_en.png) no-repeat;background-size:100% 100%;}
+    .en_help3 {background:url(../images/help3_en.png) no-repeat;background-size:100% 100%;}
+    .en_help4 {background:url(../images/help4_en.png) no-repeat;background-size:100% 100%;}
+	
+	.tip_box {
+        left: 50%;
+        margin-left: -55px;
+        margin-top: -55px;
+        position: absolute;
+        top: 50%;
+        width: 120px;
+        z-index: 20000;
+        display: none;
+		overflow:hidden;
+		background-color: #000000;
+        border-radius: 5px 5px 5px 5px;
+		height:130px;
+		opacity:.85;
+    }
+.tip_box .bg {
+        background-color: #000000;
+        border-radius: 5px 5px 5px 5px;
+        opacity: 0.8;
+        width: 120px;
+		display:none;
+		height:auto;
+    }
+    .tip_box .fav_tip {
+        color: #FFFFFF;
+        font-size: 15px;
+        left: 0;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 110px; 
+		padding:0px 5px;
+        z-index: 1;
+		height:auto;
+    }
+    .tip_box .fav_tip img {
+        display: block;
+        height: 46px;
+        margin: 22px auto 11px;
+        width: 46px;
+    }
+	
+	/*标题修正*/
+     .commonH1{margin: 0px 78px;}
+	 
+
+	/*登录忘记密码修正*/
+	.auto_sign{ position:relative; overflow:hidden; margin-bottom:10px; height:50px}
+	.auto_sign .ui-checkbox{ width:auto; padding-right:10px;}
+	.auto_sign .ui-checkbox:nth-child(3){ float:right; padding-right:0px}
+	.fogot_btn{ position:absolute; display:block; bottom:0px; margin-top:20px;right: 10px;}
+	
+}
+@media screen and (min-width:480px) and (max-width:540px){
+    .helpHome a {bottom:-65px;}
+    .title .btn-home, .btns, .btns-log, .btns-logs, .title .btn-right {font-size:12px;}
+    .header .logo {background:url(../images/logoie4e.png) no-repeat;height:40px;margin-left:10px;margin-top:15px;width:304px;}
+}

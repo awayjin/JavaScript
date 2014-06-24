@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title localString="index_file">产品文档</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+
+</head>
+<body>
+<div data-role="page" id="doc_content" class="pageBg">
+    <div class="header_cantent" id="content_detail_header">
+       <div>
+            <a href="#" class="btn_share" ></a>
+            <a href="siteSearchList.html?isSearch=false" class="btn_search" ></a>
+            <a href="#" class="btn_fontsize" ></a>
+            <a href="#" class="btn_back" data-rel="back"></a>
+            <a href="#" class="btn_menu"></a>
+       </div>
+        <div class="light_side hide" id="light_side">
+            <div class="light_box shadow"><div class="arr_up"></div>
+                <div class="light_bar">
+                   <!-- <div class="bar_out">
+                        <div class="bar_in"></div>
+                        <a class="light_btn" href="#"></a>
+                    </div>-->
+                    <input type="range" name="slider_mini" id="slider_mini" value="50" min="0" max="100" data-highlight="true" data-mini="true" />
+                </div>
+                <ul class="font_size" id="cFontSize"><a class="jian" href="#"><span></span></a><a class="jia" href="#"></a></ul>
+                <div class="night_modle_btn"><span>夜间模式</span><div id="night_btn" class="tab_btn"><div class="btn_bar "></div></div></div>
+            </div>
+
+
+            <div class="black_mask"></div>
+        </div>
+
+    </div>
+
+
+    <div data-role="content" class="content-box">
+        <div class="tip_box" id="content_detail_tip_box">
+            <div class="fav_tip">
+                <img src="../skin/default/images/star_icon.png"/>
+                <span id="fav_tip_msg"></span>
+            </div>
+            <div class="bg"></div>
+        </div>
+        <div class="menu_side hide" id="content_dir_menu">
+            <div class="menu_box shadow">
+                <div class="ctrl_menu">
+                    <a href="#" class="btn_left_sort" localString="dir_directory">目录</a>
+                    <a href="#" class="btn_right_sort" localString="common_cancel">取消</a>
+                </div>
+                <div id="content_dir_list_scroll">
+                <div id="content_dir_list"> </div>
+                </div>
+            </div>
+            <div class="black_mask"></div>
+        </div>
+        <div id="content_detail_scroller" >
+            <div id="content_detail" class="detail_text"></div>
+        </div>
+    </div>
+
+    <div class="msg_bar" id="content_detail_footer">
+        <a href="#" id="btn_download" class="btn_download"></a>
+        <a href="#" class="btn_fav" id="btn_fav"></a>
+
+        <div class="msg_warp"><a id="documentFeedback" href="#"><span localString="feedback">意见反馈</span></a></div>
+
+
+
+        <div class="msg_side hide">
+            <div class="msg shadow">
+                <div class="ctrl">
+                    <a href="#" class="close" id="closeBtn"></a>
+                    <a href="#" class="go_btn" id="goBtns" localString="feedback_submit">提交</a>
+                    <span class="tal" id="dTals">140</span>
+                </div>
+                <div class="score">
+                    <span class="bad" localString="feedback_textareaBad">差</span>
+                    <span class="good" localString="feedback_textareaGood">好</span>
+                    <ul class="star_list" id="feedProStar">
+                        <a href="#" class="on"></a><a href="#"></a><a href="#"></a><a href="#"></a><a href="#"></a>
+                    </ul>
+                </div>
+                <div class="text"><div><textarea id="textAreas" placeholder="意见反馈内容"></textarea></div></div>
+
+            </div>
+
+
+            <div class="black_mask"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

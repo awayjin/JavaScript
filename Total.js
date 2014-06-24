@@ -21,35 +21,3 @@ if( /efg/.test(str) ){
     var t = str.substr(str.indexOf("efg"));
     console.log(t);
 }
-
-//3.0
-/*
- *焦点图轮播
- */
-$(function(){
-    var len  = $(".focus-num li").length;
-    var index = 0;
-    var adTimer;
-    $(".focus-num li").mouseover(function(){
-        index = $(".focus-num li").index(this);
-        showImg(index);
-    }).eq(0).mouseover();
-
-    //滑入 停止动画，滑出开始动画.
-    $('#focus-ad').hover(function(){
-        clearInterval(adTimer);
-    },function(){
-        adTimer = setInterval(function(){
-            showImg(index)
-            index++;
-            if(index==len){index=0;}
-        } , 5000);
-    }).trigger("mouseleave");
-})
-// 通过控制top ，来显示不同的幻灯片
-function showImg(index){
-    var adWidth = $("#focus-ad").width();
-    //alert(adWidth);
-    $(".slider").stop(true,false).animate({left : -adWidth*index},1000);
-    $(".focus-num li").removeClass("on").eq(index).addClass("on");
-}

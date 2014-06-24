@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title localString="editorOrderSearch_range">查询范围</title>
+    <link rel="stylesheet"  href="../skin/default/css/styleall.css" />
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+
+</head>
+<body>
+<!--
+<div class="ctrl_box">
+    <a href="#" class="btn_left_sort">清除条件</a>
+    <a href="#" class="btn_right_sort">确定</a>
+</div>
+	<dl class="sort_list">
+	    <dt>
+	        <a href="#">版本号：<b>V100R001C01</b><span></span></a>
+	    </dt>
+	</dl>
+	<dl class="sort_open sort_list">
+	    <dt>
+	        <a href="#">文档类别：<b>全部</b><span></span></a>
+	    </dt>
+	    <dd class="on">
+	        <a href="#"><b>全部</b><span></span></a>
+	    </dd>
+	    <dd>
+	        <a href="#"><b>产品描述</b><span></span></a>
+	    </dd>
+	    <dd>
+	        <a href="#"><b>维护</b><span></span></a>
+	    </dd>
+	</dl>
+
+-->
+
+
+
+
+
+
+<div data-role="page" id="editorOrderSearch">
+
+    <!--end header-->
+    <div class="abReLeft" id="abReLefts">
+        <span class="asc" id="asc"></span>
+        <dl class="sort_open sort_list">
+            <dt>
+                <a href="#">文档类别：<b localstring="entire">全部</b><span></span></a>
+            </dt>
+            <dd class="on">
+                <a href="#"><b localstring="entire">全部</b><span></span></a>
+            </dd>
+            <dd>
+                <a href="#"><b>产品描述</b><span></span></a>
+            </dd>
+            <dd>
+                <a href="#"><b>维护</b><span></span></a>
+            </dd>
+        </dl>
+    </div>
+
+
+    <div data-role="content" class="abReRight" id="abReRight">
+        <div class="ctrl_box">
+            <!--<a href="#" data-rel="back"class="f-l btn-left btn-home btnTe" localString="about_header_left_btn">返回</a>-->
+            <a href="#" class="btn_left_sort" localString="common_clear">清除条件</a>
+            <a href="orderSearch.html" class="btn_right_sort" id="editor_set" localString="common_confirm">确定</a>
+        </div>
+        <div class="signpadding" id="editor_order_outer">
+            <div class="item-box" style="visibility: hidden">
+                <ul class="item-list">
+                    <li>
+                        <span class="radio-box cur f-r" id="editor_pro_all"></span><b style="font-weight: normal;" localString="editorOrderSearch_all_pro">全部产品</b>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="item-box m-t20" style="visibility: hidden">
+                <ul class="item-list" id="editor_focus_list_ul">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+</body>
+</html>

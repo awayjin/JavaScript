@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <script src="./js/jQuery-1.10.2.js"></script>
+    <script src="./js/bootstrap.js"></script>
+</head>
+<body>
+<div class="dropdown">
+    <a href="#" class="ca" data-toggle="dropdown">dropdown</a>
+    <ul class="dropdown-menu">
+        <li><a href="#">11</a> </li>
+    </ul>
+</div>
+
+<button class="btn-anger">ca</button>
+<button class="modal_me">nimai</button>
+
+<script>
+    $(".btn-anger").button("toggle").addClass("cao");
+    $(".modal_me").modal({"opacity": 0.5});
+
+        $("body").off(".data-toggle");
+        $("body").off(".data-api");
+        $("body").off(".data-dropdown");
+
+        $("body").off(".click.data-api");
+        $("body").off(".click.data-toggle");
+
+        $(".ca").off(".data-toggle");
+        $(".ca").off(".data-api");
+        $(".ca").off(".data-dropdown");
+
+        $(".ca").off(".click.data-api");
+        $(".ca").off(".click.toggle-api");
+        $("body").off(".click.toggle-api");
+        $(".ca").off(".click.data-toggle");
+        $(".ca").off(".toggle-api");
+        $(".ca").off(".dropdown-api");
+
+        $(".ca").off("click.dropdown.data-api");
+        $("body").off("click.dropdown.data-api");
+
+</script>
+</body>
+</html>

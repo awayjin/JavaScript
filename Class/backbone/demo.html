@@ -1,0 +1,61 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>backbone</title>
+</head>
+<body>
+
+	<script src="./js/jquery-1.10.2.js"></script>
+	<script src="./js/underscore.js"></script>
+	<script src="./js/backbone.js"></script>
+	
+	<button id="check">新手报到</button>
+	<ul class="world-list">
+		
+	</ul>
+	
+	<script>
+		;(function($){
+			World = Backbone.Model.extend({
+				name: null
+			});
+			
+			Worlds = Backbone.Model.extend({
+				initialize: function (models, options) {
+					this.bind("add", options.view.addOneWorld);
+				}
+			});
+			
+			AppView = Backbone.View.extend({
+				el: $("body"),
+				
+				initialize: function(){
+					this.worlds = new Worlds(null, {view: this});
+				},
+				
+				events: {
+					"click #check": "checkIn"
+				},
+				
+				checkIn: function(){
+					var world_name = prompt("请问,您是哪星人?");
+					if(world_name == "") world_name = '未知';
+					var world = new World({ name: world_name });
+					this.worlds.add(world);
+				},
+				
+				addOneWorld: function(model) {
+				  $("#world-list").append("<li>这里是来自<b>" +model.get('name') + "</b> 星球的问候：hello world！</li>");
+				}
+				
+			});
+			
+			var appview = new AppView;
+			
+			
+		})(jQuery);
+	</script>
+
+</body>
+</html>

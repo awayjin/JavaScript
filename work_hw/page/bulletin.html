@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title localString="bulletin_file">公告</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+</head>
+<body>
+<div data-role="page" id="bulletin" class="pageBg">
+    <div class="header_page">
+        <a href="../index.html" data-rel="back" class="btn_left" id="bulletionBtnBack"></a>
+        <!--a href="bulletinSearch.html?from=bulletinList" class="f-r btn_right" localString="bulletin_search">搜索</a-->
+        <h1 class="commonH1"><span localString="bulletin_new">公告</span></h1>
+    </div>
+    <div id="bullType" class="bull-title">
+        <a data-val="SUP_NEWS" class="active" href="?type=SUP_NEWS" class="active" localString="bulletin_site">网站公告</a>
+        <a data-val="SUP_EOX" href="?type=SUP_EOX" localString="bulletin_eox">EOX公告</a>
+        <a data-val="SUP_PREC" href="?type=SUP_PREC" localString="bulletin_alarm">预警整改</a>
+        <a data-val="SUP_PCN" href="?type=SUP_PCN" localString="bulletin_PCN">PCN</a>
+    </div>
+    <div class="bullSerach">
+        <div class="searchInputWarp" id="bulletinSearchBox" data-role="fieldcontain">
+            <input type="text" class="search-text searchW" placeholder="在当前栏目中搜索" localString="bulletin_search_tip" name="bulletinKey" id="bulletinKey" value="" />
+            <div class="search-icon focusDis focusDel">
+                <a href="###" class="searchBtnC" id="bulletinSearchBtn"></a>
+                <!--<span class="placeHolderV" localString="bulletin_search_tip">在当前栏目中搜索</span>-->
+            </div>
+            <span class="close search-close hide"></span>
+        </div>
+    </div>
+
+
+    <div data-role="content" class="content-box">
+        <div id="bulletinDataBox">
+            <!--网站公告-->
+            <ul id="bulletinWeb" class="list-bull"></ul>
+            <!--EOX公告-->
+            <ul id="bulletinEox" class="list-bull hide"></ul>
+            <!--预警整改-->
+            <ul id="bulletinYjzg" class="list-bull hide"></ul>
+            <!--PCN-->
+            <ul id="bulletinPcn" class="list-bull hide"></ul>
+            <!--搜索-->
+            <ul id="bulletinSearchResult" class="list-bull"></ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

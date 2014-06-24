@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>浏览历史</title>
+    <link rel="stylesheet"  href="../skin/default/css/styleall.css" />
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+</head>
+<body>
+<div data-role="page" id="his" class="pageBg">
+    <div class="header_page">
+        <a href="index.html" data-rel="back" class="btn_left" id="hisBtnBack"></a>
+        <h1 class="commonH1"><span localString="index_history">历史浏览</span></h1>
+		<a href="#" class="btn_right" id="reg" localString="history_clear_all">全部删除</a>
+    </div>
+
+    <div id="historyType" class="history-title">
+        <a data-val="0" class="active" href="#" class="active" localString="history_doc_list_file">产品文档</a>
+        <a data-val="1" href="#" localString="history_doc_list_cases">案例</a>
+    </div>
+
+    <div data-role="content" class="content-box">
+        <div id="hisBoxContWrapper">
+            <!--文档列表-->
+            <ul id="list-history" class="list-history">
+                <!--<li><a href="##">附件:eSpaceHealthcareV100R001C00SPC700T 安装指南 01 .epub<b>(1.5MB)</b><span>2013-3-4 20:57:37 </span></a></li>
+				<li><a href="##">附件:eSpaceHealthcareV100R001C00SPC700T 安装指南 01 .epub<b>(1.5MB)</b><span>2013-3-4 20:57:37 </span></a></li>
+				<li><a href="##">附件:eSpaceHealthcareV100R001C00SPC700T 安装指南 01 .epub<b>(1.5MB)</b><span>2013-3-4 20:57:37 </span></a></li>
+				<li><a href="##">附件:eSpaceHealthcareV100R001C00SPC700T 安装指南 01 .epub<b>(1.5MB)</b><span>2013-3-4 20:57:37 </span></a></li>
+				<li><a href="##">附件:eSpaceHealthcareV100R001C00SPC700T 安装指南 01 .epub<b>(1.5MB)</b><span>2013-3-4 20:57:37 </span></a></li>-->
+            </ul>
+            <div class="no-history hide" localString="history_list_no_doc"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="fixedMenu">
+    <a href="index.html"><span class="homeIco"></span><b>首页</b></a>
+    <a href="page/knowledge.html"><span class="knowIco"></span><b>知识库</b></a>
+    <a href="/index.html"><span class="videoIco"></span><b>视频</b></a>
+    <a href="/index.html"><span class="toolIco"></span><b>工具</b></a>
+    <a href="page/dataDirect.html" id="deve3"><span class="letterIco"></span><b>期刊</b></a>
+</div>
+
+</body>
+</html>

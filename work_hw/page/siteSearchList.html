@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title localString="siteSearchList_title">搜索列表</title>
+    <script src="../plugin/reflash.js"></script>
+    <script>
+        checkReflash();
+    </script>
+</head>
+<body>
+<div data-role="page" class="pageBg" id="globalSiteSearchList">
+    <div id="page_mask_global_search" class="page_mask"></div>
+    <div class="abReLeft" id="global_search_left_Sidebar">
+        <div class="header_page">
+            <a class="btn_left" data-rel="back" href="#" id="gs_back"></a>
+            <div class="commonH1"  id="gsearch_cmh">
+            <div class="top_search">
+                <div class="kuang">
+                    <a class="icon" href="#"></a>
+                    <input type="text" maxlength="200" value="" id="global_search_input" placeholder="搜索" localString="index_left_search"/>
+                </div>
+            </div>
+			</div>
+            <a id="global_search_filter_btn" class="btn_right" href="#" localString="common_filter">筛选</a>
+        </div>
+        <div class="content-box" data-role="content" >
+
+            <div class="tip_bar" id="global_search_total">
+
+            </div>
+            <div id="global_search_content_scroll">
+            <ul class="search-tools list90" id="global_search_content">
+                <!--li>
+                    <a href="#">
+
+                        MA5608T V800R013
+                    </a>
+                </li-->
+
+            </ul>
+            <div class="clear_btn hide" id="global_search_clear_history">
+                <a href="#" localString="commnon_clear_search">清除查询历史</a>
+            </div>
+                <div  id="pullUp" class="pullUp" style="display: none;">
+                    <span class="pullUpIcon"></span><span class="pullUpLabel" localString="gs_load_more">向上拉加载更多...</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="abReRight hide" id="global_search_right_Sidebar">
+        <div class="cePage" id="global_search_filter">
+            <div class="ctrl_box">
+                <!--div class="condition">
+                    <ul>
+                        <li class="on">
+                            <a href="#">条件</a>
+                        </li>
+                        <li>
+                            <a href="#">分类</a>
+                        </li>
+                    </ul>
+                </div-->
+                <a class="btn_right_sort" href="#" id="global_search_confirm" localString="common_confirm">确定</a>
+            </div>
+            <div id="global_search_conditions">
+                <dl class="sort_list">
+                    <dt><a href="#"><i localString="search_type">类型</i>：<b id="gs_doc_type" sdata="" localstring="entire">全部</b><span></span></a></dt>
+
+                </dl>
+                <dl class="sort_list">
+                    <dt><a href="#"><i localString="search_language">语言</i>：<b id="gs_lang" sdata="all" ></b><span></span></a></dt>
+                </dl>
+                <dl class="sort_list">
+                    <dt><a href="#"><i localString="search_format">格式</i>：<b id="gs_doc_format" sdata="" localstring="entire">全部</b><span></span></a></dt>
+                </dl>
+                <dl class="sort_list">
+                    <dt><a href="#"><i localString="index_favorites_product">产品</i>：<b id="gs_doc" sdata="SUP_DOC" localstring="index_favorites_doc" >文档</b><span></span></a></dt>
+                </dl>
+                <dl class="sort_list">
+
+                    <dt><a href="#"><i localString="search_release_date">发布时间</i>：<b id="gs_doc_time" sdata="" localstring="entire">全部</b><span></span></a></dt>
+
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <!-- 选择版本 开始-->
+    <div id="global_search_filter_condition" class="hide" >
+        <div class="pageBg">
+            <div class="header_page" id="global_search_con_header">
+                <a href="#" class="btn_left" data-role="back"></a>
+                <h1 class="commonH1"><span id="gs_con_title"></span></h1>
+                <a href="#" class="btn_right" localString="common_confirm">确定</a>
+            </div>
+
+
+            <!--筛选列表-->
+            <div class="sort_page" >
+                <div id="gs_filter_content_scroll">
+                <dl id="global_search_filter_content">
+
+
+
+                </dl>
+                <ul class="g-search-ul hide" id="gs_ul_time">
+                    <li ><span localString="search_start_date">开始时间：</span>
+                        <span  id="gs_start_time" localString="search_date_placeholder" >日/月/年</span></li>
+                    <li ><span localString="search_end_date">结束时间：</span>
+                        <span id="gs_end_time" localString="search_date_placeholder" >日/月/年</span></li>
+                </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- 选择版本 结束-->
+</div>
+</body>
+</html>
