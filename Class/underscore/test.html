@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="underscore.js"></script>
+</head>
+<body>
+<script>
+
+var func = function(greeting){ return greeting + ': ' + this.name };
+func = _.bind(func, {name: 'moe'}, 'hi');
+func();
+
+console.log(func());
+</script>
+</body>
+</html>
