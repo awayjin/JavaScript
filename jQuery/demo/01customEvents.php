@@ -20,7 +20,7 @@ li:hover{ -webkit-transition:color 1s linear, background-color 1s linear, width 
          <li data-tab="333">3</li>
     </ul>
 </div>
-<script src="/JavaScript/jQuery/jquery-1.7.1.js"></script>
+<script src="/JavaScript/jQuery/jquery-1.5.1.js"></script>
 <script>
 
 

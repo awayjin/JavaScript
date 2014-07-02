@@ -8,18 +8,26 @@
 <script>
 
         //alert(new (new ActiveXObject("Msxml2.XMLHTTP.6.0")));
-		
-		
 
+
+
+        var JAN  =  {};
 
 ;(function(){
-    var JAN  = typeof JAN !== 'object' ? {} : '';
+
+    JAN.ajaxSetup = function(){
+
+    };
 
     JAN.ajax = function(url, options){
 
-        if(url === 'object'){
-
+        if(typeof url === 'object'){
+            options = url;
+            url = undefined;
         }
+
+        //强制options是一个对象
+        options = options || {};
 
     };
 
@@ -38,14 +46,6 @@
             return new XHR();
         }
     };
-
-
-
-	
-
-	
-
-
 
 })();
 
