@@ -1,60 +1,79 @@
 [jQuery](http://jquery.com/) - New Wave JavaScript
 ==================================================
 
+//贡献引导
 Contribution Guides
 --------------------------------------
 
+//在开源软件发展的精神下,jQuery总是鼓励社区贡献代码. 帮你在开始跳到写代码之前，请务必阅读这些重要的指导方针
 In the spirit of open source software development, jQuery always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly:
 
-1. [Getting Involved](http://contribute.jquery.org/)
-2. [Core Style Guide](http://contribute.jquery.org/style-guide/js/)
-3. [Writing Code for jQuery Foundation Projects](http://contribute.jquery.org/code/)
+
+1. [Getting Involved](http://contribute.jquery.org/) //参与
+2. [Core Style Guide](http://contribute.jquery.org/style-guide/js/) //核心的风格指南
+3. [Writing Code for jQuery Foundation Projects](http://contribute.jquery.org/code/) //为jQuery编写基础代码
 
 
+//用jQuery的环境
 Environments in which to use jQuery
 --------------------------------------
 
+//浏览器支持http://jquery.com/browser-support/ 不同的两个版本1.x-master和2.x-master分支， 2.x不支持老浏览器ie6-8.
+//在node里用jQuery, 浏览器扩展,非浏览器环境里，仅支持2.x版本, 1.x不支持这些环境
 - [Browser support](http://jquery.com/browser-support/) differs between the master (2.x) branch and the 1.x-master branch. Specifically, 2.x does not support legacy browsers such as IE6-8. The jQuery team continues to provide support for legacy browsers on the 1.x-master branch. Use the latest 1.x release if support for those browsers is required. See [browser support](http://jquery.com/browser-support/) for more info.
 - To use jQuery in Node, browser extensions, and other non-browser environments, use only **2.x** releases. 1.x does not support these environments.
 
 
+
+ //你需要建立自己的jQuery
 What you need to build your own jQuery
 --------------------------------------
 
+//为了建立jQuery,你需要最新的Node.js和git 1.7以后的版本
 In order to build jQuery, you need to have Node.js/npm latest and git 1.7 or later.
+//早期版本也许能工作，但不能测试
 (Earlier versions might work OK, but are not tested.)
 
 For Windows you have to download and install [git](http://git-scm.com/downloads) and [Node.js](http://nodejs.org/download/).
+//Windows下载git 和 Node.js
 
 Mac OS users should install [Homebrew](http://mxcl.github.com/homebrew/). Once Homebrew is installed, run `brew install git` to install git,
 and `brew install node` to install Node.js.
+//Mac OS 下载git 和 Node.js
 
 Linux/BSD users should use their appropriate package managers to install git and Node.js, or build from source
 if you swing that way. Easy-peasy.
+//Linux/BSD 下载git 和 Node.js
 
 
-How to build your own jQuery
+How to build your own jQuery //怎样建立自己的jQuery?
 ----------------------------
 
+//复制一份主要的jQuery运行git仓库(repo)：
 Clone a copy of the main jQuery git repo by running:
 
 ```bash
 git clone git://github.com/jquery/jquery.git
 ```
-
+//进入jquery目录，运行建立脚本：
 Enter the jquery directory and run the build script:
 ```bash
 cd jquery && npm run build
 ```
+//jQuery构建的版本将在`dist/`子目录下, 里面有压缩的复制版和相关地图文件
 The built version of jQuery will be put in the `dist/` subdirectory, along with the minified copy and associated map file.
 
+//如果你想创建定制版 或者 帮助jQuery发展, 最好安装【grunt命令行界面】(https://github.com/gruntjs/grunt-cli)作为全局包
 If you want create custom build or help with jQuery development, it would be better to install [grunt command line interface](https://github.com/gruntjs/grunt-cli) as a global package:
 
 ```
 npm install -g grunt-cli
 ```
+//确定你grunt安装是否正确
 Make sure you have `grunt` installed by testing:
 ```
+
+//要加npm grunt -v
 grunt -v
 ```
 
