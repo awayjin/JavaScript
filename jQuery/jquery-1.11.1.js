@@ -8893,13 +8893,12 @@
                 context: true
             }
         },
-
+        //创建一个完整的settings对象到target对象上
         // Creates a full fledged settings object into target
-          //创建一个完整的settings对象到target对象上
+        //带ajaxSettings 和 settings两个字段
         // with both ajaxSettings and settings fields.
-           //带ajaxSettings 和 settings两个字段
+        //如果target是省略的，用ajaxSettings
         // If target is omitted, writes into ajaxSettings.
-           //如果target是省略的，用ajaxSettings
         ajaxSetup: function( target, settings ) {
             return settings ?
 
@@ -8918,7 +8917,7 @@
         ajax: function( url, options ) {
 
             // If url is an object, simulate pre-1.5 signature
-            //如果url是一个对象，模仿pre-1.5签名
+            //如果url是一个对象，模仿之前1.5(pre-1.5)的签名
             if ( typeof url === "object" ) {
                 options = url;
                 url = undefined;

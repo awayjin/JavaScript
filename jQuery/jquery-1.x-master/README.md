@@ -73,15 +73,17 @@ npm install -g grunt-cli
 Make sure you have `grunt` installed by testing:
 ```
 
-//要加npm grunt -v
+//grunt -v 要加npm,如:npm grunt
 grunt -v
 ```
 
+//在jquery目录下, 现在可以运行 grunt命令  ,你可以建立jQuery完整版，就好像 npm run build
 Now by running `grunt` command, in the jquery directory, you could build full version of jQuery, just like with `npm run build` command:
 ```
 grunt
 ```
 
+//jQuery Core有许多别的可获得的任务
 There are many other tasks available for jQuery Core:
 ```
 grunt -help
@@ -89,14 +91,21 @@ grunt -help
 
 ### Modules
 
+
+ //指定的创建可以排除jQuery子项功能
 Special builds can be created that exclude subsets of jQuery functionality.
+// 当创建者确认jQuery部分是不用的   允许创建较小的定制版
 This allows for smaller custom builds when the builder is certain that those parts of jQuery are not being used.
+//例如, 一个app仅仅用到 $.ajax()的JSONP,不需要计算元素的偏移位置 可以排除 偏移和AJAX/XHR模块
 For example, an app that only used JSONP for `$.ajax()` and did not need to calculate offsets or positions of elements could exclude the offset and ajax/xhr modules.
 
+//任何模块都可以排除，除了core和selector模块.排除了一个模块, 传递给相对路径src的文件夹(无.js扩展)
 Any module may be excluded except for `core`, and `selector`. To exclude a module, pass its path relative to the `src` folder (without the `.js` extension).
 
+//一些模块可以被排除在外的例子
 Some example modules that can be excluded are:
 
+// ajax 所有AJAX功能 $.ajax()`, `$.get()`, `$.post()`, `$.ajaxSetup()`, `.load()`
 - **ajax**: All AJAX functionality: `$.ajax()`, `$.get()`, `$.post()`, `$.ajaxSetup()`, `.load()`, transports, and ajax event shorthands such as `.ajaxStart()`.
 - **ajax/xhr**: The XMLHTTPRequest AJAX transport only.
 - **ajax/script**: The `<script>` AJAX transport only; used to retrieve scripts.

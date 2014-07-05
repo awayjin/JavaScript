@@ -11,41 +11,73 @@
 
 
 
-        var JAN  =  {};
+
+var JAN  =  {};
+
 
 ;(function(){
 
-    JAN.ajaxSetup = function(){
+            function ajaxExtend(){
 
-    };
+            }
 
-    JAN.ajax = function(url, options){
 
-        if(typeof url === 'object'){
-            options = url;
-            url = undefined;
-        }
+            JAN.ajaxSetup = function(target, options){
+                return options ?
+                        ajaxExtend() :
+                        ajaxExtend();
+            };
 
-        //强制options是一个对象
-        options = options || {};
 
-    };
+            JAN.ajax = function(url, options){
 
-	var XHR = window.XMLHttpRequest || function(){ 
-		try{ return new ActiveXObject("Msxml2.XMLHTTP.6.0") } catch(e1){};
-		try{ return new ActiveXObject("Msxml2.XMLHTTP.3.0") } catch(e2){};
-		try{ return new ActiveXObject("Msxml2.XMLHTTP") } catch(e3){};
-		throw new Error("This Browser does not support XMLHttpRequest!!!");
-	};
+                if(typeof url === 'object'){
+                    options = url;
+                    url = undefined;
+                }
 
-    var ajaxSettings = {
-        type: "get",
-        url: '',
-        async: true,
-        xhr: function(){
-            return new XHR();
-        }
-    };
+                //强制options是一个对象
+                options = options || {};
+
+            var i,
+                     //创建最终的参数options对象
+                s = JAN.ajaxSetup({}, options);
+
+
+            };
+
+            var XHR = window.XMLHttpRequest || function(){
+                try{ return new ActiveXObject("Msxml2.XMLHTTP.6.0") } catch(e1){};
+                try{ return new ActiveXObject("Msxml2.XMLHTTP.3.0") } catch(e2){};
+                try{ return new ActiveXObject("Msxml2.XMLHTTP") } catch(e3){};
+                throw new Error("This Browser does not support XMLHttpRequest!!!");
+            };
+
+            var ajaxSettings = {
+                type: "get",
+                url: '',
+                async: true,
+                xhr: function(){
+                    return new XHR();
+                }
+            };
+
+
+            var xhr = new XHR();
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                        console.log(xhr.responseText);
+                    } else {
+                        alert("Request was unsuccessful: " + xhr.status);
+                    }
+                }
+            };
+            console.log("xhr.readyState:", xhr.readyState);
+
+            xhr.open("get", "06AJAX.php", true);
+
+            xhr.send();
 
 })();
 
