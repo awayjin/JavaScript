@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+//    分析一：jQuery的无new构建
+var janQuery = function(select, context){
+    return new janQuery.fn.init();
+};
+janQuery.fn = janQuery.prototype ={
+    init: function(){
+//        this.age = 28;
+        return this;
+    },
+
+    name: function(){
+        return this.age;
+    },
+
+    age: 25
+};
+
+janQuery.fn.init.prototype = janQuery.fn;
+
+janQuery().age;
+
+</script>
+
+</body>
+</html>

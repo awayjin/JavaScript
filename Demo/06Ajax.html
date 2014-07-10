@@ -6,45 +6,94 @@
 </head>
 <body>
 <script>
+    function C() {
+        return new C.fn.init();
+    }
+    ;
+    C.fn = C.prototype = {  say2: function () {
+        return 11;
+    }, init: function () {
+        console.log(this);
+        return this;
+    }}
+    C.fn.init.prototype = C.fn;
+    var C = C();
+    C.say2()//C.say2();
+</script>
+<script>
 
         //alert(new (new ActiveXObject("Msxml2.XMLHTTP.6.0")));
 
 
 
 
-var JAN  =  {};
+var JAN  =  function(){
+    return new JAN.fn.init();
+};
+JAN.fn = JAN.prototype = {
+    constructor: JAN,
+
+    init: function(){
+       return this;
+    }
+};
+JAN.fn.init.prototype = JAN.fn;
 
 
-;(function(){
 
-            function ajaxExtend(){
+JAN.extend = JAN.fn.extend = function(){
+
+    var target = arguments[0] || {};
+
+    return target;
+};
+
+
+
+
+        ;(function(){
+
+            function ajaxExtend(target, src){
 
             }
 
+            JAN.extend({
+                ajaxSettings: {
+                    type: "get",
+                    url: '',
+                    async: true,
+                    xhr: function(){
+                        return new XHR();
+                    }
+                },
 
-            JAN.ajaxSetup = function(target, options){
-                return options ?
-                        ajaxExtend() :
-                        ajaxExtend();
-            };
+                ajaxSetup: function(target, options){
+                    return options ?
+                            ajaxExtend(ajaxExtend(target, JAN.ajaxSettings), options) :
+                            ajaxExtend(JAN.ajaxSettings, target);
+                },
+
+                ajax:  function(url, options){
+
+                    if(typeof url === 'object'){
+                        options = url;
+                        url = undefined;
+                    }
+
+                    //强制options是一个对象
+                    options = options || {};
+
+                    var i,
+                         //创建最终的参数options对象
+                        s = JAN.ajaxSetup({}, options);
 
 
-            JAN.ajax = function(url, options){
-
-                if(typeof url === 'object'){
-                    options = url;
-                    url = undefined;
                 }
 
-                //强制options是一个对象
-                options = options || {};
-
-            var i,
-                     //创建最终的参数options对象
-                s = JAN.ajaxSetup({}, options);
+            });
 
 
-            };
+
 
             var XHR = window.XMLHttpRequest || function(){
                 try{ return new ActiveXObject("Msxml2.XMLHTTP.6.0") } catch(e1){};
@@ -53,33 +102,30 @@ var JAN  =  {};
                 throw new Error("This Browser does not support XMLHttpRequest!!!");
             };
 
-            var ajaxSettings = {
-                type: "get",
-                url: '',
-                async: true,
-                xhr: function(){
-                    return new XHR();
-                }
-            };
+
 
 
             var xhr = new XHR();
             xhr.onreadystatechange = function(){
-                if(xhr.readyState == 4){
+//                alert(this.readyState);
+                //ie6 失效
+                if(this.readyState == 4){
                     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
-                        console.log(xhr.responseText);
+//                        alert(xhr.responseText);
                     } else {
                         alert("Request was unsuccessful: " + xhr.status);
                     }
                 }
             };
-            console.log("xhr.readyState:", xhr.readyState);
+//            console.log("xhr.readyState:", xhr.readyState);
 
             xhr.open("get", "06AJAX.php", true);
 
             xhr.send();
 
-})();
+            JAN = JAN();
+
+        })();
 
 </script>
 	2323
