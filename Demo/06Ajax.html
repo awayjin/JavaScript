@@ -2,25 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>jan</title>
+    <!--<script src="../js/jquery-1.8.2.js"></script>-->
+
 </head>
 <body>
+
 <script>
-    function C() {
-        return new C.fn.init();
-    }
-    ;
-    C.fn = C.prototype = {  say2: function () {
-        return 11;
-    }, init: function () {
-        console.log(this);
-        return this;
-    }}
-    C.fn.init.prototype = C.fn;
-    var C = C();
-    C.say2()//C.say2();
-</script>
-<script>
+
+
 
         //alert(new (new ActiveXObject("Msxml2.XMLHTTP.6.0")));
 
@@ -28,7 +18,7 @@
 
 
 var JAN  =  function(){
-    return new JAN.fn.init();
+   // return new JAN.fn.init();
 };
 JAN.fn = JAN.prototype = {
     constructor: JAN,
@@ -37,13 +27,24 @@ JAN.fn = JAN.prototype = {
        return this;
     }
 };
-JAN.fn.init.prototype = JAN.fn;
+//JAN.fn.init.prototype = JAN.fn;
 
 
 
 JAN.extend = JAN.fn.extend = function(){
+    var name, options,
+            target = arguments[0] || {},            // 常见用法 jQuery.extend( obj1, obj2 )，此时，target为arguments[0]
+            i = 0,
+            length = arguments.length;
 
-    var target = arguments[0] || {};
+    target = this;
+
+    for(;i< length; i++){
+        options = arguments[0];
+        for(name in options){
+            target[name] = options[name];
+        }
+    }
 
     return target;
 };
@@ -54,7 +55,20 @@ JAN.extend = JAN.fn.extend = function(){
         ;(function(){
 
             function ajaxExtend(target, src){
+                var deep, key,
+                        flatOptions = JAN.ajaxSettings.flatOptions || {};
 
+                for ( key in src ) {
+                    if ( src[ key ] !== undefined ) {
+                        ( flatOptions[ key ] ? target : ( deep || (deep = {}) ) )[ key ] = src[ key ];
+                    }
+                }
+
+                if ( deep ) {
+                    JAN.extend( true, target, deep );
+                }
+
+                return target;
             }
 
             JAN.extend({
@@ -64,16 +78,36 @@ JAN.extend = JAN.fn.extend = function(){
                     async: true,
                     xhr: function(){
                         return new XHR();
+                    },
+                    flatOptions: {
+                        url: true,
+                        context: true
                     }
                 },
 
-                ajaxSetup: function(target, options){
-                    return options ?
-                            ajaxExtend(ajaxExtend(target, JAN.ajaxSettings), options) :
-                            ajaxExtend(JAN.ajaxSettings, target);
+                ajaxSetup: function(target, settings){
+//                   return ajaxExtend(ajaxExtend(JAN.ajaxSettings, options), target);
+
+                    return settings ?
+                            ajaxExtend(ajaxExtend(target, JAN.ajaxSettings), settings):
+                            ajaxExtend(JAN.ajaxSettings, target)
+
+
+                    var key;
+
+                    for(key in JAN.ajaxSettings){
+                        if(settings[key] !== undefined){
+                           JAN.ajaxSettings[key] = settings[key];
+                            target = JAN.ajaxSettings;
+                        }
+                    }
+
+                    return target;
+
                 },
 
                 ajax:  function(url, options){
+
 
                     if(typeof url === 'object'){
                         options = url;
@@ -86,6 +120,8 @@ JAN.extend = JAN.fn.extend = function(){
                     var i,
                          //创建最终的参数options对象
                         s = JAN.ajaxSetup({}, options);
+
+                    console.log(s);
 
 
                 }
@@ -105,27 +141,31 @@ JAN.extend = JAN.fn.extend = function(){
 
 
 
-            var xhr = new XHR();
+/*            var xhr = new XHR();
             xhr.onreadystatechange = function(){
 //                alert(this.readyState);
                 //ie6 失效
                 if(this.readyState == 4){
                     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
-//                        alert(xhr.responseText);
+//                        alert(xhr.status + ", "+xhr.responseText);
                     } else {
-                        alert("Request was unsuccessful: " + xhr.status);
+//                        alert("Request was unsuccessful: " + xhr.status);
                     }
                 }
             };
-//            console.log("xhr.readyState:", xhr.readyState);
 
             xhr.open("get", "06AJAX.php", true);
+            xhr.send(null);*/
 
-            xhr.send();
+            JAN.ajax({"url": "asdfs", "type": "post"});
+            JAN.ajax();
 
-            JAN = JAN();
 
         })();
+
+
+
+
 
 </script>
 	2323

@@ -1,3 +1,4 @@
+alert('client');
 
 var client22 = function(){
 
@@ -181,4 +182,3 @@ var client22 = function(){
 
 }();
 
-alert('client');

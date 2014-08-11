@@ -6,7 +6,27 @@
 </head>
 <body>
 <script type="text/javascript">
-    $.ajax({});
+
+    var target  = {a:1, b:2};
+    var opt = {b:33};
+    var key;
+
+    for(target in key){
+        if(opt[key] !== undefined){
+            opt[key] = target[key];
+        }
+    }
+
+    opt;
+
+
+    $.ajax("1.0ajax.php", {
+        success: function(msg){
+        alert(msg);
+        }/*,
+
+         url:  "1.0ajax.php",*/
+    });
 </script>
 </body>
 </html>

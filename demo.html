@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <script src="./js/jquery-1.8.2.js"></script>
 </head>
 <body>
 
@@ -10,9 +11,16 @@
     <li><a href=""></a></li>
 </ul>
 <script>
-    document.createElementNS()
-    document.createElementNS()
+    $(function(){
+        $("html").click(function(event){
+            alert(11);
+            $("html").unbind();
+
+        });
+    });
+
 //    document.createElementNS()
+
 </script>
 </body>
 </html>

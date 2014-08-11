@@ -173,7 +173,7 @@
 
     jQuery.extend = jQuery.fn.extend = function() {
         var src, copyIsArray, copy, name, options, clone,
-            target = arguments[0] || {},
+            target = arguments[0] || {},            // 常见用法 jQuery.extend( obj1, obj2 )，此时，target为arguments[0]
             i = 1,
             length = arguments.length,
             deep = false;
@@ -192,17 +192,18 @@
             target = {};
         }
 
+        //如果只有一个参数传过来，扩展jQuery本身
         // extend jQuery itself if only one argument is passed
-        if ( i === length ) {
-            target = this;
+        if ( i === length ) {          // 处理这种情况 jQuery.extend(obj)，或 jQuery.fn.extend( obj )
+            target = this;            // jQuery.extend时，this指的是jQuery；jQuery.fn.extend时，this指的是jQuery.fn
             i--;
         }
 
         for ( ; i < length; i++ ) {
             // Only deal with non-null/undefined values
-            if ( (options = arguments[ i ]) != null ) {
+            if ( (options = arguments[ i ]) != null ) {    // 比如 jQuery.extend( obj1, obj2, obj3, ojb4 )，options则为 obj2、obj3...
                 // Extend the base object
-                for ( name in options ) {
+                for ( name in options ) {          // 防止自引用，不赘述
                     src = target[ name ];
                     copy = options[ name ];
 
@@ -211,21 +212,22 @@
                         continue;
                     }
 
+                    // 如果是深拷贝，且被拷贝的属性值本身是个对象
                     // Recurse if we're merging plain objects or arrays
                     if ( deep && copy && ( jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)) ) ) {
-                        if ( copyIsArray ) {
+                        if ( copyIsArray ) {   // 被拷贝的属性值是个数组
                             copyIsArray = false;
                             clone = src && jQuery.isArray(src) ? src : [];
 
-                        } else {
+                        } else {      //被拷贝的属性值是个plainObject，比如{ nick: 'casper' }
                             clone = src && jQuery.isPlainObject(src) ? src : {};
                         }
 
                         // Never move original objects, clone them
-                        target[ name ] = jQuery.extend( deep, clone, copy );
+                        target[ name ] = jQuery.extend( deep, clone, copy ); // 递归~
 
                         // Don't bring in undefined values
-                    } else if ( copy !== undefined ) {
+                    } else if ( copy !== undefined ) {       // 浅拷贝，且属性值不为undefined
                         target[ name ] = copy;
                     }
                 }
@@ -8903,7 +8905,7 @@
             return settings ?
 
                 // Building a settings object
-                ajaxExtend( ajaxExtend( target, jQuery.ajaxSettings ), settings ) :
+                ajaxExtend( ajaxExtend( target, jQuery.ajaxSettings ), $.browser.msie  ) :
 
                 // Extending ajaxSettings
                 ajaxExtend( jQuery.ajaxSettings, target );
@@ -8918,6 +8920,7 @@
 
             // If url is an object, simulate pre-1.5 signature
             //如果url是一个对象，模仿之前1.5(pre-1.5)的签名
+            //如果url是对象的话，冒充1.5版本之前的方法 -->$.ajax({url:"xx",data:{},})
             if ( typeof url === "object" ) {
                 options = url;
                 url = undefined;
@@ -9042,6 +9045,8 @@
             deferred.promise( jqXHR ).complete = completeDeferred.add;
             jqXHR.success = jqXHR.done;
             jqXHR.error = jqXHR.fail;
+
+            console.log("9049:", s);
 
             // Remove hash character (#7531: and string promotion)
             // Add protocol if not provided (#5866: IE7 issue with protocol-less urls)
