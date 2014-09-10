@@ -20,4 +20,4 @@ var str = "abcdefg"
 if( /efg/.test(str) ){
     var t = str.substr(str.indexOf("efg"));
     console.log(t);
-}
+}2d

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //01 事件监听
+    var EventUtil = {
+        addHandler: function(ele, type, listener){
+            if(ele.addEventListener){
+                ele.addEventListener(type, listener, false);
+            }else{
+                ele.attachEvent("on"+type, listener);
+            }
+        },
+
+        removeHandler: function(ele, type, listener){
+            if(ele.removeEventListener){
+                ele.removeEventListener(type, listener, false);
+            }else{
+                ele.detachEvent("on"+type, listener);
+            }
+        }
+    };
+
+    function handler(e){
+        alert(e+", "+ this);
+        EventUtil.removeHandler(window, "click", handler);
+    }
+    EventUtil.addHandler(window, "click", handler);
+</script>
+</body>
+</html>

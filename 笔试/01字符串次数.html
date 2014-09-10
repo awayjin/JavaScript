@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>统计字符串出现的次数</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<script type="text/javascript">
+    //判断一个字符串中出现次数最多的字符，统计这个次数
+    var str = 'aabbbccc';
+
+    var json = {};
+
+//    for(var i in str){
+    for(var i= 0, len = str.length; i<len; i++){
+//        if(json[str[i]] === undefined){
+        if(!json[str[i]]){
+            json[str[i]] = 1;
+        }else{
+            json[str[i]]++;
+        }
+    }
+    console.log(json);
+
+    var max = 0, numberTimes = 0;
+    for(var i in json){
+        if(json[i] > numberTimes){
+            numberTimes = json[i];
+            max = i;
+        }
+    }
+    console.log("出现次数最多的字符:", max, "出现的次数:", numberTimes);
+
+
+</script>
+</body>
+</html>
