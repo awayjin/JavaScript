@@ -6,12 +6,7 @@
     <link type="text/css" href="./skins/blue.css" rel="stylesheet">
     <!--<script src="./janDialog/artDialog.js"></script>-->
 
-    <style type="text/css">
-        .base-dialog{ width: 270px; height: 170px; background-color: #fff; color: #fff; border: 1px solid #c0bfbf;}
-        .dialog-title{ height: 32px; line-height: 32px; text-indent: 1em; background-color: #000; }
-        .dialog-content{ height: 100px;}
-        .dialog-button{ height: 60px;}
-    </style>
+
 </head>
 <body>
 
@@ -34,8 +29,6 @@
             window.$ = $
         }
 
-
-
         return $;
 
     })(window);
@@ -45,6 +38,7 @@
         var _count = 0,
                 _expando = "janDialog" + (+new Date());
 
+        //入口位置
         var janDialog = function(config, ok, cancle){
 
             config = config || {};
@@ -64,6 +58,7 @@
         }
 
         janDialog.fn = janDialog.prototype = {
+            //创建实例
             _create: function(config, ok, cancle){
                 var dom;
 
@@ -112,18 +107,6 @@
 
             title: "message"
         };
-
-//        janDialog._templates =
-//                '<div class="base-dialog">'
-//                        +      '<div class="dialog-title">标题</div>'
-//                        +      '<div class="dialog-content">'
-//                        +            '内容'
-//                        +      '</div>'
-//                        +      '<div class="dialog-button">'
-//                        +          '<button class="button-text"><span>确定</span></button>'
-//                        +         '<button class="button-text"><span>取消</span></button>'
-//                        +    '</div>'
-//                        + '</div>';
 
         janDialog._templates =
                 '<div class="d-outer" role="dialog" tabindex="-1" aria-labelledby="d-title-{id}" aria-describedby="d-content-{id}">'
@@ -181,67 +164,13 @@
         lock: true
     })
 
-    function Person(){
-        alert(11)
-    }
+
 </script>
 
 
 <script>
-    $.dialog("cc", function(){})
-//    (function(window, undefine){
-//        var $ = window.jan = function(){
-//
-//            return new $.prototype.constructor();
-//        };
-//
-//
-//        window.$  = $;
-//
-//
-//        $.fn = $.prototype = {
-//            constructor: function(){
-//
-//            }
-//
-//        }
-//        $.fn.constructor.prototype = $.fn;
-//
-//        return $;
-//    })(window);
-//
-//
-//
-//
-//    (function($, window, undefined){
-//
-//        var janDialog = function(config, ok, cancle){
-//
-//            return new janDialog.fn._create(config);
-//        };
-//
-//        janDialog.fn = janDialog.prototype = {
-//
-//            _create: function(){
-//
-//            }
-//        }
-//
-//        janDialog.fn._create.prototype = janDialog.fn;
-//
-//
-//        $.fn.dialog  = $.fn.janDialog = function(){
-//
-//        }
-//
-//
-//        this.janDialog = $.dialog = $.janDialog = janDialog;
-//
-//        var cc;
-//    })(this.jan || this.jQuery, this);
-//
-////    jan.dialog();
-//    $.dialog();
+//    $.dialog("cc", function(){})
+
 </script>
 
 </body>
