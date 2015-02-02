@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <div id="test"></div>
+    <div></div>
+</div>
+<ul>
+    <li><a href=""><span>jinwei</span></a></li>
+</ul>
+
+<script>
+
+
+    //得到所有父元素
+    !function(){
+        var arr = [];
+        window.getParents = function(ele){
+            //while循环方法
+           var dom = ele.parentNode;
+            while(dom){
+                arr.push(dom)
+                dom = dom.parentNode;
+            }
+            return arr;
+
+            //递归方法
+            if(ele.parentNode !== null){
+                arr.push(ele.parentNode);
+                arguments.callee(ele.parentNode);
+            };
+            return arr;
+        }
+    }();
+
+    var span = document.getElementsByTagName("span")[0];
+    var eles = getParents(span);
+//    console.log(eles);
+    alert(eles);
+
+
+    !function(){
+        var getParents=function(id){
+            var dom=id.parentNode;
+            while(dom.tagName){
+                document.write(dom.tagName+"<br>");
+                dom=dom.parentNode;
+            }
+            return dom;
+        }
+        getParents(test);
+
+    }();
+
+</script>
+</body>
+</html>

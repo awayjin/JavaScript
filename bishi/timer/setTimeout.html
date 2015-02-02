@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="myDiv" style="position: relative; left: 0px; border: 1px solid; width: 80px;">22</div>
+
+
+<script type="text/javascript">
+    "use strict";
+    var div = document.getElementById("myDiv"), flag = 1, left;
+    function moveLeft(){
+        left = parseInt(div.style.left);
+        console.log(left);
+        if(left <= 100 && flag == 1){
+            div.style.left = left + 5+ "px";
+            if(left >= 100){
+                flag = 0;
+            }
+            setTimeout(moveLeft, 50);
+        }else{
+            div.style.left = left - 5+ "px";
+            if(left <= 5){
+                flag = 1;
+            }
+            setTimeout(moveLeft, 50);
+        }
+    }
+    setTimeout(moveLeft, 50);
+
+   /* setTimeout(function(){
+        left = parseInt(div.style.left);
+        if(left < 100 && flag == 1){
+            div.style.left = left + 5+ "px";
+            if(left >= 100){
+                flag = 0;
+            }
+            setTimeout(arguments.callee, 50);
+        }else{
+            div.style.left = left - 5+ "px";
+            if(left <= 5){
+                flag = 1;
+            }
+            setTimeout(arguments.callee, 50);
+        }
+    }, 50);*/
+
+</script>
+
+</body>
+</html>

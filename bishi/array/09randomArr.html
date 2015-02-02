@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>将数组转换为随机数组</title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+    //将数组转换为随机数组
+    function shuffleArray(arr){
+        var randomArr, item;
+        for(var i = 0, len = arr.length-1; len>=i; len--){
+            randomArr = Math.floor(Math.random()*arr.length);
+            item = arr.shift(); //从数组首位取出
+            arr.splice(randomArr, 0, item); //在生成的随机数插入数组
+        }
+        return arr;
+    };
+
+    var arr = [22, 33, 44, 55, 66, 77, "sfd", 11];
+    var shuffle = shuffleArray(arr);
+    console.log(shuffle);
+
+
+    Array.prototype.shuffle=function(){
+        var resultArr=[];
+        var len=this.length;
+        while(len){
+            var _index=parseInt(Math.random()*len);
+            resultArr.push(this[_index]);//每次取得数组中一个字符，放到新的数组中
+            for(var i=_index;i<len;i++){//后面的向前移动
+                this[i]=this[i+1];
+            }
+            len--;
+        }
+        return resultArr;
+    }
+    var a=new Array('1','2','3');
+    console.log(a.shuffle());
+</script>
+
+</body>
+</html>

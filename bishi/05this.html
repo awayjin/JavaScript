@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var name = "The window";
+    var obj = {
+
+        name: "My window",
+        showName: function(){
+
+            //console.log(this.name);
+            return this.name
+        },
+        getName: function(){
+            var that = this;
+            return function(){
+                console.log(this.name);
+                return this.name;
+            };
+        }
+
+    };
+    //obj.getName()();
+
+
+    //函数执行时是基于执行环境陈情绑定的，而非声明环境
+    var obj = {
+        name: "obj1",
+        showName: function(){
+            return this.name;
+        }
+    };
+
+    var other = {
+        name: "obj2",
+        showName: obj.showName
+//      ,showName: function(){
+//            return obj.showName();
+//        }
+    };
+
+    console.log(other.showName());
+</script>
+</body>
+</html>

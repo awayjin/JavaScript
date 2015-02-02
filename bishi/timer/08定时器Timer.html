@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js单线程</title>
+    <meta charset="utf-8"></me>
+    <script type="text/javascript" src="../jquery.js"></script>
+</head>
+<body>
+<div id="myDiv" style="position: relative; left: 0px; border: 1px solid; width: 80px;">22</div>
+<script type="text/javascript">
+    function xhrFunc(){
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if(xhr.status == 200 || xhr.status == 304){
+                    alert(xhr.status+ " ::end3:: "+xhr.responseText);
+                }else if(xhr.status == 404){
+                    alert("Requested URL was not found");
+                }else if(xhr.status == 403){
+                    alert("Access denied");
+                }else{
+                    alert("Request was unsuccessful:"+xhr.status);
+                }
+            }
+
+        };
+        xhr.open("get", "./08.php", true);
+        xhr.send(null);
+    }
+
+    setTimeout(function(){
+        var div = document.getElementById("myDiv");
+        var left = parseInt(div.style.left) + 5;
+        div.style.left = left + "px";
+        if (left < 100){
+            setTimeout(arguments.callee, 50);
+        }else{
+            left = parseInt(div.style.left) - 5
+            div.style.left = left + "px";
+            setTimeout(arguments.callee, 50);
+        }
+    }, 50);
+
+//    window.setTimeout(function(){
+////        while(true){}
+//    }, 1000);
+
+/*    window.setTimeout(function(){
+//       xhrFunc();
+    }, 3000);*/
+
+
+    window.setTimeout(function(){
+        alert("end2 ")
+    }, 2000);
+
+    window.setTimeout(function(){
+        alert("end1 ")
+    }, 20);
+
+
+    var xhr = new XMLHttpRequest();
+    //放在open前 确保兼容性
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            if(xhr.status == 200 || xhr.status == 304){
+                alert(xhr.status+ " :::: "+xhr.responseText);
+            }else if(xhr.status == 404){
+                alert("Requested URL is not found");
+            }else if(xhr.status == 403){
+                alert("Access denied");
+            }else{
+                alert("Request was unsuccessful:"+xhr.status);
+            }
+        }
+
+    };
+    xhr.open("get", "./08.php", true);
+    xhr.send(null);
+
+
+    alert("end");
+
+
+
+
+</script>
+
+<form name="form1">
+    <input type="input" name="name2">
+    <input type="submit" value="submit" onclick="xhrFunc();" />
+</form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1 id="main-h1">1111</h1>
+<iframe src="3iframe.html" id="J_iframe_taobao"></iframe>
+
+<script>
+    var mainH1 = document.getElementById("main-h1");
+
+    function forSub(){
+        var div = document.createElement("h3");
+        var txt = document.createTextNode("4.0子页面调用的");
+
+        div.appendChild(txt);
+        document.body.insertBefore(div, document.body.firstChild);
+    }
+
+    ;!function(){
+        var ifr = document.getElementById("J_iframe_taobao");
+        var ifrDoc = ifr.contentDocument || ifr.contentWindow.document;
+        var getSubEle = ifrDoc.getElementById("S_ele");
+
+        var ifr = window.frames[0];
+        ifr.onload = function(e){
+            var isFunc = Object.prototype.toString.call(ifr.postMessage);
+            if(isFunc == "[object Function]"){
+                ifr.postMessage("1.0 你好,传给子页面!", location.protocol+location.host);
+            }
+        };
+
+        if(window.addEventListener){
+            window.addEventListener("message", function(ev){
+                console.log("5.0", ev.origin +" , "+ev.data);
+            },false);
+        }else{
+            window.attachEvent("message", function(ev){
+                console.log("5.1", ev.origin +" , "+ev.data);
+            });
+        }
+
+    }();
+
+
+!function(){
+    //    document.domain = 'a.com';
+    var ifr = document.createElement('iframe');
+    ifr.src = '3iframe.html';
+    document.body.appendChild(ifr);
+    ifr.onload = function(){
+        var doc = ifr.contentDocument || ifr.contentWindow.document;
+        // 在这里操纵b.html
+        doc.getElementById("S_ele").innerHTML = "3.0传给子页面，互相通信";
+//        doc.getElementById("S_ele").innerHTML = "222";
+//        alert(doc.getElementById("S_ele").innerHTML = "222");
+//        alert(doc.getElementsByTagName("h1")[0].childNodes[0].nodeValue);
+    };
+}()
+</script>
+</body>
+</html>

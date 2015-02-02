@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div id="S_ele">子元素</div>
+
+
+<script>
+    var subEle = document.getElementById("S_ele");
+    if(window.addEventListener){
+        window.addEventListener("message", function(ev){
+
+            console.log("1.0:", ev.origin +",, "+ev.data);
+            ev.source.postMessage("传给父页面", ev.origin);
+        }, false);
+    }
+
+    ;!function(){
+        var top = parent.document;
+        var h3 = document.createElement("h5");
+        var h3Txt = document.createTextNode("2.1 For Sale, Parent Page");
+        h3.appendChild(h3Txt);
+
+        top.getElementById("main-h1").appendChild(h3);
+
+        parent.forSub();
+    }();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .box{  background-color: green; width: 100%;}
+        .item{ background: #9a9a9a; margin: 10px 0px 10px 10px; word-break:break-all;}
+        .item:first-child{
+            width: 200px;
+        }
+        .item:nth-child(2),  .item:nth-child(3){  -webkit-box-flex:1; -moz-box-flex:1; box-flex:1 }
+
+
+        @media screen and (min-width:350px){
+            .box{ display: -webkit-box; _display: -moz-box;  display:-moz-inline-box}
+            .item:nth-child(3){ margin-right: 10px; }
+        }
+
+        @media screen and (max-width:350px){
+            .item:first-child{ -webkit-box-flex:1; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <div class="item">column 1</div>
+    <div class="item">colucolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumncolumnmn 2</div>
+    <div class="item">column 3olumncolumncolumncolumncolumncolumncolumncolumncolumncolumncoolumncolumncolumncolumncolumncolumncolumncolumncolumncolumnco</div>
+</div>
+
+
+<style type="text/css">
+    h1 > strong{ color: red;}
+    /*h1 strong{ color: green;}*/
+</style>
+与后代选择器相比，子元素选择器（Child selectors）只能选择作为某元素子元素的元素。
+<h1>This is <strong>very</strong> <strong>very</strong> important.</h1>
+<h1>This is <em>really <strong>very</strong></em> important.</h1>
+
+
+强制不换行
+
+div{
+white-space:nowrap;
+}
+自动换行
+
+div{
+word-wrap: break-word;
+word-break: normal;
+}
+强制英文单词断行
+
+div{
+word-break:break-all;
+}
+</body>
+</html>

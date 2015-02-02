@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js单线程</title>
+    <meta charset="utf-8"></me>
+    <script type="text/javascript" src="../jquery.js"></script>
+</head>
+<body>
+<div id="myDiv" style="position: relative; left: 0px; border: 1px solid; width: 80px;">22</div>
+<br>
+<br>
+<br>
+
+
+
+<script type="text/javascript">
+    function xhrFunc(e){
+        event.stopPropagation();
+        event.preventDefault();
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if(xhr.status == 200 || xhr.status == 304){
+                    alert(xhr.status+ " ::end3:: \n"+xhr.responseText);
+                }else if(xhr.status == 404){
+                    alert("Requested URL was not found");
+                }else if(xhr.status == 403){
+                    alert("Access denied");
+                }else{
+                    alert("Request was unsuccessful:"+xhr.status);
+                }
+            }
+
+        };
+        var url = "./08.php";
+        xhr.open("post", url, true);
+        //模仿表单提交，否则都是get提交
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("name2="+$('[name="name2"]').val()+"");
+
+        setTimeout(function(){console.log(3333)}, 3000)
+
+
+    }
+
+
+
+
+
+
+</script>
+
+<!--<form name="form1" method="post">-->
+    <input type="input" name="name2">
+    <input type="submit" value="submit"/>
+    <button id="btn" onclick="xhrFunc(this)">模仿表单提交</button>
+
+<!--</form>-->
+
+</body>
+</html>

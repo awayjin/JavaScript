@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../js/jquery-1.11.1.js"></script>
+    <style type="text/css">
+        .gototop{background:url(./top.gif) no-repeat;width:42px;height:46px;position:fixed;left:50%;margin-left:582px;bottom:90px;cursor:pointer;z-index:999;opacity:0.5;-moz-opacity:0.5;-khtml-opacity:0.5;filter:alpha(opacity=50)}
+        .gototop:hover{opacity:1;-moz-opacity:1;-khtml-opacity:1;filter:alpha(opacity=100)}
+        .btn-button{color: #636466;
+            text-shadow: 1px 1px 1px #fff;
+            border: 1px solid #dce1e6;
+            box-shadow: 0 1px 2px #fff inset,0 -1px 0 #a8abae inset;
+            background: -webkit-linear-gradient(top,#f2f3f7,#e4e8ec);
+            background: -moz-linear-gradient(top,#f2f3f7,#e4e8ec);
+            background: linear-gradient(top,#f2f3f7,#e4e8ec);width: 110px;
+            line-height: 28px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            margin: 0 20px 20px 0;
+            position: relative;
+            overflow: hidden;}
+    </style>
+</head>
+<body>
+
+<input type="button" style="" class="btn-button" value="修改默认地址"/>
+
+
+
+<div class="top-top" style="width:1280px; margin: 0 auto; height: 1800px; border: 1px solid;">555</div>
+
+
+<script type="text/javascript">
+    $(function(){
+        var htmlTxt = '<div class="gototop" title="返回顶部"></div>';
+        $("body").append(htmlTxt);
+        var top = $('.gototop');
+        top.hide();
+        top.click(function(){
+            $(window).scrollTop(0);
+            top.hide();
+        });
+
+        //要用window 否则不兼容IE
+        var topEle = $(".top-top"),
+            docWidth = $(window).width(),
+            centerWidth = topEle.width() || 980;
+
+
+        //根据宽度决定返回顶部
+        function scrollRight(){
+            docWidth = $(window).width(),
+            centerWidth = topEle.width() || 980;
+            var trueWidth = docWidth-centerWidth;
+            if(trueWidth<= 104){
+                top.css({ "right": 20, left: "auto", left: "inherit" });
+            }else if(trueWidth>104){
+                top.css({ "right": trueWidth/2-42-10, left: "inherit"})
+            }
+        }
+
+        scrollRight();
+
+        //函数节流
+        function throttle(method, context) {
+            clearTimeout(method.tId);
+            method.tId= setTimeout(function(){
+                method.call(context);
+            }, 100);
+        }
+
+        $(window).resize(function(){
+            throttle(scrollRight)
+//            scrollRight();
+        });
+
+        $(window).scroll(function(){
+            var st = $(document).scrollTop();
+            var h = document.documentElement.clientHeight;
+            st <= h/2 ? top.hide("fast") : top.show("fast");
+        });
+
+    });
+</script>
+
+<h1 style="height: 1800px;">高度</h1>
+</body>
+</html>
