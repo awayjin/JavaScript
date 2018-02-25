@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+  <title>Title</title>
+</head>
+<body>
+https://www.w3cplus.com/canvas/drawing-arc-and-circle.html
+弧度又称弪度，是平面角的单位，也是国际单位制导出单位。单位弧度定义为圆弧长度等于半径时的圆心角。角度以弧度给出时，通常不写弧度单位，或有时记为rad。著作权归作者所有。
+商业转载请联系作者获得授权,非商业转载请注明出处。
+
+圆的周长与半径关系：
+C = 2 * Math.PI * r
+C = Math.PI * d
+
+<canvas id="myCanvas"  height="600" style="background-color: #1f7e9a"></canvas>
+
+<script>
+  var canvas = document.createElement('canvas')
+  canvas.width = 1000
+  canvas.height = 1000
+  canvas.style = 'background-color: #999'
+  document.body.appendChild(canvas)
+
+  var context = canvas.getContext('2d')
+  context.beginPath()
+  context.strokeStyle = 'red'
+  context.strokeRect(10, 10, 50, 60)
+  context.arc(100, 100, 50, 0, 10, false)
+
+  // 绘制圆弧
+  context.moveTo(530, 530)
+  context.arc(500, 500, 30, 0, Math.PI / 4)
+  context.stroke()
+
+  var myCanvas = document.getElementById('myCanvas')
+  var ctx = myCanvas.getContext('2d')
+  drwaScreen()
+
+  function getRads (degrees) { return (Math.PI * degrees) / 180; }
+  function getDegrees (rads) { return (rads * 180) / Math.PI; }
+  function drwaScreen () {
+    var arc = { x: myCanvas.width / 2, y: myCanvas.height / 2, r: 100 }
+    var w = myCanvas.width;
+    var h = myCanvas.height;
+    ctx.save();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#e3f';
+
+    // startRad => getRads(-45)
+    // endRad => getRads(45)
+    // 顺时针旋转
+    ctx.beginPath(); // 开始路径
+    ctx.arc(arc.x, arc.y, arc.r, getRads(-45),getRads(45));
+    ctx.closePath()
+    ctx.stroke() // 描边路径
+//    ctx.fill() // 填充路径
+
+    // startRad => getRads(-135) // endRad => getRads(135) // 逆时针旋转
+    ctx.beginPath();
+    ctx.strokeStyle = "#f36";
+    ctx.arc(arc.x, arc.y, arc.r, getRads(-135), getRads(135), true);
+    ctx.stroke();
+    ctx.restore()
+
+    console.log(arc.x)
+    arc = { x: myCanvas.width / 2, y: myCanvas.height / 2, r: 15 }
+//    var w = myCanvas.width, h = myCanvas.height;
+//    ctx.save();
+//    ctx.lineWidth = 1; ctx.strokeStyle = '#e3f';
+    ctx.moveTo(100, 100)
+    console.log(arc.x)
+
+    for (var i =0; i < 5; i++) {
+      ctx.beginPath(); // 开始路径
+      ctx.strokeStyle = 'pink'
+      ctx.arc(arc.x, arc.y, arc.r * i, getRads(-45),getRads(45));
+      ctx.stroke() // 描边路径
+
+      ctx.beginPath();
+      ctx.strokeStyle = "#f36";
+      ctx.arc(arc.x, arc.y, arc.r * i, getRads(-135), getRads(135), true);
+      ctx.stroke();
+    }
+  }
+</script>
+
+</body>
+</html>
