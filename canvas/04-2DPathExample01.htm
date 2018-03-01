@@ -1,54 +1,65 @@
 <!DOCTYPE html>
 <html>
- <head>
-   <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-   <title>Canvas Path Example</title>
- </head>
- <body>
-    <canvas id="drawing" width="200" height="200">Your browser doesn't support the canvas tag.</canvas>
-    <script type="text/javascript">
-      window.onload = function(){
-        var drawing = document.getElementById("drawing");
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Canvas Path Example</title>
+</head>
+<body>
+<canvas id="drawing" width="200" height="200" style="background-color: #c1c0ab">Your browser doesn't support the canvas tag.</canvas>
+<script type="text/javascript">
+  window.onload = function(){
+    var drawing = document.getElementById("drawing");
 
-        //make sure <canvas> is completely supported
-        if (drawing.getContext){
+    //make sure <canvas> is completely supported
+    if (drawing.getContext){
 
-          var context = drawing.getContext("2d");
+      var context = drawing.getContext("2d");
 
-          //start the path
-          context.beginPath();
+      //start the path
+      context.beginPath();
 
-          //draw outer circle
-          context.arc(100, 100, 99, 0, 2 * Math.PI, false);
+      //draw outer circle
+      context.arc(100, 100, 99, 0, 2 * Math.PI, false);
 
-          //draw inner circle
-          context.moveTo(194, 100);
-          context.arc(100, 100, 94, 0, 2 * Math.PI, false);
+      //draw inner circle
+      context.moveTo(194, 100);
+      context.arc(100, 100, 94, 0, 2 * Math.PI, false);
 
-          //draw minute hand
-          context.moveTo(100,100);
-          context.lineTo(100, 20);
+      //draw minute hand
+      context.moveTo(100,100);
+      context.lineTo(100, 20);
 
-          //draw hour hand
-          context.moveTo(100, 100);
-          context.lineTo(35, 100);
+      //draw hour hand
+      context.moveTo(100, 100);
+      context.lineTo(35, 100);
 
-          console.log(context.isPointInPath(100, 100))
+      console.log(context.isPointInPath(100, 100))
 
-          // 绘制文本
-          context.font = 'bold 12px Arial'
-          context.textAlign = 'start'
-          context.textAlign = 'start'
+      // 绘制文本
+      context.font = 'bold 12px Arial'
+      context.textAlign = 'start'
+      context.textAlign = 'start'
 //          context.strokeText('12', 100, 23)
-          context.fillText('12', 94, 21)
+      context.fillText('12', 94, 21)
 
-          // 变换原点
-          context.translate(100, 100)
+      // measureText
+      let fontSize = 100
+      context.font = fontSize + 'px Arial'
+      console.log(context.measureText('Hello world.').width)
+      while (context.measureText('Hello worlD.').width > 140) {
+        fontSize--
+        context.font = fontSize + 'px Arial'
+      }
+      context.fillText('Hello world.', 20, 100)
+      context.fillText('Font size is ' + fontSize + 'px', 10, 150)
 
-          context.stroke();
-        }
-      };
+      // 变换原点
+      context.translate(100, 100)
 
-    </script>
-    </body>
+      context.stroke();
+    }
+  };
+
+</script>
+</body>
 </html>
