@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<canvas id="canvas" height="300"></canvas>
+<canvas id="canvas" height="300" style="background-color: rgba(2, 79, 39, 0.44)"></canvas>
 
 <script>
   var canvas = document.getElementById('canvas')
@@ -18,9 +18,11 @@
     }
   }
   function drawCircle () {
-//    ctx.beginPath()
+    ctx.beginPath()
     ctx.arc(150, 150, 50, canvasUtil.getRads(-90), canvasUtil.getRads(90))
+    ctx.closePath()
     ctx.stroke()
+//    ctx.fill()
   }
   drawCircle()
 </script>
