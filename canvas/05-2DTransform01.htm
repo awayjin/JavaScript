@@ -5,7 +5,7 @@
    <title>Canvas Path Example</title>
  </head>
  <body>
-    <canvas id="drawing" width="200" height="200">Your browser doesn't support the canvas tag.</canvas>
+    <canvas id="drawing" width="200" height="200" style="background-color: #0f4a58">Your browser doesn't support the canvas tag.</canvas>
     <script type="text/javascript">
       window.onload = function(){
         var drawing = document.getElementById("drawing");
@@ -21,11 +21,11 @@
           context.strokeStyle = 'red'
           context.save()
           //draw outer circle
-          context.arc(100, 100, 99, 0, 2 * Math.PI, false);
+          context.arc(100, 100, 55, 0, 2 * Math.PI, false);
 
           //draw inner circle
-          context.moveTo(194, 100);
-          context.arc(100, 100, 94, 0, 2 * Math.PI, false);
+          context.moveTo(151, 100);
+          context.arc(100, 100, 49, 0, 2 * Math.PI, false);
 
           // 变换原点
           context.translate(100, 100)
