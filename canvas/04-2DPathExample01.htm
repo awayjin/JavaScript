@@ -45,12 +45,12 @@
       // measureText
       let fontSize = 100
       context.font = fontSize + 'px Arial'
-      console.log(context.measureText('Hello world.').width)
-      while (context.measureText('Hello worlD.').width > 140) {
+      console.log(context.measureText('Hello world.2').width)
+      while (context.measureText('Hello worlD. ').width > 140) {
         fontSize--
         context.font = fontSize + 'px Arial'
       }
-      context.fillText('Hello world.', 20, 100)
+      context.strokeText('Hello world.2', 20, 100)
       context.fillText('Font size is ' + fontSize + 'px', 10, 150)
 
       // 变换原点

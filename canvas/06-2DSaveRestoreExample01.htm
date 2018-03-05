@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html>
- <head>
-   <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-   <title>Canvas Save-Restore Example</title>
- </head>
- <body>
-    <canvas id="drawing" width="200" height="200" style="background-color: #0f4a58">Your browser doesn't support the canvas tag.</canvas>
-    <script type="text/javascript">
-        window.onload = function(){
-            var drawing = document.getElementById("drawing");
-            
-            //make sure <canvas> is completely supported
-            if (drawing.getContext){
-            
-                var context = drawing.getContext("2d");
-                                
-                context.fillStyle = "#ff0000";
-                context.save();
-                
-                context.fillStyle = "#00ff00";
-                context.translate(100, 100);
-                context.save();
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Canvas Save-Restore Example</title>
+</head>
+<body>
+<canvas id="drawing" width="200" height="200" style="background-color: #0f4a58">Your browser doesn't support the canvas tag.</canvas>
+<script type="text/javascript">
+  window.onload = function(){
+    var drawing = document.getElementById("drawing");
+
+    //make sure <canvas> is completely supported
+    if (drawing.getContext){
+
+      var context = drawing.getContext("2d");
+
+      context.fillStyle = "#ff0000"; // 红色
+      context.save()
+
+      context.fillStyle = '#00ff00' // 绿色
+      context.translate(100, 100) // 变换原点，从100，100开始绘制
+      context.save()
+
+      context.fillStyle = '#0000ff' // 蓝色填充
+      context.fillRect(0, 0, 100, 50)
+
+      context.restore()
+      context.fillRect(-0, -0, 90, 50) // 绿色填充
+
+      context.restore()
+      context.fillRect(-0, -0, 90, 50) // 红色填充
+
+
+//                context.save();
 //
-                context.fillStyle = "#0000ff";
-                context.fillRect(0, 0, 100, 200);   //draws blue rectangle at (100, 100)
-//
-                context.restore();
-                context.fillRect(10, 10, 100, 200);   //draws green rectangle at (110, 110)
-//
+//                context.fillStyle = "#00ff00";
+//                context.translate(100, 100);
+//                context.save();
+//                context.fillStyle = "#0000ff";
+//                context.fillRect(0, 0, 100, 200);   //draws blue rectangle at (100, 100)
+//                context.restore();
+//                context.fillRect(10, 10, 100, 200);   //draws green rectangle at (110, 110)
 //                context.restore();
 //                context.fillRect(0, 0, 100, 200);    //draws red rectangle at (0,0)
 
 
-            }                
-        };
+    }
+  };
 
-    </script>
-    </body>
+</script>
+</body>
 </html>
