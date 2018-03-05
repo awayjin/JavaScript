@@ -1,60 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+  <title></title>
+  <meta name="viewport" content="initial-scale=1.0">
 </head>
 <body>
 <div>
-    <div id="test"></div>
-    <div></div>
+  <div id="test"></div>
+  <div></div>
 </div>
-<ul>
-    <li><a href=""><span>jinwei</span></a></li>
+<ul class="dd">
+  <li><a href=""><span>jinwei</span></a></li>
+  <li><<span>jinwei</span></li>
+  <li><<span>jinwei</span></li>
 </ul>
+
+
 
 <script>
 
 
-    //得到所有父元素
-    !function(){
-        var arr = [];
-        window.getParents = function(ele){
-            //while循环方法
-           var dom = ele.parentNode;
-            while(dom){
-                arr.push(dom)
-                dom = dom.parentNode;
-            }
-            return arr;
+  //得到所有父元素
+  !function(){
+    var arr = [];
+    window.getParents = function(ele){
+      //while循环方法
+      var dom = ele.parentNode;
+      while(dom){
+        arr.push(dom)
+        dom = dom.parentNode;
+      }
+      return arr;
 
-            //递归方法
-            if(ele.parentNode !== null){
-                arr.push(ele.parentNode);
-                arguments.callee(ele.parentNode);
-            };
-            return arr;
-        }
-    }();
+      //递归方法
+      if(ele.parentNode !== null){
+        arr.push(ele.parentNode);
+        arguments.callee(ele.parentNode);
+      };
+      return arr;
+    }
+  }();
 
-    var span = document.getElementsByTagName("span")[0];
-    var eles = getParents(span);
-//    console.log(eles);
-    alert(eles);
+  var span = document.getElementsByTagName("span")[0];
+//  var eles = getParents(span);
+//      console.log(eles);
+//  console.log(eles);
 
 
-    !function(){
-        var getParents=function(id){
-            var dom=id.parentNode;
-            while(dom.tagName){
-                document.write(dom.tagName+"<br>");
-                dom=dom.parentNode;
-            }
-            return dom;
-        }
-        getParents(test);
+  !function(){
+    var getParents=function(id){
+      var dom=id.parentNode;
+      while(dom.tagName){
+        document.write(dom.tagName+"<br>");
+        dom=dom.parentNode;
+      }
+      return dom;
+    }
+    getParents(test);
 
-    }();
+    var eles = window.getParents(document.querySelector('span'))
+    eles.forEach((item) => {
+      if (item.tagName == 'UL') {
+        console.log(item)
+      }
+    })
 
+  }();
+
+</script>
+
+
+<script>
+
+  var ul = document.querySelector('ul')
+  ul.addEventListener('click', function (e) {
+    console.log(e.target)
+  }, false)
+
+  //
+//  var eles = [...window.getParents(document.querySelector('span'))]
+//  var eles = window.getParents(document.querySelector('span'))
+//  eles.forEach((item) => {
+//    if (item.tagName == 'UL') {
+//      console.log(item)
+//    }
+//  })
 </script>
 </body>
 </html>

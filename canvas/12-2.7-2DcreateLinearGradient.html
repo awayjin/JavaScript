@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <title>阴影</title>
+</head>
+<body style="background-color: #9ea897">
+<canvas></canvas>
+
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.width = 200
+  canvas.height = 200
+  canvas.style = 'background:rgba(0, 0, 255, .5)'
+
+  var context = canvas.getContext('2d')
+
+  context.fillStyle = '#ff0000'
+  context.fillRect(10, 10, 40, 40)
+
+  // 矩形的起点位于渐变的中间位置
+  function createRectLinearGradient(context, x, y, width, height){
+    return context.createLinearGradient(x, y, x+width, y+height);
+  }
+
+  //  context.restore()
+//  var gradient = context.createLinearGradient(30, 30, 70, 80) // 线性渐变
+  var gradient = createRectLinearGradient(context, 30, 30, 140, 140) // 线性渐变
+  gradient.addColorStop(0, 'white')
+//  gradient.addColorStop(0.4, 'green')
+  gradient.addColorStop(1, 'black')
+  context.fillStyle = gradient
+  context.fillRect(30, 30, 140, 140)
+
+
+</script>
+
+</body>
+</html>

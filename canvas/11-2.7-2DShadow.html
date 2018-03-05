@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <title>阴影</title>
+</head>
+<body style="background-color: #9ea897">
+<canvas></canvas>
+
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.width = 200
+  canvas.height = 200
+  canvas.style = 'background:rgba(0, 0, 255, .5)'
+
+  var context = canvas.getContext('2d')
+  context.shadowOffsetX = -5
+  context.shadowOffsetY = -10
+  context.shadowBlur = 3 // 模糊的像素数
+  context.shadowColor = 'rgba(0, 250, 0, .5)'
+
+  context.save()
+  context.shadowColor = 'rgba(0, 0, 0, .5)'
+  context.fillRect(100, 100, 40, 60)
+
+  context.restore()
+  context.fillRect(30, 30, 40, 40)
+
+
+
+</script>
+
+</body>
+</html>

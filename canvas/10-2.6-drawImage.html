@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <title>绘制图像</title>
+</head>
+<body style="background-color: #333">
+<img src="smile.png" alt="">
+<canvas style="background-color: #0f4a58"></canvas>
+
+<canvas width="100" height="100" id="sports-circle" style="background-color: #0f4a58"></canvas>
+<script>
+  var canvas = document.querySelector('canvas')
+  var img = document.querySelector('img')
+//  var img = document.images[0]
+  var context = canvas.getContext('2d')
+//  var pattern = context.createPattern()
+
+
+  canvas.width = 200
+  canvas.height = 200
+  context.rect(140, 140, 50, 50)
+  context.drawImage(img, 10, 10)
+//    context.stroke()
+  context.fill()
+  context.strokeStyle = '#ff0000'
+  context.stroke()
+
+  //  合成
+  context.globalAlpha = 0.3
+
+  // 目标宽高
+  context.drawImage(img, 120, 30, 40, 40)
+
+//  context.globalCompositeOperation = "destination-over";
+
+  // 模式--重复的图像
+  var pattern = context.createPattern(img, 'repeat')
+  context.fillStyle = pattern
+  context.fillRect(0, 0 , 50, 50)
+
+  //
+
+</script>
+
+<script>
+  var canvas = document.querySelector('#sports-circle')
+  var centerX = canvas.width / 2
+  var centerY = canvas.height / 2
+
+  var context= canvas.getContext('2d')
+  var speed = 0
+  var percent = 50
+  var rad = Math.PI * 2 / 100 // 换算成百分比
+  var startAngle = (-90 * Math.PI) / 180 // 起始角度
+  var radius // 圆环半径
+
+  function foreCircle (n) {
+    context.beginPath()
+//    context.save()
+    context.lineWidth = 5
+    context.strokeStyle = 'red'
+    context.lineCap = 'round'
+
+    radius = centerX - context.lineWidth
+    context.arc(centerX, centerY, radius, startAngle, startAngle + n * rad, false)
+    context.globalAlpha = 0.3
+
+    context.stroke()
+    context.closePath()
+//    context.restore()
+  }
+
+  !function drawFrame() {
+    if (speed >= percent) return
+    speed++
+    window.setTimeout(() => {
+      drawFrame()
+    }, 10)
+//    window.requestAnimationFrame(drawFrame)
+    foreCircle(speed)
+  }()
+
+
+//    var drawFrame = function () {
+//      window.requestAnimationFrame(drawFrame)
+//      foreCircle(speed)
+//      if (speed >= (percent)) return
+//      speed += 1.0
+//    }
+//    drawFrame()
+
+
+//  function foreCircle (n) {
+//    context.lineWidth = 6
+//    var radius = centerX - context.lineWidth
+////        context.lineCap = 'round'
+//    context.beginPath()
+//    // 用于绘制圆弧context.arc(x坐标，y坐标，半径，起始角度，终止角度，顺时针/逆时针)
+//    context.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + n * rad, false)
+//    context.stroke()
+//    context.closePath()
+////    context.restore()
+//  }
+
+  // 执行动画
+//  (function drawFrame () {
+//    window.requestAnimationFrame(drawFrame)
+//    context.clearRect(0, 0, canvas.width, canvas.height)
+//    foreCircle(speed)
+//    if (speed >= (percent)) return
+//    speed += 1.0
+//  }())
+
+
+
+</script>
+
+</body>
+</html>
