@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <title>太极图</title>
+</head>
+<body>
+
+<canvas id="taichi" width="300" height="300" style="background-color: #1b6d85"></canvas>
+<script>
+  var canvas = document.createElement('canvas')
+  document.body.insertBefore(canvas, document.body.firstChild)
+  canvas.width = 200
+  canvas.height = 200
+  canvas.style = 'background:#333;'
+
+  function getRads (deg) {
+    return Math.PI * deg / 180
+  }
+  // 太极图
+  function drawScreen (canvas) {
+    var context = canvas.getContext('2d')
+    context.save()
+    context.lineWidth = 2
+    var arc = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      r: canvas.width / 2 - context.lineWidth
+    }
+    var width = canvas.width
+    var height = canvas.height
+    var white = '#fff'
+    var black = '#000'
+
+    // 绘制白色半圆
+    context.beginPath()
+    context.fillStyle = white
+    context.arc(arc.x, arc.y, arc.r, getRads(-90), getRads(90), false)
+    context.fill()
+
+    // 绘制黑色半圆
+    context.beginPath()
+    context.fillStyle = black
+    context.arc(arc.x, arc.y, arc.r, getRads(-90), getRads(90), true)
+    context.fill()
+
+    // 绘制白色小圆
+    context.beginPath()
+    context.fillStyle = white
+    context.arc(arc.x, arc.y - arc.r / 2, arc.r / 2, getRads(-90), getRads(90), true)
+    context.fill()
+
+    // 绘制黑色小圆
+    context.beginPath()
+    context.fillStyle = black
+    context.arc(arc.x, arc.y + arc.r / 2, arc.r / 2, getRads(-90), getRads(90), false)
+    context.fill()
+
+    // 绘制小黑点
+    context.beginPath()
+    context.fillStyle = black
+    context.arc(arc.x, arc.y - arc.r / 2, arc.r / 10, getRads(0), getRads(360), true)
+    context.fill()
+
+    // 绘制小白点
+    context.beginPath()
+    context.fillStyle = white
+    context.arc(arc.x, arc.y + arc.r / 2, arc.r / 10, getRads(0), getRads(360), true)
+    context.fill()
+  }
+  drawScreen(canvas)
+
+  var tai = document.getElementById('taichi')
+  drawScreen(tai)
+</script>
+
+</body>
+</html>
