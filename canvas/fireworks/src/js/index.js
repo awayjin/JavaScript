@@ -4,11 +4,27 @@
 // 基础配置
 import config from '../config/global'
 import util from '../config/util'
+
+// 读取图片
+import imgList from '../config/imgList'
+import ImgLoader from '../other/imgLoader'
+
 util.extend({}, { a: 1 })
 
 class Canvas {
   constructor () {
     this.initProperty()
+    imgList.d()
+    // 加载图片
+    ImgLoader.load(imgList).then(imgs => {
+      document.querySelector('#loading').style.display = 'none'
+      // bg
+      this.imgs = this.dealImgs(imgs)
+      // this.init()
+    }).catch(err => {
+      console.log('index.js:' + err)
+      console.log(err)
+    })
     this.createCanvas()
   }
 
