@@ -7,25 +7,44 @@ import util from '../config/util'
 
 // 读取图片
 import imgList from '../config/imgList'
-import ImgLoader from '../other/imgLoader'
+import ImgLoader from './other/imgLoader'
 
 util.extend({}, { a: 1 })
 
 class Canvas {
   constructor () {
     this.initProperty()
-    imgList.d()
     // 加载图片
+    // ImgLoader.load(imgList).then(imgs => {
+    //   document.querySelector('#loading').style.display = 'none'
+    //   // bg
+    //   this.imgs = this.dealImgs(imgs)
+    //   // this.init()
+    // }).catch(err => {
+    //   console.log('index.js:' + err)
+    //   console.log(err)
+    // })
     ImgLoader.load(imgList).then(imgs => {
+      console.log('index.js imgs:')
+      console.log(imgs)
       document.querySelector('#loading').style.display = 'none'
-      // bg
       this.imgs = this.dealImgs(imgs)
-      // this.init()
+      console.log(this.imgs)
+      console.log(this.imgs.bg)
     }).catch(err => {
-      console.log('index.js:' + err)
+      console.log('index.js err:')
       console.log(err)
     })
     this.createCanvas()
+  }
+
+  // 处理图片为需要的对象类型 [] => {}
+  dealImgs (imgs) {
+    const obj = {}
+    imgs.forEach(item => {
+      obj[item.key] = item.img
+    })
+    return obj
   }
 
   initProperty () {
@@ -106,6 +125,4 @@ class Canvas {
 }
 
 /* eslint-disable no-new */
-let canvas = new Canvas()
-
-console.log(canvas)
+new Canvas()
