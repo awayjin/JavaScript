@@ -43,8 +43,20 @@ class Canvas {
   loop () {
     window.requestAnimationFrame(this.loop.bind(this))
     // 动画的时间
-    /* eslint-disable */
-    ++this.time >= 200 ? 0 : this.time
+    this.time = ++this.time >= 200 ? 0 : this.time
+
+    // 渲染飘落装饰
+    this.renderFall()
+  }
+
+  renderFall () {
+    switch (this.fallType) {
+      case 'snow3':
+        this.time % config.snowInterval === 0 &&
+          this.fallDots.push(new Canvas())
+        break
+      // case 'snow3': this.time % config.snowInterval == 0 && this.fallDots.push(new Snowflake(config.snow));
+    }
   }
 
   initProperty () {
@@ -113,7 +125,7 @@ class Canvas {
 
   // 画背景
   drawBg (context, img) {
-    console.log(this.bgCtx)
+    // console.log(this.bgCtx)
     // this.bgCtx.width = this.width
     // this.bgCtx.height = this.height
     context.drawImage(img, 0, 0, this.width, this.height)
@@ -133,4 +145,5 @@ class Canvas {
 }
 
 /* eslint-disable no-new */
-new Canvas()
+let canvas = new Canvas()
+console.log(canvas)
