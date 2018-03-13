@@ -1,7 +1,8 @@
 /**
  * Created by jinwei on 2018/3/9.
  */
-const width = 600
+import resize from './resize'
+const width = 360
 const height = 600
 
 const config = (function () {
@@ -39,5 +40,7 @@ const config = (function () {
     titleWords: '一不小心|就和你|到了白头'
   }
 })()
+
+resize(config.width, config.height, config.canvases)
 
 export default config

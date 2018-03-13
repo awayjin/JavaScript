@@ -15,27 +15,15 @@ class Canvas {
   constructor () {
     this.initProperty()
     // 加载图片
-    // ImgLoader.load(imgList).then(imgs => {
-    //   document.querySelector('#loading').style.display = 'none'
-    //   // bg
-    //   this.imgs = this.dealImgs(imgs)
-    //   // this.init()
-    // }).catch(err => {
-    //   console.log('index.js:' + err)
-    //   console.log(err)
-    // })
     ImgLoader.load(imgList).then(imgs => {
-      console.log('index.js imgs:')
-      console.log(imgs)
       document.querySelector('#loading').style.display = 'none'
-      this.imgs = this.dealImgs(imgs)
-      console.log(this.imgs)
-      console.log(this.imgs.bg)
+      this.imgs = this.dealImgs(imgs) // bg
+      this.init()
     }).catch(err => {
       console.log('index.js err:')
       console.log(err)
     })
-    this.createCanvas()
+    // this.createCanvas()
   }
 
   // 处理图片为需要的对象类型 [] => {}
@@ -45,6 +33,18 @@ class Canvas {
       obj[item.key] = item.img
     })
     return obj
+  }
+
+  init () {
+    this.drawBg(this.bgCtx, this.imgs.bg)
+    this.loop()
+  }
+
+  loop () {
+    window.requestAnimationFrame(this.loop.bind(this))
+    // 动画的时间
+    /* eslint-disable */
+    ++this.time >= 200 ? 0 : this.time
   }
 
   initProperty () {
@@ -109,6 +109,14 @@ class Canvas {
     this.titleWords = config.titleWords.split('|')
     // 组成字的微粒数组
     this.titleDots = []
+  }
+
+  // 画背景
+  drawBg (context, img) {
+    console.log(this.bgCtx)
+    // this.bgCtx.width = this.width
+    // this.bgCtx.height = this.height
+    context.drawImage(img, 0, 0, this.width, this.height)
   }
 
   // 创建画布
