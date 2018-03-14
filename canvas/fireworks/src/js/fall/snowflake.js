@@ -21,6 +21,10 @@ class Snowflake extends Particle {
     this.direction = Math.random() > 0.5 ? 0.5 : -0.5
   }
 
+  fall () {
+    this.x += Math.random() * this.direction
+    this.y += this.speed
+  }
   /**
    * http://www.zhangxinxu.com/study/201210/css3-animate-flip-example.html
    H：Hue(色调)。0(或360)表示红色，120表示绿色，240表示蓝色，也可取其他数值来指定颜色。取值为：0 - 360
@@ -28,8 +32,19 @@ class Snowflake extends Particle {
    L：Lightness(亮度)。取值为：0.0% - 100.0%
    A：Alpha透明度。取值0~1之间。
    */
-  render () {
+  render (context) {
+    this.fall()
+    if (this.outOfBounds()) return false
 
+    this.g = context.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size)
+    this.g.addColorStop(0, `hsla(255, 255%, 255%, ${this.opacity})`)
+    this.g.addColorStop(1, 'hsla(255, 255%, 255%, 0)')
+
+    context.beginPath()
+    context.fillStyle = this.g
+    context.arc(this.x, this.y, this.size, 0, Math.PI * 2, false)
+    context.fill()
+    return true
   }
 }
 

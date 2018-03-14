@@ -43,19 +43,24 @@ class Canvas {
     // bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调用
     window.requestAnimationFrame(this.loop.bind(this))
     // 动画的时间
-    this.time = ++this.time >= 200 ? 0 : this.time
+    ++this.time >= 60000 ? 0 : this.time // eslint-disable-line
 
     // 渲染飘落装饰
     this.renderFall()
   }
 
+  // 飘落的装饰
   renderFall () {
+    this.fallCtx.clearRect(0, 0, this.width, this.height)
     switch (this.fallType) {
-      case 'snow3':
-        this.time % config.snowInterval === 0 &&
-          this.fallDots.push(new Snowflake(config.snow))
+      case 'snow':
+        this.time % config.snowInterval === 0 && this.fallDots.push(new Snowflake(config.snow))
         break
       // case 'snow3': this.time % config.snowInterval == 0 && this.fallDots.push(new Snowflake(config.snow));
+    }
+    // 雪花飘落
+    for (let i = this.fallDots.length - 1; i >= 0; --i) {
+      !this.fallDots[i].render(this.fallCtx) && this.fallDots.splice(i, 1)
     }
   }
 

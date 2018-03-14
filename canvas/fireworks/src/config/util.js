@@ -3,8 +3,8 @@
  */
 const util = {
   random (min = 0, max) {
-    let random = Math.random()
-    return min + (max - min) * random
+    // let random = Math.random()
+    return min + (max - min) * Math.random()
   },
   extend (origin, ...arg) {
     arg.forEach(item => {
