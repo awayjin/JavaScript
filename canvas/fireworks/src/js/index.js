@@ -4,17 +4,16 @@
 // 基础配置
 import config from '../config/global'
 import util from '../config/util'
-
 // 读取图片
 import imgList from '../config/imgList'
 import ImgLoader from './other/imgLoader'
-
-util.extend({}, { a: 1 })
+// 飘落装饰
+import Snowflake from './fall/snowflake'
 
 class Canvas {
   constructor () {
     this.initProperty()
-    // 加载图片
+    // 加载图片x
     ImgLoader.load(imgList).then(imgs => {
       document.querySelector('#loading').style.display = 'none'
       this.imgs = this.dealImgs(imgs) // bg
@@ -41,6 +40,7 @@ class Canvas {
   }
 
   loop () {
+    // bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调用
     window.requestAnimationFrame(this.loop.bind(this))
     // 动画的时间
     this.time = ++this.time >= 200 ? 0 : this.time
@@ -53,7 +53,7 @@ class Canvas {
     switch (this.fallType) {
       case 'snow3':
         this.time % config.snowInterval === 0 &&
-          this.fallDots.push(new Canvas())
+          this.fallDots.push(new Snowflake(config.snow))
         break
       // case 'snow3': this.time % config.snowInterval == 0 && this.fallDots.push(new Snowflake(config.snow));
     }

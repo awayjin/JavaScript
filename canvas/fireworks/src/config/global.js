@@ -13,6 +13,18 @@ const config = (function () {
     canvases: ['fall', 'bg', 'firework', 'dialogue'],
     // 飘落的类型('snow', 'heart', 'mix')
     fallType: 'snow',
+    // 飘落微粒产生间隔
+    snowInterval: 60,
+    // 飘落微粒属性
+    snow: {
+      x: undefined,
+      y: undefined,
+      size: undefined,
+      minSize: 5,
+      maxSize: 10,
+      speed: 0.5,
+      opacity: 0.8
+    },
     /** 阶段一 */
     // 对话的参娄
     dialogueOpt: {
