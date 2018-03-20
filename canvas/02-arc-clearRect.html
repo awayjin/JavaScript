@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <title>绘制圆角矩形</title>
+  <style>
+    body {
+      width: 100vw;
+      height: 100vh;
+      /*display: flex;*/
+      /*justify-content: center;*/
+      /*align-items: center;*/
+    }
+    canvas { display: block}
+  </style>
+
+</head>
+<body>
+
+<canvas id="myCanvas" width="300" height="300" style="background-color: #cec3c8"></canvas>
+<canvas id="moz" width="300" height="300" style="background-color: #cec3c8"></canvas>
+<a href="https://www.w3cplus.com/canvas/clip.html" target="_blank">Canvas剪切</a>
+<script>
+  let canvas = document.getElementById('myCanvas')
+  let context = canvas.getContext('2d')
+  let center = canvas.width / 2
+  let r = center - 14
+  context.beginPath()
+  context.arc(center, center, r, 0, Math.PI * 2, false)
+  context.stroke()
+  context.clip() // 将当前创建的路径设置为当前剪切路径的方法
+
+  // 正方形
+  context.beginPath()
+  context.rect(center, center, 100, 100)
+  context.stroke()
+  context.clip() // 将当前创建的路径设置为当前剪切路径的方法
+
+  context.beginPath()
+  context.fillStyle = 'red'
+  context.fillRect(center - 60, center - 60, 100, 100)
+  context.stroke()
+
+  // context.clearRect(center, center, 40, 40)
+
+  // Create clipping region
+  let moz = document.getElementById('moz')
+  let ctx = moz.getContext('2d')
+  ctx.arc(100, 100, 75, 0, Math.PI*2, false);
+  ctx.stroke()
+  ctx.clip(); // 将当前创建的路径设置为当前剪切路径的方法。
+
+  ctx.fillRect(0, 0, 100,100);
+
+</script>
+
+
+</body>
+</html>
