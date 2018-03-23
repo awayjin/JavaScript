@@ -9,7 +9,8 @@ class Particle {
   constructor ({ x, y, minSize = 5, maxSize = 7.5, size, opacity = 1 } = {}) {
     this.size = size ? size : util.random(minSize, maxSize) // eslint-disable-line
     this.x = x ? x : util.random(0, (config.width - this.size)) // eslint-disable-line
-    this.y = y ? y : -this.size // eslint-disable-line
+    this.y = y === false ? y : -this.size
+    console.log(y)
     this.opacity = opacity
   }
 

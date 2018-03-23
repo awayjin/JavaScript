@@ -17,6 +17,22 @@
 
 </head>
 <body>
+<canvas id="clear-rect" style="background-color: #aec3c6"></canvas>
+<script>
+  var cl = document.getElementById('clear-rect')
+  var con = cl.getContext('2d')
+  cl.width = 300
+  cl.height = 300
+  var cen = cl.width / 2
+  var rad = cen  - 13
+  con.arc(cen, cen, rad - 20, 0, Math.PI * 2, false)
+  con.arc(cen, cen, rad, 0, Math.PI * 2, false)
+  con.clip()
+  con.stroke()
+  con.clearRect(cen, cen, rad + 13, rad + 13)
+  con.fillRect(cen, cen, rad -20, rad)
+
+</script>
 
 <canvas id="myCanvas" width="300" height="300" style="background-color: #cec3c8"></canvas>
 <canvas id="moz" width="300" height="300" style="background-color: #cec3c8"></canvas>
