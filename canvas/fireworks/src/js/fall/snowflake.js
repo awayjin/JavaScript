@@ -34,6 +34,7 @@ class Snowflake extends Particle {
    */
   render (context) {
     this.fall()
+    console.log(this.outOfBounds())
     if (this.outOfBounds()) return false
 
     this.g = context.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size)
