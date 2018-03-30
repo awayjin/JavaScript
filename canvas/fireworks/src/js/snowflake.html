@@ -83,18 +83,18 @@
 
     render (context) {
       this.fall()
-//      console.log(this.outofBounds())
+     // console.log('y:' + this.y)
       if (this.outofBounds()) return false
-//      this.g = context.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size)
-      this.g = context.createRadialGradient(300, 34, 0, 300, 34, 6)
-      this.g.addColorStop(0, `hsla(255, 255%, 255%, 0.8)`)
-//      this.g.addColorStop(0, `hsla(255, 255%, 255%, ${this.opacity})`)
-      this.g.addColorStop(1, 'hsla(255, 255%, 255%, 0)')
+     this.g = context.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size)
+      // this.g = context.createRadialGradient(300, 34, 0, 300, 34, 6)
+      // this.g.addColorStop(0, `hsla(255, 255%, 255%, 0.8)`)
+     this.g.addColorStop(0, `hsla(255, 255%, 255%, ${this.opacity})`)
+     this.g.addColorStop(1, 'hsla(255, 255%, 255%, 0)')
 
       context.beginPath()
       context.fillStyle = this.g
-//      context.arc(this.x, this.y, this.size, 0, Math.PI * 2, false)
-      context.arc(300, 34, 6, 0, Math.PI * 2, false)
+     context.arc(this.x, this.y, this.size, 0, Math.PI * 2, false)
+      // context.arc(300, 34, 6, 0, Math.PI * 2, false)
       context.fill()
       return true
     }
