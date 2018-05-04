@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <title>Title</title>
+  <style>
+    body {
+      background: #dddddd;
+    }
+
+    .canvas {
+      margin: 10px;
+      padding: 10px;
+      background: #ffffff;
+      border: thin inset #aaaaaa;
+      width: 600px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+<pre>
+  1. canvas元素大小和绘图表面的大小(drawing surface)
+    --css设置元素大小不会改变绘图表面的大小
+  2. canvas状态的保存与恢复
+    --save与restore用于保存及恢复当前canvas绘图环境的所有属性
+    save-当前环境压入堆栈顶部，restore从堆栈顶部弹出一组状态信息
+</pre>
+<canvas id="canvas" width="600" height="300" class="canvas">
+  Canvas not supported
+</canvas>
+<canvas  class="canvas">
+  Canvas not supported
+</canvas>
+<canvas  class="canvas" width="300" height="150" style="width: 300px; height: 150px;"></canvas>
+
+
+<canvas>默认Canvas大小 300x150</canvas>
+<script>
+  var canvas = document.getElementById('canvas')
+  var context = canvas.getContext('2d')
+
+  var drawCanvas = function (context) {
+    context.save()
+    context.font = '38pt Arial'
+    context.fillStyle = 'cornflowerblue'
+    context.strokeStyle = 'blue'
+
+    var centerX = canvas.width / 2 - 150
+    var centerY = canvas.height / 2 + 15
+    console.log('centerX:' + centerX + ', centerY:' + centerY)
+    // context.moveTo(centerX, centerY)
+
+    context.fillText('Hello Canvas.', centerX, centerY)
+    context.strokeText('Hello Canvas.', centerX, centerY)
+    context.restore()
+  }
+  drawCanvas(context)
+  var canvas2 = document.getElementsByTagName('canvas')[1]
+  var context2 = canvas2.getContext('2d')
+  drawCanvas(context2)
+</script>
+
+</body>
+</html>
