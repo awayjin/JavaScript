@@ -52,7 +52,7 @@
     constructor ({x, y, minSize = 5, maxSize = 7.5, size, opacity = 1} = {}) {
       this.size = size ? size : util.random(minSize, maxSize) // eslint-disable-line
       this.x = x ? x : util.random(0, (width - this.size)) // eslint-disable-line
-//      console.log('width:' + width + ', size:' + this.size)
+      console.log('this.size:' + this.size)
       this.y = y ? y : -this.size
       this.opacity = opacity
     }
@@ -65,7 +65,6 @@
         this.y >= -this.size) {
         return false
       } else {
-        console.log('outofBounds:')
 //        console.log(this.x + ', y:' + this.y + ', this.size:' + -this.size)
         return true
       }
@@ -78,7 +77,20 @@
       super({x, y, minSize, maxSize, size})
       this.speed = speed * (1 + Math.random())
       this.opacity = util.random(opacity, 1)
-      this.direction = Math.random() > 0.5 ? 0.5 : -0.5
+//      this.direction = Math.random() > 0.5 ? 0.5 : -0.5
+      this.direction = -0.5
+    }
+
+    fall () {
+      this.x += Math.random() * this.direction
+      this.y += this.speed
+//      console.log('x:' + this.x + ', y:' + this.y)
+
+      if (this.x < 0) {
+        let a = this.x
+//        debugger
+//          console.log('x:' + this.x + ', y:' + this.y)
+      }
     }
 
     render (context) {
@@ -93,16 +105,10 @@
 
       context.beginPath()
       context.fillStyle = this.g
-     context.arc(this.x, this.y, this.size, 0, Math.PI * 2, false)
+      context.arc(this.x, this.y, this.size, 0, Math.PI * 2, false)
       // context.arc(300, 34, 6, 0, Math.PI * 2, false)
       context.fill()
       return true
-    }
-
-    fall () {
-      this.x += Math.random() * this.direction
-      this.y += this.speed
-//      console.log(this.x + ', y:' + this.y)
     }
   }
 
@@ -137,8 +143,8 @@
 
     loop () {
       window.requestAnimationFrame(this.loop.bind(this))
-//      this.time = ++this.time >= 60000 ? 0 : this.time
-      ++this.time >= 60000 ? 0 : this.time
+      this.time = ++this.time >= 60 ? 0 : this.time
+//      ++this.time >= 60 ? 0 : this.time
       this.renderFall()
     }
 
@@ -150,7 +156,7 @@
 //      }
       switch (this.fallType) {
         case 'snow':
-          this.time % 60 === 0 && this.fallDots.push(new Snowflake(this.config.snow))
+          this.time % 120 === 0 && this.fallDots.push(new Snowflake(this.config.snow))
           break
       }
       for (let i = this.fallDots.length - 1; i >= 0; --i) {
