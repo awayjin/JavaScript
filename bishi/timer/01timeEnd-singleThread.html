@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<a href="3">23232</a>
+
+<h3>为什么JavaScript是单线程?</h3>
+```html
+JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。
+比如，假定JavaScript同时有两个线程，一个线程在某个DOM节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？
+
+为了利用多核CPU的计算能力，HTML5提出Web Worker标准，允许JavaScript脚本创建多个线程，但是子线程完
+全受主线程控制，且不得操作DOM。所以，这个新标准并没有改变JavaScript单线程的本质。
+```html
+<pre>
+  console.time()语句和console.timeEnd()语句是用来对程序的执行进行计时的。
+  因为f1和f2被都setTimeout()事先设置的定时器装到一个事件队列里面。
+  本来f1应该在100ms后就要执行了，但是因为waitForMs()占用了线程，而执行JavaScript是单线程的，所以就没办法在100ms后执行那个f1，所以需要等500ms等waitForMs()执行完，然后再执行f1和f2，这时候f1和f2就几乎同时执行了。
+  所以应该选时间最短的一项，所以答案应该选B
+</pre>
+<script>
+  function f1() {
+    console.time('time span');
+  }
+  function f2() {
+    console.timeEnd('time span');
+  }
+
+  setTimeout(f1, 100);
+  setTimeout(f2, 200);
+
+  // 停止n毫秒
+  function waitForMs(n) {
+    var now = Date.now();
+    console.log(Date.now() - now)
+    while (Date.now() - now < n) {}
+//    while (300) {}
+  }
+
+  waitForMs(500)
+</script>
+
+```html
+A、time span:700.077ms
+B、time span:0.066ms
+C、time span:500.077ms
+D、time span:100.077ms
+```
+
+</body>
+</html>
