@@ -6,22 +6,47 @@
   <title>双向数据绑定</title>
 </head>
 <body>
-Record JavaScript CPU Profile 用于分析网页上的JavaScript函数在执行过程中的CPU消耗信息。
-
-Take Heap Snapshot 创建堆快照用来显示网页上的JS对象和相关的DOM节点的内存分布情况。
-
-Record Allocation Timeline 从整个Heap角度记录内存的分配信息，利用这个可以实现隔离内存泄漏问题。
-
-Record Allocation Profile 从JS函数角度记录内存的分配信息。
+<pre>
+  Record JavaScript CPU Profile 用于分析网页上的JavaScript函数在执行过程中的CPU消耗信息。
+  Take Heap Snapshot 创建堆快照用来显示网页上的JS对象和相关的DOM节点的内存分布情况。
+  Record Allocation Timeline 从整个Heap角度记录内存的分配信息，利用这个可以实现隔离内存泄漏问题。
+  Record Allocation Profile 从JS函数角度记录内存的分配信息。
+</pre>
 <a href="https://segmentfault.com/a/1190000014274840" target="_blank">
   MVVM-VUE 双向数据绑定实现
 </a>
+
+<pre>
+  <img src="flow-chart.png" alt="">
+  <a href="https://www.cnblogs.com/onepixel/p/6034307.html">MVVM小细节</a>
+  MVC
+路由至控制器内,需要在控制器自己处理model(data), 然后进行重新渲染生成view(UI)
+MVVM
+数据驱动式，一旦model有变化, 其view(UI)就会改变.
+
+  new MVVM() -> Observer(数据监听器,劫持监听所有属性) -> Dep(消息订阅器, 收集订阅者) -> Watcher(订阅者，连接Observer和Compile)
+  new MVVM() -> Compile(解析指令)
+
+  > Observer 数据监听器，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者，
+    内部采用Object.defineProperty的getter和setter来实现。
+
+  > Compile 指令解析器，它的作用对每个元素节点的指令进行扫描和解析，
+    根据指令模板替换数据，以及绑定相应的更新函数。
+
+  > Watcher 订阅者， 作为连接 Observer 和 Compile 的桥梁，
+    能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。
+
+  > Dep 消息订阅器，内部维护了一个数组，用来收集订阅者（Watcher），
+    数据变动触发 notify 函数，再调用订阅者的 update 方法。
+</pre>
+
 <div id="app">
   <h2>  MVVM-VUE 双向数据绑定实现 </h2>
   <form action="">
     <input type="text" v-model="number">
     <button type="button" v-click="increment">btn</button>
   </form>
+  <h3 v-bind="number"></h3>
   <h3 v-bind="number"></h3>
 </div>
 <script>
@@ -87,6 +112,7 @@ Record Allocation Profile 从JS函数角度记录内存的分配信息。
           Object.defineProperty(this.$data, key, {
             enumerable: true, // [ɪ'nju:mərəbəl]可枚举
             configurable: true,
+            // 当使用了getter或setter方法，不允许使用writable和value这两个属性
             get: function () {
               console.log(`获取:${value}`)
               return value
@@ -95,6 +121,7 @@ Record Allocation Profile 从JS函数角度记录内存的分配信息。
               console.log(`更新${value}`)
               if (value !== newVal) {
                 value = newVal
+                console.table(binding._directives)
                 binding._directives.forEach(function (item) {
                   item.update()
                 })
@@ -126,9 +153,9 @@ Record Allocation Profile 从JS函数角度记录内存的分配信息。
 //            return _this.$methods[attrVal].bind(_this.$data)
 //          })()
           node.addEventListener('click', (function (key) {
-            // q1?
             var attrVal = node.getAttribute('v-click')
             // bind是使data的作用域与method函数的作用域保持一致
+            // return _this.$methods[attrVal].bind(_this.$data)
             return _this.$methods[attrVal].bind(_this.$data)
           })(i))
         }

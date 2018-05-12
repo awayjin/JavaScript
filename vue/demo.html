@@ -5,6 +5,40 @@
   <title>Title</title>
 </head>
 <body>
+<pre>
+  Record JavaScript CPU Profile 用于分析网页上的JavaScript函数在执行过程中的CPU消耗信息。
+  Take Heap Snapshot 创建堆快照用来显示网页上的JS对象和相关的DOM节点的内存分布情况。
+  Record Allocation Timeline 从整个Heap角度记录内存的分配信息，利用这个可以实现隔离内存泄漏问题。
+  Record Allocation Profile 从JS函数角度记录内存的分配信息。
+</pre>
+<a href="https://segmentfault.com/a/1190000014274840" target="_blank">
+  MVVM-VUE 双向数据绑定实现
+</a>
+
+<pre>
+  <img src="flow-chart.png" alt="">
+  <a href="https://www.cnblogs.com/onepixel/p/6034307.html">MVVM小细节</a>
+  MVC
+路由至控制器内,需要在控制器自己处理model(data), 然后进行重新渲染生成view(UI)
+MVVM
+数据驱动式，一旦model有变化, 其view(UI)就会改变.
+
+  new MVVM() -> Observer(数据监听器,劫持监听所有属性) -> Dep(消息订阅器, 收集订阅者) -> Watcher(订阅者，连接Observer和Compile)
+  new MVVM() -> Compile(解析指令)
+
+  > Observer 数据监听器，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者，
+    内部采用Object.defineProperty的getter和setter来实现。
+
+  > Compile 指令解析器，它的作用对每个元素节点的指令进行扫描和解析，
+    根据指令模板替换数据，以及绑定相应的更新函数。
+
+  > Watcher 订阅者， 作为连接 Observer 和 Compile 的桥梁，
+    能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。
+
+  > Dep 消息订阅器，内部维护了一个数组，用来收集订阅者（Watcher），
+    数据变动触发 notify 函数，再调用订阅者的 update 方法。
+</pre>
+
 <div id="app">
   <form>
     <input type="text"  v-model="number">
@@ -14,127 +48,140 @@
 </div>
 
 <script>
-  function myVue(options) {
-    this._init(options);
+  function MVVM (options) {
+    this.$options = options
+    this.$methods = options.methods
+    this.$data = options.data
+    this.$el = document.querySelector(options.el)
+
+    //_binding保存着model与view的映射关系，也就是Watcher的实例。
+    // 当model改变时，我们会触发其中的指令类更新，保证view也能实时更新
+    this._binding = {}
+
+    this._observer(this.$data)
+    this._compile(this.$el)
   }
 
-  myVue.prototype._init = function (options) {
-    this.$options = options;
-    this.$el = document.querySelector(options.el);
-    this.$data = options.data;
-    this.$methods = options.methods;
+  MVVM.prototype = {
+    // 劫持监听所有属性
+    _observer: function (obj) {
+      for (var key in obj) {
+        var value = obj[key]
+        if (value instanceof Object) {
+          this._observer(value)
+        }
 
-    this._binding = {};
-    this._obverse(this.$data);
-    this._complie(this.$el);
-  }
-
-  myVue.prototype._obverse = function (obj) {
-    var value;
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) {
         this._binding[key] = {
           _directives: []
-        };
-        value = obj[key];
-        if (typeof value === 'object') {
-          this._obverse(value);
         }
-        var binding = this._binding[key];
+
+        var binding = this._binding[key]
+
+        // 重写getter和setter，监听数据
         Object.defineProperty(this.$data, key, {
           enumerable: true,
           configurable: true,
           get: function () {
-            console.log(`获取${value}`);
-            return value;
+            console.log(`获取:${value}`)
+            return value
           },
           set: function (newVal) {
-            console.log(`更新${newVal}`);
-            if (value !== newVal) {
-              value = newVal;
-              binding._directives.forEach(function (item) {
-                item.update();
+            if (newVal !== value) {
+              console.log(`更新:${value}`)
+              value = newVal
+              // 变动通知订阅者Watcher
+              binding._directives.forEach(item => {
+                item.update()
               })
             }
           }
         })
       }
-    }
-  }
+    },
+    // 绑定model与view
+    // 解析指令，对每个元素的指令进行扫描与解析
+    _compile: function (root) {
+      var _this = this
+      var nodes = root.children
+      for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i]
+        if (node.children) {
+          _this._compile(node)
+        }
 
-  myVue.prototype._complie = function (root) {
-    var _this = this;
-    var nodes = root.children;
-    for (var i = 0; i < nodes.length; i++) {
-      var node = nodes[i];
-      if (node.children.length) {
-        this._complie(node);
-      }
+        // v-click
+        if (node.hasAttribute('v-click')) {
+          var attrVal = node.getAttribute('v-click')
+          node.addEventListener('click', (function (key) {
+            // 绑定更新函数
+            return _this.$methods[attrVal].bind(_this.$data)
+          })(i), false)
+        }
 
-      if (node.hasAttribute('v-click')) {
-        node.onclick = (function () {
-          var attrVal = nodes[i].getAttribute('v-click');
-          return _this.$methods[attrVal].bind(_this.$data);
-        })();
-      }
+        // v-model 根据指令模板替换数据
+        if (node.hasAttribute('v-model') && (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA')) {
+          node.addEventListener('input', (function (key) {
+            var attrVal = node.getAttribute('v-model')
 
-      if (node.hasAttribute('v-model') && (node.tagName == 'INPUT' || node.tagName == 'TEXTAREA')) {
-        node.addEventListener('input', (function(key) {
-          var attrVal = node.getAttribute('v-model');
+            _this._binding[attrVal]._directives.push(new Watcher(
+              'input',
+              node,
+              _this,
+              attrVal,
+              'value'
+            ))
+
+            return function () {
+              _this.$data[attrVal] = nodes[key].value
+              console.log(node)
+              console.log(nodes)
+              // _this.$data[attrVal] = node.value
+            }
+          })(i), false)
+        }
+
+        // v-bind 根据指令模板替换数据
+        if (node.hasAttribute('v-bind')) {
+          var attrVal = node.getAttribute('v-bind')
           _this._binding[attrVal]._directives.push(new Watcher(
-            'input',
+            'text',
             node,
             _this,
             attrVal,
-            'value'
+            'innerHTML'
           ))
-
-          return function() {
-            _this.$data[attrVal] =  nodes[key].value;
-          }
-        })(i));
-      }
-
-      if (node.hasAttribute('v-bind')) {
-        var attrVal = node.getAttribute('v-bind');
-        _this._binding[attrVal]._directives.push(new Watcher(
-          'text',
-          node,
-          _this,
-          attrVal,
-          'innerHTML'
-        ))
+        }
       }
     }
   }
+  
+  // 消息订阅者
+  function Watcher (name, el, vm, exp, attr) {
+    this.name = name
+    this.el = el
+    this.vm = vm
+    this.exp = exp
+    this.attr = attr
 
-  function Watcher(name, el, vm, exp, attr) {
-    this.name = name;         //指令名称，例如文本节点，该值设为"text"
-    this.el = el;             //指令对应的DOM元素
-    this.vm = vm;             //指令所属myVue实例
-    this.exp = exp;           //指令对应的值，本例如"number"
-    this.attr = attr;         //绑定的属性值，本例为"innerHTML"
-
-    this.update();
+    this.update()
+  }
+  Watcher.prototype = {
+    update: function () {
+      this.el[this.attr] = this.vm.$data[this.exp]
+    }
   }
 
-  Watcher.prototype.update = function () {
-    this.el[this.attr] = this.vm.$data[this.exp];
-  }
-
-  window.onload = function() {
-    var app = new myVue({
-      el:'#app',
-      data: {
-        number: 0
-      },
-      methods: {
-        increment: function() {
-          this.number ++;
-        },
+  new MVVM({
+    el: '#app',
+    data: {
+      number: 0
+    },
+    methods: {
+      increment: function () {
+        ++this.number
       }
-    })
-  }
+    }
+  })
 </script>
 </body>
 </html>
