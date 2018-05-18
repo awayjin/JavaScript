@@ -5,6 +5,25 @@
   <title>Title</title>
 </head>
 <body>
+<div id="vue-app">
+  {{ message }}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  var appVue = new Vue({
+    el: '#vue-app',
+    data: {
+      message: 'Hello World'
+    }
+  })
+</script>
+
+<pre>
+
+</pre>
+<a href="https://www.cnblogs.com/iovec/p/7840228.html">前后端分手大师</a>
+MVVM的视图模型是一个值转换器，这意味着视图模型负责从模型中暴露（转换）数据对象，以便轻松管理和呈现对象
+
 <pre>
   Record JavaScript CPU Profile 用于分析网页上的JavaScript函数在执行过程中的CPU消耗信息。
   Take Heap Snapshot 创建堆快照用来显示网页上的JS对象和相关的DOM节点的内存分布情况。
@@ -109,6 +128,8 @@ MVVM
           _this._compile(node)
         }
 
+        var ddd = 2323
+
         // v-click
         if (node.hasAttribute('v-click')) {
           var attrVal = node.getAttribute('v-click')
@@ -131,6 +152,7 @@ MVVM
               'value'
             ))
 
+            console.log(node)
             return function () {
               _this.$data[attrVal] = nodes[key].value
               console.log(node)
@@ -171,7 +193,7 @@ MVVM
     }
   }
 
-  new MVVM({
+  var myApp = new MVVM({
     el: '#app',
     data: {
       number: 0

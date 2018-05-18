@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+  <style>
+    body {
+      background: #dddddd;
+    }
+
+    #canvas {
+      position: absolute;
+      left: 0px;
+      top: 20px;
+      margin: 20px;
+      background: #ffffff;
+      border: thin inset rgba(100,150,230,0.5);
+      cursor: pointer;
+    }
+
+    #readout {
+      margin-top: 10px;
+      margin-left: 15px;
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+
+<div id='readout'></div>
+
+<canvas id='canvas' width='500' height='250'>
+  Canvas not supported
+</canvas>
+
+<script>
+  // 鼠标坐标转换为canvas坐标
+  function windowToCanvas (canvas, x, y) {
+    var posBox = canvas.getBoundingClientRect()
+    // canvas.getBoundingClientRect().left 元素左边距离页面左边的距离
+    return {
+      // canvas.width / posBox.width 元素大小与绘图表面不相符时，进行缩放
+      x: x - posBox.left * (canvas.width / posBox.width),
+      y: y - posBox.top * (canvas.height / posBox.height)
+    }
+  }
+</script>
+<script>
+  var canvas = document.querySelector('#canvas')
+  var readout = document.querySelector('#readout')
+  var context = canvas.getContext('2d')
+  var spritesheet = new Image()
+
+  // draw sprites
+  function drawSpritesSheet () {
+    context.drawImage(spritesheet, 0, 0) // 绘制图像的起点x与y坐标
+  }
+  
+  // 绘制背景线 draw background
+  function drawBackground () {
+    var verticalLineSpacing = 14
+    // context.canvas.height
+    var canvasHeight = context.canvas.height
+
+    // clearRect
+    context.clearRect(0, 0, canvas.width, canvas.height)
+    context.strokeStyle = 'lightgray'
+    context.lineWidth = 0.5
+
+    // 绘制水平线
+    while (canvasHeight > verticalLineSpacing * 4) {
+      context.beginPath()
+      context.moveTo(0, canvasHeight)
+      context.lineTo(context.canvas.width, canvasHeight) // params x: x坐标, y: y坐标
+      context.stroke()
+      canvasHeight -= verticalLineSpacing
+    }
+  }
+
+  // 绘制鼠标指针移动水平线
+  function drawHorizontalLine (y) {
+    context.beginPath()
+    context.moveTo(0, y + 0.5)
+    context.lineTo(context.canvas.width, y + 0.5)
+    context.stroke()
+  }
+
+  // 绘制垂直线
+  function drawVerticalLine (x) {
+    context.beginPath()
+    context.moveTo(x + 0.5, 0)
+    context.lineTo(x + 0.5, context.canvas.height)
+    context.stroke()
+  }
+
+  // 绘制指导线
+  function drawGuidelines (x, y) {
+    context.strokeStyle = 'rgba(0, 0, 230, 0.1)'
+    context.lineWidth = 0.5
+    drawHorizontalLine(y)
+    drawVerticalLine(x)
+  }
+
+  // 更新坐标信息
+  function updateReadout (x, y) {
+    readout.innerHTML = `(${ x.toFixed(0) }, ${ y.toFixed(0) })`
+  }
+
+  // 鼠标移动
+  canvas.onmousemove = function (event) {
+    // clientX 鼠标指针水平坐标
+    var loc = windowToCanvas(canvas, event.clientX, event.clientY)
+
+    drawBackground()
+    drawSpritesSheet()
+    drawGuidelines(loc.x, loc.y)
+    updateReadout(loc.x, loc.y)
+  }
+
+  // img onload
+  spritesheet.src = '../shared/images/running-sprite-sheet.png'
+  spritesheet.onload = function (e) {
+    drawSpritesSheet()
+  }
+  drawBackground()
+</script>
+
+</body>
+</html>

@@ -23,9 +23,19 @@
 <pre>
   1. canvas元素大小和绘图表面的大小(drawing surface)
     --css设置元素大小不会改变绘图表面的大小
+
   2. canvas状态的保存与恢复
     --save与restore用于保存及恢复当前canvas绘图环境的所有属性
     save-当前环境压入堆栈顶部，restore从堆栈顶部弹出一组状态信息
+
+  3. 性能工具
+    3.1 性能分析器(Profiler)
+      Take Heap Snapshot 创建堆快照用来显示网页上的JS对象和相关的DOM节点的内存分布情况。
+      Record Allocation Timeline 从整个Heap角度记录内存的分配信息，利用这个可以实现隔离内存泄漏问题。
+      Record Allocation Profile 从JS函数角度记录内存的分配信息。
+    3.2 时间轴工具(TimeLine)
+    3.3 jsPerf
+      JavaScript性能测试-benchmark(跑分)
 </pre>
 <canvas id="canvas" width="600" height="300" class="canvas">
   Canvas not supported

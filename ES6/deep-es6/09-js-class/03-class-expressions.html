@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // 类表达式
+  // let PersonClass = class {
+  //   // 等价于 PersonType 构造器
+  //   constructor (name) {
+  //     this.name = name
+  //   }
+  //
+  //   sayName () {
+  //     console.log(this.name)
+  //   }
+  // }
+  //
+  // let person = new PersonClass('away')
+  // person.sayName()
+
+  // 具名类表达式 named class expressions
+  let NamedClass = class NamedClass2 {
+    constructor (name) {
+      console.log(NamedClass2)
+      this.name = name
+    }
+
+    sayName () {
+      console.log(this.name)
+    }
+  }
+  let name = new NamedClass('away-2')
+  name.sayName()
+
+  // 直接等价于具名表达式NamedClass
+  let PersonClass = (function () {
+    'use strict'
+
+    const PersonClass2 =  function (name) {
+      // 确认函数调用时用了 new
+      if (new.target === 'undefined') {
+        throw new Error('Constructor must be with new.')
+      }
+      this.name = name
+    }
+
+    Object.defineProperty(PersonClass2.prototype, 'sayName', {
+      enumerable: false,
+      writable: false,
+
+    })
+
+    return PersonClass2
+  })()
+</script>
+</body>
+</html>
