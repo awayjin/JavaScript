@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas坐标</title>
+  <style>
+    canvas { background-color: cornflowerblue; width: 400px; height: 400px;}
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+  // 鼠标坐标转换为canvas坐标
+  function windowToCanvas (canvas, x, y) {
+    var posBox = canvas.getBoundingClientRect()
+    // canvas.getBoundingClientRect().left 元素左边距离页面左边的距离
+    return {
+      // canvas.width / posBox.width 元素大小与绘图表面不相符时，进行缩放
+      x: x - posBox.left * (canvas.width / posBox.width),
+      y: y - posBox.top * (canvas.height / posBox.height)
+    }
+  }
+  var canvas = document.getElementById('canvas')
+  canvas.onclick = function (e) {
+    // clientX 鼠标指针水平坐标
+    var pos = windowToCanvas(canvas, e.clientX, e.clientY)
+  }
+</script>
+</body>
+</html>

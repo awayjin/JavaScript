@@ -51,22 +51,22 @@ MVVM
 </div>
 <script>
   // two-way
-  window.addEventListener('load', function () {
-    console.profile('调优')
-    var app = new MyVue({
-      el: '#app',
-      data: {
-        number: 0,
-//        dd: null
-      },
-      methods: {
-        increment: function () {
-          this.number++
-        }
-      }
-    })
-    console.profileEnd('调优')
-  }, false)
+//   window.addEventListener('load', function () {
+//     console.profile('调优')
+//     var app = new MyVue({
+//       el: '#app',
+//       data: {
+//         number: 0,
+// //        dd: null
+//       },
+//       methods: {
+//         increment: function () {
+//           this.number++
+//         }
+//       }
+//     })
+//     console.profileEnd('调优')
+//   }, false)
 
   var MyVue = function (options) {
     this._init(options)
@@ -216,6 +216,18 @@ MVVM
     this.el[this.attr] = this.vm.$data[this.exp]
   }
 
+  var app = new MyVue({
+    el: '#app',
+    data: {
+      number: 0,
+//        dd: null
+    },
+    methods: {
+      increment: function () {
+        this.number++
+      }
+    }
+  })
 </script>
 
 
