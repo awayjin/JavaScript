@@ -52,3 +52,21 @@ function createIterator (items) {
   // for all further calls
   console.log(iterator.next())
 ```
+
+## 8.3 何为生成器(generator)
+> 生成器是能返回一个迭代器的函数。function关键字加星号*,能使用yield关键字
+- yield是ES6新增，指定迭代器被调用时应按顺序返回的值
+```javascript
+// 生成器方法
+  function *createIterator() {
+    yield 11
+    yield 43
+    yield 33
+  }
+
+  let iterator = createIterator()
+  console.log(iterator.next().value)
+  console.log(iterator.next())
+  console.log(iterator.next())
+  console.log(iterator.next())
+```
