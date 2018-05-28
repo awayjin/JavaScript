@@ -5,7 +5,7 @@
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Title</title>
+  <title>Ball-Color</title>
   <style>
     body {
       background: #dddddd;
@@ -104,21 +104,75 @@
   }
   drawGrid(context, 'lightgray', 10, 10)
 
-  context.lineWidth = 0.5;
-  context.font = '32pt Ariel';
+  // 画球
+  !function drawBalls () {
+    context.lineWidth = 0.5
+    context.font = '32px Ariel'
 
-  for (var i=0; i < 100; ++i) {
-    circles[i] = {
-      x: 100,
-      y: 100,
-      velocityX: 3*Math.random(),
-      velocityY: 3*Math.random(),
-      radius: 50*Math.random(),
-      color: 'rgba(' + (Math.random()*255).toFixed(0) + ', ' +
-      (Math.random()*255).toFixed(0) + ', ' +
-      (Math.random()*255).toFixed(0) + ', 1.0)' };
+    // 100个球
+    for (var i = 0; i < 100; ++i) {
+      circles[i] = {
+        x: 100,
+        y: 300,
+        velocityX: Math.random() * 3,
+        velocityY: Math.random() * 3,
+        radius: Math.random() * 50,
+        color: 'rgba(' + (Math.random() * 255).toFixed(0) + ', ' +
+        (Math.random() * 255).toFixed(0) + ', ' +
+        (Math.random() * 255).toFixed(0) + ', 1.0'
+      }
+    }
+  }()
+
+  // 点击开始和暂停
+  startButton.addEventListener('click', function (event) {
+    paused = !paused
+    startButton.innerText = paused ? 'Start' : 'stop'
+  }, false)
+
+  // 绘制彩色球并移动
+  !function drawColorBall () {
+    // 回调的次数通常是每秒60次
+    window.requestAnimationFrame(drawColorBall) // requestAnimationFrame (请求帧动画) 执行更高效
+    if (!paused) {
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+      drawGrid(context, 'lightgray', 10, 10)
+
+      circles.forEach(function (circle) {
+        context.beginPath()
+        context.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2, false)
+        context.fillStyle = circle.color
+        context.fill()
+        adjustPosition(circle)
+      })
+    }
+  }()
+
+  // setInterval(function () {
+    // drawColorBall()
+    // 大多数显示器的刷新频率是60Hz
+    // 一秒之内进行60次重新渲染，每次重新渲染的时间不能超过16.66毫秒
+    // 1000 / 60 = 16.66 每次重新渲染的时间16.66毫秒
+  // }, 1000 / 60)
+
+  // 位置
+  function adjustPosition (circle) {
+    // 当达到最大宽度或到画布开始边界返回
+    if (circle.x + circle.velocityX + circle.radius > context.canvas.width ||
+     circle.x + circle.velocityX - circle.radius < 0 ) {
+      circle.velocityX = -circle.velocityX
+    }
+
+    // y
+    if (circle.y + circle.velocityY + circle.radius > context.canvas.height ||
+      circle.y + circle.velocityY - circle.radius < 0 ) {
+      circle.velocityY = -circle.velocityY
+    }
+
+    circle.x += circle.velocityX
+    circle.y += circle.velocityY
   }
-  console.log(circles)
+
 </script>
 
 </body>

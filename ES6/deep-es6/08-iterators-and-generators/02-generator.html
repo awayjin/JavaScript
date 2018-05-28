@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // 生成器方法
+  function *createIterator() {
+    yield 11
+    yield 43
+    yield 33
+  }
+
+  let iterator = createIterator()
+  console.log(iterator.next().value)
+  console.log(iterator.next())
+  console.log(iterator.next())
+  console.log(iterator.next())
+</script>
+</body>
+</html>
