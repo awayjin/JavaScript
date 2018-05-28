@@ -52,9 +52,18 @@
     }
 
     Object.defineProperty(PersonClass2.prototype, 'sayName', {
+      value: function () {
+        if (new.target !== 'undefined') {
+          throw new Error('Method cannot be called with new')
+        }
+        console.log(this.name)
+      },
+      // enumerable设置为false，不能被枚举。
       enumerable: false,
-      writable: false,
-
+      // 是否可以被重写, 默认为false
+      writable: true,
+      // 是否可以删除目标属性或是否可以再次修改属性的特性，默认false
+      configurable: true
     })
 
     return PersonClass2
