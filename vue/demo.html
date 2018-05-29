@@ -90,6 +90,8 @@ MVVM
           this._observer(value)
         }
 
+        // Dep 消息订阅器，内部维护了一个数组，用来收集订阅者（Watcher），
+        // 数据变动触发notify 函数，再调用订阅者的 update 方法。
         this._binding[key] = {
           _directives: []
         }
