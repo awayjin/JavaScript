@@ -49,6 +49,7 @@
     }
 
     // 需计算名称
+    // Symbol.iterator来定义生成器方法，从而定义类的默认迭代器
     *[Symbol.iterator]() {
       yield *this.items.values();
     }

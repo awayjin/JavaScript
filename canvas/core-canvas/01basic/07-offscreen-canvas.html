@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+  <style>
+    body {
+      background: #dddddd;
+    }
+
+    #canvas {
+      display: block;
+    }
+
+    #snapshotImageElement {
+      position: absolute;
+      left: 10px;
+      margin: 20px;
+      border: thin solid #aaaaaa;
+    }
+  </style>
+</head>
+<body>
+<img id='snapshotImageElement'/>
+
+<canvas id='canvas' width='400' height='400'>
+  Canvas not supported
+</canvas>
+
+<script>
+  // offscreen canvas 离屏canvas
+  var canvas = document.getElementById('canvas')
+  var context = canvas.getContext('2d')
+  var snapshotImageElement = document.getElementById('snapshotImageElement')
+  var loop
+  var fontHeight = 15
+  var margin = 35
+  var radius = canvas.width / 2 - margin
+  var center = canvas.width / 2
+
+  context.font = fontHeight + 'px Arial'
+  // loop = setInterval(drawClock, 1000)
+  drawClock()
+
+  // 1.0 画时钟
+  function drawClock () {
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    context.save()
+
+    context.fillStyle = 'rgba(255,255,255,0.8)'
+    context.fillRect(0, 0, canvas.width, canvas.height)
+
+    drawCircle()
+    drawCenter()
+
+    context.restore()
+  }
+  
+  // 2.0 drawCircle
+  function drawCircle () {
+    context.beginPath()
+    context.arc(center, center, radius, 0, Math.PI * 2, false)
+    context.stroke()
+  }
+
+  // 2.0 drawCenter
+  function drawCenter () {
+    context.beginPath()
+    context.arc(center, center, 5, 0, Math.PI * 2, false)
+    context.stroke()
+  }
+
+</script>
+
+</body>
+</html>

@@ -50,19 +50,16 @@
 <script>
   var canvas = document.getElementById('canvas')
   var context = canvas.getContext('2d')
-  var mousedown = {} // 鼠标按下对象
-  var rubberbandRectangle = {} // 橡皮擦矩形存放对象
-  var rubberbandDiv = document.getElementById('rubberbandDiv') // 橡皮擦画出的矩形
+  var mousedown = {} // 鼠标按下对象，存放x、y坐标
+  var rubberbandRectangle = {} // 橡皮筋矩形图像对象，存放矩形图像top,left及矩形宽高
+  var rubberbandDiv = document.getElementById('rubberbandDiv') // 橡皮筋画出的矩形
   var dragging = false
 
+  // 0-加载图像
   var image = new Image()
   image.src = '../shared/images/arch.png'
   image.onload = function () {
     drawImage()
-  }
-  // 1-draw image
-  function drawImage () {
-    context.drawImage(image, 0, 0, canvas.width, canvas.height)
   }
 
   // 2.1-start
@@ -117,31 +114,40 @@
 
     /**
      * drawImage-有三种不同的参数组合
-     * 1. 三参数--传入img元素，起点x和y坐标. 画布大小和原始大小都一样
-     * 2. 五参数--改变绘制后图像大小，多传入2参数. 目标宽度和目标高度
+     * 1. 三参数--要绘制的图像(传入img元素)，起点x和y坐标. 画布大小和原始大小都一样
+     * 2. 五参数--改变绘制后图像大小，在三参数后面多传入2参数. 目标宽度和目标高度
      * 3. 九参数--要绘制的图像，
      * 源图像的 x 坐标、源图像的 y 坐标、源图像的宽度、源图像的高度，
      * 目标图像的 x 坐标、目标图像的 y 坐标、目标图像的宽度、目标图像的高度
      **/
     try {
-       context.drawImage(canvas, rubberbandRectangle.left - bbox.left,
-       rubberbandRectangle.top - bbox.top,
-       rubberbandRectangle.width,
-       rubberbandRectangle.height,
+       context.drawImage(canvas,
+         rubberbandRectangle.left - bbox.left,
+         rubberbandRectangle.top - bbox.top,
+         rubberbandRectangle.width,
+         rubberbandRectangle.height,
        0, 0, canvas.width, canvas.height)
     } catch (e) {
       // suppress error message when mouse is released
       // outside the canvas
     }
 
+    // 4.2-重置矩形存放图像
     resetRubberbandRectangle()
 
+    // 4.3-设置橡皮擦div宽高为0
     rubberbandDiv.style.width = 0;
     rubberbandDiv.style.height = 0;
 
+    // 4.4-隐藏
     hideRubberbandDiv();
 
     dragging = false;
+  }
+
+  // 4.2 重置矩形
+  function resetRubberbandRectangle() {
+    rubberbandRectangle = { top: 0, left: 0, width: 0, height: 0 };
   }
 
   function showRubberbandDiv() {
@@ -152,14 +158,10 @@
     rubberbandDiv.style.display = 'none';
   }
 
-  resetButton.onclick = function(e) {
-    context.clearRect(0, 0, context.canvas.width,
-      context.canvas.height);
-    context.drawImage(image, 0, 0, canvas.width, canvas.height);
-  };
 
-  function resetRubberbandRectangle() {
-    rubberbandRectangle = { top: 0, left: 0, width: 0, height: 0 };
+  // 1-draw image
+  function drawImage () {
+    context.drawImage(image, 0, 0, canvas.width, canvas.height)
   }
 
   // 2-mousedown 按下鼠标时触发
@@ -188,6 +190,12 @@
   window.onmouseup = function (e) {
     rubberbandEnd()
   }
+
+  // 5-重置图像
+  resetButton.onclick = function(e) {
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+  };
 </script>
 
 </body>
