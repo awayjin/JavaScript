@@ -6,35 +6,35 @@
         content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Title</title>
-  <style>
-    body {
-      background: rgba(100, 145, 250, 0.3);
-    }
 
-    #canvas {
-      margin-left: 20px;
-      margin-right: 0;
-      margin-bottom: 20px;
-      border: thin solid #aaaaaa;
-      cursor: crosshair;
-      padding: 0;
-    }
-
-    #controls {
-      margin: 20px 0px 20px 20px;
-    }
-
-    #rubberbandDiv {
-      position: absolute;
-      border: 3px solid yellow;
-      cursor: crosshair;
-      display: none;
-    }
-
-  </style>
 </head>
 <body>
+<style>
+  body {
+    background: rgba(100, 145, 250, 0.3);
+  }
 
+  #canvas {
+    margin-left: 20px;
+    margin-right: 0;
+    margin-bottom: 20px;
+    border: thin solid #aaaaaa;
+    cursor: crosshair;
+    padding: 0;
+  }
+
+  #controls {
+    margin: 20px 0px 20px 20px;
+  }
+
+  #rubberbandDiv {
+    position: absolute;
+    border: 3px solid yellow;
+    cursor: crosshair;
+    display: none;
+  }
+
+</style>
 <div id='controls'>
   <input type='button' id='resetButton' value='Reset'/>
 </div>
@@ -170,6 +170,8 @@
     // clientX--设置或获取鼠标指针位置相对于窗口客户区域的 x 坐标，其中客户区域不包括窗口自身的控件和滚动条
     var x = e.x || e.clientX
     var y = e.y || e.clientY
+
+    e.preventDefault()
 
     var pos = document.querySelector('.pos')
     pos.innerHTML = `(${e.x}, ${e.y})`

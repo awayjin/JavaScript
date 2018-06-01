@@ -38,12 +38,17 @@
   var loop
   var fontHeight = 15
   var margin = 35
-  var radius = canvas.width / 2 - margin
-  var center = canvas.width / 2
+  var radius = canvas.width / 2 - margin // 半径
+  var centerX = canvas.width / 2
+  var centerY = canvas.height / 2
+  var handTruncation = canvas.width / 25
+  var hourHandTruncation = canvas.width / 10
+  var numberSpacing = 20
+  var handRadius = radius + numberSpacing
 
   context.font = fontHeight + 'px Arial'
-  // loop = setInterval(drawClock, 1000)
-  drawClock()
+  loop = setInterval(drawClock, 1000)
+  // drawClock()
 
   // 1.0 画时钟
   function drawClock () {
@@ -56,23 +61,67 @@
 
     drawCircle()
     drawCenter()
+    drawHands()
 
     context.restore()
+
+    drawNumerals()
   }
   
   // 2.0 drawCircle
   function drawCircle () {
     context.beginPath()
-    context.arc(center, center, radius, 0, Math.PI * 2, false)
+    context.arc(centerX, centerY, radius, 0, Math.PI * 2, false)
     context.stroke()
   }
 
-  // 2.0 drawCenter
+  // 3.0 drawCenter
   function drawCenter () {
     context.beginPath()
-    context.arc(center, center, 5, 0, Math.PI * 2, false)
+    context.arc(centerX, centerY, radius, 0, Math.PI * 2, false)
     context.stroke()
   }
+
+  // 4.0 时、分、秒针 drawHands
+  function drawHands () {
+
+    var date = new Date()
+    var hour = date.getHours()
+    hour = hour > 12 ? hour - 12 : hour
+
+    // 每一小时走过5个刻度线,60分钟,30deg，分成60份,30deg/60
+    drawHand(hour * 5 + (date.getMinutes() / 60) * 5, true, 0.5) // 时针
+    // 每一秒再分60分，秒针走一刻度，分针要走1/60刻度,sec*(6*Math.PI/180)/60
+    drawHand(date.getMinutes(), false, 0.5); // 分针
+    drawHand(date.getSeconds(), false, 0.2);
+  }
+
+  // 4.1 drawHand
+  function drawHand (loc, isHour) {
+    var angle = (Math.PI * 2) * (loc / 60) - Math.PI / 2
+    var handRadius = isHour ? radius - handTruncation - hourHandTruncation
+      : radius - handTruncation
+
+    context.moveTo(centerX, centerY)
+    context.lineTo(centerX + Math.cos(angle) * handRadius, centerY + Math.sin(angle) * handRadius)
+    context.stroke()
+  }
+
+  // 5.0 drawNumerals
+  function drawNumerals () {
+    var numerals = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ],
+      angle = 0,
+      numeralWidth = 0;
+
+    numerals.forEach(function(numeral) {
+      angle = Math.PI/6 * (numeral-3);
+      numeralWidth = context.measureText(numeral).width;
+      context.fillText(numeral,
+        canvas.width/2  + Math.cos(angle)*(handRadius) - numeralWidth/2,
+        canvas.height/2 + Math.sin(angle)*(handRadius) + fontHeight/3);
+    });
+  }
+
 
 </script>
 
