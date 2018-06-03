@@ -32,8 +32,11 @@ Observer.prototype = {
                     return;
                 }
                 val = newVal;
-                // 新的值是object的话，进行监听
+                // --新的值是object的话，进行监听
                 childObj = observe(newVal);
+                console.debug(222)
+                console.log(111)
+                console.debug(222)
                 // 通知订阅者
                 dep.notify();
             }
