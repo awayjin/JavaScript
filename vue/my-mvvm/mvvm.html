@@ -16,9 +16,47 @@
 </div>
 
 <script>
+  var obj = { _year: 33 };
+  Object.defineProperty(obj, 'year', {
+    enumerable: true,
+    configurable: false,
+    get: function proxyGetter () {
+      return this._year
+    },
+    set: function proxySetter (newVal) {
+      this['_year'] = newVal
+    }
+  });
+  obj.year = 44
+  console.log(obj)
+
+  var book = {
+    _year: 2018,
+    edition: 1,
+  };
+  Object.defineProperty(book, 'year', {
+    enumerable: true,
+    configurable: false,
+    get: function () {
+      console.log('通过对象方法访问 哈哈！');
+      return this._year;
+    },
+    set: function (newValue) {
+      if (newValue > 2004) {
+        this._year = newValue;
+        this.edition += newValue - 2004;
+      }
+    }
+  });
+  console.log(book) //通过对象方法访问 get函数里面alert出对应信息；
+  book.year = 2005;
+  console.log(book); //2
+
   var vm = new MVVM({
     data: {
-      someStr: 'Hello MVVM'
+      someStr: 'Hello MVVM',
+      obj: { a: 11 },
+      arrObj: [{ b: 22, c: 33 }]
     },
     methods: {
       clickBtn: function () {
