@@ -28,7 +28,7 @@
     }
   });
   obj.year = 44
-  console.log(obj)
+//  console.log(obj)
 
   var book = {
     _year: 2018,
@@ -48,79 +48,98 @@
       }
     }
   });
-  console.log(book) //通过对象方法访问 get函数里面alert出对应信息；
+//  console.log(book) //通过对象方法访问 get函数里面alert出对应信息；
   book.year = 2005;
-  console.log(book); //2
+//  console.log(book); //2
 
   var vm = new MVVM({
     data: {
-      someStr: 'Hello MVVM',
+      someStr: 'Parent Hello',
       obj: { a: 11 },
-      arrObj: [{ b: 22, c: 33 }]
+      arrObj: [{ b: 22, c: 33 }],
+      child: {
+        someStr: 'Child Word'
+      }
     },
     methods: {
       clickBtn: function () {
         this.someStr = 'changed data'
+      }
+    },
+    computed: {
+      getHelloWord: function () {
+        return this.someStr + this.child.someStr
+      },
+      d: {
+        set: function () {
+          console.log(111)
+        },
+        get: function () {
+          console.log(222)
+        }
       }
     }
   })
 </script>
 
 <script>
-  // data.sub.demo = 33
-  var data = { name: 'going away', sub: { subObj: 3 }, demo: [{a: 11}] }
-  observe(data)
+  function fun1 () {
+    // data.sub.demo = 33
+    var data = { name: 'going away', sub: { subObj: 3 }, demo: [{a: 11}] }
+    observe(data)
 
-  /**
-   * 数据监听器Observer, 对数据对象的所有属性进行监听,
-   * 如有变动拿到最新值并通知订阅者
-   */
-  // 1.0 需要observe的数据对象进行递归遍历
-  function observe (data) {
-    if (!data || typeof data !== 'object') {
-      return
-    }
-
-    // 取出所有属性进行遍历
-    Object.keys(data).forEach(function (key) {
-      defineReactive(data, key, data[key])
-    })
-  }
-
-  // 1.1
-  function defineReactive (data, key, val) {
-    var dep = new Dep()
-    observe(val) // 监听子属性
-    Object.defineProperty(data, key, {
-      enumerable: true, // 可枚举
-      configurable: false, // 不能再define
-      get: function () {
-        // 由于需要在闭包内添加Watcher,所以通过Dep定义一个全局target,暂存Watcher,添加完删除
-        Dep.target && dep.addDep(Dep.target)
-        return val
-      },
-      set: function (newVal) {
-        if (val === newVal) return
-        console.log('监听到值变化了, val:' + val + ', newVal:' + newVal)
-        val = newVal
-        dep.notify() // 通知所有订阅者
+    /**
+     * 数据监听器Observer, 对数据对象的所有属性进行监听,
+     * 如有变动拿到最新值并通知订阅者
+     */
+    // 1.0 需要observe的数据对象进行递归遍历
+    function observe (data) {
+      if (!data || typeof data !== 'object') {
+        return
       }
-    })
-  }
-  
-  function Dep () {
-    this.subs = []
-  }
-  Dep.prototype = {
-    addSub: function (sub) {
-      this.subs.push(sub)
-    },
-    notify: function () {
-      this.subs.forEach(function (sub) {
-        sub.update()
+
+      // 取出所有属性进行遍历
+      Object.keys(data).forEach(function (key) {
+        defineReactive(data, key, data[key])
       })
     }
+
+    // 1.1
+    function defineReactive (data, key, val) {
+      var dep = new Dep()
+      observe(val) // 监听子属性
+      Object.defineProperty(data, key, {
+        enumerable: true, // 可枚举
+        configurable: false, // 不能再define
+        get: function () {
+          // 由于需要在闭包内添加Watcher,所以通过Dep定义一个全局target,暂存Watcher,添加完删除
+          Dep.target && dep.addDep(Dep.target)
+          return val
+        },
+        set: function (newVal) {
+          if (val === newVal) return
+          console.log('监听到值变化了, val:' + val + ', newVal:' + newVal)
+          val = newVal
+          dep.notify() // 通知所有订阅者
+        }
+      })
+    }
+
+    function Dep () {
+      this.subs = []
+    }
+    Dep.prototype = {
+      addSub: function (sub) {
+        this.subs.push(sub)
+      },
+      notify: function () {
+        this.subs.forEach(function (sub) {
+          sub.update()
+        })
+      }
+    }
   }
+
 </script>
 
 </body>
