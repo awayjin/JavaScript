@@ -22,16 +22,11 @@ function Compile (el, vm) {
   if (this.$el) {
     this.$fragment = this.node2Fragment(this.$el)
     this.init() // 初始化
-    console.log(this.$el)
     this.$el.appendChild(this.$fragment)
-    console.log(this.$el)
   }
 }
 
 Compile.prototype = {
-  init: function () {
-
-  },
   // 元素节点
   isElementNode: function (node) {
     return node.nodeType === 1
@@ -47,8 +42,32 @@ Compile.prototype = {
     var child
     // 将原生节点拷贝到fragment
     while (child = el.firstChild) {
+      console.log(el.firstChild)
       fragment.appendChild(child)
     }
+    console.log(fragment)
     return fragment
   },
+  init: function () {
+    this.compileElement(this.$fragment)
+  },
+  compileElement: function (el) {
+    var childNodes = el.childNodes
+    var me = this
+
+    Array.prototype.slice.call(childNodes).forEach(function (node) {
+      var text = node.textContent
+      var reg = /\{\{(.*)\}\}/
+
+      if (me.isElementNode(node)) {
+        me.compile(node)
+      } else if (me.isTextNode(node) && reg.test(test)) {
+        me.complieText(node, RegExp.$1)
+      }
+
+      if (node.childNodes && node.childNodes.length) {
+        me.compileElement(node)
+      }
+    })
+  }
 }
