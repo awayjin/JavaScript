@@ -58,3 +58,38 @@ excerpt: Canvas元素大小与绘图表面，canvas状态保存与恢复
  
 - 5.1 Canvas立即模式(immediate-mode)绘制图形, 绘画应用程序(paint application)
 - 5.2 SVG保留模式(retained-mode)-维护一份所绘图像列表,画图应用程序(drawing application)
+
+## 6.基础数学知识。代数方程、三角函数、向量运算
+> 6.1 代数方程。根据给定的计量单位来推导等式.
+- 其标准形式ax+b=0（a≠0）
+- 给等式的两端同时乘以或除以1。如何根据计量单位来推导等式
+
+> 6.2 三角函数
+- 角的度量。角度与弧度。Canvas中所有与角有关的API都是弧度值.
+- 代数式: 由数和表示数的字母经有限次加、减、乘、除、乘方和开方等代数运算所得的式子，或含有字母的数学表达式称为代数式。例如：ax+2b，－2/3，b^2/26，√a+√2等
+```html
+在CSS中，做旋转常用到的都是角度deg
+2π rad = 360°
+1°=π/180 rad
+1 rad = 180°/π deg
+以度数表示的角度，把数字乘以π/180便转换成弧度；以弧度表示的角度，乘以180/π便转换成度数
+rad = π/ 180 * deg
+deg = 180 / π * rad
+```
+x = r * cos(α)
+y = r * sin(α)
+
+> 6.3 向量运算
+- 二维向量(two-dimensional vector)两个值: 方向(direction)和大小(magnitude).这两值可表达出物理特性力(force)和运动(motion)
+### 6.3.1 毕达哥拉斯定理也叫勾股定理. 二维向量是对大小和方向两个数值进行建模.
+```javascript
+var vectorMagnitude = Math.sqrt(Math.pow(vector.x, 2) + Math.pow(vector.y, 2)) 
+```
+
+### 6.3.2 单位向量(unit vector)
+```javascript
+var vectorMagnitude = Math.sqrt(Math.pow(vector.x, 2) + Math.pow(vector.y, 2)) 
+var unitVector = new Vector()
+unitVector.x = vector.x / vectorMagnitude
+unitVector.y = vector.y / vectorMagnitude
+```

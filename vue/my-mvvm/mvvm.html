@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <script src="src/observer.js"></script>
+  <script src="src/compile.js"></script>
   <script src="src/mvvm.js"></script>
 </head>
 <body>
@@ -53,6 +54,7 @@
 //  console.log(book); //2
 
   var vm = new MVVM({
+    el: '#app',
     data: {
       someStr: 'Parent Hello',
       obj: { a: 11 },

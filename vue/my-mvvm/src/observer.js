@@ -1,7 +1,14 @@
 /**
  * Created by jinwei on 2018/6/3.
  */
-
+/**
+ * Observer 数据监听器，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者，
+ 内部采用Object.defineProperty的getter和setter来实现。
+ * 1. typeof value
+ * 2. walk-Object.keys-key, value
+ * 3. convert-defineReactive-data, key, value
+ * 4. defineReactive-
+ */
 function Observer (data) {
   this.data = data
   this.walk(data)
@@ -22,8 +29,8 @@ Observer.prototype = {
   // 3.4
   defineReactive: function (data, key, val) {
     // 监听到变化之后就是怎么通知订阅者了，我们需要实现一个消息订阅器，
-    // 维护一个数组，用来收集订阅者，数据变动触发notify，再调用订阅者的update方法
-    var dep = new Dep()
+    // Dep维护一个数组，用来收集订阅者(Watcher)，数据变动触发notify，再调用订阅者的update方法
+    var dep = new Dep() // 消息订阅器
     var childObj = observe(val) // 监听子属性
 
     Object.defineProperty(data, key, {

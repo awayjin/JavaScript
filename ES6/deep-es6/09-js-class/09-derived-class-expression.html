@@ -27,7 +27,7 @@
     var square = new Square(7)
     console.log(square.getArea())
   }
-  fun1()
+  // fun1()
 
   // 动态地决定继承类
   function fun2 () {
@@ -57,7 +57,7 @@
     console.log(x instanceof Rectangle)
 
   }
-  fun2()
+  // fun2()
 
   // 可以动态的决定基类，也就可创建不同的继承方式
   function fun3() {
@@ -73,6 +73,14 @@
       }
     }
 
+    function SquareMixin () {
+      return {
+        d () {
+          return this.width * this.width
+        }
+      }
+    }
+
     // mixin不是传统继承，代表混入对象的任意数量的参数
     // mixin()	 函数使用了混入对象的所有自有属性，动态地填充了新函数的原型
     function mixin(...mixins) {
@@ -84,7 +92,7 @@
       return base
     }
 
-    class Square extends mixin(AreaMixin, SerializableMixin) {
+    class Square extends mixin(AreaMixin, SerializableMixin, SquareMixin()) {
       constructor (length) {
         super(length)
         this.width = length
@@ -93,8 +101,9 @@
     }
 
     var x = new Square(6)
-    console.log(x.getArea())
-    console.log(x.serialize())
+    console.log(x)
+    // console.log(x.getArea())
+    // console.log(x.serialize())
   }
   fun3()
 </script>

@@ -26,6 +26,16 @@
 <body>
 <img id='snapshotImageElement'/>
 
+<canvas class="canvas"></canvas>
+<script>
+  var canvas = document.querySelector('.canvas')
+  var context = canvas.getContext('2d')
+  // context.arc(canvas.width / 2, canvas.height / 2, 30, 0, Math.PI * 2, false)
+  context.arc(canvas.width / 2, canvas.height / 2, 30, 0, 45 * Math.PI / 180, false)
+  // context.arc(canvas.width / 2, canvas.height / 2, 30, 0,  Math.PI / 4, false)
+  context.stroke()
+</script>
+
 <canvas id='canvas' width='400' height='400'>
   Canvas not supported
 </canvas>
@@ -89,6 +99,8 @@
     var hour = date.getHours()
     hour = hour > 12 ? hour - 12 : hour
 
+    console.log('hours:' + hour * 5 + (date.getMinutes() / 60) * 5 + ', minutes:' + date.getMinutes())
+    // console.log('getMinutes:' + date.getMinutes())
     // 每一小时走过5个刻度线,60分钟,30deg，分成60份,30deg/60
     drawHand(hour * 5 + (date.getMinutes() / 60) * 5, true, 0.5) // 时针
     // 每一秒再分60分，秒针走一刻度，分针要走1/60刻度,sec*(6*Math.PI/180)/60
