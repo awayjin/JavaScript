@@ -10,10 +10,11 @@
 <body>
 <a href="https://github.com/DMQ/mvvm">mvvm</a>
 
-<div id="app">
+<div id="app" style="background-color: #b3b3b3">
   <input type="text" v-model="someStr">
   双向绑定： {{ someStr }}
   <button v-on:click="clickBtn">change model</button>
+  <p style="display: none">none</p>
 </div>
 
 <script>
@@ -82,6 +83,9 @@
       }
     }
   })
+
+  console.log(document.querySelector('#app').firstChild)
+
 </script>
 
 <script>

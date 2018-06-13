@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Working with Unnamed Parameters</title>
+</head>
+<body>
+
+
+<script>
+  function pick (object) {
+    let result = Object.create(null)
+    console.log(arguments)
+    // 从第二个参数开始处理
+    for(let i = 1, len = arguments.length; i < len; i++) {
+      result[arguments[i]] = object[arguments[i]]
+    }
+    console.log(result)
+    return result
+  }
+
+  let book = {
+    title: 'Understanding ES6',
+    author: 'Away',
+    year: 2018
+  }
+
+  let bookData = pick(book, 'author', 'year')
+  console.log(bookData.author) // Away
+  console.log(bookData.year) // 2018
+  console.log(bookData) // {author: "Away", year: 2018}
+
+</script>
+
+</body>
+</html>
