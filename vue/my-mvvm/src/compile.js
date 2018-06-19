@@ -86,7 +86,7 @@ Compile.prototype = {
       if (me.isElementNode(node)) { // 元素节点
         me.compile(node)
       } else if (false && me.isTextNode(node) && reg.test(test)) {
-        // me.complieText(node, RegExp.$1)
+        // me.compileText(node, RegExp.$1)
       }
 
       if (node.childNodes && node.childNodes.length) {
@@ -113,7 +113,11 @@ Compile.prototype = {
         // 3.6 是否事件指令
         if (me.isEventDirective(dir)) {
           compileUtil.eventHandler(node, me.$vm, exp, dir) // 3.6.1 绑定事件
+        } else {
+          // 3.7 普通指令 model
+          compileUtil[dir] && compileUtil[dir](node, me.$vm, exp)
         }
+
         node.removeAttribute(attrName)
       }
     })
@@ -129,27 +133,7 @@ Compile.prototype = {
     return dir.indexOf('on') === 0
   },
 
-  compile2: function(node) {
-    var nodeAttrs = node.attributes,
-      me = this;
 
-    [].slice.call(nodeAttrs).forEach(function(attr) {
-      var attrName = attr.name;
-      if (me.isDirective(attrName)) {
-        var exp = attr.value;
-        var dir = attrName.substring(2);
-        // 事件指令
-        if (me.isEventDirective(dir)) {
-          compileUtil.eventHandler(node, me.$vm, exp, dir);
-          // 普通指令
-        } else {
-          compileUtil[dir] && compileUtil[dir](node, me.$vm, exp);
-        }
-
-        node.removeAttribute(attrName);
-      }
-    });
-  },
 }
 
 // 指令处理集合
@@ -161,5 +145,55 @@ var compileUtil = {
     if (eventType && fn) {
       node.addEventListener(eventType, fn.bind(vm), false)
     }
-  }
+  },
+  // 3.7.1 model
+  model: function (node, vm, exp) {
+    this.bind(node, vm, exp, 'model')
+  },
+  // 3.7.2 bind
+  bind: function (node, vm, exp, dir) {
+    // 3.7.3 modelUpdater
+    var updaterFn = updater[dir + 'Updater'] // modelUpdater
+    updaterFn && updaterFn(node, this._getVMVal(vm, exp))
+  },
+  // 3.7.4 _getVMVal- split('.')
+  _getVMVal: function (vm, exp) {
+    var val = vm
+    exp = exp.split('.') // ["someStr"]
+    exp.forEach(function (key) {
+      val = val[key] // vm['someStr]
+    })
+    return val
+  },
+  model3: function(node, vm, exp) {
+    this.bind(node, vm, exp, 'model');
+
+    var me = this,
+      val = this._getVMVal(vm, exp);
+    node.addEventListener('input', function(e) {
+      var newValue = e.target.value;
+      if (val === newValue) {
+        return;
+      }
+
+      me._setVMVal(vm, exp, newValue);
+      val = newValue;
+    });
+  },
+  bind3: function(node, vm, exp, dir) {
+    var updaterFn = updater[dir + 'Updater'];
+
+    updaterFn && updaterFn(node, this._getVMVal(vm, exp));
+
+    new Watcher(vm, exp, function(value, oldValue) {
+      updaterFn && updaterFn(node, value, oldValue);
+    });
+  },
+}
+
+var updater = {
+  // 3.7.3
+  modelUpdater: function (node, value, oldValue) {
+    node.value = typeof value === 'undefined' ? '' : value
+  },
 }
