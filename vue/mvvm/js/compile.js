@@ -61,6 +61,7 @@ Compile.prototype = {
                     compileUtil.eventHandler(node, me.$vm, exp, dir);
                     // 普通指令
                 } else {
+                  console.log(compileUtil[dir])
                     compileUtil[dir] && compileUtil[dir](node, me.$vm, exp);
                 }
 
@@ -122,7 +123,7 @@ var compileUtil = {
 
     bind: function(node, vm, exp, dir) {
         var updaterFn = updater[dir + 'Updater'];
-
+        console.log(updaterFn)
         updaterFn && updaterFn(node, this._getVMVal(vm, exp));
 
         new Watcher(vm, exp, function(value, oldValue) {

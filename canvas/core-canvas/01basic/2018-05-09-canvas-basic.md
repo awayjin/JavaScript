@@ -93,3 +93,7 @@ var unitVector = new Vector()
 unitVector.x = vector.x / vectorMagnitude
 unitVector.y = vector.y / vectorMagnitude
 ```
+### 6.3.4 根据计量单位来推导等式 
+- 动画移动应以时间为基准的. 基于时间的运动(timed-based motion)
+- 计量移动速度的单位: 每秒移动的像素数(pixels per second)
+- 物体的移动速度是每秒多少个像素，以及当前动画的帧速率(frame rate)是每帧持续多少毫秒(milliseconds per frame)

@@ -18,109 +18,6 @@
 </head>
 <body>
 <canvas id="myCanvas" width="900" height="300" style="background-color: #0b2a37"></canvas>
-<script>
-  var moonCanvas = document.querySelector('#myCanvas')
-  var context = moonCanvas.getContext('2d')
-
-  // 绘制月亮
-  function drawMoon (context, d, x, y, R, rot) {
-    context.save()
-    context.translate(x, y)
-    context.scale(R, R)
-    context.rotate(Math.PI / 180 * rot)
-    pathMoon(context, d)
-    context.fillStyle = 'hsl' + randomColor()
-    context.fill()
-    context.restore()
-  }
-
-  // 画路径
-  function pathMoon (context, d) {
-    // d 表示控制点的横坐标
-    context.beginPath()
-    context.arc(0, 0, 1, Math.PI * 0.5, Math.PI * 1.5, true)
-    context.moveTo(0, -1)
-    context.arcTo(d, 0, 0, 1, dis(0, -1, d, 0) * 1 / d)
-    context.closePath()
-  }
-
-  function dis (x1, y1, x2, y2) {
-    return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
-  }
-
-  function drawScreen () {
-    drawMoon(context, 2, moonCanvas.width / 2, moonCanvas.height / 2, 100, 15)
-  }
-
-  window.addEventListener('load', eventWindowLoaded, false)
-
-  function eventWindowLoaded () {
-    canvasApp(); //包含整个Canvas应用程序
-  }
-
-  function canvasSupport (e) {
-    return !!e.getContext
-  }
-
-  function canvasApp () {
-    var myCanvas = document.getElementById('myCanvas');
-//    myCanvas.width = window.innerWidth;
-//    myCanvas.height = window.innerHeight;
-    if (!canvasSupport(myCanvas)) {
-      return;
-    }
-
-    var ctx = myCanvas.getContext('2d');
-    function getRads(degrees) {
-      return (Math.PI * degrees) / 180;
-    }
-
-    //随机颜色
-    function randomColor(){
-      var hsl = '',
-          h,s,l = '';
-      h = randomNm(0, 360);
-      s = randomNm(0, 100) + '%';
-      l = randomNm(0, 100) + '%';
-      hsl='(' + h + ',' + s + ',' + l + ')';
-      return hsl
-    }
-
-    //随机大小
-    function randomNm(min, max){
-      return min + Math.floor(Math.random() * (max-min));
-    }
-
-    function drawMoon(cxt, d, x, y, R, rot){
-      cxt.save();
-      cxt.translate(x, y);
-      cxt.scale(R, R);
-      cxt.rotate(Math.PI / 180 * rot);
-      pathMoon(cxt, d);
-      cxt.fillStyle = 'hsl' + randomColor();
-      cxt.fill();
-      cxt.restore();
-    }
-    //画路径
-    function pathMoon(cxt, d){
-      //D表示控制点的横坐标；
-      cxt.beginPath();
-      cxt.arc(0, 0, 1, Math.PI * 0.5, Math.PI * 1.5, true);
-      cxt.moveTo(0, -1);
-      cxt.arcTo(d, 0, 0, 1, dis(0, -1, d, 0) * 1 / d);
-      cxt.closePath();
-    }
-    function dis(x1, y1, x2, y2){
-      return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-    }
-
-    function drawScreen () {
-      drawMoon(ctx,2,myCanvas.width / 2,myCanvas.height / 2,100,15);
-    }
-    drawScreen();
-  }
-</script>
-
 
 <canvas id="canvas" width="400" height="400" style="background-color: #1b6d85">
   <p>抱歉，您的浏览器不支持canvas</p>
@@ -158,7 +55,13 @@
     context.beginPath()
     context.strokeStyle = 'red'
     context.moveTo(100, 50)
-    context.arcTo(100, 200, 300, 200, 40)
+    context.arcTo(100, 200, 300, 200, 140)
+    context.stroke()
+
+    context.beginPath()
+    context.strokeStyle = 'red'
+    context.moveTo(140, 270)
+    context.arcTo(100, 200, 300, 200, 140)
     context.stroke()
   }
   drawScreen()

@@ -5,15 +5,17 @@
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Nested Destructuring</title>
+  <title>Default Parameter Value Temporal Dead Zone</title>
 </head>
 <body>
+
 <script>
-  // Nested Destructuring
-  let colors = ['red', [{'green': 'green-value'}, 'lightgreen'], 'blue']
-  let [firstColor, [ secondColor, secondColorLight ]] = colors
-  console.log(secondColor) // {green: "green-value"}
-  console.log(secondColorLight) // secondColorLight
+  // Default Parameter Value Temporal Dead Zone
+  if (1) {
+    typeof a;  // 会抛出错
+    let a = 3;
+  }
 </script>
+
 </body>
 </html>

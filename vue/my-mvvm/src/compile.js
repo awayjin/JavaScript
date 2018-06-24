@@ -15,22 +15,42 @@
  *
  */
 
+/**
+ * 1.nodeType=1元素节点
+ * 2. document fragments createDocumentFragment, firstChild
+ * 3. childNodes, Array.prototype.slice.call类数组转换成数组
+ *    textContent与innerText区别
+ *    textContent 返回指定节点的文本内容，以及它的所有后代。隐藏的也返回.
+ *    innerText不会
+ *
+ *  3.1 compile-node.attributes, attr.name-attr.value
+ *  attr.indexOf('v-') === 0是否指令, substring
+ *
+ *  3.2 compileUtil
+ *  true && 33, bind- bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调用,
+ */
+
 function Compile (el, vm) {
   this.$vm = vm
+  // 1.0 获取节点
   this.$el = this.isElementNode(el) ? el : document.querySelector(el)
 
   if (this.$el) {
+    // 2.0 转换为文档片段
     this.$fragment = this.node2Fragment(this.$el)
-    this.init() // 初始化
+    // 3.0 初始化
+    this.init()
+    // 2.2 文档片段追加到当前元素中
     this.$el.appendChild(this.$fragment)
   }
 }
 
 Compile.prototype = {
-  // 元素节点
+  // 1.1 是否是元素节点
   isElementNode: function (node) {
     return node.nodeType === 1
   },
+  // 2.1 把所有节点添加文档片段里，并返回文档片段
   node2Fragment: function (el) {
     /**
      * createDocumentFragment
@@ -40,34 +60,140 @@ Compile.prototype = {
      */
     var fragment = document.createDocumentFragment() // 创建一个新的空白的文档片段
     var child
+    // console.log(el.firstChild)
     // 将原生节点拷贝到fragment
     while (child = el.firstChild) {
-      console.log(el.firstChild)
+      // console.log(el.firstChild)
       fragment.appendChild(child)
     }
-    console.log(fragment)
+    // console.log(fragment)
     return fragment
   },
   init: function () {
     this.compileElement(this.$fragment)
   },
+
+  // 3.1 解析节点
   compileElement: function (el) {
-    var childNodes = el.childNodes
+    var childNodes = el.childNodes // 返回节点的子节点集合
     var me = this
 
+    // 3.2 子节点集合类数组转换为数组并遍历
     Array.prototype.slice.call(childNodes).forEach(function (node) {
-      var text = node.textContent
+      var text = node.textContent // 返回当前节点的文本内容
       var reg = /\{\{(.*)\}\}/
 
-      if (me.isElementNode(node)) {
+      if (me.isElementNode(node)) { // 元素节点
         me.compile(node)
-      } else if (me.isTextNode(node) && reg.test(test)) {
-        me.complieText(node, RegExp.$1)
+      } else if (false && me.isTextNode(node) && reg.test(test)) {
+        // me.compileText(node, RegExp.$1)
       }
 
       if (node.childNodes && node.childNodes.length) {
         me.compileElement(node)
       }
     })
-  }
+  },
+
+  // 3.3 元素解析
+  compile: function (node) {
+    var nodeAttrs = node.attributes // 获得元素属性的集合
+    var me = this
+
+    // 3.4 元素属性集合类数组转换为数组并遍历
+    Array.prototype.slice.call(nodeAttrs).forEach(function (attr) {
+      // 属性名称
+      var attrName = attr.name
+      // 3.5 是否指令
+      if (me.isDirective(attrName)) {
+        // 指令值-属性值，egg: clickBtn
+        var exp = attr.value
+        // 截取'v-',指令名, egg: v-on:click
+        var dir = attrName.substring(2)
+        // 3.6 是否事件指令
+        if (me.isEventDirective(dir)) {
+          compileUtil.eventHandler(node, me.$vm, exp, dir) // 3.6.1 绑定事件
+        } else {
+          // 3.7 普通指令 model
+          compileUtil[dir] && compileUtil[dir](node, me.$vm, exp)
+        }
+
+        node.removeAttribute(attrName)
+      }
+    })
+  },
+
+  // 3.5 是否是指令
+  isDirective: function (attr) {
+    return attr.indexOf('v-') === 0
+  },
+
+  // 3.6 事件指令
+  isEventDirective: function (dir) {
+    return dir.indexOf('on') === 0
+  },
+
+
+}
+
+// 指令处理集合
+var compileUtil = {
+  // 3.6.2 事件处理
+  eventHandler: function (node, vm, exp, dir) {
+    var eventType = dir.split(':')[1] // on:click
+    var fn = vm.$options.methods && vm.$options.methods[exp]
+    if (eventType && fn) {
+      node.addEventListener(eventType, fn.bind(vm), false)
+    }
+  },
+  // 3.7.1 model
+  model: function (node, vm, exp) {
+    this.bind(node, vm, exp, 'model')
+  },
+  // 3.7.2 bind
+  bind: function (node, vm, exp, dir) {
+    // 3.7.3 modelUpdater
+    var updaterFn = updater[dir + 'Updater'] // modelUpdater
+    updaterFn && updaterFn(node, this._getVMVal(vm, exp))
+  },
+  // 3.7.4 _getVMVal- split('.')
+  _getVMVal: function (vm, exp) {
+    var val = vm
+    exp = exp.split('.') // ["someStr"]
+    exp.forEach(function (key) {
+      val = val[key] // vm['someStr]
+    })
+    return val
+  },
+  model3: function(node, vm, exp) {
+    this.bind(node, vm, exp, 'model');
+
+    var me = this,
+      val = this._getVMVal(vm, exp);
+    node.addEventListener('input', function(e) {
+      var newValue = e.target.value;
+      if (val === newValue) {
+        return;
+      }
+
+      me._setVMVal(vm, exp, newValue);
+      val = newValue;
+    });
+  },
+  bind3: function(node, vm, exp, dir) {
+    var updaterFn = updater[dir + 'Updater'];
+
+    updaterFn && updaterFn(node, this._getVMVal(vm, exp));
+
+    new Watcher(vm, exp, function(value, oldValue) {
+      updaterFn && updaterFn(node, value, oldValue);
+    });
+  },
+}
+
+var updater = {
+  // 3.7.3
+  modelUpdater: function (node, value, oldValue) {
+    node.value = typeof value === 'undefined' ? '' : value
+  },
 }
