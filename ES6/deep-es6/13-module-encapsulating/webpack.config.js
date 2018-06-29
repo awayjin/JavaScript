@@ -5,6 +5,13 @@ module.exports = {
     path: __dirname,
     filename: "dist/bundle.js"
   },
+  devServer: {
+    contentBase: "./public",
+    colors: true,
+    historyApiFallback: true,
+    port: 3003,
+    inline: true
+  },
   module: {
     loaders: [
       {

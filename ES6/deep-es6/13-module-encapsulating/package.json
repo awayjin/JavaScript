@@ -11,6 +11,6 @@
   },
   "devDependencies": {},
   "scripts": {
-    "dev": "webpack --progress --colors --watch"
+    "dev": "webpack --progress --colors --watch  --port 3003"
   }
 }
