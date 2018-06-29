@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+<a href="https://www.cnblogs.com/joyho/articles/5817170.html">canvas bezier</a>
+
+
+<canvas  width="300" height="150"></canvas>
+<canvas style="background-color: #cb5972;" class="canvas2" width="350" height="300"></canvas>
+
+<script>
+  var canvas = document.querySelector('canvas')
+  var context = canvas.getContext('2d')
+
+  context.beginPath()
+  context.moveTo(0, 0)
+  context.quadraticCurveTo(150, 120, 300, 0)
+  context.lineTo(300, 300)
+//  context.moveTo(0, 300)
+  context.lineTo(0, 300)
+  context.fill()
+  context.stroke()
+</script>
+
+
+<script>
+  !function () {
+    var context = document.querySelector('.canvas2').getContext('2d');
+
+    context.fillStyle     = 'cornflowerblue';
+    context.strokeStyle   = 'yellow';
+
+    context.shadowColor   = 'rgba(50, 50, 50, 1.0)';
+    context.shadowOffsetX = 2;
+    context.shadowOffsetY = 2;
+    context.shadowBlur    = 4;
+
+//    context.lineWidth = 20;
+    context.lineCap = 'round';
+
+    context.beginPath();
+    context.moveTo(0, 0);
+    context.quadraticCurveTo(150, 130, 350, 0);
+//    context.quadraticCurveTo(190, 250.0, 210.5, 160.5);
+//    context.quadraticCurveTo(240, 100.5, 290, 70.5);
+    context.stroke();
+  }()
+</script>
+</body>
+</html>
