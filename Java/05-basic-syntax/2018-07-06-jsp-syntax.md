@@ -44,7 +44,58 @@ excerpt: JSP基本语法
 ```
 
 ### 5.2.3 taglib指令
-> 声明该页面中所使用的标签库，同是引用标签库，并指定标签的前缀
-```jsp
+> 声明该页面中所使用的标签库，同时引用标签库，并指定标签的前缀
+- prefix: 用于指定标签的前缀。不能命名为jsp、jspx、java、javax、sun、servelet、sunw
+- uri: 用于指定标签库文件的存放位置
+```html
 <%@ taglib prefix="tagPrefix" uri="tagURI" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+```
+
+## 5.3 脚本标识
+> JSP中的脚本标识3部分：JSP表达式(expression)、声明标识(Declaration)和脚本程序(Scriptlet)
+
+### 5.3.1 JSP表达式
+> JSP表达式用于向页面中输出信息，语法格式 <%= 表达式 %>
+> 表达式： 可以是任何Java语言的完整表达式，最终运算结果将被转换为字符串
+```html
+<%
+String manager = "manager";
+char ch = 'A';
+%>
+<p>管理员：<%= manager %></p>
+<p>字符：<%= ch %></p>
+```
+
+### 5.3.2 声明标识
+> 声明标识用于在JSP页面中定义全局的变量或方法
+> 服务器执行JSP页面时，转换为Servlet类，会把JSP声明标识定义的变量和方法转换为类的成员变量和方法
+```html
+<%! -- %>
+<section>
+<%!
+// !声明标识
+int number = 300;
+int count () {
+  number++;
+  return number;
+}
+%>
+调用声明的全局方法, number： <%= count() %>
+</section>
+```
+
+### 5.3.3 代码片段
+> 所谓代码片段就是在JSP页面中嵌入Java代码或脚本代码
+```html
+<% Java代码或脚本代码 %>
+```
+
+## 5.5 动作标识
+### 5.5.1 包含文件标识<jsp:include>
+> 动作标识<jsp:include>用于当前页面中包含其他的文件
+```html
+<jsp:include page="url" flush="false|true" >
+  子动作标识<jsp:param>
+</jsp:include>
 ```

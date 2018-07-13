@@ -17,7 +17,11 @@
 
 /**
  * 1.nodeType=1元素节点
+ *
  * 2. document fragments createDocumentFragment, firstChild
+ *  document.createDocumentFragment 创建一个新的空白的文档片段
+ *  firstChild 属性返回指定节点的首个子节点
+ *
  * 3. childNodes, Array.prototype.slice.call类数组转换成数组
  *    textContent与innerText区别
  *    textContent 返回指定节点的文本内容，以及它的所有后代。隐藏的也返回.
@@ -37,7 +41,7 @@ function Compile (el, vm) {
 
   if (this.$el) {
     // 2.0 转换为文档片段
-    this.$fragment = this.node2Fragment(this.$el)
+    this.$fragment = this.nodeToFragment(this.$el)
     // 3.0 初始化
     this.init()
     // 2.2 文档片段追加到当前元素中
@@ -51,7 +55,7 @@ Compile.prototype = {
     return node.nodeType === 1
   },
   // 2.1 把所有节点添加文档片段里，并返回文档片段
-  node2Fragment: function (el) {
+  nodeToFragment: function (el) {
     /**
      * createDocumentFragment
      * 因为文档片段存在于内存中，并不在DOM树中，
@@ -63,10 +67,15 @@ Compile.prototype = {
     // console.log(el.firstChild)
     // 将原生节点拷贝到fragment
     while (child = el.firstChild) {
-      // console.log(el.firstChild)
+      /**
+       * appendChild
+       * 如果这个给定的要插入的child是document中已存在的节点中的引用，
+       * 那么appendChild（）方法会把它从它现在的位置转移到新的位置，相当于一个剪切的效果
+       *
+       */
       fragment.appendChild(child)
     }
-    // console.log(fragment)
+
     return fragment
   },
   init: function () {
@@ -76,21 +85,21 @@ Compile.prototype = {
   // 3.1 解析节点
   compileElement: function (el) {
     var childNodes = el.childNodes // 返回节点的子节点集合
-    var me = this
+    var that = this
 
     // 3.2 子节点集合类数组转换为数组并遍历
     Array.prototype.slice.call(childNodes).forEach(function (node) {
       var text = node.textContent // 返回当前节点的文本内容
       var reg = /\{\{(.*)\}\}/
 
-      if (me.isElementNode(node)) { // 元素节点
-        me.compile(node)
+      if (that.isElementNode(node)) { // 元素节点
+        that.compile(node)
       } else if (false && me.isTextNode(node) && reg.test(test)) {
         // me.compileText(node, RegExp.$1)
       }
 
       if (node.childNodes && node.childNodes.length) {
-        me.compileElement(node)
+        // me.compileElement(node)
       }
     })
   },
