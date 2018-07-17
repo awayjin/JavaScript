@@ -9,7 +9,7 @@ function MVVM (options) {
   var me = this
 
   // 1.0 数据代理
-  // 实现 vm.xxx -> vm._data.xxx
+  // 实现 vm._data.xxx -> vm.xxx
   Object.keys(data).forEach(function (key) {
     me._proxyData(key)
   })
@@ -18,7 +18,7 @@ function MVVM (options) {
   // me._initComputed()
 
   // 3.0 实现数据监听器Observer,监听所有属性，如变动拿到最新值通知订阅者
-  observe(data, this)
+  // observe(data, this)
 
   this.$compile = new Compile(options.el || document.body, this)
 }
@@ -35,7 +35,7 @@ MVVM.prototype = {
             return me._data[key]
           },
           set: function proxySetter (newVal) {
-            console.log('1.1 set')
+            console.log('1.1 set:' + newVal)
             me._data[key] = newVal
           }
         })

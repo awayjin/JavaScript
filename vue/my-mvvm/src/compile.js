@@ -32,6 +32,12 @@
  *
  *  3.2 compileUtil
  *  true && 33, bind- bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调用,
+ *
+ *  3.7 文本节点
+ *  node.nodeType === 3, 节点类型是3
+ *  var reg = /\{\{(.*)\}\}/; // .匹配除“\n”之外的任何单个字符。要匹配包括“\n”在内的任何字符，请使用像“(.|\n)”的模式。
+ *  reg.test(string)-test() 方法用于检测一个字符串是否匹配某个模式.
+ *  RegExp.$1 存储捕获组的构造函数属性，$1, $2...$9存储第1，2...9个捕获组
  */
 
 function Compile (el, vm) {
@@ -79,11 +85,11 @@ Compile.prototype = {
     return fragment
   },
   init: function () {
-    this.compileElement(this.$fragment)
+    this.compileNodes(this.$fragment)
   },
 
   // 3.1 解析节点
-  compileElement: function (el) {
+  compileNodes: function (el) {
     var childNodes = el.childNodes // 返回节点的子节点集合
     var that = this
 
@@ -94,12 +100,12 @@ Compile.prototype = {
 
       if (that.isElementNode(node)) { // 元素节点
         that.compile(node)
-      } else if (false && me.isTextNode(node) && reg.test(test)) {
-        // me.compileText(node, RegExp.$1)
+      } else if (that.isTextNode(node) && reg.test(text)) { // 文本节点
+        that.compileText(node, RegExp.$1)
       }
 
       if (node.childNodes && node.childNodes.length) {
-        // me.compileElement(node)
+        // me.compileNodes(node)
       }
     })
   },
@@ -142,6 +148,10 @@ Compile.prototype = {
     return dir.indexOf('on') === 0
   },
 
+  // 3.7 文本节点
+  isTextNode: function (node) {
+    return node.nodeType === 3
+  }
 
 }
 
@@ -163,6 +173,7 @@ var compileUtil = {
   bind: function (node, vm, exp, dir) {
     // 3.7.3 modelUpdater
     var updaterFn = updater[dir + 'Updater'] // modelUpdater
+
     updaterFn && updaterFn(node, this._getVMVal(vm, exp))
   },
   // 3.7.4 _getVMVal- split('.')

@@ -99,3 +99,10 @@ int count () {
   子动作标识<jsp:param>
 </jsp:include>
 ```
+
+###  include指令与与<jsp:include>动作标识的区别
+- include指令通过file属性指定包含的文件，file不支持任何表达式.<jsp:include>的page属性支持JSP表达式
+- include指令被包含的文件原封不动插入到包含页中。<jsp:include>包含文件时，当该标识被执行时，程序会将请求转发到被包含的页面
+- include指令包含文件时，不能重名的变量和方法，<jsp:include>是单独编译的，被包含文件和包含文件是不相冲突的
+
+### 5.5.2 请求转发标识<jsp:forward>

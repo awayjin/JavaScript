@@ -70,6 +70,14 @@
   book.year = 2005;
 //  console.log(book); //2
 
+
+  var reg =  /\{\{(.*)\}\}/;
+  var text = [...document.querySelector('#app').childNodes][2].textContent;
+  if (reg.test(text)) {
+    console.log(RegExp)
+  }
+
+
   var vm = new MVVM({
     el: '#app',
     data: {
