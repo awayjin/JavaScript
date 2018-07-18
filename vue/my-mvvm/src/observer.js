@@ -37,6 +37,7 @@ Observer.prototype = {
       enumerable: true, // 可枚举
       configurable: false, // 不能再define
       get: function () {
+        // console.log(Dep.target)
         // 由于需要在闭包内添加Watcher,所以通过Dep定义一个全局target,暂存Watcher,添加完删除
         // Dep.target && dep.addDep(Dep.target)
         // 通过dep添加订阅者，就必须要在闭包内操作，所以我们可以在	getter里面动手脚：
