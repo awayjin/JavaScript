@@ -28,7 +28,9 @@
  *    innerText不会
  *
  *  3.1 compile-node.attributes, attr.name-attr.value
+ *  node.attributes 获得元素属性的集合
  *  attr.indexOf('v-') === 0是否指令, substring
+ *  attributes][1].name 名称与值
  *
  *  3.2 compileUtil
  *  true && 33, bind- bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调用,
@@ -107,27 +109,27 @@ Compile.prototype = {
   // 3.3 元素解析
   compile: function (node) {
     var nodeAttrs = node.attributes // 获得元素属性的集合
-    var me = this
+    var _this = this
 
     // 3.4 元素属性集合类数组转换为数组并遍历
     Array.prototype.slice.call(nodeAttrs).forEach(function (attr) {
       // 属性名称
       var attrName = attr.name
       // 3.5 是否指令
-      if (me.isDirective(attrName)) {
+      if (_this.isDirective(attrName)) {
         // 指令值-属性值，egg: clickBtn
         var exp = attr.value
         // 截取'v-',指令名, egg: v-on:click
         var dir = attrName.substring(2)
         // 3.6 是否事件指令
-        if (me.isEventDirective(dir)) {
-          compileUtil.eventHandler(node, me.$vm, exp, dir) // 3.6.1 绑定事件
+        if (_this.isEventDirective(dir)) {
+          compileUtil.eventHandler(node, _this.$vm, exp, dir) // 3.6.1 绑定事件
         } else {
           // 3.7 普通指令 model
-          compileUtil[dir] && compileUtil[dir](node, me.$vm, exp)
+          compileUtil[dir] && compileUtil[dir](node, _this.$vm, exp)
         }
 
-        node.removeAttribute(attrName)
+        // node.removeAttribute(attrName)
       }
     })
   },
@@ -155,7 +157,7 @@ var compileUtil = {
       node.addEventListener(eventType, fn.bind(vm), false)
     }
   },
-  // 3.7.1 model
+  // 3.7.1 model, exp-value
   model: function (node, vm, exp) {
     this.bind(node, vm, exp, 'model')
   },
@@ -168,10 +170,12 @@ var compileUtil = {
   // 3.7.4 _getVMVal- split('.')
   _getVMVal: function (vm, exp) {
     var val = vm
+    console.log(val)
     exp = exp.split('.') // ["someStr"]
     exp.forEach(function (key) {
       val = val[key] // vm['someStr]
     })
+    console.log('2:'+val)
     return val
   },
   model3: function(node, vm, exp) {
@@ -203,6 +207,7 @@ var compileUtil = {
 var updater = {
   // 3.7.3
   modelUpdater: function (node, value, oldValue) {
+    console.log('value:' + value)
     node.value = typeof value === 'undefined' ? '' : value
   },
 }
