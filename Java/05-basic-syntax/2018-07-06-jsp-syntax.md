@@ -106,3 +106,14 @@ int count () {
 - include指令包含文件时，不能重名的变量和方法，<jsp:include>是单独编译的，被包含文件和包含文件是不相冲突的
 
 ### 5.5.2 请求转发标识<jsp:forward>
+```html
+<jsp:forward page="url"/>
+<jsp:forward page="url">
+子动作标识<jsp:param></jsp:param>
+</jsp:forward>
+```
+### 5.5.3 传递参数标识
+
+<jsp:forward page="url">
+子动作标识<jsp:param name='userId' value='7'></jsp:param>
+</jsp:forward>

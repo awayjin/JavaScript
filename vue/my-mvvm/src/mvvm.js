@@ -9,16 +9,16 @@ function MVVM (options) {
   var me = this
 
   // 1.0 数据代理
-  // 实现 vm._data.xxx -> vm.xxx
+  // 实现 vm.xxx -> vm._data.xxx
   Object.keys(data).forEach(function (key) {
     me._proxyData(key)
   })
 
   // 2.0 初始化计算属性
-  // me._initComputed()
+  me._initComputed()
 
   // 3.0 实现数据监听器Observer,监听所有属性，如变动拿到最新值通知订阅者
-  // observe(data, this)
+  observe(data, this)
 
   this.$compile = new Compile(options.el || document.body, this)
 }

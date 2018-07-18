@@ -27,13 +27,13 @@
  *    textContent 返回指定节点的文本内容，以及它的所有后代。隐藏的也返回.
  *    innerText不会
  *
- *  3.1 compile-node.attributes, attr.name-attr.value
+ *  3.1 compileElement-node.attributes, attr.name-attr.value
  *  attr.indexOf('v-') === 0是否指令, substring
  *
  *  3.2 compileUtil
  *  true && 33, bind- bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调用,
  *
- *  3.7 文本节点
+ *  3.8 文本节点
  *  node.nodeType === 3, 节点类型是3
  *  var reg = /\{\{(.*)\}\}/; // .匹配除“\n”之外的任何单个字符。要匹配包括“\n”在内的任何字符，请使用像“(.|\n)”的模式。
  *  reg.test(string)-test() 方法用于检测一个字符串是否匹配某个模式.
@@ -99,19 +99,19 @@ Compile.prototype = {
       var reg = /\{\{(.*)\}\}/
 
       if (that.isElementNode(node)) { // 元素节点
-        that.compile(node)
-      } else if (that.isTextNode(node) && reg.test(text)) { // 文本节点
+        that.compileElement(node)
+      } else if (that.isTextNode(node) && reg.test(text)) { // 3.8 文本节点
         that.compileText(node, RegExp.$1)
       }
 
-      if (node.childNodes && node.childNodes.length) {
-        // me.compileNodes(node)
+      if (node.childNodes && node.childNodes.length) { // 解析子节点
+        that.compileNodes(node)
       }
     })
   },
 
   // 3.3 元素解析
-  compile: function (node) {
+  compileElement: function (node) {
     var nodeAttrs = node.attributes // 获得元素属性的集合
     var me = this
 
@@ -138,6 +138,11 @@ Compile.prototype = {
     })
   },
 
+  // 3.8.2 解析文本节点
+  compileText: function (node, exp) {
+    compileUtil.text(node, this.$vm, exp) // 3.8.3
+  },
+
   // 3.5 是否是指令
   isDirective: function (attr) {
     return attr.indexOf('v-') === 0
@@ -148,7 +153,7 @@ Compile.prototype = {
     return dir.indexOf('on') === 0
   },
 
-  // 3.7 文本节点
+  // 3.7.1 文本节点
   isTextNode: function (node) {
     return node.nodeType === 3
   }
@@ -165,17 +170,35 @@ var compileUtil = {
       node.addEventListener(eventType, fn.bind(vm), false)
     }
   },
-  // 3.7.1 model
+  // 3.7.1 model-普通指令
   model: function (node, vm, exp) {
     this.bind(node, vm, exp, 'model')
+
+    var _this = this
+    var val = _this._getVMVal(vm, exp)
+    node.addEventListener('input', function (event) {
+      var newValue = event.target.value
+      if (val === newValue) {
+        return
+      }
+
+      _this._setVMVal(vm, exp, newValue)
+      val = newValue
+    }, false)
   },
+
   // 3.7.2 bind
   bind: function (node, vm, exp, dir) {
     // 3.7.3 modelUpdater
     var updaterFn = updater[dir + 'Updater'] // modelUpdater
 
     updaterFn && updaterFn(node, this._getVMVal(vm, exp))
+
+    new Watcher(vm, exp, function (value, oldValue) {
+      updaterFn && updaterFn(node, value, oldValue)
+    })
   },
+
   // 3.7.4 _getVMVal- split('.')
   _getVMVal: function (vm, exp) {
     var val = vm
@@ -185,29 +208,23 @@ var compileUtil = {
     })
     return val
   },
-  model3: function(node, vm, exp) {
-    this.bind(node, vm, exp, 'model');
 
-    var me = this,
-      val = this._getVMVal(vm, exp);
-    node.addEventListener('input', function(e) {
-      var newValue = e.target.value;
-      if (val === newValue) {
-        return;
-      }
-
-      me._setVMVal(vm, exp, newValue);
-      val = newValue;
-    });
+  _setVMVal: function (vm, exp, value) {
+    vm[exp] = value
+    // var val = vm;
+    // exp = exp.split('.');
+    // exp.forEach(function(k, i) {
+    //   // 非最后一个key，更新val的值
+    //   if (i < exp.length - 1) {
+    //     val = val[k];
+    //   } else {
+    //     val[k] = value;
+    //   }
+    // });
   },
-  bind3: function(node, vm, exp, dir) {
-    var updaterFn = updater[dir + 'Updater'];
-
-    updaterFn && updaterFn(node, this._getVMVal(vm, exp));
-
-    new Watcher(vm, exp, function(value, oldValue) {
-      updaterFn && updaterFn(node, value, oldValue);
-    });
+  text: function (node, vm, exp) {
+    var trimExp = exp.replace(/\s*/gi, '') // 去除空格
+    this.bind(node, vm, trimExp, 'text')
   },
 }
 
@@ -216,4 +233,11 @@ var updater = {
   modelUpdater: function (node, value, oldValue) {
     node.value = typeof value === 'undefined' ? '' : value
   },
+  // 文本节点指令替换
+  textUpdater: function (node, value) {
+    var reg =  /(\{\{(.*)\}\})/gi
+    var text = node.textContent.replace(reg, value)
+    node.textContent = typeof text === 'undefined' ? '' : text
+    // node.textContent = typeof value === 'undefined' ? '' : value
+  }
 }

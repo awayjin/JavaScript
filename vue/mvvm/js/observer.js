@@ -23,6 +23,7 @@ Observer.prototype = {
             configurable: false, // 不能再define
             get: function() {
                 if (Dep.target) {
+                    console.log('dep')
                     dep.depend();
                 }
                 return val;
