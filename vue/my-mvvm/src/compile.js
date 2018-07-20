@@ -190,6 +190,11 @@ var compileUtil = {
     }, false)
   },
 
+  text: function (node, vm, exp) {
+    var trimExp = exp.replace(/\s*/gi, '') // 去除空格
+    this.bind(node, vm, trimExp, 'text')
+  },
+
   // 3.7.2 bind
   bind: function (node, vm, exp, dir) {
     // 3.7.3 modelUpdater
@@ -211,7 +216,6 @@ var compileUtil = {
     })
     return val
   },
-
   _setVMVal: function (vm, exp, value) {
     vm[exp] = value
     // var val = vm;
@@ -224,10 +228,6 @@ var compileUtil = {
     //     val[k] = value;
     //   }
     // });
-  },
-  text: function (node, vm, exp) {
-    var trimExp = exp.replace(/\s*/gi, '') // 去除空格
-    this.bind(node, vm, trimExp, 'text')
   },
 }
 

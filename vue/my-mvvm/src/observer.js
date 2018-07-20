@@ -102,7 +102,6 @@ Dep.prototype = {
   },
 
   notify: function () {
-    console.log(this.subs)
     this.subs.forEach(function (sub) {
       sub.update()
     })

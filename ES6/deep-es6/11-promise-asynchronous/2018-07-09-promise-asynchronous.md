@@ -10,6 +10,7 @@ excerpt: 用模块封装代码
 {:toc}
 
 ---
+[解析Promise原理，实现一个Promise](https://blog.csdn.net/u014775861/article/details/78030508)
 # 11.Promise与异步编程(asynchronous and asynchronous programming)
 > JS最强大的一方面就是轻易处理异步编程
 
@@ -51,14 +52,17 @@ console.log('Hi') // 先执行
 ```
 
 ## 11.5 Promise基础(Promise Basics)
-- Promise是为异步操作的结果所准备的占位符
+- Promise 概括来说是对异步的执行结果的描述对象。Promise是为异步操作的结果所准备的占位符
+> Promise规范中规定，promise的状态只有三种.Promise 的状态一旦改变则不会再改变。还规定了 Promise 中必须有 then 方法
+- pending（进行中）、fulfilled（已成功）和rejected（已失败）
 
 ### 11.5.1 Promise的生命周期 The Promise Lifecycle
 > 每一个Promise都会经历一个短暂的生命周期
 - 初始为挂起态（pending state）,表示异步操作尚未结束。挂起的Promise也被认为是未决的(unsettled),
 - 一旦异步操作结束,Promise会被认为是已解决的(settled),并进入两种可能状态之一
 > 1. 已完成(fulfilled): Promise的异步操作已成功结束
-> 2. 已解决(rejected): Promise的异步操作未成功结束，可能是一个错误，或由其他原因导致
+> 2. 已拒绝(rejected): Promise的异步操作未成功结束，可能是一个错误，或由其他原因导致
+> 3. pending进行中
 
 - 内部的[[PromiseState]]属性会被设置为'pending'、'fulfilled'、'rejected',以反映Promise的状态
 

@@ -1,13 +1,56 @@
 /**
  * Created by jinwei on 2018/07/18.
  */
-// function Watcher(vm, exp, cb) {
-//   this.cb = cb
-//   this.vm = vm
-//   this.exp = exp
-// }
-
+/**
+ * 1.\w 匹配包括下划线的任何单词字符。等价于“[A-Za-z0-9_]”。
+ * /[^\w$]/.test(exp) 匹配。 在[]之间表示非，在开头表示开始
+ *
+ * 2. call, apply, bind的区别
+ */
 function Watcher(vm, expOrFn, cb) {
+  this.cb = cb
+  this.vm = vm
+  this.expOrFn = expOrFn
+  this.depIds = {}
+
+  if (typeof expOrFn === 'function') {
+    this.getter = expOrFn
+  } else {
+    this.getter = this.parseGetter(expOrFn)
+  }
+
+  // 此处为了触发属性的getter，从而在dep添加自己，结合Observer更易理解
+  this.value = this.get()
+}
+
+Watcher.prototype = {
+  parseGetter: function (exp) {
+    if (/[^\w$]/.test(exp)) return
+    var exps = exp.split('.')
+    return function (obj) {
+      for (var i = 0, len = exps.length; i < len; i++) {
+        if (!obj) return
+        obj = obj[exps[i]]
+      }
+      return obj
+    }
+  },
+  get: function () {
+    Dep.target = this // 将当前订阅者指向自己
+    var value = this.getter.call(null, this.vm) // 触发getter，添加自己到属性订阅器中
+    console.log('1:' + value)
+    Dep.target = null // 添加完毕，重置
+    return value
+  },
+  addDep: function (dep) {
+    // console.log(dep)
+  },
+  depend: function () {
+    console.log(222)
+  }
+}
+
+function Watcher3(vm, expOrFn, cb) {
   this.cb = cb;
   this.vm = vm;
   this.expOrFn = expOrFn;
@@ -22,7 +65,7 @@ function Watcher(vm, expOrFn, cb) {
   this.value = this.get();
 }
 
-Watcher.prototype = {
+Watcher3.prototype = {
   update: function() {
     this.run();
   },
