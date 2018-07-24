@@ -38,12 +38,14 @@ Watcher.prototype = {
   get: function () {
     Dep.target = this // 将当前订阅者指向自己
     var value = this.getter.call(null, this.vm) // 触发getter，添加自己到属性订阅器中
-    console.log('1:' + value)
     Dep.target = null // 添加完毕，重置
     return value
   },
   addDep: function (dep) {
-    // console.log(dep)
+    if (!this.depIds.hasOwnProperty(dep.id)) {
+      dep.addSub(this)
+      this.depIds[dep.id] = dep
+    }
   },
   depend: function () {
     console.log(222)
