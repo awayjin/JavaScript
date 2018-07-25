@@ -8,9 +8,9 @@
  * 2. call, apply, bind的区别
  */
 function Watcher(vm, expOrFn, cb) {
-  this.cb = cb
   this.vm = vm
   this.expOrFn = expOrFn
+  this.cb = cb
   this.depIds = {}
 
   if (typeof expOrFn === 'function') {
@@ -32,12 +32,13 @@ Watcher.prototype = {
         if (!obj) return
         obj = obj[exps[i]]
       }
+      console.log(obj)
       return obj
     }
   },
   get: function () {
     Dep.target = this // 将当前订阅者指向自己
-    var value = this.getter.call(null, this.vm) // 触发getter，添加自己到属性订阅器中
+    var value = this.getter.call(this.vm, this.vm) // 触发getter，添加自己到属性订阅器中
     Dep.target = null // 添加完毕，重置
     return value
   },
