@@ -6,6 +6,9 @@
  * /[^\w$]/.test(exp) 匹配。 在[]之间表示非，在开头表示开始
  *
  * 2. call, apply, bind的区别
+ *
+ * 3. hasOwnProperty, 方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性
+ * var obj = { a: 22}; obj.hasOwnProperty('a')
  */
 function Watcher(vm, expOrFn, cb) {
   this.vm = vm
@@ -32,12 +35,15 @@ Watcher.prototype = {
         if (!obj) return
         obj = obj[exps[i]]
       }
-      console.log(obj)
       return obj
     }
   },
   get: function () {
     Dep.target = this // 将当前订阅者指向自己
+    if (!this.getter) {
+      console.log(this.getter)
+      debugger
+    }
     var value = this.getter.call(this.vm, this.vm) // 触发getter，添加自己到属性订阅器中
     Dep.target = null // 添加完毕，重置
     return value
@@ -48,8 +54,16 @@ Watcher.prototype = {
       this.depIds[dep.id] = dep
     }
   },
-  depend: function () {
-    console.log(222)
+  update: function () {
+    this.run()
+  },
+  run: function () {
+    var value = this.get()
+    var oldValue = this.value
+    if (value !== oldValue) {
+      this.value = value
+      this.cb.call(this.vm, value, oldValue)
+    }
   }
 }
 

@@ -15,8 +15,10 @@
 
 <div id="app" style="background-color: #b3b3b3">
   <input type="text" v-model="someStr"> <br>
+  <input type="text" v-model="someStr3"> <br>
+
   双向绑定： {{ someStr }} <br>
-  双向绑定2： {{ someStr }}
+  双向绑定2： {{ someStr3 }}
   <p>P:<a href="##">{{ someStr }}</a></p>
   <button v-on:click="clickBtn">change model</button>
   <p style="display: none">none</p>
@@ -93,6 +95,7 @@
     el: '#app',
     data: {
       someStr: 'Parent Hello',
+      someStr3: '33lo',
       obj: { a: 11 },
       arrObj: [{ b: 22, c: 33 }],
       child: {

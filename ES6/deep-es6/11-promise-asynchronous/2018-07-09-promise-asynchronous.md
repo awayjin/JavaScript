@@ -107,3 +107,41 @@ promise.then(null, function(error) {
 > 此系统要优于事件与回调函数,因为他让操作是成功还是失败变得完全清晰.(事件模式倾向于在出错时不被触发，而在回调函数模式中你必须始终记得检查错误参数)
 
 ## 11.6 创建未决的Promise(Creating Unsettled Promises)
+> 新的Promise使用构造器来创建.接受单个参数：一个被称为executor的函数。执行器会被传递两个名为resolve()与reject()的函数作为参数
+```javascript
+let fs = require('fs')
+function readFile(fileName) {
+  return new Promise(function(resolve, reject) {
+    fs.readFile(fileName, { encoding: 'utf-8' }, function(err, contents) {
+      if (erro) {
+        reject(err)
+        return 
+      }
+      // 读取成功
+      resolve(contents)
+    })
+  })
+}
+
+let promise = readFile('example.js')
+// 同时监听完成与拒绝
+promise.then(function(contents) {
+  console.log(contents) // 完成
+}, function(err) {
+  console.error(err.message) // 拒绝
+})
+```
+> 要记住执行器会在readFile()被调用时立即运行。当 resolve()	或reject()在执行器内部被调用时，一个作业被添加到作业队列中，以便决议（resolve ）这个Promise。这被称
+ 为作业调度（job	scheduling ）
+ ```javascript
+// 执行器先执行 
+let promise = new Promise(function(resolve, reject) {
+  console.log('promise') // 1.先输出
+  resolve()
+})
+promise.then(() => {
+  console.log('Resolved.') // 3. Resolved
+})
+console.log("hi") // 2.后输出
+```
+> 因为完成处理函数与拒绝处理函数总是会在执行器的操结束后被添到作业队列的尾部.

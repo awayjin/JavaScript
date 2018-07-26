@@ -237,9 +237,10 @@ var updater = {
     node.value = typeof value === 'undefined' ? '' : value
   },
   // 文本节点指令替换
-  textUpdater: function (node, value) {
-    var reg =  /(\{\{(.*)\}\})/gi
+  textUpdater: function (node, value, oldValue) {
+    var reg =  oldValue || /(\{\{(.*)\}\})/gi
     var text = node.textContent.replace(reg, value)
+    // console.log(oldValue)
     node.textContent = typeof text === 'undefined' ? '' : text
     // node.textContent = typeof value === 'undefined' ? '' : value
   }

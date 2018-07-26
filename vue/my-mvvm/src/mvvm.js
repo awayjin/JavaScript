@@ -35,7 +35,7 @@ MVVM.prototype = {
             return me._data[key]
           },
           set: function proxySetter (newVal) {
-            console.log('1.1 set:' + newVal)
+            // console.log('1.1 set:' + newVal)
             me._data[key] = newVal
           }
         })
