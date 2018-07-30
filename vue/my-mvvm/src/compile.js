@@ -238,10 +238,44 @@ var updater = {
   },
   // 文本节点指令替换
   textUpdater: function (node, value, oldValue) {
-    var reg =  oldValue || /(\{\{(.*)\}\})/gi
+    // var reg =  oldValue || /(^\{\{(.*)\}\}$)/gi
+    var reg =  oldValue || /\{\{(.+?)\}\}/g
     var text = node.textContent.replace(reg, value)
     // console.log(oldValue)
     node.textContent = typeof text === 'undefined' ? '' : text
     // node.textContent = typeof value === 'undefined' ? '' : value
   }
+}
+
+/**
+ *
+ * test()  //检索字符串中的指定值。返回值是 true 或 false。
+   exec() // 检索字符串中的指定值。返回值是被找到的值。如果没有发现匹配，则返回 null。
+   compile()  //可以改变检索模式，也可以添加或删除第二个参数。
+ *
+ */
+function parseText(pendingText){
+  var collection=[];
+  var searchTxt="";
+  var targetTxt = "";
+  var stringLength=0,lastIndex=0,curIndex=0;
+  var reg =/\{\{(.+?)\}\}/g;
+
+  if(!reg.test(pendingText)){
+    throw new Error("未匹配");
+  }else{
+    reg.lastIndex=0;
+    while( tempR = reg.exec(pendingText))
+    {
+      curIndex = reg.lastIndex;
+      searchTxt=tempR[0];
+      stringLength=searchTxt.length;
+      collection.push(pendingText.slice(lastIndex,curIndex-stringLength));
+      targetTxt=tempR[1];
+      collection.push(targetTxt);
+      lastIndex=curIndex;
+    }
+  }
+  console.log(collection);
+  return collection
 }

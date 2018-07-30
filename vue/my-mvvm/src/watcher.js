@@ -42,7 +42,8 @@ Watcher.prototype = {
     Dep.target = this // 将当前订阅者指向自己
     if (!this.getter) {
       console.log(this.getter)
-      debugger
+      return
+      // debugger
     }
     var value = this.getter.call(this.vm, this.vm) // 触发getter，添加自己到属性订阅器中
     Dep.target = null // 添加完毕，重置
