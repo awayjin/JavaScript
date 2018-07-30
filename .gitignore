@@ -17,3 +17,4 @@ package-lock.json*
 DigitalService/node_modules/
 DigitalServiceAdmin/node_modules/
 *.lock
+*.git-credentials
