@@ -16,8 +16,9 @@
 <div id="app" style="background-color: #b3b3b3">
   <input type="text" v-model="someStr"> <br>
   <input type="text" v-model="someStr3"> <br>
-
-  双向绑定： {{ someStr }} {{ someStr3 }}<br>
+<!--  <input type="text" v-model="obj.a"> <br>
+  obj.a: {{ obj.a }} <br>-->
+  双向绑定： {{ someStr }}<br>  {{ someStr3 }}
   双向绑定2： {{ someStr }}
   <p>P:<a href="##">{{ someStr }}</a></p>
   <button v-on:click="clickBtn">change model</button>
@@ -96,7 +97,7 @@
     data: {
       someStr: 'Parent Hello',
       someStr3: '33lo',
-      obj: { a: 11 },
+      obj: { a: 'a' },
       arrObj: [{ b: 22, c: 33 }],
       child: {
         someStr: 'Child Word'

@@ -48,7 +48,7 @@ Observer.prototype = {
       },
       set: function (newVal) {
         if (val === newVal) return
-        // console.log('监听到值变化了, val:' + val + ', newVal:' + newVal)
+        console.log('监听到值变化了, val:' + val + ', newVal:' + newVal)
         val = newVal
         // --新的值是object的话，进行监听
         childObj = observe(newVal)

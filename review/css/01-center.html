@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+  <style>
+    body, html { margin: 0; padding: 0; text-align: center; box-sizing: border-box; }
+    div.left {
+      float: left;
+      width: 50%;
+      margin-right: 1%;
+    }
+    div.right {
+      float: right;
+      width: 46%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="left">
+  <section>
+    <!--1.基于表格样式-->
+    <div class="table-father">
+      <div class="table-child">
+        <div class="d">1.基于表格样式</div>
+        1.基于表格样式
+      </div>
+    </div>
+
+    <style>
+      .table-father {
+        display: table;
+        border: 1px solid;
+        width: 100%;
+        height: 300px;
+      }
+      .table-child {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+      }
+    </style>
+
+  </section>
+
+  <section>
+    <div class="parent-two">
+      <div class="child" id="position-child">
+        2.基于绝对定位的解决方案
+      </div>
+    </div>
+    <style>
+      .parent-two {
+        width: 100%;
+        height: 300px;
+        position: relative;
+        background-color: purple;
+      }
+      /*.child {
+        width: 300px;
+        height: 100px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -50px 0 0 -150px;
+        background-color: #b3b3b3;
+        vertical-align: middle;
+        display: table-cell;
+      }*/
+      #position-child {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #b3b3b3;
+      }
+    </style>
+  </section>
+
+  <section>
+    <div class="parent" id="flex-father">
+      <div class="child" id="flex-child">
+        4.基于Flexbox的解决方案，要考虑浏览器支持
+        当父元素设置display:flex后，子元素设置margin:auto不仅仅是水平居中，也可以垂直居中
+      </div>
+    </div>
+  </section>
+  <style>
+    #flex-father {
+      display: -webkit-box;
+      align-items: center;
+      justify-content: center;
+
+      display: flex;
+      background-color: gold;
+      height: 200px;
+      width: 100%;
+      border: 1px lime solid;
+    }
+    #flex-child {
+      /*margin: auto;*/
+    }
+  </style>
+</div>
+
+<div class="right">
+  <section>
+    <div class="view-child-father">
+      <div id="view-child">
+        3.基于视口单位
+      </div>
+    </div>
+    <style>
+      .view-child-father {
+        height: 100vh;
+        width: 100%;
+        border: 1px solid transparent;
+        background-color: #0a67fb;
+      }
+      #view-child {
+        margin: 50vh auto 0;
+        transform: translateY(-50%);
+        height: 100px;
+        background-color: #fb4231;
+      }
+    </style>
+  </section>
+</div>
+
+
+
+
+<section class="" style="clear: both">
+  <p>
+    实现双向绑定:
+    <input type="text" id="changed" >
+  </p>
+
+  <script>
+    var obj = { _a: 3 }
+
+    var input = document.querySelector('#changed')
+    input.oninput = function () {
+      obj._a = input.value
+    }
+
+    Object.defineProperty(obj, 'a', {
+      enumerable: true,
+      configurable: false,
+      get: function () {
+        console.log('get obj.a:' + obj._a)
+        console.log(this)
+        return this._a
+      },
+      set: function (newVal) {
+        console.log('set newVal:' + newVal)
+        input.value = newVal
+        this._a = newVal
+      }
+    })
+    obj.a = 333
+
+
+    var book = {
+      _year: 2004,
+      edition: 1
+    };
+    Object.defineProperty(book, "year", {
+      get: function(){
+        return this._year;
+      },
+      set: function(newValue){
+        if (newValue > 2004) {
+          this._year = newValue;
+          this.edition += newValue - 2004;
+        }
+      }
+    });
+    book.year = 2005;
+  </script>
+</section>
+
+</body>
+</html>
