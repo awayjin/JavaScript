@@ -145,3 +145,34 @@ promise.then(() => {
 console.log("hi") // 2.后输出
 ```
 > 因为完成处理函数与拒绝处理函数总是会在执行器的操结束后被添到作业队列的尾部.
+
+## 11.7 创建已决的Promise
+> Promise构造器就是创建未决的Promise的最好方式
+> 两种方法可使用指定值来创建已决的Promise
+
+### 11.7.1 使用Promise.resolve()
+> Promise.resolve()方法接受单个参数会返回一个处于完成态的Promise
+```javascript
+var promise = Promise.resolve(43);
+promise.then(value => {
+  console.log(value)
+})
+```
+### 11.7.2 使用Promise.reject()
+> 若一个拒绝处理函数被添加到此Promise,该拒绝处理函数将永不会被调用
+```javascript
+var promise = Promise.reject(43); 
+promise.catch(value => {
+  console.log(value)
+})
+```
+## 11.8 执行器错误
+> 如果执行器内部抛出了错误，那么Promise的拒绝处理函数会被调用
+```javascript
+var promise = new Promise(function(resolve, reject) {
+  throw new Error('Explosion..!')
+})
+promise.catch(function (error) {
+  console.log(error.message)
+})
+```
