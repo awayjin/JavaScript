@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>使用float和BFC配合圣杯布局</title>
+  <style>
+    html, body { height: 100%; padding: 0; margin: 0; }
+    body {
+      /**
+      // 窗口小于一定值时布局会混乱，因此加一个最小宽度
+      // 阈值 = 左width x 2 + 右width
+      */
+      min-width: 700px;
+      background-color: yellow;
+    }
+    div {
+      /*background-color: #fbabaa;*/
+      height: 100%;
+    }
+
+    .middle, .left, .right {
+      float: left;
+    }
+    .container {
+      height: 100%;
+      /*background-color: #b3b3b3;*/
+      padding: 0 300px 0 200px;
+    }
+    .middle {
+      width: 100%;
+      background-color: #0a67fb;
+    }
+    .left {
+      width: 200px;
+      background-color: red;
+      margin-left: -100%;
+      position: relative;
+      left: -200px;
+      /*position: relative;
+      left: -200px;
+      margin-left: -100%;*/
+    }
+    .right {
+      width: 300px;
+      margin-left: -300px;
+      position: relative;
+      right: -300px;
+      /*margin-left: -300px;
+      position: relative;
+      right: -300px;*/
+      background: greenyellow;
+    }
+
+  </style>
+</head>
+<body>
+
+
+<div class="container">
+  <div class="middle">
+    https://segmentfault.com/a/1190000014546205
+  </div>
+
+  <div class="left">
+    左栏
+  </div>
+
+  <div class="right">
+    右栏
+  </div>
+
+</div>
+
+</body>
+</html>

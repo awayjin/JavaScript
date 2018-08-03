@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+  <style>
+    html, body { height: 100%; padding: 0; margin: 0; }
+    div {
+      background-color: #fbabaa;
+      height: 100%;
+    }
+    .wrapper {
+      display: flex;
+    }
+    .left {
+      width: 200px;
+      background-color: #b3b3b3;
+    }
+    .middle {
+      width: 100%;
+    }
+    .right {
+      width: 150px;
+      background-color: purple;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="left">左栏</div>
+  <div class="middle">
+    <h2>三栏布局</h2>
+    两边定宽，然后中间的width是auto的，可以自适应内容，再加上margin边距，来进行设定
+  </div>
+  <div class="right">右栏</div>
+</div>
+
+</body>
+</html>

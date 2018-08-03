@@ -166,7 +166,7 @@ promise.catch(value => {
   console.log(value)
 })
 ```
-## 11.8 执行器错误
+## 11.8 执行器错误(Executor Errors)
 > 如果执行器内部抛出了错误，那么Promise的拒绝处理函数会被调用
 ```javascript
 var promise = new Promise(function(resolve, reject) {
@@ -176,3 +176,6 @@ promise.catch(function (error) {
   console.log(error.message)
 })
 ```
+
+## 11.9 全局的Promise拒绝处理(Global Promise Rejection Handling)
+> 争议：当一个Promise被拒绝时若缺少拒绝处理函数，静默失败
