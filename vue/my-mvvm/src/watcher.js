@@ -16,11 +16,12 @@ function Watcher(vm, expOrFn, cb) {
   this.cb = cb
   this.depIds = {}
 
-  if (typeof expOrFn === 'function') {
-    this.getter = expOrFn
-  } else {
-    this.getter = this.parseGetter(expOrFn)
-  }
+  // if (typeof expOrFn === 'function') {
+  //   this.getter = expOrFn
+  // } else {
+  //   this.getter = this.parseGetter(expOrFn)
+  // }
+  this.getter = this.parseGetter(expOrFn)
 
   // 此处为了触发属性的getter，从而在dep添加自己，结合Observer更易理解
   this.value = this.get()

@@ -9,6 +9,8 @@
 <body>
 
 <pre>
+  <a href="https://segmentfault.com/a/1190000008010666">Lifecycle</a>
+  <a href="https://juejin.im/post/5b02de32f265da0b9265e655">最新 Lifecycle</a>
   Vue生命周期和钩子函数理解
   1. beforeCreate-组件实例刚被创建，组件属性计算之前，如data属性等
   在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用
@@ -17,6 +19,9 @@
     在实例创建完成后被立即调用。
   在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。
   然而，挂载阶段还没开始，$el 属性目前不可见。
+
+  3. beforeMount-模板编译/挂载之前
+  4. mounted-模板编译/挂载之后(不保证组件已在document中)
 
 </pre>
 
@@ -31,17 +36,38 @@
       message: 'demo.'
     },
     beforeCreate: function () {
-      console.log('%c%O', 'color:red', 'this :' + this) //
+      console.group('beforeCreate 创建前状态===============》')
       console.log('%c%s', 'color:red', 'el :' + this.$el) // undefined
       console.log('%c%s', 'color:red', 'data :' + this.$data) // undefined
       console.log('%c%s', 'color:red', 'message :' + this.message) // undefined
     },
     created: function () {
-      console.group('created  创建完毕状态======')
+      console.group('created  创建完毕状态======>')
       console.log('%c%s', 'color:red', 'el :' + this.$el) // undefined
-      console.log('%c%s', 'color:red', 'data :' + this.$data) // undefined
-      console.log('%c%s', 'color:red', 'message :' + this.message) // undefined
-    }
+      console.log('%c%s', 'color:red', 'data :' + this.$data) // 已被初始化
+      console.log('%c%s', 'color:red', 'message :' + this.message) // 已被初始化
+    },
+    beforeMount: function () {
+      console.group('beforeMount 挂载前状态=======>')
+      console.log('%c%s', 'color:red', 'el :' + this.$el) // 已被初始化
+      console.log(this.$el)
+      console.log('%c%s', 'color:red', 'data :' + this.$data) // 已被初始化
+      console.log('%c%s', 'color:red', 'message :' + this.message) // 已被初始化
+    },
+    mounted: function () {
+      console.group('4.mounted 挂载结束状态=======>')
+      console.log('%c%s', 'color:red', 'el :' + this.$el) // 已被初始化
+      console.log(this.$el)
+      console.log('%c%s', 'color:red', 'data :' + this.$data) // 已被初始化
+      console.log('%c%s', 'color:red', 'message :' + this.message) // 已被初始化
+    },
+    beforeUpdate: function () {
+      console.group('5.beforeUpdate 更新前状态===============》');
+      console.log("%c%s", "color:red","el     : " + this.$el);
+      console.log(this.$el);
+      console.log("%c%s", "color:red","data   : " + this.$data);
+      console.log("%c%s", "color:red","message: " + this.message);
+    },
   })
 </script>
 
