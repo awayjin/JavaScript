@@ -23,10 +23,14 @@
   3. beforeMount-模板编译/挂载之前
   4. mounted-模板编译/挂载之后(不保证组件已在document中)
 
+  5. beforeUpdate-
+
 </pre>
 
 <div id="app">
+  <input type="text" v-model="message">
   {{ message }}
+  <button @click="message=3">更新为3</button>
 </div>
 
 <script>
@@ -36,33 +40,49 @@
       message: 'demo.'
     },
     beforeCreate: function () {
-      console.group('beforeCreate 创建前状态===============》')
+      console.group('1.beforeCreate 创建前状态===============》')
       console.log('%c%s', 'color:red', 'el :' + this.$el) // undefined
       console.log('%c%s', 'color:red', 'data :' + this.$data) // undefined
       console.log('%c%s', 'color:red', 'message :' + this.message) // undefined
     },
     created: function () {
-      console.group('created  创建完毕状态======>')
+      console.group('2.created  创建完毕状态======>')
       console.log('%c%s', 'color:red', 'el :' + this.$el) // undefined
       console.log('%c%s', 'color:red', 'data :' + this.$data) // 已被初始化
       console.log('%c%s', 'color:red', 'message :' + this.message) // 已被初始化
     },
     beforeMount: function () {
-      console.group('beforeMount 挂载前状态=======>')
+      console.group('3.beforeMount 挂载前状态,模板编译/挂载之前=======>')
       console.log('%c%s', 'color:red', 'el :' + this.$el) // 已被初始化
       console.log(this.$el)
       console.log('%c%s', 'color:red', 'data :' + this.$data) // 已被初始化
       console.log('%c%s', 'color:red', 'message :' + this.message) // 已被初始化
     },
     mounted: function () {
-      console.group('4.mounted 挂载结束状态=======>')
+      console.group('4.mounted 挂载结束状态,模板编译/挂载之后(不保证组件已在document中)=======>')
       console.log('%c%s', 'color:red', 'el :' + this.$el) // 已被初始化
       console.log(this.$el)
       console.log('%c%s', 'color:red', 'data :' + this.$data) // 已被初始化
       console.log('%c%s', 'color:red', 'message :' + this.message) // 已被初始化
     },
     beforeUpdate: function () {
-      console.group('5.beforeUpdate 更新前状态===============》');
+      console.group('5.beforeUpdate 更新前状态.组件更新前状态===============》');
+      console.log("%c%s", "color:red","el     : " + this.$el);
+      console.log(this.$el);
+      console.log("%c%s", "color:red","data   : " + this.$data);
+      console.log(this.$data);
+      console.log("%c%s", "color:red","message: " + this.message);
+    },
+    updated: function () {
+      console.group('6.updated 更新完成状态. 组件更新之后===============》');
+      console.log("%c%s", "color: green","el     : " + this.$el);
+      console.log(this.$el);
+      console.log("%c%s", "color: green","data   : " + this.$data);
+      console.log(this.$data);
+      console.log("%c%s", "color: green","message: " + this.message);
+    },
+    beforeDestroy: function () {
+      console.group('7.beforeDestroy 销毁前状态===============》');
       console.log("%c%s", "color:red","el     : " + this.$el);
       console.log(this.$el);
       console.log("%c%s", "color:red","data   : " + this.$data);
