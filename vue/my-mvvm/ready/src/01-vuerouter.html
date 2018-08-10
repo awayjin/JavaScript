@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+  <!--<script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+  <!--<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>-->
+
+  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+  <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <h1>Route</h1>
+  <p>
+    <router-link to="/foo">Go to Foo</router-link>
+    <router-link to="/bar">Go to Bar</router-link>
+    <router-link to="/user/33">Go to Bar</router-link>
+  </p>
+  <p>
+    <router-link to="/user/foo">/user/foo</router-link>
+    <router-link to="/user/dd">/user/dd</router-link>
+    <router-link to="/user/foo/profile">/user/foo/profile</router-link>
+  </p>
+  <router-view></router-view>
+</div>
+
+<script>
+  const Foo = { template: '<div>foo</div>' }
+  const Bar = { template: '<div>Bar</div>' }
+  const User = {
+    template: `
+    <div>
+       <h2>User {{ $route.params.id }}</h2>
+       <router-view></router-view>
+    </div>`
+  }
+
+  const UserProfile = { template: '<div>Profile</div>' }
+  const UserHome = { template: '<div>UserHome</div>' }
+
+  const routes = [
+    { path: '/foo', component: Foo },
+    { path: '/Bar', component: Bar },
+    {
+      // 嵌套路由
+      path: '/user/:id',
+      component: User,
+      children: [
+        { path: '', component: UserHome },
+        {
+          path: 'profile',
+          component: UserProfile
+        }
+      ]
+    }
+  ]
+
+  const router = new VueRouter({
+    routes
+  })
+
+  const vm = new Vue({
+    el: '#app',
+    router
+  })
+</script>
+
+
+<script src="../lib/demo.js"></script>
+</body>
+</html>

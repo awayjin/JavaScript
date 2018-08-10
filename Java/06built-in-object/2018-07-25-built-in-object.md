@@ -32,3 +32,30 @@ String pwd = request.getParameter("pwd");
 %>
 ```
 ## 6.6.2 在作用域中管理属性
+```html
+save.jsp
+<%
+try {
+	int money = 100;
+	int number = 0;
+	request.setAttribute("result", money * number);
+} catch (Exception err) {
+	request.setAttribute("result", "Sorry, The page happen a error.");
+}
+%>
+
+<jsp:forward page="saveVarsDeal.jsp" />
+
+----
+saveVarsDeal.jsp
+
+<%
+String message = request.getAttribute("result").toString();
+%>
+
+<p>
+<%=message %>
+```
+
+## 6.2.3 获取Cookie
+> 通过cookie可以标识用户身份，记录用户名和密码，跟踪重户用户

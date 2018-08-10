@@ -23,14 +23,20 @@
   3. beforeMount-模板编译/挂载之前
   4. mounted-模板编译/挂载之后(不保证组件已在document中)
 
-  5. beforeUpdate-
+  5. beforeUpdate-组件更新前状态
+  6. updated-组件更新之后
 
+
+  beforeCreate : 举个栗子：可以在这加个loading事件
+  created ：在这结束loading，还做一些初始化，实现函数自执行
+  mounted ： 在这发起后端请求，拿回数据，配合路由钩子做一些事情
+  beforeDestroy： 你确认删除XX吗？ destroyed ：当前组件已被删除，清空相关内容
 </pre>
 
 <div id="app">
   <input type="text" v-model="message">
   {{ message }}
-  <button @click="message=3">更新为3</button>
+  <button @click="changeMessage">更新为3</button>
 </div>
 
 <script>
@@ -39,16 +45,24 @@
     data: {
       message: 'demo.'
     },
+    methods: {
+      changeMessage () {
+        this.message = 99
+      }
+    },
     beforeCreate: function () {
+      this.inintPro = 33
       console.group('1.beforeCreate 创建前状态===============》')
       console.log('%c%s', 'color:red', 'el :' + this.$el) // undefined
       console.log('%c%s', 'color:red', 'data :' + this.$data) // undefined
       console.log('%c%s', 'color:red', 'message :' + this.message) // undefined
+      console.log('%c%s', 'color:red', 'method changeMessage :' + this.changeMessage) // undefined
     },
     created: function () {
       console.group('2.created  创建完毕状态======>')
       console.log('%c%s', 'color:red', 'el :' + this.$el) // undefined
       console.log('%c%s', 'color:red', 'data :' + this.$data) // 已被初始化
+      console.log(this.$data) // 已被初始化
       console.log('%c%s', 'color:red', 'message :' + this.message) // 已被初始化
     },
     beforeMount: function () {
@@ -56,6 +70,7 @@
       console.log('%c%s', 'color:red', 'el :' + this.$el) // 已被初始化
       console.log(this.$el)
       console.log('%c%s', 'color:red', 'data :' + this.$data) // 已被初始化
+      console.log(this.$data) // 已被初始化
       console.log('%c%s', 'color:red', 'message :' + this.message) // 已被初始化
     },
     mounted: function () {
@@ -63,6 +78,7 @@
       console.log('%c%s', 'color:red', 'el :' + this.$el) // 已被初始化
       console.log(this.$el)
       console.log('%c%s', 'color:red', 'data :' + this.$data) // 已被初始化
+      console.log( this.$data) // 已被初始化
       console.log('%c%s', 'color:red', 'message :' + this.message) // 已被初始化
     },
     beforeUpdate: function () {

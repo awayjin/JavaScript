@@ -212,12 +212,13 @@ var compileUtil = {
 
   // 3.7.4 _getVMVal- split('.')
   _getVMVal: function (vm, exp) {
-    var val = vm
-    exp = exp.split('.') // ["someStr"]
-    exp.forEach(function (key) {
-      val = val[key] // vm['someStr]
-    })
-    return val
+    // var val = vm
+    // exp = exp.split('.') // ["someStr"]
+    // exp.forEach(function (key) {
+    //   val = val[key] // vm['someStr]
+    // })
+    // return val
+    return vm[exp]
   },
   _setVMVal: function (vm, exp, value) {
     vm[exp] = value

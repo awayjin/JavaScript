@@ -37,10 +37,9 @@ Watcher.prototype = {
   },
   get: function (exp) {
     Dep.target = this // 将当前订阅者指向自己
-    // var value = this.vm[exp]
-    var value = this.getter.call(this.vm, this.vm) // 触发getter，添加自己到属性订阅器中
+    var value = this.vm[exp]
+    // var value = this.getter.call(this.vm, this.vm) // 触发getter，添加自己到属性订阅器中
     // console.log('exp:' + exp)
-    // console.log(this.vm[exp])
     Dep.target = null // 添加完毕，重置
     return value
   },
@@ -54,7 +53,7 @@ Watcher.prototype = {
     this.run()
   },
   run: function () {
-    var value = this.get() // 取到最新值
+    var value = this.get(this.expOrFn) // 取到最新值
     var oldValue = this.value
     if (value !== oldValue) {
       this.value = value
