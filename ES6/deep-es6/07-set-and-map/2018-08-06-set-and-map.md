@@ -202,4 +202,63 @@ console.log(map.has(element)) // false
 console.log(map.get(element)) // undefined
 ```
 
+## 7.6 对象的私有数据
+> Weak Map一个实际应用就是在对象实例中存储私有数据.
+> 在ES6中对象的所有属性都是公开的，若想让数据对于对象自身可访问，而在其他条件不可访问
+```javascript
+function Person(name) {
+  // 下划线私有属性的公共约定
+  this._name = name
+}
+Person.prototype.getName = function() {
+  return this._name
+}
+```
+
+### 
+```javascript
+var obj = {};
+// 不可枚举、不可配置、不可写入
+Object.defineProperty(obj, '_id', { value: 4 })
+Object.getOwnPropertyDescriptor(obj, '_id') // 默认都是false {value: 4, writable: false, enumerable: false, configurable: false}
+
+var Person = (function () {
+var privateData = [] // 永不会消失
+var privateId = 0
+
+function Person(name) {
+  Object.defineProperty(this, '_id', { value: privateId++ })
+
+  privateData[this._id] = {
+    name: name
+  }
+}
+
+Person.prototype.getName = function () {
+  return privateData[this._id].name
+}
+
+})()
+```
+
+### 7.6.2 ES6私有数据
+```javascript
+  // WeakMap保存私有数据
+  let Person = (function () {
+    let privateData = new WeakMap()
+    
+    function Person(name) {
+      privateData.set(this, { name: name })
+    }
+
+    Person.prototype.getName = function () {
+      return privateData.get(this).name
+    }
+
+    return Person
+  })()
+```
+
+### 7.6.3 Weak Map的用法与局限性
+> 当决定要使用Weak Map还是Map时，首先考虑因素在于你是否只想使用对象类型的键
 

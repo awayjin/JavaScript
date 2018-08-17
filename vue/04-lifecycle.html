@@ -9,7 +9,7 @@
 <body>
 
 <pre>
-  <a href="https://segmentfault.com/a/1190000008010666">Lifecycle</a>
+  <a href="https://segmentfault.com/a/1190000011381906">Lifecycle</a>
   <a href="https://juejin.im/post/5b02de32f265da0b9265e655">最新 Lifecycle</a>
   Vue生命周期和钩子函数理解
   1. beforeCreate-组件实例刚被创建，组件属性计算之前，如data属性等
@@ -45,10 +45,15 @@
     data: {
       message: 'demo.'
     },
+    template: `<div>template: {{ message }}</div>`,
     methods: {
       changeMessage () {
         this.message = 99
       }
+    },
+    // render-> 优于template -> outerHTML
+    render3: function (createElement) {
+      return createElement('h1', 'this is a createElement')
     },
     beforeCreate: function () {
       this.inintPro = 33
@@ -104,6 +109,13 @@
       console.log("%c%s", "color:red","data   : " + this.$data);
       console.log("%c%s", "color:red","message: " + this.message);
     },
+    destroyed: function () {
+      console.group('8.销毁完毕')
+      console.log("%c%s", "color:red","el     : " + this.$el);
+      console.log(this.$el);
+      console.log("%c%s", "color:red","data   : " + this.$data);
+      console.log("%c%s", "color:red","message: " + this.message);
+    }
   })
 </script>
 

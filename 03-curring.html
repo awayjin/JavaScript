@@ -8,8 +8,25 @@
   <title>Title</title>
 </head>
 <body>
-
+<a href="https://www.zhangxinxu.com/wordpress/2013/02/js-currying/">currying</a>
+<a href="https://juejin.im/post/5af13664f265da0ba266efcf">柯里化</a>
+<a href="https://juejin.im/post/5af13664f265da0ba266efcf">ES6 箭头函数 柯里化</a>
 <script>
+  /**
+   *
+   * func: 创建已经设置好了一个或多个参数的函数. 也称部分求值（Partial Evaluation）
+   *
+   * 柯里化（Currying），又称部分求值（Partial Evaluation），
+   * 是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，
+   * 并且返回接受余下的参数而且返回结果的新函数的技术。
+   *
+   *    *  “柯里化”就是使函数理解并处理部分应用
+   *
+   *  调用另一个函数，并为他传入要柯里化的函数和必要参数
+   *  curry主要工作就是将被返回函数的参数进行排序
+   *  1. 参数复用；2. 提前返回；3. 延迟计算/运行。
+   * */
+
   // 函数柯里化
   function curry(fn) {
     var args = Array.prototype.slice.call(arguments, 1)
@@ -19,6 +36,53 @@
       return fn.apply(null, finalArgs)
     }
   }
+
+  function add(num1, num2) {
+    return num1 + num2
+  }
+
+  var curriedAdd = curry(add, 5)
+  // console.log(curriedAdd)
+  console.log(curriedAdd(10))
+</script>
+
+<script>
+  // 用户排序
+  const has = p => o => o.hasOwnProperty(p)
+  const sortBy = p => (a, b) => a[p] > b[p]
+
+  let users = [
+    { name: 'Qian', age: 27, pets : ['Bao'], title : 'Consultant' },
+    { name: 'Zeynep', age: 19, pets : ['Civelek', 'Muazzam'] },
+    { name: 'Yael', age: 52, title : 'VP of Engineering'}
+  ]
+  result = users.filter(has('pets')).sort(sortBy('age'))
+  
+  // curring
+  !function () {
+    function add(x, y) {
+      return (x + y)
+    }
+
+    // 重新编码函数本身的方式来实现 Currying 化
+    function curryAdd(x) {
+      return function (y) {
+        return x + y
+      }
+    }
+    console.log(curryAdd(3)(5) === 8)
+
+    // 函数柯里化
+    // 使用作用域来保存上一次传进来的参数
+    function curring(fn, ...args1) {
+      return function (...args2) {
+        return fn(...arg1, ...arg2)
+      }
+    }
+
+    var increment = curring(add, 1)
+    console.log(increment(4) === 5)
+  }()
 </script>
 
 </body>
