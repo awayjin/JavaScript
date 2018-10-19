@@ -11,6 +11,15 @@
 <a href="https://www.zhangxinxu.com/wordpress/2013/02/js-currying/">currying</a>
 <a href="https://juejin.im/post/5af13664f265da0ba266efcf">柯里化</a>
 <a href="https://juejin.im/post/5af13664f265da0ba266efcf">ES6 箭头函数 柯里化</a>
+
+<div data-name="name" onclick="{() => handleClick(data)}">111</div>
+<script>
+  function handleClick(args) {
+    console.log(111)
+    console.log(args)
+  }
+</script>
+
 <script>
   /**
    *
@@ -76,12 +85,30 @@
     // 使用作用域来保存上一次传进来的参数
     function curring(fn, ...args1) {
       return function (...args2) {
-        return fn(...arg1, ...arg2)
+        return fn(...args1, ...args2)
       }
     }
 
     var increment = curring(add, 1)
-    console.log(increment(4) === 5)
+    console.log(increment(4) === 5) // true
+
+    // Loadash柯里化
+    function trueCurrying(fn, ...args) {
+      if (args.length >= fn.length) {
+        return fn(...args)
+      }
+      return function (...args2) {
+        return trueCurrying(fn, ...args, ...args2)
+      }
+    }
+
+    // 柯里化使用场景
+    /**
+     * 1.参数复用
+     *  固定不变的参数，实现参数复用是 Currying 的主要用途之一
+     * 2.延迟执行
+     *   onClick={handleOnClick}
+     */
   }()
 </script>
 

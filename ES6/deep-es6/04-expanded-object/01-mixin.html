@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // mixin
+  function mixin(receiver, supplier) {
+    Object.keys(supplier).forEach(key => {
+      receiver[key] = supplier[key]
+    })
+    return receiver
+  }
+
+  function EventTarget() {
+    
+  }
+  EventTarget.prototype = {
+    constructor: EventTarget,
+    emit (args) {
+      console.log('emit:' + args)
+    },
+    on () {
+      console.log('on')
+    }
+  }
+
+  var myObject = {}
+  mixin(myObject, EventTarget.prototype)
+
+  myObject.emit('SomethingChanged')
+
+  var obj = {}
+  Object.assign(obj, EventTarget.prototype)
+  obj.emit('Object.assign value')
+
+</script>
+
+</body>
+</html>
