@@ -1,0 +1,66 @@
+body {
+	width:3.75rem;
+	height:6.67rem;
+	background:rgba(82,167,235,1);
+}
+.payhtml {
+
+	padding-top: 1rem;
+}
+.bottom_line .choose{
+	display: block;
+}
+.pay-back {
+	text-align: center;
+	color: #fff;
+	margin: 0.1rem;
+	font-size: 0.02rem;
+}
+.pay-back  .back {
+	display: block;
+	color: #fff;
+}
+.pay_content {
+	text-align: center;
+	position: relative;
+	margin: .98rem .14rem .33rem .14rem;
+	width:3.47px;
+	height:4.36px;
+	background:rgba(255,255,255,1);
+	border-radius:.09px;
+}
+
+}
+.pay_content::before {
+			content: "";
+			background-color: #fff;
+            border-radius: 100%;
+			width: .13rem;
+			height: .13rem;
+            position: absolute;
+            left: 49%;
+            top: -20%;
+
+		}
+.pay_content::after {
+			content: "";
+			display: block;
+			width: .1rem;
+            height: .1rem;
+            background: url(./images/timg-21.png) no-repeat;
+            background-size: 100%;
+            position: absolute;
+            left: 49%;
+            top: -13%;
+		}
+.confirm_payment {
+			display: block;
+			border-radius: .1rem;
+			background-color: #fff;	
+			width: .8rem;
+			margin: 0 auto;
+			color: skyblue;
+			text-align: center;
+			padding: .01rem 0 .01rem 0;
+			cursor: pointer;
+}

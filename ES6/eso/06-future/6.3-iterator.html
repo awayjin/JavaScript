@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assert.css">
+  <script src="../assert.js"></script>
+  <title>对迭代器进行迭代</title>
+</head>
+<body>
+
+<script>
+  // 定义生成器
+  function* WeaponGenerator() {
+    yield 'Kat'
+    yield 'Wild'
+    yield null
+  }
+
+  // 调用生成器得到一个迭代器，控制生成器的执行
+  const weaponIterator = WeaponGenerator()
+
+  let item
+  while (!(item = weaponIterator.next()).done) {
+    assert(item.value !== null, item.value)
+    // assert(true, item.value)
+    // assert(!item.done, item.value)
+  }
+
+  const weaponIterator2 = WeaponGenerator()
+  for (let item of weaponIterator2) {
+    console.log(item)
+    assert(item !== null, item)
+  }
+
+  var arr = ['a', 'b', 'c', 'd']
+  assert(true, 'for-of------------------------------')
+  // for-of
+  for (let item of arr) {
+    if (item === 'b') break
+    assert(item !== null,  item)
+  }
+  assert(true, 'for-in------------------------------')
+  let obj = { a: 1, b: 2}
+  // for-in
+  for (let item in arr) {
+    if (item === 2) break
+    assert(item !== null,   item + ', val:' + arr[item])
+  }
+
+  assert(true, 'forEach------------------------------')
+  // forEach没法从函数体返回
+  arr.forEach(function (item) {
+    if (item === 2) return
+    assert(item !== null,  item)
+  })
+</script>
+
+</body>
+</html>

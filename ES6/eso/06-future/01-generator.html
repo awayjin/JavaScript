@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assert.css">
+  <script src="../assert.js"></script>
+  <title>使用生成器函数</title>
+</head>
+<body>
+
+<script>
+  function* WeaponGenerator() {
+    yield 'Kat'
+    yield 'Wak'
+  }
+  
+  for (let weapon of WeaponGenerator()) {
+    console.log(weapon)
+    assert(weapon !== undefined, weapon)
+  }
+</script>
+
+</body>
+</html>
