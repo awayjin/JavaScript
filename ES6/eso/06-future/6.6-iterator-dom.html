@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assert.css">
+  <script src="../assert.js"></script>
+  <title>使用迭代器遍历DOM</title>
+</head>
+<body>
+
+
+
+<section class="d">
+  <bar id="quadrangle">四边形 <div>33</div></bar>
+  <h3 id="circle">圆</h3>
+  <div id="triangle">三角形</div>
+</section>
+
+<script>
+  // 生成器实现-优雅
+  function* DOMGenerator(element) {
+    yield element
+    element = element.firstElementChild
+    console.log(element)
+    while (element) {
+      yield* DOMGenerator(element)
+      element = element.nextElementSibling
+    }
+  }
+  var dom = document.getElementsByClassName('d')[0]
+//  for (let element of DOMGenerator(dom)) {
+//    assert(element !== null, element.nodeName)
+//  }
+  var domIterator = DOMGenerator(dom)
+  assert(domIterator !== null, dom.nodeName)
+  assert(1, '-----------------------')
+
+  // 回调函数
+  function traverseDOM(element, callback) {
+    callback(element) // 用回调函数处理当前节点
+    element = element.firstElementChild
+    while (element) {
+      traverseDOM(element, callback)
+      element = element.nextElementSibling
+    }
+  }
+
+  const subTree = document.querySelector('section')
+  traverseDOM(subTree, function (element) {
+    assert(element !== null, element.nodeName)
+  })
+</script>
+
+</body>
+</html>
