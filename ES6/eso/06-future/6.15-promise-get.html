@@ -42,14 +42,11 @@
       xhr.send()
     })
   }
- // 只关心第一个成功或失败的Promise
-  Promise.race([
-    getJSON('data3/hanzo.json'),
-    getJSON('data/yoshi.json')
-  ]).then(data => {
+
+  getJSON('data/ninjas.json').then(data => {
     console.log(data)
-    assert(data !== null, data.name)
-  }).catch(error => fail('Failure.' + error))
+    assert(data !== null, 'Data obtained.')
+  }).catch(e => fail('Should not be here:' + e))
 </script>
 
 </body>

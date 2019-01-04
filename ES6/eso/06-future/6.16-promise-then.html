@@ -42,14 +42,27 @@
       xhr.send()
     })
   }
- // 只关心第一个成功或失败的Promise
-  Promise.race([
-    getJSON('data3/hanzo.json'),
-    getJSON('data/yoshi.json')
-  ]).then(data => {
-    console.log(data)
-    assert(data !== null, data.name)
-  }).catch(error => fail('Failure.' + error))
+
+  // 使用then链式调用promise
+  getJSON('data/ninjas.json')
+    .then(data => {
+      getJSON(data[0].missionsUrl)
+    })
+      .then(data => {
+        getJSON(data[0].detailsUrl)
+      })
+      .then(mission => assert(mission !== null, 'mission Obtained'))
+      .catch(e => fail('An error has occurred:' + e))
+
+  // Promise.all 等待多个Promise
+  Promise.all([
+    getJSON('data/ninjas.json'),
+    getJSON( 'data/yoshi.json'),
+  ]).then(results => {
+    console.log(results)
+  }).catch(error => {
+    fail('A problem in carrying out our plan!' + error)
+  })
 </script>
 
 </body>
