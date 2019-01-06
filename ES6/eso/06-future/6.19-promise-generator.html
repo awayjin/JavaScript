@@ -20,6 +20,18 @@
 </section>x
 
 <script>
+  async(function* () {
+    try {
+      const ninjas = yield getJSON('data/ninjas.json')
+      const missons = yield getJSON(ninjas[0].missionsUrl)
+      const missonsDescription = yield getJSON(missons[0].detailsUrl)
+      assert(missonsDescription !== null, missonsDescription.target)
+    } catch (e) {
+      console.log('e:')
+      console.log(e)
+    }
+  })
+
   function getJSON(url) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
@@ -42,14 +54,27 @@
       xhr.send()
     })
   }
- // 只关心第一个成功或失败的Promise
-  Promise.race([
-    getJSON('data3/hanzo.json'),
-    getJSON('data/yoshi.json')
-  ]).then(data => {
-    console.log(data)
-    assert(data !== null, data.name)
-  }).catch(error => fail('Failure.' + error))
+
+  function async(generator) {
+    // 创建迭代器，进而我们可以控制生成器
+    var iterator = generator();
+    
+    function handle(iteratorResult) {
+      if (iteratorResult.done) { return; }
+
+      const iteratorValue = iteratorResult.value
+
+      if (iteratorValue instanceof Promise) {
+        iteratorValue.then(res => handle(iterator.next(res)))
+          .catch(err => iterator.throw(err))
+      }
+    }
+    try {
+      handle(iterator.next())
+    } catch (e) {
+      iterator.throw(e) // 重启生成器的执行
+    }
+  }
 </script>
 
 </body>
