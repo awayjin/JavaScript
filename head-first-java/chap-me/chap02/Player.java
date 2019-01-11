@@ -1,3 +1,4 @@
+
 public class Player {
     int number = 0; // 要被猜的数字
     public void guess() {

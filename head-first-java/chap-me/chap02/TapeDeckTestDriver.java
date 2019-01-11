@@ -1,6 +1,6 @@
-public class TapeTeckTestDriver {
-    public static void mainb(String[] args) {
-        TapeTeck t = new TapeTeck();
+public class TapeDeckTestDriver {
+    public static void main(String[] args) {
+        TapeDeck t = new TapeDeck();
         t.canRecord = true;
         t.playTape();
 
