@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.21/vue.js"></script>
+</head>
+<body>
+
+<div id="vue">
+  <section> {{ blogSection }} </section>
+  <anchored-heading :level="1">
+    <h3>h1.Hello-world.</h3>
+  </anchored-heading>
+  <Anchored-heading :level="2"> 1-h2 text. <span>111</span></Anchored-heading>
+  <anchored-heading :level="3">3</anchored-heading>
+
+  <my-anchored-heading :level="1">1</my-anchored-heading>
+  <my-anchored-heading :level="2">2 <span>22</span></my-anchored-heading>
+</div>
+
+
+<script>
+  var getChildrenTextContent = function (children) {
+    return children.map(function (node) {
+      return node.children
+        ? getChildrenTextContent(node.children)
+        : node.text
+    }).join('')
+  }
+
+  Vue.component('anchored-heading', {
+    render: function (createElement) {
+      console.log(this.$slots.default)
+      // 创建 kebab-case 风格的ID
+      var headingId = getChildrenTextContent(this.$slots.default)
+        .toLowerCase()
+        .replace(/\W+/g, '-')
+        .replace(/(^\-|\-$)/g, '')
+      console.log(headingId)
+
+      return createElement(
+        'h' + this.level,
+        [
+          createElement('a', {
+            attrs: {
+              name: headingId,
+              href: '#' + headingId
+            }
+          }, this.$slots.default)
+        ]
+      )
+    },
+    props: {
+      level: {
+        type: Number,
+        required: true
+      }
+    }
+  })
+
+
+  var getChildText = function (children) {
+      return children.map(function (node) {
+        return node.children
+          ? getChildText(node.children)
+          : node.text
+      })
+  }
+  Vue.component('my-anchored-heading', {
+    props: {
+      level: {
+        type: Number,
+        require: true
+      }
+    },
+    render: function (createElement) {
+      // var headingId = getChildText(this.$slots.default)
+      var headingId = this.$slots.default.map(node => {
+        return node.text
+      })
+
+      return createElement(
+        'div',
+        {
+          'class': {
+            foo: true,
+            bar: false
+          },
+          style: {
+            color: 'red',
+            fontSize: '14px'
+          }
+        },
+        [
+          // '文字',
+          createElement('a', {
+            attrs: {
+              name: headingId,
+              href: '#' + headingId
+            }
+          }, this.$slots.default)
+        ],
+        // this.$slots.default
+      )
+      // return createElement('h' + this.level, this.$slots.default)
+    }
+  })
+
+  new Vue({
+    el: '#vue',
+    data: { blogSection: 22 },
+    // template: '<h3>33</h3>',
+    // render: function (createElement) {
+    //   return createElement('section', this.blogSection)
+    // }
+  })
+
+
+</script>
+
+
+</body>
+</html>

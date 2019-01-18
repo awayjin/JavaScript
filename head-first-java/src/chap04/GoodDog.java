@@ -4,7 +4,7 @@ package chap04;
  * Created by jinw01 on 2019/1/11.
  */
 public class GoodDog {
-    private int size;
+    private int size; // 实例变量
 
     public int getSize (){
         return size;
@@ -33,5 +33,9 @@ public class GoodDog {
         two.bark();
         one.setSize(10);
         one.bark();
+
+        // 局部变量
+        int x;
+//        int y = x + 1;
     }
 }

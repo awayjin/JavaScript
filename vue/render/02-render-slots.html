@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.21/vue.js"></script>
+</head>
+<body>
+
+<div id="vue">
+  <blog-post>
+    <h1 slot="header">
+      About Me
+      <nav slot="nav">'nav text'</nav>
+    </h1>
+
+    <p >Here's some page content, which will be included in vm.$slots.default, because it's not inside a named slot.</p>
+
+    <p slot="footer">
+      Copyright 2016 Evan You
+    </p>
+
+    <p>If I have some content down here, it will also be included in vm.$slots.default.</p>.
+    <section> section default </section>
+  </blog-post>
+  
+  <blog-object>
+      <h1 slot="title"> h1 title</h1>
+  </blog-object>
+</div>
+
+<script>
+
+  // compoent slots
+  Vue.component('blog-post', {
+    render: function (createElement) {
+      let header = this.$slots.header
+      let body = this.$slots.default
+      let nav = this.$slots.nav
+      let footer = this.$slots.footer
+      return createElement('div', [
+        createElement('header', header),
+        createElement('main', body),
+        createElement('h1', 'slot text'),
+        createElement('nav', nav),
+        createElement('footer', footer)
+      ])
+    }
+  })
+
+  // reander object
+  Vue.component('blog-object', {
+    render: function (createElement) {
+      let title = this.$slots.title
+      return createElement('div',
+        {
+          'class': {
+            foo: true,
+            bar: false
+          }
+        },
+        [
+          createElement('header', title),
+        ]
+      )
+    }
+  })
+
+  new Vue({
+    el: '#vue',
+    data: { blogSection: 22 },
+    // template: '<h3>33</h3>',
+    // render: function (createElement) {
+    //   return createElement('section', this.blogSection)
+    // }
+  })
+
+
+</script>
+
+
+</body>
+</html>

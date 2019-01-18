@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.21/vue.js"></script>
+</head>
+<body>
+
+<div id="vue">
+  <section> {{ blogSection }} </section>
+  <anchor-heading :level="1"><a href="#hello-world" name="hello-world">h1.Hello-world.</a></anchor-heading>
+  <anchor-heading :level="2"> h2.</anchor-heading>
+</div>
+<script type="text/vx-template" id="anchored-heading-template">
+  <h1 v-if="level === 1">
+    <slot></slot>
+  </h1>
+  <h2 v-else-if="level === 2">
+    <slot></slot>
+  </h2>
+</script>
+
+<script>
+  // h1-h6
+  // Vue.component('anchor-heading', {
+  //   template: "#anchored-heading-template",
+  //   props: {
+  //     level: {
+  //       type: Number,
+  //       required: true
+  //     }
+  //   }
+  // })
+
+  Vue.component('anchor-heading', {
+    render: function (createElement) {
+      return createElement(
+        'h' + this.level,
+        this.$slots.default
+      )
+    },
+    props: {
+      level: {
+        type: Number,
+        requried: true
+      }
+    }
+  })
+
+  new Vue({
+    el: '#vue',
+    data: { blogSection: 22 },
+    // template: '<h3>33</h3>',
+    // render: function (createElement) {
+    //   return createElement('section', this.blogSection)
+    // }
+  })
+
+
+</script>
+
+
+</body>
+</html>

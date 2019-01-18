@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+
+<ul>
+  <li>
+    <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map" target="_blank">
+      map
+    </a>
+  </li>
+</ul>
+
+<script>
+  console.log('2. map------------------')
+
+  // map
+  /**
+   * 1. map
+   *
+   var new_array = arr.map(function callback(currentValue[, index[, array]]) {
+      // Return element for new_array }[,
+   thisArg])
+   *
+   */
+  var mapArray = [11, 22, 33]
+  var thisArg = this
+  mapArray.map(function callback(item, index, array)  {
+    console.log(index)
+    console.log(array)
+    console.log(thisArg)
+    return item * 3
+  }, thisArg)
+
+  console.log('2. every------------------')
+  /*
+    2. every-方法测试数组的所有元素是否都通过了指定函数的测试
+  */
+  var everyArray = [4, 5, 6]
+  var everyResult = everyArray.every(function (value, index, array) {
+    console.log(value)
+    console.log(index)
+    console.log(array)
+    console.log(thisArg)
+      return value >= 5
+  }, thisArg)
+  console.log(everyResult)
+
+  /*
+  * 3. some-方法测试是否至少有一个元素通过由提供的函数实现的测试
+  * */
+  console.log('3 some.------------------')
+  var someArray = [7, 8, 9]
+  var someResult = someArray.some(function (value, index, array) {
+    console.log(value)
+    console.log(index)
+    console.log(array)
+    console.log(thisArg)
+    return value > 8
+  }, thisArg)
+  console.log(someResult)
+
+  console.log('4. filter------------------')
+  /*
+ * 4. filter-方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素
+ * */
+  var filterArray = [7, 8, 9]
+  var filterResult = filterArray.filter(function (value, index, array) {
+    console.log(value)
+    console.log(index)
+    console.log(array)
+    console.log(thisArg)
+    return value > 8
+  }, thisArg)
+  console.log(filterResult)
+
+  // 5. 对数组中的每一项运行给定函数。这个方法没有返回值。
+</script>
+</body>
+</html>
