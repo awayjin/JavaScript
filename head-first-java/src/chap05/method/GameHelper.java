@@ -1,5 +1,7 @@
 package chap05.method;
 import java.io.*;
+import java.util.ArrayList;
+
 /**
  * Created by jinw01 on 2019/1/15.
  */
@@ -17,5 +19,10 @@ public class GameHelper {
             System.out.println("IOException:" + e);
         }
         return inputLine;
+    }
+
+    public ArrayList<String> placeDotCom(int num) {
+        ArrayList<String> alphaCells = new ArrayList<String>();
+        return alphaCells;
     }
 }
