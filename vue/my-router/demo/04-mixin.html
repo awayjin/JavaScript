@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /**
+   * vm.$options实例属性
+   * 用于当前 Vue 实例的初始化选项。需要在选项中包含自定义属性时会有用处
+   *
+   * 混入 (mixins) 是一种分发 Vue 组件中可复用功能的非常灵活的方式。
+   *
+   */
+
+  // 定义一个混入对象
+  var myMixin = {
+    data: function () {
+      return {
+        message: 'hello',
+        foo: 'abc',
+        bar: 'abc-bar'
+      }
+    },
+    created: function () {
+      this.hello()
+    },
+    methods: {
+      hello: function () {
+        console.log('hello from mixin!')
+      }
+    }
+  }
+
+  // 定义一个使用混入对象的组件
+  var Component = Vue.extend({
+    mixins: [myMixin]
+  })
+
+  var component = new Component()
+
+  Vue.mixin({
+    created: function () {
+      console.log('前1')
+      var myOption = this.$options.myOption
+      if (myOption) {
+        console.log(myOption)
+      }
+    }
+  })
+
+  // 选项合并，在和组件的数据发生冲突时以组件数据优先
+  new Vue({
+    mixins: [myMixin],
+    data: function () {
+      return {
+        message: 'goodbye',
+        bar: 'def，优先'
+      }
+    },
+    created: function () {
+      console.log('后1')
+      console.log(this.$data)
+    },
+    myOption: 'Hello!.'
+  })
+</script>
+
+
+<script>
+  let SerializableMixin = {
+    serialize () {
+      return JSON.stringify(this)
+    }
+  }
+
+  let AreaMixin = {
+    getArea () {
+      return this.length * this.width
+    }
+  }
+
+  // 接受混入对象的任意数量的参数
+  function mixin(...mixins) {
+    var base = function () {}
+    // 将每个混入对象的属性都赋值到新函数的原型上
+    Object.assign(base.prototype, ...mixins)
+    console.log(base.prototype)
+    return base
+  }
+
+  class Square extends mixin(AreaMixin, SerializableMixin) {
+    constructor(length) {
+      // 使用了extends就得使用super
+      super()
+      this.length = length
+      this.width = length
+    }
+  }
+
+  var x = new Square(3)
+  console.log(x.getArea()) // 9
+  console.log(x.serialize()) // "{ "length": 3, "width": 3 }"
+
+</script>
+
+
+<script>
+  var arr = [11, 22, 33, 88, 55, 44]
+  // 扩展运算符
+  console.log([...arr]);
+  console.log(Math.max(...arr, 99)); // 99
+
+  // 剩余参数
+  function restFunc(a, ...b) {
+    console.log('剩余参数');
+    var obj = {}
+    Object.assign(obj, ...b)
+    console.log(a + '...b:' + b)
+    console.log(obj)
+  }
+  restFunc(11, {a: 2}, {a:2, b: 3})
+</script>
+
+</body>
+</html>

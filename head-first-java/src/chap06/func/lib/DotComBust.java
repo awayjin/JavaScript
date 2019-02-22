@@ -1,6 +1,6 @@
 package chap06.func.lib;
 
-import chap05.method.GameHelper;
+//import chap05.method.GameHelper;
 //import java.util.*;
 import java.util.ArrayList;
 
@@ -34,7 +34,8 @@ public class DotComBust {
 
         for(DotCom dotComToSet: dotComsList) { // 对list中所有的 DotCom重复
             ArrayList<String> newLocation = helper.placeDotCom(3); // 要求DotCom的位置
-            dotComToSet.setLocationCells(newLocation); //调用这个DotCom的setter方法来指派刚取得的位置
+            System.out.println("newLocation:" + newLocation);
+            dotComToSet.setLocationCells(newLocation); // 调用这个DotCom的setter方法来指派刚取得的位置
         } // close for loop
 //        ArrayList<String> list = new ArrayList();
     }  // close setUpGame method

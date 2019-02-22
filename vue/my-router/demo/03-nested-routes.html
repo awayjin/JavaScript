@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>嵌套路由</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+  <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <router-link to="/">index</router-link>
+  <router-link to="/about">about</router-link>
+  <router-link to="/about/me/me">about me</router-link>
+  <router-link to="/about/me/us.;o">about us</router-link>
+
+  <router-view></router-view>
+</div>
+
+<script>
+  const About = {
+    // 嵌套路由
+    template: `
+      <div>
+        <div class="about">about</div>
+        <router-view></router-view>
+      </div>
+    `
+  }
+  const AboutMe = {
+    template: '<div>about me</div>'
+  }
+  const AboutUs = {
+    template: '<div>about us.</div>'
+  }
+
+  const router = new VueRouter({
+    routes: [
+      {
+        path: '/',
+        component: {
+          template: '<div>index</div>'
+        }
+      },
+      {
+        path: '/about/:id',
+        component: About,
+        children: [
+          {
+            // 当 /about/:id/me 匹配成功，
+            // AboutMe 会被渲染在 About 的 <router-view> 中
+            path: 'me',
+            component: AboutMe
+          },
+          {
+            path: 'us',
+            component: AboutUs
+          }
+        ] // close about routes
+      } // close about
+    ] // close outer routes
+  })
+  new Vue({
+    router,
+    el: '#app'
+  })
+</script>
+
+</body>
+</html>

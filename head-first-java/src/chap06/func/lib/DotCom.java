@@ -18,7 +18,7 @@ public class DotCom {
         locationCells = loc;
     }
 
-    // 设置名
+    // 设置名称
     public void setName(String n) {
         name = n;
     }

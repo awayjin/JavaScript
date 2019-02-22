@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Title</title>
-    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Title</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
 
 </head>
 <body>
@@ -13,26 +13,27 @@
 </div>
 <script>
 
-    // let myPlugin = {
-    //     install () {
-    //         Vue.prototype.cusEle = () => {
-    //             console.log(33)
-    //         };
-    //     }
-    // }
-    // Vue.use(myPlugin)
+  // let myPlugin = {
+  //     install () {
+  //         Vue.prototype.cusEle = () => {
+  //             console.log(33)
+  //         };
+  //     }
+  // }
+  // Vue.use(myPlugin)
 
-    Vue.prototype.cusEle = () => {
-        console.log(33)
-    };
+  Vue.prototype.cusEle = () => {
+    console.log(33)
+  };
 
-    const vue = new Vue({
-        render: function (c) {
-            c('div')
-        }
-    })
-    vue.$mount('#app')
-    vue.cusEle()
+  const vue = new Vue({
+    render: function (c) {
+      return c('div', '22, This"s many texts')
+    },
+    template: 'it is not replace.'
+  })
+  vue.$mount('#app')
+  vue.cusEle()
 </script>
 
 </body>
