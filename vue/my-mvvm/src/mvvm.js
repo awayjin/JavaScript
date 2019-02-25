@@ -20,6 +20,7 @@ function MVVM (options) {
   // 3.0 实现数据监听器Observer,监听所有属性，如变动拿到最新值通知订阅者
   observe(data, this)
 
+  // 4
   this.$compile = new Compile(options.el || document.body, this)
 }
 

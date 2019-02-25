@@ -16,6 +16,9 @@
   <p>
     <router-link to="/index">Go To index</router-link>
     <router-link to="/about">Go To About</router-link>
+    <router-link to="/" tag="li">
+      <a >Go To '/'</a>
+    </router-link>
   </p>
   <!-- 路由出口, 路由匹配到的组件将渲染在这里 -->
   <router-view></router-view>
@@ -34,13 +37,14 @@
   // 我们晚点再讨论嵌套路由。
   const routes = [
     { path: '/', component: Index },
-    // { path: '/index', component: Index },
+    { path: '/index', component: Index },
     { path: '/about', component: About }
   ]
 
   // 3.创建 router 实例, 然后传 `routes` 配置
   const router =  new VueRouter({
-    routes
+    routes,
+    mode: 'history'
   })
 
   // 把组件映射到路由
