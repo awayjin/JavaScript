@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<a href="https://blog.csdn.net/jtunion/article/details/77453079" target="_blank">
+  类型判断
+</a>
+<script>
+  String.prototype.two = () => console.log('hello two')
+  Symbol.prototype.hello = () => console.log("hello");
+
+  var a = Symbol("a");
+  console.log(typeof a); //symbol，a 并非对象
+  a.hello(); //hello，有效
+
+
+  // 每一类装箱对象皆有私有的 Class 属性，这些属性可以用
+  // Object.prototype.toString来获取 ...
+  var symbolObject = Object(Symbol('aa'))
+  var type = Object.prototype.toString.call(symbolObject) // [object Symbol]
+  console.log('type:' + type)
+
+  // 拆箱转换
+  var o = {
+    valueOf : () => {console.log("valueOf"); return {}},
+    toString : () => {console.log("toString"); return {}}
+  }
+
+  o * 2
+  // valueOf
+  // toString
+  // TypeError
+
+</script>
+</body>
+</html>
