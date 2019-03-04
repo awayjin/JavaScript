@@ -15,5 +15,8 @@ public class Animal extends Dog {
             animals[i].go();
         }
     }
+    public void dd () {
+
+    }
 }
 

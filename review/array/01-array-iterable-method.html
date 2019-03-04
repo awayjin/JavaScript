@@ -9,6 +9,15 @@
 </head>
 <body>
 
+<script>
+  // map和forEach区别
+  var arr = [11, 22, 33]
+  var arrEach = arr.forEach((value) => {
+    return value * 3
+  })
+  console.log(arrEach)
+</script>
+
 <ul>
   <li>
     <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map" target="_blank">
@@ -23,7 +32,7 @@
   // map
   /**
    * 1. map
-   *
+   * map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。
    var new_array = arr.map(function callback(currentValue[, index[, array]]) {
       // Return element for new_array }[,
    thisArg])

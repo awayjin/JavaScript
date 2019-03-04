@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <title>Title</title>
+</head>
+<body>
+<form action="http://localhost:3000/" method="post">
+  <input type="text" name="dd" value="<script>alert(11)</script>">
+  <input type="submit">
+</form>
+<form id= "form1" action = "http://localhost:3000/" method = "post">
+  姓名：<input type = 'text' name = "name" value ="dragon"><br/>
+  年龄：<input type = "number" name = "age" value ="25">
+  <input type = "submit" value =" 提交"/>
+</form>
+
+<h2><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank">4.2 跨域资源共享 CORS 详解</a></h2>
+<h2><a href="http://www.cnblogs.com/wonyun/p/5524617.html" target="_blank">3.1 HTTP强缓存、协商缓存</a></h2>
+
+作者：雕兄
+链接：https://www.zhihu.com/question/41986174/answer/93491697
+
+看到这个问题，挺有意思，我面试的时候就会问。因为这货可以作为一条主线来用，以下是针对一位简历中写到：
+
+<h2>1.熟悉原生js，http协议，了解seajs的面试者，我常用的套路：开局问：原生xhr怎么写？</h2>
+<p>答：创建一个xhr对象，readystate onload send open blabla接着问：怎么处理回调？答：status等于200且readystate等于4的时候，取responseText处理。</p>
+
+<h2>2.接下来开启http协议分支任务问：http状态码常见有哪些？</h2>
+<p>答：200，302，304，404，5xx问：302是啥？304是啥？什么时候会返回304？</p>
+
+<h2>3.0 你刚刚说浏览器缓存，具体缓存机制是怎么样的？</h2>
+<p>答：…</p>
+<h2>3.1 问：你刚刚说的是发起一个get请求，除此之外http method还有哪些？</h2>
+<p>答：常用的还有post，put，delete等。</p>
+
+<h2>4. 问：post跟get有啥区别？答：…http分支聊得差不多啦，回主线，进入跨域和web前端安全分支。
+  问：http聊的差不多啦，</h2>
+<h2>4.1 我们回到xhr，你知道同源策略么？</h2>
+<p>答：同协议，同域名，同端口</p>
+
+<h2>4.2 问：怎么跨域发起请求</h2>
+<p> 答：cors，jsonp等接下来聊聊，cors的细节，jsonp的原理。</p>
+
+<h2>5. 再接下来聊聊其他跨域的方案，postmessage，document.domain降域接下来就着,同源策略，</h2>
+
+<h2>5.1 聊聊cookie，问题往csrf上走，csrf是啥，怎么防。</h2>
+<p>
+  答： CSRF（Cross-site request forgery）跨站请求伪造
+</p>
+
+<h2>5.2 顺着csrf，聊聊xss，概念，怎么防？</h2>
+<p>XSS: 跨站脚本攻击(Cross Site Scripting)</p>
+
+<p>跨域和安全聊完，跟面试者聊聊模块化，seajs源码之类，这个跟xhr关系不大，主要为后边的问题铺垫。最后会让面试者写一个seajs插件，支持commonjs规范写的模块。
+  基础知识都懂，最后这个问题就看你怎么用基础去解决实际问题了</p>
+
+<script>
+  // 1.原生ajax CORS
+ function Ajax() {
+   var xhr = new XMLHttpRequest();
+   // 发送xhr允许带cookie,还需要到服务器端设置
+   // Access-Control-Allow-Origin不能设置*
+   xhr.withCredentials = true; // ajax允许带cookie
+   xhr.onreadystatechange = function () {
+     if (xhr.readyState === 4) {
+       if (xhr.status === 200) {
+         console.log(xhr.responseText)
+       }
+     }
+   }
+   xhr.open('get', 'http://localhost:3000/', true)
+   xhr.send(null)
+ }
+  Ajax()
+
+  // 200 401未授权 404 500
+
+  /*
+   * 3.CORS-同源策略  跨域资源共享（Cross-origin resource sharing)
+    响应：
+      访问控制允许源。 Access-Control-Allow-Origin: *
+      访问控制允许cookie Access-Control-Allow-Credentials: true
+      Access-Control-Expose-Headers
+      Content-Type
+   *
+   *
+   */
+
+  // 4.2 JSONP填充式JSON
+  function handleResponse(response) {
+//    response = JSON.parse(response)
+    console.log(("You’ re at IP address " + response.ip + ", which is in " +
+    response.city + ", " + response.region_name))
+  }
+  function Jsonp() {
+    var script = document.createElement('script')
+//  script.src = 'http://freegeoip.net/json/?callback=handleResponse'
+    script.src = 'http://localhost:3000/?callback=handleResponse'
+    document.body.insertBefore(script, document.body.firstChild)
+  }
+  Jsonp()
+
+
+</script>
+</body>
+</html>

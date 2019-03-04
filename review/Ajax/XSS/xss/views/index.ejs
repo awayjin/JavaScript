@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/lib/he.js"></script>
+    <script src="/javascripts/lib/htmlparser.js"></script>
+    <script>
+      // 过滤危险标签
+      function parse(str) {
+        var results = ''
+        try {
+          HTMLParser(he.unescape(str, {strict: true}), {
+            start: function( tag, attrs, unary ) {
+              results += "<" + tag;
+              // || tag === 'img'
+              if (tag === 'script' || tag === 'style' || tag === 'link' || tag === 'iframe' || tag === 'frame') {
+                return
+              }
+              for ( var i = 0; i < attrs.length; i++ ) {
+                results += " " + attrs[i].name + '="' + attrs[i].escaped + '"';
+              }
+              results += ">";
+            },
+            end: function( tag ) {
+              results += "</" + tag + ">";
+            },
+            chars: function( text ) {
+              results += text;
+            },
+            comment: function( text ) {
+              results += "<!--" + text + "-->";
+            }
+          })
+          return results
+        } catch (e) {
+          console.log('parse function error:' + e)
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+  <p>不解析=:<%= xss %></p>
+  <p>解析-:<%- xss %></p>
+
+  <div class="comment-wrap">
+    <textarea name="name" id="comment" cols="30" rows="10">
+      <p>sks: <img src="null" alt="" onerror="var div = document.createElement('div'); div.innerHTML = '<h2>111</h2>'; document.body.appendChild(div);"></p>
+    </textarea>
+    <button type="button" name="button" id="btn">评论</button>
+    <button type="button" name="button" id="get">获取评论</button>
+
+    <div class="response-wrap">
+
+    </div>
+  </div>
+
+    <script>
+      !function () {
+        var btn = document.getElementById('btn')
+        var get = document.getElementById('get')
+        var wrap = document.querySelector('.comment-wrap')
+        var res = document.querySelector('.response-wrap')
+
+        function commentHandle(url) {
+          var xhr = new XMLHttpRequest()
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              if (xhr.status == 200 || xhr.status === 304) {
+//                var txt = document.createTextNode(xhr.responseText)
+//                wrap.appendChild(txt)n
+                var com = parse(JSON.parse(xhr.response).comment)
+                var span = document.createElement('span')
+                span.innerHTML = com
+                res.appendChild(span)
+                console.log('Ok:')
+                console.log(xhr.responseText)
+              } else {
+                console.log('error:' + xhr.status)
+                console.log(xhr.responseText)
+              }
+            }
+          }
+          xhr.open('GET', url, true)
+          xhr.send(null)
+        }
+
+        btn.addEventListener('click', function () {
+          var commoent = document.querySelector('#comment').value
+          var url = '/comment?comment='+ commoent
+          commentHandle(url)
+        }, false)
+
+        // 获取评论
+        get.addEventListener('click', function () {
+          commentHandle('/getComment')
+        }, false)
+      }()
+    </script>
+  </body>
+</html>

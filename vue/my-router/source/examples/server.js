@@ -1,14 +1,33 @@
-const express = require('express')
-const webpack = require('webpack')
+const express = require('express') // express
+const webpack = require('webpack') // webpack
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const WebpackConfig = require('./webpack.config')
+const path = require('path')
+const ejs = require('ejs')
 
 const app = express()
 // console.log(WebpackConfig)
 // console.log(process)
+// app.use(webpackMiddleware(compiler, {
+//   publicPath: webpackConf.output.publicPath
+// }))
 
-app.use(function () {
-  
+let compiler = webpack(WebpackConfig)
+app.use(webpackDevMiddleware(compiler, {
+  publicPath: '/assets/'
+}))
+app.engine('html', ejs.renderFile)
+app.set('views', path.join(__dirname, '../src/html'))
+app.set('view engine', 'html')
+
+app.get('/', function (req, res) {
+  res.render('index')
+})
+
+const port = process.env.PORT || 5000
+
+app.listen(port, function () {
+  console.log(`Server listening on http://localhost:${port}`)
 })
 
 // const express = require('express')

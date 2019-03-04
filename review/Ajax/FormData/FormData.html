@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1>使用bodyParser中间件上传文件</h1>
+
+<form action="" enctype="multipart/form-data">
+ 请选择文件 <input type="file" id="file" name="file" class="dd"/>
+    <input type="button" value="上传文件" onclick="uploadFile()"/>
+    <output id="result"></output>
+</form>
+
+<script>
+function uploadFile() {
+    var formData= new FormData();
+    var files = document.getElementById("file").files;
+    var file = files[0];
+    formData.append("myFile", file);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "bodyParser.html", true);
+    xhr.onload = function () {
+        if (xhr.status == 200) {
+//            document.getElementById("result").insertAdjacentHTML("afterend", xhr.response);
+            document.getElementById("result").innerHTML = xhr.response;
+        }
+    };
+    xhr.send(formData)
+}
+</script>
+
+
+
+<p id="results"><b>Results: </b> </p>
+<form id="form2" name="form2">
+    <select name="single">
+        <option>Single</option>
+        <option>Single2</option>
+    </select>
+    <br/>
+    <input type="checkbox" name="check" value="check1"/> check1
+    <input type="checkbox" name="check" value="check2" id="ddd"  checked="checked"/> check2
+    <input type="radio" name="radio" value="radio1" checked="checked"/> radio1
+    <input type="radio" name="radio" value="radio2"/> radio2
+</form>
+
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<!--<script type="text/javascript">
+    !window.jQuery && document.write('<script src="js/jquery.min.js"><\/script>');
+</script>-->
+
+<button id="btn">button</button>
+
+<script>
+    var formD = new FormData();
+    formD.append("fd", formD)
+    $("#results").append( "<tt>" + $("#ddd").val() + "</tt>" );
+    $("body").append( "<tt>" + $("form").serialize() + "</tt>" );
+
+ $("#btn").click(function () {
+//     var form = document.querySelector("#form2");
+     var form = document.forms[1];
+     var xhr = new XMLHttpRequest();
+     xhr.onload = function () {
+         if (xhr.status == 200) {
+             console.log(xhr.response);
+         } else {
+             alert("error")
+         }
+     };
+     xhr.open("post", "serialize.php", true);
+     xhr.send(new FormData(form));
+
+//     $.post("serialize.php", {"jin": $("#form2").serialize()}, function (data) {
+//         console.log(data);
+//     });
+ });
+</script>
+</body>
+</html>
