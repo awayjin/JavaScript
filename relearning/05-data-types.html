@@ -30,14 +30,37 @@
 
   // 拆箱转换
   var o = {
-    valueOf : () => {console.log("valueOf"); return {}},
+    // valueOf : () => {console.log("valueOf"); return 3},
+    valueOf : () => {console.log("valueOf"); return {} },
     toString : () => {console.log("toString"); return {}}
   }
 
-  o * 2
+  // ES6后Symbol.toPrimitive显示的覆盖之前的行为
+  o[Symbol.toPrimitive] = () => {
+    console.log('Symbol.toPrimitive')
+    return 'Hello Symbol.toPrimitive'
+  }
+
+  // o * 2
+  console.log(o + '')
+
   // valueOf
   // toString
   // TypeError
+
+  // var o = {
+  //   valueOf : () => {console.log("valueOf"); return {}},
+  //   toString : () => {console.log("toString"); return {}}
+  // }
+  //
+  // o[Symbol.toPrimitive] = () => {console.log("toPrimitive"); return "hello"}
+  //
+  //
+  // console.log(o + "")
+  // toPrimitive
+  // hello
+
+  
 
 </script>
 </body>

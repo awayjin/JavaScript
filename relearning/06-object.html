@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Title</title>
+</head>
+<body>
+3
+<script>
+  var a1 = {a: 2};
+  a1.b=3;
+  Object.defineProperty(a1, 'a', {
+    writable: false,
+    // configurable: false
+  })
+  var des = Object.getOwnPropertyDescriptor
+  a1.a = String(33);
+  // delete a1.a // configurable设置为false
+  console.log(des(a1, 'a')) // { value: 2, writable: false, enumerable: true, configurable: true }
+
+  // 用get和set创建访问器属性
+  var a2 = {
+    // a: 'gettter a',
+    get a () {
+      return 33
+    },
+    set a (par) {
+      // 你给year定义了setter，然后在setter里面又给year赋值，就是又调用了setter，循环调用了
+      this.a = par
+    }
+  }
+  // a2.a = 33 // Uncaught RangeError: Maximum call stack size exceeded
+
+
+  var person = {
+    a:1
+  }
+  // # 注:里面的this指向ogj(person)
+  Object.defineProperty(person,'a',{
+    get(){
+      return this.a
+    },
+    set(val){
+      this.a = val
+    }
+  })
+  //我们想当然的这么写.
+  // person.a // Uncaught RangeError: Maximum call stack size exceeded
+  // 什么,溢出了?这是为什么?
+  //   哦~原来是这么写的话会造成循环引用,狂call不止
+  // 我们看下流程:
+  // person.a → get.call(person) → this.a → person.a  → get.call(person) → this.a......
+</script>
+</body>
+</html>
