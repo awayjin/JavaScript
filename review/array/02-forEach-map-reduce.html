@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assert.css">
+  <script src="../assert.js"></script>
+  <title>Title</title>
+</head>
+<body>
+<p><a href="https://www.zhihu.com/question/24927450">如何形象地解释 JavaScript 中 map、foreach、reduce 间的区别？</a></p>
+<p><a href="https://www.cnblogs.com/leaf930814/p/6667011.html">JS的forEach和map方法的区别？</a></p>
+
+<script>
+  /**
+   * JS的forEach和map方法的区别
+      1. forEach()返回值是undefined，不可以链式调用
+      2. map()返回一个新数组，原数组不会改变\
+      3. 没有办法终止或者跳出forEach()循环，除非抛出异常，
+        所以想执行一个数组是否满足什么条件，返回布尔值，
+        可以用一般的for循环实现，或者用Array.every()或者Array.some()
+
+   *
+   */
+  // forEach
+  var array = ['a', 'b', 'c']
+  var forEachArray = array.forEach((element) => {
+    // assert(element !== 'undefined', element)
+    return element + '3'
+  })
+  pass('forEachArray: ' + forEachArray) // undefined
+  pass('array: ' + array) // undefined
+
+  // 3.1 在使用forEach()时候，如果数组在迭代的时候被修改，
+  // 则其他元素会被跳过。因为 forEach()不会在迭代之前创建数组的副本。
+  var words = ['one', 'two', 'three', 'four']
+  words.forEach((word) => {
+    console.log(word) // one two four
+    if (word === 'two') {
+      words.shift()
+    }
+  })
+  // console.log(words)
+  assert(words != null, 'words: ' + words)
+  // console.log(forEachArray)
+
+  pass('----map-----')
+
+  // map-返回新数组
+  var mapArray = array.map((element) => {
+    assert(element !== 'undefined', element)
+    if (element === 'b') return  element + '4'
+    return element + '3'
+  })
+  assert(mapArray !== null, '新数组：' + mapArray + ',原数组：' + array)
+  console.log(mapArray)
+
+  // 3.2 反转字符串
+  var str = '12345'
+  var strMap = Array.prototype.map.call(str, (element) => {
+    return element
+  }).reverse().join('')
+  assert(str !== undefined, '反转数组map:' + strMap)
+</script>
+
+</body>
+</html>
