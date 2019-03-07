@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+
+<a href="https://www.jianshu.com/p/0362b6cd90d6">数组的可变更方法和非可变更方法</a>
+
+
+<script>
+
+  var arr = [{a: 1}, {a: 3332}];
+  var obj = {}
+  var list = []
+  arr.map(item => {
+    obj['b'] = item.a
+    console.log(obj)
+    list.push(obj)
+  })
+  console.table(list)
+  console.log('-----------------')
+
+</script>
+<script>
+  /**
+   * 数组的非变更方法和可变更方法
+   *
+   * 1.为什么字符串可以使用数组的非变更方法？
+   * 2.为什么非变更方法可以，变更方法不可以？
+   * */
+
+  var a = 'abc'
+  var b = Array.prototype.join.call(a, '-') // 'a-b-c'
+  var c = Array.prototype.map.call(a, item => item.toUpperCase() ).join(); // [a, b, c]
+  var d = Array.prototype.slice.call(a) // ['a', 'b', 'c']
+
+  console.log(b)
+  console.log(c)
+  console.log(d)
+  // Uncaught TypeError: Cannot assign to read only property '0' of object '[object String]'
+  // var e = Array.prototype.reverse.call(a) // Uncaught TypeError
+</script>
+
+</body>
+</html>

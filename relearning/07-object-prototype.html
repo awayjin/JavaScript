@@ -58,6 +58,53 @@
   var e = new Error;
   console.log([o, n, s, b, d, arg, r, f, arr, e].map(v => Object.prototype.toString.call(v)));
 
+  // ES6后- Symbol.toStringTag
+  var obj = { [Symbol.toStringTag]: ' My Object' }
+  console.log(obj + '')
+
+  // 类
+  class Rectangle {
+    constructor(height, width) {
+      this.height = height;
+      this.width = width;
+    }
+    // Getter
+    get area() {
+      return this.calcArea();
+    }
+    // Method
+    calcArea() {
+      return this.height * this.width;
+    }
+  }
+
+  // 继承
+  class Animal {
+    constructor(name) {
+      this.name = name;
+    }
+
+    speak() {
+      console.log(this.name + ' makes a noise.');
+    }
+  }
+
+  class Dog extends Animal {
+    constructor(name) {
+      // 被继承的类一般称为“超类”，也有叫做父类
+      // 调用超类构造函数并传入名称参数
+      super(name); // call the super class constructor and pass in the name parameter
+    }
+
+    speak() {
+      console.log(this.name + ' barks.');
+    }
+  }
+
+  let dog = new Dog('Mitzie');
+  dog.speak(); // Mitzie barks.
+
+
 </script>
 </body>
 </html>
