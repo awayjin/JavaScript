@@ -87,15 +87,27 @@
     speak() {
       console.log(this.name + ' makes a noise.');
     }
+
+    // 静态方法
+    static ping() {
+      console.log('ping')
+    }
   }
 
   class Dog extends Animal {
-    constructor(name) {
-      // 被继承的类一般称为“超类”，也有叫做父类
-      // 调用超类构造函数并传入名称参数
-      super(name); // call the super class constructor and pass in the name parameter
-    }
+    // constructor(name) {
+    //   // 被继承的类一般称为“超类”，也有叫做父类
+    //   // 调用超类构造函数并传入名称参数
+    //   // super关键字用于访问和调用一个对象的父对象上的函数。
+    //   // super(name)
+    //   super.ping()
+    //   // super(name); // call the super class constructor and pass in the name parameter
+    //
+    // }
 
+    static pingExtend () {
+      super.ping()
+    }
     speak() {
       console.log(this.name + ' barks.');
     }
@@ -104,6 +116,7 @@
   let dog = new Dog('Mitzie');
   dog.speak(); // Mitzie barks.
 
+  Dog.pingExtend()
 
 </script>
 </body>
