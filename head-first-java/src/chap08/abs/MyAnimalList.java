@@ -16,3 +16,7 @@ public class MyAnimalList {
         }
     }
 }
+
+class DD extends Object {
+
+}
