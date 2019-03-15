@@ -65,5 +65,46 @@
   assert(str !== undefined, '反转数组map:' + strMap)
 </script>
 
+
+<a href="https://segmentfault.com/q/1010000006658882" target="_blank">for-in和for-of的区别</a>
+<a href="https://www.cnblogs.com/xueshanshan/p/8487438.html" target="_blank">for-in和for-of的区别</a>
+<script>
+  pass('------------for-in和for-of的区别-------------')
+
+  pass('------------for-in-------[\'a\',123,{a:\'1\',b:\'2\'}]------')
+  let aArray = ['a', 1, 4, {a:'1',b:'2'}, 5];
+  aArray.name = '自定义'
+  for (let index in aArray) {
+    if (index == 1) break
+    console.log('index:' + index + ', aArray[index]:' + aArray[index])
+    pass('index:' + index + ', aArray[index]:' + aArray[index])
+  }
+
+  pass('------------for-of-------------')
+  for (let index of aArray) {
+    if (index == 4) break
+    console.log('index:' + index + ', aArray[index]:' + aArray[index])
+    pass('index:' + index + ', aArray[index]:' + aArray[index])
+  }
+
+
+  let data = [
+    { id: 201801, name: '张三', age: 15, },
+    { id: 201804, name: 'John', age: 18, },
+    { id: 201804, name: 'John', age: 13, },
+    { id: 201802, name: '李四', age: 18, }
+  ];
+
+  let hash = {};
+  data = data.reduce((preVal, curVal) => {
+    // hash[curVal.id] ? '' : hash[curVal.id] = true && preVal.push(curVal);
+    hash[curVal.id] ? '' : hash[curVal.id] = preVal.push(curVal);
+    return curVal
+    // return preVal
+  }, [])
+  assert(data, 'data:' + data)
+  console.log(data)
+</script>
+
 </body>
 </html>
