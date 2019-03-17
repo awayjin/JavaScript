@@ -13,6 +13,31 @@
 </a>
 
 <script>
+
+  var a = 1
+  var obj1 = {
+    a:2,
+    fn:function(){
+      console.log(this.a)
+    }
+  }
+  var fn1 = obj1.fn
+  fn1()//1
+  var f2fn = fn1.bind(obj1)
+  f2fn() // 2
+  fn1.apply(obj1) // 2
+
+  var a = 1
+  function f1(fn){
+    fn()
+    console.log(a) //1
+  }
+  f1(f2)
+
+  function f2(){
+    var a = 2
+  }
+
   document.addEventListener('click', function(e){
     console.log(this);
     setTimeout(function(){
