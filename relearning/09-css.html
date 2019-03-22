@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    @page {
+      size: 8.5in 11in;
+      margin: 10%;
+      background-color: red;
+
+      @top-left {
+        content: "Hamlet";
+      }
+      @top-right {
+        content: "Page " counter(page);
+      }
+    }
+
+    @counter-style triangle {
+      system: cyclic;
+      symbols: ‣;
+      suffix: " ";
+    }
+
+    :root {
+      --main-color: #06c;
+      --accent-color: #006;
+    }
+    /* The rest of the CSS file */
+    #foo h1 {
+      color: var(--main-color);
+    }
+
+    section {
+      float: left;
+      margin: 1em; border: solid 1px;
+      width: calc(100%/3 - 2*1em - 2*1px);
+      background-color: red;
+    }
+    ul { list-style-type: toggle(circle, square); }
+
+
+  </style>
+</head>
+<body>
+dd
+
+<ul>
+  <li>44</li>
+  <li>44</li>
+  <li>44</li>
+  <li>44</li>
+  <li>44</li>
+</ul>
+<ul>
+  <li>44</li>
+  <li>44</li>
+  <li>44</li>
+  <li>44</li>
+  <li>44</li>
+</ul>
+<section>
+333
+</section>
+<div id="foo">
+  <h1>22</h1>
+</div>
+
+<ol triangle>
+  <li>11</li>
+  <li>11</li>
+</ol>
+</body>
+</html>
