@@ -5,15 +5,18 @@
   "private": true,
   "main-BC": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --mode development",
-    "dev": "webpack-dev-server --open",
-    "build": "webpack --mode production"
+    "start": "webpack-dev-server --open",
+    "watch": "webpack --watch",
+    "dev": "webpack-dev-server --hotOnly",
+    "dev2": "webpack-dev-server --open",
+    "build": "webpack",
+    "build2": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "^2.0.1",
     "css-loader": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
