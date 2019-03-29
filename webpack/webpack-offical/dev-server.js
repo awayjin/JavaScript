@@ -9,9 +9,12 @@ const options = {
 }
 
 webpackDevServer.addDevServerEntrypoints(config, options)
+
 const compiler = webpack(config)
 const server = new webpackDevServer(compiler, options)
 
-server.listen(3004, 'localhost', () => {
-  console.log('dev server listening on port 4000')
+const port = process.env.PORT || 3004 // 进程-用户环境信息
+
+server.listen(port, 'localhost', () => {
+  console.log(`dev server listening on port ${port}`)
 })

@@ -16,6 +16,7 @@ let compiler = webpack(WebpackConfig)
 app.use(webpackDevMiddleware(compiler, {
   publicPath: '/assets/'
 }))
+
 app.engine('html', ejs.renderFile)
 app.set('views', path.join(__dirname, '../src/html'))
 app.set('view engine', 'html')

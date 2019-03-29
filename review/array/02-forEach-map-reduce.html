@@ -37,7 +37,7 @@
   // 则其他元素会被跳过。因为 forEach()不会在迭代之前创建数组的副本。
   var words = ['one', 'two', 'three', 'four']
   words.forEach((word) => {
-    console.log(word) // one two four
+    // console.log(word) // one two four
     if (word === 'two') {
       words.shift()
     }
@@ -55,7 +55,7 @@
     return element + '3'
   })
   assert(mapArray !== null, '新数组：' + mapArray + ',原数组：' + array)
-  console.log(mapArray)
+  // console.log(mapArray)
 
   // 3.2 反转字符串
   var str = '12345'
@@ -76,14 +76,14 @@
   aArray.name = '自定义'
   for (let index in aArray) {
     if (index == 1) break
-    console.log('index:' + index + ', aArray[index]:' + aArray[index])
+    // console.log('index:' + index + ', aArray[index]:' + aArray[index])
     pass('index:' + index + ', aArray[index]:' + aArray[index])
   }
 
   pass('------------for-of-------------')
   for (let index of aArray) {
     if (index == 4) break
-    console.log('index:' + index + ', aArray[index]:' + aArray[index])
+    // console.log('index:' + index + ', aArray[index]:' + aArray[index])
     pass('index:' + index + ', aArray[index]:' + aArray[index])
   }
 
@@ -97,10 +97,10 @@
 
   let hash = {};
   data = data.reduce((preVal, curVal) => {
-    // hash[curVal.id] ? '' : hash[curVal.id] = true && preVal.push(curVal);
-    hash[curVal.id] ? '' : hash[curVal.id] = preVal.push(curVal);
-    return curVal
-    // return preVal
+    hash[curVal.id] ? '' : hash[curVal.id] = true && preVal.push(curVal);
+    // hash[curVal.id] ? '' : hash[curVal.id] = preVal.push(curVal);
+    // return curVal
+    return preVal
   }, [])
   assert(data, 'data:' + data)
   console.log(data)
