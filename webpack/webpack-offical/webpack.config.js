@@ -5,77 +5,36 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack') // 访问内置插件
 // const MyPlugin = require('./plugins/my-plugins.js')
 
+// 定义了一些文件夹的路径
+const ROOT_PATH = path.resolve(__dirname)
+const APP_PATH = path.resolve(ROOT_PATH, 'src')
+const BUILD_PATH = path.resolve(ROOT_PATH, 'build')
+
 module.exports = {
-  // entry: './src/index.js',
-  entry: {
-    app: './src/index.js',
-    // app: './src/index.js',
-    // print: './src/print.js'
-  },
+  mode: 'development',
+  // content: __dirname,
+  //实现刷新浏览器webpack-hot-middleware/client?noInfo=true&reload=true 是必填的
+  entry: ['webpack-hot-middleware/client?noInfo=true&reload=true' , APP_PATH],
+  // 输出的文件名 合并以后的js会命名为bundle.js
   output: {
-    // filename: 'bundle.js',
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: BUILD_PATH,
+    filename: 'bundle.js'//将app文件夹中的两个js文件合并成build目录下的bundle.js文件
   },
-  // devtool: 'inline-source-map', // 使用 source map
-  // 模块热替换
-  devServer: {
-    host: 'localhost',
-    port: 6000,
-    contentBase: './dist',
-    hot: true
-  },
+  devtool: '#source-map',
   module: {
     rules: [
-      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
+      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
+      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
     ]
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin(), // removed
-    // new UglifyJsPlugin(), // 压缩JS
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      // template: './src/index.html',
-      title: 'Output Manager'
+      template: './src/index.html',
+      // title: 'Output Manager'
     }),
-    new webpack.NamedModulesPlugin(),
-    // new MyPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.NoEmitOnErrorsPlugin()
   ]
-  // module4: {
-  //   rules: [
-  //     // {
-  //     //   test: /\.css$/,
-  //     //   use: [
-  //     //     { loader: 'style-loader'},
-  //     //     {
-  //     //       loader: 'css-loader',
-  //     //       options: {
-  //     //         modules: true
-  //     //       }
-  //     //     }
-  //     //   ]
-  //     // }
-  //     { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
-  //     // { test: /\.css$/, loader: 'style-loader!css-loader' }
-  //   ]
-  // }
-  // module3: {
-  //   rules: [
-  //     {
-  //       test: /\.css$/,
-  //       use: [
-  //         // { loader: 'style-loader' },
-  //         {
-  //           loader: 'css-loader',
-  //           options: {
-  //             modules: true
-  //           }
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
 }
 
 // npx webpack --config webpack.config.js

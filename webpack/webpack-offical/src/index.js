@@ -12,7 +12,7 @@ function component() {
   // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
   // Lodash, currently included via a script, is required for this line to work
    // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack-000'], ' ')
+  element.innerHTML = _.join(['Hello', 'webpack-11'], '-33 ')
 
   btn.innerHTML = 'Click me and check the console'
   btn.onclick = printMe
@@ -23,6 +23,19 @@ function component() {
 
   return element
 }
+
+// loadash
+var loadash = () => {
+  // 数组去重
+  var arr = [NaN, 11, 33, NaN, 33]
+  var uni = _.uniq(arr)
+
+  var objects = [{ 'x': 1, 'y': 2 }, { 'x': 33, 'y': 33 }];
+  var diffArray = _.differenceWith(objects, [{ 'x': 1, 'y': 2 }], _.isEqual);
+  console.log('diffArray:')
+  console.log(diffArray)
+}
+loadash()
 
 // document.body.appendChild(component())
 let element = component() // 当 print.js 改变导致页面重新渲染时，重新获取渲染的元素
@@ -39,12 +52,20 @@ document.body.appendChild(element)
 //   })
 // }
 if (module.hot) {
+  console.log('333--module.hot:');
+  console.log(module.hot);
   module.hot.accept('./print.js', function () {
-    console.log('1---------------------------------!');
-    console.log('12.--Accepting the updated printMe module!');
     // printMe()
     document.body.removeChild(element)
     element = component() // 重新渲染页面后，component 更新 click 事件处理
     document.body.appendChild(element)
+    module.hot.dispose()
   })
 }
+
+// if (module.hot) {
+//   module.hot.accept();
+//   module.hot.dispose(function() {
+//     clearInterval(timer);
+//   });
+// }
