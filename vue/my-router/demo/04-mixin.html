@@ -125,6 +125,17 @@
     console.log(obj)
   }
   restFunc(11, {a: 2}, {a:2, b: 3})
+
+  // Spread operator
+  /*
+  * 扩展语句
+扩展语句符允许一个表达式在原地展开， 当需要多个参数 (比如函数调用时) 或者多个值(比如字面量数组)
+  * */
+  var array = ['a', 'b']
+  var newArr = ['c', ...array, 'e']
+  console.log('newArr------------------')
+  console.log(newArr)
+  console.log(...newArr)
 </script>
 
 </body>

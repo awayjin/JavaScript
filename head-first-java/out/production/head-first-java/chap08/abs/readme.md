@@ -18,3 +18,30 @@
 
 ### 8.2.1 使用super调用超类构造函数
 > super()必须是在子类构造函数中第一个执行语句
+
+## 8.7 使用抽象类
+> 超类定义了一种给定结构的抽象但是不提供任何完整方法的实现
+> 所有子类共享的通用形式
+> 任何含有一个或多个抽象方法的类都必须声明成抽象类
+```java
+public class AbstractDemo extends SuperClass {
+    int callTwo() {
+        System.out.println("This is a abstract method");
+        return 33;
+    }
+
+    public static void main(String args[]) {
+        AbstractDemo demo = new AbstractDemo();
+        demo.callTwo();
+        demo.callMe();
+//        SuperClass d = new SuperClass(); // 抽象类不能实例化
+    }
+}
+
+abstract class SuperClass {
+    void callMe() {
+        System.out.println("This is a method of abstract class method");
+    }
+    abstract int callTwo ();
+}
+```

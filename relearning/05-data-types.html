@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
   <title>Title</title>
 </head>
 <body>
+<script>
+  var supperArray = [11, 22, 33]
+  var superObj = { a: 1, b: 2 }
+  // IIFE
+  void function () {
+    var element = document.createElement('iframe')
+    element.src = './05-iframe.html'
+    document.documentElement.appendChild(element)
+  }()
+</script>
+
+<a href="https://blog.csdn.net/dxx1988/article/details/6818028">类型-经典问答</a>
+
 <a href="https://www.cnblogs.com/onepixel/p/5126046.html" target="_blank">
   js数据类型
 </a>
@@ -14,6 +28,37 @@
 
 
 <script>
+  var o = new Object
+
+  o[Symbol.iterator] = function() {
+    var v = 0
+    return {
+      next: function() {
+        return { value: v++, done: v > 10 }
+      }
+    }
+  };
+
+  console.log('%c%s', 'color:green', '-------Symbol.iterator--------------')
+  // Symbol.iterator为每个对象定义一个迭代器
+  var myIterable = {}
+  myIterable[Symbol.iterator] = function *() {
+     for (var i = 0; i < 5; i++) {
+       yield i
+     }
+  }
+
+  for(var v of o) {
+    console.log(v); // 0 1 2 3 ... 9
+  }
+
+  console.log('%c%s', 'color:green', '-------Symbol.iterator--------------')
+
+  for (var c of myIterable) {
+    console.log(c)
+  }
+
+  console.log('%c%s', 'color:green', '---------装箱操作------------')
   String.prototype.two = () => console.log('hello two')
   Symbol.prototype.hello = () => console.log("hello");
 

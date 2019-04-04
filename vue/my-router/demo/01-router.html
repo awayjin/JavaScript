@@ -8,16 +8,24 @@
   <title>Title</title>
   <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
   <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
+  <style>
+    #app p a {
+      display: inline-block;
+      margin-right: 5px;
+    }
+  </style>
 </head>
 <body>
 
 <div id="app">
   <h1>Hello Vue-Router</h1>
   <p>
-    <router-link to="/index">Go To index</router-link>
-    <router-link to="/about">Go To About</router-link>
+    <router-link to="/index">Go To index.</router-link>
+    <router-link to="/about">Go To About.</router-link>
+    <router-link to="/user/33">Go To User/33.</router-link>
+    <router-link to="/user/22">Go To User/22.</router-link>
     <router-link to="/" tag="li">
-      <a >Go To '/'</a>
+      <a >Go To '/'.</a>
     </router-link>
   </p>
   <!-- 路由出口, 路由匹配到的组件将渲染在这里 -->
@@ -29,6 +37,13 @@
   // 可以从其他文件 import 进来
   const Index = { template: '<div>index</div>'}
   const About = { template: '<div>about</div>'}
+  const User = { template: `<div>
+    <div>User---当前路由$route.params.id {{ $route.params.id }}</div>
+    <div>
+      User---33 在任何组件内通过 this.$router <br>
+      访问路由器$router.query: {{ $route.query }}</div>
+    </div>
+  `}
 
   // 2.定义路由
   // 每个路由应该映射一个组件。 其中"component" 可以是
@@ -38,12 +53,15 @@
   const routes = [
     { path: '/', component: Index },
     { path: '/index', component: Index },
-    { path: '/about', component: About }
+    { path: '/about', component: About },
+    // 动态路由
+    { path: '/user/:id', component: User }
   ]
 
   // 3.创建 router 实例, 然后传 `routes` 配置
   const router =  new VueRouter({
     routes,
+    // history需要后端nginx配置
     mode: 'history'
   })
 
@@ -53,6 +71,12 @@
   // 从而让整个应用都有路由功能
   new Vue({
     router: router,
+    created () {
+      console.log('%c%s', 'color:red', 'el :' + this.$el)
+    },
+    mounted () {
+      console.log('%c%s', 'color:green', 'el :' + this.$el) // 已被初始化
+    }
   }).$mount('#app')
 </script>
 
