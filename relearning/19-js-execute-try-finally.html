@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var foo = function () {
+    try {
+      console.log(11)
+      return 'return value'
+      console.log(22)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      console.log('finally')
+      return 'finally value'
+    }
+  }
+  console.log(foo())
+
+  // 带标签的语句
+  let i =  5
+  let j = 4
+  outer: while (i) {
+    // console.log(i)
+    // i--
+    console.log('i:' + i)
+    inner: while (j) {
+      console.log('j:' + j)
+      j--
+      if (j == 2) break outer
+    }
+  }
+</script>
+</body>
+</html>
