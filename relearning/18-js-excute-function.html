@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  function showThis () {
+    console.log(this)
+  }
+
+  var o = {
+    showThis: showThis,
+    demo: function () {
+      console.log(this)
+    }
+  }
+
+  showThis() // global
+  o.showThis() // o
+  o.demo() // o
+
+  void function () {
+    // static a = 3;
+    class C {
+      showThis() {
+        console.log(this);
+      }
+    }
+    var o = new C();
+    var showThis = o.showThis;
+
+    showThis(); // undefined
+    o.showThis(); // o
+  } ()
+
+  // 生成器函数
+  function* a() {}
+  // 异步生成器函数
+  async function* a() {}
+  // 异步普通函数
+  async function a() {}
+  // 普通函数
+  function a() {}
+
+
+  // 异步箭头函数
+  var a = async () => {}
+  // 箭头函数
+  var a = () => {}
+
+  var a = 1;
+  foo();
+
+  // 在别处定义了 foo：
+
+var b = 2;
+  function foo(){
+    console.log(b); // 2
+    console.log(a); // error
+  }
+
+</script>
+</body>
+</html>
