@@ -26,6 +26,8 @@ let hotMiddleware = webpackHotMiddle(compiler, {
 
 app.use(devMiddleware)
 
+
+
 // app.use(hotMiddleware)
 
 // const hotMiddleware = require("webpack-hot-middleware")

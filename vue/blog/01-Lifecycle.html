@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>阐述一下 Vue 的生命周期(Lifecycle)</title>
+</head>
+<body>
+<a href="https://juejin.im/entry/5aee8fbb518825671952308c">Vue生命周期深入</a>
+
+
+概念：
+
+
+1. 生命周期构子函数
+
+## callhook
+
+> 生命周期其实就是在源码的某个时间点执行了callHook方法来调用vm.$options的生命周期钩子方法
+
+源码位置: vue/src/core/instance/lifecycle.js
+```javascript
+
+```
+
+const handlers = vm.$options[hook] // 获取Vue选项中的生命周期钩子函数
+
+initLifecycle(vm) // 初始化生命周期
+initEvents(vm)  // 初始化事件
+initRender(vm) // 初始化渲染
+callHook(vm, 'beforeCreate') // 触发beforeCreate钩子
+initInjections(vm) // resolve injections before data/props 初始化Inject
+initState(vm) // 初始化数据
+initProvide(vm) // resolve provide after data/props 初始化Provide
+callHook(vm, 'created') // 触发created钩子
+
+</body>
+</html>

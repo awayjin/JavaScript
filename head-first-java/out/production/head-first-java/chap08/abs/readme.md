@@ -45,3 +45,12 @@ abstract class SuperClass {
     abstract int callTwo ();
 }
 ```
+
+## 8.8 继承中使用final
+> 用于已命名常量的等价物，用于继承
+
+### 8.8.1 使用final阻止重载
+> 声明成final的方法不能被重载
+
+## 8.9 Object类
+> Object是所有其他类的超类

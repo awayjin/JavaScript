@@ -9,7 +9,8 @@
   <!--<script src="https://unpkg.com/vue/dist/vue.js"></script>-->
   <!--<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>-->
 
-  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+  <!--<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>-->
+  <script src="vue-v2.5.17-beta.js"></script>
   <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
 </head>
 <body>
@@ -40,7 +41,7 @@
     </div>`
   }
 
-  const UserProfile = { template: '<div>Profile</div>' }
+  const UserProfile = { template: '<div>--Profile--</div>' }
   const UserHome = { template: '<div>UserHome</div>' }
 
   const routes = [
@@ -66,7 +67,10 @@
 
   const vm = new Vue({
     el: '#app',
-    router
+    router,
+    beforeCreate: function () {
+      console.log(333)
+    }
   })
 </script>
 
