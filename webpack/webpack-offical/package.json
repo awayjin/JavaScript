@@ -7,9 +7,9 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "watch": "webpack --watch",
-    "dev": "node dev-server.js",
+    "dev": "node server.js",
     "nodemon": "nodemon dev-server.js",
-    "server": "node server.js",
+    "server": "node dev-server.js",
     "build": "webpack",
     "dev3": "webpack-dev-server --hotOnly",
     "dev2": "webpack-dev-server --open",

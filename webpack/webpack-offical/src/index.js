@@ -12,7 +12,7 @@ function component() {
   // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
   // Lodash, currently included via a script, is required for this line to work
    // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack-11'], '-33 ')
+  element.innerHTML = _.join(['Hello', 'webpack-22'], '-22 ')
 
   btn.innerHTML = 'Click me and check the console'
   btn.onclick = printMe

@@ -1,8 +1,5 @@
-const express = require('express')
-const rewrite = require('express-urlrewrite')
-const webpack = require('webpack')
-
 const webpackDevServer = require('webpack-dev-server')
+const webpack = require('webpack')
 
 const config = require('./webpack.config.js')
 const options = {
@@ -32,7 +29,15 @@ const fs = require('fs') // 文件系统
  1. 对于以/开始的路径片段，path.join只是简单的将该路径片段进行拼接，而path.resolve将以/开始的路径片段作为根目录，在此之前的路径将会被丢弃，就像是在terminal中使用cd命令一样
 
  */
+// console.log('__dirname:', __dirname)
+// const dirName = fs.readdirSync(__dirname)
+// console.log('fs.readdirSync:', dirName)
+// const dir = fs.statSync(dirName[1])
+// console.log('fs.statSync[2]---:', dir, ', fs.statSync isDirector----:', dir.isDirectory())
 
+const express = require('express')
+
+const rewrite = require('express-urlrewrite')
 const path = require('path')
 
 const app = express()

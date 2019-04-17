@@ -66,12 +66,13 @@
   })
 
   const vm = new Vue({
-    el: '#app',
+    // el: '#app',
     router,
     beforeCreate: function () {
       console.log(333)
     }
   })
+  vm.$mount('#app')
 </script>
 
 </body>
