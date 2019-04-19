@@ -2,22 +2,128 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>闭包和执行上下文到底是怎么回事</title>
 </head>
 <body>
-<a href="https://www.zhihu.com/question/41466747/answer/584673304">
-  知识线路
-</a>
+<a href="https://zhuanlan.zhihu.com/p/60538328">javascript常见的内存泄漏</a>
 
-1. 闭包、作用域的理解.
-A: http://note.youdao.com/noteshare?id=6c7f0ca8788018aedf136f67f3f882ca
+<pre>
 
-2. 什么是闭包，什么时候使用闭包，闭包会造成什么问题。callback是否为闭包
+  1. 闭包、作用域的理解.
+  A: http://note.youdao.com/noteshare?id=6c7f0ca8788018aedf136f67f3f882ca
 
-3. 什么情况会造成内存泄露（setTimeout, setInterval）,还有呢？
+  2. 什么是闭包，什么时候使用闭包，闭包会造成什么问题。callback是否为闭包
+
+  3. 什么情况会造成内存泄露（setTimeout, setInterval）,还有呢？
+
+  4. 为什么 var 声明的变量无法删除
+    4A:
+    1). 每个变量下都有一个隐藏属性 [[Configurable]], 如果 configurable为 false, 表示不能更改和删除
+    2). 在用 var 声明变量时，JavaScript 引擎会默认把configurable设为false，所以它不能改名字，不能被删掉。
+
+     [[Configurable]]：表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特
+性，或者能否把属性修改为访问器属性
+
+
+</pre>
+
+<pre>
+2A:
+(闭包是指有权访问另一个函数作用域中的变量的函数)
+
+1、 闭包本质还是函数，只不过这个函数绑定了执行上下文环境（函数内部引用的所有变量）。
+
+2、 在函数式编程中，闭包的逻辑就是：『让程序运行环境来管理状态』。
+命令式语言围绕状态来建模，每次指令操作都在控制状态的变化，需要人为管理；
+而闭包是对行为的控制，将运行逻辑和上下文绑定，执行闭包的时候，逻辑和上下文是关联的，
+一个十分简单的例子：
+```javascript
+const foo = () => {
+  let v = 1
+  return () => v++
+}
+const bar = foo()
+bar() // 1
+bar() // 2
+bar() // 3
+```
+
+ 上面，foo 是一个普通函数，但是当它被执行后，连同 foo 内部作用域以及返回的匿名函数，
+构成了闭包函数 bar，其中变量 v 将由这个闭包在运行时自行管理，每次执行都会触发匿名函数的逻辑，将 v 的值增 1。
+
+3、 闭包的特点很鲜明:
+闭包内，变量无法释放，无法被直接访问；闭包可以被延迟执行。
+  所以可以用它来做一些事情：
+   - 管理私有变量和私有方法，将对变量（状态）的变化封装在安全的环境中
+   - 将代码封装成一个闭包形式，等待时机成熟的时候再使用，比如实现柯里化和反柯里化>
+   - 由于闭包内的部分资源无法自动释放，容易造成内存泄露
+
+
+</pre>
+
+<h3 id="someElement">
+  some element
+</h3>
+<script>
+  const foo = () => {
+    let v = 1
+    return () => {
+      let a = v++ // x++，递增前返回数值
+      console.log(a) // 1, 2, 3
+      // let a = ++v // 递增后返回数值
+      // console.log(a) // 2, 3, 4
+      return a
+    }
+  }
+  const bar = foo()
+  bar()
+  bar()
+  bar()
+
+  function assignHandler(){
+    var element = document.getElementById("someElement");
+    var id = element.id;
+    element.onclick = function(){
+      alert(id);
+    };
+    element = null;
+  }
+  assignHandler()
+</script>
+
+<script>
+  var theThing = null
+  function LeakClass () {
+  }
+
+  function MakeLeakObjects (count) {
+    var arr = []
+    for (var i = 0; i < count; ++i) {
+      arr.push(new LeakClass())
+    }
+    return arr
+  }
+
+  var replaceThing = function () {
+    var unused = function () {
+      if (originalThing) {
+        console.log('hi')
+      }
+    }
+
+    var originalThing = theThing
+    theThing = {
+      leaks: MakeLeakObjects(1000),
+      someMethod: function () {
+
+      }
+    }
+  }
+
+  // setInterval()
+</script>
 
 </body>
 </html>

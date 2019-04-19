@@ -100,7 +100,6 @@ if (vm.$options.el) {
 
 ```javascript
 // vue/src/platforms/web/entry-runtime-with-compiler.js
-
 const mount = Vue.prototype.$mount // 保存之前定义的 $mount 方法，然后重写
 Vue.prototype.$mount = function (
   el?: string | Element,
@@ -134,3 +133,47 @@ Vue.compile = compileToFunctions // 对最后生成的模版进行解析，生�
 ```
 
 ## 8.0 执行钩子函数 beforeMount
+> 在挂载开始之前被调用：相关的 render 函数首次被调用。
+```javascript
+// vue/src/core/instance/lifecycle.js
+// 挂载组件的方法
+export function mountComponent (): Component {
+  callHook(vm, 'beforeMount') // 调用beforeMount钩子 
+  let updateComponent
+  if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+    updateComponent = () => {
+      const vnode = vm._render()
+    }
+  } else {
+    updateComponent = () => {
+      vm._update(vm._render(), hydrating)
+    }
+  }
+  return vm
+}
+```
+
+## 9.0 Create vm.$el and replace 'el' with it 创建 vm.$el 并用它替换 el
+> 编译 el 并进行 DOM 替换的操作
+
+## 10.0 mounted
+> el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子
+- 实例挂载到 DOM 树上，此时可以通过 DOM API 获取到 DOM 节点，$ref属性可以访问
+
+```javascript
+export function mountComponent (
+  vm: Component,
+  el: ?Element,
+  hydrating?: boolean
+): Component {
+  vm.$el = el
+  // manually mounted instance, call mounted on self
+  // mounted is called for render-created child components in its inserted hook
+  if (vm.$vnode == null) {
+    vm._isMounted = true
+    callHook(vm, 'mounted') //调用mounted钩子
+  }
+  return vm
+}
+```
+- 判断如果vm.$vnode == null，则设置vm._isMounted = true并调用mounted钩子函数

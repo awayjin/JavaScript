@@ -30,14 +30,14 @@ new Vue({
   },
   beforeCreate () {
     this.variableBeforeCreate = 'variable BeforeCreate' // 定义非响应式变量
-    console.log('1.--------%c%s', 'color: orange',
+    console.group('1.--------%c%s', 'color: orange',
       'beforeCreate el: ' + this.$el,
       ', $data:' + this.$data,
       ', message:' + this.message)
     console.log('\n')
   },
   created () {
-    console.log('2.-------%c%s', 'color: green',
+    console.group('2.-------%c%s', 'color: green',
       'created el: ' + this.$el,
       ', $data:' + this.$data,
       ', message:' + this.message)
@@ -48,13 +48,15 @@ new Vue({
     console.log('\n')
   },
   // 为什么钩子函数不能是箭头函数？
-  beforeMount: () => {
-    console.log('3.-------------beforeMount:')
-    console.log(this)
+  // beforeMount: () => {
+  beforeMount () {
+    console.group('3.-------------beforeMount:')
+    console.log(this.$el)
     console.log('\n')
+    // debugger
   },
   mounted () {
-    console.log('4.--------%c%s', 'color: blue',
+    console.group('4.--------%c%s', 'color: blue',
       'mounted el: ' + this.$el,
       ', $data:' + this.$data,
       ', message:' + this.message)
@@ -63,6 +65,9 @@ new Vue({
     console.log(this.$methods)
     console.log(this.computedMessageMsg)
     console.log(this.variableBeforeCreate)
+    console.log('this.$vnode:')
+    console.log(this.$vnode)
+    console.log(this)
     console.log('\n')
   },
   render: h => h(App)
