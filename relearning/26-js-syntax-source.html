@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script type="module">
+  // 把模块中所有的变量以类似对象属性的方式引入。
+  import * as obj from  './js/26-source.js'
+  obj.console()
+  obj.consoleTwo()
+  //  引入模块中的变量。
+  import {consoleTwo, console } from  './js/26-source.js'
+  console()
+  consoleTwo()
+</script>
+</body>
+</html>
