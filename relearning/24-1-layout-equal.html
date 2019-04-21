@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>等分布局问题</title>
+</head>
+<body>
+<div class="outer">
+  <div class="inner"> inner </div>
+  <div class="inner">inner</div>
+  <div class="inner">inner</div>
+  <!--<div class="inner"> inner </div><div class="inner">inner</div><div class="inner">inner</div>-->
+</div>
+
+
+<style>
+  .outer {
+    /*font-size: 0;*/
+    width: 201px;
+  }
+  .inner {
+    width:33.33%;
+    height:300px;
+    display:inline-block;
+    outline:solid 1px blue;
+  }
+
+  .inner:last-child {
+    margin-right: -5px;
+  }
+
+
+</style>
+
+</body>
+</html>
