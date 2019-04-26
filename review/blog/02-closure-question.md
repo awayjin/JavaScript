@@ -1,13 +1,14 @@
 # 常见的内存泄露
 
-## 什么是内存泄露
+## 1. 什么是内存泄露
 > 内存泄漏指由于疏忽或错误造成程序未能释放已经不再使用的内存。
 内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，
 由于设计错误，导致在释放该段内存之前就失去了对该段内存的控制，
 从而造成了内存的浪费。
 ————[wikipedia](https://zh.wikipedia.org/wiki/%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F)
+- 闭包不会造成内存泄漏。程序写错了才会造成内存泄漏。
 
-## 意外的全局变量
+## 2. 意外的全局变量
 > JavaScript对未声明变量的处理方式：在全局对象上创建该变量的引用(即全局对象上的属性，不是变量，因为它能通过delete删除)
 
 ```javascript
@@ -38,10 +39,10 @@ Object.getOwnPropertyDescriptor(window, 'a')
 - 在用 var 声明变量时，JavaScript 引擎会默认把configurable设为false，所以它不能改名字，不能被删掉。
 
 
-## console [console](https://zhuanlan.zhihu.com/p/60538328)
+## 3. console [console](https://zhuanlan.zhihu.com/p/60538328)
 > 在传递给 console.log 的对象是不能被垃圾回收
 
-## 闭包
+## 4. 闭包
 > 闭包本质还是函数，只不过这个函数绑定了执行上下文环境（函数内部引用的所有变量）
 - 闭包不会造成内存泄漏。程序写错了才会造成内存泄漏。
 
@@ -91,9 +92,10 @@ Object.getOwnPropertyDescriptor(window, 'a')
 如果内部函数中存在有对外部函数变量（可以不是被引用的内部函数），
 并且存在某个或多个内部函数被其他对象引用，那么就会形成闭包，外部函数的变量对象就会存在于闭包函数的作用域链中。
 
-- 变量对象（variable object ES3标准中执行上下文中的一种，ES5 ES2018 不一样）
+- 变量对象（variable object ES3标准中执行上下文中的一种，ES5 ES2018 是词法环境）
 
-## DOM 泄露
-- 在JavaScript中，DOM操作是非常耗时的。因为JavaScript/ECMAScript引擎独立于渲染引擎，而DOM是位于渲染引擎，相互访问需要消耗一定的资源
+## 5. DOM 泄露
+> 在JavaScript中，DOM操作是非常耗时的。因为JavaScript/ECMAScript引擎独立于渲染引擎，而DOM是位于渲染引擎，相互访问需要消耗一定的资源
 
+- 为了减少DOM访问次数，一般情况下，当需要多次访问同一个DOM方法或属性时，会将DOM引用缓存到一个局部变量中
 - 如果在执行某些删除、更新操作后，可能会忘记释放掉代码中对应的DOM引用，这样会造成DOM内存泄露

@@ -158,7 +158,7 @@ export function mountComponent (): Component {
 
 ## 10.0 mounted
 > el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子
-- 实例挂载到 DOM 树上，此时可以通过 DOM API 获取到 DOM 节点，$ref属性可以访问
+- 实例挂载到 DOM 树上，此时可以通过 DOM API 获取到 DOM 节点，$ref 属性可以访问
 
 ```javascript
 export function mountComponent (
@@ -169,11 +169,18 @@ export function mountComponent (
   vm.$el = el
   // manually mounted instance, call mounted on self
   // mounted is called for render-created child components in its inserted hook
+  // 判断如果vm.$vnode == null，则设置vm._isMounted = true并调用mounted钩子函数
   if (vm.$vnode == null) {
     vm._isMounted = true
-    callHook(vm, 'mounted') //调用mounted钩子
+    callHook(vm, 'mounted') // 调用mounted钩子
   }
   return vm
 }
 ```
-- 判断如果vm.$vnode == null，则设置vm._isMounted = true并调用mounted钩子函数
+
+## 11.0 updated
+> 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子
+
+#### 11.1 beforeUpdate
+> 数据更新时调用，发生在虚拟 DOM 打补丁之前。
+- 适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器

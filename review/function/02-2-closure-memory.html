@@ -13,16 +13,21 @@
 <script>
   function f() {
     var str = Array(10000).join('#');
+
     var foo = {
       name: 'foo'
     }
+
+    // 未用到
     function unused() {
       var message = 'it is only a test message';
-      str = 'unused: ' + str;
+      str = 'unused: ' + str; // 不能被 GC  回收
     }
+
     function getData() {
       return 'data';
     }
+
     return getData;
   }
 

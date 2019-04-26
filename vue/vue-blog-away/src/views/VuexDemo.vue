@@ -1,18 +1,18 @@
+<!--<style lang="less" scoped>-->
+<style>
+  :root {
+    background-color: #f0efd0;
+  }
+</style>
 <template>
   <div class="about">
-    <h1>This is an about  page</h1>
+    <h1>Vuex</h1>
     <button @click="updatedData">Click Me changed data.</button>
     <p>
       inject-{{ foo }}
     </p>
     <p>Vuex count: {{ $store.state.count }} </p>
-    <p>Original fullName: {{ fullName }} </p>
-    <p>Computed fullNameComputed: {{ fullNameComputed }} </p>
-    <p>Original now: {{ now }} </p>
-    <p>Original message: {{ message }} </p>
 
-    <p>Computed reversed message: {{ reversedMessage }} </p>
-    <p>Method reversed message: {{ reversedMessageMethod() }} </p>
   </div>
 </template>
 
@@ -32,31 +32,7 @@ export default {
   inject: ['foo'],
   data () {
     return {
-      message: 'Hello World',
-      watchArray: [33, 44],
-      firstName: 'jin',
-      lastName: 'wei',
-      fullName: 'jin wei'
-    }
-  },
-  computed: {
-    // 词倒排
-    reversedMessage () {
-      return this.message.split('').reverse().join('')
-    },
-    now () {
-      return Date.now()
-    },
-    fullNameComputed () {
-      return this.firstName + ' ' + this.lastName
-    }
-  },
-  watch: {
-    firstName (val) {
-      this.fullName = val + ' ' + this.lastName
-    },
-    lastName (val) {
-      this.fullName = this.firstName + ' ' + val
+      message: 'Hello World'
     }
   },
   methods: {
@@ -68,8 +44,10 @@ export default {
       console.log(222)
       console.log(window._)
       console.log(this.$store.state.count)
+      console.log(this.$store.state.count)
       // this.lastName = 'away-2'
       this.firstName = 'jin-2'
+      this.$store.commit('increment')
       // this.now = 33
     }
   }

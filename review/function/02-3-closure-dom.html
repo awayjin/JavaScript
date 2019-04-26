@@ -16,6 +16,8 @@
   <pre class="wrapper"></pre>
 </div>
 
+
+
 <script>
   // 因为要多次用到 pre.wrapper、div.container、input.remove、input.add 节点，将其缓存到本地变量中
   var wrapper = document.querySelector('.wrapper');
@@ -45,6 +47,8 @@
     hide(addBtn);
     hide(removeBtn);
     container.removeChild(wrapper);
+
+    // wrapper = null; // 在执行删除操作时，将wrapper对pre节点的引用释放掉
   }
   var addCallback = function(){
     wrapper.appendChild(document.createTextNode('\t' + ++counter + '：a new line text\n'));

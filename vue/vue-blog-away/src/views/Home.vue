@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
+    {{ $store.state.count  + 1 }}
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
@@ -14,6 +15,9 @@ export default {
   name: 'home',
   components: {
     HelloWorld
+  },
+  beforeCreate () {
+    this.$store.state.count = 333
   }
 }
 </script>

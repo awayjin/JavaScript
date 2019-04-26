@@ -1,18 +1,10 @@
 <template>
   <div class="about">
-    <h1>This is an about  page</h1>
+    <h1>Lifecylce hooks</h1>
     <button @click="updatedData">Click Me changed data.</button>
     <p>
       inject-{{ foo }}
     </p>
-    <p>Vuex count: {{ $store.state.count }} </p>
-    <p>Original fullName: {{ fullName }} </p>
-    <p>Computed fullNameComputed: {{ fullNameComputed }} </p>
-    <p>Original now: {{ now }} </p>
-    <p>Original message: {{ message }} </p>
-
-    <p>Computed reversed message: {{ reversedMessage }} </p>
-    <p>Method reversed message: {{ reversedMessageMethod() }} </p>
   </div>
 </template>
 
@@ -33,7 +25,6 @@ export default {
   data () {
     return {
       message: 'Hello World',
-      watchArray: [33, 44],
       firstName: 'jin',
       lastName: 'wei',
       fullName: 'jin wei'
@@ -58,6 +49,38 @@ export default {
     lastName (val) {
       this.fullName = this.firstName + ' ' + val
     }
+  },
+  beforeCreate () {
+    console.log('1.beforeCreate this.message', this.message)
+    console.log(this)
+  },
+  created () {
+    console.group('2.created this.message', this.message)
+    console.log(this)
+  },
+  beforeMount () {
+    console.group('3. beforeMount this.message', this.message)
+    console.log(this)
+  },
+  mounted () {
+    console.group('4. mounted this.message', this.message)
+    console.log(this)
+  },
+  beforeUpdate () {
+    console.group('5. beforeUpdate this.message', this.message)
+    console.log(this)
+  },
+  updated () {
+    console.group('6. updated this.message', this.message)
+    console.log(this)
+  },
+  beforeDestroy () {
+    console.group('7. beforeDestroy this.message', this.message)
+    console.log(this)
+  },
+  destroyed () {
+    console.group('8. destroyed this.message', this.message)
+    console.log(this)
   },
   methods: {
     // 倒排
