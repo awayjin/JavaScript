@@ -6,6 +6,63 @@
   <title>Title</title>
 </head>
 <body>
+7. 如何用 promise 封装一个ajax
+
+<button class="btn">Send a ajax request</button>
+
+<script>
+  var btn = document.getElementsByClassName('btn')[0]
+  btn.onclick = function () {
+    http('get', 'http://localhost:4002/ajax3').then(data => {
+    // http('get', '/ajax').then(data => {
+      console.log(data)
+    }).catch(err => {
+      console.error('error:')
+      console.log(err)
+    })
+  }
+
+  function http (method, url, async = true) {
+    return new Promise(function (resolve, reject) {
+      let xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200 && xhr.status <= 300 || xhr.status === 304) {
+            resolve(xhr.responseText, this)
+          } else {
+            let resJSON = {
+              code: xhr.status,
+              response: xhr.response
+            }
+            reject(resJSON, this)
+          }
+        }
+      }
+
+      // error
+      // xhr.onerror = function (e) {
+      //   reject(e)
+      // }
+
+      async =  async === false ? false : true
+      xhr.open(method.toUpperCase(), url, true)
+      xhr.send(null)
+    })
+  }
+
+
+
+  function sleep (duration) {
+    return new Promise(function (resolve, reject) {
+      setTimeout(resolve, duration)
+    })
+  }
+
+  sleep(1000).then( () => {
+    console.log('finished')
+  })
+
+</script>
 
 </body>
 </html>
