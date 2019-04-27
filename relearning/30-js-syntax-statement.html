@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>syntax-statement</title>
+</head>
+<body>
+
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...of"></a>
+<pre>
+  for...of与for...in的区别
+
+  for...in 语句以原始插入顺序迭代对象的可枚举属性。
+  for...of 语句遍历可迭代对象定义要迭代的数据。
+</pre>
+
+<script>
+  var sym = Symbol(2)
+  var obj = {
+    a: 11,
+    b: {
+      b1: 221,
+      [sym]: 222
+    },
+    c: 33,
+    d: 44
+  }
+
+  // 不可枚举
+  Object.defineProperty(obj, 'c', {
+    enumerable: false,
+    value: 40
+  })
+
+  Object.defineProperty(obj, 'a', {
+    enumerable: true,
+    value: 'reset 11'
+  })
+
+  // for in
+  for (var key in obj) {
+    console.log(key + ', value:' + obj[key])
+  }
+  console.log('var 穿透' + key) // d
+
+  for (let key2 in obj.b) {
+    console.log(key2)
+  }
+  // console.log('var 穿透,' + key2) // let 块级
+
+
+  console.log('for of-----------------')
+  // for of是一个iterable-可迭代的
+  for (let e of [11, 22]) {
+    console.log(e)
+  }
+
+  // 给对象添加 iterator
+  let ofObj = {
+    [Symbol.iterator]: () => ({
+      _value: 100,
+      next () {
+        if (this._value == 104) return {
+          done: true
+        }
+        else return {
+          value: this._value++,
+          // value: ++this._value,
+          done: false
+        }
+      }
+    })
+  }
+  for (let e of ofObj) {
+    console.log(e)
+  }
+
+  // 生成器函数
+  function* iteatorFunc() {
+    yield 'ite 01'
+    yield 'ite 02'
+    yield 'ite 03'
+  }
+  for (let e of iteatorFunc()) {
+    console.log(e)
+  }
+
+
+  console.log('------------myIterable')
+  var myIterable = {
+    [Symbol.iterator]: function* () {
+      yield 'my iterator 04'
+      yield 'my iterator 052'
+      yield 'my iterator 06'
+    }
+  }
+  // myIterable[Symbol.iterator] = function* () {
+  //   yield 'my iterator 01'
+  //   yield 'my iterator 02'
+  //   yield 'my iterator 03'
+  // }
+  for (let e of myIterable) {
+    console.log(e)
+  }
+  console.log([...myIterable])
+
+
+  // 异步生成器函数 配备了 for await of
+  function sleep(duration) {
+    return new Promise(function(resolve, reject) {
+      setTimeout(resolve,duration);
+    })
+  }
+  async function* foo(){
+    i = 0;
+    while(true) {
+      await sleep(1000);
+      yield i++;
+    }
+
+  }
+  // for await(let e of foo())
+  //   console.log(e);
+
+  let o = { a: 1, b: 2 }
+  // with 语句把对象的属性在它内部的作用域内变成变量。
+  with (o) {
+    console.log(a, b)
+  }
+  // console.log(a)
+
+  // try throw语句
+  try {
+    throw new Error('error 44')
+  } catch (e) {
+    console.log(e)
+  } finally {
+    // finally 语句一般用于释放资源，它一定会被执行，
+    console.log('Finally is always executed.')
+  }
+
+  {
+    console.log('This is a block statement, also execution')
+  }
+
+  // let const 也会被预处理
+  const preV = 22
+  if (true) {
+    console.log(preV); // 抛错，证明有预处理
+    let preV = 44;
+  }
+
+  // class 最基本的用法只需要 class 关键字、名称和一对大括号。
+  // 它的声明特征跟 const 和 let 类似，都是作用于块级作用域，
+  // 预处理阶段则会屏蔽外部变量。
+</script>
+
+</body>
+</html>

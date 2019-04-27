@@ -5,16 +5,79 @@
   <title>Title</title>
 </head>
 <body>
+<a href="https://www.jianshu.com/p/f7db50cf956f">
+  在浏览器中使用javascript module（译）
+</a>
+
+
+<script>
+
+  // for(var i = 0; i < 20; i ++) {
+  for(let i = 0; i < 20; i ++) {
+    // void function(i){
+      var div = document.createElement("div");
+      div.innerHTML = i;
+      div.onclick = function(){
+        console.log(i);
+      }
+      document.body.appendChild(div);
+    // }(i);
+  }
+
+
+</script>
+
+<!--<script type="module"  src="./js/26-b.js"></script>-->
+<script type="module">
+  import { a, modify } from './js/26-a.js'
+  console.log('*********')
+
+  console.log(a)
+
+  modify()
+
+  console.log(a)
+
+
+  console.log('*********')
+</script>
+<script type="module">
+  import aa, { a as a1, b, c } from './js/26-c.js'
+  console.log(aa)
+  console.log(a1)
+  console.log(b)
+  console.log(c)
+</script>
+<!--<script type="module" src="./js/26-a.js"></script>-->
+
+<script src="./js/26-script.js">
+// 脚本加载
+</script>
 
 <script type="module">
+  // 模块
+  window.console.log('-------\n')
+
+  // 引入模块中导处的默认值
+  import x from './js/26-module.js'
+  window.console.log(x)
+
+  window.console.log('2.--------------\n')
+  //  引入模块中的变量。 语法要求不带 as 的默认值永远在前面
+  import d, {consoleTwo as two, console } from './js/26-module.js'
+  console()
+  two()
+  window.console.log(d)
+
+  window.console.log('-------')
+
   // 把模块中所有的变量以类似对象属性的方式引入。
-  import * as obj from  './js/26-source.js'
+  import * as obj from './js/26-module.js'
   obj.console()
   obj.consoleTwo()
-  //  引入模块中的变量。
-  import {consoleTwo, console } from  './js/26-source.js'
-  console()
-  consoleTwo()
+
+
+
 </script>
 </body>
 </html>

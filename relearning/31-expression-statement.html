@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>primary</title>
+</head>
+<body>
+
+
+
+<script>
+  void function () {
+    var obj = {}
+    var a = 4
+    var b = 5
+    Object.defineProperty(obj, 'c', {
+      // value: 33,
+      set: (val) => {
+        console.log(val)
+        this.a = val
+      },
+      get: () => {
+        return this.a
+      }
+    })
+
+    Object.defineProperties(obj, {
+      'a': {
+        // value: 33,
+        set: (val) => {
+          // console.log(val)
+          this.a = val
+        },
+        get: () => {
+          return this.a
+        }
+      },
+      'b': {
+        // value: 33,
+        set: (val) => {
+          // console.log(val)
+          this.b = val
+        },
+        get: () => {
+          return this.b
+        }
+      }
+    })
+    obj.a = 40
+    obj.b = 50
+    a = obj.a
+    b = obj.b
+
+    console.log(a)
+    console.log(b)
+  }()
+
+  var f = (arg) => {
+    console.log(arg)
+    console.log(arg[0])
+    console.log(arg[1])
+    console.log(arg[2])
+    console.log(arg.a + ', b: ' + arg.b + ', c: ' + arg.c)
+  }
+  // 这是一个是带函数的模板，这个带函数名的模板表示把模板的各个部分算好后传递给一个函数。
+  var a = 10
+  var b = 10
+  var c = 10
+  f`a${b}c`
+
+
+
+
+  class Cls{
+    constructor(n){
+      console.log("cls", n);
+      return class {
+        constructor(n) {
+          console.log("returned", n);
+        }
+      }
+    }
+  }
+
+  class Cls3 {
+    constructor (n) {
+      return class {
+        constructor (n) {
+          console.log("returned", n);
+        }
+      }
+    }
+  }
+  new (new Cls(1));
+
+</script>
+</body>
+</html>
