@@ -99,3 +99,100 @@ Object.getOwnPropertyDescriptor(window, 'a')
 
 - 为了减少DOM访问次数，一般情况下，当需要多次访问同一个DOM方法或属性时，会将DOM引用缓存到一个局部变量中
 - 如果在执行某些删除、更新操作后，可能会忘记释放掉代码中对应的DOM引用，这样会造成DOM内存泄露
+
+## 6. Timer 定时器
+> 在不需要setInterval()时，没有通过clearInterval()方法移除，那么setInterval()会不停地调用函数，再不需要重复定时器时，确保对定时器进行清除，避免占用系统资源。为了能在JavaScript中创建出平滑流畅的动画，浏览器为JavaScript动画添加了一个新API-requestAnimationFrame()。
+```html
+<input type="button" value="start" class="start">
+<input type="button" value="stop" class="stop">
+
+<script>
+  var counter = 0
+  // var timer
+  var clock = {
+    timer: null,
+    start: function () {
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+      this.timer = setInterval(this.step.bind(null, ++counter), 1000)
+    },
+    step: function (flag) {
+      var date = new Date()
+      var h = date.getHours()
+      var m = date.getMinutes()
+      var s = date.getSeconds()
+      console.log('%d ---< %d:%d:%d', flag, h, m, s)
+    },
+    destroy: function () {
+      console.log('----> stop <----')
+      clock = null
+      clearInterval(this.timer)
+    }
+  }
+
+  var start = document.querySelector('.start')
+  var stop = document.querySelector('.stop')
+
+  start.addEventListener('click', clock.start.bind(clock))
+  stop.addEventListener('click', clock.destroy.bind(clock))
+
+</script>
+
+```
+
+## 7. EventListener 事件监听器
+> 对于匿名函数，浏览器会将其看做不同的EventListener，所以只要将匿名的EventListener
+```html
+<div class="container"></div>
+<script>
+  var container = document.querySelector('.container')
+  var counter = 0
+
+  var createHtml = function (n, counter) {
+    var template = `
+    ${new Array(n).join(`
+      <div>
+        ${counter}: this is a new data
+        <input type="button" value="remove">
+      </div>
+    `)}`
+
+    container.innerHTML = template
+  }
+
+  var clickCallback = (event) => {
+    var target = event.target
+    if (target.tagName === 'INPUT') {
+      container.removeChild(target.parentNode)
+    }
+  }
+
+  // 在窗口大小变化时，会不断地对container添加代理事件
+  /**
+   *
+   * 同一个元素节点注册了多个相同的EventListener，那么重复的实例会被抛弃。
+   * 这么做不会让得EventListener被重复调用，也不需要用removeEventListener手动清除多余的EventListener，
+   * 因为重复的都被自动抛弃了。而这条规则只是针对于命名函数
+   * */
+  var resizeCallback = function (init) {
+    createHtml(10, ++counter)
+
+    // 事件委托 命名函数
+    container.addEventListener('click', clickCallback, false)
+
+    // 对于匿名函数，浏览器会将其看做不同的EventListener，所以只要将匿名的EventListener
+    // container.addEventListener('click', function (event) {
+    //   var target = event.target
+    //   if (target.tagName === 'INPUT') {
+    //     console.log(target.parentElement)
+    //     // container.removeChild(target.parentElement)
+    //     container.removeChild(target.parentNode)
+    //   }
+    // }, false)
+  }
+
+  window.addEventListener('resize', resizeCallback, false)
+  resizeCallback(true)
+</script>
+```

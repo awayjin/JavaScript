@@ -1,5 +1,5 @@
 export let a = 1
 
-export function modify() {
+export default function modify() {
   a = 2
 }

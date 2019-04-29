@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+
+<custom-el class="custom">33</custom-el>
+<div class="container"></div>
+
+<script>
+  var container = document.querySelector('.container')
+  var counter = 0
+
+  var createHtml = function (n, counter) {
+    var template = `
+    ${new Array(n).join(`
+      <div>
+        ${counter}: this is a new data
+        <input type="button" value="remove">
+      </div>
+    `)}`
+
+    container.innerHTML = template
+  }
+
+  var clickCallback = (event) => {
+    var target = event.target
+    if (target.tagName === 'INPUT') {
+      container.removeChild(target.parentNode)
+    }
+  }
+
+  // 在窗口大小变化时，会不断地对container添加代理事件
+  /**
+   *
+   * 同一个元素节点注册了多个相同的EventListener，那么重复的实例会被抛弃。
+   * 这么做不会让得EventListener被重复调用，也不需要用removeEventListener手动清除多余的EventListener，
+   * 因为重复的都被自动抛弃了。而这条规则只是针对于命名函数
+   * */
+  var resizeCallback = function (init) {
+    createHtml(10, ++counter)
+
+    // 事件委托 命名函数
+    container.addEventListener('click', clickCallback, false)
+
+    // 对于匿名函数，浏览器会将其看做不同的EventListener，所以只要将匿名的EventListener
+    // container.addEventListener('click', function (event) {
+    //   var target = event.target
+    //   if (target.tagName === 'INPUT') {
+    //     console.log(target.parentElement)
+    //     // container.removeChild(target.parentElement)
+    //     container.removeChild(target.parentNode)
+    //   }
+    // }, false)
+  }
+
+  window.addEventListener('resize', resizeCallback, false)
+  resizeCallback(true)
+</script>
+
+</body>
+</html>

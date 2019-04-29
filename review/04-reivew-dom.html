@@ -5,8 +5,10 @@
   <title>DOM 相关</title>
 </head>
 <body>
+<input type="search" id="search">
 
-1. 写一个函数，给定 nodes=[]，每一个节点拥有id, name, parent id，输出一个属性列表的展示(涉及dom操作)
+1. 写一个函数，给定 nodes=[]，每一个节点拥有id, name, parentId，输出一个属性列表的展示(涉及dom操作)
+OK
 
 2. 给定一个html，输出其中包含的html标签数量，可以用 dom api 注意iframe
 
@@ -21,5 +23,64 @@
 7. 重绘和重排
 <a href="https://imweb.io/topic/5c2206a7611a25cc7bf1d848">-</a>
 
+
+<div class="nodes" id="nodes-id" name="first-name" parentId="body-id">>
+  <div  id="child-one" name="first-name" parentId="parent--id">
+    first name name
+    <div class="nested-id" id="nested-child-onw" name="two-name" parentId="child-one">
+      <h2>nested h2</h2>
+      nested h2
+    </div>
+  </div>
+  <div  id="child-two" name="two-name" parentId="parent--id">
+    two name name
+  </div>
+</div>
+
+<script>
+  // 2. 给定一个html，输出其中包含的html标签数量，可以用 dom api 注意iframe
+  // attribute 与 property 区别 https://segmentfault.com/a/1190000008781121
+
+  // html 标签数量
+  let getHTMLTagCount = () => {
+
+  }
+</script>
+
+<script>
+
+  // 1. 写一个函数，给定 nodes=[]，每一个节点拥有id, name, parentId，输出一个属性列表的展示(涉及dom操作)
+  function AttributeList (element) {
+    'use strict'
+    let nodes = []
+
+    void function f(ele) {
+      let childNodes
+
+      if (ele.nodeType !== 1)  return
+      // 元素节点
+      nodes.push({
+        parentId: ele.getAttribute('parentId'),
+        id: ele.getAttribute('id'),
+        name: ele.getAttribute('name'),
+      })
+
+      childNodes = ele.childNodes
+      if (childNodes.length) { // 是否有子节点
+        [...childNodes].forEach(item => {
+          if (item.nodeType !== 1) return
+          // 子节点是元素节点-递归
+          f(item)
+        })
+      }
+    }(element)
+
+    return nodes
+  }
+
+  var nodes = document.querySelector('.nodes')
+  var getNodesAttr = AttributeList(nodes)
+  console.log(getNodesAttr)
+</script>
 </body>
 </html>

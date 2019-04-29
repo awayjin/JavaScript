@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>生成一些带锚点的标题</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.21/vue.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+  <anchor-heading :level="1">Hello anchor</anchor-heading>
+  <anchor-heading :level="2">Hello anchor</anchor-heading>
+  <anchor-heading :level="3">Hello anchor</anchor-heading>
+  <anchor-heading :level="4">Hello anchor</anchor-heading>
+</div>
+
+<script type="text/x-template" id="anchored-heading-template">
+    <h1 v-if="level === 1">
+      <slot></slot>
+    </h1>
+    <h2 v-else-if="level === 2">
+      <slot></slot>
+    </h2>
+    <h3 v-else-if="level === 3">
+      <slot></slot>
+    </h3>
+    <h4 v-else-if="level === 4">
+      <slot></slot>
+    </h4>
+</script>
+
+<script>
+  Vue.component('anchor-heading', {
+    // render: function (createElement) {
+    //   // default 属性包括了所有没有被包含在具名插槽中的节点，或 v-slot:default 的内容
+    //   console.log(this.$slots.default)
+    //   return createElement(
+    //     'h' + this.level, // 标签名称
+    //     this.$slots.default // 子节点数组
+    //   )
+    // },
+    template: '#anchored-heading-template',
+    props: {
+      level: {
+        type: Number,
+        required: true
+      }
+    }
+  })
+  new Vue({
+  }).$mount('#app')
+</script>
+
+</body>
+</html>
