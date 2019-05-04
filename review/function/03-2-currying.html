@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>curry bind</title>
+</head>
+<body>
+<a href="https://www.zhangxinxu.com/wordpress/2013/02/js-currying">currying</a>
+<a href="https://zhuanlan.zhihu.com/p/31271179">柯里化</a>
+<a href="https://juejin.im/post/5af13664f265da0ba266efcf">ES6 箭头函数 柯里化</a>
+
+
+<script>
+
+  var add = function (num1) {
+    return function (num2) {
+      return function (num3) {
+        return num1 + num2 + num3
+      }
+    }
+  }
+
+  var add = x => y => z => x+y+z
+  console.log(add(1)(2)(3))
+  // console.log(curry(add(1)(2)(3)()))
+
+  // curry
+  function curry (fn) {
+    var args = Array.prototype.slice.call(arguments, 1)
+    // console.log('args: ' + args)
+    return function () {
+      var innerArgs = Array.prototype.slice.call(arguments)
+      var finalArgs = args.concat(innerArgs)
+
+      console.log('innerArgs: ' + innerArgs)
+      console.log('finalArgs: ' + finalArgs)
+      return fn.apply(null, finalArgs)
+    }
+  }
+
+
+  function curring (fn, ...arg1) {
+    return function (...arg2) {
+      return fn(...arg1, ...arg2)
+    }
+  }
+  
+  function trueCurring(fn, ...args) {
+    if (args.length >= fn.length) {
+      return fn(...args)
+    }
+
+    return function (...args2) {
+      return trueCurring(fn, ...args, ...args2)
+    }
+  }
+
+
+  var add = (x, y) => x + y;
+
+  var increment = trueCurring(add, 11)
+  console.log(increment(22) === 33) // true
+  console.log(trueCurring(add, 11, 22) === 33) // true 被柯里化了
+  console.log(curring(add, 11, 22) === 33) // false
+
+
+
+</script>
+</body>
+</html>

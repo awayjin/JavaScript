@@ -26,6 +26,8 @@
  * Vue 通过 watch 选项提供了一个更通用的方法，来响应数据的变化。
  * 当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的
  */
+import * as myDemo from '../settings/index'
+
 export default {
   name: 'about',
   // 子组件注入 'foo'
@@ -34,6 +36,11 @@ export default {
     return {
       message: 'Hello World'
     }
+  },
+  mounted () {
+    console.log(myDemo)
+    console.log(myDemo.default())
+    // myDemo.default()
   },
   methods: {
     // 倒排

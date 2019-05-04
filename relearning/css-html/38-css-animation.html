@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div class="ani">
+  animation transition
+</div>
+
+<style>
+  @keyframes mykr {
+    from {
+      background-color: red;
+      transition: margin-left 1s 2s ease;
+    }
+
+    30% {
+      margin-left: 30px;
+      transition: top ease-in;
+
+    }
+
+    70% {
+      margin-left: 70px;
+      transition: top ease-out;
+
+    }
+
+    to {
+      background-color: green;
+      transition: top linear;
+
+    }
+
+  }
+
+  .ani {
+    /* infinite */
+    animation: mykr 3s 4 alternate;
+  }
+
+</style>
+
+</body>
+</html>

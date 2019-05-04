@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>垂直居中对齐</title>
+</head>
+<body>
+
+<div id="parent">
+  <div class="child">33</div>
+  <div class="child">
+    align-content 堆栈伸缩行
+    align-items 侧轴上项目对齐方式
+    align-self 侧轴上单个项目对齐方式
+    flex 伸缩性
+    flex-basis 伸缩-基准值
+    flex-direction 伸缩流方向
+    flex-flow伸缩流的方向与换行
+    flex-grow伸缩-扩展基数
+    flex-shrink 伸缩-收缩比率
+    flex-wrap 伸缩-换行
+    justify-content 主轴对齐
+    order 伸缩-顺序
+
+  </div>
+</div>
+
+<style>
+  #parent {
+    display: flex;
+    justify-content: center;
+    /*align-content: center;*/
+    align-items: center;
+
+
+    border: 1px solid red;
+    height: 500px;
+    width: 800px;
+  }
+  .child {
+    outline: 1px solid;
+    width: 200px;
+    height: 300px;
+  }
+</style>
+
+</body>
+</html>
