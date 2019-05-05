@@ -21,7 +21,7 @@
   }
 
   var add = x => y => z => x+y+z
-  console.log(add(1)(2)(3))
+  // console.log(add(1)(2)(3))
   // console.log(curry(add(1)(2)(3)()))
 
   // curry
@@ -32,8 +32,8 @@
       var innerArgs = Array.prototype.slice.call(arguments)
       var finalArgs = args.concat(innerArgs)
 
-      console.log('innerArgs: ' + innerArgs)
-      console.log('finalArgs: ' + finalArgs)
+      // console.log('innerArgs: ' + innerArgs)
+      // console.log('finalArgs: ' + finalArgs)
       return fn.apply(null, finalArgs)
     }
   }
@@ -44,9 +44,15 @@
       return fn(...arg1, ...arg2)
     }
   }
-  
+
+  // 递归降解
   function trueCurring(fn, ...args) {
     if (args.length >= fn.length) {
+      console.log('args.length:' + args.length)
+      console.log('fn.length:' + fn.length)
+      console.log(args)
+      console.log(fn)
+
       return fn(...args)
     }
 
@@ -62,6 +68,7 @@
   console.log(increment(22) === 33) // true
   console.log(trueCurring(add, 11, 22) === 33) // true 被柯里化了
   console.log(curring(add, 11, 22) === 33) // false
+  console.log(curry(add, 11, 22) === 33) // false
 
 
 

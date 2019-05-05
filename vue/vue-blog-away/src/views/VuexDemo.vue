@@ -39,7 +39,7 @@ export default {
   },
   mounted () {
     console.log(myDemo)
-    console.log(myDemo.default())
+    console.log(myDemo.default()) // defaultFunc str
     // myDemo.default()
   },
   methods: {
