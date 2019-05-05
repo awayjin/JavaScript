@@ -27,6 +27,7 @@
  * 当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的
  */
 import * as myDemo from '../settings/index'
+// var hello = require('../settings/index')
 
 export default {
   name: 'about',
@@ -41,6 +42,7 @@ export default {
     console.log(myDemo)
     console.log(myDemo.default()) // defaultFunc str
     // myDemo.default()
+    // console.log(hello)
   },
   methods: {
     // 倒排

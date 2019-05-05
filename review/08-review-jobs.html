@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+1. 讲讲项目中的难点和亮点, 项目中存在的问题， 对之前的项目做过什么优化
+
+2. 自己做项目的一些思路，封装过什么
+
+3. 简要描述下写的中间件，为什么要写这个中间件
+
+4. 谈谈对 webpack 的理解，常用哪些plugin，对 webpack 配置是否了解，对项目打包是否做过什么优化
+<a href="https://github.com/hawx1993/tech-blog/issues/3">webpack打包分析与性能优化</a>
+
+5. 有没有落地的 http2.0 经验，自己独立负责项目，职业规划
+
+
+<pre>
+1. 项目中存在的问题, 对应的优化
+
+  (1) 构建速度慢，3分钟左右，怎样优化？
+      - 使用 yarn 而不是 npm,
+      - <a href="https://segmentfault.com/q/1010000012211052">webpack 优化</a>
+
+  (2) 技术人员水平参差不齐、代码风格不一，工具保证(eslint), 需要前端团队规范
+      - <a href="https://awayjin.github.io/codeguide/">前端团队规范</a>
+      - Code Review建立一种review的文化
+
+  (3) 某些页面代码过长，可读性差、不好维护，没有分模块
+
+  (4) 背景不一样，不是所有人员都能使用好 git, 编写好 git 常用命令
+
+  (5) 随项目的迭代，模块越来越多，路由、请求资源、样式、图片都需要按文件夹分
+
+  (6) 一次数据加载太多(1000多条)，导致操作明显卡顿， element-ui 表格渲染太慢
+
+2. 疑问, LESS 样式何时加 scoped 好？
+
+</pre>
+
+ESLint - 目标是提供一个插件化的javascript代码检测工具
+校验语法或代码的书写风格
+
+<a href="https://router.vuejs.org/zh/guide/advanced/lazy-loading.html">路由懒加载</a>
+vue-cli 3.0 --- component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+others: --- component: resolve => require(['../pages/exception.vue'], resolve)
+</body>
+</html>

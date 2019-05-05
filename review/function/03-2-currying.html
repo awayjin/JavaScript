@@ -39,20 +39,16 @@
   }
 
 
+  // 在此实现中，currying 函数的返回值其实是一个接收剩余参数并且立即返回计算值的函数
   function curring (fn, ...arg1) {
     return function (...arg2) {
       return fn(...arg1, ...arg2)
     }
   }
 
-  // 递归降解
+  // 通过递归来将 currying 的返回的函数也自动 Currying 化
   function trueCurring(fn, ...args) {
     if (args.length >= fn.length) {
-      console.log('args.length:' + args.length)
-      console.log('fn.length:' + fn.length)
-      console.log(args)
-      console.log(fn)
-
       return fn(...args)
     }
 
