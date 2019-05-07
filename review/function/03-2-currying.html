@@ -39,7 +39,9 @@
   }
 
 
-  // 在此实现中，currying 函数的返回值其实是一个接收剩余参数并且立即返回计算值的函数
+  // 在此实现中，currying 函数的返回值
+  // 其实是一个接收剩余参数并且立即返回计算值的函数
+  // 即它的返回值并没有自动被 Currying 化
   function curring (fn, ...arg1) {
     return function (...arg2) {
       return fn(...arg1, ...arg2)

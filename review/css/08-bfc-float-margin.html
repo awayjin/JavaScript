@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="view=device-width">
+  <title>Title</title>
+</head>
+<body>
+
+<a href="https://juejin.im/post/5909db2fda2f60005d2093db">关于CSS-BFC深入理解</a>
+<a href="https://juejin.im/entry/59478ce8a0bb9f006bda9756">BFC的原理简介及其一些应用</a>
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context">
+  MDN 块级式化上下文
+</a>
+
+
+<div class="blue">
+  创建新的BFC避免两个相邻 div 之间的 外边距折叠( margin collapsing) 问题
+</div>
+<div class="red-outer">
+  <div class="red-inner">
+    red inner---
+    red-outer盒的高度应该是 70px 没有就被折叠了
+  </div>
+</div>
+<style>
+  .blue, .red-inner {
+    height: 50px;
+    margin: 10px 0;
+  }
+
+  .blue { background-color: blue; }
+  .red-outer {
+    /* 避免外边距折叠*/
+    /*overflow: hidden;*/
+    /* 无副作用 */
+    /*display: flow-root;*/
+    background-color: red;
+  }
+</style>
+
+  <br>
+  <br>
+  <br>
+  <br>
+<div class="box">
+  <div class="float">I am a floated box!</div>
+  <p>I am content inside the container.</p>
+</div>
+<style>
+  .box {
+    background-color: rgb(224, 206, 247);
+    border: 5px solid purple;
+    padding: 10px;
+    /* 创建包含浮动的 BFC */
+    /* overflow: auto;*/
+    /* 一个新的 display 属性的值，它可以创建无副作用的BFC。
+    在父级块中使用 display: flow-root 可以创建新的BFC*/
+    /*display: flow-root;*/
+  }
+
+  .float {
+    float: left;
+    width: 200px;
+    height: 150px;
+    background-color: white;
+    border:1px solid black;
+    padding: 10px;
+    opacity: .5;
+  }
+</style>
+
+</body>
+</html>
