@@ -39,6 +39,10 @@ export default {
       fullName: 'jin wei'
     }
   },
+  mounted () {
+    console.log('about this:')
+    console.log(this)
+  },
   computed: {
     // 词倒排
     reversedMessage () {

@@ -7,10 +7,13 @@
 <body>
 
 <div id="parent">
-  <div class="child">33</div>
-  <div class="child">
+  <div class="child child-one">
+    align-content对单行是没有效果的
+  </div>
+  <div class="child child-two">
     justify-content 主轴对齐
     align-items 侧轴上项目对齐方式
+
     align-content 堆栈伸缩行
 
     align-self 侧轴上单个项目对齐方式
@@ -30,18 +33,29 @@
   #parent {
     display: flex;
     justify-content: center;
-    /*align-content: center;*/
     align-items: center;
 
+    /*align-content: center;*/
+    /*flex-wrap: wrap;*/
 
     border: 1px solid red;
-    height: 500px;
-    width: 800px;
+    padding: 40px;
+    height: 600px;
+    /*width: 100%;*/
   }
+
   .child {
     outline: 1px solid;
     width: 200px;
     height: 300px;
+  }
+
+  .child-one {
+    /*margin-right: 100px;*/
+  }
+
+  .child-two {
+    /*margin-top: 40px;*/
   }
 </style>
 
