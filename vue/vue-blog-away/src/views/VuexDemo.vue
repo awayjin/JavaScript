@@ -33,17 +33,34 @@ export default {
   name: 'about',
   // 子组件注入 'foo'
   inject: ['foo'],
+  // state - 驱动应用的数据源
   data () {
     return {
+      count: 30,
       message: 'Hello World'
     }
   },
+  // view - 以声明方式将 state 映射到视图
+  template1: `<div>count: {{ count }}</div>`,
+  // 为什么 render 没执行？
+  render (h) {
+    return h('h2', this.count + `<div>count2: {{ count }}</div>`)
+  },
+  render2: function (createElement) {
+    return createElement('h1', this.message)
+  },
   mounted () {
-    console.log(myDemo)
+    console.log(Array(39).join('-') + 'VuexDemo')
+    console.log(this)
+    console.log(this.$root.$data)
+    console.log(this.$root.$data.count)
+    console.log(this.$data.count)
+    console.log(this.$data.message)
     console.log(myDemo.default()) // defaultFunc str
     // myDemo.default()
     // console.log(hello)
   },
+  // actions - 响应在 view 上的用户输入导致的状态变化
   methods: {
     // 倒排
     reversedMessageMethod () {

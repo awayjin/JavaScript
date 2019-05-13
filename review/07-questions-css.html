@@ -22,6 +22,11 @@
 
   2.3 水平垂直居中有哪些实现方式
 
+  line-height: height 有被问到该值是不是等于高度设置的值，这个没有答好，回来测试发现是跟盒模型相关的，需要是 computed height
+  absolute + transform 居中为什么要使用 transform（为什么不使用marginLeft / Top），这是一道重绘重排的问题。
+  flex + align-items: center 我会对 flex 容器以及 flex 项目的每个 css 属性都了解一遍，并且写了一些小 demo。
+
+
 3. css 优先级关系
 
 4. 格式化上下文(formatting context)
