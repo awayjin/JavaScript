@@ -1,5 +1,5 @@
 <!--<style lang="less" scoped>-->
-<style>
+<style scoped>
   :root {
     background-color: #f0efd0;
   }
@@ -7,7 +7,13 @@
 <template>
   <div class="about">
     <h1>Vuex</h1>
+    <h2>
+      token: {{ token }}
+    </h2>
     <button @click="updatedData">Click Me changed data.</button>
+    <br>
+    <br>
+    <button @click="updateChange">changed Vuex state.</button>
     <p>
       inject-{{ foo }}
     </p>
@@ -28,6 +34,7 @@
  */
 import * as myDemo from '../settings/index'
 // var hello = require('../settings/index')
+import { mapState } from 'vuex'
 
 export default {
   name: 'about',
@@ -37,8 +44,14 @@ export default {
   data () {
     return {
       count: 30,
+      bool: true,
       message: 'Hello World'
     }
+  },
+  computed: {
+    ...mapState({
+      token: state => state.user.token
+    })
   },
   // view - 以声明方式将 state 映射到视图
   template1: `<div>count: {{ count }}</div>`,
@@ -65,6 +78,15 @@ export default {
     // 倒排
     reversedMessageMethod () {
       return this.message.split('').reverse().join('')
+    },
+    updateChange () {
+      let dispatch = this.$store.dispatch
+      if (this.bool) {
+        dispatch('user/setToken', 'set token value')
+      } else {
+        dispatch('user/setToken', 'origin value')
+      }
+      this.bool = !this.bool
     },
     updatedData () {
       console.log(222)
