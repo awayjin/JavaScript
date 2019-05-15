@@ -1,6 +1,19 @@
 <template>
   <div class="about">
     <h1>This is an about  page</h1>
+    <pre>
+      about.getters doneArray: {{ $store.getters.doneArray }}
+      doneArray: {{ doneArrFilter }}
+
+      count: {{ count }}
+      countAlias: {{ countAlias + '-concat'}}
+      number: {{ number  }}
+      city: {{ city }}
+      obj.val: {{ val }}
+
+      <button @click="aboutCommit">About commit modules.</button>
+    </pre>
+    <hr>
     <button @click="updatedData">Click Me changed data.</button>
     <p>
       inject-{{ foo }}
@@ -17,6 +30,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 /**
  * 1. 计算属性缓存 vs 方法
  * 计算属性是基于它们的响应式依赖进行缓存的
@@ -26,6 +40,14 @@
  * Vue 通过 watch 选项提供了一个更通用的方法，来响应数据的变化。
  * 当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的
  */
+
+const obj = {
+  val: 20,
+  mulVal () {
+    return this.val * 2
+  }
+}
+
 export default {
   name: 'about',
   // 子组件注入 'foo'
@@ -36,14 +58,35 @@ export default {
       watchArray: [33, 44],
       firstName: 'jin',
       lastName: 'wei',
+      ...obj,
       fullName: 'jin wei'
     }
   },
   mounted () {
-    console.log('about this:')
-    console.log(this)
+    console.log(this.$store)
+    console.log(this.$store.commit)
   },
   computed: {
+    aboutDoneArr () {
+      return this.arrFilter.filter(number => number % 2 === 0)
+    },
+    ...mapGetters([
+      'doneArray',
+      'doneArrFilter'
+    ]),
+    ...mapState({
+      count: s => s.count,
+      number: s => s.about.number,
+      arrFilter: s => s.about.arrFilter,
+      countAlias: 'count', // 别名
+      city: state => state.about.city
+    }),
+    // count () {
+    //   return this.$store.state.count
+    // },
+    // city () {
+    //   return this.$store.state.about.city
+    // },
     // 词倒排
     reversedMessage () {
       return this.message.split('').reverse().join('')
@@ -64,6 +107,10 @@ export default {
     }
   },
   methods: {
+    // about commit
+    aboutCommit () {
+      this.$store.commit('aboutIncrement')
+    },
     // 倒排
     reversedMessageMethod () {
       return this.message.split('').reverse().join('')
