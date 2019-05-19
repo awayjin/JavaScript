@@ -235,6 +235,7 @@ var compileUtil = {
   },
 }
 
+// 更新函数
 var updater = {
   // 3.7.3
   modelUpdater: function (node, value, oldValue) {
