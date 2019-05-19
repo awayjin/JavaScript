@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  /* 第一种情况的样式 */
+  #box{
+    border:1px solid #f00;
+    width: 25%;
+    padding-bottom: 75%;
+  }
+  /*  第二种情况的样式  */
+  #box1{
+    border:1px solid #f0f;
+    padding-right: 25%;
+    /*padding-bottom: 75%;*/
+  }
+</style>
+<body>
+<!-- 第一种情况的盒子 -->
+<div id="box">
+  纯css实现一个高宽比为1：3的盒子 列举几种方式
+
+  在默认的水平文档流方向下，CSS margin和padding属性的垂直方向的百分比值都是相对于宽度计算的，这个和top, bottom等属性的百分比值不一样
+</div>
+<!-- 第二种情况的盒子 -->
+<div id="box1">
+  <a href="https://www.zhangxinxu.com/wordpress/2017/08/css-percent-padding-image-layout">z</a>
+</div>
+</body>
+</html>
+
+<!-- 这里的情况分两种：
+第一种是设置宽度，但是高度不设置的情况
+第二种是宽度和高度都不设置的情况
+使用的场景：用在图片宽度自适应，并且需要保持宽高比的时候 -->
