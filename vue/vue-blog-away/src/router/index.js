@@ -28,12 +28,19 @@ export default new Router({
         return import('../views/Hooks.vue')
       }
     },
+    // vuex
     {
       path: '/vuex-demo',
       // name: 'hooks',
       component: () => {
         return import('../views/VuexDemo.vue')
       }
+    },
+    // event-hub
+    {
+      path: '/event-hub',
+      name: 'event-hub index',
+      component: () => import('../views/event-hub/index.vue')
     }
   ]
 })
