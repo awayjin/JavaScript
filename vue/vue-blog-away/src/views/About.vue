@@ -8,10 +8,12 @@
       count: {{ count }}
       countAlias: {{ countAlias + '-concat'}}
       number: {{ number  }}
+      numberTwo: {{ numberTwo  }}
       city: {{ city }}
       obj.val: {{ val }}
 
       <button @click="aboutCommit">About commit modules.</button>
+      <button @click="setNumberComponent">Set Number Increment additional 2</button>
     </pre>
     <hr>
     <button @click="updatedData">Click Me changed data.</button>
@@ -30,7 +32,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 /**
  * 1. 计算属性缓存 vs 方法
  * 计算属性是基于它们的响应式依赖进行缓存的
@@ -77,6 +79,7 @@ export default {
     ...mapState({
       count: s => s.count,
       number: s => s.about.number,
+      numberTwo: s => s.about.numberTwo,
       arrFilter: s => s.about.arrFilter,
       countAlias: 'count', // 别名
       city: state => state.about.city
@@ -98,15 +101,20 @@ export default {
       return this.firstName + ' ' + this.lastName
     }
   },
-  watch: {
-    firstName (val) {
-      this.fullName = val + ' ' + this.lastName
-    },
-    lastName (val) {
-      this.fullName = this.firstName + ' ' + val
-    }
-  },
   methods: {
+    // mapActions 组件中分发 action
+    ...mapActions([
+      'addOne',
+      'setNumber' // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+    ]),
+    // setNumber
+    setNumberComponent () {
+      // this.$store.dispatch('setNumber', 10)
+      console.log(this.setNumber)
+      this.setNumber(10)
+      this.addOne()
+      // this.setNumber(10)
+    },
     // about commit
     aboutCommit () {
       this.$store.commit('aboutIncrement')
@@ -122,6 +130,14 @@ export default {
       // this.lastName = 'away-2'
       this.firstName = 'jin-2'
       // this.now = 33
+    }
+  },
+  watch: {
+    firstName (val) {
+      this.fullName = val + ' ' + this.lastName
+    },
+    lastName (val) {
+      this.fullName = this.firstName + ' ' + val
     }
   }
 }
