@@ -7,7 +7,9 @@ import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
-window.vm = new Vue({
+// eventHub 将在各处使用该事件中心
+// 组件通过它来通信
+Vue.prototype.$eventHub = new Vue({
   router,
   store,
   // 父组件提供
@@ -16,5 +18,4 @@ window.vm = new Vue({
     foo: 'bar'
   },
   render: h => h(App)
-})
-  .$mount('#app')
+}).$mount('#app')

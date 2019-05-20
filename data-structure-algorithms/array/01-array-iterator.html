@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  var arr = [1, 2, 3, 4, 5, 6, 7]
+
+  var isEvent = number => {
+    console.log(number)
+    // number = 4
+    return number % 2 === 0 ? true : false
+  }
+
+  console.log(Array(30) + '原数组 arr')
+  console.log(arr)
+
+
+  // 迭代器函数
+
+  console.log(Array(30) + '1.every')
+  // every
+  var myEvery = arr.every(isEvent) // 迭代每一个元素，直到返回 false
+  console.log(myEvery)
+
+  console.log(Array(30) + '2. some')
+  // some
+  var mySome = arr.some(isEvent) // 迭代每一个元素，直到返回 true
+  console.log(mySome)
+
+  console.log(Array(30) + '3. forEach' )
+  // forEach-不返回值 可以改变原数组??
+  var myForEach = arr.forEach(isEvent) // 和 for 相同，不返回值
+  console.log(myForEach)
+  // arr.forEach(item => {
+  //   return item * 3
+  // })
+  // arr.forEach(function(part, index, theArray) {
+  //   theArray[index] = "hello world";
+  // });
+  console.log(arr)
+
+  // 4. map-返回值
+  console.log(Array(30) + '4. map')
+  var myMap = arr.map(isEvent)
+  console.log(myMap)
+
+  // 5. filter-返回原值
+  console.log(Array(30) + '5. filter')
+  var myFilter = arr.filter(isEvent)
+  console.log(myFilter)
+
+  // 6. reduce-返回原值
+  console.log(Array(30) + '6. reduce')
+  var myDeduce = arr.reduce((acc, value) => {
+    return acc + value
+  })
+  console.log(myDeduce)
+</script>
+</body>
+</html>
