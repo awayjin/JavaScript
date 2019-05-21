@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // 赋值与浅拷贝
+
+  void function () {
+    var obj1 = {
+      name: 'shallow and deep copy',
+      age: 18,
+      language: [1, [2, 3], [4, 5]]
+    }
+
+    // 对象赋值
+    var obj2 = obj1
+    obj2.name = 'assigment name'
+    obj2.language = ['ass2', 'ass3']
+    console.log('obj1:', obj1)
+    console.log('obj2:', obj2)
+  }()
+
+  console.log('shallow copy:', Array(40).join('-'))
+  void function () {
+    var obj1 = {
+      name: 'shallow and deep copy',
+      age: 18,
+      language: [1, [2, 3], [4, 5]]
+    }
+    // 浅拷贝
+    function shallowCopy (src) {
+      var dst = {}
+      for (var prop in src) {
+        if (src.hasOwnProperty(prop)) {
+          dst[prop] = src[prop]
+        }
+      }
+      return dst
+    }
+    var obj3 = shallowCopy(obj1)
+    obj3.name = 'shallow name'
+    obj3.language[1] = ['二', '三']
+    console.log('obj1:', obj1)
+    console.log('obj3:', obj3)
+
+    var objAssign = Object.assign({}, obj1)
+
+  }()
+
+  console.log('Object.assign:', Array(40).join('-'))
+  void function () {
+    var obj1 = {
+      age: 18,
+      language: {
+        a: 100
+      }
+    }
+    // Object.assign
+
+
+    var objAssign = Object.assign({}, obj1)
+    objAssign.language.a = 200
+    console.log('obj1:', obj1)
+    console.log('objAssign:', objAssign)
+
+    // 只有一层时是深拷贝
+
+
+  }()
+</script>
+
+</body>
+</html>
