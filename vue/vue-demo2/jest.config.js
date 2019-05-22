@@ -1,3 +1,5 @@
+// npm run test:unit -- --watch
+
 module.exports = {
   moduleFileExtensions: [
     'js',
@@ -19,12 +21,19 @@ module.exports = {
   snapshotSerializers: [
     'jest-serializer-vue'
   ],
-  testMatch: [
+  // remove
+  testMatch3: [
     '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
   ],
+  // add
+  testMatch: ["**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"],
   testURL: 'http://localhost/',
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname'
-  ]
+  ],
+  // add
+  collectCoverage: process.env.COVERAGE === "true",
+  // add
+  collectCoverageFrom: ["src/**/*.{js,vue}", "!**/node_modules/**"]
 }
