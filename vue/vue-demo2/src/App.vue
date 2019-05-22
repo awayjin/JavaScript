@@ -3,7 +3,14 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/mixin">mixin</router-link> |
-      <router-link to="/about">About</router-link>
+
+      <Authorized :authority="['admin1']">
+        <router-link to="/about">About1</router-link>
+      </Authorized>
+
+      <router-link to="/about" v-auth="['admin2']">About2</router-link>
+      <router-link to="/about" v-auth="['admin']">About3</router-link>
+
     </div>
     <router-view/>
   </div>

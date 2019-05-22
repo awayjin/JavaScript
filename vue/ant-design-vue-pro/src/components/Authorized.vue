@@ -1,5 +1,6 @@
 <script>
 import { check } from "../utils/auth";
+
 export default {
   functional: true,
   props: {
