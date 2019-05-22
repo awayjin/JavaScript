@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import findLast from 'lodash/findLast'
 import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { check, isLogin } from './utils/auth'
 
 Vue.use(Router)
@@ -44,6 +45,7 @@ router.beforeEach((to, from, next) => {
   if (to.path !== from.path) {
     NProgress.start()
   }
+  console.log('to.matched: ', to.matched)
   const record = findLast(to.matched, record => record.meta.authority)
   if (record && !check(record.meta.authority)) {
     if (!isLogin() && to.path !== '/mixin') {
