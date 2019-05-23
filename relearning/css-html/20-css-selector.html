@@ -6,6 +6,7 @@
   <title>JS Bin</title>
 </head>
 <body>
+
 <svg width="100" height="28" viewBox="0 0 100 28" version="1.1"
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <desc>Example link01 - a link on an ellipse
@@ -14,10 +15,12 @@
     <text y="100%">name</text>
   </a>
 </svg>
+
 <br/>
 <a href="javascript:void 0;">name element</a>
-<p>p</p>
-<a href="#" class="a b c">xxx</a> <br>
+<hr>
+<a href="#" class="a-size">first</a> <br>
+
 <a href="##" class="a b c">xxx</a> <br>
 <a href="##" class="a b c" data-mul="fir">mul</a> <br>
 <a href="##" class="a b c" data-mul="mul sec" lang="en-3">mul</a> <br>
@@ -31,10 +34,11 @@
   * {
     font-style: italic;
   }
+  /* 匹配所有的 SVG <a> 元素 */
   svg|a {
     stroke: green;
-    font-size: 12px;
-    stroke-width:1;
+    font-size: 20px;
+    /*stroke-width:1;*/
   }
 
   html|a {
@@ -42,19 +46,19 @@
     color: red;
   }
 
-  .a{ color: black; }
-  .b[href] { font-style: normal; color: blue; }
-  .c[href='##'] {
-    color: pink;
-  }
-  /* 多种匹配 */
-  .a[data-mul~=fir] {
-     color: lightgrey;
-  }
-  /* 开头匹配 */
-  .a[lang|=en] {
-    color: mediumpurple;
-  }
+  .a-size { color: black; font-size: 20px; }
+  /*.b[href] { font-style: normal; color: blue; }*/
+  /*.c[href='##'] {*/
+    /*color: pink;*/
+  /*}*/
+  /*!* 多种匹配 *!*/
+  /*.a[data-mul~=fir] {*/
+     /*color: lightgrey;*/
+  /*}*/
+  /*!* 开头匹配 *!*/
+  /*.a[lang|=en] {*/
+    /*color: mediumpurple;*/
+  /*}*/
 </style>
 </body>
 </html>
