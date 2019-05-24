@@ -8,6 +8,7 @@ import { check, isLogin } from './utils/auth'
 
 Vue.use(Router)
 
+// https://blog.csdn.net/QingWaXieZi/article/details/85041224
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,

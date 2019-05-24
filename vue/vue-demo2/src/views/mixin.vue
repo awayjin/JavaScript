@@ -6,6 +6,7 @@
       当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项
       mixinMsg: {{ mixinMsg }}
       message: {{ message }}
+      <span class="count">1</span>
     </pre>
   </div>
 </template>
