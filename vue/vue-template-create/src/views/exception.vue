@@ -2,30 +2,28 @@
   <div class="page">
     <div class="bd">
       <div class="page-not-found">
-        <h3 v-show="content.title !== ''" class="title">{{ content.title }}</h3>
-        <p v-show="content.describe !== ''" class="describe">{{ content.describe }}</p>
-        <div  @click="QRCode" v-html="content.extra"></div>
+        <h3 v-if="content.title !== ''" class="title">{{ content.title }}</h3>
+        <p v-if="content.describe !== ''" class="describe">{{ content.describe }}</p>
+        <div v-html="content.extra"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+const INFORMATION_OPERATE = `<p class="redirect">返回 <a href="javascript:;" onclick="window.history.back()">上一页</a> | <a href="/">首页</a> | <a href="javascript:;"  @click="QRCode">退出重试</a></p>`
+
 const exceptionList = {
   'default': {
     title: '',
     describe: '服务器发生未知异常',
-    extra: '<p class="redirect">返回 <a href="javascript:;" onclick="window.history.back()">上一页</a> | <a href="/">首页</a> | <a href="javascript:;" >退出重试</a></p>'
-  },
-  '401': {
-    title: '',
-    describe: '没有权限,',
-    extra: '<p class="redirect">客户端请求错误<a href="javascript:;" >401</a></p>'
+    extra: INFORMATION_OPERATE
   },
   '403': {
     title: '403',
     describe: '没有权限,',
-    extra: '<p class="redirect">无权限 <a href="javascript:;" >403</a></p>'
+    extra: '<p class="redirect"><a href="javascript:;"  @click="QRCode">退出重试</a></p>'
+    // extra: INFORMATION_OPERATE
   }
 }
 
@@ -41,7 +39,13 @@ export default {
   },
   methods: {
     QRCode () {
-      console.log('QRCode')
+      let closeObj = {
+        'method': 'closeWeb',
+        'content': '',
+        'success': '',
+        'error': ''
+      }
+      window.location = '/native_service?data=' + JSON.stringify(closeObj)
     }
   }
 }

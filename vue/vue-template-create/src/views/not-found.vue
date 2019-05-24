@@ -15,6 +15,7 @@
 
 <style lang='scss'>
   @import '../scss/vars';
+
   .page-not-found {
     padding-top: 40px;
     h3.title {

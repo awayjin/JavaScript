@@ -1,46 +1,46 @@
-# vue-admin-create
+# x-board-mobile
 
-Vue 管理后台基础脚手架
-
-
-
-
-### 目录结构
-
-
-### vue ui 安装
-
-建议后续的依赖，通过 GUI 安装所需开发依赖或项目依赖
-
-```
-npm install -g @vue/cli
-# OR
-yarn global add @vue/cli
-```
-
-## Project setup
+## 安装
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 运行开发环境
+在 `src/utils/env-setup.js` 文件设置远程资源 `URL` 、端口号、前缀
+
 ```
-yarn run serve
+yarn run dev 
+yarn run test 
+yarn run pro 
 ```
 
-### Compiles and minifies for production
+### 构建打包
+在 `src/utils/env-setup.js` 文件设置远程资源 `URL` 、端口号、前缀
+
 ```
+yarn run build:dev
+yarn run build:test
 yarn run build
 ```
 
-### Run your tests
+### 运行单元测试
 ```
-yarn run test
+yarn run test:unt
+```
+
+实时监控单元测试
+```
+yarn run test:unit -- --watch
 ```
 
 ### Lints and fixes files
 ```
 yarn run lint
+```
+
+### Run your unit tests
+```
+yarn run test:unit
 ```
 
 ### Customize configuration

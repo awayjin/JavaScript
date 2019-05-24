@@ -1,5 +1,10 @@
 import Vue from 'vue'
 import axios from 'axios'
+import baseURL from '../utils/env-setup'
+
+// axios.defaults.baseURL = 'https://vanvan.vankeservice.com/'
+axios.defaults.baseURL = baseURL
+console.log('process.env: ', process.env)
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || ''
@@ -7,8 +12,8 @@ import axios from 'axios'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 let config = {
-  // baseURL: process.env.baseURL || process.env.apiUrl || ''
-  timeout: 60 * 1000 // Timeout
+  // baseURL: process.env.baseURL || process.env.apiUrl || ""
+  // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 }
 
