@@ -21,19 +21,21 @@
 <hr>
 <a href="#" class="a-size">first</a> <br>
 
-<a href="##" class="a b c">xxx</a> <br>
-<a href="##" class="a b c" data-mul="fir">mul</a> <br>
-<a href="##" class="a b c" data-mul="mul sec" lang="en-3">mul</a> <br>
-<a href="##" class="a b c" data-mul="mul flower" lang="en-2">mul</a> <br>
-<ena>2</ena>
-<ena>3</ena>
+<a href="##" class="a">xxx</a> <br>
+<a href="##" class="a b" data-mul="fir">mul</a> <br>
+<a href="##" class="a b c" id="c" data-mul="mul sec" lang="en-3">mul</a> <br>
+<a href="##" class="a b c d" data-st="muls" data-mul="mul flower mul-4" lang="en-2">mul</a> <br>
 
 <style>
   @namespace svg url(http://www.w3.org/2000/svg);
   @namespace html url(http://www.w3.org/1999/xhtml);
   * {
-    font-style: italic;
+    /*font-style: italic;*/
   }
+  [href] { font-style: italic; }
+  [href='#'] { font-style: normal; }
+  [class~='c'] { color: purple; }
+  [data-st|='mul'] { font-size: 30px;}
   /* 匹配所有的 SVG <a> 元素 */
   svg|a {
     stroke: green;
@@ -47,6 +49,9 @@
   }
 
   .a-size { color: black; font-size: 20px; }
+  #c { font-style: normal; font-size: 50px; }
+  .c { font-style: italic; font-size: 14px; }
+
   /*.b[href] { font-style: normal; color: blue; }*/
   /*.c[href='##'] {*/
     /*color: pink;*/
