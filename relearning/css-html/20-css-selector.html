@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>JS Bin</title>
+  <link rel="dns-prefetch" href="//g.alicdn.com">
 </head>
 <body>
 
@@ -15,6 +16,9 @@
     <text y="100%">name</text>
   </a>
 </svg>
+<!--<a href="">&lt;!&ndash; I will be lime &ndash;&gt;</a>-->
+
+<area shape="circle" coords="" href="" alt="">
 
 <br/>
 <a href="javascript:void 0;">name element</a>
@@ -22,9 +26,25 @@
 <a href="#" class="a-size">first</a> <br>
 
 <a href="##" class="a">xxx</a> <br>
-<a href="##" class="a b" data-mul="fir">mul</a> <br>
-<a href="##" class="a b c" id="c" data-mul="mul sec" lang="en-3">mul</a> <br>
-<a href="##" class="a b c d" data-st="muls" data-mul="mul flower mul-4" lang="en-2">mul</a> <br>
+<a href="###" class="a b" data-mul="fir">3 mul</a> <br>
+<a href="####" class="a b c" id="c" data-mul="mul sec" lang="en-3">4 mul</a> <br>
+<a href="#####" class="a b c d" data-st="muls" data-mul="mul flower mul-4" >5 mul</a> <br>
+
+
+<section>
+  <span>1</span>
+  <span>2</span>
+  <span>3</span>
+  <span>4</span>
+  <span>5</span>
+  <span>6</span>
+  <span>7</span>
+  <span>8</span>
+  <span>9</span>
+  <span>10</span>
+  <span>11</span>
+  <span>12</span>
+</section>
 
 <style>
   @namespace svg url(http://www.w3.org/2000/svg);
@@ -51,6 +71,21 @@
   .a-size { color: black; font-size: 20px; }
   #c { font-style: normal; font-size: 50px; }
   .c { font-style: italic; font-size: 14px; }
+
+  /* 树结构关系-伪类选择器 */
+  section span:nth-child(even) { color: deeppink; }
+  section span:nth-child(odd) { color: blue; }
+  /*section span:nth-child(4n-1) { color: green; }*/
+
+  /* 链接与行为-伪类选择器 */
+  :any-link {
+    text-decoration: none;
+  }
+  a:link { color: #333; }
+  a:visited { color: darkgrey; }
+  a:hover { text-decoration: underline; }
+  a:active { font-size: 60px; font-style: italic; color: rebeccapurple; }
+  a:target {}
 
   /*.b[href] { font-style: normal; color: blue; }*/
   /*.c[href='##'] {*/

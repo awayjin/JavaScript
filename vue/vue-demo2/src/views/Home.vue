@@ -13,6 +13,13 @@ export default {
   name: 'home',
   components: {
     HelloWorld
+  },
+  beforeRouteEnter (to, from, next) {
+    // console.log('home-to:', to)
+    next()
+  },
+  mounted () {
+    // console.log(this.$router)
   }
 }
 </script>

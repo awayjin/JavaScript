@@ -16,6 +16,7 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
+      homeHidden: 'define hidden',
       component: Home
     },
     {
@@ -27,6 +28,7 @@ const router = new Router({
     {
       path: '/about',
       meta: { authority: ['user', 'admin'] },
+      hidden: 'define hidden',
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
@@ -38,6 +40,30 @@ const router = new Router({
       meta: { icon: 'form', title: '表单', authority: ['3admin'] },
       name: 'mixin',
       component: () => import('./views/mixin.vue')
+    },
+    // user 用户模块
+    {
+      // path: '/user/:id', // 动态路由
+      path: '/user', // 动态路由
+      component () {
+        return import('./views/user/user-index.vue')
+      },
+      // 嵌套路由
+      children: [
+        {
+          path: ':id/else',
+          component: () => import('./views/user/user-else.vue')
+        },
+        {
+          path: 'login',
+          // redirect: '/login',
+          component: () => import('./views/user/user-login.vue')
+        },
+        {
+          path: ':id/profile',
+          component: () => import('./views/user/user-profile.vue')
+        }
+      ]
     }
   ]
 })
@@ -46,19 +72,17 @@ router.beforeEach((to, from, next) => {
   if (to.path !== from.path) {
     NProgress.start()
   }
-  console.log('to.matched: ', to.matched)
   const record = findLast(to.matched, record => record.meta.authority)
+  // const record = to.matched.find(item => item.meta.authority)
   if (record && !check(record.meta.authority)) {
-    if (!isLogin() && to.path !== '/mixin') {
+    if (!isLogin() && to.path !== '/user/login') {
       next({
-        path: '/403'
+        path: '/user/login'
       })
     } else if (to.path !== '/403') {
-      console.log(403)
       next({
         path: '/403'
       })
-      // next()
     }
     NProgress.done()
   }

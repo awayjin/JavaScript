@@ -4,12 +4,22 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/mixin">mixin</router-link> |
 
-      <Authorized :authority="['admin1']">
+     <!-- <Authorized :authority="['admin']">
         <router-link to="/about">About1</router-link>
-      </Authorized>
+      </Authorized> |-->
+      <router-link to="/about">About1</router-link> |
 
-      <router-link to="/about" v-auth="['admin2']">About2</router-link>
-      <router-link to="/about" v-auth="['admin']">About3</router-link>
+      <router-link to="/about" vc-auth="['admin2']">About2</router-link> |
+      <router-link to="/about" vc-auth="['admin3']">About3</router-link> |
+
+      <div>User:
+       <router-link to="user">user</router-link>
+      | <router-link to="/user/foo/else">user-foo</router-link>
+      | <router-link to="/user/bar/else">user-bar</router-link>
+      | <router-link to="/user/33/profile">user-33-profile</router-link>
+      | <router-link to="/user/anything/profile">user-xx-profile</router-link>
+      | <router-link to="/user/anything/login">user-xx-login</router-link>
+      </div>
 
     </div>
     <router-view/>

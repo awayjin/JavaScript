@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
+      <router-link to="/login">login</router-link> |
       <router-link to="/about?cd=me">About</router-link> |
       <router-link to="/exception/403">403</router-link> |
       <router-link to="/exception/2">exception</router-link>

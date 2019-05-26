@@ -1,4 +1,6 @@
-export default {
+import Vue from 'vue'
+
+const filters = {
   // 全局过滤器
   install (Vue) {
     Vue.filter('demoFilter', function (val) {
@@ -14,3 +16,7 @@ export default {
     })
   } // close install
 }
+
+Vue.use(filters)
+
+export default filters

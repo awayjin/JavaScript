@@ -19,10 +19,7 @@ export default {
     }
   },
   mounted () {
-    // this.$axios.get('/get')
-    // this.$axios.post('/post')
-    // console.log(this.$axios.get('/get'))
-    console.log(this.$axios.post)
+    // console.log(this.$axios.post)
   }
 }
 </script>

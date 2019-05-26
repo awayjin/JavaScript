@@ -4,7 +4,7 @@ import baseURL from '../utils/env-setup'
 
 // axios.defaults.baseURL = 'https://vanvan.vankeservice.com/'
 axios.defaults.baseURL = baseURL
-console.log('process.env: ', process.env)
+// console.log('process.env: ', process.env)
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || ''
