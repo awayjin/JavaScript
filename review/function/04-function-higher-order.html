@@ -53,7 +53,7 @@ isType, add-acc 累加
 
   // 2. filter 数组去重
   void function () {
-    let arr1 = [31, 2, 31, 2, 3, undefined, 5, 4, 5, 3, 4, null, undefined, null, 4]
+    let arr1 = [31, 2, 31, 2, 3, undefined, 5, 4, 5, 3, 4, null, undefined, null, 4, { a: 1}, { a: 1 }]
     let arr2 = []
     let arr3 = []
 
@@ -63,16 +63,16 @@ isType, add-acc 累加
         arr2.push(arr1[i])
       }
     }
-    console.log(arr1)
-    console.log(arr2)
+    console.log('arr1:', arr1)
+    console.log('arr2:', arr2)
 
     // filter 去重
     arr3 = arr1.filter((element, index, array) => {
       return array.indexOf(element) === index
     })
 
-    console.log(arr1)
-    console.log(arr3)
+    console.log('arr1:', arr1)
+    console.log('arr3:', arr3)
 
   }()
 

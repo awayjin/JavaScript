@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Title</title>
+</head>
+<body>
+<h1>体验一把HTTP2</h1>
+<script src="bundle1.js"></script>
+<script src="bundle2.js"></script>
+
+<p><button class="http2"> http/2 加载100张图片</button></p>
+<p> <button class="http"> http-- 加载100张图片</button></p>
+
+<script>
+  const http2 = document.querySelector('.http2')
+  http2.addEventListener('click', () => {
+    for(var i=0;i<100;i++) {
+      fetch('//localhost:5003/network.png')
+    }
+  }, false)
+
+  const http = document.querySelector('.http')
+  http.addEventListener('click', () => {
+    console.log('http')
+    fetch('http://localhost:5005/network.png')
+  }, false)
+</script>
+
+</body>
+</html>
