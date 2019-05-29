@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+<a href="##" class="a">xxx</a> <br>
+<a href="###" class="a b" data-mul="fir">3 mul</a> <br>
+<a href="####" class="a b c" id="c" data-mul="mul sec" lang="en-3">4 mul</a> <br>
+<a href="http#####" class="a b c d" data-st="muls" data-mul="mul flower mul-4" >5 mul</a> <br>
+
+<br>
+<div>
+  <span class="a" a>First paragraph</span><br/>
+  <span>Second paragraph</span>
+</div>
+
+<div>
+  <p class="a" a>First paragraph</p>
+  <p>Second paragraph</p>
+</div>
+
+
+<style>
+  [href] { font-style: italic; }
+  [href='#'] { font-style: normal; }
+  [class~='c'] { color: purple; }
+  [data-st|='mul'] { font-size: 30px;}
+
+  .c[href^='#'] { color: red;  }
+  [href^='#']::before { content: 'ADD SYMBOL...'; }
+
+  div>p.a {
+    color:green;
+  }
+
+  div::first-line {
+    color:blue;
+  }
+
+ 
+</style>
+</body>
+</html>
+
