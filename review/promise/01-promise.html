@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+4.0 Promise 相关问题
+4.1 Promise是否了解，如何实现一个promise
+<a href="https://yq.aliyun.com/articles/609233"></a>
+
+4.2 axios 与 xhr 的区别，如何用 promise 包装 xhr
+
+4.3 如何用 promise 封装一个ajax
+<a href="https://juejin.im/post/5b699295e51d45199358f7b5"></a>
+
+4.4 async await 实现原理
+
+<script>
+  setTimeout(() => console.log(22), 0)
+  console.log(0)
+  const promise = new Promise((resolve, rejected) => {
+    setTimeout(() => {
+      console.log(33)
+    })
+    let begin = Date.now()
+    while (Date.now() - begin < 1000); // 暂停2秒
+    resolve(11)
+  })
+  promise.then(data => console.log(data))
+  void function () {
+
+  }()
+
+  
+  void function () {
+    function sleep (duration) {
+      return new Promise((res, reject) => {
+        console.log(arguments)
+        console.log('b1')
+        setTimeout(reject, duration)
+      })
+    }
+    console.log('a1')
+    sleep(0).then(() => console.log('c1'), (err) => console.log(err))
+  }()
+
+  void function () {
+
+
+    // setTimeout 把整个代码分割成了 2 个宏观任务，这里不论是 5 秒还是 0 秒，都是一样的。
+    // 第一个宏观任务中，包含了先后同步执行的 console.log("a") console.log("b")
+    // setTimeout 后，第二个宏观任务执行调用了 resolve，然后 then 中的代码异步得到执行，
+    // 所以调用了 console.log(“c”)，最终输出的顺序才是： a b c。
+
+    // 两个宏观任务
+    function sleep(duration) {
+      return new Promise(function(resolve, reject) {
+        console.log("b");
+        setTimeout(resolve, duration);
+      })
+    }
+    console.log("a");
+    // sleep(5000).then(()=>console.log("c"));
+    sleep(0).then(()=>console.log("c"));
+  }()
+
+</script>
+</body>
+</html>
