@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create"></a>
+
+<script>
+  function Parent (colorHair = 'black', forturne = '100' , x = 0, y = 0) {
+    this.colorHair = colorHair
+    this.forturne = forturne
+    this.x = x
+    this.y = y
+  }
+  Parent.prototype.move = (x, y) => {
+    this.x += x
+    this.y += y
+  }
+
+  var person1 = new Parent()
+
+</script>
+
+</body>
+</html>
