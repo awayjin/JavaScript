@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>复杂选择器</title>
+</head>
+<body>
+
+<p>
+  类型选择器（type selectors）（例如, h1）和 伪元素（pseudo-elements）（例如, ::before）
+
+  类选择器（class selectors） (例如,.example)，属性选择器（attributes selectors）（例如, [type="radio"]），伪类（pseudo-classes）（例如, :hover）
+
+  ID选择器（例如, #example）
+</p>
+<pre>
+  <div>
+    <span class="a" a>First paragraph</span><br/>
+
+    <span class="b pseudo" data-color>Second class selectors</span>
+    <span class="pseudo " data-color>three attributes selectors</span>
+    <span class="pseudo c" data-color>four pseudo-classes 伪类（pseudo-classes）</span>
+    <span class="pseudo">five pseudo-classes 伪类（pseudo-classes）</span>
+
+    <span >six paragraph</span>
+    <span >five paragraph</span>
+  </div>
+</pre>
+
+<div class="relation">
+  <p>first </p>
+  <p>Second </p>
+  <p>three </p>
+  <p>four </p>
+  <div>
+    <p>div >
+      <span>six</span></p>
+  </div>
+</div>
+<div class="relation-sec">seven</div>
+<div class="relation-sec">eight</div>
+<div>nine</div>
+
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/CSS">CSS</a> defined in the MDN glossary.</li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML">HTML</a> defined in the MDN glossary.</li>
+</ul>
+
+<style>
+  /*#a { color: orange; }*/
+
+  /* 同一类优先级 */
+  .pseudo:nth-child(1n).c { color: blue; }
+  .pseudo[data-color] { color: cyan; }
+  .pseudo.b { color: red; }
+
+  /*span { color: green; }*/
+
+  /* 复杂选择器 */
+  .relation p { color: orange; }
+  .relation > p { color: red; }
+  .relation ~ div { color: green; }
+  .relation + div { color: cyan; }
+
+  .relation div p::first-letter { font-size: 40px;}
+
+  [href^=h]::after {
+    content: '⤴';
+  }
+</style>
+
+
+<hr>
+<div>
+  <p id=a>First paragraph</p>
+  <p>Second paragraph</p>
+</div>
+
+<div class="pseudo-elements">
+  <p class="a">first-this is some selectors. Please you learning them.</p>
+  <p class="two">two.--this is some selectors. Please you learning them.</p>
+</div>
+<style>
+  /*<!-- 伪元素 -->*/
+
+
+
+  .pseudo-elements>.a { color: green; }
+  .pseudo-elements::first-line { font-style: italic; color: blue; font-size: 1.4rem; }
+  /*.pseudo-elements .two ::first-letter { text-transform: uppercase; }*/
+  .pseudo-elements .two::first-letter { text-transform: uppercase; font-size: 2rem; float:left; }
+</style>
+
+</body>
+</html>
+

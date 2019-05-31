@@ -20,7 +20,7 @@ const server = http2.createSecureServer({
 function onRequest (req, res) {
   // 路径指向 index.html
   const reqPath = req.url === '/' ? '/index.html' : req.url
-  //获取html资源
+  // 获取html资源
   const file = publicFiles.get(reqPath)
   // 文件不存在
   if (!file) {
