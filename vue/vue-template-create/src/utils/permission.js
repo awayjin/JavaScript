@@ -14,7 +14,7 @@ router.beforeEach((to, from, next) => {
   NProgress.start()
   if (getToken()) {
     if (to.path === '/login') {
-      next('/')
+      next()
     } else {
       next()
     }
@@ -26,7 +26,6 @@ router.beforeEach((to, from, next) => {
       NProgress.done()
     }
   }
-  // next()
 })
 
 // router.beforeEach(async (to, from, next) => {

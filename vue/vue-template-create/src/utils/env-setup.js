@@ -1,11 +1,11 @@
 let envList = {
   dev: { // 开发
-    G_HOST: 'https://digitaltest.vankeservice.com',
+    G_HOST: '',
     G_PORT: '',
     G_PREFIX: ''
   },
   test: { // 测试
-    G_HOST: 'https://test-222.vankeservice.com',
+    G_HOST: 'https://digitaltest.vankeservice.com',
     G_PORT: '',
     G_PREFIX: ''
   },

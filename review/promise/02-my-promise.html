@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+1. 例如 promises = []，实现必须上一个异步完成后再去跑下一个任务
+
+<script>
+  function PromiseMy (constructor) {
+// 设置属性 status value resolveCbs rejectedCbs
+//     status: pending, fulfilled, rejected
+    this.status = 'pending'
+    // 定义状态为 resolved 时的值
+    this.value = undefined
+    // 定义状态为 rejected 时的值
+    this.reason = undefined
+
+    var resolve = (value) => {
+      // 两个==="pending"，保证了状态的改变是不可逆的
+      if (this.status === 'pending') {
+        this.value = value
+        this.status = 'resolved'
+      }
+    }
+
+    var reject = (reason) => {
+      // 两个==="pending"，保证了状态的改变是不可逆的
+      if (this.status == 'pending') {
+        this.reason = reason
+        this.status = 'rejected'
+      }
+    }
+
+    // 捕获构造函数异常
+    try {
+      constructor(resolve, reject)
+    } catch (e) {
+      this.reject(e)
+    }
+
+  }
+
+  PromiseMy.prototype.then = function (onFulfilled, onRejected) {
+
+    switch (this.status) {
+      case 'resolved':
+        onFulfilled(this.value)
+        break
+      case 'rejected':
+        onRejected(this.reason)
+        break
+      default:
+    }
+    return this
+  }
+
+  class PromiseES {
+    constructor (fn) {
+      // 设置属性 status value resolveCbs rejectedCbs
+      // status: pending, fulfilled, rejected
+      this.status = 'pending'
+      // 定义状态为 resolved 时的值
+      this.value = undefined
+      // 定义状态为 rejected 时的值
+      this.reason = undefined
+
+      let self = this
+      try {
+        fn(this.resolve.bind(this), self.reject.bind(this))
+      } catch (e) {
+        this.reject(e)
+      }
+    }
+    resolve (value) {
+      // 两个==="pending"，保证了状态的改变是不可逆的
+      if (this.status === 'pending') {
+        this.value = value
+        this.status = 'resolved'
+      }
+    }
+    reject (reason) {
+      // 两个==="pending"，保证了状态的改变是不可逆的
+      if (this.status == 'pending') {
+        this.reason = reason
+        this.status = 'rejected'
+      }
+    }
+    // then 方法
+    then (onFulfilled, onRejected) {
+      switch (this.status) {
+        case 'resolved':
+          onFulfilled(this.value)
+          break
+        case 'rejected':
+          onRejected(this.reason)
+          break
+        default:
+      }
+      return this
+    }
+    catch (cb) {
+      return this.then(null, cb)
+    }
+  }
+</script>
+</body>
+</html>

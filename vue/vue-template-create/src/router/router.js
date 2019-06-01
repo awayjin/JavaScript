@@ -39,7 +39,7 @@ export const routesMap = [
 
 export default new Router({
   base: process.env.BASE_URL,
-  mode: 'history',
+  // mode: 'history',
   // scrollBehavior: () => ({ y: 0 }),
   routes: routesMap
 })
