@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store.js'
+import router from './router/router'
+import store from './store/store.js'
 // import Authorized from './components/authorized' // 组件方式控制权限
 // import Auth from './directives/auth' // 指令方式控制权限
 

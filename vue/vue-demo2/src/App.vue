@@ -7,19 +7,10 @@
      <!-- <Authorized :authority="['admin']">
         <router-link to="/about">About1</router-link>
       </Authorized> |-->
-      <router-link to="/about">About1</router-link> |
-
       <router-link to="/about" vc-auth="['admin2']">About2</router-link> |
-      <router-link to="/about" vc-auth="['admin3']">About3</router-link> |
+      <router-link to="/vuex" >Vuex</router-link> |
 
-      <div>User:
-       <router-link to="user">user</router-link>
-      | <router-link to="/user/foo/else">user-foo</router-link>
-      | <router-link to="/user/bar/else">user-bar</router-link>
-      | <router-link to="/user/33/profile">user-33-profile</router-link>
-      | <router-link to="/user/anything/profile">user-xx-profile</router-link>
-      | <router-link to="/user/anything/login">user-xx-login</router-link>
-      </div>
+      <router-link to="user">user</router-link>
 
     </div>
     <router-view/>

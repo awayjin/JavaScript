@@ -5,55 +5,65 @@
   <title>Title</title>
 </head>
 <body>
+<a href="https://juejin.im/post/5b6161e6f265da0f8145fb72">Promise/A+规范翻译</a>
+<a href="http://www.ituring.com.cn/article/66566">图灵:Promise/A+规范翻译</a>
+<a href="https://github.com/petkaantonov/bluebird">bluebird </a>
+
 1. 例如 promises = []，实现必须上一个异步完成后再去跑下一个任务
+<script>
+  // 例如 promises = []，实现必须上一个异步完成后再去跑下一个任务
+  let promises = [11, 22, 33]
+  // Promise.resolve
+  let template = Promise.resolve()
+  promises.forEach(item => {
+    template = template.then(() => console.log(item))
+  })
+
+  // async-await
+  promises.forEach(async item => {
+    await console.log(item)
+  })
+</script>
 
 <script>
-  function PromiseMy (constructor) {
-// 设置属性 status value resolveCbs rejectedCbs
-//     status: pending, fulfilled, rejected
-    this.status = 'pending'
-    // 定义状态为 resolved 时的值
-    this.value = undefined
-    // 定义状态为 rejected 时的值
-    this.reason = undefined
-
-    var resolve = (value) => {
-      // 两个==="pending"，保证了状态的改变是不可逆的
-      if (this.status === 'pending') {
-        this.value = value
-        this.status = 'resolved'
+  function PromiseMY(constructor){
+    let self=this;
+    self.status="pending" //定义状态改变前的初始状态
+    self.value=undefined;//定义状态为resolved的时候的状态
+    self.reason=undefined;//定义状态为rejected的时候的状态
+    function resolve(value){
+      //两个==="pending"，保证了状态的改变是不可逆的
+      if(self.status==="pending"){
+        self.value=value;
+        self.status="resolved";
       }
     }
-
-    var reject = (reason) => {
-      // 两个==="pending"，保证了状态的改变是不可逆的
-      if (this.status == 'pending') {
-        this.reason = reason
-        this.status = 'rejected'
+    function reject(reason){
+      //两个==="pending"，保证了状态的改变是不可逆的
+      if(self.status==="pending"){
+        self.reason=reason;
+        self.status="rejected";
       }
     }
-
-    // 捕获构造函数异常
-    try {
-      constructor(resolve, reject)
-    } catch (e) {
-      this.reject(e)
+    //捕获构造异常
+    try{
+      constructor(resolve,reject);
+    }catch(e){
+      reject(e);
     }
-
   }
 
-  PromiseMy.prototype.then = function (onFulfilled, onRejected) {
-
-    switch (this.status) {
-      case 'resolved':
-        onFulfilled(this.value)
-        break
-      case 'rejected':
-        onRejected(this.reason)
-        break
+  PromiseMY.prototype.then=function(onFullfilled,onRejected){
+    let self=this;
+    switch(self.status){
+      case "resolved":
+        onFullfilled(self.value);
+        break;
+      case "rejected":
+        onRejected(self.reason);
+        break;
       default:
     }
-    return this
   }
 
   class PromiseES {
@@ -62,46 +72,57 @@
       // status: pending, fulfilled, rejected
       this.status = 'pending'
       // 定义状态为 resolved 时的值
-      this.value = undefined
+      // promise 被解决时传递给解决回调的值
+      this.value = null
       // 定义状态为 rejected 时的值
-      this.reason = undefined
+      // 表示一个 promise 的拒绝原因
+      this.reason = null
 
-      let self = this
+      // resolve
+      let resolve = (value) => {
+        // 两个==="pending"，保证了状态的改变是不可逆的
+        if (this.status === 'pending') {
+          this.value = value
+          this.status = 'resolved'
+        }
+      }
+
+      // reject
+      let reject = (reason) => {
+        // 两个==="pending"，保证了状态的改变是不可逆的
+        if (this.status == 'pending') {
+          this.reason = reason
+          this.status = 'rejected'
+        }
+      }
+
       try {
-        fn(this.resolve.bind(this), self.reject.bind(this))
+        fn(resolve.bind(this), reject.bind(this))
       } catch (e) {
-        this.reject(e)
+        reject.bind(this, e)
       }
     }
-    resolve (value) {
-      // 两个==="pending"，保证了状态的改变是不可逆的
-      if (this.status === 'pending') {
-        this.value = value
-        this.status = 'resolved'
-      }
-    }
-    reject (reason) {
-      // 两个==="pending"，保证了状态的改变是不可逆的
-      if (this.status == 'pending') {
-        this.reason = reason
-        this.status = 'rejected'
-      }
-    }
+
     // then 方法
     then (onFulfilled, onRejected) {
       switch (this.status) {
         case 'resolved':
-          onFulfilled(this.value)
+          onFulfilled.call(this, this.value)
           break
         case 'rejected':
-          onRejected(this.reason)
+          console.log('onRejected,:', onRejected)
+          onRejected.call(this, this.reason)
           break
         default:
       }
       return this
     }
     catch (cb) {
-      return this.then(null, cb)
+      if (this.status === 'resolved') {
+        // this.status = 'p'
+        return this
+      }
+      return this.then.call(this, null, cb)
     }
   }
 </script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<pre>
+Promise 静态方法
+  Promise.all(iterable) - 等待所有都完成（或第一个失败）
+  Promise.race(iterable) - 一旦迭代器中的某个promise解决或拒绝，返回的 promise就会解决或拒绝
+  Promise.resolve - 解决
+  Promise.reject - 拒绝
+  length
+  name
+  prototype
+
+Promise 实例方法：
+  constructor
+  then
+  catch
+  finally
+</pre>
+
+
+<script>
+  var promise2 = Promise.reject('44')
+  var promise1 = 33
+  var promise3 = new Promise(function (resolve, reject) {
+    setTimeout(resolve, 100, 'setTimeout\'s params')
+    // setTimeout(reject, 100, 'setTimeout\'s params')
+  })
+
+  // all
+  Promise.all([
+    promise1,
+    promise2,
+    promise3
+  ])
+  .then(function (values) {
+    console.table('values:', values)
+  })
+  .catch(err => console.log('Promise.all err::', err))
+
+  // race
+  Promise.race([
+    promise1,
+    promise2,
+    promise3
+  ])
+    .then(function (values) {
+      console.table('Promise.race values:', values)
+    })
+    .catch(err => console.log('Promise.race err2::', err))
+</script>
+
+</body>
+</html>
