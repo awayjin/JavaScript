@@ -21,7 +21,9 @@
     </pre>
     <pre>
       state: {{ count }}
-      <button @click="mutationState3">更改 count 状态</button>
+      <button @click="mutationState3">更改 count 状态</button> <br>
+      底层原理核心实现 min-vuex： {{ demoCount }}
+      <button @click="$demoVuex.commit('increment')">my min-vuex count++</button>
     </pre>
   </div>
 </template>
@@ -34,7 +36,10 @@ export default {
     // console.log('this.$route: ', this.$route)
   },
   computed: mapState({
-    count: state => state.count
+    count: state => state.count,
+    demoCount () {
+      return this.$demoVuex.state.count
+    }
   }),
   data () {
     return {

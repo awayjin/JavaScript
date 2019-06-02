@@ -8,6 +8,22 @@ import store from './store/store.js'
 // Vue.component('Authorized', Authorized)
 // Vue.use(Auth)
 
+// my-vuex 核心实现
+import DemoVuex from './views/vuex/min-vuex'
+Vue.use(DemoVuex)
+const demoStore = new DemoVuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  }
+})
+
+Vue.prototype.$demoVuex = demoStore
+
 Vue.config.productionTip = false
 // demo
 new Vue({
