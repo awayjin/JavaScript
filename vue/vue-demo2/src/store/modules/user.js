@@ -19,7 +19,6 @@ const user = {
     setToken ({ commit }, token) {
       commit(SET_TOKEN, token)
     }
-
   }
 }
 

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+
+<a href="https://juejin.im/post/5b852d51f265da43351d6580">
+  JavaScript-使用WeakMap创建对象的私有属性
+</a>
+
+<script>
+  var private3 = {}
+
+  class Person2 {
+    constructor (name) {
+       dd = name
+    }
+  }
+
+  function Person (name, age) {
+    this.name = name
+    this.age = age
+  }
+
+  var p1  = new Person('p1', 20)
+  var p2  = new Person('p2', 30)
+  console.log('p1:', p1)
+  console.log('p2:', p2)
+
+  void function () {
+    const Person = (function() {
+      let name;
+
+      function Person(n) {
+        name = n;
+      }
+
+      Person.prototype.getName = function() {
+        return name;
+      };
+
+      return Person;
+    }());
+    let person1 = new Person('小明');
+    let person2 = new Person('大明')
+    console.log('person1', person1.getName())
+    console.log('person2', person2.getName())
+  }()
+
+  !function () {
+    let _items = Symbol()
+    class Stack {
+      constructor () {
+        this[_items] = []
+      }
+      push (element) {
+        this[_items].push(element)
+      }
+    }
+  }()
+</script>
+
+</body>
+</html>

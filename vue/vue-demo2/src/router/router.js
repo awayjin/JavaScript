@@ -1,10 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/Home.vue'
-import findLast from 'lodash/findLast'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { check, isLogin } from '../utils/auth'
 
 import routeUser from './route-user'
 import routeVuex from './route-vuex'
@@ -49,24 +47,26 @@ const router = new Router({
     .concat(routeVuex) // Vuex 模块
 })
 
+// import { check, isLogin } from '../utils/auth'
+// import findLast from 'lodash/findLast'
 router.beforeEach((to, from, next) => {
   if (to.path !== from.path) {
     NProgress.start()
   }
-  const record = findLast(to.matched, record => record.meta.authority)
-  // const record = to.matched.find(item => item.meta.authority)
-  if (record && !check(record.meta.authority)) {
-    if (!isLogin() && to.path !== '/user/login') {
-      next({
-        path: '/user/login'
-      })
-    } else if (to.path !== '/403') {
-      next({
-        path: '/403'
-      })
-    }
-    NProgress.done()
-  }
+  // const record = findLast(to.matched, record => record.meta.authority)
+  // // const record = to.matched.find(item => item.meta.authority)
+  // if (record && !check(record.meta.authority)) {
+  //   if (!isLogin() && to.path !== '/user/login') {
+  //     next({
+  //       path: '/user/login'
+  //     })
+  //   } else if (to.path !== '/403') {
+  //     next({
+  //       path: '/403'
+  //     })
+  //   }
+  //   NProgress.done()
+  // }
   NProgress.done()
   next()
 })

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Map and Set</title>
+</head>
+<body>
+<pre>
+集合: Map-WeakMap, Set-WeakSet
+
+  Map.prototype: Object.getOwnPropertyNames(Map.prototype)
+    ["constructor", "get", "set", "has", "delete", "clear", "entries", "forEach", "keys", "size", "values"]
+
+  Set.prototype: Object.getOwnPropertyNames(Set.prototype)
+   ["constructor", "has", "add", "delete", "clear", "entries", "forEach", "size", "values", "keys"]
+
+  Object.getOwnPropertyNames(WeakMap.prototype)
+    ["constructor", "delete", "get", "set", "has"]
+
+  Object.getOwnPropertyNames(WeakSet.prototype)
+    ["constructor", "delete", "has", "add"]
+</pre>
+
+<script>
+  // ES5
+  void function () {
+    var map = Object.create(null)
+    map.count = 0
+    // 无法判断 count 是存在还是非零值
+    if (map.count) {}
+
+    // 对象属性必须是字符串
+    map[5] = 'is 5 or "5"'
+    console.log('es5 property is a String:', map['5'])
+
+    // 由于对象属性只能是字符串， map[key2] map[key1]是同一个值
+    var key1 = { a: 1 }
+    var key2 = { a: 2 }
+    map[key1] = 'key1 and key2 are sample key'
+    console.log('ES5 map[key2]:', map[key2])
+  }()
+
+  console.log(Array(20).join('-'), 'es6 Map-set', Array(20).join('-'))
+  void function () {
+    // ES6-Map
+    let map = new Map()
+
+    // set()
+    let sym1 = Symbol()
+    map.set(sym1, 'a symbol value')
+    // get()
+    console.log('map.get(sym1):', map.get(sym1))
+
+    map.set('count', 0)
+    map.set('count2', 20)
+    // has()
+    console.log('map.has(count):', map.has('count'))
+    // size
+    console.log('map.size:', map.size)
+
+    // forEach
+    map.forEach((value, key, map) => {
+      console.log('ES6 map.forEach, value', value, ' key:', key, ' map:', map)
+    })
+
+    // entries
+    console.log('map.entries:', map.entries())
+
+    // keys
+    console.log('map.keys:', map.keys())
+
+    // delete
+    console.log('map.delete:', map.delete('count2'))
+    console.log('map.keys:', map.keys())
+
+    // clear
+    console.log('map.delete:', map.clear())
+    console.log('map.keys:', map.keys())
+
+  }()
+</script>
+
+</body>
+</html>

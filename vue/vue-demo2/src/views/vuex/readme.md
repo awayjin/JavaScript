@@ -11,3 +11,26 @@
 - Mutation: 更改 State 方法
 - Action: 触发 mutation 方法
 - Module: Vue.set 动态添加到 state 响应式数据中
+
+### 1. State
+Vuex 使用单一状态树(Single State Tree)，用一个对象就包含了全部的应用层级状态。唯一数据源(SSOT),每个应用仅包含一个 store 实例.
+
+- mapState 辅助函数，对象展开运算符
+
+### 2. Getter
+Vuex 允许我们在 store 中定义“getter”（可以认为是 store 的计算属性）。像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算
+
+- 通过属性访问---store.getters.doneTodos
+- 通过方法访问
+```javascript
+// 通过方法访问
+// 你也可以通过让 getter 返回一个函数，来实现给 getter 传参。
+// 在你对 store 里的数组进行查询时非常有用
+getListById: state => id => {
+  return state.listId.find(todo => todo.id === id)
+}
+```
+- mapGetters 辅助函数
+
+### 3. Mutation
+更改 Vuex 的 store 中的状态的唯一方法是提交 mutation

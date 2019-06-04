@@ -23,11 +23,12 @@ const demoStore = new DemoVuex.Store({
 })
 
 Vue.prototype.$demoVuex = demoStore
-
+// Vue.store = store
 Vue.config.productionTip = false
 // demo
 new Vue({
   router,
+  // 从根组件“注入”到每一个子组件中
   store,
   render: h => h(App)
 }).$mount('#app')
