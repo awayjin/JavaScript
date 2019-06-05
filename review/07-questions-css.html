@@ -79,9 +79,20 @@ flex + align-items: center 我会对 flex 容器以及 flex 项目的每个 css 
 3. 盒模型
 
 4. BFC
-概念
-如何触发
-怎么应用
+概念: 块格式化上下文（Block Formatting Context，BFC） 是块盒子的布局过程发生的区域
+总结： BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此
+
+如何触发:
+浮动： float属性不为none
+定位： position为absolute或fixed
+显示： display为inline-block, table-cell, table-caption, flex, inline-flex
+溢出： overflow 不为visible
+
+怎么应用：
+margin 折叠
+浮动内容和周围的内容等高
+
+
 
 5. CSS 预处理器
 一般回答 变量 / 嵌套 / 自动前缀 / 条件语句 / 循环语句

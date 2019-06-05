@@ -13,6 +13,31 @@
   MDN 块级式化上下文
 </a>
 
+<style>
+  .par {
+    border: 5px solid #fcc;
+    width: 300px;
+    /*overflow: auto;*/
+  }
+
+  .child {
+    border: 5px solid #f66;
+    width:100px;
+    height: 100px;
+    float: left;
+  }
+</style>
+<div class="par">
+  <div class="child"></div>
+  <div class="child"></div>
+</div>
+
+<hr>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <div class="blue">
   创建新的BFC避免两个相邻 div 之间的 外边距折叠( margin collapsing) 问题
@@ -25,7 +50,7 @@
 </div>
 <style>
   .blue, .red-inner {
-    height: 50px;
+    height: 60px;
     margin: 10px 0;
   }
 
