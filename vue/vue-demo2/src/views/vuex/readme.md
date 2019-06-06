@@ -33,4 +33,29 @@ getListById: state => id => {
 - mapGetters 辅助函数
 
 ### 3. Mutation
-更改 Vuex 的 store 中的状态的唯一方法是提交 mutation
+更改 Vuex 的 store 中的状态的唯一方法是提交 mutation.
+
+Vuex 中的 mutation 非常类似于事件：每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)
+
+提交载荷（Payload）
+```javascript
+this.$store.commit('todosMulTen', {
+ number: 1
+})
+var a = {
+  ...mapMutations({
+    secondAdd: 'INCREMENT_SECOND_ADD'
+  })
+}
+```
+对象风格的提交方式
+
+Mutation 需遵守 Vue 的响应规则
+
+ 使用常量替代 Mutation 事件类型
+ 
+ 
+ ### 4. Action
+ 
+ 分发 Action
+ Action 通过 store.dispatch

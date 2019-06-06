@@ -6,6 +6,7 @@ import 'nprogress/nprogress.css'
 
 import routeUser from './route-user'
 import routeVuex from './route-vuex'
+import routeComponent from './route-component'
 
 Vue.use(Router)
 
@@ -45,6 +46,7 @@ const router = new Router({
   ]
     .concat(routeUser) // user 用户模块
     .concat(routeVuex) // Vuex 模块
+    .concat(routeComponent) // 组件 模块
 })
 
 // import { check, isLogin } from '../utils/auth'

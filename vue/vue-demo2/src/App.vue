@@ -9,7 +9,7 @@
       </Authorized> |-->
       <router-link to="/about" vc-auth="['admin2']">About2</router-link> |
       <router-link to="/vuex" >Vuex</router-link> |
-
+      <router-link to="component" >组件</router-link> |
       <router-link to="user">user</router-link>
 
     </div>
