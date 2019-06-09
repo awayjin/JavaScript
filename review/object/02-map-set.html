@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // WeakMap 创建私有属性 items
+  var Stack = function () {
+    var items = new WeakMap()
+    class Stack {
+      constructor () {
+        // this[items] = []
+        items.set(this, [])
+      }
+      // push
+      push (element) {
+        items.get(this).push(element)
+      }
+      // pop
+      pop () {
+        return items.get(this).pop()
+      }
+      // size
+      size () {
+        return items.get(this).length
+      }
+      // peek
+      peek () {
+        let s = items.get(this)
+        return s[s.length - 1]
+      }
+      print () {
+        console.log(items.get(this).toString())
+        return this
+      }
+    }
+    return Stack
+  }()
+
+  var stack1 = new Stack()
+  stack1.push('33')
+  stack1.push('44')
+  console.log('stack1:', stack1)
+  console.log('stack1.length:', stack1.size())
+  console.log('stack1.pop:', stack1.pop())
+  stack1.push('55')
+  stack1.print()
+  console.log('stack1.peek:', stack1.peek())
+
+</script>
+</body>
+</html>

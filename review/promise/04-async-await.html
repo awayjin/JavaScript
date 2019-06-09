@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>async and await 信号灯</title>
+  <style>
+    #traffic-light {
+      width: 50px;
+      height: 50px;
+      background-color: green;
+      border-radius: 50%;
+      color: white;
+      text-shadow: 0 0 3px black;
+    }
+  </style>
+</head>
+<body>
+
+<div id="traffic-light">
+
+</div>
+
+<script>
+  // async and await 交通信号灯
+  // function sleep (duration) {
+  //   return new Promise(function (resolve, reject) {
+  //     setTimeout(resolve, duration)
+  //   })
+  // }
+  //
+  // // async function foo () {
+  // //   console.log('a')
+  // //   await sleep(2000)
+  // //   console.log('b')
+  // // }
+  //
+  // async function foo (name) {
+  //   await sleep(2000)
+  //   console.log(name)
+  // }
+  //
+  // // async和await还可以嵌套
+  // async function foo2 () {
+  //   await foo('a')
+  //   await foo('b')
+  // }
+
+  // 交通灯
+  async function changeColor (duration, color) {
+    var trafficLight = document.getElementById('traffic-light')
+    trafficLight.style.backgroundColor = color
+    trafficLight.innerText = duration + 'ms'
+    await sleep(duration)
+  }
+
+  async function sleep (duration) {
+    return new Promise(function (resolve, reject) {
+      setTimeout(resolve, duration)
+    })
+  }
+
+  // 交通信号灯
+  async function main () {
+    while (true) {
+      await changeColor(3000, 'green')
+      await changeColor(1000, 'yellow')
+      await changeColor(2000, 'red')
+    }
+  }
+
+  main()
+
+</script>
+</body>
+</html>

@@ -8,17 +8,145 @@
   <title>Symbol</title>
 </head>
 <body>
+<a href="https://segmentfault.com/a/1190000010754245">深入理解ES6之《Symbol》</a>
 <pre>
 Object.getOwnPropertyNames(Symbol)
 (18) ["length", "name", "prototype", "for", "keyFor", "asyncIterator", "hasInstance", "isConcatSpreadable", "iterator", "match", "replace", "search", "species", "split", "toPrimitive", "toStringTag", "unscopables", "matchAll"]
 
 Object.getOwnPropertyNames(Symbol.prototype)
 (4) ["constructor", "toString", "valueOf", "description"]
+
+  属性:
+
 </pre>
 
+
 <script>
+  function print(name) {
+    console.log(Array(20).join('-') + `${name}` + Array(20).join('-'))
+  }
+
+  print('1. Symbol.iterator')
+  // 1. Symbol.iterator, 为每一个对象定义一个迭代器
+  var myIterable = { a: 1 }
+  // ES6 迭代器 *
+  myIterable[Symbol.iterator] = function* () {
+    yield '1-1'
+    yield '1-2'
+    yield '1-3'
+  }
+  // ES5
+  for (let item of myIterable) {
+    console.log('Symbol.iterator item:', item)
+  }
+
+
+
+  print('2. 创建匿名的对象属性')
+  // 创建匿名的对象属性
+  var obj = {
+    [Symbol]: 'anonymous value',
+    a: 1,
+    b: 2
+  }
+  // 无法遍历
+  for(let key in obj) {
+    console.log('key:', key, ', value:', obj[key])
+  }
+
+
+
+  print('3. getOwnPropertySymbols')
+
+  // Object.getOwnPropertySymbols
+  let Stack = function () {
+    let _items = Symbol() // 私有属性
+    class Stack { // 栈数据结构
+      constructor () {
+        this[_items] = []
+      }
+      // push
+      push (element) {
+        this[_items].push(element)
+        return this
+      }
+      // peek-返回最后一个元素
+      peek () {
+        return this[_items][this[_items].length - 1]
+      }
+      // pop-移除最后一个元素
+      pop () {
+        return this[_items].pop()
+      }
+      print () {
+        console.log(this[_items].toString())
+      }
+    }
+    Stack[_items] = 33 // Symbol 不可枚举，也不会出现在 getOwnPropertyNames
+    Stack[4] = 44
+    return Stack
+  }()
+  let stack1 = new Stack()
+  stack1.push(3)
+  stack1.push(4)
+  stack1.push(5)
+  let objectSymbols = Object.getOwnPropertySymbols(stack1)
+  console.log('length:', objectSymbols.length) // 1
+  console.log('objectSymbols:', objectSymbols) // [Symbol()]
+  console.log('objectSymbols[0]:', objectSymbols) // Symbol
+  stack1[objectSymbols[0]].push(6)
+  stack1.print() // 3,4,5,6
+
+
+  var sym3 = Symbol(33)
+  var obj = { [sym3]: 3,[ Symbol(44)]: 4};
+  var syms = Object.getOwnPropertySymbols(obj)
+  console.log(syms)
+  console.log(syms[0])
+  console.log(sym3 in obj)
+  console.log(Object.keys(obj))
+  console.log(Reflect.ownKeys(obj))
 
 </script>
 
+
+<script>
+  function sleep(duration) {
+    return new Promise((resolve, reject) => {
+      // setTimeout(resolve, duration)
+      resolve()
+    })
+  }
+  var value = async (duration, value) => {
+    await sleep(duration)
+    console.log(value)
+  }
+  // 实现上一个异步任务完成后，再去跑下一个任务
+  var promises = [11, 22]
+  promises[0] = async () => {
+    await value(2000, '1.1----------await value')
+  }
+
+  promises[1] = async () => {
+    await value(20, '1.2---------await two val')
+  }
+  console.log(typeof promises[0] === 'function')
+  var resolve = Promise.resolve()
+  promises.forEach(data => {
+    // resolve = resolve.then(data => console.log(data))
+    resolve = resolve.then(() => {
+      console.log(11111)
+      data()
+    })
+  })
+
+  // promises.forEach(async data => {
+  //   await console.log('async-await: ', data())
+  // })
+  promises.forEach(async function (data) {
+    await data()
+  })
+  console.log('1.0--------')
+</script>
 </body>
 </html>

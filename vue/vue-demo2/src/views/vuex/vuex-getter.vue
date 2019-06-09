@@ -2,10 +2,10 @@
   <div>
     <h2>Vuex Getter</h2>
     <p>computed: {{ doneTodosCount }}</p>
-    <p>通过属性访问: {{ $store.getters.doneTodos }}</p>
+    <p>通过属性访问: {{ $store.getters['moduleVuex/doneTodos'] }}</p>
     <p>计算属性 : {{ doneCount }} </p>
     <p>mapGetters 别名: {{ doneCountAlias }} </p>
-    <p> 通过方法访问: {{ getListById(4) }} --- {{ this.$store.getters.getListById(6) }}</p>
+    <p> 通过方法访问: {{ getListById(4) }} --- {{ this.$store.getters['moduleVuex/getListById'](6) }}</p>
   </div>
 </template>
 
@@ -19,17 +19,19 @@ export default {
       return this.$store.state.moduleVuex.todos.filter(todo => todo % 2 === 0)
     },
     doneCount () {
-      return this.$store.getters.doneCount
+      // return this.$store.getters.moduleVuex.doneCount
+      return this.$store.getters['moduleVuex/doneTodos']
     },
     // mapGetters 辅助函数
     ...mapGetters({
-      'doneCountAlias': 'doneCount'
+      'doneCountAlias': 'moduleVuex/doneCount'
     })
   },
   methods: {
     // 方法访问
     getListById (id) {
-      return this.$store.getters.getListById(id)
+      // return this.$store.getters.getListById(id)
+      return this.$store.getters[`moduleVuex/getListById(${id})`]
     }
   }
 }

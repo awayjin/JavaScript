@@ -14,6 +14,7 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
+    <button @click="goToNameCompoent">click</button>
   </div>
 </template>
 <script>
@@ -21,6 +22,13 @@ export default {
   beforeRouteEnter (to, from, next) {
     // console.log('about-to:', to)
     next()
+  },
+  methods: {
+    goToNameCompoent () {
+      this.$router.push({
+        name: 'componentRoot'
+      })
+    }
   }
 }
 </script>

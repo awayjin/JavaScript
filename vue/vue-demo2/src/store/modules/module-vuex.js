@@ -3,6 +3,7 @@
 const INCREMENT_SECOND_ADD = 'INCREMENT_SECOND_ADD'
 
 const vuex = {
+  namespaced: true, // 命名空间
   // state
   state: {
     first: 0,
@@ -54,6 +55,15 @@ const vuex = {
   actions: {
     increment (context) {
       context.commit('incrementThree')
+    },
+    incrementIfOddOnRootSum ({ state, commit, rootState }) {
+      console.log('state:', state)
+      console.log('commit:', commit)
+      console.log('rootState:', rootState)
+      commit('incrementThree')
+      if ((state.count + rootState.count) % 2 === 1) {
+        commit('increment')
+      }
     }
   }
 }

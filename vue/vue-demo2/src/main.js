@@ -10,7 +10,7 @@ import store from './store/store.js'
 
 // my-vuex 核心实现
 import DemoVuex from './views/vuex/min-vuex'
-Vue.use(DemoVuex)
+// Vue.use(DemoVuex)
 const demoStore = new DemoVuex.Store({
   state: {
     count: 0
@@ -26,9 +26,12 @@ Vue.prototype.$demoVuex = demoStore
 // Vue.store = store
 Vue.config.productionTip = false
 // demo
-new Vue({
+window.Vue = new Vue({
   router,
   // 从根组件“注入”到每一个子组件中
   store,
-  render: h => h(App)
+  render: h => h(App),
+  mounted () {
+    document.dispatchEvent(new Event('render-event'))
+  }
 }).$mount('#app')

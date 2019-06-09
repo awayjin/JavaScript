@@ -1,10 +1,12 @@
 <template>
   <div>
     <h2>Vuex Mutation</h2>
-    <p>
-      <button @click="commitMul">todos数组乘以10</button>: {{ todos }}
-      todosSatate: {{ todosSatate }}
-    </p>
+    <pre>
+      <button @click="commitMul">todos数组乘以10</button>
+      getters['moduelVuex/doneTodos']: {{ $store.getters['moduleVuex/doneTodos'] }}
+      todos: {{ todos }}
+      --todosSatate: {{ todosSatate }}
+    </pre>
     <p>
       state.second++: {{ second }}
       <button @click="secondAdd">secondAdd</button>
@@ -12,6 +14,7 @@
     <p>
       Action: state.three++: {{ three }}
       <button @click="threeAdd">Action three add</button>
+      <button @click="threeAdd3">模块的局部状态</button>
     </p>
   </div>
 </template>
@@ -27,7 +30,7 @@ export default {
       three: s => s.moduleVuex.three
     }),
     ...mapGetters({
-      'todos': 'doneTodos'
+      'todos': 'moduleVuex/doneTodos'
     })
   },
   methods: {
@@ -50,8 +53,10 @@ export default {
     ...mapMutations({
       secondAdd: 'INCREMENT_SECOND_ADD'
     }),
+    // actions
     threeAdd3 () {
-      this.$store.dispatch('increment')
+      // this.$store.dispatch('increment')
+      this.$store.dispatch('incrementIfOddOnRootSum')
     },
     // mapActions
     ...mapActions({
