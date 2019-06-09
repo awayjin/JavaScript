@@ -61,6 +61,7 @@ Mutation 需遵守 Vue 的响应规则
  Action 通过 store.dispatch
  
  
+ ### mini-vuex 核心底层实现
  ```javascript
 import Vue from 'vue'
 const Store = function Store (options = {}) {

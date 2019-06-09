@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  void function () {
+    // return
+    var obj = {}
+    // defineProperty
+    Object.defineProperty(obj, 'a', {
+      get () {
+        return this._a
+      },
+      set (value) {
+        // console.log('this.a:', this.a)
+        this._a = value  + '-1.obj'
+      }
+    })
+
+    obj.a = 33
+    console.log('1:', obj.a)
+  }()
+
+
+  void function () {
+    var obj = { a: 11, b: 22 }
+    Object.defineProperties(obj, {
+      a: {
+        get () {
+          return this._a
+        },
+        set (value) {
+          this._a = value + '-a'
+        }
+      },
+      b: {
+        get () {
+          return this._b
+        },
+        set (value) {
+          this._b = value + '-b'
+        }
+      }
+    })
+    obj.a = '11-12'
+    console.log('2 obj.a:', obj.a, ' obj.b:', obj.b)
+  }()
+
+</script>
+
+</body>
+</html>
