@@ -21,8 +21,8 @@ Store.prototype.commit = function (type, payload) {
 Object.defineProperties(Store.prototype, {
   state: {
     get: function () {
-      return this._vm._data.$$state
-      // return this._vm.$$state
+      // return this._vm._data.$$state
+      return this._vm.$data.$$state
     }
   }
 })
