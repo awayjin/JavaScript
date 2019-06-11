@@ -2,11 +2,80 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
   <title>Title</title>
 </head>
 <body>
 
+<pre>
+ 并集：对于给定的两个集合，返回一个包含两个集合中所有元素的新集合。
+ 交集：对于给定的两个集合，返回一个包含两个集合中共有元素的新集合。
+ 差集：对于给定的两个集合，返回一个包含所有存在于第一个集合且不存在于第二个集
+合的元素的新集合。
+ 子集：验证一个给定集合是否是另一集合的子集。
+</pre>
 <script>
+  // 并集：对于给定的两个集合，返回一个包含两个集合中所有元素的新集合。
+  //  交集：对于给定的两个集合，返回一个包含两个集合中共有元素的新集合。
+  //  差集：对于给定的两个集合，返回一个包含所有存在于第一个集合且不存在于第二个集
+  // 合的元素的新集合。
+  //  子集：验证一个给定集合是否是另一集合的子集。
+  console.log(Array(20).join('-'), '并集', Array(20).join('-'))
+
+  // 并集
+  var setA = new Set()
+  setA.add(11)
+  setA.add(22)
+  setA.add({ a: 1})
+  var setB = new Set()
+  setB.add(11)
+  setB.add(33)
+  setB.add({ a: 1 })
+  var unionAB = new Set()
+  for (let x of setA) unionAB.add(x)
+  for (let x of setB) unionAB.add(x)
+  console.log('ES6 并集, unionAB:', unionAB)
+  console.log('ES6 并集, 简单语法:', new Set([...setA, ...setB]))
+  // console.log('Object.assign:', Object.assign(setA, setB))
+
+
+  // 交集
+  console.log(Array(20).join('-'), '交集', Array(20).join('-'))
+  let intersection = (setA, setB) => {
+    let intersectionSet = new Set()
+    for (let x of setA) {
+      if (setB.has(x)) {
+        intersectionSet.add(x)
+      }
+    }
+    return intersectionSet
+  }
+  let intersectionAB = intersection(setA, setB)
+  console.log('ES6 交集, intersectionAB:', intersectionAB)
+  let intersectionSimpleAB = new Set([...setA].filter( x => setB.has(x))) // es6
+  console.log('ES6 交集, 简单语法:', intersectionSimpleAB)
+
+
+  console.log(Array(20).join('-'), '差集', Array(20).join('-'))
+  // 差集
+  let difference = (setA, setB) => {
+    let differenceSet = new Set()
+    for (let x of setA) {
+      if (!setB.has(x)) {
+        differenceSet.add(x)
+      }
+    }
+    return differenceSet
+  }
+  let differenceAB = difference(setA, setB)
+  console.log('ES6 差集, differenceAB:', differenceAB)
+  let differenceSimpleAB = new Set([...setA].filter( x => !setB.has(x))) // es6
+  console.log('ES6 差集, 简单语法:', differenceSimpleAB)
+
+</script>
+
+<script>
+  console.log(Array(20).join('-'), '栈 Stack', Array(20).join('-'))
   // WeakMap 创建私有属性 items
   var Stack = function () {
     var items = new WeakMap()

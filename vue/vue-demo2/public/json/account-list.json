@@ -1,0 +1,101 @@
+{
+  "code": 200,
+  "result": {
+    "pageNum": 1,
+    "pageSize": 20,
+    "size": 6,
+    "startRow": 1,
+    "endRow": 6,
+    "total": 6,
+    "pages": 1,
+    "list": [
+      {
+        "id": 10,
+        "uid": "452501198804092536",
+        "rewardSource": "plin",
+        "rewardAmount": 60,
+        "orderNo": "15817",
+        "rewardReason": "红色锦旗",
+        "rewardDetail": "sd",
+        "rewardTime": "2019-05-30 10:52:39",
+        "rewardGrantTime": "2019-05-30 10:52:39",
+        "rewardDisPerson": "吉登清"
+      },
+      {
+        "id": 5,
+        "uid": "452501198804092536",
+        "rewardSource": "daily",
+        "rewardAmount": -50.15,
+        "orderNo": "12345878",
+        "rewardReason": "日常加减分",
+        "rewardDetail": "溜门撬锁",
+        "rewardTime": "2019-05-29 13:52:36",
+        "rewardGrantTime": "2019-05-29 13:52:38",
+        "rewardDisPerson": "钱八"
+      },
+      {
+        "id": 4,
+        "uid": "452501198804092536",
+        "rewardSource": "daily",
+        "rewardAmount": 96.25,
+        "orderNo": "12345878",
+        "rewardReason": "日常加减分",
+        "rewardDetail": "拾金不昧",
+        "rewardTime": "2019-05-29 13:50:59",
+        "rewardGrantTime": "2019-05-29 13:51:04",
+        "rewardDisPerson": "赵六"
+      },
+      {
+        "id": 3,
+        "uid": "452501198804092536",
+        "rewardSource": "daily",
+        "rewardAmount": -100.35,
+        "orderNo": "12345878",
+        "rewardReason": "日常加减分",
+        "rewardDetail": "迟到",
+        "rewardTime": "2019-05-29 13:47:18",
+        "rewardGrantTime": "2019-05-29 13:47:24",
+        "rewardDisPerson": "王五"
+      },
+      {
+        "id": 1,
+        "uid": "452501198804092536",
+        "rewardSource": "daily",
+        "rewardAmount": 100.25,
+        "orderNo": "12345678",
+        "rewardReason": "锦旗",
+        "rewardDetail": "锦旗",
+        "rewardTime": "2019-05-25 00:00:00",
+        "rewardGrantTime": "2019-06-25 00:00:00",
+        "rewardDisPerson": "张三"
+      },
+      {
+        "id": 2,
+        "uid": "452501198804092536",
+        "rewardSource": "plin",
+        "rewardAmount": 50.5,
+        "orderNo": "12345878",
+        "rewardReason": "朴林业务",
+        "rewardDetail": "朴林业务",
+        "rewardTime": "2019-05-25 00:00:00",
+        "rewardGrantTime": null,
+        "rewardDisPerson": "李四"
+      }
+    ],
+    "prePage": 0,
+    "nextPage": 0,
+    "isFirstPage": true,
+    "isLastPage": true,
+    "hasPreviousPage": false,
+    "hasNextPage": false,
+    "navigatePages": 8,
+    "navigatepageNums": [
+      1
+    ],
+    "navigateFirstPage": 1,
+    "navigateLastPage": 1,
+    "lastPage": 1,
+    "firstPage": 1
+  },
+  "message": "请求成功"
+}

@@ -1,0 +1,10 @@
+{
+  "code": 200,
+  "result": {
+    "property": {
+      "incomeTotal": 2011492.6,
+      "spendingTotal": -42361.23
+    }
+  },
+  "message": "请求成功"
+}

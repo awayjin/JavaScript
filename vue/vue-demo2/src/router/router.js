@@ -9,10 +9,11 @@ import routeUser from './route-user'
 import routeVuex from './route-vuex'
 import routeComponent from './route-component'
 import routeView from './route-view'
+import routeAccountList from './route-account-list.js'
 
 Vue.use(Router)
 
-// https://blog.csdn.net/QingWaXieZi/article/details/85041224
+// 路由添加公共参数: https://blog.csdn.net/QingWaXieZi/article/details/85041224
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -54,12 +55,17 @@ const router = new Router({
       meta: { icon: 'form', title: '表单', authority: ['3admin'] },
       name: 'mixin',
       component: () => import('../views/mixin.vue')
+    },
+    {
+      path: '/jsx',
+      component: () => import('../views/jsx/jsx-index.vue')
     }
   ]
     .concat(routeUser) // user 用户模块
     .concat(routeVuex) // Vuex 模块
     .concat(routeComponent) // 组件 模块
     .concat(routeView) // view 模块
+    .concat(routeAccountList) // 账单列表 模块
 })
 
 // import { check, isLogin } from '../utils/auth'
