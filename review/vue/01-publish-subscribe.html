@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Title</title>
+</head>
+<body>
+<div id="id"> id </div>
+
+<script>
+  document.documentElement.onclick = function () {
+    console.log('publish-subscribe')
+  }
+
+  // 订阅
+  document.documentElement.addEventListener('click', function () {
+    console.log('发布-订阅')
+  }, false)
+
+
+  var dom = document.querySelector('#id')
+  // 自定义事件
+  // var event = new Event('build')
+  var event = new CustomEvent('build', {
+    detail: '自定义数据1'
+  })
+
+  // Listen for the event.
+  dom.addEventListener('build', function (e) {
+    console.log('custom events>.....', e.detail)
+    console.log(e)
+  }, false);
+
+  // Dispatch the event.
+  dom.dispatchEvent(event);
+
+  // 发布-订阅模式
+  var salesOffices = {
+    clientList: [],
+    listen (fn) {
+      this.clientList.push(fn)
+    },
+    trigger () {
+      // for (let i = 0, fn; fn = this.clientList[i++];) {
+      //   fn.apply(this, arguments)
+      // }
+      for (let i = 0; i < this.clientList.length; i++) {
+        this.clientList[i].apply(this, arguments)
+      }
+    }
+  }
+
+  // 订阅
+  salesOffices.listen(function (price, squareMeter) {
+    console.log('price:', price)
+    console.log('squareMeter:', squareMeter)
+  })
+
+  salesOffices.trigger(2000, '88')
+  salesOffices.trigger(3000, '120')
+
+</script>
+
+</body>
+</html>
