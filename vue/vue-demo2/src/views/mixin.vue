@@ -5,8 +5,9 @@
       混入 (mixin) 来分发 Vue 组件中的可复用功能
       当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项
       mixinMsg: {{ mixinMsg }}
-      message: {{ message }} --3
-      <span class="count">1</span>
+      message: {{ message }}
+      <button @click="hello"> hello </button>
+      <button @click="crossDomain"> crossDomain </button>
     </pre>
   </div>
 </template>
@@ -39,9 +40,19 @@ export default {
     return {
       message: 'component msg'
     }
+  },
+  methods: {
+    crossDomain () {
+      // console.log(this.$axios)
+      // fetch('http://locahost:4003')
+      this.$axios.get('user?name=nam-3&url=www.runoob.com')
+      // this.$axios.get('http://localhost:5005/user?name=nam-3&url=www.runoob.com')
+      // this.$axios.post('https://fancy-test.4009515151.com/capricom/billInfo/getBillInfoList')
+        .then(data => {
+          console.log('data:', data)
+        })
+        .catch(error => console.log('error, :', error))
+    }
   }
 }
 </script>
-
-<style scoped>
-</style>

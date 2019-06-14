@@ -19,16 +19,23 @@
 //   // lintOnSave: process.env.NODE_ENV !== 'production',
 //
 // }
-const PrerenderSPAPlugin = require('prerender-spa-plugin');
-const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
-const path = require('path');
+const PrerenderSPAPlugin = require('prerender-spa-plugin')
+const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
+const path = require('path')
+
+// import FullURL from './src/utils/env-setup.js'
+// const FullURL = require('./src/utils/env-setup.js')
+// console.log('FullURL:', FullURL)
+
 module.exports = {
   devServer: {
     overlay: {
       warnings: true,
       errors: true
     },
-    port: 4002
+    port: 4002,
+    // 代理跨域
+    proxy: 'http://localhost:5005'
   },
   configureWebpack: config => {
     if (process.env.NODE_ENV !== 'production') return;

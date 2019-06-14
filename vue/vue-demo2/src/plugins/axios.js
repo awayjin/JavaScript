@@ -15,7 +15,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
 let config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
-  // timeout: 60 * 1000, // Timeout
+  timeout: 3 * 1000 // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 }
 
