@@ -18,6 +18,7 @@ Vue.use(InfiniteScroll)
 Vue.component(Spinner.name, Spinner)
 
 // my-vuex 核心实现
+// eslint-disable-next-line
 import DemoVuex from './views/vuex/min-vuex.js'
 // Vue.use(DemoVuex)
 const demoStore = new DemoVuex.Store({
