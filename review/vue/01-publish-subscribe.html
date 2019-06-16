@@ -9,31 +9,34 @@
 <div id="id"> id </div>
 
 <script>
-  document.documentElement.onclick = function () {
-    console.log('publish-subscribe')
-  }
-
-  // 订阅
-  document.documentElement.addEventListener('click', function () {
-    console.log('发布-订阅')
-  }, false)
-
-
-  var dom = document.querySelector('#id')
   // 自定义事件
-  // var event = new Event('build')
-  var event = new CustomEvent('build', {
-    detail: '自定义数据1'
-  })
+  !function () {
+    document.documentElement.onclick = function () {
+      console.log('publish-subscribe')
+    }
 
-  // Listen for the event.
-  dom.addEventListener('build', function (e) {
-    console.log('custom events>.....', e.detail)
-    console.log(e)
-  }, false);
+    // 订阅
+    document.documentElement.addEventListener('click', function () {
+      console.log('发布-订阅')
+    }, false)
 
-  // Dispatch the event.
-  dom.dispatchEvent(event);
+
+    var dom = document.querySelector('#id')
+    // 自定义事件
+    // var event = new Event('build')
+    var event = new CustomEvent('build', {
+      detail: '自定义数据1'
+    })
+
+    // Listen for the event.
+    dom.addEventListener('build', function (e) {
+      console.log('custom events>.....', e.detail)
+      console.log(e)
+    }, false);
+
+    // Dispatch the event.
+    dom.dispatchEvent(event);
+  }()
 
   // 最简单模式
   void function () {
@@ -128,18 +131,119 @@
   console.log(Array(20).join('-'), '观察者模式通用实现', Array(20).join('-'))
 
   // 发布-订阅模式通用实现
-  var event = {
-  }
+  void function () {
+    var event = {
+      // 缓存列表
+      clientList: [],
 
-  // 给所有对象动态安装发布-订阅功能
-  var installEvent = function (obj) {
-    for (var i in event) {
-      obj[i] = event[i]
+      // 增加订阅者
+      listen (key, fn) {
+        // 如果还没有订阅过此类消息，给该类消息创建一个缓存列表
+        if (!this.clientList[key]) {
+          this.clientList[key] = []
+        }
+        // 订阅的消息添加进缓存列表
+        this.clientList[key].push(fn)
+      },
+
+      // 发布消息
+      trigger () {
+        // 取出消息类型
+        let key = Array.prototype.shift.call(arguments)
+        // 取出消息对应的回调函数
+        let fns = this.clientList[key]
+
+        // 如果没有订阅消息则返回
+        if (!fns || fns.length === 0) {
+          return false
+        }
+
+        // 执行
+        for (let i = 0, fn; fn = fns[i++];) {
+          fn.apply(this, arguments)
+        }
+      },
+
+      // 取消订阅事件
+      remove (key, fn) {
+        let fns = this.clientList[key]
+
+        if (!fns) {
+          return false
+        }
+
+
+        if (!fn) { // 如果没有传入具体的回调函数，表示需要取消 key 对应消息的所有订阅
+          fns && (fns.length = 0)
+        } else {
+          for (let len = fns.length; len >= 0; len--) {
+            let _fn = fns[len]
+            if (_fn === fn) {
+              fns.splice(len, 1) // 删除订阅者的回调
+            }
+          }
+        }
+
+      }
     }
-  }
+
+    // 给所有对象动态安装发布-订阅功能
+    var installEvent = function (obj) {
+      // for (var i in event) {
+      //   obj[i] = event[i]
+      // }
+      Object.assign(obj, event)
+    }
+
+
+    var salesOffice = {}
+    installEvent(salesOffice)
+    // salesOffice = Object.assign({}, event)
+
+    salesOffice.listen('squareMeter95', fn99 = price => console.log('price=', price))
+    // salesOffice.listen('squareMeter114', price => console.log('price=', price))
+
+    // console.log(salesOffice.clientList)
+
+    salesOffice.trigger('squareMeter95', 200)
+    salesOffice.remove('squareMeter95', fn99)
+    salesOffice.trigger('squareMeter95', 300)
+    // salesOffice.trigger('squareMeter114', 300)
+  }()
 
 
 </script>
 
+
+<script type="module">
+  console.log(Array(20).join('-'), '-2.0 观察者模式通用实现', Array(20).join('-'))
+
+  import Event from './observer-pattern.js'
+  // var salesOffices = {}
+  // salesOffices = Object.assign(salesOffices, event)
+  // var installEvent = function (obj) {
+  //   // for (var i in event) {
+  //   //   obj[i] = event[i]
+  //   // }
+  //   Object.assign(obj, event)
+  // }
+  console.log('Event:', Event)
+  let salesOffices = Event
+
+  let fn1 = function (price) {
+    console.log('price11=', price)
+  }
+  salesOffices.listen('squareMeter95', fn1)
+  salesOffices.listen('squareMeter95', price => console.log('price22=', price))
+  salesOffices.listen('squareMeter114', price => console.log('price33=', price))
+
+
+
+  salesOffices.trigger('squareMeter95', 200)
+  salesOffices.remove('squareMeter95', fn1)
+  salesOffices.trigger('squareMeter114', 300)
+  salesOffices.trigger('squareMeter95', 1250)
+
+</script>
 </body>
 </html>
