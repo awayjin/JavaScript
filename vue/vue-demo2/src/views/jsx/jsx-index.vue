@@ -6,31 +6,41 @@
     </a>
     <br>
     <br>
-    <hr>
 
+    <hr>
     template:
-    <TemplateAnchorHeading1 :level="3">
-      3
+    <TemplateAnchorHeading1 :level="5">
+      <template v-slot:header>
+        <div>header</div>
+      </template>
+      <template v-slot:main>
+        <div>main</div>
+      </template>
+      <template v-slot:default>
+        <div>footer</div>
+      </template>
+
+      <div name="footer">footer</div>
     </TemplateAnchorHeading1>
 
-    <hr>
+    <hr>    <br>
+    render:
+    <RenderAnchorHeading2 :level="1">
+      <slot >render function3</slot>
+      <!--<slot v-slot:name="default">render default</slot>-->
+    </RenderAnchorHeading2>
 
+    <hr>
     jsx:
     <JsxAnchorHeading3 :level="2" >
       jsx heading
     </JsxAnchorHeading3>
-
-    <hr>
-    render:
-    <RenderAnchorHeading2 :level="1">
-      render function
-    </RenderAnchorHeading2>
   </div>
 </template>
 <script>
 import TemplateAnchorHeading1 from './template-anchor.vue'
-import JsxAnchorHeading3 from './jsx-anchor.jsx'
 import RenderAnchorHeading2 from './render-anchor.js'
+import JsxAnchorHeading3 from './jsx-anchor.jsx'
 
 export default {
   components: {

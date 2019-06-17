@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import axios from 'axios'
-import baseURL from '../utils/env-setup'
+// import baseURL from '../utils/env-setup'
 
 // axios.defaults.baseURL = 'https://vanvan.vankeservice.com/'
-axios.defaults.baseURL = baseURL
+// axios.defaults.baseURL = baseURL
 // axios.defaults.headers.common['Authorization'] = 'Wpnz0wtYkZz85VN1z10KxjqQ4LA7NU'
 
 // Full config:  https://github.com/axios/axios#request-config

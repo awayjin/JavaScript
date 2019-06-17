@@ -8,6 +8,9 @@
       message: {{ message }}
       <button @click="hello"> hello </button>
       <button @click="crossDomain"> crossDomain </button>
+      <ul>
+        <li v-for="item in msgData" v-bind:key="item.id">{{ item.msg }}</li>
+      </ul>
     </pre>
   </div>
 </template>
@@ -38,18 +41,23 @@ export default {
   // 选项合并
   data () {
     return {
-      message: 'component msg'
+      message: 'component msg',
+      msgData: []
     }
+  },
+  mounted () {
+    this.crossDomain()
   },
   methods: {
     crossDomain () {
       // console.log(this.$axios)
       // fetch('http://locahost:4003')
-      this.$axios.get('user?name=nam-3&url=www.runoob.com')
+      this.$axios.get('http://localhost:5005/user?name=nam-3&url=www.runoob.com')
       // this.$axios.get('http://localhost:5005/user?name=nam-3&url=www.runoob.com')
       // this.$axios.post('https://fancy-test.4009515151.com/capricom/billInfo/getBillInfoList')
         .then(data => {
-          console.log('data:', data)
+          this.msgData = data.data
+          console.log('data:', data.data)
         })
         .catch(error => console.log('error, :', error))
     }

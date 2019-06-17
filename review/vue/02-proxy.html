@@ -8,14 +8,35 @@
   <title>Proxy</title>
 </head>
 <body>
+<a href="https://zhuanlan.zhihu.com/p/58866216">使用 Proxy 追踪 JavaScript 类</a>
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy">
+  MDN Proxy
+</a>
 
 Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）
+
+<script>
+  console.time('执行时间')
+  function func (duration) {
+    if (duration) {
+      var time = new Date()
+      while (new Date() - time <= duration) {
+
+      }
+    }
+  }
+  func(1000)
+  console.timeEnd('执行时间')
+</script>
 
 <script>
   // 基础示例
   let handler = {
     get: function (target, name) {
       return name in target ? target[name] : 37
+    },
+    has: function (oTarget, sKey) {
+      console.log('for in')
     }
   }
 
@@ -26,11 +47,47 @@ Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋�
   console.log('p.a:', p.a, ' p.b:', p.b)
   console.log('c' in p, ', p.c:', p.c)
 
-  // 无操作转发代理
+  // 1. 无操作转发代理
   let target = {}
   let noOpr = new Proxy(target, {})
   noOpr.a = 33
   console.log(target.a)
+
+  // 2. 使用 Proxy 进行验证 traps
+  const car = {
+    maker: 'BMW',
+    year: 2018
+  }
+  const ProxyCar = new Proxy(car,  {
+    set (obj, prop, value) {
+      if (prop === 'maker' && value.length < 1) {
+        throw new Error('Invalid maker')
+      }
+
+      if (prop === 'year' && typeof value !== 'number') {
+        throw new Error('Invalid year')
+      }
+
+      obj[prop] = value
+      // return value
+    }
+  })
+  ProxyCar.year = 2019
+  console.log('ProxyCar, car:', car)
+  ProxyCar.year = '2020'
+  ProxyCar.maker = '2'
+
+
+  // 3. 扩展构造函数
+  // 方法代理可以轻松地通过一个新构造函数来扩展一个已有的构造函数。
+  // 这个例子使用了construct和apply
+  function extend(sup, base) {
+    var descriptor = Object.getOwnPropertyDescriptor(
+      base.prototype, 'constructor'
+    )
+
+    base.protype = Object.create(sup.prototype)
+  }
 </script>
 
 </body>
