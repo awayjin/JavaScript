@@ -85,7 +85,7 @@ Observer.prototype = {
 // 3.1 创建一个Observer实例
 function observe (value, vm) {
   /**
-   * 数据监听器Observer, 对数据对象的所有属性进行监听,
+   * 数据监听器 Observer, 对数据对象的所有属性进行监听,
    * 如有变动拿到最新值并通知订阅者
    */
   // 1.0 需要observe的数据对象进行递归遍历
@@ -102,7 +102,7 @@ function observe (value, vm) {
 
 var uid = 0
 
-// 3.5 订阅器，收集订阅者。订阅者应该是Watcher
+// 3.5 订阅器，收集订阅者。订阅者应该是 Watcher
 function Dep () {
   this.id = uid++
   this.subs = []
