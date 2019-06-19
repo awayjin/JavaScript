@@ -16,16 +16,17 @@
       <template v-slot:main>
         <div>main</div>
       </template>
-      <template v-slot:default>
+      <template v-slot>
+        <span>default-val</span>
+      </template>
+      <template v-slot:footer>
         <div>footer</div>
       </template>
-
-      <div name="footer">footer</div>
     </TemplateAnchorHeading1>
 
     <hr>    <br>
     render:
-    <RenderAnchorHeading2 :level="1">
+    <RenderAnchorHeading2 :level="4">
       <slot >render function3</slot>
       <!--<slot v-slot:name="default">render default</slot>-->
     </RenderAnchorHeading2>
@@ -34,6 +35,7 @@
     jsx:
     <JsxAnchorHeading3 :level="2" >
       jsx heading
+      <a href="https://www.jianshu.com/p/96dc63e4e263">demo</a>
     </JsxAnchorHeading3>
   </div>
 </template>

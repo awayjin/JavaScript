@@ -1,6 +1,6 @@
 // 全局的发布-订阅对象
 // 发布-订阅模式通用实现
-const event = function () {
+const Event = function () {
   console.log(33)
   let global = this
   let Event
@@ -9,6 +9,7 @@ const event = function () {
   Event = function () {
     let _listen
     let _create
+    let namespaceCache = {}
 
     let each = (ary, fn) => {
       let ret
@@ -36,8 +37,26 @@ const event = function () {
       let ret = {
         listen (key, fn, last) {
           _listen(key, fn, cache)
+          if (offlineStack === null) {
+            return false
+          }
+
+          if (last === 'last') {
+
+          } else {
+            each(offlineStack, function () {
+              this()
+            })
+          }
+
+          offlineStack = null
         }
       }
+
+      return namespace ?
+        ( namespaceCache[ namespace ] ? namespaceCache[ namespace ] :
+          namespaceCache[ namespace ] = ret )
+        : ret;
     }
 
     return {
@@ -52,4 +71,11 @@ const event = function () {
   return Event
 }()
 
-export default event
+// 先发布再订阅
+Event.trigger('click', 33, 44, 55)
+Event.listen('click', (a, ...b) => {
+  console.log('先发布再订阅, a:', a)
+  console.log('先发布再订阅, 剩余参数: ...b:', b)
+})
+
+export default Event

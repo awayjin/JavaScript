@@ -31,14 +31,14 @@ export default {
         }
       },
       // 子节点数
-      this.$slots.default,
+      // this.$slots.default,
 
       // {String | Array}
       // 子级虚拟节点 (VNodes)，由 `createElement()` 构建而成，
       // 也可以使用字符串来生成“文本虚拟节点”。可选。
       [
         '先写一些文字',
-        createElement('h1', '一则头条')
+        createElement('div', this.$slots.default)
       ]
     )
   }
