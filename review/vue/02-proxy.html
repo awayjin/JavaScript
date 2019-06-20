@@ -15,6 +15,47 @@
 
 Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）
 
+<pre>
+  Object.defineProperty() 的问题主要有三个：
+
+不能监听数组的变化
+
+必须遍历对象的每个属性
+
+必须深层遍历嵌套的对象
+
+
+</pre>
+
+<script>
+  // 监听对象的每个属性
+  let obj = {
+    a: 11
+  }
+  let proxyObj = new Proxy(obj, {
+    get (target, name) {
+      console.log(target[name] + '-proxy')
+      return target[name] + '-proxy'
+    },
+    set (target, key, value) {
+      target[key] = value
+    }
+  })
+  console.log(proxyObj.a)
+
+  let obj2 = {}
+  let twoValue = [11, 22, {a: 33}]
+  Object.defineProperty(obj2, 'a', {
+    get () {
+      console.log(twoValue, ' -defineProperty')
+      return twoValue, ' -defineProperty'
+    },
+    set (value) {
+      twoValue = value
+    }
+  })
+</script>
+
 <script>
   console.time('执行时间')
   function func (duration) {
@@ -74,7 +115,7 @@ Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋�
   })
   ProxyCar.year = 2019
   console.log('ProxyCar, car:', car)
-  ProxyCar.year = '2020'
+  // ProxyCar.year = '2020'
   ProxyCar.maker = '2'
 
 

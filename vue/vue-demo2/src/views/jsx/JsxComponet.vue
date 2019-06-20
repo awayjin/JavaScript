@@ -1,11 +1,12 @@
-<template>
+<template functional>
   <div>
-    jsx-component
+    jsx-component 自定义
   </div>
 </template>
 
 <script>
 export default {
+  // functional: true,
   name: 'jsx-component.vue'
 }
 </script>

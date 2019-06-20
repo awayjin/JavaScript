@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<div id="app">
+  {{ demo }}
+  <p>
+    arr: {{ arr }}
+  </p>
+  <p v-if="obj.a || obj.b">
+    {{ obj.a || obj.b  }}
+  </p>
+  <p v-else>
+    none
+  </p>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      demo: 'demo',
+      arr: [],
+      obj: {
+        a: null
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

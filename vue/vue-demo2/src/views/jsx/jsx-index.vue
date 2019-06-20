@@ -38,7 +38,9 @@
     jsx:
     <JsxAnchorHeading3 :level="2" >
       jsx heading
-      <a href="https://www.jianshu.com/p/96dc63e4e263">demo</a>
+      <a href="https://www.jianshu.com/p/96dc63e4e263" target="_blank">demo</a>
+      <br>
+      <template v-slot:demo> demo-v-slot</template>
     </JsxAnchorHeading3>
   </div>
 </template>
