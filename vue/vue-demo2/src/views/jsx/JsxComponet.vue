@@ -1,12 +1,12 @@
 <template>
   <div>
-    33
+    jsx-component
   </div>
 </template>
 
 <script>
 export default {
-  name: "jsx-component.vue"
+  name: 'jsx-component.vue'
 }
 </script>
 

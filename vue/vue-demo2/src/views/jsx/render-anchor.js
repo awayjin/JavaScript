@@ -6,8 +6,8 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$slots)
-    console.log(this.$scopedSlots)
+    // console.log(this.$slots)
+    // console.log(this.$scopedSlots)
   },
   render (createElement) {
     // @returns {VNode}

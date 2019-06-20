@@ -13,6 +13,9 @@ import store from './store/store.js'
 import { InfiniteScroll, Spinner } from 'mint-ui'
 import VueGlobalVariable from './utils' // 全局变量设置
 
+import ClickOutside from './directives/click-outside'
+Vue.use(ClickOutside)
+
 Vue.use(VueGlobalVariable)
 Vue.use(InfiniteScroll)
 Vue.component(Spinner.name, Spinner)
@@ -43,6 +46,7 @@ window.Vue = new Vue({
   store,
   render: h => h(App),
   mounted () {
+    // for 预渲染
     document.dispatchEvent(new Event('render-event'))
   }
 }).$mount('#app')
