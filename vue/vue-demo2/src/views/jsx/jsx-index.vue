@@ -1,3 +1,15 @@
+<style>
+  .mask {
+    height: 400px;
+    width: 500px;
+    position: absolute;
+    top: 270px;
+    background-color: #000;
+    opacity: .3;
+    /*pointer-events: none;*/
+    /*display: none;*/
+  }
+</style>
 <template>
   <div>
     jsx
@@ -5,8 +17,15 @@
       jsx实现
     </a>
     <span >
-        <input type="text" v-demo>
-      </span>
+      <input type="text" autofocus placeholder="ha" v-focus>
+    </span>
+
+    <div > clickOutside </div>
+    <div v-clickOutSide="hideMask" style="background-color: #f0efd0; height: 80px;">
+      <!--<button @click="toggleMask($event)">show modal</button>-->
+      <button @click="show=!show">show modal</button>
+      <div class="mask" v-show="show"></div>
+    </div>
     <br>
     <br>
 
@@ -54,6 +73,16 @@ export default {
     TemplateAnchorHeading1,
     JsxAnchorHeading3,
     RenderAnchorHeading2
+  },
+  data () {
+    return {
+      show: false
+    }
+  },
+  methods: {
+    hideMask () {
+      this.show = false
+    }
   }
 }
 </script>

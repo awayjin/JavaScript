@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  var Person = function(){
+    // this.age = 44
+  }
+  // Person.prototype.age = 55
+  // Object.prototype.age = 66 // 等价 Person.prototype.__proto__.age = 66
+  Person.prototype.__proto__.age = 66
+  // Object.prototype.__proto__ // end
+  var per = new Person()
+  console.log('per.age:', per.age) // 44
+  console.log(per.constructor === Person)  // true
+  console.log(per.__proto__ === Person.prototype) // true
+  console.log(Object.prototype.age === Person.prototype.__proto__.age) // true
+</script>
+
+</body>
+</html>

@@ -1,8 +1,10 @@
 export default {
   install (Vue) {
+    // https://www.jianshu.com/p/9e1c241d8edb
     // 指令: 点击包含元素外关闭
     Vue.directive('clickOutSide', {
       bind (el, binding, vnode) {
+        console.log('clickOutSide:', el)
         function documentHandler (e) {
           if (el.contains(e.target)) {
             return false
@@ -21,7 +23,7 @@ export default {
     })
 
     // v-demo
-    Vue.directive('demo', {
+    Vue.directive('focus', {
       bind () {
         console.log('this is a v-demo. only once')
       },
