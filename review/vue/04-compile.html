@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<a href="https://www.jianshu.com/p/672a54807e57">MVVM ES6 实现</a>
+<pre>
+  2、实现一个指令解析器Compile，对每个元素节点的指令进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数
+
+  Compile 指令解析器，它的作用对每个元素节点的指令进行扫描和解析，
+  根据指令模板替换数据，以及绑定相应的更新函数。
+
+  compile 解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，
+  并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，
+  收到通知，更新视图
+
+  Compiler 编译器：用来将模板字符串编译成为 JavaScript 渲染函数的代码。
+</pre>
+
+<div id="app">
+  {{ demo }}
+  <p>
+    arr: {{ arr }}
+  </p>
+  <p v-if="obj.a || obj.b">
+    {{ obj.a || obj.b  }}
+  </p>
+  <p v-else>
+    none
+  </p>
+</div>
+
+<script>
+  let res = Vue.compile(
+    `<div>
+      {{ demo }}
+      <template>{{ b }}</template>
+    </div>`
+  )
+  console.log('res:', res)
+
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      demo: 'demo',
+      b: 33,
+      arr: [],
+      obj: {
+        a: null
+      }
+    },
+    render: res.render,
+    staticRenderFns: res.staticRenderFns
+  })
+</script>
+
+</body>
+</html>
