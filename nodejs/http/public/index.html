@@ -17,15 +17,24 @@ why?
 <script>
   const http2 = document.querySelector('.http2')
   http2.addEventListener('click', () => {
-    for(var i=0;i<100;i++) {
+    console.log(33)
+    console.time('http2 加载100张图片时间')
+    for(var i=0;i<1000;i++) {
       fetch('//localhost:5003/network.png')
     }
+    console.timeEnd('http2 加载100张图片时间')
   }, false)
 
   const http = document.querySelector('.http')
   http.addEventListener('click', () => {
     console.log('http')
-    fetch('http://localhost:5005/network.png')
+    console.time('http---:: 加载100张图片时间')
+    // fetch('http://localhost:5005/network.png')
+    for(var i=0;i<1000;i++) {
+      // fetch('http://localhost:5005/network.png')
+      fetch('http://localhost:5005/network.png')
+    }
+    console.timeEnd('http---:: 加载100张图片时间')
   }, false)
 </script>
 

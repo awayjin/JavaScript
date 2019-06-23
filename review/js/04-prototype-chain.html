@@ -5,23 +5,55 @@
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Title</title>
+  <title>继承</title>
 </head>
 <body>
 
+
+
 <script>
-  var Person = function(){
-    // this.age = 44
-  }
-  // Person.prototype.age = 55
-  // Object.prototype.age = 66 // 等价 Person.prototype.__proto__.age = 66
-  Person.prototype.__proto__.age = 66
-  // Object.prototype.__proto__ // end
-  var per = new Person()
-  console.log('per.age:', per.age) // 44
-  console.log(per.constructor === Person)  // true
-  console.log(per.__proto__ === Person.prototype) // true
-  console.log(Object.prototype.age === Person.prototype.__proto__.age) // true
+  // 继承只有一种结构：对象
+  // void function () {
+    function Person () { }
+    let person1 = new Person()
+
+    console.log('原型对象 constructor 指向构造函数：',
+      Person.prototype.constructor === Person)
+
+    // __proto__
+    console.log('1.0 实例 person1, 私有属性 __proto__:',
+      person1.__proto__ === Person.prototype) // true
+
+    console.log('2.0 原型对象 Person.prototype 私有属性 __proto_:',
+      Person.prototype.__proto__ === Object.prototype)
+
+    console.log('3.0 层层向上直到未端为 null:', Object.prototype.__proto__)
+
+    // ES6 Object.getPrototypeOf
+    console.log('2.1 ES6原型对象 Person.prototype 私有属性 __proto_:',
+      Object.getPrototypeOf(Person.prototype) === Object.prototype)
+    console.log('1.1 ES6实例 person1, 私有属性 getPrototypeOf:',
+      Object.getPrototypeOf(person1) === Person.prototype) // true
+    console.log('3.1 层层向上直到未端为 null:', Object.getPrototypeOf(Object.prototype))
+
+  // }()
+
+  console.log(Array(40).join('-'))
+
+  void function () {
+    var Person = function(){
+      // this.age = 44
+    }
+    // Person.prototype.age = 55
+    // Object.prototype.age = 66 // 等价 Person.prototype.__proto__.age = 66
+    Person.prototype.__proto__.age = 66
+    // Object.prototype.__proto__ // end
+    var per = new Person()
+    console.log('per.age:', per.age) // 44
+    console.log(per.constructor === Person)  // true
+    console.log(per.__proto__ === Person.prototype) // true
+    console.log(Object.prototype.age === Person.prototype.__proto__.age) // true
+  }()
 </script>
 
 </body>

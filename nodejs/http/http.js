@@ -43,8 +43,18 @@
 var express = require('express')
 var app = express()
 
+app.use(express.static('public'))
+
+
 app.get('/', function (req, res) {
   res.send('首页')
+})
+
+
+app.get('/img', function (req, res) {
+  // res.send('首页')
+  res.sendFile( __dirname + "/" + req.url );
+  console.log("Request for " + req.url + " received.");
 })
 
 var arr = [

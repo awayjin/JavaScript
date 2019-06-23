@@ -30,6 +30,16 @@
     <br>
 
     <hr>
+    jsx:
+    <JsxAnchorHeading3 :level="2" >
+      jsx heading
+      <a href="https://www.jianshu.com/p/96dc63e4e263" target="_blank">demo</a>
+      <br>
+      <template v-slot:demo> demo-v-slot</template>
+    </JsxAnchorHeading3>
+    jsx4: <JsxAnchorVue4 :level="2"><span>haha--</span></JsxAnchorVue4>
+
+    <hr>
     template:
     <TemplateAnchorHeading1 :level="5">
       <template v-slot:header>
@@ -53,25 +63,19 @@
       <!--<slot v-slot:name="default">render default</slot>-->
     </RenderAnchorHeading2>
 
-    <hr>
-    jsx:
-    <JsxAnchorHeading3 :level="2" >
-      jsx heading
-      <a href="https://www.jianshu.com/p/96dc63e4e263" target="_blank">demo</a>
-      <br>
-      <template v-slot:demo> demo-v-slot</template>
-    </JsxAnchorHeading3>
   </div>
 </template>
 <script>
 import TemplateAnchorHeading1 from './template-anchor.vue'
 import RenderAnchorHeading2 from './render-anchor.js'
 import JsxAnchorHeading3 from './jsx-anchor.jsx'
+import JsxAnchorVue4 from './jsx-anchor-heading.vue'
 
 export default {
   components: {
     TemplateAnchorHeading1,
     JsxAnchorHeading3,
+    JsxAnchorVue4,
     RenderAnchorHeading2
   },
   data () {

@@ -4,7 +4,7 @@
 // import './jsx.scss'
 // import styles from './jsx-d.css' // 局部样式
 import styles from './jsx.scss' // 局部样式
-import JsxComponent from './JsxComponet'
+import JsxComponent from './jsx-componet'
 
 export default {
   props: {
