@@ -6,6 +6,7 @@
       当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项
       mixinMsg: {{ mixinMsg }}
       message: {{ message }}
+      Mixin2 msg2: {{ msg2 }}
       <button @click="hello"> hello </button>
       <button @click="crossDomain"> crossDomain </button>
       <ul>
@@ -35,9 +36,18 @@ const myMixin = {
     }
   }
 }
+
+const mixin2 = {
+  data () {
+    return {
+      msg2: 'mixin2'
+    }
+  }
+}
+
 export default {
   name: 'mixin',
-  mixins: [myMixin],
+  mixins: [myMixin, mixin2],
   // 选项合并
   data () {
     return {

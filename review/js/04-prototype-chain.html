@@ -29,12 +29,24 @@
 
     console.log('3.0 层层向上直到未端为 null:', Object.prototype.__proto__)
 
-    // ES6 Object.getPrototypeOf
+  console.log(Array(30).join('-'), 'Object.getPrototypeOf', Array(30).join('-'))
+
+  // ES6 Object.getPrototypeOf
     console.log('2.1 ES6原型对象 Person.prototype 私有属性 __proto_:',
       Object.getPrototypeOf(Person.prototype) === Object.prototype)
     console.log('1.1 ES6实例 person1, 私有属性 getPrototypeOf:',
       Object.getPrototypeOf(person1) === Person.prototype) // true
     console.log('3.1 层层向上直到未端为 null:', Object.getPrototypeOf(Object.prototype))
+
+
+  console.log(Array(30).join('-'), 'Object.setPrototypeOf', Array(30).join('-'))
+  // ES6 Object.setPrototypeOf(obj, prototype)
+  // 设置一个指定的对象的原型 ( 即, 内部[[Prototype]]属性）到另一个对象或  null。
+  Object.setPrototypeOf(person1, null)
+  // Object.setPrototypeOf(person1, Person.prototype)
+  console.log('Object.setPrototypeOf(person1):', Object.getPrototypeOf(person1))
+  console.log('Object.setPrototypeOf():', Object.getPrototypeOf(person1) === Person.prototype)
+
 
   // }()
 

@@ -10,7 +10,7 @@
 <body>
 
 <script>
-  // 链表
+  // 数据结构--链表
   function LinkedList () {
     let Node = function (element) {
       this.element = element
@@ -20,31 +20,82 @@
     let length = 0
     let head = null
 
-    // 添加
+    // 添加---向链表最后一项追加元素
     this.append = function (element) {
       let node = new Node(element)
-      let current
+      let current = null
 
       if (head === null) {
-        head = node
+        head = node // 表头
       } else {
         current = head
+        // 循环列表，直到最后一项
+        while (current.next) {
+          current = current.next
+        }
+        // 找到最后，建立链接
+        current.next = node
       }
 
       length++
     }
 
-    // 大小
-    this.size = function () {
-      return length
+    // 删除--从链表中移除元素
+    this.removeAt = position => {
+      if (position > -1 && position < length) { // 检测边界值
+        let current = head
+        let previous
+        let index = 0
+        if (position === 0) {
+          head = current.next
+        } else {
+          while (index++ < position) {
+            previous = current
+            current = current.next
+            // console.log('--previous--', previous)
+            // console.log('--current--', current)
+          }
+          // 将previous与current的下一项链接起来：跳过current，从而移除它
+          previous.next = current.next
+        }
+        // 长度减1
+        length--
+        // 返回删除项
+        return current.element
+      } else {
+        return null
+      }
     }
+
+    // length 大小
+    this.size = () => length
+
+    // 转换成字符串
+    this.toString = () => {
+      let current = head
+      let string = ''
+
+      while (current) {
+        string += current.element + (current.next ? ', ' : '')
+        current = current.next
+      }
+      return string
+    }
+
   }
 
   // instance
   let list = new LinkedList()
-  list.append(55)
-  list.append(1000)
+  list.append(11)
+  list.append(22)
+  list.append(33)
+  list.append(44)
   console.log('list:', list)
+  console.log('size:', list.size())
+  console.log('toString:', list.toString())
+  console.log('越界删除 list.removeAt(5):', list.removeAt(5))
+  console.log('list.removeAt(2):', list.removeAt(2))
+  console.log('toString:', list.toString())
 </script>
 
 </body>
