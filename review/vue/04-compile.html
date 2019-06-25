@@ -21,17 +21,19 @@
   Compiler 编译器：用来将模板字符串编译成为 JavaScript 渲染函数的代码。
 </pre>
 
-<div id="app">
-  {{ demo }}
-  <p>
-    arr: {{ arr }}
-  </p>
-  <p v-if="obj.a || obj.b">
-    {{ obj.a || obj.b  }}
-  </p>
-  <p v-else>
-    none
-  </p>
+<div class="wrap">
+  <div id="app">
+    {{ demo }}
+    <p>
+      arr: {{ arr }}
+    </p>
+    <p v-if="obj.a || obj.b">
+      {{ obj.a || obj.b  }}
+    </p>
+    <p v-else>
+      none
+    </p>
+  </div>
 </div>
 
 <script>
@@ -53,10 +55,55 @@
         a: null
       }
     },
-    render: res.render,
-    staticRenderFns: res.staticRenderFns
+    // render: res.render,
+    // staticRenderFns: res.staticRenderFns
   })
 </script>
 
+----------------------------
+<div id="fragment">
+  {{ demo }}
+  <p>
+    arr: {{ arr }}
+  </p>
+</div>
+
+<ul id="ul">
+</ul>
+
+<script>
+ !function () {
+   // createDocumentFragment
+   var fragment = document.createDocumentFragment()
+   var child = null
+   var el = document.querySelector('#fragment')
+
+   var element = document.createElement('div')
+   while (child = el.firstChild) {
+     console.log('child:', child, ', child.length:', child.length)
+     fragment.appendChild(child)
+     // element.appendChild(child)
+   }
+   // el.appendChild(element)
+   el.appendChild(fragment)
+
+   console.log('fragment:', fragment)
+ }()
+
+
+ var element  = document.getElementById('ul'); // assuming ul exists
+ var fragment = document.createDocumentFragment();
+ var browsers = ['Firefox', 'Chrome', 'Opera',
+   'Safari', 'Internet Explorer'];
+
+ browsers.forEach(function(browser) {
+   var li = document.createElement('li');
+   li.textContent = browser;
+   fragment.appendChild(li);
+ });
+
+ element.appendChild(fragment);
+
+</script>
 </body>
 </html>

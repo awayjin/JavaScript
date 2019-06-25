@@ -78,7 +78,7 @@ Compile.prototype = {
       /**
        * appendChild
        * 如果这个给定的要插入的child是document中已存在的节点中的引用，
-       * 那么appendChild（）方法会把它从它现在的位置转移到新的位置，相当于一个剪切的效果
+       * 那么 appendChild() 方法会把它从它现在的位置转移到新的位置，相当于一个剪切的效果
        *
        */
       fragment.appendChild(child)
