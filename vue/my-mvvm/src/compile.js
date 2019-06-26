@@ -192,6 +192,7 @@ var compileUtil = {
 
   text: function (node, vm, exp) {
     var trimExp = exp.replace(/\s*/gi, '') // 去除空格
+    // console.log('exp:', exp)
     this.bind(node, vm, trimExp, 'text')
   },
 
