@@ -9,34 +9,80 @@
 </head>
 <body>
 
+<script>
+  console.log(Array(30).join('-'), '使用 class 关键字创建对象，生成原型链', Array(30).join('-'))
+  class Polygon {
+    constructor (width, height) {
+      this.width = width
+      this.height = height
+    }
+  }
 
+  class Square extends Polygon {
+    // 边长
+    constructor (sideLength) {
+      super(sideLength, sideLength)
+    }
+    // 面积
+    get area () {
+      return this.width * this.height
+    }
+    // 设置新的边长
+    set sideLength (newLength) {
+      this.width = newLength
+      this.height = newLength
+    }
+  }
+  const square = new Square(10)
+  console.log('sideLength=10 square.area:', square.area)
+  square.sideLength = 5
+  console.log('new sideLength=5 square.area:', square.area)
+
+
+  console.log(Array(30).join('-'), '继承方法', Array(30).join('-'))
+
+  // 继承方法
+  var obj = {
+    a: 11,
+    add () {
+      return this.a + 1
+    }
+  }
+  console.log('obj.add:', obj.add()) // 12
+  // 当继承的函数被调用时，this 指向的是当前继承的对象，而不是继承的函数所在的原型对象。
+  var ins = Object.create(obj)
+  ins.a = 31
+  console.log('ins.add:', ins.add()) // 32
+
+</script>
 
 <script>
+  console.log(Array(30).join('-'), '继承属性', Array(30).join('-'))
+
   // 继承只有一种结构：对象
-  // void function () {
-    function Person () { }
-    let person1 = new Person()
+  function Person () { }
+  let person1 = new Person()
 
-    console.log('原型对象 constructor 指向构造函数：',
-      Person.prototype.constructor === Person)
+  console.log('原型对象 constructor 指向构造函数：',
+    Person.prototype.constructor === Person)
 
-    // __proto__
-    console.log('1.0 实例 person1, 私有属性 __proto__:',
-      person1.__proto__ === Person.prototype) // true
+  // __proto__
+  console.log('1.0 实例 person1, 私有属性 __proto__:',
+    person1.__proto__ === Person.prototype) // true
 
-    console.log('2.0 原型对象 Person.prototype 私有属性 __proto_:',
-      Person.prototype.__proto__ === Object.prototype)
+  console.log('2.0 原型对象 Person.prototype 私有属性 __proto_:',
+    Person.prototype.__proto__ === Object.prototype)
 
-    console.log('3.0 层层向上直到未端为 null:', Object.prototype.__proto__)
+  console.log('3.0 层层向上直到未端为 null:', Object.prototype.__proto__)
 
   console.log(Array(30).join('-'), 'Object.getPrototypeOf', Array(30).join('-'))
 
   // ES6 Object.getPrototypeOf
-    console.log('2.1 ES6原型对象 Person.prototype 私有属性 __proto_:',
-      Object.getPrototypeOf(Person.prototype) === Object.prototype)
-    console.log('1.1 ES6实例 person1, 私有属性 getPrototypeOf:',
-      Object.getPrototypeOf(person1) === Person.prototype) // true
-    console.log('3.1 层层向上直到未端为 null:', Object.getPrototypeOf(Object.prototype))
+  console.log('2.1 ES6原型对象 Person.prototype 私有属性 __proto_:',
+    Object.getPrototypeOf(Person.prototype) === Object.prototype)
+  console.log('1.1 ES6实例 person1, 私有属性 getPrototypeOf:',
+    Object.getPrototypeOf(person1) === Person.prototype) // true
+  console.log('3.1 层层向上直到未端为 null:', Object.getPrototypeOf(Object.prototype))
 
 
   console.log(Array(30).join('-'), 'Object.setPrototypeOf', Array(30).join('-'))
@@ -47,8 +93,6 @@
   console.log('Object.setPrototypeOf(person1):', Object.getPrototypeOf(person1))
   console.log('Object.setPrototypeOf():', Object.getPrototypeOf(person1) === Person.prototype)
 
-
-  // }()
 
   console.log(Array(40).join('-'))
 
