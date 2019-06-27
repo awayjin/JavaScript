@@ -68,6 +68,12 @@ console.log('Object.setPrototypeOf():', Object.getPrototypeOf(person1) === Perso
 
 ### 使用不同的方法来创建对象和生成原型链
 - 使用 Object.create 创建的对象
+```javascript
+var a = {a: 1}; 
+// a ---> Object.prototype ---> null
+
+var b = Object.create(a);
+```
 
 - 使用 class 关键字创建的对象
 ```javascript
@@ -99,3 +105,40 @@ console.log('Object.setPrototypeOf():', Object.getPrototypeOf(person1) === Perso
   square.sideLength = 5
   console.log('new sideLength=5 square.area:', square.area)
 ```
+
+### 性能
+
+在原型链上查找属性比较耗时，对性能有副作用，这在性能要求苛刻的情况下很重要。另外，试图访问不存在的属性时会遍历整个原型链。
+
+Object.prototype 继承的 hasOwnProperty 方法
+```javascript
+// div元素的属性都打印出来
+var func = () => {
+ 	var index = 0
+    while (index++ < 5) {
+      if (index === 3) return index;
+      console.log(index)
+    }
+}
+console.log('func():', func())
+```
+
+### 总结：4 个用于拓展原型链的方法
+- New-initialization
+- Object.create
+- Object.setPrototypeOf
+- __proto__
+```javascript
+function foo(){}
+foo.prototype = {
+  foo_prop: "foo val"
+};
+function bar(){}
+var proto = new foo;
+proto.bar_prop = "bar val";
+bar.prototype = proto;
+var inst = new bar;
+console.log(inst.foo_prop);
+console.log(inst.bar_prop);
+```
+
