@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>virtual-dom</title>
+</head>
+<body>
+
+
+<ul id='list'>
+  <li class='item'>Item 1</li>
+  <li class='item'>Item 2</li>
+  <li class='item'>Item 3</li>
+</ul>
+<script>
+  var element = {
+    tagName: 'ul', // 节点标签名
+    props: { // DOM的属性，用一个对象存储键值对
+      id: 'list'
+    },
+    children: [ // 该节点的子节点
+      {tagName: 'li', props: {class: 'item'}, children: ["Item 1"]},
+      {tagName: 'li', props: {class: 'item'}, children: ["Item 2"]},
+      {tagName: 'li', props: {class: 'item'}, children: ["Item 3"]},
+    ]
+  }
+
+  function Element (tagName, props, children) {
+    this.tagName = tagName
+    this.props = props
+    this.children = children
+  }
+
+  var el = function (tagName, props, children) {
+    return new Element(tagName, props, children)
+  }
+
+  var ul = el(
+    'ul',
+    { id: 'list'},
+    [
+      el('li', { props: 'item'}, ['item 1']),
+      el('li', { props: 'item'}, ['item 2']),
+      el('li', { props: 'item'}, ['item 3'])
+    ]
+  )
+
+  console.log('ul:')
+  console.log(ul)
+
+
+</script>
+
+
+</body>
+</html>
