@@ -68,6 +68,7 @@ Observer.prototype = {
           dep.depend()
         }
         return val
+        // return data[key] //  Maximum call stack size exceeded
       },
       set: function (newVal) {
         if (val === newVal) return
@@ -102,7 +103,7 @@ function observe (value, vm) {
 
 var uid = 0
 
-// 3.5 订阅器，收集订阅者。订阅者应该是 Watcher
+// 3.5 消息订阅器，收集订阅者。订阅者应该是 Watcher
 function Dep () {
   this.id = uid++
   this.subs = []

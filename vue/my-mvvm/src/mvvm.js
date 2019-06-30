@@ -14,6 +14,9 @@
  compile 主要做的事情是解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，
  并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图
 
+ compile 主要做的事情是解析DOM节点树，将节点中的变量替换成数据，然后初始化渲染页面视图，
+ 并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图
+
  > Watcher 订阅者， 作为连接 Observer 和 Compile 的桥梁，
  能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。
 
@@ -51,7 +54,7 @@ MVVM.prototype = {
     setter = setter ||
         Object.defineProperty(me, key, {
           enumerable: true, // 可枚举
-          configurable: false, // 不能再define
+          configurable: false, // 表示能否通过 delete 删除属性从而重新定义属性
           get: function proxyGetter () {
             return me._data[key]
           },
@@ -74,7 +77,7 @@ MVVM.prototype = {
           get: typeof computed[key] === 'function'
             ? computed[key]
             : computed[key].get,
-          set: function () {
+          set: function (value) {
 
           }
         })

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // var obj = {
+  //   a: 13
+  // }
+  // var bValue
+  // Object.defineProperty(obj, 'a', {
+  //   get () {
+  //     return bValue
+  //   },
+  //   set (value) {
+  //     bValue = value
+  //   },
+  //   configurable: true,
+  //   enumerable: true
+  // })
+  // // obj.a = 44
+
+
+  var obj = {
+    a: 33,
+    b: 44
+  }
+
+  var defineReactive = (data, key, value) => {
+    Object.defineProperty(data, key, {
+      enumerable: true,
+      configurable: false,
+      get () {
+        return value
+      },
+      set (newValue) {
+        value = newValue
+      }
+    })
+  }
+
+  // 劫持属性，并转为访问器属性 setter getter
+  Object.keys(obj).forEach(key => {
+    // convert(key, obj[key])
+    defineReactive(obj, key, obj[key])
+  })
+</script>
+</body>
+</html>

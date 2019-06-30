@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件系统 eventEmitter</title>
+</head>
+<body>
+<a href="https://blog.csdn.net/Gochan_Tao/article/details/90245233"></a>
+<a href="https://blog.csdn.net/u010582082/article/details/77244161">ES6</a>
+
+promise 的 executor（执行器） 里的代码是同步的
+promise 的回调是 microTask（微任务） 而 setTimeout 的回调是 task（任务/宏任务）
+microTask 早于 task 被执行。
+
+
+<script>
+  class EventEmitter {
+    constructor () {
+      this.events = {}
+    }
+
+    on (eventName, callback) {
+      // 监听 event 事件,触发时调用 callback 函数
+      let arr = this.events[eventName] || []
+      arr.push(callback)
+      this.events[eventName] = arr
+      return this
+    }
+
+    emit (eventName, ...args) {
+      // 触发事件,并把参数传给事件的处理函数
+      let callbacks = this.events[eventName]
+      // this.events[eventName] = callbacks && callbacks.filter(fn => fn !== callback)
+      callbacks.forEach(fn => fn.apply(null, args))
+      return this
+    }
+
+    off (eventName, callback) {
+
+    }
+
+    once () {}
+
+  }
+
+  const eve = new EventEmitter()
+  eve.on('myEve1', (data) => {
+    console.log('my event1 trigger. data:', data)
+  })
+  eve.on('myEve1', (data) => {
+    console.log('my33 event1 trigger. data:', data)
+  })
+  eve.emit('myEve1', [11, 22])
+  eve.emit('myEve1', 55, 66)
+</script>
+
+
+<script>
+  console.log(Array(30).join('--'))
+  // 事件系统
+  class Events {
+    constructor () {
+      this._events = {}
+    }
+    // 监听事件
+    on (event, callback) {
+      let arr = this._events[event] || []
+      arr.push(callback)
+      this._events[event] = arr
+      return this
+    }
+    // 触发事件
+    emit (event, ...args) {
+      let callbacks = this._events[event]
+      if (callbacks) {
+        callbacks.map(item => item.call(this, ...args))
+      }
+    }
+    // 删除事件
+    off (event, callback) {
+      let callbacks = this._events[event]
+
+      if (callbacks) {
+        delete this._events[event]
+      }
+    }
+    // 只触发一次
+    once (event, ...args) {
+      let callbacks = this._events[event]
+      if (callbacks){
+        this.emit(event, ...args)
+        this.off(event)
+      }
+    }
+  }
+
+  let events = new Events()
+  events.on('test',  (data) => console.log('data-1:', data) )
+  events.on('test2',  (data) => console.log('second data-2:', data) )
+  events.on('test3',  (data) => console.log('second data-33:', data) )
+  events.emit('test', [333, 444])
+  events.emit('test2', 0, 1)
+  events.once('test3', '触发一次')
+  events.emit('test3', '不再触发')
+  events.off('test2')
+  events.emit('test2', 22)
+
+</script>
+
+</body>
+</html>

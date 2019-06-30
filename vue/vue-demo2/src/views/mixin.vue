@@ -7,7 +7,8 @@
       mixinMsg: {{ mixinMsg }}
       message: {{ message }}
       Mixin2 msg2: {{ msg2 }}
-      <button @click="hello"> hello </button>
+      <button @click="hello"> hello Mixins </button>
+      <button @click="onEmit"> onEmit  </button>
       <button @click="crossDomain"> crossDomain </button>
       <ul>
         <li v-for="item in msgData" v-bind:key="item.id">{{ item.msg }}</li>
@@ -33,6 +34,10 @@ const myMixin = {
   methods: {
     hello () {
       console.log('hello from mixin.')
+    },
+    onEmit () {
+      this.$emit('onEmit', 'from mixin2')
+      this.$emit('onEmit', 'from mixin2-2')
     }
   }
 }
@@ -56,7 +61,9 @@ export default {
     }
   },
   mounted () {
-    this.crossDomain()
+    this.$on('onEmit', data => console.log('onEmit1:', data))
+    this.$on('onEmit', data => console.log('onEmit2:', data))
+    // this.crossDomain()
   },
   methods: {
     crossDomain () {

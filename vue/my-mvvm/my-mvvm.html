@@ -13,19 +13,43 @@
 <a href="https://github.com/DMQ/mvvm">mvvm</a>
 <a href="https://juejin.im/post/5b06c79d51882538b4297adb">jujin</a>
 
+
+
+<div id="app2" style="background-color: #e7e4e5">
+  <input type="text" v-model="someStr"> <br>
+  <input type="text" v-model="someStr3"> <br>
+  <!--  <input type="text" v-model="obj.a"> <br>
+    obj.a: {{ obj.a }} <br>-->
+  双向绑定： {{ someStr }}<br>  {{ someStr3 }}
+  双向绑定2： {{ someStr }}
+  <p>P:<a href="##">{{ someStr }}---</a></p>
+  <button v-on:click="clickBtn">change model</button>
+  <div style="display: none">none</div>
+  {{ getHelloWord }}
+  <br>
+  ---arr: {{ arr }}--
+  <br>
+  ---computed: {{ somePlus }}
+</div>
+<br>
+<br>
+
 <div id="app" style="background-color: #b3b3b3">
   <input type="text" v-model="someStr"> <br>
   <input type="text" v-model="someStr3"> <br>
+  <input type="text" v-model="arr"> <br>
 <!--  <input type="text" v-model="obj.a"> <br>
   obj.a: {{ obj.a }} <br>-->
   双向绑定： {{ someStr }}<br>  {{ someStr3 }}
   双向绑定2： {{ someStr }}
-  <p>P:<a href="##">{{ someStr }}</a></p>
+  <p>P:<a href="##">{{ someStr }}---</a></p>
   <button v-on:click="clickBtn">change model</button>
   <p style="display: none">none</p>
   {{ getHelloWord }}
   <br>
   ---arr: {{ arr }}--
+  <br>
+  ---computed: {{ somePlus }}
 
 </div>
 
@@ -33,12 +57,12 @@
 
 
   var vm = new MVVM({
-    // el: '#app',
+    el: '#app',
     data: {
       someStr: 'Parent Hello',
       someStr3: '33lo',
       obj: { a: 'a' },
-      arr: [33, 22, 'a'],
+      arr: [33, 22, 'a', 4],
       arrObj: [{ b: 22, c: 33 }],
       child: {
         someStr: 'Child Word'
@@ -50,15 +74,19 @@
       }
     },
     computed: {
+      // 仅读取
       getHelloWord: function () {
-        return this.someStr + this.child.someStr
+        return this.someStr + this.child.someStr + '---Computed getHelloWord'
       },
-      d: {
-        set: function () {
-          console.log(111)
+      // 读取和设置
+      somePlus: {
+        set: function (value) {
+          console.log('111:', this)
+          this.someStr3 = value + 'set computed'
         },
         get: function () {
           console.log(222)
+          return this.someStr3 + '---get Computed'
         }
       }
     }

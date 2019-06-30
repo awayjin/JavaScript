@@ -34,6 +34,8 @@ module.exports = {
 ### 3. 核心概念之 Loaders
 webpack 开箱即用只支持 JS 和 JSON 两种文件类型，通过 Loaders 去支持其它文件类型并且把它们转化成有效的模块，并且可以添加到依赖图中。
 
+本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图（和最终的 bundle）可以直接引用的模块。
+
 本身是一个函数，接受源文件作为参数，返回转换的结果。
 
 常见的 Loaders 有哪些?
@@ -58,4 +60,136 @@ webpack 开箱即用只支持 JS 和 JSON 两种文件类型，通过 Loaders �
 ### 5. 核心概念之 Mode
 Mode ⽤来指定当前的构建环境是:production、development 还是 none 
 
-设置 mode 可以使⽤用 webpack 内置的函数，默认值为 production
+设置 mode 可以使用 webpack 内置的函数，默认值为 production
+
+### 6.1 资源解析: 增加 ES6 的 babel preset 配置
+
+安装 babel-loader
+```html
+安装:
+npm install -D babel-loader @babel/core @babel/preset-env
+
+.babelrc
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ]
+}
+
+webpack.config.js
+module: {
+    rules: [
+      { test: /.js$/, use: 'babel-loader'}
+    ]
+}
+```
+presets 是一系列 plugins 的集合
+一个 plugins 对应一个功能
+
+### 6.2 资源解析: 解析 React JSX
+安装 `react react-dom @babel/preset-react`
+```html
+npm i react react-dom @babel/preset-react -D
+```
+
+### 6.3 资源解析:解析 CSS
+css-loader 用于加载 .css ⽂件，并且转换成 commonjs 对象
+
+style-loader 将样式通过 <style> 标签插入到 head 中
+
+```html
+sudo yarn add --dev css-loader style-loader
+sudo yarn add --dev less less-loader
+```
+
+### 6.4 资源解析:解析图⽚片 file-loader
+```html
+sudo yarn add --dev file-loader
+```
+
+### 6.5 资源解析:使⽤用 url-loader
+url-loader 也可以处理图片和字体.
+可以设置较⼩资源⾃动 base64
+```html
+sudo yarn add --dev url-loader
+```
+
+### 7.0 webpack 中的文件监听使⽤
+webpack 开启监听模式，有两种⽅方式: 
+- 启动 webpack 命令时，带上 --watch 参数 
+- 在配置 webpack.config.js 中设置 watch: true
+
+唯一缺陷:每次需要⼿手动刷新浏览器器
+
+### 7.1 ⽂件监听的原理分析
+
+轮询判断⽂件的最后编辑时间是否变化
+ 
+某个⽂件发⽣生了了变化，并不会立刻告诉监听者，而是先缓存起来，等 aggregateTimeout
+```javascript
+module.exports = {
+  // 文件监听，放到硬盘中
+    watch: true,
+    // 只有开启监听模式时，watchOptions才有意义
+    watchOptions: {
+      // 默认为空，不监听的文件或者文件夹，支持正则匹配
+      ignored: /node_modules/,
+      // 监听到变化发生后会等300ms再去执行，默认300ms
+      aggregateTimeout: 300,
+      // 判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
+      poll: 1000
+    },
+}
+```
+
+### 8.0 热更新:webpack-dev-server
+WDS 不不刷新浏览器,WDS 不输出文件，而是放在内存中
+
+使⽤用 HotModuleReplacementPlugin插件
+
+```html
+sudo yarn add --dev webpack-dev-server
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  // mode: 'production'
+  mode: 'development',
+  devServer: {
+    contentBase: './dist',
+    // 热更新
+    hot: true
+  }
+
+```
+
+热更新分两个阶段，启动阶段还是依赖磁盘文件去编译。更新阶段是直接内存增量更新的
+
+这里面的热更新有最核心的是 HMR Server 和 HMR runtime。
+
+HMR Server 是服务端，用来将变化的 js 模块通过 websocket 的消息通知给浏览器端。
+
+HMR Runtime 是浏览器端，用于接受 HMR Server 传递的模块数据，浏览器端可以看到 .hot-update.json 的文件过来。
+
+HotModuleReplacementPlugin是做什么用的？
+
+webpack 构建出来的 bundle.js 本身是不具备热更新的能力的，HotModuleReplacementPlugin 的作用就是将 HMR runtime 注入到 bundle.js，使得bundle.js可以和HMR server建立websocket的通信连接
+
+### 8.1 热更新:使用 webpack-dev-middleware
+WDM 将 webpack 输出的⽂文件传输给服务器器 适⽤用于灵活的定制场景
+```javascript
+const express = require('express');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev- middleware');
+const app = express();
+const config = require('./webpack.config.js'); const compiler = webpack(config);
+app.use(webpackDevMiddleware(compiler, { publicPath: config.output.publicPath
+}));
+app.listen(3000, function () {
+console.log('Example app listening on port 3000!\n');
+});
+```
+
+### 8.2 热更新的原理理分析
+![热更新原理](./hmr.png)

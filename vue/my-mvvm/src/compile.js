@@ -23,9 +23,12 @@
  *  firstChild 属性返回指定节点的首个子节点
  *
  * 3. childNodes, Array.prototype.slice.call类数组转换成数组
- *    textContent与innerText区别
+ *
+ *    textContent 与 innerText区别
  *    textContent 返回指定节点的文本内容，以及它的所有后代。隐藏的也返回.
  *    innerText不会
+ *
+ *    childNodes 和 children 的区别, children-只包含元素节点，别的无区别。
  *
  *  3.1 compileElement-node.attributes, attr.name-attr.value
  *  node.attributes 获得元素属性的集合
@@ -112,7 +115,7 @@ Compile.prototype = {
     })
   },
 
-  // 3.3 元素解析
+  // 3.3 解析元素节点
   compileElement: function (node) {
     var nodeAttrs = node.attributes // 获得元素属性的集合
     var _this = this
