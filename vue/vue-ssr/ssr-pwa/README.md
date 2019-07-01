@@ -1,4 +1,4 @@
-# pwa-demo
+# ssr-pwa
 
 ## Project setup
 ```
