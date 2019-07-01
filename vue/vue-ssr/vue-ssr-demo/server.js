@@ -1,3 +1,5 @@
+// demo: https://www.cnblogs.com/lentoo/p/9637845.html
+
 const Vue = require('vue')
 const server = require('express')()
 const renderer = require('vue-server-renderer').createRenderer()

@@ -144,7 +144,7 @@ module.exports = {
 ```
 
 ### 8.0 热更新:webpack-dev-server
-WDS 不不刷新浏览器,WDS 不输出文件，而是放在内存中
+WDS 不刷新浏览器,WDS 不输出文件，而是放在内存中
 
 使⽤用 HotModuleReplacementPlugin插件
 
