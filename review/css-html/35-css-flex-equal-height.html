@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>两列等高</title>
+</head>
+<body>
+
+<div class="parent">
+  <div class="child" style=";">
+    <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Flex">flex 属性</a>
+
+    两列等高
+
+    CSS属性 flex 规定了弹性元素如何伸长或缩短以适应flex容器中的可用空间。
+    这是一个简写属性，用来设置 flex-grow, flex-shrink 与 flex-basis。
+    <pre>
+    justify-content 主轴对齐
+
+    align-items 侧轴上项目对齐方式
+    align-content 堆栈伸缩行
+
+    flex 伸缩性
+    </pre>
+
+
+  </div>
+  <div class="child">
+    <pre>
+      align-self 侧轴上单个项目对齐方式
+
+      flex-flow 伸缩流的方向与换行
+      flex-shrink 伸缩-收缩比率
+      flex-basis 伸缩-基准值
+
+      flex-direction 伸缩流方向
+
+      flex-grow 伸缩-扩展基数
+      flex-wrap 伸缩-换行
+
+      order 伸缩-顺序
+    </pre>
+
+  </div>
+</div>
+<br/>
+<div class="parent">
+  <div class="child"  style="height:400px;" >
+    1
+  </div>
+
+  <div class="child">
+    2
+  </div>
+  <div class="child" style="outline: 1px solid red">
+    3
+  </div>
+</div>
+
+<div class="box">
+  <span>你好1</span>
+  <span>你好2</span>
+  <span>你好3</span>
+  <span>你好4</span>
+  <span>你好5</span>
+  <span>你好6</span>
+  <span>你好7</span>
+</div>
+
+<style>
+  .box{
+    display: flex;
+    display: -webkit-flex;
+    /*默认，项目左对齐*/
+    /*justify-content: flex-start;*/
+   /*align-items: stretch;*/
+    background: #999;
+    width: 100%;
+  }
+  .box span{
+    margin: 10px 10px;
+    padding: 10px;
+    background: #ff0;
+    width: 50px;
+  }
+
+  .box span:nth-of-type(2n){
+    background-color: red;
+    height: 30px;
+    padding-top: 20px;
+  }
+
+  .parent {
+    display: flex;
+    /*justify-content: center;*/
+    /*align-items: stretch;*/
+    /*align-content: center;*/
+
+    width: 500px;
+  }
+  .child {
+    width: 300px;
+    outline: 1px solid;
+  }
+</style>
+</body>
+</html>

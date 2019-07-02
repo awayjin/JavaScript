@@ -28,10 +28,34 @@
     ]
   }
 
+  // constructor
   function Element (tagName, props, children) {
     this.tagName = tagName
     this.props = props
     this.children = children
+  }
+
+  // render
+  // render方法会根据tagName构建一个真正的DOM节点，然后设置这个节点的属性，
+  // 最后递归地把自己的子节点也构建起来
+  Element.prototype.render = function () {
+    var el = document.createElement(this.tagName) // 根据tagName构建
+    var props = this.props
+
+    for (var propName in props) { // 设置节点的DOM属性
+      var propValue = props[propName]
+      el.setAttribute(propName, propValue)
+    }
+
+    var children = this.children || []
+    children.forEach(function (child) {
+      var childEl = (child instanceof Element)
+        ? child.render() // 如果子节点也是虚拟DOM，递归构建DOM节点
+        : document.createTextNode(child) // 如果字符串，只构建文本节点
+      el.appendChild(childEl)
+    })
+
+    return el
   }
 
   var el = function (tagName, props, children) {
@@ -42,14 +66,16 @@
     'ul',
     { id: 'list'},
     [
-      el('li', { props: 'item'}, ['item 1']),
-      el('li', { props: 'item'}, ['item 2']),
-      el('li', { props: 'item'}, ['item 3'])
+      el('li', { class: 'item'}, ['item 1']),
+      el('li', { class: 'item'}, ['item 2']),
+      el('li', { class: 'item'}, ['item 3'])
     ]
   )
 
-  console.log('ul:')
-  console.log(ul)
+  var ulRoot = ul.render()
+  document.body.appendChild(ulRoot)
+  console.log('ul:', ul)
+  console.log('ulRoot:', ulRoot)
 
 
 </script>
