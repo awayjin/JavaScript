@@ -16,19 +16,27 @@
  */
 
 /**
- * 1.nodeType=1元素节点
+ * 1.nodeType=1元素节点, =3文本节点
  *
- * 2. document fragments createDocumentFragment, firstChild
+ * 2. DOM API, Node
  *  document.createDocumentFragment 创建一个新的空白的文档片段
  *  firstChild 属性返回指定节点的首个子节点
+ *  appendChild
+ *  如果这个给定的要插入的child是document中已存在的节点中的引用，
+ *  那么 appendChild() 方法会把它从它现在的位置转移到新的位置，相当于一个剪切的效果
  *
- * 3. childNodes, Array.prototype.slice.call类数组转换成数组
+ * 3. childNodes 和 children, 类数组转换成数组 Array.prototype.slice.call
  *
  *    textContent 与 innerText区别
  *    textContent 返回指定节点的文本内容，以及它的所有后代。隐藏的也返回.
  *    innerText不会
  *
  *    childNodes 和 children 的区别, children-只包含元素节点，别的无区别。
+ *
+ *    类数组转换成数组, 3种方法
+ *    Array.prototype.slice.call(el.childNodes)
+ *    Array.from(el.childNodes)
+ *    [...el.childNodes]
  *
  *  3.1 compileElement-node.attributes, attr.name-attr.value
  *  node.attributes 获得元素属性的集合
@@ -44,6 +52,38 @@
  *  reg.test(string)-test() 方法用于检测一个字符串是否匹配某个模式.
  *  RegExp.$1 存储捕获组的构造函数属性，$1, $2...$9存储第1，2...9个捕获组
  */
+
+
+/**
+ * 1. nodeToFragment 转为文档片段，遍历
+ *
+ * 2. compileNodes(el) 解析节点
+ *
+ *  2.1 子节点转为数组，遍历 Array.prototype.slice.call(el.childNodes)
+ *
+ *  2.2 元素节点解析 compileElement(node)
+ *
+ *  2.3 解析文本节点 compileText(node, RegExp.$1)
+ *    textContent 与 innerText区别
+ *    reg.test(text) 和 reg.exec(text)
+ *
+ *  2.4 递归子节点 compileNodes(node)
+ *
+ * 3. 解析文本节点 compileText
+ *  文本节点指令处理 compileUtil.text(node, this.$vm, exp)
+ *
+ * 4. 指令处理集合 compileUtil
+ *  4.1 text(node, vm, exp) 方法
+ *    replace, 替换空白
+ *      \s匹配任何空白字符, trimExp = exp.replace(/(\s*)/gi, '')
+ *    bind, 绑定
+ *      this.bind(node, vm, trimExp, 'text')
+ *
+ * 5. 绑定, bind
+ *
+ *  updater[dir + 'Updater'] // textUpdater
+ *  第一次初始化视图
+ * */
 
 function Compile (el, vm) {
   this.$vm = vm
@@ -109,7 +149,7 @@ Compile.prototype = {
         that.compileText(node, RegExp.$1)
       }
 
-      if (node.childNodes && node.childNodes.length) { // 解析子节点
+      if (node.childNodes && node.childNodes.length) { // 递归，解析子节点
         that.compileNodes(node)
       }
     })
@@ -202,7 +242,7 @@ var compileUtil = {
   // 3.7.2 bind
   bind: function (node, vm, exp, dir) {
     // 3.7.3 modelUpdater
-    var updaterFn = updater[dir + 'Updater'] // modelUpdater
+    var updaterFn = updater[dir + 'Updater'] // textUpdater, modelUpdater
 
     // 第一次初始化视图
     updaterFn && updaterFn(node, this._getVMVal(vm, exp))
