@@ -8,7 +8,7 @@
  根据指令模板替换数据，以及绑定相应的更新函数。
 
  > Watcher 订阅者， 作为连接 Observer 和 Compile 的桥梁，
- 能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。
+ 能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图。
 
  > Dep 消息订阅器，内部维护了一个数组，用来收集订阅者（Watcher），
  数据变动触发 notify 函数，再调用订阅者的 update 方法。
@@ -146,7 +146,8 @@ Compile.prototype = {
       if (that.isElementNode(node)) { // 元素节点
         that.compileElement(node)
       } else if (that.isTextNode(node) && reg.test(text)) { // 3.8 文本节点
-        that.compileText(node, RegExp.$1)
+        that.compileText(node, RegExp.$1.trim())
+        // that.compileText(node, RegExp.$1)
       }
 
       if (node.childNodes && node.childNodes.length) { // 递归，解析子节点
@@ -234,9 +235,9 @@ var compileUtil = {
   },
 
   text: function (node, vm, exp) {
-    var trimExp = exp.replace(/\s*/gi, '') // 去除空格
+    // var trimExp = exp.replace(/\s*/gi, '') // 去除空格
     // console.log('exp:', exp)
-    this.bind(node, vm, trimExp, 'text')
+    this.bind(node, vm, exp, 'text')
   },
 
   // 3.7.2 bind

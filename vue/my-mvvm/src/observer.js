@@ -14,7 +14,7 @@
  根据指令模板替换数据，以及绑定相应的更新函数。
 
  > Watcher 订阅者， 作为连接 Observer 和 Compile 的桥梁，
- 能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。
+ 能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图。
 
  > Dep 消息订阅器，内部维护了一个数组，用来收集订阅者（Watcher），
  数据变动触发 notify 函数，再调用订阅者的 update 方法。
@@ -64,9 +64,7 @@ Observer.prototype = {
         // 由于需要在闭包内添加Watcher,所以通过Dep定义一个全局target,暂存Watcher,添加完删除
         // Dep.target && dep.addDep(Dep.target)
         // 通过dep添加订阅者，就必须要在闭包内操作，所以我们可以在	getter里面动手脚：
-        if (Dep.target) {
-          dep.depend()
-        }
+        Dep.target && dep.depend()
         return val
         // return data[key] //  Maximum call stack size exceeded
       },
