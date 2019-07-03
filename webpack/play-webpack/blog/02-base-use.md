@@ -176,7 +176,10 @@ HotModuleReplacementPlugin是做什么用的？
 
 webpack 构建出来的 bundle.js 本身是不具备热更新的能力的，HotModuleReplacementPlugin 的作用就是将 HMR runtime 注入到 bundle.js，使得bundle.js可以和HMR server建立websocket的通信连接
 
-### 8.1 热更新:使用 webpack-dev-middleware
+### 8.1 热更新的原理理分析
+![热更新原理](./hmr.png)
+
+### 8.2 热更新:使用 webpack-dev-middleware
 WDM 将 webpack 输出的⽂文件传输给服务器器 适⽤用于灵活的定制场景
 ```javascript
 const express = require('express');
@@ -191,5 +194,3 @@ console.log('Example app listening on port 3000!\n');
 });
 ```
 
-### 8.2 热更新的原理理分析
-![热更新原理](./hmr.png)

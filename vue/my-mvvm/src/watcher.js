@@ -27,7 +27,7 @@
  根据指令模板替换数据，以及绑定相应的更新函数。
 
  > Watcher 订阅者， 作为连接 Observer 和 Compile 的桥梁，
- 能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。
+ 能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图。
 
  > Dep 消息订阅器，内部维护了一个数组，用来收集订阅者（Watcher），
  数据变动触发 notify 函数，再调用订阅者的 update 方法。
@@ -47,23 +47,9 @@ function Watcher(vm, expOrFn, cb) {
 }
 
 Watcher.prototype = {
-  parseGetter: function (exp) {
-    // if (/[^\w$]/.test(exp)) return
-    // var exps = exp.split('.')
-    return function (obj) {
-      // for (var i = 0, len = exps.length; i < len; i++) {
-      //   if (!obj) return
-      //   obj = obj[exps[i]]
-      // }
-      // return obj
-      return obj[exp]
-    }
-  },
   get: function (exp) {
     Dep.target = this // 将当前订阅者指向自己
-    var value = this.vm[exp]
-    // var value = this.getter.call(this.vm, this.vm) // 触发getter，添加自己到属性订阅器中
-    // console.log('exp:' + exp)
+    var value = this.vm[exp]  // 触发getter，添加自己到属性订阅器中
     Dep.target = null // 添加完毕，重置
     return value
   },
@@ -82,6 +68,18 @@ Watcher.prototype = {
     if (value !== oldValue) {
       this.value = value
       this.cb.call(this.vm, value, oldValue) // 执行Compile中绑定的回调，更新视图
+    }
+  },
+  parseGetter: function (exp) {
+    // if (/[^\w$]/.test(exp)) return
+    // var exps = exp.split('.')
+    return function (obj) {
+      // for (var i = 0, len = exps.length; i < len; i++) {
+      //   if (!obj) return
+      //   obj = obj[exps[i]]
+      // }
+      // return obj
+      return obj[exp]
     }
   }
 }
