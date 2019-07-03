@@ -58,6 +58,17 @@
     return el
   }
 
+  function diff (oldTree, newTree) {
+    var index = 0
+    var patches = {}
+    dfsWalk(oldTree, newTree, index, patches)
+    return patches
+  }
+  
+  function dfsWalk () {
+    
+  }
+
   var el = function (tagName, props, children) {
     return new Element(tagName, props, children)
   }
