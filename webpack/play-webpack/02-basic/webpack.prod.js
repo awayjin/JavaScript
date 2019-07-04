@@ -1,6 +1,7 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   // entry: './src/index.js',
@@ -11,7 +12,7 @@ module.exports = {
   },
   output: {
     // filename: 'bundle.js',
-    filename: '[name].js', // 多页面配置
+    filename: '[name]_[hash:8].js', // 多页面配置
     path: path.resolve(__dirname, 'dist')
   },
   // 文件监听. 放到硬盘中
@@ -36,6 +37,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
+              name: '[name]_[hash:8]',
               limit: 10240
             }
           }
@@ -44,33 +46,29 @@ module.exports = {
       {
         test: /.css$/,
         use: [
-          'style-loader',
+          // 'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader'
         ]
       },
       {
         test: /.less$/,
         use: [
-          'style-loader',
+          // 'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader'
         ]
       }
     ]
   },
+  mode: 'production',
+  // mode: 'development'
   plugins: [
-    new HTMLWebpackPlugin({
-      template: './src/index.html'
-    }),
-    // new webpack.HotModuleReplacementPlugin() // 可以不加
-  ],
-  // mode: 'production'
-  mode: 'development',
-  devServer: {
-    contentBase: './dist',
-    // 热更新， hot: true 自动引入 HotModuleReplacementPlugin
-    hot: true
-  }
+    new MiniCssExtractPlugin({
+      filename: '[name]_[contenthash:8].css'
+    })
+  ]
 }
 
 // 通过占位符确保文件名称的唯一。 filename: '[name].js', // 多页面配置
