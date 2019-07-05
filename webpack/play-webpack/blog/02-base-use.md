@@ -194,3 +194,15 @@ console.log('Example app listening on port 3000!\n');
 });
 ```
 
+### 9. 什么是文件指纹?
+打包后输出的⽂件名的后缀
+
+文件指纹如何⽣生成？
+- Hash:和整个项⽬目的构建相关，只要项⽬文件有修改，整个项⽬目构建的 hash 值就会更更改
+- Chunkhash：和 webpack 打包的 chunk 有关，不同的 entry 会⽣成不同的 chunkhash 值
+- Contenthash：根据⽂件内容来定义 hash ，⽂件内容不变，则 contenthash 不变
+
+
+JS 的⽂件指纹设置, 设置 output 的 filename，使⽤ [chunkhash]
+
+[name]_[hash:8].js

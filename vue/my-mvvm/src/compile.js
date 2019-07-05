@@ -283,7 +283,7 @@ var compileUtil = {
 // 更新函数
 var updater = {
   // 3.7.3
-  modelUpdater: function (node, value, oldValue) {
+  modelUpdater: function (node, value) {
     node.value = typeof value === 'undefined' ? '' : value
   },
   // 文本节点指令替换
