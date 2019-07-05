@@ -58,15 +58,18 @@
     return el
   }
 
+  // diff 函数，对比两棵树
   function diff (oldTree, newTree) {
-    var index = 0
-    var patches = {}
+    var index = 0 // 当前节点的标志
+    var patches = {} // 用来记录每个节点差异的对象
     dfsWalk(oldTree, newTree, index, patches)
     return patches
   }
-  
+
+  // 对两棵树进行深度优先遍历
   function dfsWalk () {
-    
+    // 对比oldNode和newNode的不同，记录下来
+    // patches[index] = [...]
   }
 
   var el = function (tagName, props, children) {
