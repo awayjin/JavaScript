@@ -22,7 +22,9 @@
 
   1.4 vuex中如何在层层都可以引用$store
 
-  1.5 vuex和redux的差别
+  1.5 Vuex 是通过什么方式提供响应式数据的？
+  vuex和redux的差别，Vuex 更像 mobx
+  - store就像是vuex数据库，那通过store.对象的方式就可以操作vuex状态,也就能提供响应式式数据
 
   1.6 什么时候用到Vuex合适
   <a href="https://juejin.im/post/5cd239136fb9a032297b1512">Vuex 里该存放什么样的数据</a>
@@ -39,6 +41,7 @@
   <a href="https://github.com/DMQ/mvvm">mvvm</a>
 
   2.3 vue中可以对对象进行数据监听，如果对于数组中的某个元素能否监听，是如何做到的
+  <a href="https://www.csdn.net/gather_20/OtTacgwsODczLWJsb2cO0O0O.html"></a>
 
   2.4 vue eventbus 的原理
 
@@ -47,40 +50,51 @@
   <a href="https://www.cnblogs.com/onepixel/p/6034307.html">Vue.js 和 MVVM 小细节</a>
   <a href="https://www.cnblogs.com/iovec/p/7840228.html">前后端分手大师——MVVM 模式</a>
 
+  2.6 vue computed 具体在什么阶段进行的依赖收集，具体的过程详细描述
+
 </pre>
 
+<pre>
+3. 虚拟 DOM 相磁
+  3.1 Virtual DOM 原理, 什么是虚拟dom
+
+  3.2 vnode的引入与直接操作原生dom相比，哪一个相率更高，为什么
+
+  3.3 为什么不能用 index 作为 key?
+  最好不要用index作为key，用index作为key有时候还会导致bug，尤其是item是具有某种状态的时候。。
+  举个简单的例子，如果有ABC三个item，其中第一个A是选中的，这个时候如果我在A前面添加D，如果用index作为key就会变成D是选中的了，建议用唯一id来作为key
+
+</pre>
+
+
+<pre>
+4. 路由相关
+  4.1 前端路由有没有用过，你在项目中怎么实现路由的嵌套？
+</pre>
+
+
+<pre>
+5. 组件相关
+  5.1 组件A下有子组件B、C，那么3个组件生命周期的调用顺序，
+  同级组件mounted触发一定是先调用先call吗？同步还是异步
+
+  5.2 vue父子组件通信的方式? 如何实现一个自定义组件，不同组件之间如何通信的？
+</pre>
+
+6. 阐述一下 Vue 的生命周期(Lifecycle)
+
+7. 谈谈对vue和react对比，并从中能学到什么
+
 <a href="https://github.com/lynnic26/LynnNote/issues/1">Vue XSS</a>
-
-3. 组件A下有子组件B、C，那么3个组件生命周期的调用顺序，同级组件mounted触发一定是先调用先call吗？同步还是异步
-
 
 <a href="https://github.com/geektime-geekbang/geektime-vue-1/tree/master/%E6%BC%94%E7%A4%BADEMO%E6%BA%90%E7%A0%81/src/views/1.10">17 | template和JSX的对比以及他们的本质</a>
 
 
-1. 阐述一下 Vue 的生命周期(Lifecycle)
-
-2. vue父子组件通信的方式? 如何实现一个自定义组件，不同组件之间如何通信的？
-
-
-6. 前端路由有没有用过，你在项目中怎么实现路由的嵌套？
-
-
-10. vue computed 具体在什么阶段进行的依赖收集，具体的过程详细描述
 
 Q: 为什么钩子函数不能是一个箭头函数,
 A: 所有的生命周期钩子自动绑定 this 上下文到实例中，因此你可以访问数据，对属性和方法进行运算。
    这意味着你不能使用箭头函数来定义一个生命周期方法 (例如 created: () => this.fetchTodos())。
    这是因为箭头函数绑定了父上下文，因此 this 与你期待的 Vue 实例不同，this.fetchTodos 的行为未定义。
-
-为什么在data中有时候无法获取定义的数据,
-我们通过this获取data中的数据真的直接保存在this下了吗，
-Vue又是怎么做到无感知的事件监听/事件解绑
-
-10. vnode的引入与直接操作原生dom相比，哪一个相率更高，为什么
-
-11. 什么是虚拟dom
-
-9. 谈谈对vue和react对比，并从中能学到什么
 
 </body>
 </html>

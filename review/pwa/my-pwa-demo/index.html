@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="mainfest" href="my-pwa-demo.webmanifest">
+  <title>Title</title>
+  <script src="data/games.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+demo
+
+<pre>
+  document.addEventListener("DOMContentLoaded", function() {
+    . . .
+  });
+  一个事件监听器，它监听浏览器的 "DOMContentLoaded" 事件，即 HTML 文档体加载、解释完毕事件。
+  事件触发时将调用 " . . ." 处的代码，从而避免了错误发生
+
+  脚本阻塞问题实际有两种解决方案
+  async 和 defer
+  sync 是最理想的选择 -- 脚本之间彼此独立
+  defer 顺序加载和运行
+</pre>
+
+<div id="content">
+  // Content inserted in here 内容插在这儿
+</div>
+</body>
+</html>

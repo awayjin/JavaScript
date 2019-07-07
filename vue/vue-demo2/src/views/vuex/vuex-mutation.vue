@@ -2,7 +2,7 @@
   <div>
     <h2>Vuex Mutation</h2>
     <pre>
-      <button @click="commitMul">todos数组乘以10</button>
+      <button @click="commitMul">todos数组 + 2</button>
       getters['moduelVuex/doneTodos']: {{ $store.getters['moduleVuex/doneTodos'] }}
       todos: {{ todos }}
       --todosSatate: {{ todosSatate }}
@@ -14,7 +14,8 @@
     <p>
       Action: state.three++: {{ three }}
       <button @click="threeAdd">Action three add</button>
-      <button @click="threeAdd3">模块的局部状态</button>
+      <br>
+      <button @click="threeAdd3">threeAdd3 模块的局部状态</button>
     </p>
   </div>
 </template>
@@ -41,7 +42,7 @@ export default {
       // })
       // 对象风格的提交方式
       this.$store.commit({
-        type: 'todosMulTen',
+        type: 'moduleVuex/todosMulTen',
         number: 2
       })
     },
@@ -51,16 +52,22 @@ export default {
     },
     // mutation 都是同步事务
     ...mapMutations({
-      secondAdd: 'INCREMENT_SECOND_ADD'
+      secondAdd: 'moduleVuex/INCREMENT_SECOND_ADD'
     }),
     // actions
+    // action 直接更改 state, vue-devtools 插件记录不到 state 变更
+    // actions 可以根据当前 state 进一步处理数据，计算或请求后端接口，
+    // 然后通过 commit 的形式提交给 mutations 去处理。
+    // mutation 必须同步执行这个限制么？Action 就不受约束！我们可以在 action 内部执行异步操作：
     threeAdd3 () {
-      // this.$store.dispatch('increment')
-      this.$store.dispatch('incrementIfOddOnRootSum')
+      // this.$store.dispatch('moduleVuex/incrementIfOddOnRootSum')
+      // this.$store.state.moduleVuex.three++ // action 直接更改 state, 记录不到
+      this.three.three++ // action 直接更改 state, 记录不到
     },
     // mapActions
     ...mapActions({
-      threeAdd: 'increment'
+      // threeAdd: 'moduleVuex/increment'
+      threeAdd: 'moduleVuex/increment'
     })
   }
 }

@@ -72,5 +72,22 @@ PWA 所需的关键要素是 service worker 支持。
 
 其他功能，如 Web App Manifest，Push，Notifications和 Add to Home Screen 功能也得到了广泛的支持。 目前，Safari 对 Web App Manifest 和 Add to Home Screen 的支持有限，并且不支持 Web 推送通知。
 
-### 2. PWA 结构
+## 2. PWA 结构
 [PWA 结构](https://developer.mozilla.org/zh-CN/docs/Web/Progressive_web_apps/App_structure)
+
+应用架构
+
+渲染网站主要有两种方法 - 在服务器上或在客户端上。
+
+- 服务器端渲染（SSR）意味着网站在服务器上渲染，因此它提供了更快的首次加载，但是在页面之间导航需要每次都下载所有内容。
+
+- 客户端渲染（CSR）允许在导航到不同页面时几乎立即在浏览器中更新网站，但在开始时需要更多的初始下载和客户端上的额外渲染。 首次访问时网站速度较慢，但后续访问速度要快得多。
+
+将SSR与CSR混合可以获得最佳结果 - 您可以在服务器上渲染网站，缓存其内容，然后在客户端需要时更新渲染。 
+
+PWA可以使用您喜欢的任何方法构建，但有些方法会更适合。最流行的方法是“app shell”概念，它完全按照上述方式混合SSR和CSR
+
+### 2.1 App shell
+App shell意图尽快加载最小的用户界面，然后缓存它，以便在后续访问时可以离线使用，然后加载应用程序的所有内容。
+
+可以通过service worker控制从服务器请求的内容以及从缓存中检索的内容

@@ -304,26 +304,25 @@ var updater = {
    compile()  //可以改变检索模式，也可以添加或删除第二个参数。
  *
  */
-function parseText(pendingText){
-  var collection=[];
-  var searchTxt="";
+function parseText(pendingText) {
+  var collection = [];
+  var searchTxt = "";
   var targetTxt = "";
-  var stringLength=0,lastIndex=0,curIndex=0;
-  var reg =/\{\{(.+?)\}\}/g;
+  var stringLength = 0, lastIndex = 0, curIndex = 0;
+  var reg = /\{\{(.+?)\}\}/g;
 
-  if(!reg.test(pendingText)){
+  if (!reg.test(pendingText)) {
     throw new Error("未匹配");
-  }else{
-    reg.lastIndex=0;
-    while( tempR = reg.exec(pendingText))
-    {
+  } else {
+    reg.lastIndex = 0;
+    while (tempR = reg.exec(pendingText)) {
       curIndex = reg.lastIndex;
-      searchTxt=tempR[0];
-      stringLength=searchTxt.length;
-      collection.push(pendingText.slice(lastIndex,curIndex-stringLength));
-      targetTxt=tempR[1];
+      searchTxt = tempR[0];
+      stringLength = searchTxt.length;
+      collection.push(pendingText.slice(lastIndex, curIndex - stringLength));
+      targetTxt = tempR[1];
       collection.push(targetTxt);
-      lastIndex=curIndex;
+      lastIndex = curIndex;
     }
   }
   console.log(collection);

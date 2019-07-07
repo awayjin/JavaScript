@@ -1,4 +1,4 @@
-var el = require('./element')
+var el = require('./lib/element')
 
 // 1. 用 JavaScript 对象结构表示 DOM 树的结构；
 // 然后用这个树构建一个真正的 DOM 树，插到文档当中

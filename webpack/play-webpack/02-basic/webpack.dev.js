@@ -1,6 +1,7 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   // entry: './src/index.js',
@@ -63,6 +64,7 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: './src/index.html'
     }),
+    new CleanWebpackPlugin()
     // new webpack.HotModuleReplacementPlugin() // 可以不加
   ],
   // mode: 'production'

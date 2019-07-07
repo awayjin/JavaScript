@@ -205,4 +205,62 @@ console.log('Example app listening on port 3000!\n');
 
 JS 的⽂件指纹设置, 设置 output 的 filename，使⽤ [chunkhash]
 
+抽成 css 文件，而不是 style
+```
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+  {
+    test: /.css$/,
+    use: [
+      // 'style-loader',
+      MiniCssExtractPlugin.loader,
+      'css-loader'
+    ]
+  },
+  {
+    test: /.less$/,
+    use: [
+      // 'style-loader',
+      MiniCssExtractPlugin.loader,
+      'css-loader',
+      'less-loader'
+    ]
+  }
+```
+
+
 [name]_[hash:8].js
+
+### 10. 代码压缩
+
+- HTML 压缩
+- CSS 压缩
+- JS 压缩
+
+JS ⽂件的压缩，内置了 uglifyjs-webpack-plugin
+
+CSS ⽂件的压缩，使⽤ optimize-css-assets-webpack-plugin。同时使⽤ cssnano
+```html
+new OptimizeCSSAssetsPlugin({
+  assetNameRegExp: /\.css$/g,
+  cssProcessor: require('cssnano')
+})
+```
+
+
+html ⽂件的压缩,修改 html-webpack-plugin， 设置压缩参数
+```html
+new HtmlWebpackPlugin({
+  template: path.join(__dirname, 'src/index.html'),
+  filename: 'index.html',
+  chunks: ['index'],
+  inject: true,
+  minify: {
+    html5: true,
+    collapseWhitespace: true,
+    preserveLineBreaks: false,
+    minifyCSS: true,
+    minifyJS: true,
+    removeComments: false
+  }
+})
+```

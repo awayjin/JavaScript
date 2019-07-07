@@ -1,7 +1,9 @@
 const path = require('path')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   // entry: './src/index.js',
@@ -11,9 +13,10 @@ module.exports = {
     search: './src/search.js',
   },
   output: {
+    // path: path.resolve(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist'),
     // filename: 'bundle.js',
     filename: '[name]_[hash:8].js', // 多页面配置
-    path: path.resolve(__dirname, 'dist')
   },
   // 文件监听. 放到硬盘中
   // watch: true,
@@ -57,7 +60,24 @@ module.exports = {
           // 'style-loader',
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'less-loader'
+          'less-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('autoprefixer')({
+                  browsers: ['last 2 version', '>1%', 'ios 7']
+                })
+              ]
+            }
+          },
+          {
+            loader: 'px2rem-loader',
+            options: {
+              remUnit: 75,
+              remPrecision: 8
+            }
+          }
         ]
       }
     ]
@@ -67,7 +87,40 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name]_[contenthash:8].css'
-    })
+    }),
+    new HTMLWebpackPlugin({
+      template: path.join(__dirname, 'src/index.html'),
+      filename: 'index.html',
+      chunks: ['index'],
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: false
+      }
+    }),
+    new HTMLWebpackPlugin({
+      template: path.join(__dirname, 'src/search.html'),
+      filename: 'search.html',
+      chunks: ['search'],
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: false
+      }
+    }),
+    new OptimizeCSSAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano')
+    }),
+    new CleanWebpackPlugin()
   ]
 }
 
