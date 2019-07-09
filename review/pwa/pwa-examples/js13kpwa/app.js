@@ -26,13 +26,15 @@ document.getElementById('content').innerHTML = content;
 
 // Registering Service Worker
 if('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('/pwa-examples/js13kpwa/sw.js');
+	// navigator.serviceWorker.register('/pwa-examples/js13kpwa/sw.js');
+	navigator.serviceWorker.register('./sw.js');
 };
 
 // Requesting permission for Notifications after clicking on the button
 var button = document.getElementById("notifications");
 button.addEventListener('click', function(e) {
 	Notification.requestPermission().then(function(result) {
+		console.log('result:', result)
 		if(result === 'granted') {
 			randomNotification();
 		}
