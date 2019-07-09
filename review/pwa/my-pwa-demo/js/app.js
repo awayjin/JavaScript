@@ -27,3 +27,19 @@ document.getElementById('content').innerHTML = content
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js')
 }
+
+// Notifications API 的通知接口用于向用户配置和显示桌面通知
+// Notification.requestPermission() 向用户申请显示通知的权限
+var button = document.getElementById('notifications')
+button.addEventListener('click', function (e) {
+  Notification.requestPermission().then(function (result) {
+    console.log('result::', result)
+    if (result === 'granted') {
+      var options = {
+        body: '创建 body',
+        icon: 'data/img/lost-in-my-mind.jpg'
+      }
+      new Notification('demo title', options)
+    }
+  })
+})
