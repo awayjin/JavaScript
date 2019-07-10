@@ -1,10 +1,15 @@
 <template>
   <div>
+    <Header />
     <nuxt />
   </div>
 </template>
 <script>
+import Header from './header.vue'
 export default {
+  components: {
+    Header
+  },
   asyncData(content) {
     console.log('content:', content) // eslint-disable-line
     // console.log('asyncData')

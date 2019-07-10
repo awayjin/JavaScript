@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  ${ require('raw-loader!./meta.html') }
   <title>Title</title>
   <script>
+    ${ require('raw-loader!babel-loader!../node_modules/lib-flexible/flexible.js') }
+  </script>
+  <!--<script>
 
     ;(function(win, lib) {
       var doc = win.document;
@@ -123,7 +126,7 @@
 
     })(window, window['lib'] || (window['lib'] = {}));
 
-  </script>
+  </script>-->
 </head>
 <body>
 <div id="root"></div>

@@ -84,3 +84,23 @@ npm i lib-flexible -S
 
 ```
 
+### 3.4 资源内联的意义
+
+代码层⾯：
+- ⻚⾯框架的初始化脚本
+- 上报相关打点
+- css 内联避免⻚⾯闪动
+
+请求层⾯：减少 HTTP ⽹络请求数
+- ⼩图⽚或者字体内联 (url-loader)
+
+raw-loader 内联 html, raw-loader 内联 JS
+
+```html
+yarn add --dev raw-loader@0.5.1
+ <script>
+   ${ require('raw-loader!./meta.html') }
+
+    ${ require('raw-loader!babel-loader!../node_modules/lib-flexible/flexible.js') }
+  </script>
+```
