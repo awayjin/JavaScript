@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "pre-commit": "lint-staged",
+    "prepare-commit-msg": "exec < /dev/tty && git-cz --hook",
+    "commitmsg": "validate-commit-msg"
+  }
+}
