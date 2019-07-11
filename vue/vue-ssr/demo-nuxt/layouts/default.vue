@@ -1,7 +1,6 @@
 <template>
   <div>
     <nuxt />
-    demo---
   </div>
 </template>
 

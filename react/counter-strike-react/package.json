@@ -31,7 +31,6 @@
     "redux-persist": "^5.10.0",
     "redux-persist-transform-encrypt": "^2.0.1",
     "redux-thunk": "^2.3.0",
-    "strike-ui-react": "^0.1.0",
     "whatwg-fetch": "^3.0.0"
   },
   "config": {

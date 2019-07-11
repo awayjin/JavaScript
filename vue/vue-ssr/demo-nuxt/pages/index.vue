@@ -1,26 +1,31 @@
 <template>
-  <section class="container">
+  <div class="container">
     <div>
       <logo />
       <h1 class="title">
-        nuxt-demo
+        demo-nuxt
       </h1>
       <h2 class="subtitle">
-        My dandy Nuxt.js project
+        My super-duper Nuxt.js project
       </h2>
       <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green"
-          >Documentation</a
+        <a
+          href="https://nuxtjs.org/"
+          target="_blank"
+          class="button--green"
         >
+          Documentation
+        </a>
         <a
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"
           class="button--grey"
-          >GitHub</a
         >
+          GitHub
+        </a>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
