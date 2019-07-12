@@ -1,0 +1,323 @@
+.account-wrap {
+  .loading-wrap {
+    padding: 2rem;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+  .account-header {
+    //display: flex;
+    position: relative;
+    //top: 44rem;
+    height: 4.9rem;
+    //overflow: auto;
+    z-index: 6;
+    width: 100%;
+  }
+  .for-color {
+    background-color: #F5F5F5;
+  }
+  .account-list-wrap li {
+    display: flex;
+    //line-height: 3rem;
+    padding: .7rem 0 .3rem;
+  }
+  .account-list-wrap li.list-none {
+    padding-top: 10rem;
+    font-size: 2.2rem;
+    color: #CECECE;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    p {
+      padding-top: 2rem;
+    }
+  }
+
+  // account-list
+  .account-list .account-list-item {
+    position: relative;
+    overflow: hidden;
+    &:after {
+      content: '';
+      border-bottom: 1px solid #f2f3f2;
+      display: block;
+      position: absolute;
+      height: 2.1rem;
+      bottom: 0;
+      left: 1.5rem;
+      width: 100%;
+    }
+    &:last-child:after {
+      border-bottom: 0;
+    }
+    .account-row-date {
+      font-size: 1.5rem;
+      color: #4A4A4A;
+      font-weight: 400;
+      span {
+        margin: 2rem 0 2rem 1.5rem;
+      }
+    }
+    .bold {
+      margin-top: .7rem;
+      font-size: 1.5rem;
+      color: #4A4A4A;
+    }
+    .gray {
+      color: #A8A8A9;
+      font-size: 1.3rem;
+      margin-top: .3rem;
+      margin-bottom: .6rem;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .color {
+      margin-top: 2rem;
+      text-align: right;
+      color: #4DB87F;
+      font-size: 1.5rem;
+    }
+    .color-minus {
+      color: #E65045;
+    }
+    .color-addition {
+      color: #4DB87F;
+    }
+    .account-earnings {
+      text-align: right;
+      margin-right: 1.5rem;
+    }
+  }
+  .account-list .list-load-all {
+    padding: 3rem 1.2rem;
+    text-align: center;
+    font-size: 1.4rem;
+    justify-content: center;
+  }
+    // account-row
+  .account-row {
+    flex: 1;
+    font-size: 1.4rem;
+  }
+
+  // account-period-content
+  .account-period-content {
+    position: fixed;
+    top: 9.4rem;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 100;
+    color: #666;
+    text-align: center;
+    overflow: auto;
+    height: 100%;
+    background: rgba(0,0,0,.3);
+    ul {
+      background: #fff;
+      height: 70%;
+      overflow: auto;
+      width: 100%;
+    }
+    li {
+      font-size: 1.4rem;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+      height: 4.8rem;
+      line-height: 4.8rem;
+      text-indent: 1.5rem;
+
+      &:before {
+        content: '';
+        margin-left: 1.5rem;
+        //position: absolute;
+        //left: 1.5rem;
+        //bottom: 0rem;
+        //width: 100%;
+        //border-bottom: 1px solid #CECECE;
+        z-index: 10;
+        content: "";
+        -webkit-transform: scale(.5);
+        transform: scale(.5);
+        position: absolute;
+        border-bottom: 1px solid #e3e6e4;
+        top: -50%;
+        right: -50%;
+        bottom: -50%;
+        left: -50%;
+        pointer-events: none;
+      }
+
+    }
+    li:last-child:before { border-bottom: 0; }
+    li.current {
+      color: #4DB87F;
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 1.1rem;
+        right: 1rem;
+        background: url('/img/date-cur@2x.png') no-repeat center center;
+        background-size: 50%;
+        width: 38px;
+        height: 27px;
+      }
+    }
+
+  }
+  .account-content-origin ul {
+     height: auto;
+  }
+  // account-choose
+  .account-choose {
+    height: 4.8rem;
+    line-height: 4.8rem;
+    background-color: #fff;
+    font-size: 1.5rem;
+    border-top: 1px solid #CECECE;
+    border-bottom: 1px solid #CECECE;
+    text-align: center;
+    width: 50%;
+    display: inline-block;
+    overflow: auto;
+    position: relative;
+    .arrow {
+      background: url('/img/drop-down@2x.png') no-repeat center center;
+      background-size: 50%;
+      width: 16px;
+      height: 11px;
+    }
+    .arrow-current {
+      background: url('/img/drop-down-cur@2x.png') no-repeat center center;
+      background-size: 50%;
+    }
+  }
+  .account-choose-cur {
+    color: #4DB87F;
+    .arrow {
+      background: url('/img/drop-down-cur@2x.png') no-repeat center center;
+      background-size: 50%;
+      transform: rotate(180deg);
+    }
+    .arrow-current {
+      background: url('/img/drop-down-cur@2x.png') no-repeat center center;
+      background-size: 50%;
+      transform: rotate(0deg);
+    }
+  }
+  //.account-choose:last-child {
+  .account-choose:nth-child(2) {
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      height: 4.8rem;
+      border-left: 1px solid #CECECE;
+    }
+  }
+
+  .account-count {
+    background-color: #F5F5F5;
+    font-size: 1.2rem;
+    display: inline-block;
+    .gap {
+      margin-right: .6rem;
+      font-style: normal;
+    }
+  }
+  .right-list-qa {
+    background: url("/img/queans@2x.png") no-repeat center center;
+    background-size: 100%;
+    height: 40px;
+    display: inline-block;
+    position: relative;
+    top: .4rem;
+    left: .1rem;
+  }
+
+  .account-content {
+    margin-top: 1rem;
+    margin: 3rem 0;
+    position: relative;
+    z-index: 2;
+  }
+  .account-fixed {
+    position: fixed;
+    top: 44px;
+    width: 100%;
+    z-index: 3;
+    //background-color: #fff;
+  }
+  .account-count {
+    width: 100%;
+    padding: 1rem 0 .5rem 1.5rem;
+    text-align: left;
+    color: #A8A8A9;
+    position: relative;
+    top: -.0rem;
+  }
+  .account-content { overflow: hidden; }
+}
+
+.account-detail {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  z-index: 8;
+  width: 100%;
+  height: 100%;
+  color: #4A4A4A;
+
+  .account-detail-content {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+  }
+
+  // .big-area
+  .big-area {
+    border-bottom: 1px solid #CECECE;
+    margin: 0 1.5rem;
+    text-align: center;
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .detail-desc-til { font-size: 1.4rem; }
+    .area-money-til {
+      font-size: 1.2rem;
+      color: #A8A8A9;
+      margin-bottom: .5rem;
+    }
+    .area-money-money {
+      font-size: 0;
+      span { font-size: 2rem;}
+      .number { font-size: 4rem; }
+    }
+  }
+
+  .account-detail-desc {
+    margin: 3rem 0 0 1.5rem ;
+    line-height: 3rem;
+    font-size: 1.5rem;
+    li {
+      position: relative;
+      .detail-desc-con {
+        position: absolute;
+        left: 8rem;
+        padding: 0 1.5rem 1.5rem 0;
+      }
+    }
+    .detail-desc-til { color: #A8A8A9; }
+  }
+
+}

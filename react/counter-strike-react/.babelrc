@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "strike-ui-react",
+        "libraryDirectory": "lib"
+      },
+      "strike-ui-react"
+    ]
+  ],
+  "presets": ["react-app"]
+}
