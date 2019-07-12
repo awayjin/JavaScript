@@ -1,6 +1,9 @@
 
 module.exports = {
   mode: 'universal',
+  server: {
+    port: 3001
+  },
   /*
   ** Headers of the page
   */
@@ -52,6 +55,17 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-    }
+    },
+    // sass
+    // extend(config, { isDev, isClient }) {
+    //   const vueLoader = config.module.rules.find((rule) => rule.loader === 'vue-loader');
+    //   vueLoader.options.loaders.sass = 'vue-style-loader!css-loader!sass-loader';
+    // },
+    // // post-css
+    // postcss: [
+    //   require('postcss-nested')(),
+    //   require('postcss-responsive-type')(),
+    //   require('postcss-hexrgba')()
+    // ]
   }
 }
