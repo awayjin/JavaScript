@@ -1,3 +1,4 @@
+const glob = require('glob') // mul pages
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -5,13 +6,56 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
+// 动态设置多页入口
+const setMPA = () => {
+  const entry = {};
+  const htmlWebpackPlugins = [];
+  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'));
+
+  Object.keys(entryFiles)
+    .map((index) => {
+      const entryFile = entryFiles[index];
+      // '/Users/cpselvis/my-project/src/index/index.js'
+
+      const match = entryFile.match(/src\/(.*)\/index\.js/);
+      const pageName = match && match[1];
+
+      entry[pageName] = entryFile;
+      htmlWebpackPlugins.push(
+        new HTMLWebpackPlugin({
+          inlineSource: '.css$',
+          template: path.join(__dirname, `src/${pageName}/index.html`),
+          filename: `${pageName}.html`,
+          chunks: ['vendors', pageName],
+          inject: true,
+          minify: {
+            html5: true,
+            collapseWhitespace: true,
+            preserveLineBreaks: false,
+            minifyCSS: true,
+            minifyJS: true,
+            removeComments: false
+          }
+        })
+      );
+    });
+
+  return {
+    entry,
+    htmlWebpackPlugins
+  }
+}
+
+const { entry, htmlWebpackPlugins } = setMPA();
+
 module.exports = {
   // entry: './src/index.js',
   // 多入口-多页面配置
-  entry: {
-    index: './src/index.js',
-    search: './src/search.js',
-  },
+  // entry: {
+  //   index: './src/index.js',
+  //   search: './src/search.js',
+  // },
+  entry: entry,
   output: {
     // path: path.resolve(__dirname, 'dist'),
     path: path.join(__dirname, 'dist'),
@@ -85,43 +129,46 @@ module.exports = {
   mode: 'production',
   // mode: 'development'
   plugins: [
+    // css file
     new MiniCssExtractPlugin({
       filename: '[name]_[contenthash:8].css'
     }),
-    new HTMLWebpackPlugin({
-      template: path.join(__dirname, 'src/index.html'),
-      filename: 'index.html',
-      chunks: ['index'],
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: false
-      }
-    }),
-    new HTMLWebpackPlugin({
-      template: path.join(__dirname, 'src/search.html'),
-      filename: 'search.html',
-      chunks: ['search'],
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: false
-      }
-    }),
+    // new HTMLWebpackPlugin({
+    //   template: path.join(__dirname, 'src/index.html'),
+    //   filename: 'index.html',
+    //   chunks: ['index'],
+    //   inject: true,
+    //   minify: {
+    //     html5: true,
+    //     collapseWhitespace: true,
+    //     preserveLineBreaks: false,
+    //     minifyCSS: true,
+    //     minifyJS: true,
+    //     removeComments: false
+    //   }
+    // }),
+    // new HTMLWebpackPlugin({
+    //   template: path.join(__dirname, 'src/search.html'),
+    //   filename: 'search.html',
+    //   chunks: ['search'],
+    //   inject: true,
+    //   minify: {
+    //     html5: true,
+    //     collapseWhitespace: true,
+    //     preserveLineBreaks: false,
+    //     minifyCSS: true,
+    //     minifyJS: true,
+    //     removeComments: false
+    //   }
+    // }),
+    // optimize css
     new OptimizeCSSAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano')
     }),
+    // ⾃动清理构建⽬录
     new CleanWebpackPlugin()
-  ]
+  ].concat(htmlWebpackPlugins)
 }
 
 // 通过占位符确保文件名称的唯一。 filename: '[name].js', // 多页面配置

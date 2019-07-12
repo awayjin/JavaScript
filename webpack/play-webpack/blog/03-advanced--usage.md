@@ -104,3 +104,53 @@ yarn add --dev raw-loader@0.5.1
     ${ require('raw-loader!babel-loader!../node_modules/lib-flexible/flexible.js') }
   </script>
 ```
+
+### 3.5 多⻚⾯打包通⽤⽅案
+
+动态获取 entry 和设置 html-webpack-plugin 数量
+
+利⽤ glob.sync
+```html
+sudo yarn add --dev glob
+// 动态设置多页入口
+const setMPA = () => {
+  const entry = {};
+  const htmlWebpackPlugins = [];
+  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'));
+
+  Object.keys(entryFiles)
+    .map((index) => {
+      const entryFile = entryFiles[index];
+      // '/Users/cpselvis/my-project/src/index/index.js'
+
+      const match = entryFile.match(/src\/(.*)\/index\.js/);
+      const pageName = match && match[1];
+
+      entry[pageName] = entryFile;
+      htmlWebpackPlugins.push(
+        new HTMLWebpackPlugin({
+          inlineSource: '.css$',
+          template: path.join(__dirname, `src/${pageName}/index.html`),
+          filename: `${pageName}.html`,
+          chunks: ['vendors', pageName],
+          inject: true,
+          minify: {
+            html5: true,
+            collapseWhitespace: true,
+            preserveLineBreaks: false,
+            minifyCSS: true,
+            minifyJS: true,
+            removeComments: false
+          }
+        })
+      );
+    });
+
+  return {
+    entry,
+    htmlWebpackPlugins
+  }
+}
+
+const { entry, htmlWebpackPlugins } = setMPA();
+```
