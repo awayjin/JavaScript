@@ -8,6 +8,7 @@ import './search.less'
 console.log('search34444')
 class Search extends React.Component {
   render() {
+    debugger
     return <div className="search-text">
       Search Text3
       <img src={ LifeCycleImg } alt=""/>

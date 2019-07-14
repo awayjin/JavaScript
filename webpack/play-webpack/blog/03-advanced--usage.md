@@ -154,3 +154,13 @@ const setMPA = () => {
 
 const { entry, htmlWebpackPlugins } = setMPA();
 ```
+
+### 3.6 基础库分离
+
+思路：将 react、 react-dom 基础包通过 cdn 引⼊，不打⼊ bundle 中
+
+⽅法：使⽤ html-webpack-externals-plugin
+
+```shell
+yarn add --dev html-webpack-externals-plugin
+```

@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 
 // 动态设置多页入口
 const setMPA = () => {
@@ -62,17 +63,6 @@ module.exports = {
     // filename: 'bundle.js',
     filename: '[name]_[hash:8].js', // 多页面配置
   },
-  // 文件监听. 放到硬盘中
-  // watch: true,
-  // // 只有开启监听模式时，watchOptions才有意义
-  // watchOptions: {
-  //   // 默认为空，不监听的文件或者文件夹，支持正则匹配
-  //   ignored: /node_modules/,
-  //   // 监听到变化发生后会等300ms再去执行，默认300ms
-  //   aggregateTimeout: 300,
-  //   // 判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
-  //   poll: 1000
-  // },
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader'},
@@ -126,6 +116,7 @@ module.exports = {
       }
     ]
   },
+  // mode: 'none',
   mode: 'production',
   // mode: 'development'
   plugins: [
@@ -167,8 +158,24 @@ module.exports = {
       cssProcessor: require('cssnano')
     }),
     // ⾃动清理构建⽬录
-    new CleanWebpackPlugin()
-  ].concat(htmlWebpackPlugins)
+    new CleanWebpackPlugin(),
+    new HtmlWebpackExternalsPlugin({
+      externals: [
+        {
+          module: 'react',
+          entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+          global: 'React',
+        },
+        {
+          module: 'react-dom',
+          entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+          global: 'ReactDOM',
+        },
+
+      ],
+    })
+  ].concat(htmlWebpackPlugins),
+  devtool: 'source-map'
 }
 
 // 通过占位符确保文件名称的唯一。 filename: '[name].js', // 多页面配置
