@@ -6,6 +6,8 @@ console.log('json', json)
 console.log('rawTxt2:', rawTxt)
 // console.log('rawTxt2:', JSON.parse(rawTxt))
 
+
+
 var func = () => {
   console.log('arrow function')
 }

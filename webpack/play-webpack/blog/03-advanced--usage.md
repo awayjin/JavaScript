@@ -159,8 +159,34 @@ const { entry, htmlWebpackPlugins } = setMPA();
 
 思路：将 react、 react-dom 基础包通过 cdn 引⼊，不打⼊ bundle 中
 
-⽅法：使⽤ html-webpack-externals-plugin
+#### 方法1：使用 html-webpack-externals-plugin
 
 ```shell
 yarn add --dev html-webpack-externals-plugin
+
+new HtmlWebpackExternalsPlugin({
+  externals: [
+    {
+      module: 'react',
+      entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+      global: 'React',
+    },
+    {
+      module: 'react-dom',
+      entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+      global: 'ReactDOM',
+    },
+
+  ]
+  
+  <script src="https://11.url.cn/now/lib/16.2.0/react.min.js" ></script>
+  <script src="https://11.url.cn/now/lib/16.2.0/react-dom.min.js" ></script>
+
 ```
+
+#### 3.6.2 利⽤ SplitChunksPlugin 进⾏公共脚本分离
+
+
+利⽤ SplitChunksPlugin 分离基础包
+
+'vendors', 
