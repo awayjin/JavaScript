@@ -2,7 +2,10 @@
 module.exports = {
   mode: 'universal',
   server: {
-    port: 3001
+    port: 3003
+  },
+  router: {
+    middleware: 'auth'
   },
   /*
   ** Headers of the page

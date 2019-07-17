@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app"></div>
+
+<!-- 加载 React。-->
+<!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+
+<style>
+  .img { background-color: black; }
+</style>
+<script type="text/babel">
+  function formatDate (val) {
+    return val.toLocaleDateString()
+  }
+
+  // 将组件拆分为更小的组件
+  function Component(props) {
+    return (
+      <div className="Comment">
+        <div className='img'><img src={ props.author.avatarUrl } /></div>
+        <p>name: { props.author.name }</p>
+        <p>text: { props.text }</p>
+        <p>date: { formatDate(props.date) }</p>
+      </div>
+    )
+  }
+
+  const comment = {
+    date: new Date(),
+    author: {
+      avatarUrl: 'https://www.runoob.com/images/logo-domain-white.png',
+      name: 'away',
+    },
+    text: 'This is an author describe.'
+  }
+
+
+  ReactDOM.render(
+    <Component
+      date = { comment.date }
+      author = { comment.author }
+      text = { comment.text }
+    />,
+    // e(Welcome),
+    document.querySelector('#app')
+  )
+</script>
+</body>
+</html>

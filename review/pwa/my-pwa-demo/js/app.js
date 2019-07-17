@@ -1,4 +1,4 @@
-var template = "<article>\n\
+let template = "<article>\n\
     <img src='data/img/SLUG.jpg' alt='NAME'>\n\
     <h3>#POS. NAME</h3>\n\
     <ul>\n\
@@ -10,9 +10,9 @@ var template = "<article>\n\
     </ul>\n\
 </article>";
 
-var content = ''
-for (var i = 0; i < games.length; i++) {
-  var entry = template
+let content = ''
+for (let i = 0; i < games.length; i++) {
+  let entry = template
     .replace(/POS/g, (i + 1)) // 索引
     .replace(/SLUG/g, games[i].slug) // 图片
     .replace(/NAME/g, games[i].name) // 名称
@@ -37,9 +37,9 @@ button.addEventListener('click', function (e) {
     if (result === 'granted') {
       var options = {
         body: '创建 body',
-        icon: 'data/img/lost-in-my-mind.jpg'
+        icon: 'data/img/lost-in-cyberspace.jpg'
       }
-      new Notification('demo title', options)
+      new Notification('demo title3', options)
     }
   })
 })

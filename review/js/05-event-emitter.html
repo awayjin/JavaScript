@@ -13,46 +13,6 @@ promise 的回调是 microTask（微任务） 而 setTimeout 的回调是 task�
 microTask 早于 task 被执行。
 
 
-<script>
-  class EventEmitter {
-    constructor () {
-      this.events = {}
-    }
-
-    on (eventName, callback) {
-      // 监听 event 事件,触发时调用 callback 函数
-      let arr = this.events[eventName] || []
-      arr.push(callback)
-      this.events[eventName] = arr
-      return this
-    }
-
-    emit (eventName, ...args) {
-      // 触发事件,并把参数传给事件的处理函数
-      let callbacks = this.events[eventName]
-      // this.events[eventName] = callbacks && callbacks.filter(fn => fn !== callback)
-      callbacks.forEach(fn => fn.apply(null, args))
-      return this
-    }
-
-    off (eventName, callback) {
-
-    }
-
-    once () {}
-
-  }
-
-  const eve = new EventEmitter()
-  eve.on('myEve1', (data) => {
-    console.log('my event1 trigger. data:', data)
-  })
-  eve.on('myEve1', (data) => {
-    console.log('my33 event1 trigger. data:', data)
-  })
-  eve.emit('myEve1', [11, 22])
-  eve.emit('myEve1', 55, 66)
-</script>
 
 
 <script>
@@ -105,6 +65,48 @@ microTask 早于 task 被执行。
   events.off('test2')
   events.emit('test2', 22)
 
+</script>
+
+
+<script>
+  class EventEmitter {
+    constructor () {
+      this.events = {}
+    }
+
+    on (eventName, callback) {
+      // 监听 event 事件,触发时调用 callback 函数
+      let arr = this.events[eventName] || []
+      arr.push(callback)
+      this.events[eventName] = arr
+      return this
+    }
+
+    emit (eventName, ...args) {
+      // 触发事件,并把参数传给事件的处理函数
+      let callbacks = this.events[eventName]
+      // this.events[eventName] = callbacks && callbacks.filter(fn => fn !== callback)
+      callbacks.forEach(fn => fn.apply(null, args))
+      return this
+    }
+
+    off (eventName, callback) {
+
+    }
+
+    once () {}
+
+  }
+
+  const eve = new EventEmitter()
+  eve.on('myEve1', (data) => {
+    console.log('my event1 trigger. data:', data)
+  })
+  eve.on('myEve1', (data) => {
+    console.log('my33 event1 trigger. data:', data)
+  })
+  eve.emit('myEve1', [11, 22])
+  eve.emit('myEve1', 55, 66)
 </script>
 
 </body>

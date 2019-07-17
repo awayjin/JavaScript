@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // import ReactDOM from 'react-dom'
-import About from '../pages/about/index.jsx'
+// import AboutHTML from '../pages/about/index.js'
 
 function BasicExample() {
   return (
@@ -37,17 +37,19 @@ function Home() {
   );
 }
 
-// function About() {
-//   // return (
-//   //   <div>
-//   //     <h2>About</h2>
-//   //   </div>
-//   // );
-//   return ReactDOM.render(
-//     <h1>Hello, world!</h1>,
-//     document.getElementById('root')
-//   )
-// }
+
+
+function About() {
+  return (
+    <div>
+      <h2>About</h2>
+    </div>
+  );
+  // return ReactDOM.render(
+  //   <h1>Hello, world!</h1>,
+  //   document.getElementById('root')
+  // )
+}
 
 function Topics({ match }) {
   return (

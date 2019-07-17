@@ -1,26 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Router from './router/index'
-
-class ShoppingList extends React.Component {
-  return () {
-    return  (
-      <div>
-        <h1>name: {this.props.name}</h1>
-        <ul>
-          <li>11</li>
-          <li>232</li>
-        </ul>
-      </div>
-    )
-  }
-}
-
-// return React.createElement('div', {className: 'shopping-list'},
-//   React.createElement('h1', /* ... h1 children ... */),
-//   React.createElement('ul', /* ... ul children ... */)
-// );
+  import Router from './router/index'
 
 function App() {
   return (
