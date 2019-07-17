@@ -27,7 +27,7 @@ const setMPA = () => {
           inlineSource: '.css$',
           template: path.join(__dirname, `src/${pageName}/index.html`),
           filename: `${pageName}.html`,
-          chunks: ['vendors', pageName],
+          chunks: ['vendors', 'commons', pageName],
           inject: true,
           minify: {
             html5: true,
@@ -159,22 +159,45 @@ module.exports = {
     }),
     // ⾃动清理构建⽬录
     new CleanWebpackPlugin(),
-    new HtmlWebpackExternalsPlugin({
-      externals: [
-        {
-          module: 'react',
-          entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
-          global: 'React',
-        },
-        {
-          module: 'react-dom',
-          entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
-          global: 'ReactDOM',
-        },
-
-      ],
-    })
+    // new HtmlWebpackExternalsPlugin({
+    //   externals: [
+    //     {
+    //       module: 'react',
+    //       entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+    //       global: 'React',
+    //     },
+    //     {
+    //       module: 'react-dom',
+    //       entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+    //       global: 'ReactDOM',
+    //     },
+    //
+    //   ],
+    // })
   ].concat(htmlWebpackPlugins),
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         test: /(react|react-dom)/,
+  //         name: 'vendors',
+  //         chunks: 'all'
+  //       }
+  //     }
+  //   }
+  // },
+  optimization: {
+    splitChunks: {
+      minSize: 0,
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'all',
+          minChunks: 2
+        }
+      }
+    }
+  },
   devtool: 'source-map'
 }
 

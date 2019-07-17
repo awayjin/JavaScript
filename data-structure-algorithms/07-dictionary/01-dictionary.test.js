@@ -3,6 +3,7 @@
 // const Dictionary = require('./01-dictionary')
 import Dictionary from './01-dictionary.js'
 
+// const dic = new Map()
 const dic = new Dictionary()
 dic.set('away', 'away@qq.com')
 dic.set('jin', 'jin@qq.com')
