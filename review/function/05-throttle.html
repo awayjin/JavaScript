@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // 函数节流
+  function throttle (method, context) {
+    clearTimeout(method.id)
+    method.id = setTimeout(() => {
+      method.call(context)
+    }, 100)
+  }
+
+  function throttle (func, time) {
+    let activeTime = 0
+    return () => {
+      const current = Date.now()
+      if (current - activeTime > time) {
+        func.call(this, arguments)
+        activeTime = Date.now()
+      }
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -175,7 +175,7 @@ new HtmlWebpackExternalsPlugin({
       module: 'react-dom',
       entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
       global: 'ReactDOM',
-    },
+    },````
 
   ]
   
@@ -189,4 +189,88 @@ new HtmlWebpackExternalsPlugin({
 
 利⽤ SplitChunksPlugin 分离基础包
 
-'vendors', 
+```jshelllanguage
+chunks: ['vendors', 'commons', pageName],
+
+  optimization: {
+    splitChunks: {
+      minSize: 0,
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'all',
+          minChunks: 2
+        }
+      }
+    }
+  }
+```
+
+## 3.7 tree shaking(摇树优化)
+
+概念： 1 个模块可能有多个⽅法，只要其中的某个⽅法使⽤到了，则整个⽂件都会被打到
+bundle ⾥⾯去， tree shaking 就是只把⽤到的⽅法打⼊ bundle ， 没⽤到的⽅法会在
+uglify 阶段被擦除掉。
+
+
+使⽤： webpack 默认⽀持，在 .babelrc ⾥设置 modules: false 即可
+
+· production mode的情况下默认开启
+
+要求：必须是 ES6 的语法， CJS 的⽅式不⽀持
+
+
+#### 3.7.1 DCE (Dead code elimination)
+代码不会被执⾏，不可到达
+
+代码执⾏的结果不会被⽤到
+
+代码只会影响死变量（只写不读）
+
+if (false) {
+    console.log('这段代码永远不会执行’ );
+}
+
+#### 3.7.2 Tree-shaking 原理
+
+利⽤ ES6 模块的特点:
+- 只能作为模块顶层的语句出现
+- import 的模块名只能是字符串常量
+- import binding 是 immutable的
+
+代码擦除： uglify 阶段删除⽆⽤代码
+
+
+## 3.8 scope hoisting
+现象：构建后的代码存在⼤量闭包代码
+
+webpack mode 为 production 默认开启
+
+必须是 ES6 语法， CJS 不⽀持
+
+```html
+// webpack 4.0 以下要手动加入
+plugins: [
++ new webpack.optimize.ModuleConcatenationPlugin()
+};
+```
+
+## 3.9 代码分割的意义
+
+对于⼤的 Web 应⽤来讲，将所有的代码都放在⼀个⽂件中显然是不够有效的，特别是当你的
+某些代码块是在某些特殊的时候才会被使⽤到。 webpack 有⼀个功能就是将你的代码库分割成
+chunks（语块），当代码运⾏到需要它们的时候再进⾏加载。
+
+适⽤的场景：
+- 抽离相同代码到⼀个共享块
+- 脚本懒加载，使得初始下载的代码更⼩
+
+懒加载 JS 脚本的⽅式
+- CommonJS： require.ensure
+- ES6：动态 import（⽬前还没有原⽣⽀持，需要 babel 转换）
+
+如何使⽤动态 import?
+- npm install @babel/plugin-syntax-dynamic-import --save-dev
+
+ES6：动态 import（⽬前还没有原⽣⽀持，需要 babel 转换）
+- "plugins": ["@babel/plugin-syntax-dynamic-import"]

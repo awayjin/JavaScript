@@ -63,6 +63,8 @@ module.exports = {
     // filename: 'bundle.js',
     filename: '[name]_[hash:8].js', // 多页面配置
   },
+  // mode: 'none',
+  mode: 'production',
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader'},
@@ -116,9 +118,6 @@ module.exports = {
       }
     ]
   },
-  // mode: 'none',
-  mode: 'production',
-  // mode: 'development'
   plugins: [
     // css file
     new MiniCssExtractPlugin({
