@@ -33,6 +33,7 @@ function Graph () {
     return s
   }
 
+  // 初如化所有顶多颜色为白色--未访问过
   let initializeColor = () => {
     let color = []
     for (let i = 0; i < vertices.length; i++) {
@@ -46,7 +47,7 @@ function Graph () {
     let color = initializeColor()
     let queue = new Queue()
     queue.enqueue(v)
-    
+
     while (!queue.isEmpty()) {
       let u = queue.dequeue()
       let neighbors = adjList.get(u)
@@ -64,7 +65,49 @@ function Graph () {
       if (callback) {
         callback(u)
       }
+    }
 
+  }
+
+  // bfs 宽度优先搜索--最短路径
+  this.BFS = (v) => {
+    let color = initializeColor()
+    let queue = new Queue()
+    queue.enqueue(v)
+
+    let d =[] // 从v到u的距离d[u]
+    let pred = [] // 前溯点pred[u]，用来推导出从v到其他每个顶点u的最短路径
+    for (let i = 0; i < vertices.length; i++) {
+      d[vertices[i]] = 0
+      pred[vertices[i]] = null
+    }
+
+    while (!queue.isEmpty()) {
+      let u = queue.dequeue()
+      let neighbors = adjList.get(u) // 邻接表
+      color[u] = 'grey'
+
+      for (let i = 0; i < neighbors.length; i++) {
+        let w = neighbors[i]
+        if (color[w] === 'white') {
+          color[w] = 'grey' // 访问未探索过
+
+          d[w] = d[u] + 1
+          pred[w] = u
+
+          queue.enqueue(w)
+        }
+      }
+
+      color[u] = 'black' // 完全探索过
+      // if (callback) {
+      //   callback(u)
+      // }
+    }
+
+    return {
+      distance: d,
+      predecessors: pred
     }
 
   }

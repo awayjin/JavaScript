@@ -24,6 +24,20 @@
   graph.addEdge('E', 'I');
 
   console.log(graph.toString())
+  
+  function printNode (value) {
+    console.log('Visited vertex:', value)
+  }
+
+  graph.bfs(myVertices[0], printNode)
+
+  var shortestPathA = graph.BFS(myVertices[0]);
+  console.log(shortestPathA);
+
+  console.log('--C---');
+
+  var shortestPathA = graph.BFS('C');
+  console.log(shortestPathA);
 </script>
 
 </body>
