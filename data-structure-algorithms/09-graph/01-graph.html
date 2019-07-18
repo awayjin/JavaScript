@@ -7,6 +7,8 @@
 <body>
 <script type="module">
   import Graph from './01-graph.js'
+  import Stack  from '../03-stack/01-stack.js'
+
   var graph = new Graph()
   var myVertices = ['A','B','C','D','E','F','G','H','I']; //{7}
   for (var i=0; i<myVertices.length; i++){ //{8}
@@ -36,8 +38,33 @@
 
   console.log('--C---');
 
-  var shortestPathA = graph.BFS('C');
-  console.log(shortestPathA);
+  var shortestPathC = graph.BFS('C');
+  console.log(shortestPathC);
+
+  // 从顶点 A 到其他顶点的路径
+  let fromVertex = myVertices[0]
+  for (let i = 1; i < myVertices.length; i++) {
+    let toVertex = myVertices[i]
+    let path = new Stack()
+
+    // console.log('myVertices[i]:', myVertices[i])
+    for (
+      let v = toVertex;
+      v !== fromVertex;
+      v = shortestPathA.predecessors[v]
+    ) {
+      path.push(v)
+    }
+
+    path.push(fromVertex)
+    let s = path.pop()
+    
+    while (!path.isEmpty()) {
+      s += ' - ' + path.pop()
+    }
+
+    console.log(s)
+  }
 </script>
 
 </body>
