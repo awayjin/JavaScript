@@ -33,7 +33,7 @@ function Graph () {
     return s
   }
 
-  // 初如化所有顶多颜色为白色--未访问过
+  // 初如化所有顶点颜色为白色--未访问过
   let initializeColor = () => {
     let color = []
     for (let i = 0; i < vertices.length; i++) {
@@ -99,7 +99,7 @@ function Graph () {
         }
       }
 
-      color[u] = 'black' // 完全探索过
+      // color[u] = 'black' // 完全探索过
       // if (callback) {
       //   callback(u)
       // }
@@ -110,6 +110,33 @@ function Graph () {
       predecessors: pred
     }
 
+  }
+
+  // dfs-深度优先搜索
+  this.dfs = (callback) => {
+    let color = initializeColor()
+    console.log('color:', color)
+    for (let i = 0; i < vertices.length; i++) {
+      if (color[vertices[i]] === 'white') {
+        dfsVisit(vertices[i], color, callback)
+      }
+    }
+  }
+
+  let dfsVisit = (u, color, callback) => {
+    color[u] = 'grey'
+    if (callback) {
+      callback(u)
+    }
+
+    let neighbors = adjList.get(u)
+    for (let i = 0; i < neighbors.length; i++) {
+      let w = neighbors[i]
+      if (color[w] === 'white') {
+        dfsVisit(w, color, callback) // 递归
+      }
+    }
+    color[u] = 'black'
   }
 
 }

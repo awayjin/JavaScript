@@ -10,6 +10,7 @@ module.exports = {
   extends: [
     '@nuxtjs',
     'plugin:nuxt/recommended'
+    // "eslint:recommended"
   ],
   // add your custom rules here
   // 关闭 singleline 警告

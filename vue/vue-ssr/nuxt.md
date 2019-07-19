@@ -16,3 +16,10 @@ pages
 Nuxt.js 允许你扩展默认的布局，或在 layout 目录下创建自定义的布局
 
 #### 自定义布局
+
+## eslint
+修复
+```
+"lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+```

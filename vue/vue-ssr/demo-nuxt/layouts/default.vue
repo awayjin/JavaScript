@@ -13,14 +13,6 @@
   </div>
 </template>
 
-<script>
-// export default {
-//   router: {
-//     middleware: 'auth'
-//   }
-// }
-</script>
-
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

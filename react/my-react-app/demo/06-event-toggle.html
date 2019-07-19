@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app"></div>
+
+<!-- 加载 React。-->
+<!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+
+<script type="text/babel">
+
+  class Toggle extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = { isToggle: true}
+
+      // 为了在回调中使用 `this`，这个绑定是必不可少的
+      this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick () {
+      this.setState(state => ({
+        isToggle: !state.isToggle
+      }))
+      console.log('state.isToggle:', this.state.isToggle)
+    }
+
+    render () {
+      return (
+        <button onClick={ this.handleClick }>
+          { this.state.isToggle ? 'on' : 'off'}
+        </button>
+      )
+    }
+  }
+
+  class Toggle2 extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = { isToggle: true}
+
+      // 为了在回调中使用 `this`，这个绑定是必不可少的
+      this.handleClick = this.handleClick.bind(this)
+    }
+
+    //  public class fields
+    handleClick = () => {
+      console.log('this is:', this)
+      this.setState(state => ({
+        isToggle: !state.isToggle
+      }))
+      // this.setState({
+      //   isToggle: !this.state.isToggle
+      // })
+    }
+    // handleClick () {
+    //   this.setState(state => ({
+    //     isToggle: !state.isToggle
+    //   }))
+    //   console.log('state.isToggle:', this.state.isToggle)
+    // }
+
+    render () {
+      return (
+        <button onClick={ this.handleClick}>
+          { this.state.isToggle ? 'on2' : 'off2' }
+        </button>
+      )
+    }
+  }
+
+  ReactDOM.render(
+    <div>
+      <Toggle />,
+      <Toggle2 />,
+    </div>,
+    document.querySelector('#app')
+  )
+</script>
+</body>
+</html>

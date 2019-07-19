@@ -31,6 +31,7 @@
     console.log('Visited vertex:', value)
   }
 
+  console.log(Array(20).join('-'), '--广度优先搜索--', Array(20).join('-'));
   graph.bfs(myVertices[0], printNode)
 
   var shortestPathA = graph.BFS(myVertices[0]);
@@ -41,6 +42,7 @@
   var shortestPathC = graph.BFS('C');
   console.log(shortestPathC);
 
+  console.log(Array(20).join('-'), '--从顶点 A 到其他顶点的路径--', Array(20).join('-'));
   // 从顶点 A 到其他顶点的路径
   let fromVertex = myVertices[0]
   for (let i = 1; i < myVertices.length; i++) {
@@ -65,6 +67,11 @@
 
     console.log(s)
   }
+
+  console.log(Array(20).join('-'), '--深度优先搜索--', Array(20).join('-'));
+  // 深度优先搜索
+  graph.dfs(printNode)
+
 </script>
 
 </body>

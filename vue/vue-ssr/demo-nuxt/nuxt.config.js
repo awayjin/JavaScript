@@ -58,7 +58,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-    },
+    }
     // sass
     // extend(config, { isDev, isClient }) {
     //   const vueLoader = config.module.rules.find((rule) => rule.loader === 'vue-loader');

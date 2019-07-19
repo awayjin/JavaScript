@@ -1,60 +1,44 @@
+<style lang="scss">
+  @import '../assets/scss/vars.scss';
+  @import '../assets/scss/layout.scss';
+  @import '../assets/scss/account-list.scss';
+  .page-content {
+    margin-top: 4.4rem;
+  }
+</style>
+
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        demo-nuxt
-      </h1>
-      <h2 class="subtitle">
-        My super-duper Nuxt.js project
-      </h2>
-      <div class="links">
-        <nuxt-link to="/">首页</nuxt-link>
-        <nuxt-link to="/list-detail">详情</nuxt-link>
-      </div>
-    </div>
+  <div class="home account-wrap">
+    <PageHeader
+      :title="'我的账单'"
+      :left-icon="'left-arrow'"
+      :left-click-event="true"
+      :right-icon="'right-list-qa'"
+      @page-header-right-click="goToQA"
+    />
+
+    <AccountHeader
+      :income-total="incomeTotal | twoDecimal"
+      :spending-total="spendingTotal | twoDecimal"
+      @emit-enc-date="responseEncDate"
+      @emit-enc-origin="responseEncOrigin"
+    />
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import PageHeader from '../components/page-header'
+import AccountHeader from '../components/account-header'
 
 export default {
   components: {
-    Logo
+    PageHeader,
+    AccountHeader
+  },
+  methods: {
+    goToQA() {
+      window.console.log('goToQA')
+    }
   }
 }
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>

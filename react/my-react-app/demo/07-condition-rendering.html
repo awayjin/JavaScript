@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app"></div>
+
+<!-- 加载 React。-->
+<!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+
+<script type="text/babel">
+  function UserGreeting (props) {
+    return <h1>Welcom back.</h1>
+  }
+
+  function GuestGreeting (props) {
+    return <h2>Please sign up</h2>
+  }
+
+  function Greeting (props) {
+    const isLoggin = props.isLoggin
+    if (isLoggin) {
+      return <UserGreeting />
+    } else {
+      return <GuestGreeting />
+    }
+  }
+
+  // 元素变量
+  function LoginButton(props) {
+    return (
+      <button onClick={ props.onClick }>
+        Login
+      </button>
+    )
+  }
+
+  function LogoutButton(props) {
+    return (
+      <button onClick={ props.onClick }>
+        Logout
+      </button>
+    )
+  }
+
+  class LoginControl extends React.Component {
+    constructor(props) {
+      super(props)
+      this.handleLoginClick = this.handleLoginClick.bind(this)
+      this.handleLogOutClick = this.handleLogOutClick.bind(this)
+
+      this.state = {
+        isLogged: false
+      }
+    }
+
+    handleLoginClick () {
+      this.setState({ isLogged: true })
+    }
+
+    handleLogOutClick () {
+      this.setState({ isLogged: false })
+    }
+
+    render () {
+      const isLogged = this.state.isLogged
+      let button
+      if (isLogged) {
+        button = <LogoutButton onClick={ this.handleLogOutClick } />
+      } else {
+        button = <LoginButton  onClick={ this.handleLoginClick } />
+      }
+
+      return (
+        <div>
+          <Greeting isLoggedIn={ isLogged } >
+            { button }
+          </Greeting>
+        </div>
+      )
+    }
+
+  }
+
+  ReactDOM.render(
+    <div>
+      <LoginControl />
+    </div>,
+    document.querySelector('#app')
+  )
+</script>
+</body>
+</html>
