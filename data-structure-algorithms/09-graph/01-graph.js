@@ -114,10 +114,11 @@ function Graph () {
 
   // dfs-深度优先搜索
   this.dfs = (callback) => {
-    let color = initializeColor()
-    console.log('color:', color)
+    let color = initializeColor() // [A: "white", B: "white", C: "white", D: "white", E: "white", …]
+    // console.log('color:', color)
     for (let i = 0; i < vertices.length; i++) {
       if (color[vertices[i]] === 'white') {
+        console.log('vertices[i]:', vertices[i]) // only once
         dfsVisit(vertices[i], color, callback)
       }
     }
@@ -130,13 +131,64 @@ function Graph () {
     }
 
     let neighbors = adjList.get(u)
+    // console.log('neighbors:', neighbors)
     for (let i = 0; i < neighbors.length; i++) {
       let w = neighbors[i]
+      // console.log('w---', w)
       if (color[w] === 'white') {
         dfsVisit(w, color, callback) // 递归
       }
     }
     color[u] = 'black'
+  }
+
+  // 探索深度优先算法
+  let time = 0
+  this.DFS = function () {
+    let color = initializeColor()
+    let d = [] // 顶点u的发现时间d[u]
+    let f = [] // 当顶点u被标注为黑色时，u的完成探索时间f[u]
+    let p = [] //  顶点u的前溯点p[u]
+    time = 0
+
+    for (let i = 0; i < vertices.length; i++) {
+      d[vertices[i]] = 0
+      f[vertices[i]] = 0
+      p[vertices[i]] = null
+    }
+
+    for (let i = 0; i < vertices.length; i++) {
+      if (color[vertices[i]] === 'white') {
+        DFSVisit(vertices[i], color, d, f, p)
+      }
+    }
+
+    return {
+      discovery: d,
+      finished: f,
+      predecessors: p
+    }
+  }
+
+  let DFSVisit = (u, color, d, f, p) => {
+    console.log('discovered', u)
+    color[u] = 'grey'
+    d[u] = ++time
+
+    let neighbors = adjList.get(u)
+    for (let i = 0; i < neighbors.length; i++) {
+      let w = neighbors[i]
+      if (color[w] === 'white') {
+        p[w] = u
+        DFSVisit(w, color, d, f, p)
+      }
+    }
+
+    color[u] = 'black'
+    f[u] = ++time
+    console.log('explored', u)
+
+
   }
 
 }

@@ -1,3 +1,3 @@
-export function getStr () {
-  return 'common str'
+export function getStr() {
+  return 'common str';
 }

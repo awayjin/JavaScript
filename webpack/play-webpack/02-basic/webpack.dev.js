@@ -1,8 +1,8 @@
-const path = require('path')
-const webpack = require('webpack')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
-const glob = require('glob') // mul pages
+const path = require('path');
+const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const glob = require('glob'); // mul pages
 
 // 动态设置多页入口
 const setMPA = () => {
@@ -32,34 +32,34 @@ const setMPA = () => {
             preserveLineBreaks: false,
             minifyCSS: true,
             minifyJS: true,
-            removeComments: false
-          }
-        })
+            removeComments: false,
+          },
+        }),
       );
     });
 
   return {
     entry,
-    htmlWebpackPlugins
-  }
-}
+    htmlWebpackPlugins,
+  };
+};
 
 const { entry, htmlWebpackPlugins } = setMPA();
 
 module.exports = {
   // entry: './src/index.js',
   // 多入口-多页面配置
-  entry: entry,
+  entry,
   output: {
     // filename: 'bundle.js',
     // filename: '[name].js', // 多页面配置
     filename: '[name][hash:8].js', // chunkhash
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
-      { test: /\.txt$/, use: 'raw-loader'},
-      { test: /.js$/, use: 'babel-loader'},
+      { test: /\.txt$/, use: 'raw-loader' },
+      { test: /.js$/, use: 'babel-loader' },
       // { test: /.(jpeg|png|gif|jpg)$/, use: 'file-loader' },
       {
         test: /.(jpeg|png|gif|jpg)$/,
@@ -67,30 +67,30 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 10240
-            }
-          }
-        ]
+              limit: 10240,
+            },
+          },
+        ],
       },
       {
         test: /.css$/,
         use: [
           'style-loader',
-          'css-loader'
-        ]
+          'css-loader',
+        ],
       },
       {
         test: /.less$/,
         use: [
           'style-loader',
           'css-loader',
-          'less-loader'
-        ]
-      }
-    ]
+          'less-loader',
+        ],
+      },
+    ],
   },
   plugins: [
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
     // new webpack.HotModuleReplacementPlugin() // 可以不加
   ].concat(htmlWebpackPlugins),
   // mode: 'production'
@@ -98,7 +98,7 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     // 热更新， hot: true 自动引入 HotModuleReplacementPlugin
-    hot: true
+    hot: true,
   },
-  devtool: 'source-map'
-}
+  devtool: 'source-map',
+};

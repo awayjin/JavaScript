@@ -1,47 +1,58 @@
-'use strict'
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import LifeCycleImg from './images/lifecycle.png'
-import './search.less'
-import { getStr } from '../../common/index.js'
-import { a } from './tree-shaking.js'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import LifeCycleImg from './images/lifecycle.png';
+import './search.less';
+import { getStr } from '../../common/index.js';
+import { a } from './tree-shaking.js';
+import LargeNumberAway  from 'large-number-away'
 
-console.log('search34444')
+console.log('search34444');
 class Search extends React.Component {
-  constructor () {
-    super(...arguments)
+  constructor() {
+    super(...arguments);
     this.state = {
-      Text: null
-    }
+      Text: null,
+    };
   }
 
   // 动态引入组件
-  loadComponent () {
-    import('./text.js').then(data => {
-      console.log('data:', data)
+  loadComponent() {
+    import('./text.js').then((data) => {
+      console.log('data:', data);
       this.setState({
-        Text: data.default
-      })
-    })
+        Text: data.default,
+      });
+    });
   }
 
   render() {
-    const { Text } = this.state
+    const { Text } = this.state;
     return (
       <div className="search-text">
+        <p>LargeNumberAway: { LargeNumberAway(4, 15) } </p>
         <p>
-          dynamic: { Text ? <Text /> : null }
+          dynamic:
+          {' '}
+          { Text ? <Text /> : null }
         </p>
-        <p>common: { getStr() } </p>
-        <p>funcA: { a() }</p>
-        <img src={ LifeCycleImg } onClick={ this.loadComponent.bind(this) } alt=""/>
+        <p>
+common:
+          { getStr() }
+          {' '}
+
+        </p>
+        <p>
+funcA:
+          { a() }
+        </p>
+        <img src={LifeCycleImg} onClick={this.loadComponent.bind(this)} alt="" />
       </div>
-    )
+    );
   }
 }
 
 ReactDOM.render(
   <Search />,
-  document.getElementById('root')
-)
+  document.getElementById('root'),
+);

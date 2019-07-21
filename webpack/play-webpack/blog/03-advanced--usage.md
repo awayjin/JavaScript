@@ -274,3 +274,66 @@ chunks（语块），当代码运⾏到需要它们的时候再进⾏加载。
 
 ES6：动态 import（⽬前还没有原⽣⽀持，需要 babel 转换）
 - "plugins": ["@babel/plugin-syntax-dynamic-import"]
+
+
+## 3.10 ESLint 的必要性
+安装
+```html
+yarn add --dev eslint  eslint-plugin-import   eslint-plugin-react  eslint-plugin-jsx-a11y
+
+yarn add --dev eslint-loader
+yarn add --dev babel-eslint
+yarn add --dev eslint-config-airbnb
+```
+
+
+## 3.11 webpack 打包库和组件
+
+webpack 除了可以⽤来打包应⽤，也可以⽤来打包 js 库
+
+实现⼀个⼤整数加法库的打包
+- 需要打包压缩版和⾮压缩版本
+- ⽀持 AMD/CJS/ESM 模块引⼊
+
+库的⽬录结构和打包要求
+
+打包输出的库名称:
+- 未压缩版 large-number.js
+- 压缩版 large-number.min.js
+
+如何将库暴露出去？
+- library: 指定库的全局变量
+- libraryTarget: ⽀持库引⼊的⽅式
+
+npm init -y
+yarn add -D webpack webpack-cli
+yarn add -D terser-webpack-plugin
+
+```javascript
+module.exports = {
+    mode: "production",
+    entry: {
+      "large-number": "./src/index.js",
+      "large-number.min": "./src/index.js"
+    },
+    output: {
+        filename: "[name].js",
+        library: "largeNumber",
+        libraryExport: "default",
+        libraryTarget: "umd"
+    }
+};
+```
+
+设置⼊⼝⽂件
+
+package.json 的 main 字段为 index.js
+```html
+if (process.env.NODE_ENV === "production") {
+module.exports = require("./dist/large-number.min.js");
+} else {
+module.exports = require("./dist/large-number.js");
+}
+```
+
+
