@@ -15,7 +15,7 @@ function Graph () {
   // 添加顶点之间的边
   this.addEdge = function (v, w) {
     adjList.get(v).push(w)
-    adjList.get(w).push(v)
+    // adjList.get(w).push(v)
   }
 
   // print

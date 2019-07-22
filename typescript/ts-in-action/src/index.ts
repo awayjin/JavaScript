@@ -71,4 +71,25 @@ let endless = () => {
   while (1) {}
 }
 
+// 数字枚举
+enum Direction {
+  up = 11,
+  Down,
+  Left,
+  Right
+}
+
+hello += '<br> 数字枚举:' + Direction.Right
+
+// 字符串枚举
+enum Direction2 {
+  up = 'up',
+  left = 'left',
+  right = 'right',
+  down = 'up'
+}
+
+hello += '<br> 字符串枚举:' + Direction2.right
+
+
 document.querySelectorAll('.app')[0].innerHTML = hello
