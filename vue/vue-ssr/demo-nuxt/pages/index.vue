@@ -18,8 +18,8 @@
     />
 
     <AccountHeader
-      :income-total="incomeTotal | twoDecimal"
-      :spending-total="spendingTotal | twoDecimal"
+      :income-total="incomeTotal"
+      :spending-total="spendingTotal"
       @emit-enc-date="responseEncDate"
       @emit-enc-origin="responseEncOrigin"
     />
@@ -35,9 +35,26 @@ export default {
     PageHeader,
     AccountHeader
   },
+  data () {
+    return {
+      incomeTotal: 2,
+      spendingTotal: 2
+    }
+  },
+  // created 服务端渲染
+  created () {
+    console.log('created')
+    console.log(this.$axios.get)
+  },
   methods: {
-    goToQA() {
+    goToQA () {
       window.console.log('goToQA')
+    },
+    responseEncDate () {
+      window.console.log('responseEncDate')
+    },
+    responseEncOrigin () {
+      window.console.log('responseEncOrigin')
     }
   }
 }

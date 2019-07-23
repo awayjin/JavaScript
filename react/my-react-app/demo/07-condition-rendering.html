@@ -36,6 +36,7 @@
 
   // 元素变量
   function LoginButton(props) {
+    console.log('props:', props)
     return (
       <button onClick={ props.onClick }>
         Login
@@ -81,9 +82,8 @@
 
       return (
         <div>
-          <Greeting isLoggedIn={ isLogged } >
-            { button }
-          </Greeting>
+          <Greeting isLoggin={ isLogged } />
+          { button }
         </div>
       )
     }

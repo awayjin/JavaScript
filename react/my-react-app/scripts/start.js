@@ -126,8 +126,8 @@ checkBrowsers(paths.appPath, isInteractive)
         console.log();
       }
 
-      console.log(chalk.cyan('Starting the development server...\n'));
-      openBrowser(urls.localUrlForBrowser);
+      console.log(chalk.cyan('Starting the development server...\n' + urls.localUrlForBrowser));
+      // openBrowser(urls.localUrlForBrowser); // 不自动在浏览器中打开
     });
 
     ['SIGINT', 'SIGTERM'].forEach(function(sig) {

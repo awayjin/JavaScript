@@ -34,6 +34,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/request'
   ],
   /*
   ** Nuxt.js modules
@@ -57,7 +58,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend(config, ctx) {
+    extend (config, ctx) {
     }
     // sass
     // extend(config, { isDev, isClient }) {
