@@ -5,6 +5,7 @@ function Element (tagName, props, children) {
   this.children = children
 }
 
+// 根据 js 对象构建真正的 DOM
 Element.prototype.render = function () {
   var el = document.createElement(this.tagName) // 根据tagName构建
   var props = this.props
@@ -14,12 +15,24 @@ Element.prototype.render = function () {
     el.setAttribute(propName, propValue)
   }
 
+  console.log('el:', el)
+  var eleFunc = (child) => {
+    console.log('element:', child)
+    return child.render()
+  }
+
+  var textFunc = (child) => {
+    console.log('text:', child)
+    return document.createTextNode(child)
+  }
+
   var children = this.children || []
   children.forEach(function (child) {
-    var childEl = (child instanceof Element)
-      ? child.render() // 如果子节点也是虚拟DOM，递归构建DOM节点
-      : document.createTextNode(child) // 如果字符串，只构建文本节点
+    var childEl = (child instanceof Element) // 是否元素节点
+      ? eleFunc(child) // 如果子节点也是虚拟DOM，递归构建DOM节点
+      : textFunc(child) // 如果字符串，只构建文本节点
     el.appendChild(childEl)
+    console.log('-------childEl---', childEl)
   })
 
   return el

@@ -1,12 +1,17 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.js',
+  mode: 'development',
+  entry: {
+    index: './src/index.js'
+  },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    // filename: '[name]_[hash:8].js'
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'dist'),
+    filename: '[name]_[hash:8].js'
+    // filename: 'bundle.js'
   },
   devtool: 'source-map',
   devServer: {
@@ -15,6 +20,8 @@ module.exports = {
     hot: true
   },
   plugins: [
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new HTMLWebpackPlugin({
       template: path.join(__dirname, 'src/index.html'),
       filename: 'index.html',
