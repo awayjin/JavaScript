@@ -71,10 +71,16 @@
 export default {
   name: 'AccountHeader',
   props: {
-    spendingTotal: [String, Number],
-    incomeTotal: [String, Number]
+    spendingTotal: {
+      type: [String, Number],
+      default: 'd'
+    },
+    incomeTotal: {
+      type: [String, Number],
+      default: 'dc'
+    }
   },
-  data() {
+  data () {
     return {
       periodShow: false,
       encourageShow: false,
@@ -87,7 +93,7 @@ export default {
       recentlyMonth12: []
     }
   },
-  mounted() {
+  created () {
     this.getOneYear()
   },
   methods: {
@@ -96,24 +102,24 @@ export default {
     //   alert(fromUrl)
     //   alert(!!(fromUrl && fromUrl.length > 8))
     // },
-    togglePeriod() {
+    togglePeriod () {
       this.periodShow = !this.periodShow
       this.hideEncourage()
     },
-    toggleOrigin() {
+    toggleOrigin () {
       this.encourageShow = !this.encourageShow
       this.hidePeriod()
     },
     // hide
-    hidePeriod() {
+    hidePeriod () {
       this.periodShow = false
     },
     // hide
-    hideEncourage() {
+    hideEncourage () {
       this.encourageShow = false
     },
     // 激励时间-选择月份
-    choseMonth(item, e) {
+    choseMonth (item, e) {
       e.stopPropagation()
       this.pickedYearMonth = item
       this.hidePeriod()
@@ -123,13 +129,13 @@ export default {
       this.$emit('emit-enc-date', item)
     },
     // 选择激励来源
-    choseOrigin(item, e) {
+    choseOrigin (item, e) {
       this.pickedEncOrigin = item
       this.descEncOrigin = item
       this.$emit('emit-enc-origin', item)
     },
     // 最近一年
-    getOneYear() {
+    getOneYear () {
       const dataArr = []
       const date = new Date()
       const month = date.getMonth() + 1

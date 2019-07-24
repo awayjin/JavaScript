@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     // 左右键按钮事件
-    leftClick(event) {
+    leftClick (event) {
       if (this.isIndex) {
         // 关闭 调App接口 22
         this.$appConfig.QRCode.closeApp()
@@ -83,10 +83,10 @@ export default {
         this.$router.back()
       }
     },
-    titleClick() {
+    titleClick () {
       this.$emit('page-header-title-click')
     },
-    rightClick() {
+    rightClick () {
       this.$emit('page-header-right-click')
     }
   }

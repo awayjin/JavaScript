@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // import ReactDOM from 'react-dom'
-// import AboutHTML from '../pages/about/index.js'
+import About from '../pages/about/index.js'
 
-function BasicExample() {
+function RouterMap() {
   return (
     <Router>
       <div>
@@ -22,10 +22,11 @@ function BasicExample() {
         <hr />
 
         <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
+        <Route path="/about" render={ About } />
         <Route path="/topics" component={Topics} />
       </div>
     </Router>
+
   );
 }
 
@@ -35,20 +36,6 @@ function Home() {
       <h2>Home</h2>
     </div>
   );
-}
-
-
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-  // return ReactDOM.render(
-  //   <h1>Hello, world!</h1>,
-  //   document.getElementById('root')
-  // )
 }
 
 function Topics({ match }) {
@@ -85,4 +72,4 @@ function Topic({ match }) {
   );
 }
 
-export default BasicExample;
+export default RouterMap;
