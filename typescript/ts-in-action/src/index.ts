@@ -1,4 +1,6 @@
-let hello : string = 'Hello TypeScript'
+import './part1.base/06-07.interface.ts'
+
+let hello: string = 'Hello TypeScript'
 
 console.log(hello)
 // document.querySelector('.app').innerHTML = hello

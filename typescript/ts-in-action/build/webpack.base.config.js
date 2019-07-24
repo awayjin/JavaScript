@@ -5,6 +5,10 @@ module.exports = {
   output: {
     filename: 'app.js'
   },
+  devServer: {
+    port: 3005,
+    hot: true
+  },
   // 3个扩展名
   resolve: {
     extensions: ['.js', '.ts', '.tsx']

@@ -16,6 +16,9 @@ tree.insert(18);
 tree.insert(25);
 tree.insert(6);
 
+
+console.log('tree.getRoot()', tree.getRoot());
+
 console.log('********* in-order transverse ***********');
 function printNode(value){
     console.log(value);
@@ -53,4 +56,4 @@ console.log(tree.getRoot());
 
 console.log('********* printing HTML tree ***********');
 var parent = document.getElementsByTagName('body')[0];
-printHTMLTree(tree.getRoot(), parent, 255);
+// printHTMLTree(tree.getRoot(), parent, 255);
