@@ -138,5 +138,16 @@
   })()
 </script>
 
+
+var obj1 = {
+age: 18,
+language: [1, 2, [33]],
+func: () => 'f1',
+}
+var obj2 = JSON.parse(JSON.stringify(obj1))
+obj2.language[2] = [44]
+obj2.func = () => 'f2'
+console.log('obj1:', obj1)
+console.log('obj2:', obj2)
 </body>
 </html>

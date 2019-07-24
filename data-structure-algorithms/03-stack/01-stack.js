@@ -1,4 +1,4 @@
-// 后进先出
+// 栈--后进先出
 function Stack () {
   let items = []
 

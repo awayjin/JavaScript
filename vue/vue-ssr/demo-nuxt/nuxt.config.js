@@ -42,8 +42,19 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     '@nuxtjs/eslint-module'
+  ],
+  proxy: [
+    [
+      '/capricom', {
+        // target: 'http://localhost:9000',
+        target: 'https://fancy-test.4009515151.com/',
+        changeOrigin: true,
+        pathRewrite: { '^/capricom': '/' }
+      }
+    ]
   ],
   /*
   ** Axios module configuration

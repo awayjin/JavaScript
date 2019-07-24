@@ -2,28 +2,28 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // import ReactDOM from 'react-dom'
 import About from '../pages/about/index.js'
+import Form from '../pages/official/09-form.js'
+import LiftingState from '../pages/official/10-LiftingState.js'
 
 function RouterMap() {
   return (
     <Router>
       <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/topics">Topics</Link>
-          </li>
-        </ul>
+        <nav className={ 'nav' }>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/topics">Topics</Link>
+          <Link to={ '/form'}>Form</Link>
+          <Link to={ '/lifting-state'}>LiftingState</Link>
+        </nav>
 
         <hr />
 
         <Route exact path="/" component={Home} />
-        <Route path="/about" render={ About } />
+        <Route path="/about" component={ About } />
         <Route path="/topics" component={Topics} />
+        <Route path={'/form'} component={Form} />
+        <Route path={'/lifting-state'} component={ LiftingState } />
       </div>
     </Router>
 

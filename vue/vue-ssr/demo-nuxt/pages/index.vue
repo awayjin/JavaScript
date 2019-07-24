@@ -41,10 +41,58 @@ export default {
       spendingTotal: 2
     }
   },
+  async asyncData (context) {
+    let incomeTotal = 5
+    // const vm = context
+    const params = JSON.stringify({
+      examCycleToDate: '2019-07-24', // 考核周期开始时间
+      examCycleFromDate: '2018-07-01', // 考核周期结束时间
+      rewardSource: 'all', // 激励来源
+      staffIdentityId: '', // 人员身份证号
+      page: 1, // 当前页
+      pageSize: 20 // 每页数
+    })
+    // const url = vm.$appConfig.api.apiAccountList(params)
+    const url = 'https://fancy-test.4009515151.com/capricom/billInfo/getBillInfoList'
+    // const url = 'capricom/billInfo/getBillInfoList'
+    // console.log('params:', params)
+    await context.$axios.post(url, params).then((data) => {
+      if (data.status === 200) {
+        const result = data.data.result
+        incomeTotal = 15.5 + '服务端请求'
+        console.log('服务端请求', result)
+      }
+    }, (error) => {
+      console.error('error::', error)
+    })
+    return {
+      spendingTotal: 4.4,
+      incomeTotal: incomeTotal
+    }
+  },
   // created 服务端渲染
   created () {
     console.log('created')
-    console.log(this.$axios.get)
+    // console.log(this.$axios)
+    const vm = this
+    const params = JSON.stringify({
+      examCycleToDate: '2019-07-24', // 考核周期开始时间
+      examCycleFromDate: '2018-07-01', // 考核周期结束时间
+      rewardSource: 'all', // 激励来源
+      staffIdentityId: '', // 人员身份证号
+      page: 1, // 当前页
+      pageSize: 20 // 每页数
+    })
+    const url = 'https://fancy-test.4009515151.com/capricom/billInfo/getBillInfoList'
+    vm.$axios.post(url, params).then((data) => {
+      if (data.status === 200) {
+        const result = data.data.result
+        // vm.incomeTotal = 5.5
+        console.log('客户端请求', result)
+      }
+    }, (error) => {
+      console.error('error::', error)
+    })
   },
   methods: {
     goToQA () {
