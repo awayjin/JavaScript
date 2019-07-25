@@ -65,6 +65,8 @@ export default {
     }, (error) => {
       console.error('error::', error)
     })
+    // console.log('context', context)
+    // console.log('this', this)
     return {
       spendingTotal: 4.4,
       incomeTotal: incomeTotal

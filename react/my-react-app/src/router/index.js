@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import About from '../pages/about/index.js'
 import Form from '../pages/official/09-form.js'
 import LiftingState from '../pages/official/10-LiftingState.js'
+import CompositionInheritance from '../pages/official/11-composition-inheritance.js'
 
 function RouterMap() {
   return (
@@ -15,6 +16,7 @@ function RouterMap() {
           <Link to="/topics">Topics</Link>
           <Link to={ '/form'}>Form</Link>
           <Link to={ '/lifting-state'}>LiftingState</Link>
+          <Link to={ '/composition-inheritance'}>组合</Link>
         </nav>
 
         <hr />
@@ -24,6 +26,7 @@ function RouterMap() {
         <Route path="/topics" component={Topics} />
         <Route path={'/form'} component={Form} />
         <Route path={'/lifting-state'} component={ LiftingState } />
+        <Route path={'/composition-inheritance'} component={ CompositionInheritance } />
       </div>
     </Router>
 
