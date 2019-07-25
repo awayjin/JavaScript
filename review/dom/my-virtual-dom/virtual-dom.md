@@ -51,3 +51,37 @@ let element = {
 
 ## 3. 算法实现
 
+### 3.1 步骤一：用JS对象模拟DOM树
+
+用 JavaScript 来表示一个 DOM 节点，只需要记录它的节点类型、属性，还有子节点：
+
+```javascript
+// element.js
+function Element (tagName, props, children) {
+  this.tagName = tagName
+  this.props = props
+  this.children = children
+}
+
+module.exports = function (tagName, props, children) {
+  return new Element(tagName, props, children)
+}
+```
+
+
+上面的 DOM 结构就可以简单的表示：
+
+```javascript
+// index.js
+// js 对象表示 DOM 结构
+var el = require('./element.js')
+var ul = el(
+  'ul',
+  { id: 'list'},
+  [
+    el('li', { props: 'item'}, ['item 1']),
+    el('li', { props: 'item'}, ['item 2']),
+    el('li', { props: 'item'}, ['item 3'])
+  ]
+)
+```
