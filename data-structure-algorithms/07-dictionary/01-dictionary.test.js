@@ -1,3 +1,5 @@
+// JavaScript 字典所有测试用例
+
 // https://www.jianshu.com/p/ce4f46cd9372
 
 // const Dictionary = require('./01-dictionary')

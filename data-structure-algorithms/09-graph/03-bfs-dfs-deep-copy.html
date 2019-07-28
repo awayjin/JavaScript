@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+第 6 题：请分别用深度优先思想和广度优先思想实现一个拷贝函数？
+<a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/10"></a>
+
+只深拷贝了 Object, Array，其他的非基本类型都是浅拷贝（如果处理Set什么的就太复杂了，题目用意应该是考察遍历树和重复引用吧）
+
+DFS用常规的递归问题不大，需要注意下重复引用的问题，不用递归的话就用栈
+
+BFS就用队列，整体代码倒是差不多
+
+<script>
+  // 如果是对象/数组，返回一个空的对象/数组，
+  // 都不是的话直接返回原对象
+  // 判断返回的对象和原有对象是否相同就可以知道是否需要继续深拷贝
+  // 处理其他的数据类型的话就在这里加判断
+  function getEmpty(o){
+    if(Object.prototype.toString.call(o) === '[object Object]'){
+      return {};
+    }
+    if(Object.prototype.toString.call(o) === '[object Array]'){
+      return [];
+    }
+    return o;
+  }
+
+  function deepCopyBFS(origin){
+    let queue = [];
+    let map = new Map(); // 记录出现过的对象，用于处理环
+
+    let target = getEmpty(origin);
+    if(target !== origin){
+      queue.push([origin, target]);
+      map.set(origin, target);
+    }
+
+    while(queue.length){
+      let [ori, tar] = queue.shift();
+      for(let key in ori){
+        // 处理环状
+        if(map.get(ori[key])){
+          tar[key] = map.get(ori[key]);
+          continue;
+        }
+
+        tar[key] = getEmpty(ori[key]);
+        if(tar[key] !== ori[key]){
+          queue.push([ori[key], tar[key]]);
+          map.set(ori[key], tar[key]);
+        }
+      }
+    }
+
+    return target;
+  }
+
+  function deepCopyDFS(origin){
+    let stack = [];
+    let map = new Map(); // 记录出现过的对象，用于处理环
+
+    let target = getEmpty(origin);
+    if(target !== origin){
+      stack.push([origin, target]);
+      map.set(origin, target);
+    }
+
+    while(stack.length){
+      let [ori, tar] = stack.pop();
+      for(let key in ori){
+        // 处理环状
+        if(map.get(ori[key])){
+          tar[key] = map.get(ori[key]);
+          continue;
+        }
+
+        tar[key] = getEmpty(ori[key]);
+        if(tar[key] !== ori[key]){
+          stack.push([ori[key], tar[key]]);
+          map.set(ori[key], tar[key]);
+        }
+      }
+    }
+
+    return target;
+  }
+
+  // 判断类型-
+  // Object Function
+  const isType = (item) => {
+    return Object.prototype.toString.call(item).slice(8, -1)
+    // return Object.prototype.toString.call(item).replace(/\[object\s|\]/, -1, '')
+  }
+
+  // 深拷贝
+  function deepClone (origin) {
+    let result
+    if (isType(origin) === 'Object') {
+      result = {}
+    } else if (isType(origin) === 'Array') {
+      result = []
+    } else {
+      return origin
+    }
+
+    for (let key in origin) {
+      let value = origin[key]
+      if (isType(value) === 'Array' || isType(value) === 'Object') {
+        result[key] = deepClone(value)
+      } else {
+        result[key] = value
+      }
+    }
+    return result
+  }
+
+  var obj1 = {
+    x: ()=> 'init',
+    obj: { a: 'init' },
+    val: 'init',
+    arr: ['init', { test: 'init'}]
+  }
+  var obj2 = deepCopyDFS(obj1)
+  obj2.x = 22
+  obj2.arr[1].test = 44
+  obj2.obj.a = 'a-1'
+  console.log('obj1', obj1)
+  console.log('obj2', obj2)
+
+  var obj3 = deepClone(obj1)
+  obj3.x = 99
+  obj3.val = 'changed val'
+  obj3.arr[1].test = 55
+  obj3.obj.a = '3-a-1'
+  console.log('obj1', obj1)
+  console.log('obj3', obj3)
+
+
+  // test
+  // [deepCopyBFS, deepCopyDFS].forEach(deepCopy=>{
+  //   console.log(deepCopy({a:1}));
+  //   console.log(deepCopy([1,2,{a:[3,4]}]))
+  //   console.log(deepCopy(function(){return 1;}))
+  //   console.log(deepCopy({
+  //     x:function(){
+  //       return "x";
+  //     },
+  //     val:3,
+  //     arr: [
+  //       1,
+  //       {test:1}
+  //     ]
+  //   }))
+  //
+  //   let circle = {};
+  //   circle.child = circle;
+  //   console.log(deepCopy(circle));
+  // })
+</script>
+
+</body>
+</html>

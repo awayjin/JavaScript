@@ -1,6 +1,6 @@
-// 二叉搜索要树
+// 二叉搜索树
 function binarySearchTree () {
-  
+
   let Node = function (key) {
     this.key = key
     this.left = null
@@ -41,11 +41,11 @@ function binarySearchTree () {
     return root
   }
 
-  // inorder traverse
+  // 中序遍历 inorder traverse
+  // 中序遍历-从最小到最大的顺序访问所有节点
   this.inOrderTraverse = (callback) => {
     inOrderTraverseNode(root, callback)
   }
-
   let inOrderTraverseNode = (node, callback) => {
     if (node !== null) {
       inOrderTraverseNode(node.left, callback)
