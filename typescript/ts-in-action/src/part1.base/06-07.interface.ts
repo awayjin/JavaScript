@@ -3,7 +3,7 @@ interface List {
   readonly id: number, // 只读属性
   name: string;
   age?: number; // 可有属性
-  [x: string]: any; // 字符串索引签名
+  [x: string]: any; // 字符串索引签名, 用任意字符串来索引 List
 }
 
 interface Result {
@@ -41,19 +41,22 @@ render({
 
 render(<Result> {
   data: [
-    { id: 3, name: 'c', sex: 11 },
+    { id: 3, name: 'c', sex: 11, height: 20, aa: 3 },
     { id: 4, name: 'd', sex: '33' }
   ]
 })
 
-// 字符串类型接口
+// 字符串类型接口--
+// 用任意数字来索引 StringArray
 interface StringArray {
   [index: number]: string // 字符串类型接口
 }
 let chars: StringArray = ['a', 'b']
 
+// 用任意字符串来索引 Names
 interface Names {
   [x: string]: string;
+  // y: numer;
   [z: number]: string;
 }
 
