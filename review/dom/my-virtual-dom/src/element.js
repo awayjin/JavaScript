@@ -10,12 +10,13 @@ Element.prototype.render = function () {
   var el = document.createElement(this.tagName) // 根据tagName构建
   var props = this.props
 
+  console.log('el1:', el)
+
   for (var propName in props) { // 设置节点的DOM属性
     var propValue = props[propName]
     el.setAttribute(propName, propValue)
   }
 
-  console.log('el:', el)
   var eleFunc = (child) => {
     console.log('element:', child)
     return child.render()
@@ -34,6 +35,7 @@ Element.prototype.render = function () {
     el.appendChild(childEl)
     console.log('-------childEl---', childEl)
   })
+  console.log('el2:', el)
 
   return el
 }
