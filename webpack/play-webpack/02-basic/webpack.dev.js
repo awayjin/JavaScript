@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const glob = require('glob'); // mul pages
+const FriendlyErrorsWebpackPlguin = require('friendly-errors-webpack-plugin') // 构建时日志提示
 
 // 动态设置多页入口
 const setMPA = () => {
@@ -91,6 +92,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new FriendlyErrorsWebpackPlguin()
     // new webpack.HotModuleReplacementPlugin() // 可以不加
   ].concat(htmlWebpackPlugins),
   // mode: 'production'
@@ -99,6 +101,8 @@ module.exports = {
     contentBase: './dist',
     // 热更新， hot: true 自动引入 HotModuleReplacementPlugin
     hot: true,
+    stats: 'errors-only'
+    // stats: 'verbose'
   },
   devtool: 'source-map',
 };

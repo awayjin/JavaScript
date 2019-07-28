@@ -13,34 +13,37 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const setMPA = () => {
   const entry = {};
   const htmlWebpackPlugins = [];
-  const entryFiles = glob.sync(path.join(__dirname, './src/*/index.js'));
+  const entryFiles = glob.sync(path.join(__dirname, './src/*/index-server.js'));
 
   Object.keys(entryFiles)
     .map((index) => {
       const entryFile = entryFiles[index];
       // '/Users/cpselvis/my-project/src/index/index.js'
 
-      const match = entryFile.match(/src\/(.*)\/index\.js/);
+      const match = entryFile.match(/src\/(.*)\/index-server\.js/);
       const pageName = match && match[1];
 
-      entry[pageName] = entryFile;
-      htmlWebpackPlugins.push(
-        new HtmlWebpackPlugin({
-          inlineSource: '.css$',
-          template: path.join(__dirname, `src/${pageName}/index.html`),
-          filename: `${pageName}.html`,
-          chunks: ['vendors', pageName],
-          inject: true,
-          minify: {
-            html5: true,
-            collapseWhitespace: true,
-            preserveLineBreaks: false,
-            minifyCSS: true,
-            minifyJS: true,
-            removeComments: false
-          }
-        })
-      );
+      if (pageName) {
+        entry[pageName] = entryFile;
+        htmlWebpackPlugins.push(
+          new HtmlWebpackPlugin({
+            inlineSource: '.css$',
+            template: path.join(__dirname, `src/${pageName}/index.html`),
+            filename: `${pageName}.html`,
+            chunks: ['vendors', pageName],
+            inject: true,
+            minify: {
+              html5: true,
+              collapseWhitespace: true,
+              preserveLineBreaks: false,
+              minifyCSS: true,
+              minifyJS: true,
+              removeComments: false
+            }
+          })
+        );
+      }
+
     });
 
   return {
@@ -51,11 +54,13 @@ const setMPA = () => {
 
 const { entry, htmlWebpackPlugins } = setMPA();
 
+
 module.exports = {
   entry: entry,
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name]_[chunkhash:8].js'
+    filename: '[name]-server.js',
+    libraryTarget: 'umd'
   },
   mode: 'production',
   module: {
@@ -169,6 +174,5 @@ module.exports = {
   //         }
   //     }
   // }
-  stats: 'normal'
-  // stats: 'errors-only'
+  stats: 'errors-only'
 };

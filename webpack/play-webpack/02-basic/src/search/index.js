@@ -31,13 +31,13 @@ class Search extends React.Component {
     return (
       <div className="search-text">
         <p>LargeNumberAway: { LargeNumberAway(4, 15) } </p>
-        <p>
+        <div>
           dynamic:
           {' '}
           { Text ? <Text /> : null }
-        </p>
+        </div>
         <p>
-common:
+common 3:
           { getStr() }
           {' '}
 
