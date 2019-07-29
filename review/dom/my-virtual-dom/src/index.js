@@ -17,7 +17,7 @@ var diff = require('./diff.js')
 // js 对象表示 DOM 结构
 var tree = el(
   'ul',
-  { id: 'list'},
+  { id: 'list', class: 'remove-prop-demo', cDemo: 'c-demo-value' },
   [
     33,
     el('li', { class: 'item' }, ['item 1']),
@@ -37,11 +37,17 @@ console.log('tree ul:', tree)
 console.log('ulRoot:', ulRoot)
 
 // 3. 生成新的虚拟DOM
-var newTree = el('div', {'id': 'container'}, [
-  el('h1', {style: 'color: red'}, ['simple virtal dom']),
-  el('p', ['Hello, virtual-dom']),
-  el('ul', [el('li'), el('li')])
-])
+var newTree = el(
+  'ul',
+  { id: 'list', class: 'remove-prop-demo-222', myNewProp: 'my-new-prop' },
+  [
+    66,
+    el('li', { class: 'item3' }, ['item 4']),
+    el('li', { class: 'item' }, ['item 5']),
+    el('li', { class: 'item' }),
+    44,
+  ]
+)
 
 // 4. 比较两棵虚拟DOM树的不同
 var patches = diff(tree, newTree)
