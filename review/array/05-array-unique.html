@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<a href="https://mp.weixin.qq.com/s/_CForjghNYMb7Zj781JL4Q">JavaScript 高阶函数浅析</a>
+
+数组去重
+
+<script>
+  // 1. new Set() - Array.from 扩展操作符...
+  var arr = [undefined, 22, undefined, 22, 33, { a: 1 }, { a: 1}]
+  var arr2 = Array.from(new Set(arr))
+  var arr2 = [...new Set(arr)]
+
+  // 2. for -  indexOf
+  // 当前值的索引位置等于循环的索引，就 push 到数组里
+  var arr = [undefined, 22, undefined, 22, 33, { a: 1 }, { a: 1}]
+  var uniqueArray = (target) => {
+    let arr = []
+    for (let i = 0; i < target.length; i++) {
+      if (target.indexOf(target[i]) === i) {
+        arr.push(target[i])
+      }
+    }
+    return arr;
+  }
+  uniqueArray(arr)
+
+  // 3. filter
+  var arr = [undefined, null, 22, null, undefined, 22, 33, { a: 1 }, { a: 1}]
+  var arr2 = arr.filter((item, index) => {
+    return arr.indexOf(item) === index
+  })
+  arr2
+</script>
+
+</body>
+</html>
