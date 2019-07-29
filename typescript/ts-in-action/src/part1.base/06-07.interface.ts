@@ -1,3 +1,44 @@
+// 函数类型接口
+let add2 = (x: number, y: number) => x + y // 用一个变量定义函数类型
+// console.log('add3:', add3(4, 5))
+
+// 函数类型接口
+interface Add3 {
+  (x: number, y: number): number
+}
+
+// 类型别名
+type Add4 = (x: number, y: number) => number
+//
+let add33: Add3 = (a, b) => a + b;
+let add44: Add4 = (a, b) => a + b;
+console.log('add2 add2:', add2(3, 5))
+console.log('函数类型接口 add33:', add33(4, 5))
+console.log('类型别名 add44:', add44(14, 15))
+
+// 混合类型接口
+interface Lib {
+  (): void;
+  version: string;
+  doSomething(): void
+}
+
+// 创建多个实例
+function getLib () {
+  let lib: Lib = (() => {}) as Lib; // 类型断言 -- 全局单例
+  lib.version = '1.0.1'
+  lib.doSomething = () => 'doSomething'
+  return lib
+}
+
+let lib1 = getLib()
+console.log('创建多个实例, lib1()', lib1.doSomething())
+let lib2 = getLib()
+console.log('创建多个实例, lib2()', lib2.version)
+
+/*------------------------------------------------------------------*/
+
+
 // 对象类型接口
 interface List {
   readonly id: number, // 只读属性
