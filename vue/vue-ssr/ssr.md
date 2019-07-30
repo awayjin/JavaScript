@@ -1,3 +1,5 @@
+demo: https://juejin.im/post/5b98e5875188255c8320f88a
+
 ### 什么是服务器端渲染 (SSR) Server-Side Rendering
 
 Vue.js 是构建客户端应用程序的框架。默认情况下，可以在浏览器中输出 Vue 组件，进行生成 DOM 和操作 DOM。也可以将同一个组件渲染为服务器端的 HTML 字符串
