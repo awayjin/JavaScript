@@ -134,5 +134,11 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-react-jsx-self": "^7.2.0",
+    "@babel/plugin-transform-react-jsx-source": "^7.5.0",
+    "@types/react-router-dom": "^4.3.4",
+    "react-router-dom": "^5.0.1"
   }
 }
