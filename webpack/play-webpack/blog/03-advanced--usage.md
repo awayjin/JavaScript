@@ -337,7 +337,7 @@ module.exports = require("./dist/large-number.js");
 ```
 
 
-## 3.12 服务端渲染 (SSR)
+## 3.12 服务端渲染 (SSR-React)
 
 
 ## 3.13 当前构建时的⽇志显示 
