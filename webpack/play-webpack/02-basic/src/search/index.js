@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import LifeCycleImg from './images/lifecycle.png';
 import './search.less';
 import { getStr } from '../../common/index.js';
+// import { getStr } from '../../../common/index.js'; // for build show errors
 import { a } from './tree-shaking.js';
 import LargeNumberAway  from 'large-number-away'
 
