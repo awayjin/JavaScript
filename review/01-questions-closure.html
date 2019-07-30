@@ -20,9 +20,9 @@
   2. 什么是闭包，什么时候使用闭包，闭包会造成什么问题。callback 是否为闭包
 
   3. 什么情况会造成内存泄露（setTimeout, setInterval）,还有呢？
+  3.2  内存泄漏，及如何主动的去发现是否存在内存泄漏？
   <a href="https://zhuanlan.zhihu.com/p/60538328">javascript常见的内存泄漏</a>
-
-  3.2 内存泄漏，及如何主动的去发现是否存在内存泄漏
+  <a href="function/02-memory-leak.md"></a>
 
   4. 为什么 var 声明的变量无法删除
     <a href="https://www.zhihu.com/question/20625021"></a>
@@ -35,7 +35,8 @@
 
   5. 闭包、作用域的理解
 
-  6. 内存泄漏，及如何主动的去发现是否存在内存泄漏？
+  6.
+  
 
 </pre>
 
@@ -101,38 +102,6 @@ bar() // 3
     element = null;
   }
   assignHandler()
-</script>
-
-<script>
-  var theThing = null
-  function LeakClass () {
-  }
-
-  function MakeLeakObjects (count) {
-    var arr = []
-    for (var i = 0; i < count; ++i) {
-      arr.push(new LeakClass())
-    }
-    return arr
-  }
-
-  var replaceThing = function () {
-    var unused = function () {
-      if (originalThing) {
-        console.log('hi')
-      }
-    }
-
-    var originalThing = theThing
-    theThing = {
-      leaks: MakeLeakObjects(1000),
-      someMethod: function () {
-
-      }
-    }
-  }
-
-  // setInterval()
 </script>
 
 </body>

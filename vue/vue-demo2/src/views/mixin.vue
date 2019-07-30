@@ -7,6 +7,7 @@
       mixinMsg: {{ mixinMsg }}
       message: {{ message }}
       Mixin2 msg2: {{ msg2 }}
+      xss: <span v-html="xss"></span>
       <button @click="hello"> hello Mixins </button>
       <button @click="onEmit"> onEmit  </button>
       <button @click="crossDomain"> crossDomain </button>
@@ -24,6 +25,7 @@ const myMixin = {
     // 选项合并
     return {
       message: 'myMixin msg. it will be replaced',
+      xss: '<img src=\'null\' onerror=\'alert("xss攻击")\' />',
       mixinMsg: 'This is a mixin msg.'
     }
   },
