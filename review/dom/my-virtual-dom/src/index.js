@@ -33,8 +33,8 @@ var ulRoot = tree.render()
 document.body.appendChild(ulRoot)
 
 
-console.log('tree ul:', tree)
-console.log('ulRoot:', ulRoot)
+// console.log('tree ul:', tree)
+// console.log('ulRoot:', ulRoot)
 
 // 3. 生成新的虚拟DOM
 var newTree = el(
@@ -56,7 +56,7 @@ var patches = diff(tree, newTree)
 // 5. 在真正的DOM元素上应用变更
 // patch(root, patches)
 
-console.log(Object.prototype.toString.call(tree))
-console.log(Object.prototype.toString.call(tree).replace(/\[object\s|\]/g, ''))
+// console.log(Object.prototype.toString.call(tree))
+// console.log(Object.prototype.toString.call(tree).replace(/\[object\s|\]/g, ''))
 
 console.log(Array(90).join('-'))

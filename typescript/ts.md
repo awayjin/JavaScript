@@ -1,6 +1,9 @@
 # typescript
 
 ## webpack 配置
+
+创建 tsconfig.json, `tsc --init `. 帮助 `tsc -h`
+
 ```
 npm i -D webpack webpack-cli webpack-dev-server
 

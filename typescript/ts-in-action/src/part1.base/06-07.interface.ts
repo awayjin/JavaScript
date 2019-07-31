@@ -1,4 +1,10 @@
-// 函数类型接口
+console.log(
+  Array(20).join('-'),
+  '06-07 对象接口、字符中接口、函数接口',
+  Array(20).join('-')
+)
+
+// 3. 函数类型接口
 let add2 = (x: number, y: number) => x + y // 用一个变量定义函数类型
 // console.log('add3:', add3(4, 5))
 
@@ -39,7 +45,7 @@ console.log('创建多个实例, lib2()', lib2.version)
 /*------------------------------------------------------------------*/
 
 
-// 对象类型接口
+// 1. 对象类型接口
 interface List {
   readonly id: number, // 只读属性
   name: string;
@@ -87,7 +93,7 @@ render(<Result> {
   ]
 })
 
-// 字符串类型接口--
+// 2. 字符串类型接口--
 // 用任意数字来索引 StringArray
 interface StringArray {
   [index: number]: string // 字符串类型接口
