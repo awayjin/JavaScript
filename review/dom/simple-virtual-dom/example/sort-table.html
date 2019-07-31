@@ -17,6 +17,42 @@
   </body>
 
   <script src="../dist/bundle.js"></script>
+
+  <script type="module">
+    // var el = require('../lib/element.js')
+    // var diff = require('../lib/diff.js')
+    // import el from '../lib/element.js'
+    // import diff from '../lib/diff.js'
+
+    var el = svd.el
+    var diff = svd.diff
+    var patch = svd.patch
+
+    // 1. 构建虚拟DOM
+    var tree = el('div', {'id': 'container'}, [
+      el('h1', {style: 'color: blue'}, ['simple virtal dom']),
+      el('p', ['Hello, virtual-dom']),
+      el('ul', [el('li')])
+    ])
+
+    // 2. 通过虚拟DOM构建真正的DOM
+    var root = tree.render()
+    document.body.appendChild(root)
+
+    // 3. 生成新的虚拟DOM
+    var newTree = el('div', {'id': 'container'}, [
+      el('h1', {style: 'color: red'}, ['simple virtal dom']),
+      el('p', { class: 'p' }, ['Hello, virtual-dom']),
+      el('ul', [el('li', ['li-1']), el('li')])
+    ])
+
+    // 4. 比较两棵虚拟DOM树的不同
+    var patches = diff(tree, newTree)
+    console.log(patches)
+
+    // 5. 在真正的DOM元素上应用变更
+    patch(root, patches)
+  </script>
   <script>
 
   var el = svd.el
