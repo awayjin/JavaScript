@@ -19,11 +19,11 @@ var tree = el(
   'ul',
   { id: 'list', class: 'remove-prop-demo', cDemo: 'c-demo-value' },
   [
-    33,
+    // 33,
     el('li', { class: 'item' }, ['item 1']),
     el('li', { class: 'item' }, ['item 2']),
-    el('li', { class: 'item' }, [el('span', { class: 'child' }, [11])]),
-    44,
+    // el('li', { class: 'item' }, [el('span', { class: 'child' }, [11])]),
+    // 44,
   ]
 )
 
@@ -41,11 +41,11 @@ var newTree = el(
   'ul',
   { id: 'list', class: 'remove-prop-demo-222', myNewProp: 'my-new-prop' },
   [
-    66,
-    el('li', { class: 'item3' }, ['item 4']),
-    el('li', { class: 'item' }, ['item 5']),
-    el('li', { class: 'item' }),
-    44,
+    // 66,
+    el('li', { class: 'item5' }, ['cont item 5']),
+    el('li', { class: 'item6' }),
+    el('li', { class: 'item' }, ['item 1']),
+    // 44,
   ]
 )
 

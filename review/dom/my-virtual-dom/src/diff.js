@@ -57,13 +57,11 @@ function dfsWalk (oldNode, newNode, index, patches) {
     currentPatch.push({ type: patch.REPLACE, node: newNode })
   }
 
-  // console.log('arguments:', arguments)
-  // if (currentPatch.length) {
-  //   patches[index] = currentPatch
-  // }
-
   // 对比 oldNode 和 newNode 的不同，记录下来
-  patches[index] = []
+  if (currentPatch.length) {
+    patches[index] = currentPatch
+  }
+  console.log('currentPatch:', currentPatch)
 
 }
 
@@ -72,10 +70,27 @@ function isIgnoreChildren (node) {
 }
 
 // diff children
-async function diffChildren (oldChildren, newChildren, index, patches, currentPatces) {
-  let diffs = await listDiff2(oldChildren, newChildren, 'key')
+function diffChildren (oldChildren, newChildren, index, patches, currentPatches) {
+  console.log('index:', index, 'patches:', patches, 'currentPatches:', currentPatches)
+  let diffs = listDiff2(oldChildren, newChildren, 'key')
   console.log('-diffs:', diffs)
-  console.log(444)
+  console.log('444-child')
+  var newChildren = diffs.children
+
+  if (diffs.moves.length) { console.log('diffs move.length')}
+
+  let leftNode = null
+  let currentNodeIndex = index
+
+  // debugger
+  _.each(oldChildren, function (child, i) {
+    let newChild = newChildren[i]
+    currentNodeIndex = (leftNode && leftNode.count)
+      ? currentNodeIndex + leftNode.count + 1
+      : currentNodeIndex + 1
+    dfsWalk(child, newChild, currentNodeIndex, patches)
+    leftNode = child
+  })
 
 }
 
