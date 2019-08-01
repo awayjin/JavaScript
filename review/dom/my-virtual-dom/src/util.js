@@ -10,3 +10,15 @@ _.type = (obj) => {
 _.isString = (list) => {
   return _.type(list) === 'String'
 }
+
+_.each = (array, fn) => {
+  for (let i = 0, len = array.length; i < len; i++) {
+    fn(array[i], i)
+  }
+}
+
+// _.each = function each (array, fn) {
+//   for (var i = 0, len = array.length; i < len; i++) {
+//     fn(array[i], i)
+//   }
+// }
