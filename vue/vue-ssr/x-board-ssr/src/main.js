@@ -3,7 +3,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import { createRouter } from "./router"
 
-console.log(createRouter)
+console.log('createRouter:', createRouter)
 
 
 // 导出一个工厂函数，用于创建新的
