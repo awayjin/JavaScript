@@ -55,7 +55,7 @@
 </pre>
 
 <pre>
-3. 虚拟 DOM 相磁
+3. 虚拟 DOM 相关
   3.1 Virtual DOM 原理, 什么是虚拟dom
 
   3.2 vnode的引入与直接操作原生dom相比，哪一个相率更高，为什么
@@ -65,7 +65,6 @@
   举个简单的例子，如果有ABC三个item，其中第一个A是选中的，这个时候如果我在A前面添加D，如果用index作为key就会变成D是选中的了，建议用唯一id来作为key
 
 </pre>
-
 
 <pre>
 4. 路由相关
@@ -87,14 +86,15 @@
 
 <a href="https://github.com/lynnic26/LynnNote/issues/1">Vue XSS</a>
 
-<a href="https://github.com/geektime-geekbang/geektime-vue-1/tree/master/%E6%BC%94%E7%A4%BADEMO%E6%BA%90%E7%A0%81/src/views/1.10">17 | template和JSX的对比以及他们的本质</a>
-
-
-
 Q: 为什么钩子函数不能是一个箭头函数,
 A: 所有的生命周期钩子自动绑定 this 上下文到实例中，因此你可以访问数据，对属性和方法进行运算。
    这意味着你不能使用箭头函数来定义一个生命周期方法 (例如 created: () => this.fetchTodos())。
    这是因为箭头函数绑定了父上下文，因此 this 与你期待的 Vue 实例不同，this.fetchTodos 的行为未定义。
+
+
+<a href="https://github.com/geektime-geekbang/geektime-vue-1/tree/master/%E6%BC%94%E7%A4%BADEMO%E6%BA%90%E7%A0%81/src/views/1.10">
+  17 | template和JSX的对比以及他们的本质
+</a>
 
 </body>
 </html>

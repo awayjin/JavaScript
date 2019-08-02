@@ -159,7 +159,7 @@ const { entry, htmlWebpackPlugins } = setMPA();
 
 思路：将 react、 react-dom 基础包通过 cdn 引⼊，不打⼊ bundle 中
 
-#### 方法1：使用 html-webpack-externals-plugin
+#### 3.6.1 方法1：使用 html-webpack-externals-plugin
 
 ```shell
 yarn add --dev html-webpack-externals-plugin
@@ -184,7 +184,7 @@ new HtmlWebpackExternalsPlugin({
 
 ```
 
-#### 3.6.2 利⽤ SplitChunksPlugin 进⾏公共脚本分离
+#### 3.6.2 方法2 利⽤ SplitChunksPlugin 进⾏公共脚本分离
 
 Webpack4 内置的，替代CommonsChunkPlugin插件
 
