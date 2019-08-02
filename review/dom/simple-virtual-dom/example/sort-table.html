@@ -40,11 +40,22 @@
     document.body.appendChild(root)
 
     // 3. 生成新的虚拟DOM
-    var newTree = el('div', {'id': 'container'}, [
-      el('h1', {style: 'color: red'}, ['simple virtal dom']),
-      el('p', { class: 'p' }, ['Hello, virtual-dom']),
-      el('ul', [el('li', ['li-1']), el('li')])
-    ])
+    // var newTree = el('div', {'id': 'container'}, [
+    //   el('h1', {style: 'color: red'}, ['simple virtal dom']),
+    //   el('p', { class: 'p' }, ['Hello, virtual-dom']),
+    //   el('ul', [el('li', ['li-1']), el('li')])
+    // ])
+    var newTree = el(
+      'ul',
+      { id: 'list', class: 'remove-prop-demo', cDemo: 'c-demo-value' },
+      [
+        33,
+        el('li', { class: 'item' }, ['item 1']),
+        el('li', { class: 'item' }, ['item 2']),
+        el('li', { class: 'item' }, [el('span', { class: 'child' }, [11])]),
+        44,
+      ]
+    )
 
     // 4. 比较两棵虚拟DOM树的不同
     var patches = diff(tree, newTree)
