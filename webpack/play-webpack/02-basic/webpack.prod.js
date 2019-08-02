@@ -160,13 +160,25 @@ module.exports = {
     }
   ].concat(htmlWebpackPlugins),
   // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         test: /(react|react-dom)/, // 把 react react-dom 提取出 vendors-xx.js
+  //         name: 'vendors', // 把 vendors 添加到 htmlWebpackPlugins chunks: ['vendors', pageName],
+  //         chunks: 'all'
+  //       }
+  //     }
+  //   }
+  // },
+  // // 分离公共文件
+  // optimization: {
   //     splitChunks: {
   //         minSize: 0,
   //         cacheGroups: {
   //             commons: {
   //                 name: 'commons',
   //                 chunks: 'all',
-  //                 minChunks: 2
+  //                 minChunks: 2 // 最少两次
   //             }
   //         }
   //     }

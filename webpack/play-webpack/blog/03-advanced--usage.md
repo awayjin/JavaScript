@@ -186,10 +186,31 @@ new HtmlWebpackExternalsPlugin({
 
 #### 3.6.2 方法2 利⽤ SplitChunksPlugin 进⾏公共脚本分离
 
+Webpack4 内置的，替代CommonsChunkPlugin插件
+
+chunks 参数说明：
+- async 异步引⼊的库进⾏分离(默认)
+- initial 同步引⼊的库进⾏分离
+- all 所有引⼊的库进⾏分离(推荐)
 
 利⽤ SplitChunksPlugin 分离基础包
 
-```jshelllanguage
+minChunks: 设置最⼩引⽤次数为2次
+
+minuSize: 分离的包体积的⼤⼩
+
+```
+optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /(react|react-dom)/, // 把 react react-dom 提取出 vendors-xx.js
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
+  },
 chunks: ['vendors', 'commons', pageName],
 
   optimization: {

@@ -29,6 +29,17 @@ const prodConfig = {
       ]
     }),
   ],
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         test: /(react|react-dom)/, // 把 react react-dom 提取出 vendors-xx.js
+  //         name: 'vendors', // 把 vendors 添加到 htmlWebpackPlugins chunks: ['vendors', pageName],
+  //         chunks: 'all'
+  //       }
+  //     }
+  //   }
+  // },
   // 公共的资源 commons.js
   optimization: {
     splitChunks: {
@@ -36,6 +47,7 @@ const prodConfig = {
       cacheGroups: {
         commons: {
           name: 'commons',
+          // all 所有引⼊的库进⾏分离(推荐)
           chunks: 'all',
           minChunks: 2
         }
