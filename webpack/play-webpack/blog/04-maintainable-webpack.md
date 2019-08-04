@@ -42,3 +42,10 @@ merge = require("webpack-merge")
 
 
 功能模块设计
+![功能模块设计](./04-build.png)
+
+
+## 4.3 使用 ESLint 规范构建脚本
+使用 eslint-config-airbnb-base
+
+eslint --fix 可以自动处理空格

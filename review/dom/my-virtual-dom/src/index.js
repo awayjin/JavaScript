@@ -1,5 +1,6 @@
 var el = require('./element.js')
 var diff = require('./diff.js')
+let patch = require('./patch')
 
 // 1. 用 JavaScript 对象结构表示 DOM 树的结构；
 // 然后用这个树构建一个真正的 DOM 树，插到文档当中
@@ -29,8 +30,8 @@ var tree = el(
 
 // 根据 tree 构建真正的 <ul>
 // 2. 通过虚拟 DOM 构建真正的 DOM
-var ulRoot = tree.render()
-document.body.appendChild(ulRoot)
+var root = tree.render()
+document.body.appendChild(root)
 
 
 // console.log('tree ul:', tree)
@@ -44,7 +45,7 @@ var newTree = el(
     // 66,
     el('li', { class: 'item5' }, ['cont item 5']),
     el('li', { class: 'item6' }),
-    el('li', { class: 'item' }, ['item 1']),
+    el('li', { class: 'item7' }, ['item 7']),
     // 44,
   ]
 )
@@ -52,9 +53,10 @@ var newTree = el(
 // 4. 比较两棵虚拟DOM树的不同
 var patches = diff(tree, newTree)
 // var patches = diff.diff(tree, newTree)
+console.log('patches:', patches)
 
 // 5. 在真正的DOM元素上应用变更
-// patch(root, patches)
+patch(root, patches)
 
 // console.log(Object.prototype.toString.call(tree))
 // console.log(Object.prototype.toString.call(tree).replace(/\[object\s|\]/g, ''))

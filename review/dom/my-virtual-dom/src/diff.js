@@ -14,84 +14,39 @@ function diff (oldTree, newTree) {
 }
 
 // 对两棵树进行深度优先遍历
-// function dfsWalk (oldNode, newNode, index, patches) {
-//   let currentPatch = [] // 当前差异数组
-//   // Node is removed
-//   if (oldNode === null) {
-//     console.log(111)
-//     // Real DOM node will be removed when perform reordering, so has no needs to do anthings in here
-//   } else if (_.isString(oldNode) && _.isString(newNode)) { // TextNode content replacing
-//     console.log(222)
-//     if (newNode !== oldNode) {
-//       currentPatch.push({ type: patch.TEXT, context: newNode })
-//     }
-//   } else if ( //  Nodes are the same, diff old node's props and children
-//     oldNode.tagName === newNode.tagName &&
-//     oldNode.key === newNode.key ) {
-//     console.log(333)
-//     // diff props - 计算两树 props 的差异
-//     let propsPatches = diffProps(oldNode, newNode)
-//     if (propsPatches) {
-//       currentPatch.push({
-//         type: patch.PROPS,
-//         props: propsPatches
-//       })
-//     }
-//     // console.log('patch.PROPS:', patch.PROPS)
-//     // console.log('currentPatch:', currentPatch)
-//
-//     // diff children - 计算子节点的差异
-//     // Diff children. If the node has a `ignore` property, do not diff children
-//     // 计算子节点的差异. 如果节点有一个 'ignore' 属性，不计算子节点
-//     // console.log('isIgnoreChildren:', isIgnoreChildren)
-//     if (!isIgnoreChildren(newNode)) {
-//       console.log('3-3')
-//       diffChildren(
-//         oldNode.children,
-//         newNode.children,
-//         index,
-//         patches,
-//         currentPatch
-//       )
-//     }
-//
-//   } else {
-//     console.log(444)
-//     // Nodes are not the same, replace the old node with new node
-//     currentPatch.push({ type: patch.REPLACE, node: newNode })
-//   }
-//
-//   // 对比 oldNode 和 newNode 的不同，记录下来
-//   if (currentPatch.length) {
-//     patches[index] = currentPatch
-//   }
-//   console.log('currentPatch:', currentPatch)
-//
-// }
-
 function dfsWalk (oldNode, newNode, index, patches) {
-  var currentPatch = []
-
-  // Node is removed.
+  let currentPatch = [] // 当前差异数组
+  // Node is removed
   if (newNode === null) {
+    console.log(111)
     // Real DOM node will be removed when perform reordering, so has no needs to do anthings in here
-    // TextNode content replacing
-  } else if (_.isString(oldNode) && _.isString(newNode)) {
+  } else if (_.isString(oldNode) && _.isString(newNode)) { // TextNode content replacing
+    console.log(222)
     if (newNode !== oldNode) {
-      currentPatch.push({ type: patch.TEXT, content: newNode })
+      currentPatch.push({ type: patch.TEXT, context: newNode })
     }
-    // Nodes are the same, diff old node's props and children
-  } else if (
+
+  } else if ( //  Nodes are the same, diff old node's props and children
     oldNode.tagName === newNode.tagName &&
-    oldNode.key === newNode.key
-  ) {
-    // Diff props
-    var propsPatches = diffProps(oldNode, newNode)
+    oldNode.key === newNode.key ) {
+    console.log(333)
+    // diff props - 计算两树 props 的差异
+    let propsPatches = diffProps(oldNode, newNode)
     if (propsPatches) {
-      currentPatch.push({ type: patch.PROPS, props: propsPatches })
+      currentPatch.push({
+        type: patch.PROPS,
+        props: propsPatches
+      })
     }
+    // console.log('patch.PROPS:', patch.PROPS)
+    // console.log('currentPatch:', currentPatch)
+
+    // diff children - 计算子节点的差异
     // Diff children. If the node has a `ignore` property, do not diff children
+    // 计算子节点的差异. 如果节点有一个 'ignore' 属性，不计算子节点
+    // console.log('isIgnoreChildren:', isIgnoreChildren)
     if (!isIgnoreChildren(newNode)) {
+      console.log('3-3')
       diffChildren(
         oldNode.children,
         newNode.children,
@@ -100,14 +55,19 @@ function dfsWalk (oldNode, newNode, index, patches) {
         currentPatch
       )
     }
-    // Nodes are not the same, replace the old node with new node
+
   } else {
+    console.log(444)
+    // Nodes are not the same, replace the old node with new node
     currentPatch.push({ type: patch.REPLACE, node: newNode })
   }
 
+  // 对比 oldNode 和 newNode 的不同，记录下来
   if (currentPatch.length) {
     patches[index] = currentPatch
   }
+  console.log('currentPatch:', currentPatch)
+
 }
 
 function isIgnoreChildren (node) {
@@ -119,6 +79,7 @@ function diffChildren (oldChildren, newChildren, index, patches, currentPatch) {
   var diffs = listDiff(oldChildren, newChildren, 'key')
   newChildren = diffs.children
 
+  console.log('diffs:', diffs)
   if (diffs.moves.length) {
     var reorderPatch = { type: patch.REORDER, moves: diffs.moves }
     currentPatch.push(reorderPatch)

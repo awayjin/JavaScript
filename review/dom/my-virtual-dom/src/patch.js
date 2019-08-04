@@ -84,6 +84,7 @@ function reorderChildren (node, moves) {
     var index = move.index
     if (move.type === 0) { // remove item
       if (staticNodeList[index] === node.childNodes[index]) { // maybe have been removed for inserting
+        if (!node.childNodes.length) return
         node.removeChild(node.childNodes[index])
       }
       staticNodeList.splice(index, 1)
