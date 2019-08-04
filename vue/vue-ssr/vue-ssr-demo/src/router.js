@@ -1,14 +1,25 @@
-// router.js
+// vue-router
+
 import Vue from 'vue'
-import Router from 'pe'
+import Router from 'vue-router'
+// const Vue = require('vue')
+// const Router = require('router.js')
 
-Vue.js(Router)
+Vue.use(Router)
 
+// module.exports = function createRouter () {
 export function createRouter () {
   return new Router({
     mode: 'history',
-    // routers: [
-    //
-    // ]
+    routes: [
+      {
+        path: '/',
+        component: () => import('./components/home.vue')
+      },
+      {
+        path: '/about',
+        component: () => import('./components/about.vue')
+      }
+    ]
   })
 }
