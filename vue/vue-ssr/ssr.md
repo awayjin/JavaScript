@@ -1,4 +1,4 @@
-完整实现: https://juejin.im/post/5b98e5875188255c8320f88a
+基于 CLI 实现: https://juejin.im/post/5b98e5875188255c8320f88a
 
 官网例子实现: https://juejin.im/post/5ba35be16fb9a05d3b336936
 

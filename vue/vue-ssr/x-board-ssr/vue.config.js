@@ -11,6 +11,10 @@ module.exports = {
   css: {
     extract: false
   },
+  devServer: {
+    hot: true,
+    port: 5003
+  },
   configureWebpack: () => ({
     // 将 entry 指向应用程序的 server / client 文件
     entry: `./src/entry-${target}.js`,
