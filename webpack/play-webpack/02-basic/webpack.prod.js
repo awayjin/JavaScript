@@ -11,7 +11,9 @@ const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
 
-const smp = new SpeedMeasureWebpackPlugin()
+const smp = new SpeedMeasureWebpackPlugin() // 速度分析
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 const setMPA = () => {
   const entry = {};
@@ -54,8 +56,9 @@ const setMPA = () => {
 
 const { entry, htmlWebpackPlugins } = setMPA();
 
-// module.exports = smp.wrap({
-module.exports = {
+// 速度分析
+module.exports = smp.wrap({
+// module.exports = {
   entry: entry,
   output: {
     path: path.join(__dirname, 'dist'),
@@ -128,6 +131,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new BundleAnalyzerPlugin(), // 体积分析
     new MiniCssExtractPlugin({
       filename: '[name]_[contenthash:8].css'
     }),
@@ -136,20 +140,20 @@ module.exports = {
       cssProcessor: require('cssnano')
     }),
     new CleanWebpackPlugin(),
-    new HtmlWebpackExternalsPlugin({
-      externals: [
-        {
-          module: 'react',
-          entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
-          global: 'React',
-        },
-        {
-          module: 'react-dom',
-          entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
-          global: 'ReactDOM',
-        },
-      ]
-    }),
+    // new HtmlWebpackExternalsPlugin({
+    //   externals: [
+    //     {
+    //       module: 'react',
+    //       entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+    //       global: 'React',
+    //     },
+    //     {
+    //       module: 'react-dom',
+    //       entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+    //       global: 'ReactDOM',
+    //     },
+    //   ]
+    // }),
     new FriendlyErrorsWebpackPlugin(),
     function() {
       this.hooks.done.tap('done', (stats) => {
@@ -163,17 +167,17 @@ module.exports = {
       })
     }
   ].concat(htmlWebpackPlugins),
-  // optimization: {
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       commons: {
-  //         test: /(react|react-dom)/, // 把 react react-dom 提取出 vendors-xx.js
-  //         name: 'vendors', // 把 vendors 添加到 htmlWebpackPlugins chunks: ['vendors', pageName],
-  //         chunks: 'all'
-  //       }
-  //     }
-  //   }
-  // },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /(react|react-dom)/, // 把 react react-dom 提取出 vendors-xx.js
+          name: 'vendors', // 把 vendors 添加到 htmlWebpackPlugins chunks: ['vendors', pageName],
+          chunks: 'all'
+        }
+      }
+    }
+  },
   // // 分离公共文件
   // optimization: {
   //     splitChunks: {
@@ -189,5 +193,5 @@ module.exports = {
   // }
   stats: 'normal'
   // stats: 'errors-only'
-}
-// });
+// }
+});
