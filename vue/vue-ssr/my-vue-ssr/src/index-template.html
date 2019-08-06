@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Title</title>
+  <!--<meta name="viewport" content="width=device-width">-->
+  <!-- 使用三花括号(triple-mustache)进行 HTML 不转义插值(non-HTML-escaped interpolation) -->
+  {{{ meta }}}
+
+  <title>{{ title }}</title>
 </head>
 <body>
+<!-- 使用双花括号(double-mustache)进行 HTML 转义插值(HTML-escaped interpolation) -->
+url: {{ url }}
+
 <div id="my-renderer">
-  33
+  3333
   <!--vue-ssr-outlet-->
 </div>
 

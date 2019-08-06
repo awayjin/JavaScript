@@ -12,12 +12,19 @@ const renderer = createRenderer({
 })
 
 server.get('*', (req, res) => {
-  const app = new Vue({
-    data: { title: 'msg title' },
-    template: '<div>-{{ title }}</div>'
+  const vm = new Vue({
+    data: { msg: 'msg-txt' },
+    template: '<div>-{{ msg }}</div>'
   })
 
-  renderer.renderToString(app, (err, html) => {
+  // 模板的上下文
+  const context = {
+    title: 'server/index.js title',
+    url: req.url,
+    meta: `<meta name="viewport" content="width=device-width">`
+  }
+
+  renderer.renderToString(vm, context,(err, html) => {
     if (err) {
       res.status(500).end('Interval Server Error')
       return
