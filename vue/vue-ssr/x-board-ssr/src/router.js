@@ -4,9 +4,9 @@ import Home from './views/Home.vue'
 
 Vue.use(Router)
 
-export function createRouter(){
+export function createRouter () {
   return new Router({
-    mode: 'history', //一定要是history模式
+    mode: 'history', // 一定要是history模式
     routes: [
       {
         path: '/',
