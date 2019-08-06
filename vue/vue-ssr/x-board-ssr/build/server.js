@@ -15,6 +15,10 @@ const renderer = createRenderer({
 
 const createApp = require('./app')
 
+// 假设服务器 bundle 已经完成构建
+const createApp = require('/path/to/built-server-bundle.js')
+
+
 // 4. 与服务器集成
 server.get('*', (req, res) => {
   const context = {
@@ -26,14 +30,15 @@ server.get('*', (req, res) => {
   `
   }
 
+
+  createApp(context)
+
   console.log('req.url:', req.url)
   const app = createApp(context)
 
   // 渲染上下文对象-context
   renderer.renderToString(app, context, (err, html) => {
-  // renderer.renderToString(app, (err, html) => {
-    // 页面 title 将会是 "Hello"
-    // meta 标签也会注入
+    // renderer.renderToString(app, (err, html) => {
     console.log('err--:', err)
     if (err) {
       res.status(500).end('Internal Server Error')

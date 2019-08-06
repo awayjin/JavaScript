@@ -9,6 +9,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
+
+const smp = new SpeedMeasureWebpackPlugin()
 
 const setMPA = () => {
   const entry = {};
@@ -51,6 +54,7 @@ const setMPA = () => {
 
 const { entry, htmlWebpackPlugins } = setMPA();
 
+// module.exports = smp.wrap({
 module.exports = {
   entry: entry,
   output: {
@@ -185,4 +189,5 @@ module.exports = {
   // }
   stats: 'normal'
   // stats: 'errors-only'
-};
+}
+// });
