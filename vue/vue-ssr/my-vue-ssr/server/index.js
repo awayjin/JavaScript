@@ -2,14 +2,13 @@ const server = require('express')()
 const fs = require('fs')
 const path = require('path')
 const Vue = require('vue')
+// const { app } = require('../src/entry-server')
 
 const { createRenderer } = require('vue-server-renderer')
 const renderer = createRenderer({
-  // template: fs.readFileSync('./src/index-template.html', 'utf-8')
-  // template: fs.readFileSync('./dist/index.html', 'utf-8')
   template: fs.readFileSync(path.join(__dirname, '../src/index-template.html'), 'utf-8')
-  // template: fs.readFileSync(path.join(__dirname, '../dist/index.html'), 'utf-8')
 })
+// const renderer = createRenderer()
 
 server.get('*', (req, res) => {
   const vm = new Vue({
@@ -24,7 +23,11 @@ server.get('*', (req, res) => {
     meta: `<meta name="viewport" content="width=device-width">`
   }
 
+  // const context = { url: req.url }
+  // const vm = app(context)
+
   renderer.renderToString(vm, context,(err, html) => {
+  // renderer.renderToString(vm,(err, html) => {
     if (err) {
       res.status(500).end('Interval Server Error')
       return
