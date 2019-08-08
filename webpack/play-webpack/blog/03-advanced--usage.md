@@ -197,7 +197,7 @@ chunks 参数说明：
 
 minChunks: 设置最⼩引⽤次数为2次
 
-minuSize: 分离的包体积的⼤⼩
+minSize: 分离的包体积的⼤⼩
 
 ```
 optimization: {
