@@ -1,16 +1,21 @@
+const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 
 module.exports = {
-  entry: './src/entry-server.js',
+  // entry: './src/entry-server.js', // 为什么加了 .js 后就不能 build ?
+  entry: `./src/entry-server`,
+  // 这允许 webpack 以 Node 适用方式(Node-appropriate fashion)处理动态导入(dynamic import)，
+  // 并且还会在编译 Vue 组件时，
+  // 告知 `vue-loader` 输送面向服务器代码(server-oriented code)。
   target: 'node',
   devtool: 'source-map',
-  output: {
-    libraryTarget: 'commonjs2'
-  },
+  // 默认文件名为 `vue-ssr-server-bundle.json`
+  plugins: [
+    new VueSSRServerPlugin()
+  ],
   // https://webpack.js.org/configuration/externals/#function
   // https://github.com/liady/webpack-node-externals
-  // 外置化应用程序依赖模块。可以使服务器构建速度更快，
   // 并生成较小的 bundle 文件。
   externals: nodeExternals({
     // 不要外置化 webpack 需要处理的依赖模块。
@@ -19,9 +24,8 @@ module.exports = {
     whitelist: /\.css$/
   }),
   // 这是将服务器的整个输出
-  // 构建为单个 JSON 文件的插件。
-  // 默认文件名为 `vue-ssr-server-bundle.json`
-  plugins: [
-    new VueSSRServerPlugin()
-  ]
+  // 外置化应用程序依赖模块。可以使服务器构建速度更快，
+  output: {
+    libraryTarget: 'commonjs2'
+  }
 }
