@@ -19,20 +19,20 @@ module.exports = {
     // }),
     new VueSSRClientPlugin()
   ],
-  optimization: {
-    splitChunks: {
-      minSize: 0,
-      cacheGroups: {
-        commons: {
-          name: 'commons',
-          // - async 异步引⼊的库进⾏分离(默认)
-          // - initial 同步引⼊的库进⾏分离
-          // - all 所有引⼊的库进⾏分离(推荐)
-          chunks: 'all',
-          // 设置最⼩引⽤次数为2次
-          minChunks: 2
-        }
-      }
-    }
-  }
+  // optimization: {
+  //   splitChunks: {
+  //     minSize: 0,
+  //     cacheGroups: {
+  //       commons: {
+  //         name: 'commons',
+  //         // - async 异步引⼊的库进⾏分离(默认)
+  //         // - initial 同步引⼊的库进⾏分离
+  //         // - all 所有引⼊的库进⾏分离(推荐)
+  //         chunks: 'all',
+  //         // 设置最⼩引⽤次数为2次
+  //         minChunks: 2
+  //       }
+  //     }
+  //   }
+  // }
 }

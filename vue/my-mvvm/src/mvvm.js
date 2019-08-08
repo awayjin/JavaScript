@@ -28,7 +28,10 @@
 function MVVM (options) {
   this.$options = options || {}
 
-  var data = this._data = this.$options.data
+  var data = this.$options.data
+  this._data = data
+  this.$data = data
+
   var me = this
 
   // 1.0 数据代理

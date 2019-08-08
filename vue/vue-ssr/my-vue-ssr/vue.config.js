@@ -14,14 +14,15 @@ module.exports = {
     port: 5001
   },
   css: {
-    extract: process.env.NODE_ENV === 'production'
+    // extract: process.env.NODE_ENV === 'production'
+    extract: false
   },
-  configureWebpack: {
+  configureWebpack: () => ({
     // 客户端渲染入口
     // entry: `./src/entry-${TARGET}.js`
     ...(isNode ? serverConfig : clientConfig)
     // ...webpackConfig
-  },
+  }),
   chainWebpack: config => {
     config.module
       .rule('vue')
