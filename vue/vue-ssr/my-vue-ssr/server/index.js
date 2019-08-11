@@ -2,7 +2,7 @@ const express = require('express')
 const server = express()
 const fs = require('fs')
 const path = require('path')
-const Vue = require('vue')
+// const Vue = require('vue')
 // const { app } = require('../src/entry-server')
 
 // const { createRenderer } = require('vue-server-renderer')
@@ -14,17 +14,22 @@ const Vue = require('vue')
 const resolve = file => path.resolve(__dirname, file);
 
 const { createBundleRenderer } = require('vue-server-renderer')
+
+// 主要记录了静态资源文件的配置信息
 const serverBundle = require('../dist/vue-ssr-server-bundle.json')
+// 主要记录了js文件的内容
 const clientManifest = require('../dist/vue-ssr-client-manifest.json')
 
 const renderer = createBundleRenderer(serverBundle, {
-  runInNewContext: false,
+  runInNewContext: false, // 推荐
+  // （可选）页面模板
   template: fs.readFileSync(resolve("../src/index-template.html"), "utf-8"),
   // template: fs.readFileSync(resolve("../dist/index.html"), "utf-8"),
+
+  // （可选）客户端构建 manifest
   clientManifest: clientManifest
 })
 
-// express().use("/dist", express.static("./dist"))
 server.use(express.static('dist'))
 
 server.get('*', (req, res) => {
@@ -43,11 +48,14 @@ server.get('*', (req, res) => {
   // const context = { url: req.url }
   // const vm = app(context)
 
+  // 这里无需传入一个应用程序，因为在执行 bundle 时已经自动创建过。
+  // 现在我们的服务器与应用程序已经解耦！
   renderer.renderToString(context,(err, html) => {
-  // renderer.renderToString(vm, context,(err, html) => {
-  // renderer.renderToString(vm,(err, html) => {
+  // renderer.renderToString(vm, context, (err, html) => {
+  // renderer.renderToString(vm, (err, html) => {
     if (err) {
-      res.status(500).end('Interval Server Error')
+      console.log('err:', err)
+      res.status(500).end('Interval Server Error' + err)
       return
     }
     res.send(html)

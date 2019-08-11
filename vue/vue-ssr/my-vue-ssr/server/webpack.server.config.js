@@ -1,9 +1,10 @@
 // const path = require('path')
 const nodeExternals = require('webpack-node-externals')
-const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
+const VueSSRServerPlugin = require('vue-server-renderer/server-plugin.js')
 
 module.exports = {
-  // entry: './src/entry-server.js', // 为什么加了 .js 后就不能 build ?
+  // 为什么加了 .js 后就不能 build ?
+  // entry: './src/entry-server.js',
   entry: `./src/entry-server`,
 
   // 这允许 webpack 以 Node 适用方式(Node-appropriate fashion)处理动态导入(dynamic import)，
@@ -21,6 +22,8 @@ module.exports = {
 
   // https://webpack.js.org/configuration/externals/#function
   // https://github.com/liady/webpack-node-externals
+  // [vue-server-renderer-webpack-plugin] It is recommended to
+  // externalize dependencies in the server build for better build performance.
   // 并生成较小的 bundle 文件。
   externals: nodeExternals({
     // 不要外置化 webpack 需要处理的依赖模块。

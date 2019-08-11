@@ -29,7 +29,7 @@ export default context => {
       const matchedComponents = router.getMatchedComponents()
       // 匹配不到的路由，执行 reject 函数，并返回 404
       if (!matchedComponents.length) {
-        // ESlint 要求
+        // ESlint 通不过
         // return reject({
         //   code: 404
         // })
