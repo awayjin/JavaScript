@@ -110,6 +110,7 @@ var uid = 0
 // 3.5 消息订阅器，收集订阅者。订阅者应该是 Watcher
 function Dep () {
   this.id = uid++
+  // 内部维护了一个数组，用来收集订阅者（Watcher）
   this.subs = []
 }
 
@@ -129,6 +130,7 @@ Dep.prototype = {
     }
   },
 
+  // 数据变动触发 notify 函数，再调用订阅者的 update 方法
   notify: function () {
     this.subs.forEach(function (sub) {
       sub.update()

@@ -15,6 +15,9 @@ const smp = new SpeedMeasureWebpackPlugin() // 速度分析
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
+// 构建速度优化
+const HappyPack = require('happypack')
+
 const setMPA = () => {
   const entry = {};
   const htmlWebpackPlugins = [];
@@ -70,7 +73,14 @@ module.exports = smp.wrap({
       {
         test: /.js$/,
         use: [
-          'babel-loader',
+          'happypack/loader', // 构建速度优化
+          {
+            loader: 'thread-loader', // webpack 4.x 构建速度优化
+            options: {
+              workers: 6
+            }
+          }
+          // 'babel-loader',
           // 'eslint-loader'
         ]
       },
@@ -131,6 +141,9 @@ module.exports = smp.wrap({
     ]
   },
   plugins: [
+    new HappyPack({
+      loaders: ['babel-loader']
+    }),
     new BundleAnalyzerPlugin(), // 体积分析
     new MiniCssExtractPlugin({
       filename: '[name]_[contenthash:8].css'
