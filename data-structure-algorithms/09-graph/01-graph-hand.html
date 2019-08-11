@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script type="module">
+  import Graph from './01-graph-hand.js'
+
+  let graph = new Graph()
+
+  let arr = ['A', 'B', 'C', 'D']
+  // 添加所有的顶点
+  arr.map(item => graph.addVertex(item))
+
+  // 给 A 添加3条边 B C D
+  graph.addEdge('A', 'B')
+  graph.addEdge('A', 'C')
+  graph.addEdge('A', 'D')
+
+  console.log('graph.toString()::', graph.toString())
+</script>
+
+
+<script>
+
+</script>
+</body>
+</html>
