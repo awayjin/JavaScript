@@ -1,7 +1,7 @@
 console.log(
-  Array(20).join('-'),
+  Array(10).join('-'),
   '06-07 对象接口、字符中接口、函数接口',
-  Array(20).join('-')
+  Array(10).join('-')
 )
 
 // 3. 函数类型接口

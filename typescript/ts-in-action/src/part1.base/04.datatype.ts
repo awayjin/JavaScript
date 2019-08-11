@@ -1,8 +1,15 @@
 
+
+console.log(
+  Array(10).join('-'),
+  '04 datatype',
+  Array(10).join('-')
+)
+
 // document.querySelector('.app').innerHTML = hello
 
 // 基本类型(原始类型)
-let bool: boolean|Array<boolean> = false
+let bool: boolean | Array<number> = false
 let str: string = 'str'
 let num: number | undefined | null = 55
 let sym: Symbol = Symbol()
@@ -13,6 +20,11 @@ let un: undefined = undefined
 let nu: null = null
 num = undefined // "strictNullChecks": false 才可以
 num = 33  // "strictNullChecks": false 才可以
+
+bool = [11, 22]
+console.log('bool:', bool)
+bool = false
+console.log('bool:', bool)
 
 // 数组
 let arr1: number[] = [11, 22]
