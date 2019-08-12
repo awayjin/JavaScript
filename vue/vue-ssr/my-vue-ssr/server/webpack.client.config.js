@@ -18,7 +18,7 @@ module.exports = {
     //   minChunks: Infinity
     // }),
     new VueSSRClientPlugin()
-  ],
+  ]
   // optimization: {
   //   splitChunks: {
   //     minSize: 0,

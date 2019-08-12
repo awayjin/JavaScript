@@ -1,3 +1,4 @@
+/* eslint-disable */
 // process.env.WEBPACK_TARGET: undefined
 // process.env.NODE_ENV: development
 var obj = {

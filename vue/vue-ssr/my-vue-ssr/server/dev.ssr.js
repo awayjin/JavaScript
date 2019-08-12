@@ -36,27 +36,25 @@ serverCompiler.outputFileSystem = mfs
 // var d = mfs.readFileSync('/file.txt', 'utf-8')
 // console.log('d:', d) // hello world.
 
-
 // 3、监听文件修改，实时编译获取最新的 vue-ssr-server-bundle.json
 // 记录 webpack 打包生成的新文件
 let bundle
 
 // 监听 client 文件改变，重新打包
-serverCompiler.watch({}, (err, stats) =>{
+serverCompiler.watch({}, (err, stats) => {
   if (err) {
     throw err
   }
   stats = stats.toJson()
-  stats.errors.forEach(error => console.error(error) )
-  stats.warnings.forEach( warn => console.warn(warn) )
+  stats.errors.forEach(error => console.error(error))
+  stats.warnings.forEach(warn => console.warn(warn))
   const bundlePath = path.join(
     webpackConfig.output.path,
     'vue-ssr-server-bundle.json'
   )
-  bundle = JSON.parse(mfs.readFileSync(bundlePath,'utf-8'))
+  bundle = JSON.parse(mfs.readFileSync(bundlePath, 'utf-8'))
   console.log('new bundle generated')
 })
-
 
 // 4、获取最新的 vue-ssr-client-manifest.json
 // 这边的 8080 是 dev server 的端口号
@@ -77,15 +75,13 @@ const handleRequest = async ctx => {
 
   const renderer = createBundleRenderer(bundle, {
     runInNewContext: false,
-    template: fs.readFileSync(path.resolve(__dirname, "../src/index-template.html"), "utf-8"),
+    template: fs.readFileSync(path.resolve(__dirname, '../src/index-template.html'), 'utf-8'),
     clientManifest: clientManifest
   })
 
   const html = await renderToString(ctx, renderer)
   ctx.body = html
-
 }
-
 
 function renderToString (context, renderer) {
   return new Promise((resolve, reject) => {

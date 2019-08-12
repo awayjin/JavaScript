@@ -28,7 +28,7 @@ module.exports = {
     // 客户端渲染入口
     ...(isNode ? serverConfig : clientConfig)
     // ...webpackConfig
-  },
+  }
   // chainWebpack: config => {
   //   config.module
   //     .rule('vue')
