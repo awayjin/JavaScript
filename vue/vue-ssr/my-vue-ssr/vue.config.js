@@ -22,7 +22,7 @@ module.exports = {
     extract: process.env.NODE_ENV === 'production',
     // extract: false,
     // vue ssr Cannot read property 'replace' of undefined
-    // sourceMap: true
+    sourceMap: true
   },
   configureWebpack: {
     // 客户端渲染入口

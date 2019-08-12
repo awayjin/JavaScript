@@ -7,9 +7,11 @@
     "dev": "concurrently \"npm run serve\" \"npm run dev:serve\" ",
     "serve": "vue-cli-service serve",
     "ssr": "nodemon server/index.js",
-    "build": "npm run build:server -- --any && npm run build:client -- --no-clean --any && rm -rf ./dist/index.html",
+    "build": "npm run build:server -- --any && npm run build:client -- --no-clean --any && npm run rim",
     "build:client": "vue-cli-service build",
     "build:server": "cross-env WEBPACK_TARGET=node vue-cli-service build",
+    "rim": "rimraf ./dist/index.html",
+    "rm": "rm -rf ./dist/index.html",
     "lintfix": "eslint --ext .js,.vue",
     "lint": "vue-cli-service lint"
   },
@@ -40,6 +42,7 @@
     "less-loader": "^4.1.0",
     "lint-staged": "^8.1.5",
     "lodash.merge": "^4.6.2",
+    "rimraf": "^2.6.3",
     "vue-server-renderer": "^2.6.10",
     "vue-template-compiler": "^2.6.10",
     "webpack-node-externals": "^1.7.2"
