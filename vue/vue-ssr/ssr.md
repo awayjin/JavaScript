@@ -64,3 +64,14 @@ Vue.js 是构建客户端应用程序的框架。默认情况下，可以在浏�
 #### 介绍构建步骤
 
 #### 介绍构建步骤
+
+
+## concurrently 并行地运行多个命令
+concurrently 并行地运行多个命令（同时跑前端和后端的服务）
+```html
+ "scripts": {
+    "dev": "concurrently \"npm run serve\" \"npm run dev:serve\"",
+    "serve": "vue-cli-service serve",
+    "dev:serve": "cross-env WEBPACK_TARGET=node node ./server/ssr.js",
+  }
+```
