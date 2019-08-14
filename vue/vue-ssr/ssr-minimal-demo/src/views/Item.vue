@@ -3,7 +3,7 @@
     <span v-if="!item">loading</span>
     <div v-if="item">
      <h2>{{item.title}}</h2>
-      
+      <p> away </p>
       <div v-html="item.content"></div>
     </div>
 

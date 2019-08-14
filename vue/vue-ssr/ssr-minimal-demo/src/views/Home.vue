@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>文章列表</h3>
+    <p>jin-3</p>
     <div class="list" v-for="i in list">
       <router-link :to="{path:'/item/'+i.id}">{{i.title}}</router-link>
       </div>
