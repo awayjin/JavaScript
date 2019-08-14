@@ -61,12 +61,11 @@ serverCompiler.watch({}, (err, stats) => {
 // const clientManifestResp = axios.get('http://localhost:5001/vue-ssr-client-manifest.json')
 // const clientManifest = clientManifestResp.data
 
-
 console.log('\n port', process.env.PORT)
 
 // 4. 处理请求
 const handleRequest = async ctx => {
-  console.log('path-----:', ctx.path)
+  // console.log('path-----:', ctx.path)
   if (!bundle) {
     ctx.body = 'wait minutes --away---'
     return
@@ -74,6 +73,7 @@ const handleRequest = async ctx => {
 
   // 4、获取最新的 vue-ssr-client-manifest.json
   const clientManifestResp = await axios.get('http://localhost:5001/vue-ssr-client-manifest.json')
+  // const clientManifestResp = await axios.get('../dist/vue-ssr-client-manifest.json')
   const clientManifest = clientManifestResp.data
 
   const renderer = createBundleRenderer(bundle, {
