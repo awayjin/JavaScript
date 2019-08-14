@@ -75,3 +75,9 @@ concurrently 并行地运行多个命令（同时跑前端和后端的服务）
     "dev:serve": "cross-env WEBPACK_TARGET=node node ./server/ssr.js",
   }
 ```
+
+## 此工程模板的亮点
+
+- 1. 基于最新的`vue-cli`搭建SSR, 可以无缝对接
+- 2. 所有平台构建、开发命令一样
+- 3. 更易维护，每行注释

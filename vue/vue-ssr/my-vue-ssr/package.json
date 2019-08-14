@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently \"npm run serve\" \"npm run dev:serve\"",
     "serve": "vue-cli-service serve",
-    "dev:serve": "cross-env WEBPACK_TARGET=node node ./server/ssr.js",
+    "dev:serve": "cross-env WEBPACK_TARGET=node cross-env PORT=5002 node ./server/ssr.js",
     "ssr": "nodemon server/server-koa.js",
     "ssr:express": "nodemon server/server-koa.js",
     "build": "npm run build:server -- --any && npm run build:client -- --no-clean --any",

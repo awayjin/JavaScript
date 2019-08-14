@@ -4,7 +4,7 @@ const VueSSRServerPlugin = require('vue-server-renderer/server-plugin.js')
 
 module.exports = {
   // 为什么加了 .js 后就不能 build ?
-  // entry: './src/entry-server.js',
+  // entry: `./src/entry-server.js`,
   entry: `./src/entry-server`,
 
   // 这允许 webpack 以 Node 适用方式(Node-appropriate fashion)处理动态导入(dynamic import)，

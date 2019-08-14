@@ -30,7 +30,7 @@ rimraf('./dist/index.html', (err) => {
 const renderer = createBundleRenderer(serverBundle, {
   runInNewContext: false, // 推荐
   // （可选）页面模板
-  template: fs.readFileSync(resolve('../src/index-template.html'), 'utf-8'),
+  template: fs.readFileSync(resolve('../src/index-template-BC.html'), 'utf-8'),
   // template: fs.readFileSync(resolve("../dist/index.html"), "utf-8"),
 
   // （可选）客户端构建 manifest
@@ -69,7 +69,7 @@ server.get('*', (req, res) => {
   })
 })
 
-const PORT = process.env.PORT || 3002
+const PORT = process.env.PORT || 3001
 server.listen(PORT, () => {
   console.log(`server started at http://localhost:${PORT}`)
 })
