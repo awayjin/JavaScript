@@ -25,6 +25,8 @@ module.exports = {
   // [vue-server-renderer-webpack-plugin] It is recommended to
   // externalize dependencies in the server build for better build performance.
   // 并生成较小的 bundle 文件。
+  // 防止将某些 import 的包(package)打包到 bundle 中，
+  // 而是在运行时(runtime)再去从外部获取这些扩展依赖
   externals: nodeExternals({
     // 不要外置化 webpack 需要处理的依赖模块。
     // 你可以在这里添加更多的文件类型。例如，未处理 *.vue 原始文件，
