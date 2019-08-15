@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">71.43% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>10/14</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,21 +30,21 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">57.14% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/7</span>
+        <span class='fraction'>4/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">71.43% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>10/14</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -85,35 +85,35 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,36 +121,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// 队列
-function <span class="fstat-no" title="function not covered" >Queue </span>() {
-  let items = <span class="cstat-no" title="statement not covered" >[]</span>
+function Queue () {
+  let items = []
 &nbsp;
   // 添加元素
-<span class="cstat-no" title="statement not covered" >  this.enqueue = <span class="fstat-no" title="function not covered" >(e</span>lement) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    items.push(element)</span>
+  this.enqueue = (element) =&gt; {
+    items.push(element)
   }
 &nbsp;
   // 移除元素
-<span class="cstat-no" title="statement not covered" >  this.dequeue = <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return items.shift()</span>
+  this.dequeue = () =&gt; {
+    return items.shift()
   }
 &nbsp;
   // 查看队列头元素
-<span class="cstat-no" title="statement not covered" >  this.front = <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  this.front = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    return items[0]</span>
   }
 &nbsp;
   // 是否为空
-<span class="cstat-no" title="statement not covered" >  this.isEmpty = <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return items.length === 0</span>
+  this.isEmpty = () =&gt; {
+    return items.length === 0
   }
 &nbsp;
   // size
-<span class="cstat-no" title="statement not covered" >  this.size = <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  this.size = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    return items.length</span>
   }
 &nbsp;
   // print
-<span class="cstat-no" title="statement not covered" >  this.print = <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+  this.print = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >    console.log(items.toString())</span>
 <span class="cstat-no" title="statement not covered" >    return items.toString()</span>
   }
@@ -163,7 +163,7 @@ export default Queue</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Aug 10 2019 16:10:00 GMT+0800 (CST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Aug 15 2019 07:28:44 GMT+0800 (CST)
 </div>
 </div>
 <script src="../prettify.js"></script>
