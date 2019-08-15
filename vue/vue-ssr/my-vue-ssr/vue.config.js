@@ -10,18 +10,25 @@ const clientConfig = require('./server/webpack.client.config.js')
 console.log('process.env.WEBPACK_TARGET:', process.env.WEBPACK_TARGET)
 console.log('process.env.NODE_ENV:', process.env.NODE_ENV)
 
+// const isProd = process.env.NODE_ENV === 'production'
 const PORT = process.env.PORT || 5001
 console.log('PORT:', PORT)
 
 module.exports = {
   // 添加一个字段，如果是开发环境，就指定到webpack dev server中
-  // publicPath: process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:5001' : '',
-  assetsDir: 'dist/',
+  publicPath: process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:5001' : '',
+  // assetsDir: 'dist/',
   devServer: {
     headers: { 'Access-Control-Allow-Origin': '*' },
     port: PORT,
+    overlay: {
+      warnings: true,
+      errors: true
+    }
     // proxy: 'http://127.0.0.1:5001'
   },
+  // lintOnSave: !isProd,
+  // lintOnSave: process.env.NODE_ENV !== 'production',
   css: {
     // 将组件中的 CSS 提取至一个独立的 CSS 文件中, 以便缓存
     extract: process.env.NODE_ENV === 'production',
