@@ -2,7 +2,7 @@
   <div class="carts">
     <h1> shopping carts --33 </h1>
     <p>
-      state:  {{ number }}
+      state 44:  {{ number }}
       <button @click="$store.commit('addNumber')">number++</button>
     </p>
   </div>

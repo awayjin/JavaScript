@@ -15,8 +15,8 @@ console.log('PORT:', PORT)
 
 module.exports = {
   // 添加一个字段，如果是开发环境，就指定到webpack dev server中
-  // publicPath: process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:5001' : '',
-  assetsDir: 'dist/',
+  publicPath: process.env.NODE_ENV !== 'production' ? 'http://127.0.0.1:5001' : '',
+  // assetsDir: 'dist/',
   devServer: {
     headers: { 'Access-Control-Allow-Origin': '*' },
     port: PORT,
