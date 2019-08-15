@@ -29,7 +29,7 @@ export function createRouter () {
       {
         path: '/carts',
         name: 'carts',
-        component: () => import('../views/shopping-carts.vue')
+        component: () => import('../views/cart-index.vue')
       },
       {
         path: '/user',
