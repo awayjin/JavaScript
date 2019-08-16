@@ -49,6 +49,7 @@ function render(req, res) {
   const startTime = Date.now()
   res.setHeader('Content-Type', 'text/html')
 
+  // error
   const handleError = err => {
     if (err.url) {
       res.redirect(err.url)
@@ -60,19 +61,23 @@ function render(req, res) {
     }
   }
 
+  // context
   const context = {
     title: 'SSR 测试1',
     url: req.url
   }
 
+  // renderToString
   renderer.renderToString(context, (err, html) => {
     if (err) {
       return handleError(err)
     }
     res.send(html)
+
     if (cacheable) {
       microCache.set(req.url, html)
     }
+
     if (!isProd) {
       console.log(`whole request: ${Date.now() - startTime}ms`)
     }
@@ -84,15 +89,23 @@ function render(req, res) {
 
 let renderer
 let readyPromise
+// template
 const templatePath = resolve('./src/index-template.html')
 
-readyPromise = devServer(
-  app,
-  templatePath,
-  (bundle, options) => {
-    renderer = createRenderer(bundle, options)
-  }
-)
+if (isProd) {
+  // 生产
+  // ...生产暂不处理
+} else {
+  // 开发
+  readyPromise = devServer(
+    app,
+    templatePath,
+    (bundle, options) => {
+      renderer = createRenderer(bundle, options)
+    }
+  )
+}
+
 
 
 app.get(

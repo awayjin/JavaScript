@@ -2,7 +2,7 @@
   <div class="about">
     <h1>This is an about page</h1>
     <p>
-      state:  {{ number }}
+      state:  {{ number }}33
       <button @click="$store.commit('addNumber')">number++</button>
     </p>
   </div>

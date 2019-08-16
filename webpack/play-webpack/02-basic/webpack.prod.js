@@ -10,6 +10,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const smp = new SpeedMeasureWebpackPlugin() // 速度分析
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
@@ -181,16 +182,23 @@ module.exports = smp.wrap({
     }
   ].concat(htmlWebpackPlugins),
   optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /(react|react-dom)/, // 把 react react-dom 提取出 vendors-xx.js
-          name: 'vendors', // 把 vendors 添加到 htmlWebpackPlugins chunks: ['vendors', pageName],
-          chunks: 'all'
-        }
-      }
-    }
+    minimizer: [
+      new TerserPlugin({
+        parallel: 4
+      })
+    ]
   },
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         test: /(react|react-dom)/, // 把 react react-dom 提取出 vendors-xx.js
+  //         name: 'vendors', // 把 vendors 添加到 htmlWebpackPlugins chunks: ['vendors', pageName],
+  //         chunks: 'all'
+  //       }
+  //     }
+  //   }
+  // },
   // // 分离公共文件
   // optimization: {
   //     splitChunks: {
@@ -204,6 +212,7 @@ module.exports = smp.wrap({
   //         }
   //     }
   // }
+
   stats: 'normal'
   // stats: 'errors-only'
 // }
