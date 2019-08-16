@@ -5,7 +5,7 @@
       {{ item.title }} - {{ item.price }}
       <br>
       <button
-        @click="actionTest">
+        >
         加入购物车
       </button>
     </li>
