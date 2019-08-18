@@ -6,9 +6,7 @@ const VueSSRClientPlugin = require('vue-server-renderer/client-plugin.js')
 
 module.exports = {
   // entry: './src/entry-client.js'
-  entry: {
-    app: './src/entry-client.js'
-  },
+  entry: path.join(__dirname, '../src/entry-client.js'),
   target: 'web',
   // lintOnSave: true,
   plugins: [

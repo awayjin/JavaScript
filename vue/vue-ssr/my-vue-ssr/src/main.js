@@ -4,14 +4,27 @@ import { createRouter } from './router/router.js'
 // import store from './store'
 import { createStore } from './store/store.js'
 // import './registerServiceWorker'
+// import './plugins/axios' // 请求资源配置
+import './plugins/global-config.js' // 全局插件
 
-// Vue.config.productionTip = false
-//
-// new Vue({
-//   router,
-//   store,
-//   render: h => h(App)
-// }).$mount('#app')
+import DemoVuex from './plugins/min-vuex' // vuex 核心实现
+
+const demoVuex = new DemoVuex.Store({
+  state: {
+    number: 100
+  },
+  mutations: {
+    addNumber (state) {
+      state.number++
+    }
+  }
+})
+Vue.prototype.$demoVuex = demoVuex
+
+// ssr 时 window 为 undefined
+if (typeof window === 'undefined') {
+  global.window = {}
+}
 
 export function createApp () {
   const router = createRouter()

@@ -21,6 +21,11 @@ export default {
   components: {
     HelloWorld,
     ProductList
+  },
+  computed: {
+    email () {
+      return this.$store.state.userInfo.email
+    }
   }
 }
 </script>

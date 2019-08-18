@@ -7,12 +7,13 @@
 <body>
 <script type="module">
   import Graph from './01-graph-hand.js'
+  import Stack from '../03-stack/01-stack.js'
 
   let graph = new Graph()
 
-  let arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+  let vertexes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
   // 添加所有的顶点
-  arr.map(item => graph.addVertex(item))
+  vertexes.map(item => graph.addVertex(item))
 
   // 给 A 添加3条边 B C D
   graph.addEdge('A', 'B')
@@ -38,11 +39,37 @@
     console.log(vertex)
   }
 
-  graph.bfs(arr[0], bfsPrint)
+  graph.bfs(vertexes[0], bfsPrint)
 
   // 改进版本-BFS
+  let shortestPathA = graph.BFS(vertexes[0])
   console.log(Array(20).join('-'), '改进版本-BFS:')
-  console.log(graph.BFS('A'))
+  console.log(shortestPathA)
+
+  console.log(Array(20).join('-'), '追溯路径:', Array(20).join('-'))
+  // 通过前溯点数组，构建从 A 点到其他顶点的路径
+  // 探索指定顶点的所有路径
+  let fromVertex = vertexes[0]
+  for (let i = 1; i < vertexes.length; i++) {
+    let toVertex = vertexes[i]
+    let path = new Stack()
+
+    for (let v = toVertex;
+         v !== fromVertex;
+         v = shortestPathA.predecessors[v]) {
+      path.push(v)
+    }
+
+    path.push(fromVertex)
+    let s = path.pop()
+    
+    while (!path.isEmpty()) {
+      s += ' - ' + path.pop()
+    }
+
+    console.log(s)
+
+  }
 </script>
 
 

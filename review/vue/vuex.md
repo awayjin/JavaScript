@@ -79,6 +79,7 @@ Mutation 需遵守 Vue 的响应规则
  
  ### 5. mini-vuex 核心底层实现
  ```javascript
+// min-vuex.js
 import Vue from 'vue'
 const Store = function Store (options = {}) {
   const {state = {}, mutations={}} = options
@@ -102,4 +103,24 @@ Object.defineProperties(Store.prototype, {
   }
 });
 export default {Store}
+
+// main.js
+// my-vuex 核心实现
+// eslint-disable-next-line
+import DemoVuex from './min-vuex.js'
+// Vue.use(DemoVuex)
+const demoStore = new DemoVuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  }
+})
+
+Vue.prototype.$demoVuex = demoStore
+
+
 ```

@@ -9,10 +9,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+<<<<<<< HEAD
 const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+=======
+>>>>>>> 4259028c94de2ca65811fb1df221ccfa918f46c2
 
+const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin') // 速度分析
 const smp = new SpeedMeasureWebpackPlugin() // 速度分析
+
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 

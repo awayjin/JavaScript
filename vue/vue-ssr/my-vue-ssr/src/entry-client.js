@@ -7,4 +7,5 @@ const { app, router } = createApp()
 // 才能正确地调用组件中可能存在的路由钩子。
 router.onReady(() => {
   app.$mount('#app')
+  // console.log('entry-client this.$axios:', app.$axios.get)
 })

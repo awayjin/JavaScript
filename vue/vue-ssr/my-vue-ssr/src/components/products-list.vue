@@ -5,7 +5,7 @@
       {{ item.title }} - {{ item.price }}
       <br>
       <button
-        @click="actionTest">
+        >
         加入购物车
       </button>
     </li>
@@ -20,6 +20,7 @@ export default {
   created () {
     this.$store.dispatch('products/getAllProducts')
     // this.$store.dispatch('products/demo')
+    console.log('products-list.vue this.$axios:', this.$axios)
   },
   methods: {
     actionTest () {

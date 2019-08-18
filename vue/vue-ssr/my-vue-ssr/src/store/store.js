@@ -12,8 +12,14 @@ export function createStore () {
       Carts,
       products
     },
+    mutations: {
+      addNumber (state) {
+        state.userInfo.number++
+      }
+    },
     state: {
       userInfo: {
+        number: 10,
         email: '258246377@qq.com'
       }
     }

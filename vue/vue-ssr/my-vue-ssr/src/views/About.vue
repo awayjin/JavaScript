@@ -2,7 +2,7 @@
   <div class="about">
     <h1>This is an about page</h1>
     <p>
-      state:  {{ number }}33
+      state:  {{ number }}--
       <button @click="$store.commit('addNumber')">number++</button>
     </p>
   </div>
@@ -12,8 +12,11 @@
 export default {
   computed: {
     number () {
-      return this.$store.state.number
+      return this.$store.state.userInfo.number
     }
+  },
+  created () {
+    console.log('About.vue this.$axios', this.$axios)
   }
 }
 </script>
