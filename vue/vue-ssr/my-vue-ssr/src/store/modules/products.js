@@ -9,16 +9,38 @@ const state = {
   all: [
     { title: 11, price: 1.1, id: 1 },
     { title: 22, price: 2.1, id: 2 }
-  ]
+  ],
+  demo: 'init demo'
+}
+
+// mutations
+const mutations = {
+  [PRODUCTS.SET_PRODUCTS] (state, products) {
+    state.all = products
+  },
+  [PRODUCTS.SET_DEMO] (state, msg) {
+    state.demo = msg
+  }
 }
 
 // actions
 const actions = {
+  // 加入到购物车
+  // addProductToCart ({ commit }) {
+  addProductToCart ({ commit }, payload) {
+    commit(PRODUCTS.SET_DEMO, payload)
+    console.log('products.js addProductToCart item:', payload || 33)
+  },
+  updatedDemo ({ commit }, payload) {
+    commit(PRODUCTS.SET_DEMO, payload)
+    console.log('products.js updatedDemo', payload || 33)
+  },
+  // 显示所有产品
   getAllProducts ({ commit }) {
     let url = 'https://api.myjson.com/bins/ntj93'
     // console.log('this.$axios:', $axios)
     $axios.get(url).then(data => {
-      console.log('data', data)
+      // console.log('data', data)
       commit(PRODUCTS.SET_PRODUCTS, data.data)
     }, err => {
       console.log('err', err)
@@ -35,13 +57,6 @@ const actions = {
     // shop.getProducts(products => {
     //   commit(PRODUCTS.SET_PRODUCTS, products)
     // })
-  }
-}
-
-// mutations
-const mutations = {
-  [PRODUCTS.SET_PRODUCTS] (state, products) {
-    state.all = products
   }
 }
 

@@ -20,9 +20,6 @@ export default {
     ProductList,
     ShoppingCart
   },
-  // methods: mapActions('cart', [
-  //
-  // ]),
   computed: {
     number () {
       return this.$store.state.Carts.number

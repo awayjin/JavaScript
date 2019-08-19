@@ -113,6 +113,12 @@ app.get(
   isProd
     ? ''
     : (req, res) => {
-      readyPromise.then(() => )
+      readyPromise.then(() => render(req, res))
     }
 )
+
+
+const port = process.env.PORT || 9003
+app.listen(port, () => {
+  console.log(`server started at http://locahlhost:${port}`)
+})
