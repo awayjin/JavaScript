@@ -141,6 +141,7 @@ function Graph () {
     }
     color[u] = 'black'
   }
+  // console.log('vertices:', vertices)
 
   // 探索深度优先算法
   let time = 0
