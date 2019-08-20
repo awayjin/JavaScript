@@ -1,18 +1,16 @@
+
+const merge = require('webpack-merge')
+const base = require('./webpack.base.config')
+
 // const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin.js')
 const path = require('path')
 
-module.exports = {
+module.exports = merge(base, {
   // 为什么加了 .js 后就不能 build ?
   // entry: `./src/entry-server.js`,
   entry: `./src/entry-server`,
-
-  output: {
-    path: path.resolve(__dirname, '../dist'),
-    publicPath: '/dist/',
-    filename: '[name].js',
-  },
 
   // 这允许 webpack 以 Node 适用方式(Node-appropriate fashion)处理动态导入(dynamic import)，
   // 并且还会在编译 Vue 组件时，
@@ -48,4 +46,4 @@ module.exports = {
     new VueSSRServerPlugin()
   ]
 
-}
+})
