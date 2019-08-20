@@ -38,9 +38,7 @@ const actions = {
   // 显示所有产品
   getAllProducts ({ commit }) {
     let url = 'https://api.myjson.com/bins/ntj93'
-    // console.log('this.$axios:', $axios)
     $axios.get(url).then(data => {
-      // console.log('data', data)
       commit(PRODUCTS.SET_PRODUCTS, data.data)
     }, err => {
       console.log('err', err)

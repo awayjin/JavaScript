@@ -11,6 +11,8 @@ import routeComponent from './route-component'
 import routeView from './route-view'
 import routeAccountList from './route-account-list.js'
 
+// import About from '../views/About.vue'
+
 Vue.use(Router)
 
 // 路由添加公共参数: https://blog.csdn.net/QingWaXieZi/article/details/85041224
@@ -24,12 +26,6 @@ const router = new Router({
         default: Home,
         mixin: Mixin
       }
-    },
-    {
-      path: '/3',
-      name: 'home',
-      homeHidden: 'define hidden',
-      component: Home
     },
     {
       path: '/403',
@@ -48,7 +44,10 @@ const router = new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
+      // 路由懒加载
       component: () => import(/* webpackChunkName: 'about' */ '../views/About.vue')
+      // 没有路由懒加载
+      // component: About // import About from '../views/About.vue'
     },
     {
       path: '/mixin',

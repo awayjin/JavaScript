@@ -2,8 +2,8 @@ import Vue from 'vue'
 
 const Store = function (options = {}) {
   const { state = {}, mutations = {} } = options
-  console.log('options:', options)
-  console.log('state:', state)
+  // console.log('options:', options)
+  // console.log('state:', state)
   this._vm = new Vue({
     data: {
       $$state: state

@@ -1,46 +1,93 @@
-import { PRODUCTS } from '../mutation-types'
+import shop from '../../api/shop'
+import { CART, PRODUCTS } from '../mutation-types'
 
-const _products = [
-  { 'id': 1, 'title': '华为 Mate 20', 'price': 3999, 'inventory': 2 },
-  { 'id': 2, 'title': '小米 9', 'price': 2999, 'inventory': 0 },
-  { 'id': 3, 'title': 'OPPO R17', 'price': 2999, 'inventory': 5 }
-]
-
-const shop = {
-  getProducts (cb) {
-    setTimeout(() => {
-      cb(_products)
-    }, 100)
-  }
+// initial state
+// shape: [{ id, quantity }]
+const state = {
+  items: [],
+  checkoutStatus: null
 }
 
-// state
-const state = {
-  all: [
-    { title: 11, price: 1.1, id: 1 },
-    { title: 22, price: 2.1, id: 2 }
-  ]
+// getters
+const getters = {
+  cartProducts: (state, getters, rootState) => {
+    return state.items.map(({ id, quantity }) => {
+      const product = rootState.products.all.find(product => product.id === id)
+      return {
+        title: product.title,
+        price: product.price,
+        quantity
+      }
+    })
+  },
+
+  cartTotalPrice: (state, getters) => {
+    return getters.cartProducts.reduce((total, product) => {
+      return total + product.price * product.quantity
+    }, 0)
+  }
 }
 
 // actions
 const actions = {
-  getAllProducts ({ commit }) {
-    shop.getProducts(products => {
-      commit(PRODUCTS.SET_PRODUCTS, products)
-    })
+  checkout ({ commit, state }, products) {
+    const savedCartItems = [...state.items]
+    commit(CART.SET_CHECKOUT_STATUS, null)
+    // empty cart
+    commit(CART.SET_CART_ITEMS, { items: [] })
+    shop.buyProducts(
+      products,
+      () => commit(CART.SET_CHECKOUT_STATUS, 'successful'),
+      () => {
+        commit(CART.SET_CHECKOUT_STATUS, 'failed')
+        // rollback to the cart saved before sending the request
+        commit(CART.SET_CART_ITEMS, { items: savedCartItems })
+      }
+    )
+  },
+
+  addProductToCart ({ state, commit }, product) {
+    commit(CART.SET_CHECKOUT_STATUS, null)
+    if (product.inventory > 0) {
+      const cartItem = state.items.find(item => item.id === product.id)
+      if (!cartItem) {
+        commit(CART.PUSH_PRODUCT_TO_CART, { id: product.id })
+      } else {
+        commit(CART.INCREMENT_ITEM_QUANTITY, cartItem)
+      }
+      // remove 1 item from stock
+      commit(`products/${PRODUCTS.DECREMENT_PRODUCT_INVENTORY}`, { id: product.id }, { root: true })
+    }
   }
 }
 
 // mutations
 const mutations = {
-  [PRODUCTS.SET_PRODUCTS] (state, products) {
-    state.all = products
+  [CART.PUSH_PRODUCT_TO_CART] (state, { id }) {
+    state.items.push({
+      id,
+      quantity: 1
+    })
+  },
+
+  [CART.INCREMENT_ITEM_QUANTITY] (state, { id }) {
+    const cartItem = state.items.find(item => item.id === id)
+    cartItem.quantity++
+  },
+
+  [CART.SET_CART_ITEMS] (state, { items }) {
+    state.items = items
+  },
+
+  [CART.SET_CHECKOUT_STATUS] (state, status) {
+    state.checkoutStatus = status
   }
 }
 
 export default {
-  namespace: true,
+  namespaced: true,
   state,
+  getters,
   actions,
   mutations
 }

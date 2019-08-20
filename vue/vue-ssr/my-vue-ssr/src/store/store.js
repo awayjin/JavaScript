@@ -1,3 +1,5 @@
+// https://github.com/geektime-geekbang/geektime-vue-1/blob/master/vuex-demo3/src/store/index.js
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Carts from './modules/carts.js' // 购物车
@@ -25,15 +27,3 @@ export function createStore () {
     }
   })
 }
-
-// export default new Vuex.Store({
-//   state: {
-//     number: 1
-//   },
-//   mutations: {
-//
-//   },
-//   actions: {
-//
-//   }
-// })

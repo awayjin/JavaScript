@@ -6,7 +6,7 @@
         {{ item.title }} - {{ item.price }}
         <br>
         <button
-          @click="addProductToCart(item)">
+          @click="addProductToCart(item)" :disabled="!item.inventory">
           加入购物车
         </button>
         <button @click="updatedProductsTitle(item)">
@@ -44,6 +44,9 @@ export default {
   },
   methods: {
     // 加入购物车
+    ...mapActions('products', [
+      'addProductToCart'
+    ]),
     // ...mapActions('cart', [
     //   'addProductToCart'
     // ]),
@@ -53,13 +56,6 @@ export default {
     // ...mapActions(['demo']),
     updatedProductsTitle2 (item) {
       this.$store.dispatch('products/updatedDemo', item.title)
-    },
-    addProductToCart (item) {
-      console.log('addProductToCart')
-    },
-    actionTest () {
-      this.$store.dispatch('products/getAllProducts')
-      console.log('111')
     }
   }
 }

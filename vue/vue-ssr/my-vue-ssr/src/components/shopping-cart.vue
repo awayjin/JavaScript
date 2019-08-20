@@ -4,8 +4,8 @@
     <p><i>请添加产品到购物车</i></p>
     <ul>
       <li
-        >
-        title -  price - quantity
+        v-for="item in products" :key="item.id">
+        {{ item.title }} -  {{ item.price }} x {{ item.quantity }}
       </li>
     </ul>
     <p>合计: total </p>
@@ -15,7 +15,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
+  computed: {
+    // products: 'items'
+    ...mapState({
+      products: state => state.Carts.items
+    })
+  }
   // name: 'products-list'
 }
 </script>

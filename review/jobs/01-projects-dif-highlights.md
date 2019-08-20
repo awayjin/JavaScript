@@ -22,4 +22,13 @@ server {
     }
 ```
 
+## 亮点3: 路由改为懒加载
+结合 Vue 的异步组件和 Webpack 的代码分割功能，轻松实现路由组件的懒加载
+```
+// 路由懒加载
+component: () => import('./views/About.vue')
+// 没有路由懒加载
+component: About // import About from '../views/About.vue'
+```
+
 ## 难点1: 编写服务端渲染(SSR)通用工程模板

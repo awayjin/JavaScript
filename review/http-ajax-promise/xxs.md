@@ -10,6 +10,7 @@
   <li>2.0 理解XSS原理</li>
   <li>
     3.0 理解XSS的攻击方式
+    
     (1) 反射型：发出请求时，XSS代码出现在URL中，作为输入提交到服务器端，服务器端解析后响应，XSS代码随响应内容一起传回给浏览器，最后浏览器解析执行XSS代码。这个过程像一次反射，故叫反射型XSS
     url:http://localhost:3000/?xss=%3Ciframe%20src=%22http://www.baidu.com%22%3E
     不解析=:<%= xss %>， 解析-:<%- xss %>
@@ -30,3 +31,8 @@
   过滤: 移除用户上传的DOM属性，如onerror等事件，移除用户上传的Style节点，script节点、iframe节点等
 </p>
 <p>校正: 避免直接对HTML Entity解码，使用DOM Parse转换，校正不配对的DOM标签 </p>
+
+
+## cookie 和 token 都存放在 header 中，为什么不会劫持 token？
+1. 首先token不是防止XSS的，而是为了防止CSRF的；
+2、CSRF攻击的原因是浏览器会自动带上cookie，而浏览器不会自动带上token
