@@ -116,6 +116,36 @@ function Graph () {
     }
   }
 
+  // dfs-深度优先搜索
+  this.dfs = (callback) => {
+    let color = initColors() // [A: "white", B: "white", C: "white", D: "white", E: "white", …]
+    // console.log('color:', color)
+    for (let i = 0; i < vertexes.length; i++) {
+      if (color[vertexes[i]] === 'white') {
+        console.log('vertices[i]:', vertexes[i]) // only once
+        dfsVisit(vertexes[i], color, callback)
+      }
+    }
+  }
+
+  let dfsVisit = (u, color, callback) => {
+    color[u] = 'grey'
+    if (callback) {
+      callback(u)
+    }
+
+    let neighbors = adjList.get(u)
+    // console.log('neighbors:', neighbors)
+    for (let i = 0; i < neighbors.length; i++) {
+      let w = neighbors[i]
+      // console.log('w---', w)
+      if (color[w] === 'white') {
+        dfsVisit(w, color, callback) // 递归
+      }
+    }
+    // color[u] = 'black'
+  }
+
 }
 
 export default Graph

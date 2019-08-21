@@ -26,8 +26,8 @@
   graph.addEdge('C', 'D')
   graph.addEdge('C', 'G')
 
-  graph.addEdge('D', 'H')
   graph.addEdge('D', 'G')
+  graph.addEdge('D', 'H')
 
   graph.addEdge('E', 'I')
 
@@ -35,11 +35,11 @@
   console.log('graph.toString()::', graph.toString())
 
   // bfs
-  function bfsPrint (vertex) {
+  function printNode (vertex) {
     console.log(vertex)
   }
 
-  graph.bfs(vertexes[0], bfsPrint)
+  graph.bfs(vertexes[0], printNode)
 
   // 改进版本-BFS
   let shortestPathA = graph.BFS(vertexes[0])
@@ -70,6 +70,11 @@
     console.log(s)
 
   }
+
+
+  console.log(Array(20).join('-'), '--深度优先搜索--', Array(20).join('-'));
+  // 深度优先搜索
+  graph.dfs(printNode)
 </script>
 
 

@@ -76,8 +76,9 @@ function Graph() {
         if (callback) {
             callback(u);
         }
-        console.log('Discovered ' + u);
+        // console.log('Discovered ' + u);
         var neighbors = adjList.get(u);
+        console.log('顶点u:', u, '邻点:', neighbors)
         for (var i=0; i<neighbors.length; i++){
             var w = neighbors[i];
             if (color[w] === 'white'){
