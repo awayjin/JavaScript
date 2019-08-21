@@ -131,7 +131,7 @@ function Graph () {
     }
 
     let neighbors = adjList.get(u)
-    // console.log('neighbors:', neighbors)
+    console.log('顶点u:', u, 'neighbors:', neighbors)
     for (let i = 0; i < neighbors.length; i++) {
       let w = neighbors[i]
       // console.log('w---', w)
