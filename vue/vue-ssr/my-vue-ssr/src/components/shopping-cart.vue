@@ -15,12 +15,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
   computed: {
     // products: 'items'
     ...mapState({
       products: state => state.Carts.items
+    }),
+    ...mapGetters('Carts', {
+      products: 'cartProducts'
     })
   }
   // name: 'products-list'

@@ -5,7 +5,7 @@
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <test-toast msg="33" />
     <p>
-      minx-vuex: {{ number }}
+      min-vuex: {{ number }}
       <button @click="addNumber">add number by min-vuex.js</button>
     </p>
   </div>

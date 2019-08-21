@@ -16,6 +16,7 @@ export default {
     }
   },
   created () {
+    setTimeout(() => this.$toast.info(), 1000)
     console.log('About.vue this.$axios', this.$axios)
   }
 }

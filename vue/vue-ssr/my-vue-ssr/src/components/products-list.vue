@@ -44,12 +44,15 @@ export default {
   },
   methods: {
     // 加入购物车
-    ...mapActions('products', [
-      'addProductToCart'
-    ]),
-    // ...mapActions('cart', [
+    // ...mapActions('products', [
     //   'addProductToCart'
     // ]),
+    // addProductToCart (product) {
+    //   this.$store.dispatch('products/addProductToCart', product)
+    // },
+    ...mapActions('Carts', [
+      'addProductToCart'
+    ]),
     ...mapActions({
       updatedProductsTitle: 'products/updatedDemo'
     }),

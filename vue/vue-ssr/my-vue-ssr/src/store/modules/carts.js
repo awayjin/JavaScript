@@ -3,16 +3,22 @@ import { CART } from '../mutation-types'
 const carts = {
   namespaced: true,
   state: {
-    items: [
-      { title: 'cart 11', price: 1.1, id: 1, quantity: 30 },
-      { title: 'cart 22', price: 1.1, id: 2 },
-      { title: 22, price: 2.1, id: 2 }
-    ],
+    items: [],
     number: 1
   },
 
   // getters
   getters: {
+    cartProducts (state, getters, rootState) { // rootState
+      return state.items.map(({ id, quantity }) => {
+        const product = rootState.products.all.find(product => product.id === id)
+        return {
+          title: product.title,
+          price: product.price,
+          quantity
+        }
+      })
+    }
   },
 
   // mutations
@@ -21,6 +27,7 @@ const carts = {
       state.number++
     },
     [CART.PUSH_PRODUCT_TO_CART] (state, { id }) {
+      console.log('id:', id)
       state.items.push({
         id,
         quantity: 1
@@ -30,7 +37,8 @@ const carts = {
   // actions
   actions: {
     addProductToCart ({ commit, state }, product) {
-      if (product.inventory > 0) {
+      console.log('product:', product)
+      if (product.inventory > 0) { // 有库存
         const cartItem = state.items.find(item => item.id === product.id)
         if (!cartItem) {
           commit(CART.PUSH_PRODUCT_TO_CART, { id: product.id })

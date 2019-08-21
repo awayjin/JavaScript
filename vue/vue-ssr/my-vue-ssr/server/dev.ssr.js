@@ -27,8 +27,11 @@ const serverCompiler = webpack(webpackConfig)
 
 const mfs = new MemoryFS()
 
+// https://www.webpackjs.com/api/node/#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F-custom-file-systems-
 // 指定输出到的内存流中
 // 指定 webpack 的输出目录
+// 使用 memory-fs 替换默认的 outputFileSystem，
+// 以将文件写入到内存中，而不是写入到磁盘
 serverCompiler.outputFileSystem = mfs
 
 // mfs.mkdirpSync('/')
