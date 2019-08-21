@@ -31,4 +31,6 @@ component: () => import('./views/About.vue')
 component: About // import About from '../views/About.vue'
 ```
 
+## 亮点4: 按模块拆分-请求资源\路由
+
 ## 难点1: 编写服务端渲染(SSR)通用工程模板
