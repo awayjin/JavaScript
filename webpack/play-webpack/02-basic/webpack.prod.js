@@ -9,12 +9,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-<<<<<<< HEAD
-const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-=======
->>>>>>> 4259028c94de2ca65811fb1df221ccfa918f46c2
 
+const TerserPlugin = require('terser-webpack-plugin')
 const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin') // 速度分析
 const smp = new SpeedMeasureWebpackPlugin() // 速度分析
 
@@ -147,6 +143,9 @@ module.exports = smp.wrap({
     ]
   },
   plugins: [
+    new webpack.DllReferencePlugin({
+      manifest: require('./build/library/library.json')
+    }),
     new HappyPack({
       loaders: ['babel-loader']
     }),

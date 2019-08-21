@@ -5,6 +5,7 @@ import './part1.base/06-07.interface.ts'
 import './part1.base/04.datatype.ts'
 
 import './part1.base/10-11.class'
+import './part1.base/13-14.generics'
 
 
 let hello: string = 'Hello TypeScript'

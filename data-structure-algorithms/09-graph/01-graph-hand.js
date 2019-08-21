@@ -15,7 +15,7 @@ function Graph () {
   this.addEdge = (v, w) => {
     console.log(vertexes)
     adjList.get(v).push(w)
-    adjList.get(w).push(v) // 无向的
+    // adjList.get(w).push(v) // 无向的
   }
 
   // toString
@@ -144,6 +144,52 @@ function Graph () {
       }
     }
     // color[u] = 'black'
+  }
+
+  // 深度优先搜索-改进版
+  // depth-first search--dfs
+  this.DFS = () => {
+    let color = initColors()
+    for (let i = 0; i < vertexes.length; i++) {
+      if (vertexes[i] === 'white') {
+        DFSVisit(u, color)
+      }
+    }
+  }
+  function DFSVisit (u, color) {
+
+    let d = [] // 发现时间
+    let pred = [] // 前溯点
+    let f = [] // 完成时间
+
+    color['u'] = 'grey'
+
+    for (let i = 0;  i < color.length; i++) {
+      d[i] = 0
+      pred[i] = null
+      f[i] = 0
+    }
+
+    let neighbours = adjList.get(u)
+    for (let i = 0; i < neighbours.length; i++) {
+      let w = neighbours[i]
+      if (w === 'white') {
+        d[w] = d[u] + 1
+        pred[w] = u
+        color[u] = 'grey'
+        DFSVisit(w, color)
+      }
+    }
+
+    color[u] = 'black'
+    f[u] += 1
+
+    return {
+      distance: d,
+      predecessors: pred,
+      finished: f
+    }
+
   }
 
 }
