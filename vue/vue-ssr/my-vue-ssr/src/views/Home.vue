@@ -32,10 +32,11 @@ export default {
   },
   mounted () {
     this.$myMethod('home.vue msg')
-    console.log('mounted')
+    console.log('mounted 55')
   },
   created () {
     console.log('created')
+    console.log('mounted 55')
   }
 }
 </script>

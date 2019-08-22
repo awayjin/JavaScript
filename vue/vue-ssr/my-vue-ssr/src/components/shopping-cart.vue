@@ -9,8 +9,8 @@
       </li>
     </ul>
     <p>合计: total </p>
-    <p><button >提交</button></p>
-    <p >提交 checkoutStatus.</p>
+    <p><button :disabled="!products.length">提交</button></p>
+    <p v-show="checkoutStatus">提交 {{ checkoutStatus }}.</p>
   </div>
 </template>
 
@@ -20,7 +20,8 @@ export default {
   computed: {
     // products: 'items'
     ...mapState({
-      products: state => state.Carts.items
+      products: state => state.Carts.items,
+      checkoutStatus: state => state.Carts.checkoutStatus
     }),
     ...mapGetters('Carts', {
       products: 'cartProducts'

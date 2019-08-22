@@ -4,7 +4,7 @@ const carts = {
   namespaced: true,
   state: {
     items: [],
-    number: 1
+    checkoutStatus: null
   },
 
   // getters
@@ -32,16 +32,28 @@ const carts = {
         id,
         quantity: 1
       })
+    },
+    // 设置状态
+    [CART.SET_CHECKOUT_STATUS] (state, status) {
+      state.checkoutStatus = status
+    },
+    // 增加产品数量
+    [CART.INCREMENT_ITEM_QUANTITY] (state, { id }) {
+      const cartItem = state.items.find(product => product.id === id)
+      cartItem.quantity++
     }
   },
   // actions
   actions: {
     addProductToCart ({ commit, state }, product) {
       console.log('product:', product)
+      commit(CART.SET_CHECKOUT_STATUS, null)
       if (product.inventory > 0) { // 有库存
         const cartItem = state.items.find(item => item.id === product.id)
         if (!cartItem) {
           commit(CART.PUSH_PRODUCT_TO_CART, { id: product.id })
+        } else {
+          commit(CART.INCREMENT_ITEM_QUANTITY, cartItem)
         }
         // console.log(cartItem)
       }

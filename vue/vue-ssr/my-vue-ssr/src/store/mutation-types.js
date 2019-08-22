@@ -4,5 +4,7 @@ export const PRODUCTS = {
 }
 
 export const CART = {
-  PUSH_PRODUCT_TO_CART: 'pushProductToCart'
+  PUSH_PRODUCT_TO_CART: 'pushProductToCart',
+  SET_CHECKOUT_STATUS: 'setCheckoutStatus',
+  INCREMENT_ITEM_QUANTITY: 'incrementItemQuantity'
 }

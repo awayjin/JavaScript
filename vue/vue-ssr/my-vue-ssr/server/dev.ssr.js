@@ -57,6 +57,13 @@ serverCompiler.watch({}, (err, stats) => {
   )
   bundle = JSON.parse(mfs.readFileSync(bundlePath, 'utf-8'))
   console.log('new bundle generated')
+  console.log('new bundle generated')
+  console.log('new bundle generated')
+  console.log('new bundle generated')
+  console.log('new bundle generated')
+  console.log('new bundle generated')
+  console.log('new bundle generated')
+  console.log('new bundle generated')
 })
 
 // 4、获取最新的 vue-ssr-client-manifest.json
