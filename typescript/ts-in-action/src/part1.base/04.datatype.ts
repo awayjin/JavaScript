@@ -12,8 +12,8 @@ console.log(
 let bool: boolean | Array<number> = false
 let str: string = 'str'
 let num: number | undefined | null = 55
-let sym: Symbol = Symbol()
-let sym2 = Symbol()
+// let sym: Symbol = Symbol()
+// let sym2 = Symbol()
 let bool3 = '33'
 let un: undefined = undefined
 // un = 33 // 不能
