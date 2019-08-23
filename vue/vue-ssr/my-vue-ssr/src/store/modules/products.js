@@ -20,6 +20,11 @@ const mutations = {
   },
   [PRODUCTS.SET_DEMO] (state, msg) {
     state.demo = msg
+  },
+  // 减少产品数
+  [PRODUCTS.DECREMENT_PRODUCT_INVENTORY] (state, { id }) {
+    const product = state.all.find(item => item.id === id)
+    product.inventory--
   }
 }
 

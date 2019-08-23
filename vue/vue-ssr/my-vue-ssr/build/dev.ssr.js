@@ -8,9 +8,21 @@ const webpack = require('webpack')
 const MemoryFS = require('memory-fs')
 const webpackConfig = require('@vue/cli-service/webpack.config')
 const path = require('path')
+const fs = require('fs')
+const Koa = require('koa')
+const KoaRouter = require('koa-router')
 
+const app = new Koa()
+const router = new KoaRouter()
 const mfs = new MemoryFS()
-const compile = webpack(webpackConfig)
+// const compile = webpack(webpackConfig)
+const compile = webpack({
+  mode: 'development',
+  entry: './build/entry-client.js',
+  output: {
+    publicPath: '/'
+  }
+})
 // 磁盘读取改为内存读取
 compile.outputFileSymtem = mfs
 
@@ -24,17 +36,29 @@ compile.watch({
   if (err) {
     throw err
   }
-  stats = stats.toJson()
-  stats.errors.forEach(error => console.error(error))
-  stats.warnings.forEach(warn => console.warn(warn))
   const bundlePath = path.join(
     webpackConfig.output.path,
     'vue-ssr-server-bundle.json'
   )
-  bundle = JSON.parse(mfs.readFileSync(bundlePath, 'utf-8'))
-
-  console.log('bundle:', bundle)
+  console.log('bundlePath:', bundlePath)
+  // bundle = JSON.parse(mfs.readFileSync(bundlePath, 'utf-8'))
+  // console.log('bundle:', bundle)
   // console.log('stats:', stats)
+})
+
+let handleRequest = async ctx => {
+
+}
+
+router.get('*', async ctx => {
+  ctx.body = ctx.params
+})
+app.use(router.routes())
+app.use(router.allowedMethods())
+
+const port = process.env.NODE_ENV || 3030
+app.listen(port, () => {
+  console.log(`server started at http://locahost:${port}`)
 })
 
 

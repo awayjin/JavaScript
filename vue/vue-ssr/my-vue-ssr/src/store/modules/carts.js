@@ -1,4 +1,4 @@
-import { CART } from '../mutation-types'
+import { CART, PRODUCTS } from '../mutation-types'
 
 const carts = {
   namespaced: true,
@@ -45,9 +45,14 @@ const carts = {
   },
   // actions
   actions: {
+
+    checkout ({ commit, state }, products) {
+      console.log('cart.js actions products:', products)
+    },
+
     addProductToCart ({ commit, state }, product) {
       console.log('product:', product)
-      commit(CART.SET_CHECKOUT_STATUS, null)
+      // commit(CART.SET_CHECKOUT_STATUS, null)
       if (product.inventory > 0) { // 有库存
         const cartItem = state.items.find(item => item.id === product.id)
         if (!cartItem) {
@@ -56,6 +61,12 @@ const carts = {
           commit(CART.INCREMENT_ITEM_QUANTITY, cartItem)
         }
         // console.log(cartItem)
+        // remove 1 item from stock
+        commit(
+          `products/${PRODUCTS.DECREMENT_PRODUCT_INVENTORY}`,
+          { id: product.id },
+          { root: true }
+        )
       }
     }
   }

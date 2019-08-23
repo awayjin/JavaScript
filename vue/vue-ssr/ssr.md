@@ -83,3 +83,12 @@ concurrently 并行地运行多个命令（同时跑前端和后端的服务）
 2. 所有平台构建、开发命令一样
 
 3. 更易维护，每行注释
+
+## node
+````html
+// process.cwd() 是当前执行node命令时候的文件夹地址 ——工作目录
+// __dirname 是被执行的js 文件的地址 ——文件所在目录
+// __dirname 是被执行的js 文件的地址 ——文件所在目录
+// console.log('process.cwd():', process.cwd())
+// console.log('__dirname :', __dirname )
+````

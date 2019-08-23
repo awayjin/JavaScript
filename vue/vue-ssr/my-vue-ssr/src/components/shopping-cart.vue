@@ -9,7 +9,7 @@
       </li>
     </ul>
     <p>合计: total </p>
-    <p><button :disabled="!products.length">提交</button></p>
+    <p><button :disabled="!products.length" @click="checkout(products)">提交</button></p>
     <p v-show="checkoutStatus">提交 {{ checkoutStatus }}.</p>
   </div>
 </template>
@@ -26,8 +26,12 @@ export default {
     ...mapGetters('Carts', {
       products: 'cartProducts'
     })
+  },
+  methods: {
+    checkout (products) {
+      this.$store.dispatch('Carts/checkout', products)
+    }
   }
-  // name: 'products-list'
 }
 </script>
 

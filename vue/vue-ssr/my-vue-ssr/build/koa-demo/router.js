@@ -1,8 +1,11 @@
 const Koa = require('koa')
 const Router = require('koa-router')
+const KoaStatic = require('koa-static')
+const path = require('path')
 
 const app = new Koa()
 const router = new Router()
+const resolve = file => path.join(__dirname,  file)
 
 router.get('/', async ctx => {
   ctx.body = 'index'
@@ -19,6 +22,12 @@ router.get('/product/:pid', async ctx => {
   console.log(ctx.params)
   ctx.body = 'This is a product page. pid:' + ctx.params.pid
 })
+
+app.use(KoaStatic(resolve('./static')))
+app.use(async ctx => {
+  ctx.body = 'hel judy'
+})
+
 
 // 启动路由
 app.use(router.routes())

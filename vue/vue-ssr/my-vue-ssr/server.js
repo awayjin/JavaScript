@@ -35,7 +35,7 @@ const microCache = LRU({
 })
 
 // renderer
-function render(req, res) {
+function render (req, res) {
   // 缓存
   const cacheable = isCacheable(req.url)
   if (cacheable) {
@@ -81,11 +81,8 @@ function render(req, res) {
     if (!isProd) {
       console.log(`whole request: ${Date.now() - startTime}ms`)
     }
-
   })
-
 }
-
 
 let renderer
 let readyPromise
@@ -106,8 +103,6 @@ if (isProd) {
   )
 }
 
-
-
 app.get(
   '*',
   isProd
@@ -116,7 +111,6 @@ app.get(
       readyPromise.then(() => render(req, res))
     }
 )
-
 
 const port = process.env.PORT || 9003
 app.listen(port, () => {
