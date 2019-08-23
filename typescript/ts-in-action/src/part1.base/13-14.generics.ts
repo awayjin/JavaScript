@@ -37,3 +37,38 @@ interface log3<T = string> {
 }
 
 let myLog3: log3<number> = log
+
+
+// 泛型的好处
+// 1.函数和类可以支持多种类型，增加的程序的可扩展性
+// 2.不必写多条函数重载，联合类型声明，增强代码的可读性
+// 3.灵活控制类型之间的约束
+//
+// 总结：
+// 泛型不仅可以保持类型的一致性，又不失程序的灵活性，同时也可以通过泛型约束，
+// 控制类型之间的约束。从代码的上来看，可读性，简洁性，远优于函数重载，联合类型声明以及 any 类型的声明。
+
+// 泛型类与泛型约束
+class Log4<T> {
+  run (value: T) {
+    console.log(value)
+    // return value
+  }
+}
+
+let log4 = new Log4<number>()
+log4.run(999)
+let log42 = new Log4()
+log42.run('泛型类与泛型约束')
+
+interface Length {
+  length: number
+}
+// 都要 length 属性
+function Log5<T extends Length>(value: T): T {
+  console.log(value, value.length)
+  return value
+}
+Log5([1])
+Log5('str')
+Log5({ length: 2})

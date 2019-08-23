@@ -122,3 +122,36 @@ plugins: [
   })
 ]
 ```
+
+## 5.6 缓存
+
+目的： 提升二次构建速度. node_modules 下有 .cache
+
+缓存思路：
+- babel-loader 开启缓存
+- terser-webpack-plugin 开启缓存
+- 使用 cache-loader 或者 hard-source-webpack-plugin
+
+```
+// babel-loader 的缓存开启
+new HappyPack({
+    loaders: [ 'babel-loader?cacheDirectory=true' ]
+}),
+
+// terser-webpack-plugin 开启缓存
+optimization: {
+    minimizer: [
+        new TerserPlugin({
+            parallel: true,
+            cache: true
+        })
+    ]
+},
+
+// hard-source-webpack-plugin
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+
+plugins: [
+    new HardSourceWebpackPlugin()
+]
+```

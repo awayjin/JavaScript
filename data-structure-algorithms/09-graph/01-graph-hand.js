@@ -148,47 +148,51 @@ function Graph () {
 
   // 深度优先搜索-改进版
   // depth-first search--dfs
+  var time
   this.DFS = () => {
     let color = initColors()
-    for (let i = 0; i < vertexes.length; i++) {
-      if (vertexes[i] === 'white') {
-        DFSVisit(u, color)
-      }
-    }
-  }
-  function DFSVisit (u, color) {
 
     let d = [] // 发现时间
     let pred = [] // 前溯点
     let f = [] // 完成时间
 
-    color['u'] = 'grey'
+    time = 0
 
-    for (let i = 0;  i < color.length; i++) {
-      d[i] = 0
-      pred[i] = null
-      f[i] = 0
+    for (let i = 0;  i < vertexes.length; i++) {
+      d[vertexes[i]] = 0
+      pred[vertexes[i]] = null
+      f[vertexes[i]] = 0
     }
 
-    let neighbours = adjList.get(u)
-    for (let i = 0; i < neighbours.length; i++) {
-      let w = neighbours[i]
-      if (w === 'white') {
-        d[w] = d[u] + 1
-        pred[w] = u
-        color[u] = 'grey'
-        DFSVisit(w, color)
+    for (let i = 0; i < vertexes.length; i++) {
+      if (color[vertexes[i]] === 'white') {
+        DFSVisit(vertexes[i], color, d, f, pred)
       }
     }
-
-    color[u] = 'black'
-    f[u] += 1
 
     return {
       distance: d,
       predecessors: pred,
       finished: f
     }
+  }
+  function DFSVisit (u, color, d, f, pred) {
+    console.log('discovered:', u)
+    color['u'] = 'grey'
+    d[u] = ++time
+    let neighbours = adjList.get(u)
+    for (let i = 0; i < neighbours.length; i++) {
+      let w = neighbours[i]
+      // if (w === 'white') {
+      if (color[w] === 'white') {
+        pred[w] = u
+        DFSVisit(w, color, d, f, pred)
+      }
+    }
+
+    color[u] = 'black'
+    f[u] = ++time
+    console.log('explored:', u)
 
   }
 
