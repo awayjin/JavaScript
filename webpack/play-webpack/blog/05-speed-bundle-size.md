@@ -155,3 +155,36 @@ plugins: [
     new HardSourceWebpackPlugin()
 ]
 ```
+
+## 5.7 缩小构建目标. 减少文件搜索范围
+
+目的： 尽可能的少构建模块
+
+比如 babel-loader 不解析 node_modules
+
+减少文件搜索范围
+- 优化 resolve.modules 配置（ 减少模块搜索层级）
+- 优化 resolve.mainFields 配置
+- 优化 resolve.extensions 配置
+- 合理使用 alias
+
+```javascript
+module.exports = {
+  module: {
+    rules: [
+      {
+      test: /.js$/,
+      //include: path.resolve('src'),
+      
+      }]
+  },
+  resolve: {
+      alias: {
+          'react': path.resolve(__dirname, './node_modules/react/umd/react.production.min.js'),
+          'react-dom': path.resolve(__dirname, './node_modules/react-dom/umd/react-dom.production.min.js'),
+      },
+      extensions: ['.js'],
+      mainFields: ['main']
+  }
+}
+```
