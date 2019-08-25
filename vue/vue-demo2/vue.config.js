@@ -5,6 +5,7 @@ const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 const path = require('path')
 const ManifestPlugin = require('pwa-manifest-webpack-plugin')
+const VueSSRClientManifest = require('vue-server-renderer/client-plugin.js')
 
 // import FullURL from './src/utils/env-setup.js'
 // const FullURL = require('./src/utils/env-setup.js')
@@ -18,12 +19,14 @@ module.exports = {
     },
     port: 4002,
     // 代理跨域
-    proxy: 'http://localhost:5005'
+    // proxy: 'http://localhost:5005'
   },
   configureWebpack: config => {
     if (process.env.NODE_ENV !== 'production') return;
     return {
+      target: 'web',
       plugins: [
+        new VueSSRClientManifest(),
         // manifest
         new ManifestPlugin({
           name: '最野新闻', // 标题 指定了Web App的名称。

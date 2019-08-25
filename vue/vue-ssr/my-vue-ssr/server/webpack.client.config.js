@@ -1,7 +1,5 @@
 // 生成 clientManifest
 
-// const webpack = require('webpack')
-const path = require('path')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin.js')
 
 module.exports = {
@@ -39,3 +37,5 @@ module.exports = {
   //   }
   // }
 }
+
+

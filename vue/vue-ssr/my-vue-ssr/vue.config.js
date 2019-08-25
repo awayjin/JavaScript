@@ -1,13 +1,10 @@
-
 const isNode = process.env.WEBPACK_TARGET === 'node'
 
 // node server 端打包
 const serverConfig = require('./server/webpack.server.config.js')
 // 客户端打包
 const clientConfig = require('./server/webpack.client.config.js')
-// const merge = require('lodash.merge')
 
-// const isProd = process.env.NODE_ENV === 'production'
 const PORT = process.env.PORT || 5001
 console.log('PORT:', PORT)
 
@@ -32,9 +29,9 @@ module.exports = {
     sourceMap: true
   },
   configureWebpack: {
-    // 客户端渲染入口
+    // 渲染入口
     ...(isNode ? serverConfig : clientConfig)
-  }
+  },
   // chainWebpack: config => {
   //   config.module
   //     .rule('vue')

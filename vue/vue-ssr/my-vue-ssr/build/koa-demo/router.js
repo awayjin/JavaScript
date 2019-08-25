@@ -23,7 +23,11 @@ router.get('/product/:pid', async ctx => {
   ctx.body = 'This is a product page. pid:' + ctx.params.pid
 })
 
-app.use(KoaStatic(resolve('./static')))
+const staticOptions = {
+  index: 'index-template.html'
+}
+const staticDir= resolve('./static')
+app.use(KoaStatic(staticDir, staticOptions))
 app.use(async ctx => {
   ctx.body = 'hel judy'
 })

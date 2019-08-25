@@ -6,7 +6,7 @@
     <h1>购物车示例</h1>
     <p>账号: {{ email }}</p>
     <hr>
-    <h2>产品</h2>
+    <h2>产品</h2>55533
     <ProductList />
   </div>
 </template>

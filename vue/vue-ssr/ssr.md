@@ -1,12 +1,29 @@
-基于 CLI 实现: https://juejin.im/post/5b98e5875188255c8320f88a
+
+基于 vue-cli3.x 实现: https://juejin.im/post/5b98e5875188255c8320f88a
 
 官网例子实现: https://juejin.im/post/5ba35be16fb9a05d3b336936
+
+
+# 基于 Vue-cli3.x 服务端渲染(SSR)实现
+
+本文关键知识点
+1. 什么是 SSR ? SSR 优缺点 
+
+2. 基于 vue-cli3.x 创建工程模板
+
+3. 改造 SSR 工程模板
+ - 编写通用代码
+ - 3.1 vue.config.js
+ - 3.2 生成服务端 server-bundle 文件
+ - 3.3 生成客户端 client-manifest 文件
 
 ## 1. SSR 介绍
 
 ### 什么是服务器端渲染 (SSR) Server-Side Rendering
 
-Vue.js 是构建客户端应用程序的框架。默认情况下，可以在浏览器中输出 Vue 组件，进行生成 DOM 和操作 DOM。也可以将同一个组件渲染为服务器端的 HTML 字符串
+- 服务端渲染：渲染过程在服务器端完成，最终的渲染结果 HTML 页面通过 HTTP 协议发送给客户端。对于客户端而言，只是看到了最终的 HTML 页面，看不到数据，也看不到模板。
+
+- 客户端渲染：服务器端把模板和数据发送给客户端，渲染过程在客户端完成。
 
 服务器渲染的 Vue.js 应用程序也可以被认为是"同构"或"通用"，因为应用程序的大部分代码都可以在服务器和客户端上运行。
 
@@ -19,7 +36,7 @@ Vue.js 是构建客户端应用程序的框架。默认情况下，可以在浏�
 
 - 更快的内容到达时间 (time-to-content)，特别是对于缓慢的网络情况或运行缓慢的设备。
 
-使用服务器端渲染 (SSR) 时还需要有一些权衡之处：
+使用服务器端渲染 (SSR) 缺点：
 
 - 开发条件所限。浏览器特定的代码，只能在某些生命周期钩子函数 (lifecycle hook) 中使用；一些外部扩展库 (external library) 可能需要特殊处理
 
@@ -34,6 +51,81 @@ Vue.js 是构建客户端应用程序的框架。默认情况下，可以在浏�
 
 
 ## 2. 基本用法
+
+#### 创建工程
+
+手动选择 `Babel Router Vuex Linter / Formatter`
+```
+vue create vue-ssr-example
+```
+
+## 3. 改造 SSR 工程模板
+
+服务端渲染需要生成两个 JSON 文件
+
+#### 3.1 根目录下新建 `vue.config.js`
+
+```javascript
+// vue.config.js
+// 核心代码
+const serverConfig = require('./server/webpack.server.config.js')
+const clientConfig = require('./server/webpack.client.config.js')
+module.exports = {
+  css: {
+    extract: process.env.NODE_ENV === 'production',
+    // vue ssr Cannot read property 'replace' of undefined
+    sourceMap: true
+  },
+  configureWebpack: {
+    ...(isNode ? serverConfig : clientConfig)
+  }
+}
+```
+
+
+#### 3.2 生成服务端 server-bundle 文件 `vue-ssr-server-bundle.json`
+
+```javascript
+// ./server/webpack.server.config.js
+const nodeExternals = require('webpack-node-externals')
+const VueSSRServerPlugin = require('vue-server-renderer/server-plugin.js')
+module.exports = {
+  // 为什么加了 .js 后就不能 build ?
+  entry: `./src/entry-server`,
+  target: 'node',
+  // 对 bundle renderer 提供 source map 支持
+  devtool: 'source-map',
+  output: {
+    libraryTarget: 'commonjs2'
+  },
+  externals: nodeExternals({
+    whitelist: /\.css$/
+  }),
+  plugins: [
+    new VueSSRServerPlugin()
+  ]
+}
+
+```
+
+#### 3.2 生成客户端 client-manifest 文件 `vue-ssr-client-manifest.json`
+```javascript
+
+// ./server/webpack.client.config.js
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin.js')
+module.exports = {
+  entry: {
+    app: './src/entry-client.js'
+  },
+  target: 'web',
+  plugins: [
+    new VueSSRClientPlugin()
+  ]
+}
+
+```
+
+
 
 ## 3. 编写通用代码
 编写"通用"代码时的约束条件 - 即运行在服务器和客户端的代码。
