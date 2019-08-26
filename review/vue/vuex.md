@@ -8,7 +8,7 @@ Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式 + 库。
 - 多个视图依赖于同一状态。
 - 来自不同视图的行为需要变更同一状态。
 
-把组件状态共享抽取出来，以一个全局单例模式管理 
+把组件的共享状态抽取出来，以一个全局单例模式管理 
 
 通过定义和隔离状态管理中的各种概念并通过`强制规则维持视图和状态间的独立性`，我们的代码将会变得更结构化且易维护。
 
@@ -19,7 +19,7 @@ Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式 + 库。
 - Getter --- this.$store.getters.xxx 取值
 - Mutation --- this.$store.commit('xxx') 赋值
 - Action --- this.$store.dispatch('xxx') 赋值
-- Module
+- Module 将 store 分割成模块
 
 描述
 - State: 提供一个响应式数据
@@ -78,6 +78,11 @@ Mutation 需遵守 Vue 的响应规则
  
  
  ### 5. mini-vuex 核心底层实现
+ 
+ Store 核心代码原理
+ - Vue 实例的 data 属性上声明一个变量 $$state, 把 state 数据源赋值给这个变量. (通过 Vue 处理后变成响应式的 state)
+ - 通过 `Object.defineProperies` 劫持 Store.prototype.state 的 getter, 返回声明的变量 $$state
+ 
  ```javascript
 // min-vuex.js
 import Vue from 'vue'
