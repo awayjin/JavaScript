@@ -138,6 +138,7 @@ new HappyPack({
     loaders: [ 'babel-loader?cacheDirectory=true' ]
 }),
 
+const TerserPlugin = require('terser-webpack-plugin')
 // terser-webpack-plugin 开启缓存
 optimization: {
     minimizer: [
