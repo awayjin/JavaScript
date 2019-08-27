@@ -176,7 +176,7 @@ function Graph () {
   }
 
   function DFSVisitor (u, color, d, f, pred) {
-    console.log('discovered:', u)
+    // console.log('discovered:', u)
     d[u] = ++time
     color[u] = 'grey'
     let neighbours = adjList.get(u)
@@ -189,7 +189,7 @@ function Graph () {
     }
     vertexes[u] = 'black'
     f[u] = ++time
-    console.log('explored:', u)
+    // console.log('explored:', u)
   }
 
 }
