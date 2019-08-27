@@ -189,3 +189,88 @@ module.exports = {
   }
 }
 ```
+
+## 5.9 图片压缩, 用 loader
+
+配置 image-webpack-loader
+
+```javascript
+module.exports = {
+  module: {
+    rules: [
+      {
+      test: /.(png|jpg|gif|jpeg)$/,
+      use: [
+        {
+          loader: 'image-webpack-loader',
+          options: {
+            mozjpeg: {
+              progressive: true,
+              quality: 65
+            },
+            // optipng.enabled: false will disable optipng
+            optipng: {
+              enabled: false,
+            },
+            pngquant: {
+              quality: '65-90',
+              speed: 4
+            },
+            gifsicle: {
+              interlaced: false,
+            },
+            // the webp option will enable WEBP
+            webp: {
+              quality: 75
+            }
+          }
+        },
+        {
+          loader: 'file-loader',
+          options: {
+            name: '[name]_[hash:8].[ext]'
+          }
+        }
+      ]
+    }
+    ]
+  }
+}
+```
+
+
+## 5.10 tree shaking(摇树优化)
+
+概念： 1 个模块可能有多个方法，只要其中的某个方法使用到了， 则整个文件都会被打到 bundle 里面去，tree shaking 就是只把用到的方法打入 bundle ，没用到的方法会在 uglify 阶段被擦除掉。
+
+使用： webpack 默认支持， 在 .babelrc 里设置 modules: false 即可
+
+· production mode的情况下默认开启
+
+要求： 必须是 ES6 的语法， CJS 的方式不支持
+
+> 无用的 CSS 如何删除掉？
+
+PurifyCSS: 遍历代码， 识别已经用到的 CSS class
+
+uncss: HTML 需要通过 jsdom 加载，所有的样式通过PostCSS解析， 通过 document.querySelector 来识别在 html 文件里面不存在的选择器
+
+> 在 webpack 中如何使用 PurifyCSS
+
+使用 purgecss-webpack-plugin
+
+```javascript
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob')
+const PATHS = {
+    src: path.join(__dirname, 'src')
+};
+
+module.exports = {
+  plugins: [
+    new PurgecssPlugin({
+                paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+            })
+  ]
+}
+```
