@@ -32,6 +32,8 @@ shortestPath = new ShortestPath(graph);
 
 dist = shortestPath.floydWarshall();
 
+
+
 var s = '';
 for (i=0; i<dist.length; ++i) {
     s = '';
