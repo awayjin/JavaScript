@@ -1,6 +1,24 @@
 # webpack构建速度和体积优化策略 (12讲)
   
+体积优化策略总结
+- Scope Hoisting
+- Tree-shaking
+- 图片压缩
+- 动态 Polyfill
 
+## 3.8 scope hoisting
+现象：构建后的代码存在⼤量闭包代码
+
+webpack mode 为 production 默认开启
+
+必须是 ES6 语法， CJS 不⽀持
+
+```html
+// webpack 4.0 以下要手动加入
+plugins: [
++ new webpack.optimize.ModuleConcatenationPlugin()
+};
+```
 
 ## 5.1 多进程/多实例： 并行压缩
 
@@ -274,3 +292,6 @@ module.exports = {
   ]
 }
 ```
+
+
+## 构建体积优化： 动态 Polyfill
