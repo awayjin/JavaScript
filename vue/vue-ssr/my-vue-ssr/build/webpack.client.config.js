@@ -1,23 +1,12 @@
 // 生成 clientManifest
 
-const webpack = require('webpack')
-const merge = require('webpack-merge')
-const base = require('./webpack.base.config')
-
-// const webpack = require('webpack')
-const path = require('path')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin.js')
 
-module.exports = merge(base, {
+module.exports = {
   // entry: './src/entry-client.js'
-  entry: path.join(__dirname, '../src/entry-client.js'),
-
-  output: {
-    path: path.resolve(__dirname, '../dist'),
-    publicPath: '/dist/',
-    filename: '[name].js',
+  entry: {
+    app: './src/entry-client.js'
   },
-
   target: 'web',
   // lintOnSave: true,
   plugins: [
@@ -47,4 +36,6 @@ module.exports = merge(base, {
   //     }
   //   }
   // }
-})
+}
+
+

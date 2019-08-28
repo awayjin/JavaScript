@@ -1,13 +1,8 @@
-
-const merge = require('webpack-merge')
-const base = require('./webpack.base.config')
-
 // const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin.js')
-const path = require('path')
 
-module.exports = merge(base, {
+module.exports = {
   // 为什么加了 .js 后就不能 build ?
   // entry: `./src/entry-server.js`,
   entry: `./src/entry-server`,
@@ -46,4 +41,4 @@ module.exports = merge(base, {
     new VueSSRServerPlugin()
   ]
 
-})
+}

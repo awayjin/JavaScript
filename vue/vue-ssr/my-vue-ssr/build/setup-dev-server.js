@@ -1,11 +1,9 @@
 
 const fs = require('fs')
 const path = require('path')
-
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
-
 const MFS = require('memory-fs')
 const chokidar = require('chokidar')
 
