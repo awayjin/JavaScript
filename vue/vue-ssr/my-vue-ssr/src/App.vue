@@ -6,6 +6,7 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/user">User</router-link>
     </div>
+    demo 3444
     <router-view/>
   </div>
 </template>

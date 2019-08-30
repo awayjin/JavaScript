@@ -7,15 +7,23 @@
 # 基于 Vue-cli3.x 服务端渲染(SSR)实现
 
 本文关键知识点
+
 1. 什么是 SSR ? SSR 优缺点 
 
 2. 基于 vue-cli3.x 创建工程模板
 
 3. 改造 SSR 工程模板
- - 编写通用代码
  - 3.1 vue.config.js
- - 3.2 生成服务端 server-bundle 文件
- - 3.3 生成客户端 client-manifest 文件
+ 
+ - 3.2 服务端渲染需要生成两个 JSON 文件
+     - 3.2.1 生成服务端 server-bundle 文件
+     - 3.3.2 生成客户端 client-manifest 文件
+     
+ - 3.3 代码改造
+    - 3.3.1 新建所有页面模板 index-template.html
+    - 3.3.2 修改源码结构。状态单例，客户端和服客端不同的入口
+    
+4. 基于 vue-cli3.x 实现热更新
 
 ## 1. SSR 介绍
 
@@ -61,9 +69,15 @@ vue create vue-ssr-example
 
 ## 3. 改造 SSR 工程模板
 
-服务端渲染需要生成两个 JSON 文件
+## 3.1  根目录下新建 vue.config.js 
 
-#### 3.1 根目录下新建 `vue.config.js`
+关键点: 添加 source-map。如果不加会SSR会报错， vue ssr Cannot read property 'replace' of undefined
+```javascript
+css: {
+  sourceMap: true
+}
+```
+
 
 ```javascript
 // vue.config.js
@@ -82,8 +96,9 @@ module.exports = {
 }
 ```
 
+## 3.2 服务端渲染需要生成两个 JSON 文件
 
-#### 3.2 生成服务端 server-bundle 文件 `vue-ssr-server-bundle.json`
+#### 3.2.1 生成服务端 server-bundle 文件 `vue-ssr-server-bundle.json`
 
 ```javascript
 // ./server/webpack.server.config.js
@@ -108,7 +123,7 @@ module.exports = {
 
 ```
 
-#### 3.2 生成客户端 client-manifest 文件 `vue-ssr-client-manifest.json`
+#### 3.2.2 生成客户端 client-manifest 文件 `vue-ssr-client-manifest.json`
 ```javascript
 
 // ./server/webpack.client.config.js
@@ -125,7 +140,28 @@ module.exports = {
 
 ```
 
+## 3.3 代码改造
 
+#### 3.3.1 新建入口静态文件 index-template.html
+此模板应该包含 `<!--vue-ssr-outlet-->`
+
+#### 3.3.2 修改源码结构。
+避免状态单例
+```javascript
+// app.js
+const Vue = require('vue')
+module.exports = function createApp (context) {
+  return new Vue({
+    data: {
+      url: context.url
+    },
+    template: `<div>访问的 URL 是： {{ url }}</div>`
+  })
+}
+```
+
+客户端和服客端不同的入口
+entry-client.js 和 entry-server.js
 
 ## 3. 编写通用代码
 编写"通用"代码时的约束条件 - 即运行在服务器和客户端的代码。

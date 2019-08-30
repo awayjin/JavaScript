@@ -13,7 +13,7 @@ module.exports = {
   target: 'node',
 
   // 对 bundle renderer 提供 source map 支持
-  devtool: 'source-map',
+  // devtool: 'source-map',
 
   // 此处告知 server bundle 使用 Node 风格导出模块(Node-style exports)
   output: {

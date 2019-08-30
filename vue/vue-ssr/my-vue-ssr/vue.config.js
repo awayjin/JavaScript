@@ -23,7 +23,7 @@ module.exports = {
   },
   css: {
     // 将组件中的 CSS 提取至一个独立的 CSS 文件中, 以便缓存
-    extract: process.env.NODE_ENV === 'production',
+    // extract: process.env.NODE_ENV === 'production',
     // extract: false,
     // vue ssr Cannot read property 'replace' of undefined
     sourceMap: true
