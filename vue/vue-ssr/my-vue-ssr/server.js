@@ -10,7 +10,6 @@ const templatePath = resolve('./src/index-template.html')
 
 // renderer
 function render (req, res) {
-
   // context
   const context = {
     title: 'SSR 测试1',
