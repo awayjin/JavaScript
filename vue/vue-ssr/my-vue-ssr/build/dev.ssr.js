@@ -8,6 +8,7 @@ const KoaRouter = require('koa-router')
 const KoaStatic = require('koa-static')
 const axios = require('axios')
 const { createBundleRenderer } = require('vue-server-renderer')
+// const mid = require('webpack-dev-middleware')
 
 const app = new Koa()
 const router = new KoaRouter()

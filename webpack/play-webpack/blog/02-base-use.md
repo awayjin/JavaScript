@@ -146,7 +146,7 @@ module.exports = {
 ### 8.0 热更新:webpack-dev-server
 WDS 不刷新浏览器,WDS 不输出文件，而是放在内存中
 
-使⽤用 HotModuleReplacementPlugin插件
+使⽤模块热更新，HotModuleReplacementPlugin 插件
 
 ```html
 sudo yarn add --dev webpack-dev-server
@@ -180,7 +180,7 @@ webpack 构建出来的 bundle.js 本身是不具备热更新的能力的，HotM
 ![热更新原理](./hmr.png)
 
 ### 8.2 热更新:使用 webpack-dev-middleware
-WDM 将 webpack 输出的⽂文件传输给服务器器 适⽤用于灵活的定制场景
+WDM 将 webpack 输出的文件传输给服务器器 适⽤用于灵活的定制场景
 ```javascript
 const express = require('express');
 const webpack = require('webpack');

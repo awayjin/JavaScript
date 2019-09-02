@@ -77,11 +77,18 @@ module: {
 }
 ```
 
+### 5.4.1 多进程/多实例： 并行压缩
+方法二： uglifyjs-webpack-plugin 开启 parallel 参数
+
+webpack4.x 默认开启了 TerserPlugin, 支持ES6 语法压缩代码， uglifyjs 不支持，开启并行压缩都有 parallel，设置为 true.
+ 
+ 方法三： terser-webpack-plugin 开启 parallel 参数
+
 ## 5.5 分包： 设置 Externals
 思路： 将 react、 react-dom 基础包通过
 cdn 引入， 不打入 bundle 中
 
-方法： 使用 html-webpack-externalsplugin
+方法： 使用 html-webpack-externals-plugin
 ````
     new HtmlWebpackExternalsPlugin({
         externals: [

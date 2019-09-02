@@ -9,12 +9,33 @@
 </head>
 <body>
 
+<pre>
+1. webpack 打包性能优化，如何分块打包，及 HMR 的实现原理
+
+  1.1 速度优化
+  - 缓存1：插件 hard-source-webpack-plugin, 开启二次缓存,极大的提升构建速度
+
+  - 并行2: 多进程多实例并行优化，webpack4.x 默认开启了 TerserPlugin, 支持ES6 语法压缩代码，
+    uglifyjs 不支持，开启并行压缩都有 parallel，设置为 true
+
+  1.2 体积
+  - 分包1: 基础包不打入到 bundle 中，通过 CDN 引入
+  - 分包2：预编译资源模块，将基础包打包成一个文件。方法使用 DLLPlugin 进行分包
+  - 压缩3： 图片压缩, 用 loader，配置 image-webpack-loader
+  - 优化4: tree shaking(摇树优化)
+
+2. HMR 的实现原理-Hot Modules Replacement
+   HMR Server 服务端(通过 WebSocket) -> HMR Runtime 浏览器(可看 hot-update.js) ->
+   bundle.js（通过 HotModulesReplacementPlugin 注入）
+
+</pre>
+
 1. 谈谈对 webpack 的理解，常用哪些plugin，对webpack配置是否了解，对项目打包是否做过什么优化
 <a href="https://github.com/hawx1993/tech-blog/issues/3">webpack打包分析与性能优化</a>
 https://www.jianshu.com/p/26849b857dce
 
-2. webpack 打包性能优化，如何分块打包，及 HMR 的实现原理
- - 插件 hard-source-webpack-plugin, 开启二次缓存,极大的提升构建速度
+
+
 
 3. 介绍下 webpack 热更新原理，是如何做到在不刷新浏览器的前提下更新页面的
 
