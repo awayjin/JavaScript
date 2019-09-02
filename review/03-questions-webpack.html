@@ -22,7 +22,7 @@
   - 分包1: 基础包不打入到 bundle 中，通过 CDN 引入
   - 分包2：预编译资源模块，将基础包打包成一个文件。方法使用 DLLPlugin 进行分包
   - 压缩3： 图片压缩, 用 loader，配置 image-webpack-loader
-  - 优化4: tree shaking(摇树优化)
+  - 优化4: tree shaking(摇树优化), css: purgecss-webpack-plugin
 
 2. HMR 的实现原理-Hot Modules Replacement
    HMR Server 服务端(通过 WebSocket) -> HMR Runtime 浏览器(可看 hot-update.js) ->
@@ -35,7 +35,9 @@
 https://www.jianshu.com/p/26849b857dce
 
 
-
+2. webpack 打包性能优化，如何分块打包，及 HMR 的实现原理
+ - 插件 hard-source-webpack-plugin, 开启二次缓存,极大的提升构建速度
+ - 摇树优化, css: purgecss-webpack-plugin
 
 3. 介绍下 webpack 热更新原理，是如何做到在不刷新浏览器的前提下更新页面的
 
