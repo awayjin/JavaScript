@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // @ts-check
+
+let arr = []
+arr[0] = [11, 22, 33, 77]
+arr[1] = [44, 55, 66]
+
+// 二维数组矩阵
+function matrix (arr) {
+  for (let i = 0; i < arr.length; i++) {
+    console.info(arr[i])
+    for (let j = 0; j < arr[i].length; j++) {
+      console.log('i:', i, 'j:', j, ', arr[i][j]:', arr[i][j])
+      console.log('-->i:', i, 'arr[i].length:', arr[i].length)
+    }
+  }
+}
+matrix(arr)
+
+
+</script>
+</body>
+</html>
