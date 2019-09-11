@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+<a href="https://github.com/mqyqingfeng/Blog/issues/10/">函数参数按值传递</a>
+
+<script>
+  const friends = [
+    { name: 'John', age: 30 },
+    { name: 'Ana', age: 20 },
+    { name: 'jin', age: 21 },
+    { name: 'Chris', age: 25 }, // ES2017 允许存在尾逗号
+  ]
+
+  // 对象数组升序
+  function comparePerson (a, b) {
+    if (a.age  < b.age) {
+      return -1
+    }
+    if (a.age > b.age ) {
+      return 1
+    }
+
+    return 0
+  }
+
+  // sort
+  console.dir(friends.sort((a, b) => a.age - b.age))
+
+  // console.log(friends.sort(comparePerson))
+</script>
+
+<script type="">
+
+</script>
+
+
+</body>
+</html>

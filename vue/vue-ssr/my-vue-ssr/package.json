@@ -9,6 +9,7 @@
     "dev:serve": "cross-env WEBPACK_TARGET=node node ./server/ssr.js",
     "my": "concurrently \"cross-env WEBPACK_TARGET=node node ./build/dev.ssr.js\" \"npm run serve\"",
     "ssr": "nodemon server/server-koa.js",
+    "pm2": "pm2 start server/server-koa.js",
     "ssr:express": "nodemon server/server-koa.js",
     "build": "npm run build:server -- --any && npm run build:client -- --no-clean --any",
     "build:client": "vue-cli-service build",

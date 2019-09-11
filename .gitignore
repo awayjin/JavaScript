@@ -19,3 +19,4 @@ DigitalServiceAdmin/node_modules/
 *.lock
 *.git-credentials
 .git-credentials
+*.class

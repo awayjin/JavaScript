@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!--<script src="04-01.stack.js"></script>-->
+<script>
+  // const stack = new Stack()
+  // stack.push(5)
+  // stack.push(8)
+</script>
+<script type="module">
+  import Stack from './04-01.stack.js'
+
+  const stack = new Stack()
+  stack.push(5)
+  stack.push(8)
+  console.log(stack)
+  console.log(stack)
+
+  // Symbol stack
+  void function () {
+    const _items = Symbol()
+    class Stack2 {
+      constructor () {
+        this[_items] = []
+      }
+      push (element) {
+        this[_items].push(element)
+      }
+      print () {
+        console.log(this[_items])
+      }
+    }
+    const stack2 = new Stack2()
+    stack2.push(33)
+    console.log(stack2)
+
+    let objSymbols = Object.getOwnPropertySymbols(stack2)
+    console.log(objSymbols.length)
+    console.log(objSymbols)
+    console.log(objSymbols[0])
+    console.log(stack2[objSymbols[0]].push(99))
+    stack2.print()
+  }()
+
+  // WeakMap Stack
+  void function () {
+    // WeakMap 创建私有变量，无法继承成员，代码冗余
+    let _items = new WeakMap()
+    class Stack3 {
+      constructor () {
+        // this[_items] = []
+        _items.set(this, [])
+      }
+      push (element) {
+        // let _items = this[_items]
+        let g = _items.get(this)
+        g.push(element)
+      }
+      pop () {
+        let g = _items.get(this)
+        return g.pop()
+      }
+      print () {
+        let g = _items.get(this)
+        console.log(g)
+        // return g
+      }
+    }
+
+    let stack = new Stack3()
+    stack.push('aa')
+    stack.push('bb')
+    console.log('WeakMap stack:', stack)
+    // stack.print()[0] = 33
+    stack.print()
+    stack.push('cc')
+    stack.print()
+    stack.pop()
+    stack.print()
+
+  }()
+</script>
+
+</body>
+</html>
