@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/54#">
+  使用迭代和递归的方式实现 flatten 函数
+</a>
+
+<script>
+  var arrOri = [11, [[55], 22, 33], 44];
+  // 迭代方式
+  function flatten (arrOri) {
+    let arr = arrOri
+    let arr1 = []
+    while (arr.length) {
+      let item = arr.shift()
+      if (Array.isArray(item)) {
+        arr.unshift(...item)
+      } else {
+        arr1.push(item)
+      }
+    }
+    return arr1
+  }
+  flatten(arrOri)
+
+  // 递归方式
+  var arrOri = [11, [[55], 22, 33], 44];
+  function flatten(arr) {
+    let arrs = []
+    arr.map(item => {
+      if (Array.isArray(item)) {
+        arrs.push(...flatten(item))
+      } else {
+        arrs.push(item)
+      }
+    })
+    return arrs;
+  }
+  flatten(arrOri)
+</script>
+
+</body>
+</html>
