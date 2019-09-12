@@ -1,35 +1,33 @@
 export default class Stack {
   constructor () {
-    this.items = []
+    this.count = 0
+    this.items = {}
   }
-
+  // push
   push (element) {
-    this.items.push(element)
-    return this
+    this.items[this.count] = element
+    this.count++
   }
   // pop
   pop () {
-    return this.items.pop()
+    if (this.isEmpty()) {
+      return undefined
+    }
+    this.count--
+    const result = this.items[this.count]
+    delete this.items[this.count]
+    return result
   }
-  // toString
-  toString () {
-    // console.log(this.items)
-    return this.items.toString()
+  getElement () {
+
   }
+  // peek - 查看栈顶元素
   peek () {
-    return this.items[this.items.length - 1]
+    return this.items[this.count - 1]
   }
+  // isEmpty
   isEmpty () {
-    return this.items.length === 0
-  }
-  size () {
-    return this.items.length
-  }
-  clear () {
-    return this.items = []
-  }
-  print(){
-    console.log(this.toString())
+    return this.count === 0
   }
 }
 
@@ -75,3 +73,4 @@ export function baseConverter (decNumber, base) {
 
   return baseString
 }
+

@@ -8,10 +8,20 @@
 
 
 <script type="module">
-  import { decimalToBinary } from './04-01.stack.js'
+  import { decimalToBinary, baseConverter } from './04-01.stack.js'
+  console.log(Array(20).join('-'), '十进制转二进制', Array(20).join('-'))
   console.log(decimalToBinary(233)); // 11101001
   console.log(decimalToBinary(10)); // 1010
+  console.log(decimalToBinary(10) === '1010'); // 1010
   console.log(decimalToBinary(1000)); // 1111101000
+
+  console.log(Array(20).join('-'), '十进制转2-36进制', Array(20).join('-'))
+  console.log(baseConverter(10, 2)); // 1010
+  console.log(baseConverter(10, 2) === '1010'); // true
+  console.log(baseConverter(175, 16)); // 'AF'
+  console.log(baseConverter(175, 16) === 'AF'); // true
+  console.log(baseConverter(10, 16)); // 'A'
+  console.log(baseConverter(10, 16) === 'A'); // true
 
 </script>
 
