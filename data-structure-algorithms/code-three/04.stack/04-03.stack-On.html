@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script type="module">
+  import StackObject, { decimalToBinary, baseConverter } from './04-01.stack-object.js'
+
+  console.log(Array(20).join('-'), '时间复杂度 O(n) 比较', Array(20).join('-'))
+  console.log(decimalToBinary(10) === '1010'); // 1010
+  console.log(baseConverter(175, 16)); // 'AF'
+  console.log(baseConverter(175, 16) === 'AF'); // true
+
+  console.log(Array(40).join('-'))
+
+  let stackObject = new StackObject()
+  const t0 = performance.now()
+  let arr1 = []
+  for (let i = 0; i < 1000000; i++) {
+    stackObject.push(i)
+    arr1.push(i)
+  }
+  const t1 = performance.now()
+  stackObject.peek()
+  // 查找
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] === 999998) {
+      console.log('找到：', i)
+    }
+  }
+  console.log('arr1[99998]：', arr1[999998])
+  console.log('stackObject.peek():', stackObject.peek())
+  console.log('基于 对象 的栈 添加 100000 个元素 执行时间:', t1 - t0)
+
+  console.log(Array(40).join('-'))
+
+  import StackArray from './04-01.stack.js'
+  let st = new StackArray()
+  const t2 = performance.now()
+  let arr2 = {}
+  let count = 0
+  for (let i = 0; i < 1000000; i++) {
+    st.push(i)
+    count++
+    arr2[count] = i
+  }
+  st.peek()
+  // 查找
+  for (let i = 0; i < arr2.length; i++) {
+    if (arr2[i] === 999998) {
+      console.log('找到：', i)
+    }
+  }
+  const t3 = performance.now()
+  console.log('arr2[99998]：', arr2[999998])
+  console.log('st.peek():', st.peek())
+  console.log('基于 数组 的栈 添加 1000000 个元素 执行时间:', t3 - t2)
+
+</script>
+
+</body>
+</html>
