@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+
+<script type="module">
+  import { Queue } from './05-01.queue.js'
+
+  const q = new Queue()
+  q.enqueue(3)
+  q.enqueue(5)
+  q.enqueue(8)
+  q.enqueue(4)
+  q.enqueue(21)
+  console.log(q, 'size:', q.size())
+  q.dequeue()
+  console.log(q, 'size:', q.size())
+  console.log('q.isEmpty():', q.isEmpty())
+  // q.clear()
+  console.log('q.items():', q.items)
+  console.log('q.toString():', q.toString())
+</script>
+</body>
+</html>
