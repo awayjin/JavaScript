@@ -75,8 +75,7 @@
   console.log(trueCurring(add, 11, 22) === 33) // true 被柯里化了
   console.log(curring(add, 11, 22) === 33) // false
   console.log(curry(add, 11, 22) === 33) // false
-
-
+  console.log('trueCurring- x + y + z:', trueCurring((x, y, z) => x + y + z, 1, 2, 3))
 
 </script>
 </body>

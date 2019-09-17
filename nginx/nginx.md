@@ -34,6 +34,9 @@ nginx
 关闭nginx
 nginx -s stop
 
+重启
+nginx -s reload
+
 /usr/local/etc/nginx/nginx.conf （配置文件路径）
 
 /usr/local/var/www （服务器默认路径）
