@@ -28,7 +28,7 @@ function comparePerson(a: Person, b: Person) {
 
   return 0
 }
-// console.log('friends.sort:', friends.sort(comparePerson))
+console.log('friends.sort:', friends.sort(comparePerson))
 console.log('friends.sort:', friends.sort((a: Person, b: Person) => a.age - b.age ))
 
 // document.querySelector('.app').innerHTML = hello

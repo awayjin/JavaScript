@@ -1,7 +1,7 @@
 
 基于 vue-cli3.x 实现: https://juejin.im/post/5b98e5875188255c8320f88a
 
-官网例子实现: https://juejin.im/post/5ba35be16fb9a05d3b336936
+Vue-cli 较完整实现: http://www.ediaos.com/2019/01/27/vue-cli3-ssr-project/
 
 
 # 基于 Vue-cli3.x 服务端渲染(SSR)实现

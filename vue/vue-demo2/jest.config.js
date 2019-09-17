@@ -32,7 +32,6 @@ module.exports = {
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname'
   ],
-  // add
   collectCoverage: process.env.COVERAGE === "true",
   // add
   collectCoverageFrom: ["src/**/*.{js,vue}", "!**/node_modules/**"]
