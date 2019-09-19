@@ -1,0 +1,131 @@
+<<<<<<< HEAD
+=======
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<a href="http://www.baidu.com/" target="testBd">window name</a>
+
+<h2 id="handleFunc">4.0 函数绑定</h2>
+
+<iframe src="01test_iframe.html" name="testBd" width="500" height="400"></iframe>
+<script>
+/*
+  1.0 安全的类型检测
+  	 Object.prototype.call.toString('c')
+	 
+  2.0 作用域安全的构造函数
+  
+  3.0 惰性载入函数	
+  		3.1 函数调用时处理函数
+		3.2 函数声明时指定适当的函数
+		
+  4.0 函数绑定		
+  
+ */
+ 
+//4.0 函数绑定	
+var EventUtil ={
+	addHandler: function(element, event, handler){
+		return element.addEventListener(event, handler, null);
+	}
+}
+ 
+var handler = {
+	message: "event loaded",
+	handleClick: function(){
+		alert(this.message);	
+	}	
+};
+var btn = document.querySelector("#handleFunc");
+EventUtil.addHandler(btn, "click", handler.handleClick);
+
+
+ 
+//3.0 惰性载入函数	
+var key = 0;
+function lazyFunc(){
+	console.log("hello lazy function");
+	if(key == 1){
+		lazyFunc = function(){
+			console.log("11");	
+		}	
+	}else{
+		console.log("con");
+		lazyFunc = function(){
+			console.log("33");	
+		}	
+	}
+	//return lazyFunc;
+} 
+lazyFunc();
+lazyFunc();
+ 
+
+//惰性载入函数
+function createXHR(){
+	if(typeof XMLHttpRequest != "undefined"){
+		createXHR = function(){
+			return new XMLHttpRequest();	
+		};
+	}else if(typeof ActiveXObject != "undefined"){
+		createXHR = function(){
+			if(typeof arguments.callee.activeXString != "string"){
+			
+				var versions = ["MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.3.0", "MSXML2.XMLHttp"],
+					i
+					len;
+					
+				for(i=0, len=versions.length; i<len; i++){
+					try{
+						new ActiveXObject(version[i]);	
+						arguments.callee.activeXString = version[i];
+					}catch(ex){
+						
+					}
+				}
+			}
+			return new ActiveXObject(arguments.callee.activeXString);
+					
+		}
+	}else{
+		createXHR = function(){
+			throw new Error("No XHR");
+		};	
+	}	
+}
+
+
+function Ploygon(sides){
+	if(this instanceof Ploygon){
+	//if(22){	
+		this.sides = sides;
+		this.getArea = function(){
+			return 0;	
+		};
+	}else{
+		return new Ploygon(sides);	
+	}
+}
+
+function Rectangle(width, height){
+	Ploygon.call(this, 2);
+	this.height = height;
+	this.width = width;
+	this.getArea = function(){
+		return this.width * this.height;
+	};
+}
+Rectangle.prototype = new Ploygon();
+var rect = new Rectangle(10, 5);
+//console.log(rect.sides);
+
+</script>
+
+</body>
+</html>
+>>>>>>> 707646eb6d1de71aa3298d4aa50c758145faa798

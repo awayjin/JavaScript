@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+    <book>
+        <author>phpernote.com</author>
+        <title>PHP And MySQL Development</title>
+        <publisher>火星出版社</publisher>
+    </book>
+    <book>
+        <author>taobao.com</author>
+        <title>如何淘宝</title>
+        <publisher>淘宝出版社</publisher>
+    </book>
+</books>
