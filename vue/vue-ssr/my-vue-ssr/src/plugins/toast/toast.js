@@ -1,8 +1,14 @@
 import Vue from 'vue'
-
 import Toast from './toast.vue'
 
 const ToastConstructor = Vue.extend(Toast)
+ToastConstructor.prototype.remove = function () {
+  console.log('this.$el:', this.$el)
+  let el = this.$el
+  if (el.parentNode) {
+    el.parentNode.removeChild(el)
+  }
+}
 
 const info = () => {
   // SSR https://zhuanlan.zhihu.com/p/36233639
@@ -11,6 +17,12 @@ const info = () => {
       el: document.createElement('div')
     })
     document.body.appendChild(instance.$el)
+
+    Vue.nextTick(() => {
+      instance.timer = setTimeout(() => {
+        instance.remove()
+      }, 2000)
+    })
   }
 }
 

@@ -4,6 +4,7 @@
     <p>
       state:  {{ number }}--
       <button @click="$store.commit('addNumber')">number++</button>
+      <br><button @click="toast">toast</button>
     </p>
   </div>
 </template>
@@ -18,6 +19,11 @@ export default {
   created () {
     setTimeout(() => this.$toast.info(), 1000)
     console.log('About.vue this.$axios', this.$axios)
+  },
+  methods: {
+    toast () {
+      this.$toast.info('toast. info')
+    }
   }
 }
 </script>

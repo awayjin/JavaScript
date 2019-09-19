@@ -14,7 +14,7 @@
 
 
 let a
-let arr = [1, null]
+let arr = [1, null] as any
 
 let c = (x = 1) => x + 3
 
