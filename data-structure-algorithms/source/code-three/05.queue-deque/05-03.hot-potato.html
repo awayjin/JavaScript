@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>hot-potato</title>
+</head>
+<body>
+
+<script type="module">
+  import { Queue } from './05-01.queue.js'
+
+  // hotPotato - 击鼓传花
+  function hotPotato (elementsList, num) {
+    let q = new Queue()
+    let eliminatedList = []
+
+    for (let i = 0; i < elementsList.length; i++) {
+      q.enqueue(elementsList[i])
+    }
+
+    let t1 = performance.now()
+    while (q.size() > 1) {
+      for (let i = 0; i < num; i++) {
+        q.enqueue(q.dequeue())
+      }
+      eliminatedList.push(q.dequeue())
+    }
+    let t2 = performance.now()
+    console.log('while 执行时间:', t2 - t1)
+
+    return {
+      eliminated: eliminatedList,
+      winner: q.dequeue()
+    }
+  }
+
+  let names = ['A', 'B', 'C', 'D', 'E']
+  let result = hotPotato(names, 6)
+  console.log(result)
+  result.eliminated.forEach(name => {
+    console.log(`${name} 在击鼓传花中被击败`)
+  })
+  console.log(`胜利者: ${result.winner}`)
+</script>
+</body>
+</html>
