@@ -7,6 +7,7 @@ export class Queue {
     this.items = {}
     // this.items = []
   }
+
   // addFront
   addFront (element) {
     if (this.isEmpty()) { // 空
@@ -24,11 +25,35 @@ export class Queue {
       this.lowestCount = 0
     }
   }
+
+  // removeFront
+  removeFront () {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    let item = this.items[this.lowestCount]
+    delete this.items[this.lowestCount]
+    this.lowestCount++
+    return item
+  }
+
   // addBack
   addBack (element) {
     this.items[this.count] = element
     this.count++
   }
+
+  // removeBack
+  removeBack () {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    let item = this.items[this.count]
+    delete this.items[this.count]
+    this.count--
+    return item
+  }
+
   // peek
   peek () {
     if (this.isEmpty()) {

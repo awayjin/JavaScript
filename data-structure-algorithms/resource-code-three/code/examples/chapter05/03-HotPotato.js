@@ -1,7 +1,7 @@
 const { hotPotato } = PacktDataStructuresAlgorithms;
 
 const names = ['John', 'Jack', 'Camila', 'Ingrid', 'Carl'];
-const result = hotPotato(names, 7);
+const result = hotPotato(names, 6);
 
 result.eliminated.forEach(name => {
   console.log(`${name} was eliminated from the Hot Potato game.`);
