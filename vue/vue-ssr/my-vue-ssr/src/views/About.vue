@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     toast () {
-      this.$toast.info('toast. info')
+      this.$toast.info('toast--pass--info!!!')
     }
   }
 }

@@ -3,19 +3,32 @@ import Toast from './toast.vue'
 
 const ToastConstructor = Vue.extend(Toast)
 ToastConstructor.prototype.remove = function () {
-  console.log('this.$el:', this.$el)
+  // console.log('this.$el:', this.$el)
   let el = this.$el
   if (el.parentNode) {
     el.parentNode.removeChild(el)
   }
 }
 
-const info = () => {
+const info = (props) => {
   // SSR https://zhuanlan.zhihu.com/p/36233639
-  if (typeof document === 'object') { // 是客户端才执行
+  // 是客户端才执行
+  if (typeof document === 'object') {
     const instance = new ToastConstructor({
       el: document.createElement('div')
     })
+
+    console.log('instance:', instance)
+    console.log('instance.message:', instance.message)
+    console.log('instance.el:', instance.el)
+    let obj = {}
+    if (typeof props === 'string') {
+      obj = {
+        message: props
+      }
+    }
+
+    instance.message = obj.message
     document.body.appendChild(instance.$el)
 
     Vue.nextTick(() => {
