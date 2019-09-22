@@ -24,19 +24,24 @@
       for (let i = 0; i < num; i++) {
         q.enqueue(q.dequeue())
       }
+      console.log('q.toString():', q.toString())
       eliminatedList.push(q.dequeue())
     }
     let t2 = performance.now()
     console.log('while 执行时间:', t2 - t1)
-
+    console.log('q:', q.toString())
     return {
       eliminated: eliminatedList,
       winner: q.dequeue()
     }
   }
+  // C D E A B -- D E A B
+  // B D E A - D E A
+  // E A D - AD
+  // D A
 
   let names = ['A', 'B', 'C', 'D', 'E']
-  let result = hotPotato(names, 6)
+  let result = hotPotato(names, 7)
   console.log(result)
   result.eliminated.forEach(name => {
     console.log(`${name} 在击鼓传花中被击败`)

@@ -1,5 +1,6 @@
 const { palindromeChecker } = PacktDataStructuresAlgorithms;
 
+console.log('abc', palindromeChecker('abc'));
 console.log('a', palindromeChecker('a'));
 console.log('aa', palindromeChecker('aa'));
 console.log('kayak', palindromeChecker('kayak'));

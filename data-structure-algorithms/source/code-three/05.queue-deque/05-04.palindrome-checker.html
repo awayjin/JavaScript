@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title></title>
+</head>
+<body>
+
+<script type="module">
+  import { Deque } from './05-02.deque.js'
+
+  // 用双端队列 palindrome - 回文检查
+  function palindromeChecker (str) {
+    let d = new Deque()
+    let firstChar
+    let lastChar
+    let isEqual = true
+
+    if (str !== '' && str !== null) {
+      for (let i = 0; i < str.length; i++) {
+        d.addBack(str.charAt(i))
+      }
+
+      while (d.size() > 1 && isEqual) {
+        firstChar = d.removeFront()
+        lastChar = d.removeBack()
+        if (firstChar !== lastChar) {
+          console.log(44)
+          isEqual = false
+        }
+      }
+    }
+
+    return isEqual
+  }
+
+  function palindromeChecker2(aString) {
+    if (
+      aString === undefined ||
+      aString === null ||
+      (aString !== null && aString.length === 0)
+    ) {
+      return false;
+    }
+    const deque = new Deque();
+    const lowerString = aString.toLocaleLowerCase().split(' ').join('');
+    let firstChar;
+    let lastChar;
+
+    for (let i = 0; i < lowerString.length; i++) {
+      deque.addBack(lowerString.charAt(i));
+    }
+
+    while (deque.size() > 1) {
+      firstChar = deque.removeFront();
+      lastChar = deque.removeBack();
+      if (firstChar !== lastChar) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  console.log(`回文检查: palindromeChecker`, palindromeChecker('level'))
+  console.log(`回文检查: palindromeChecker2`, palindromeChecker2('level'))
+  console.log(`回文检查: palindromeChecker`, palindromeChecker('abc'))
+  console.log(`回文检查: palindromeChecker2`, palindromeChecker2('abc'))
+</script>
+</body>
+</html>

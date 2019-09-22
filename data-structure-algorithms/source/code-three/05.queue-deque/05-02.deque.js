@@ -1,5 +1,5 @@
 // 双端队列 - 兼具队列和栈的特点
-export class Queue {
+export class Deque {
   constructor () {
     this.count = 0 // 队列的大小
     // 需从队列前端移除元素，这个变量帮助我们追踪第一个元素
@@ -26,6 +26,13 @@ export class Queue {
     }
   }
 
+  // addBack
+  addBack (element) {
+    this.items[this.count] = element
+    this.count++
+  }
+
+
   // removeFront
   removeFront () {
     if (this.isEmpty()) {
@@ -37,21 +44,36 @@ export class Queue {
     return item
   }
 
-  // addBack
-  addBack (element) {
-    this.items[this.count] = element
-    this.count++
-  }
-
   // removeBack
   removeBack () {
     if (this.isEmpty()) {
       return undefined
     }
+    this.count--
     let item = this.items[this.count]
     delete this.items[this.count]
-    this.count--
+    // this.count-- // ??
     return item
+  }
+
+  removeFront2() {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+    const result = this.items[this.lowestCount];
+    delete this.items[this.lowestCount];
+    this.lowestCount++;
+    return result;
+  }
+
+  removeBack2() {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+    this.count--;
+    const result = this.items[this.count];
+    delete this.items[this.count];
+    return result;
   }
 
   // peek
