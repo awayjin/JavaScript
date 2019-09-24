@@ -106,19 +106,3 @@ let endless = () => {
   while (1) {}
 }
 
-// 数字枚举
-enum Direction {
-  up = 11,
-  Down,
-  Left,
-  Right
-}
-
-
-// 字符串枚举
-enum Direction2 {
-  up = 'up',
-  left = 'left',
-  right = 'right',
-  down = 'up'
-}
