@@ -36,16 +36,57 @@ export class LinkedList {
         this.head = current.next
       } else {
         let previous
-        for (let i = 0; i < index; i++) {
-          previous = current
-          current = previous.next
-        }
+        // for (let i = 0; i < index; i++) {
+        //   previous = current
+        //   current = previous.next
+        // }
+        previous = this.getElementAt(index - 1)
+        current = previous.next
         // 将previous与current的下一项链接起来:跳过current，从而移除它
         previous.next = current.next
       }
       this.count--
     }
     return undefined
+  }
+
+  // 目标索引 index
+  getElementAt (index) {
+    if (index >= 0 && index <= this.count) {
+      let node = this.head
+      for (let i = 0; i < index && node !== null; i++) {
+        node = node.next
+      }
+      return node
+    }
+    return undefined
+  }
+
+  // remove - 根据元素的值移除元素
+  remove (element) {
+
+  }
+
+  // 在任意位置插入元素
+  insert (element, index) {
+    if (index >= 0 && index <= this.count) {
+      let node = new Node(element)
+      if (index === 0) {
+        let current = this.head
+        node.next = current
+        this.head = node
+      } else {
+        let previous = this.getElementAt(index - 1)
+        let current = previous.next
+        previous.next = node
+        node.next = current
+      }
+
+      this.count++
+
+      return true
+    }
+    return false
   }
 
 }

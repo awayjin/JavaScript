@@ -11,11 +11,13 @@
 import { LinkedList } from './06.linked-list.js'
 
 let ll = new LinkedList()
-ll.push(3)
-ll.push(8)
+ll.insert(3, 0)
 ll.push(5)
+ll.insert(8, 0)
+ll.insert(18, 3)
+
 console.log(ll)
-ll.removeAt(1)
+ll.removeAt(2)
 console.log(ll)
 </script>
 

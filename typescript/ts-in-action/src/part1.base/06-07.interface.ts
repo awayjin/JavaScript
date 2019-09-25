@@ -63,8 +63,9 @@ console.log('创建多个实例, lib2()', lib2.version)
 interface List {
   readonly id: number, // 只读属性
   name: string;
-  age?: number; // 可有属性
-  [x: string]: any; // 字符串索引签名, 用任意字符串来索引 List
+  // age?: number; // 可有属性
+  // 字符串索引签名, 用任意字符串来索引 List， 这样 List 就支持多个属性了
+  [x: string]: any;
 }
 
 interface Result {
@@ -89,6 +90,20 @@ let result = {
 }
 
 render(result)
+// 类型断言
+render(<Result>{
+  data: [
+    { id: 5, name: 'E', sex: 'female' },
+    { id: 6, name: 'F', sex: 'male', age: 20 }
+  ]
+})
+// 类型断言
+render({
+  data: [
+    { id: 5, name: 'E', sex: 'female' },
+    { id: 6, name: 'F', sex: 'male', age: 20 }
+  ]
+} as Result)
 
 
 
