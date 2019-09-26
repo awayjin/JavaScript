@@ -62,11 +62,6 @@ export class LinkedList {
     return undefined
   }
 
-  // remove - 根据元素的值移除元素
-  remove (element) {
-
-  }
-
   // 在任意位置插入元素
   insert (element, index) {
     if (index >= 0 && index <= this.count) {
@@ -87,6 +82,40 @@ export class LinkedList {
       return true
     }
     return false
+  }
+
+  // indexOf 返回一个元素的位置
+  indexOf (element) {
+    let current = this.head
+
+    for (let i = 0; i < this.count && current !== null; i++) {
+      if (current.element === element) {
+        return i
+      }
+      current = current.next
+    }
+    return -1
+  }
+
+  // remove - 根据元素的值移除元素
+  remove (element) {
+    let index = this.indexOf(element)
+    return this.removeAt(index)
+  }
+
+  // size
+  size () {
+    return this.count
+  }
+
+  // isEmpty
+  isEmpty () {
+    return this.size() === 0
+  }
+
+  // getHead - 获取表头
+  getHead () {
+    return this.head
   }
 
 }

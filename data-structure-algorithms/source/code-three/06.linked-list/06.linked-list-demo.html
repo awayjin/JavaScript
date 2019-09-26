@@ -8,17 +8,19 @@
 <body>
 
 <script type="module">
-import { LinkedList } from './06.linked-list.js'
+  import { LinkedList } from './06.linked-list.js'
 
-let ll = new LinkedList()
-ll.insert(3, 0)
-ll.push(5)
-ll.insert(8, 0)
-ll.insert(18, 3)
+  let ll = new LinkedList()
+  ll.insert(3, 0)
+  ll.push(5)
+  ll.insert(8, 0)
+  ll.insert(18, 3)
 
-console.log(ll)
-ll.removeAt(2)
-console.log(ll)
+  console.log(ll)
+  ll.removeAt(2)
+  console.log(ll)
+
+  console.log(ll.indexOf(18))
 </script>
 
 </body>
