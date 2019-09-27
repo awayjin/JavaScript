@@ -13,14 +13,14 @@
 // - 当类型推断不符合你的要求的时候，你可以使用类型断言 as，但是类型断言不能乱用，要对自己上下文充分了解
 
 
-let a
-let arr = [1, null] as any
-
-let c = (x = 1) => x + 3
-
-window.onkeydown = (event) => {
-  console.log(event)
-}
+// let a
+// let arr = [1, null] as any
+//
+// let c = (x = 1) => x + 3
+//
+// window.onkeydown = (event: any) => {
+//   console.log(event)
+// }
 
 // 类型断言
 interface Foo {

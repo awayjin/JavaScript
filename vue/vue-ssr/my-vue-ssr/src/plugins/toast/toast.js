@@ -13,9 +13,13 @@ ToastConstructor.prototype.remove = function () {
 const info = (props) => {
   // SSR https://zhuanlan.zhihu.com/p/36233639
   // 是客户端才执行
+  console.log('ToastConstructor:', ToastConstructor)
   if (typeof document === 'object') {
     const instance = new ToastConstructor({
-      el: document.createElement('div')
+      el: document.createElement('div'),
+      data: {
+        test: 'test-d'
+      }
     })
 
     console.log('instance:', instance)
