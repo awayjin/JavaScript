@@ -2,6 +2,7 @@
   <div>
     toast
     -- <span v-text="message"></span>
+    {{ test }}
   </div>
 </template>
 

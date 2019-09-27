@@ -1,9 +1,11 @@
 <template>
   <div class="home">
+    <p>
+      <button @click="toast">toast</button>
+    </p>
     <img alt="Vue logo" src="../assets/logo.png">
-    This is a home's page. 222
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <test-toast msg="33" />
+<!--    <test-toast msg="33" />-->
     <p>
       min-vuex: {{ number }}
       <button @click="addNumber">add number by min-vuex.js</button>
@@ -27,17 +29,15 @@ export default {
     }
   },
   methods: {
+    toast () {
+      this.$toast.info('toast--pass--info!!!')
+    },
     addNumber () {
       this.$demoVuex.commit('addNumber')
     }
   },
   mounted () {
-    this.$myMethod('home.vue msg')
-    console.log('mounted 55')
-  },
-  created () {
-    console.log('created')
-    console.log('mounted 55')
+    // this.$myMethod('home.vue msg')
   }
 }
 </script>

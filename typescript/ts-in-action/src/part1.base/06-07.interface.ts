@@ -63,9 +63,10 @@ console.log('创建多个实例, lib2()', lib2.version)
 interface List {
   readonly id: number, // 只读属性
   name: string;
-  // age?: number; // 可有属性
+  // age: boolean;
+  // age?: number; // 可选属性
   // 字符串索引签名, 用任意字符串来索引 List， 这样 List 就支持多个属性了
-  [x: string]: any;
+  [xcc: string]: any;
 }
 
 interface Result {

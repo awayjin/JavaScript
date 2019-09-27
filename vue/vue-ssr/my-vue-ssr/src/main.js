@@ -7,11 +7,11 @@ import { createStore } from './store/store.js'
 // import './plugins/axios' // 请求资源配置
 import './plugins/global-config.js' // 全局插件
 import DemoVuex from './plugins/min-vuex' // vuex 核心实现
-import Toast from './plugins/toast/toast.js' // toast
-// import './plugins/toast/toast.js' // toast
+// import Toast from './plugins/toast/toast.js' // toast
+import './plugins/toast/toast.js' // toast
 
 if (typeof document === 'object') {
-  Toast.info()
+  // Toast.info()
 }
 
 const demoVuex = new DemoVuex.Store({

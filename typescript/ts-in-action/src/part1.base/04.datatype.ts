@@ -52,6 +52,10 @@ bool = false
 console.log('bool:', bool)
 
 // 数组
+let list: number[] = [1, 2]
+// 数组泛型
+let list2: Array<string> = ['3']
+
 let arr1: number[] = [11, 22]
 let arr2: Array<number> = [33, 44]
 let arr3: Array<string | number> = ['55', '66', 44] // 泛型接口
