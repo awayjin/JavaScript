@@ -1,4 +1,4 @@
-class Set {
+export class Set {
   constructor () {
     this.items = {}
   }
@@ -45,5 +45,48 @@ class Set {
   // values
   values () {
     return Object.values(this.items)
+  }
+
+  // union - 并集
+  union (otherSet) {
+    let s = new Set()
+    this.values().forEach(item => s.add(item))
+    otherSet.values().forEach(item => s.add(item))
+    return s
+  }
+
+  // 交集 - intersection
+  intersection (otherSet) {
+    let s = new Set()
+    this.values().forEach(value => {
+      if (otherSet.has(value)) {
+        s.add(value)
+      }
+    })
+    return s
+  }
+
+  // 差集 - intersection
+  difference (otherSet) {
+    let s = new Set()
+    this.values().forEach(value => {
+      if (!otherSet.has(value)) {
+        s.add(value)
+      }
+    })
+    return s
+  }
+
+  // 子集
+  // 子集的元素个数需要小于或等于要比较的集合
+  isSubetOf (otherSet) {
+    if (this.size() > otherSet.size()) {
+      return false
+    }
+
+    return this.values().every(value => otherSet.has(value))
+    // this.values().every(value => {
+    //   return otherSet.has(value)
+    // })
   }
 }
