@@ -18,6 +18,129 @@ console.log(
   Array(10).join('-')
 )
 
+/*------------------------------------------------------------------*/
+
+// 1. 对象类型接口
+interface List {
+  readonly id: number, // 只读属性
+  name: string;
+  // age: boolean;
+  // age?: number; // 可选属性
+  // 字符串索引签名, 用任意字符串来索引 List， 这样 List 就支持多个属性了
+  [xcc: string]: any;
+}
+
+interface Result {
+  data: List[]
+}
+
+function render(result: Result) {
+  result.data.forEach((value) => {
+    // console.log('value id, name:', value.id, value.name)
+    if (value.age) {
+      // console.log('age:', value.age)
+    }
+    // value.id++
+  })
+}
+
+let result = {
+  data: [
+    { id: 5, name: 'E', sex: 'female' },
+    { id: 6, name: 'F', sex: 'male', age: 20 }
+  ]
+}
+
+render(result)
+// 类型断言
+render(<Result>{
+  data: [
+    { id: 5, name: 'E', sex: 'female' },
+    { id: 6, name: 'F', sex: 'male', age: 20, 10: 0 }
+  ]
+})
+// 类型断言
+render({
+  data: [
+    { id: 5, name: 'E', sex: 'female' },
+    { id: 6, name: 'F', sex: 'male', age: 20 }
+  ]
+} as Result)
+
+
+
+// 类型断言
+render({
+  data: [
+    { id: 1, name: 'A', sex: 'female' },
+    { id: 2, name: 'B', age: 20 }
+  ]
+} as Result)
+
+render(<Result> {
+  data: [
+    { id: 3, name: 'c', sex: 11, height: 20, aa: 3 },
+    { id: 4, name: 'd', sex: '33' }
+  ]
+})
+
+/*------------------------------------------------------------------*/
+
+
+// 2. 字符串类型接口--
+// 用任意数字来索引 StringArray
+interface StringArray {
+  [index: number]: string // 字符串类型接口
+}
+let chars: StringArray = ['a', 'b']
+
+// 用任意字符串来索引 Names
+interface Names {
+  [index: string]: string;
+  // y: numer;
+  // 数字索引的返回值一定要是字符串索引的子类型, number 转换为 string
+  // [z: number]: string;
+  // [zac: number]: number;
+}
+
+let stra: StringArray = ['3']
+// let nam: Names = ['a3', '3']
+// let namd2: Names = '3'
+
+let hel: string = '33'
+
+let hello2: string = 'Hello TypeScript'
+
+
+// 对象类型接口
+function printLabel(labeledObj: { label: string }) {
+  console.log('2. 字符串类型接口', labeledObj.label)
+}
+
+let myObj = { size: 10, label: 'size 10 object..'}
+
+printLabel(myObj)
+
+// 用接口来描述
+interface LabeledValue {
+  label: string
+}
+
+function printLabel2(labeledObj: LabeledValue ) {
+  console.log('用接口来描述:', labeledObj.label)
+}
+
+printLabel2(myObj)
+
+// 可选属性
+interface SquareConfig {
+  color?: string,
+  width?: number
+}
+
+/*------------------------------------------------------------------*/
+
+
 // 3. 函数类型接口
 let add2 = (x: number, y: number) => x + y // 用一个变量定义函数类型
 // console.log('add3:', add3(4, 5))
@@ -56,119 +179,7 @@ console.log('创建多个实例, lib1()', lib1.doSomething())
 let lib2 = getLib()
 console.log('创建多个实例, lib2()', lib2.version)
 
-/*------------------------------------------------------------------*/
-
-
-// 1. 对象类型接口
-interface List {
-  readonly id: number, // 只读属性
-  name: string;
-  // age: boolean;
-  // age?: number; // 可选属性
-  // 字符串索引签名, 用任意字符串来索引 List， 这样 List 就支持多个属性了
-  [xcc: string]: any;
-}
-
-interface Result {
-  data: List[]
-}
-
-function render(result: Result) {
-  result.data.forEach((value) => {
-    console.log('value id, name:', value.id, value.name)
-    if (value.age) {
-      console.log('age:', value.age)
-    }
-    // value.id++
-  })
-}
-
-let result = {
-  data: [
-    { id: 5, name: 'E', sex: 'female' },
-    { id: 6, name: 'F', sex: 'male', age: 20 }
-  ]
-}
-
-render(result)
-// 类型断言
-render(<Result>{
-  data: [
-    { id: 5, name: 'E', sex: 'female' },
-    { id: 6, name: 'F', sex: 'male', age: 20 }
-  ]
-})
-// 类型断言
-render({
-  data: [
-    { id: 5, name: 'E', sex: 'female' },
-    { id: 6, name: 'F', sex: 'male', age: 20 }
-  ]
-} as Result)
-
-
-
-// 类型断言
-render({
-  data: [
-    { id: 1, name: 'A', sex: 'female' },
-    { id: 2, name: 'B', age: 20 }
-  ]
-} as Result)
-
-render(<Result> {
-  data: [
-    { id: 3, name: 'c', sex: 11, height: 20, aa: 3 },
-    { id: 4, name: 'd', sex: '33' }
-  ]
-})
-
-// 2. 字符串类型接口--
-// 用任意数字来索引 StringArray
-interface StringArray {
-  [index: number]: string // 字符串类型接口
-}
-let chars: StringArray = ['a', 'b']
-
-// 用任意字符串来索引 Names
-interface Names {
-  [x: string]: string;
-  // y: numer;
-  [z: number]: string;
-}
-
-
-let hel: string = '33'
-
-let hello2: string = 'Hello TypeScript'
-
-
-// 对象类型接口
-function printLabel(labeledObj: { label: string }) {
-  console.log(labeledObj.label)
-}
-
-let myObj = { size: 10, label: 'size 10 object..'}
-
-printLabel(myObj)
-
-// 用接口来描述
-interface LabeledValue {
-  label: string
-}
-
-function printLabel2(labeledObj: LabeledValue ) {
-  console.log(labeledObj.label)
-}
-
-printLabel2(myObj)
-
-// 可选属性
-interface SquareConfig {
-  color?: string,
-  width?: number
-}
-
-
 
 console.log('--- from 06-07 interface.ts')
+
+/*------------------------------------------------------------------*/
