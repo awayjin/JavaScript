@@ -32,6 +32,24 @@ module.exports = {
 ```
 
 ### 3. 核心概念之 Loaders
+> 定义: 只是一个导出为函数的 JavaScript 模块。
+多个 loader 串行执行，顺序从后到前。
+
+
+```javascript
+module.exports = function(source) {
+  return source
+}
+
+{
+  test: /\.js/,
+  use: [
+    'bar-loader',
+    'foo-loader'
+  ]
+}
+```
+
 webpack 开箱即用只支持 JS 和 JSON 两种文件类型，通过 Loaders 去支持其它文件类型并且把它们转化成有效的模块，并且可以添加到依赖图中。
 
 本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图（和最终的 bundle）可以直接引用的模块。
