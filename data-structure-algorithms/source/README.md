@@ -20,3 +20,6 @@ yarn add --dev jest babel-jest babel-core babel-preset-env regenerator-runtime
 
 
 yarn add --dev babel-jest @babel/core @babel/preset-env babel-plugin-transform-es2015-modules-commonjs
+
+关联文件类型:
+Preferences -> Editor -> File Types

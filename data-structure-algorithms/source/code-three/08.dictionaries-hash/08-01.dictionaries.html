@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 并集
+  Set.prototype.union = function (otherSet) {
+    let s = new Set()
+    for (item of this.values()) s.add(item)
+    for (item of otherSet.values()) s.add(item)
+    // this.values().forEach(item => s.add(item))
+    // otherSet.values().forEach(item => s.add(item))
+    return s
+  }
+  // 并集
+  let set = new Set()
+  set.add(3)
+  set.add(4)
+  set.add(5)
+  let set2 = new Set()
+  set2.add(4)
+  set2.add(5)
+  set2.add(6)
+  // expect(set.union(set2).values()).toEqual([3, 4, 5, 6])
+  console.log(set.union(set2))
+</script>
+</body>
+</html>
