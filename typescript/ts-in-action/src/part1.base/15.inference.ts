@@ -28,7 +28,13 @@ interface Foo {
 }
 let foo = {} as Foo
 foo.bar = 1 // err
+let foo3 = {}
 
 let foo2: Foo = {
   bar: 3
 }
+
+// generics 泛型
+// 泛型（Generics）是指在定义函数、接口或类的时候，
+// 不预先指定具体的类型，而在使用的时候再指定类型的一种特性。
+// 使用泛型来创建可重用的组件

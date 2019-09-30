@@ -7,6 +7,23 @@
 <body>
 <input type="search" id="search">
 
+<pre>
+  1. 虚拟 DOM - Virtual DOM
+
+  1.1 什么是虚拟dom 虚拟 dom、dom diff 算法原理
+  <a href="./dom/my-virtual-dom/virtual-dom.md"></a>
+  <a href="https://github.com/livoras/blog/issues/13">深度剖析：如何实现一个 Virtual DOM 算法</a>
+  
+  1.2 react Virtual DOM 是什么? 如何实现? 说一下diff算法 ?
+  vm网上资料很多, 实现其实也只是解析JSX -> AST语法树, diff算法主要是说了react如何将O(n3)的算法降低到O(n)级别的
+
+  1.3 DIFF算法为什么是O(n)复杂度而不是O(n^3)
+</pre>
+
+8. 内存泄漏，及如何主动的去发现是否存在内存泄漏
+<a href="https://zhuanlan.zhihu.com/p/60538328">javascript常见的内存泄漏</a>
+<a href="function/02-memory-leak.md"></a>
+
 1. 写一个函数，给定 nodes=[]，每一个节点拥有id, name, parentId，输出一个属性列表的展示(涉及dom操作)
 OK
 
@@ -16,17 +33,13 @@ OK
 
 4. VNode 的引入与直接操作原生dom相比，哪一个相率更高，为什么
 
-5. 什么是虚拟dom 虚拟 dom、dom diff 算法原理
-<a href="https://github.com/livoras/blog/issues/13">深度剖析：如何实现一个 Virtual DOM 算法</a>
 
 6. 如果script标签放在head标签中，如何让js脚本等待 DOM 加载完成执行
 
 7. 重绘和重排
 <a href="https://imweb.io/topic/5c2206a7611a25cc7bf1d848">-</a>
 
-8. 内存泄漏，及如何主动的去发现是否存在内存泄漏
-<a href="https://zhuanlan.zhihu.com/p/60538328">javascript常见的内存泄漏</a>
-<a href="function/02-memory-leak.md"></a>
+
 
 <div class="nodes" id="nodes-id" name="first-name" parentId="body-id">>
   <div  id="child-one" name="first-name" parentId="parent--id">

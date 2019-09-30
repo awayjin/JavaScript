@@ -20,6 +20,37 @@ console.log(
 
 /*------------------------------------------------------------------*/
 
+// 对象的类型——接口
+// 在 TypeScript 中，我们使用接口（Interfaces）来定义对象的类型。
+// 一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集
+interface Person3 {
+  name: string;
+  age?: number;
+  maybe?: number;
+  // 可选属性
+  sex?: string;
+  // 任意属性
+  // [propName: string]: string; // error
+  [propName: string]: any; // error
+}
+
+interface PersonList {
+  data: Person3[]
+}
+
+let away: Person3 = {
+  name: 'Away',
+  age: 20,
+  maybe: 4,
+  sex: 'male',
+  favorite: 'thought',
+  0: 1
+// } as unknown as any
+}
+console.log('away:', away)
+
+/*------------------------------------------------------------------*/
+
 // 1. 对象类型接口
 interface List {
   readonly id: number, // 只读属性
