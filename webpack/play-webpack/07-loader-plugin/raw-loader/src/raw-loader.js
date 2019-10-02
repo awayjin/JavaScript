@@ -1,8 +1,24 @@
-// const loaderUtils = require('loader-utils');
-const fs = require('fs');
-const path = require('path');
+const loaderUtils = require('loader-utils')
 
-module.exports = function(source) {
+module.exports = function (source) {
+  const options = loaderUtils.getOptions(this)
+  const { name } = loaderUtils.getOptions(this)
+  console.log('options:', options)
+  console.log('name:', name)
+
+  const json = JSON.stringify(source)
+    .replace('foo', '-jin-')
+
+  // return `export default ${json}` // 一个参数
+  // throw new Error('Error.-')
+  this.callback(null, json, 2, 3, 4)
+}
+
+// const loaderUtils = require('loader-utils');
+// const fs = require('fs');
+// const path = require('path');
+
+// module.exports = function(source) {
   // const { name } = loaderUtils.getOptions(this);
   //
   // const url = loaderUtils.interpolateName(this, "[name].[ext]", {
@@ -16,10 +32,10 @@ module.exports = function(source) {
   // const callback = this.async();
   // console.log('name', name);
 
-  const json = JSON.stringify(source)
-    .replace('foo', '-my replace-')
-    .replace(/\u2028/g, '\\u2028') // 完全问题
-    .replace(/\u2029/g, '\\u2029');
+  // const json = JSON.stringify(source)
+  //   .replace('foo', '-my replace-')
+    // .replace(/\u2028/g, '\\u2028') // 完全问题
+    // .replace(/\u2029/g, '\\u2029');
 
   // fs.readFile(path.join(__dirname, './async.txt'), 'utf-8', (err, data) => {
   //     if (err) {
@@ -31,7 +47,7 @@ module.exports = function(source) {
 
   // throw new Error('Error');
 
-  return `export default ${json}`;
+  // return `export default ${json}`;
   // this.callback(null, json, 2, 3, 4);
 
-}
+// }

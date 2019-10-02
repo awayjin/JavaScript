@@ -6,7 +6,11 @@ runLoaders({
   resource: path.join(__dirname, './src/demo.txt'),
   loaders: [
     {
-      loader: path.join(__dirname, './src/raw-loader.js')
+      loader: path.join(__dirname, './src/raw-loader.js'),
+      options: {
+        name: 'pass-test-args',
+        arg2: 'arg2'
+      }
     }
   ],
   context: {
@@ -14,5 +18,5 @@ runLoaders({
   },
   readResource: fs.readFile.bind(fs)
 }, (err, result) => {
-  err ? console.log(err) : console.log(result);
+  err ? console.log(err) : console.log('result:', result);
 });
