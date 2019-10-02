@@ -1,16 +1,4 @@
-// 转为字符串
-function defaultToString (item) {
-  // 在字典中，理想的情况是用字符串作为键名
-  if (item === null) {
-    return 'NULL'
-  } else if (item === undefined) {
-    return 'UNDEFINED'
-  } else if (typeof item === 'string' || item instanceof String) {
-    return `${item}`
-  }
-  console.log(111, '--', item.toString())
-  return item.toString()
-}
+import { defaultToString } from '../utils/util'
 // console.log(defaultToString(3))
 // console.log(defaultToString('3'))
 // console.log(defaultToString(null))
@@ -18,6 +6,7 @@ function defaultToString (item) {
 // console.log(defaultToString({})) // "[object Object]"
 // console.log(defaultToString(new String(3)))
 
+// valuePair - 保存两个值:原始的 key 和 value
 class ValuePair {
   constructor (key, value) {
     this.key = key
@@ -81,5 +70,33 @@ export class Dictionary {
   // values
   values () {
     return this.keyValues().map(valuePair => valuePair.value)
+  }
+
+  // size
+  size () {
+    return Object.keys(this.table).length
+  }
+
+  // isEmpty
+  isEmpty () {
+    return this.size() === 0
+  }
+
+  // clear
+  clear () {
+    this.table = {}
+  }
+
+  // toString
+  toString () {
+    if (this.isEmpty()) {
+      return ''
+    }
+    const valuePairs = this.keyValues()
+    let objString = `${valuePairs[0].toString()}` // {1}
+    for (let i = 1; i < valuePairs.length; i++) {
+      objString = `${objString},${valuePairs[i].toString()}` // {2} }
+      return objString // {3}
+    }
   }
 }

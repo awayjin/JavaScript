@@ -79,7 +79,7 @@ export class Set {
 
   // 子集
   // 子集的元素个数需要小于或等于要比较的集合
-  isSubetOf (otherSet) {
+  isSubsetOf (otherSet) {
     if (this.size() > otherSet.size()) {
       return false
     }
