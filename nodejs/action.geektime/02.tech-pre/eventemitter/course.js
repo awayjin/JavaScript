@@ -1,5 +1,6 @@
 // const EventEmitter = require('events').EventEmitter
-const { EventEmitter } = require('events')
+// const { EventEmitter } = require('events')
+const EventEmitter = require('events')
 
 // 把抛事件的模块封装起来
 // 强调抛事件这种模式更适合底层模块往外传递信息

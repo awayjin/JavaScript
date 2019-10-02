@@ -17,6 +17,6 @@ process.stdin.on('data', e => {
 
   if (count === 3) {
     console.log(`你赢了 ${count} 次, 我不玩了，退出！`)
-    process.exit()
+    process.exit() // 退出
   }
 })
