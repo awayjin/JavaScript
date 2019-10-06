@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>设计模式</title>
+    <script src="jquery-1.7.1.js"></script>
+</head>
+<body>
+<button>设计模式</button>
+<script>
+
+/*
+    //第一种
+    var createMask = function(){
+        return document.body.append(document.createElement("div"));
+    }
+    $("button").click(function(){
+        var mask = createMask();
+        mask.show();
+    });
+    */
+
+    //不需要是浪费
+    var mask = document.body.append(document.createElement("div"));
+    $("button").click(function(){
+        mask.show();
+    });
+
+    var mask;
+    var createMask = function(){
+        if(mask){
+             return mask;
+        }else{
+            mask = document.body.append(document.createElement("div"));
+            return mask;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>生成器方法</title>
+</head>
+<body>
+
+<script>
+  // 类的生成器方法
+  class MyClass {
+    *createIterator () {
+      yield 31
+      yield 2
+      yield 9
+    }
+  }
+
+  let instance = new MyClass()
+  let iterator = instance.createIterator()
+  iterator.next()
+
+  // class Collection {
+  //   constructor () {
+  //     this.items = []
+  //   }
+  //
+  //   *[Symbol.iterator] () {
+  //     yield *this.items.values()
+  //   }
+  // }
+  //
+  // var collection = new Collection()
+  // collection.items.push(1)
+  // collection.items.push(2)
+  // collection.items.push(3)
+  //
+  // for (let x of collection) {
+  //   console.log(x)
+  // }
+
+  class Collection {
+
+    constructor() {
+      this.items = [];
+    }
+
+    // 需计算名称
+    // Symbol.iterator来定义生成器方法，从而定义类的默认迭代器
+    *[Symbol.iterator]() {
+      yield *this.items.values();
+    }
+  }
+
+  var collection = new Collection();
+  collection.items.push(12);
+  collection.items.push(22);
+  collection.items.push(33);
+
+  for (let x of collection) {
+    console.log(x);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assert.css">
+  <script src="../assert.js"></script>
+  <title>Promise</title>
+</head>
+<body>
+
+
+
+<section class="d">
+  <bar id="quadrangle">四边形 <div>33</div></bar>
+  <h3 id="circle">圆</h3>
+  <div id="triangle">三角形</div>
+</section>x
+
+<script>
+
+
+  function getJSON(url) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest()
+      xhr.open('GET', url)
+      xhr.onload = function () {
+        try {
+          if (this.status === 200) {
+            resolve(JSON.parse(this.response))
+          } else {
+            reject(this.status + '' + this.statusText)
+          }
+        } catch (e) {
+          reject(e.message)
+        }
+      }
+      xhr.onerror = function () {
+        reject(this.status + ' ,' + this.statusText)
+      }
+
+      xhr.send()
+    })
+  }
+
+  // async表明当的函数依赖一个异步返回的值
+  (async function () {
+    try {
+      // 调用异步位置放await,告诉js引擎，请在不阻塞应用的情况下等待执行结果
+      const ninjas = await getJSON("data/ninjas.json")
+      console.log(ninjas)
+      const missons = await getJSON(missons[0].missonsUrl)
+      console.log(missons)
+    } catch (e) {
+      console.log("Error:", e)
+    }
+  })()
+</script>
+
+<script>
+  function* demo () {
+    yield 33
+    yield 11
+  }
+  var d = demo()
+</script>
+
+</body>
+</html>

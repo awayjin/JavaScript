@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Destructured Parameters</title>
+</head>
+<body>
+
+<script>
+  // 参数解构 Destructured Parameters
+  function setCookie(name, value, { secure, path, domain, expires}) {
+    // code to set the cookie
+  }
+  setCookie('type', 'js', {
+    secure: true,
+    expires: 6000
+  })
+
+  function setCookie2 (name, value, options = {}) {
+    let	{	secure,	path,	domain,	expires	}	=	options
+  }
+  // 5.7.7 解构的参数是必需的
+  setCookie2('type', 'js') // 没有默认值{} 会报错
+
+  // 参数解构的默认值
+  function setCookie3(name, value, {
+    secure = true,
+    path = '/',
+    domain = 'example.com',
+    expires = new Date(Date.now() + 60 * 60 * 1000)} = {}) {
+    // code to set the cookie
+    console.log(domain)
+    console.log(expires)
+  }
+  setCookie3('type', 'js')
+</script>
+</body>
+</html>

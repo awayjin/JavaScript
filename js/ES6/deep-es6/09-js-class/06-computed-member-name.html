@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // 需计算的成员名
+  let methodName = 'sayName'
+  class PersonClass {
+    constructor (name) {
+      this.name = name
+    }
+
+    [methodName] () {
+      console.log(this.name)
+    }
+  }
+
+  let me = new PersonClass('Away')
+  me.sayName()
+
+  var obj = {
+    [methodName]: '222'
+  }
+</script>
+</body>
+</html>

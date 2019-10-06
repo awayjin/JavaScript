@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>janDialog </title>
+    <link rel="stylesheet" href="./skins/green.css">
+</head>
+<body>
+
+
+<!--<div style="position: absolute; left: 0; top: 0">-->
+<!--<div class="d-outer">-->
+    <!--<table class="d-border" >-->
+        <!--<tbody>-->
+        <!--<tr>-->
+            <!--<td class="d-nw"></td>-->
+            <!--<td class="d-n"></td>-->
+            <!--<td class="d-ne"></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="d-w"></td>-->
+            <!--<td class="d-c">-->
+                <!--<div class="d-inner">-->
+                    <!--<table class="d-dialog">-->
+                        <!--<tbody>-->
+                        <!--<tr>-->
+                            <!--<td class="d-header">-->
+                                <!--<div class="d-titleBar">-->
+                                    <!--<div class="d-title" id="d-title-{id}"></div>-->
+                                    <!--<a href="javascript:;" class="d-close">×</a></div>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td class="d-main">-->
+                                <!--<div class="d-content" id="d-content-{id}">1111</div>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td class="d-footer">-->
+                                <!--<div class="d-buttons"></div>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
+            <!--</td>-->
+            <!--<td class="d-e"></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td class="d-sw"></td>-->
+            <!--<td class="d-s"></td>-->
+            <!--<td class="d-se"></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+<!--</div>-->
+
+<!--</div>-->
+
+<script>
+(function(window, undefined){
+
+    var $ = window.jan = function(){
+
+        return $.fn.constructor();
+    };
+
+    $.fn = $.prototype = {
+        constructor: function(){
+
+        }
+    }
+    $.fn.constructor.prototype = $.fn;
+
+
+
+    var janDialog = function(config){
+        this.config = config;
+
+        return new janDialog.prototype._create(config);
+    }
+
+    janDialog.fn = janDialog.prototype ={
+        _create: function(config){
+            var body = document.body,
+                div = document.createElement("div");
+
+            div.innerHTML = this._innerHTML();
+            body.insertBefore(div, body.firstChild);
+
+            return this;
+        },
+
+        _innerHTML: function(){
+            return defaults._innerHTML();
+        }
+    }
+    janDialog.fn._create.prototype = janDialog.fn;
+
+    var defaults = {
+        _innerHTML: function(){
+            return janDialog.defaults;
+        }
+
+    }
+
+
+    janDialog.defaults =  '<div class="d-outer" role="dialog" tabindex="-1" aria-labelledby="d-title-{id}" aria-describedby="d-content-{id}">'
+            +	'<table class="d-border">'
+            +		'<tbody>'
+            +			'<tr>'
+            +				'<td class="d-nw"></td>'
+            +				'<td class="d-n"></td>'
+            +				'<td class="d-ne"></td>'
+            +			'</tr>'
+            +			'<tr>'
+            +				'<td class="d-w"></td>'
+            +				'<td class="d-c">'
+            +					'<div class="d-inner">'
+            +					'<table class="d-dialog">'
+            +						'<tbody>'
+            +							'<tr>'
+            +								'<td class="d-header">'
+            +									'<div class="d-titleBar">'
+            +										'<div id="d-title-{id}" class="d-title"></div>'
+            +										'<a class="d-close" href="javascript:;">×</a>'
+            +									'</div>'
+            +								'</td>'
+            +							'</tr>'
+            +							'<tr>'
+            +								'<td class="d-main">'
+            +									'<div id="d-content-{id}" class="d-content">1111</div>'
+            +								'</td>'
+            +							'</tr>'
+            +							'<tr>'
+            +								'<td class="d-footer">'
+            +									'<div class="d-buttons"></div>'
+            +								'</td>'
+            +							'</tr>'
+            +						'</tbody>'
+            +					'</table>'
+            +					'</div>'
+            +				'</td>'
+            +				'<td class="d-e"></td>'
+            +			'</tr>'
+            +			'<tr>'
+            +				'<td class="d-sw"></td>'
+            +				'<td class="d-s"></td>'
+            +				'<td class="d-se"></td>'
+            +			'</tr>'
+            +		'</tbody>'
+            +	'</table>'
+            +'</div>';
+
+     jan.dialog = janDialog;
+})(window);
+    console.log(jan.dialog());
+</script>
+
+</body>
+</html>

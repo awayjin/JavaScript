@@ -1,0 +1,252 @@
+﻿<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<title></title>
+<style>
+* {margin:0;}
+body {font-size:12px;}
+<!--#popupAddr{ position:relaqtive; top:0px; left:auto;}
+--></style>
+<script type="text/javascript" src="jquery-1.7.1.js"></script>
+<script type="text/javascript" src="citySelect-ajax.js"></script>
+<script>
+
+
+var a=false;
+//if(!a){alert(123)}
+document.write(200000);
+function testVal(a){
+	var a = 200
+	//alert(a);
+}
+var a= 100;
+testVal(a)
+//alert(a);
+
+/*
+ *jQuery插件机制
+ *1. jQuery.extend 扩展jQuery对象本身
+ * 用来在jQuery命名空间上增加新函数
+ *2. jQuery.fn.extend 扩展 jQuery 元素集来提供新的方法
+ *
+ */
+var par = jQuery.extend({ //扩展jQuery对象本身
+	max : function(a, b){return a > b ? a : b},
+	min : function(a, b){return a > b ? b : a}	
+},{ 
+	//max : function(a, b){return a > b ? b : a} //2
+
+}); 
+//alert(par.max(2,3)); //3
+//alert($.min(3,2)); //2
+
+//扩展 jQuery 元素集来提供新的方法（通常用来制作插件）。
+jQuery.fn.extend({
+	alertWhi : function(){
+		alert("jQuery.fn.extend对象");	
+	}
+});
+//$("#test").alertWhi();
+/*
+ *jQuery.inAarry()
+ *确定第一个参数在数组中的位置，没找到返回-1
+ */
+var arrTest = ["jin", 4, "John"];
+var jPos = jQuery.inArray("John", arrTest); 
+//alert(jPos); //2
+ 
+$(function(){
+	$("#test").click(function(){
+		$.openLayer({
+			maxItems: 5,
+			pid : "0",
+			oneLevel: false,//不限制不同级别省市，默认是限制
+			returnValue: "resvals-a",
+			returnTxts: "restxts",
+			index : 1
+		});
+	});
+	$("#test2").click(function(){
+		$.openLayer({
+			maxItems : 1,
+			pid : "0",
+			returnValue : "resvals-a",
+			returnTxts : "restxts",
+			span_width : {d1:120,d2:150,d3:150},
+			//shared : false,
+			index : 3
+		});
+	});
+});
+
+
+</script>
+<!--      $('.tan_xuan1 li, #subAddresses li').live("click", function (event) {
+          var text = $.trim($(this).text()), //获得当前点击城市的值
+              selArea = $("#selectedAddresses"), //当前选中项容器
+              selArrVal = [], //保存选中项的value值
+              maxItems = 5,
+              areavalue = $.trim($(this).find("input").val()),
+              cloneLi = $(this).find("input").parent().parent().clone().removeClass(); //复制一份li
+
+          alert(checked_1)
+          var checked_2 = $(this).find(":input").attr("checked");
+          alert(checked_2)
+          if (checked == true) {
+              //这个是jQ中和Dom中checked相反，非常DT的问题  
+              $('.tan_xuan1 li, #subAddresses li').find(":input").click(function (event) {
+                  $(this).blur();
+                  // event.stopPropagation(); //这个是同步input中的checked
+              });
+              $(this).find(":input").attr("checked", false); //把当前点击项的checked设置为选中
+          } else {
+
+              $(this).find(":input").attr("checked", true);
+          }
+
+
+          /*selArea.find("input").each(function (i) {
+          if (maxItems == 1) {
+
+          } else {
+          selArrVal.push($(this).find(":input").val());
+          if (checked == true && checkeLevel(this) && checkNum(this, maxItems)) {
+          selArea.append(cloneLi);
+          } else {
+          //selArea.find(":input[value=" + this.value + "]").parent().remove();
+          selArea.find(":input[value=" + this.value + "]").parent().parent().remove(); //再一次点击 删除
+          }
+          }
+
+          //              if (selArrVal[i] === areavalue) {
+          //                  alert(23)
+          //                  $(this).parent().parent().remove();
+          //                  //alert($(this).parents("li").siblings().html());
+          //                  return false;
+          //              } 
+
+          });*/
+
+          //$('#btnJobarea').val(text); //设置城市选择器input value属性的值
+          //$('#jobAreaName').val(text);
+          // $('#jobarea').val(areavalue);
+          // $('#ifDiv, #addressDiv, #subAddresses').hide(); //隐藏省市 及半透明背景
+      });-->
+</head>
+<body>
+<div id="jin">122<span style="height:30px; border:1px solid red;">cccccccc</span></div>
+<script type="text/javascript">
+
+$("#jin").live("click", function(event){
+	alert(event.target.tagName)
+	if(event.target.tagName == 'SPAN'){
+		alert(1232)
+	}
+});
+
+//$("#jin").click();
+
+</script>
+<input  name="job_checkbox" type="checkbox" class="cc" checked="true" >
+<input type="checkbox"  name="job_checkbox" >
+
+<h2 id="clcikChecked" style="cursor:pointer">Checked改变</h2>
+<input type="checkbox" id="selAll">
+<script type="text/javascript">
+
+
+$("#clcikChecked").click(function(){
+	var allJob = $(":input[name='job_checkbox']");
+	 if( allJob.attr("checked") ){
+	 	allJob.attr("checked", false);
+	 }else{
+		allJob.attr("checked", true); 
+	 }
+});
+
+	$("#selAll").click(function(){
+		 var allObj = $("input[name='job_checkbox']");
+		 if( $(this).attr("checked") ){
+			 allObj.attr( "checked", true );
+			// $(this).attr("checked", true);		 } else {
+			 
+		 } else {
+			 allObj.attr( "checked", false )
+		 }
+	});
+</script>
+<br>
+<br>
+
+<h1 onClick="$(this).alertWhi()">用jQuery.fn.extend扩展jQuery元素提供的新方法！&nbsp;</h1>
+
+
+
+<div><input name="test"  id="test" value="多选例子" type="button"/><input name="test2"  id="test2" value="单选例子" type="button"/></div>
+<div>结果id：<input type='text' id='resvals-a' value='这里存放结果id' size=50></div>
+<div>结果文本：<input type='text' id='restxts' value='这里存放结果文本' size=50></div>
+
+
+<div style="border:2px groove #F00; cursor:pointer;" id="id23">23</div>
+<script type="text/javascript">
+$("#id23").click(function(){
+	$("#id23").html(twoFn());
+	//alert(twoFn())
+	function twoFn(){
+		var htmlDiv = "<div id='a1'>a111</div>";
+		htmlDiv += "<div id='a2'>a2222</div>";
+		return htmlDiv;
+		
+//			var TITLE = "最多能选择5项！";
+//			var CLOSE = "<span id='_cancel' style='cursor:pointer;'>[取消]</span>&nbsp;&nbsp;<span id='_ok' style='cursor:pointer;'>[确定]</span>";
+//			//头部
+//			var htmlDiv = "<div id='heads'><div id='headdiv'><span id='title'>" + TITLE + "</span><span id='close'>" + CLOSE + "</span></div>";
+//			//内容容器创建部分
+//			htmlDiv += "<div id='container'></div></div>";
+//			return htmlDiv;
+	}
+	
+});
+var after = $("<div id='after'></div>");
+$("#id23").append(after);
+after.append($("<h3>after element</h3>"));
+
+
+</script>
+
+<div class="life">原生js选中class名1</div>
+<div class="life" id="life2">原生js选中class名2</div>
+
+<script type="text/javascript">
+
+/*原生js取得类名*/
+var stringL = "123";
+//alert(stringL.length);//字符串长度
+function getByClass(className){
+	var nodes = document.getElementsByTagName("*");
+	var classArr = [];
+	for(var i=0; i<nodes.length; i++){
+		 if(hasClass(nodes[i], className)){
+			classArr.push(nodes[i]); //把符合的添加到数组中
+		 }
+	}
+	return classArr;
+}
+function hasClass(node, className){
+	var name = node.className.split(/\s+/); //类名是空隔分开的
+	//alert(name.length) //1
+	for(var i=0; i<name.length; i++){
+		if(name[i]==className){
+			//alert(name[i])
+			return true;
+		}
+	}
+	return false;
+}
+
+
+//alert(window.getBoundingClientRect)
+</script>
+
+</body>
+</html>

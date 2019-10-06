@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assert.css">
+  <script src="../assert.js"></script>
+  <title>对迭代器进行迭代</title>
+</head>
+<body>
+
+<script>
+  // 定义生成器1
+  function* WeaponGenerator() {
+    yield 'Kat'
+    // yield* 将执行权交给另一个生成器
+    yield* WarGenerator()
+    yield null
+  }
+
+  function* WarGenerator () {
+    yield 'war-Sun'
+    yield 'war-moon'
+  }
+
+  const weaponIterator = WeaponGenerator()
+  for (let item of weaponIterator) {
+    assert(item !== null, item)
+  }
+
+
+
+</script>
+
+</body>
+</html>

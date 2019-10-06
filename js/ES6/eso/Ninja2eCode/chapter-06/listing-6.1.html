@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Using a generator to generate a sequence of values</title>
+		<link rel="stylesheet" href="../assert.css">
+		<script src="../assert.js"></script>
+	</head>
+	<body>
+		<script>
+			"use strict"
+			function* WeaponGenerator(){
+				yield "Katana";
+				yield "Wakizashi";
+				yield undefined;
+				yield "Kusarigama";
+			}
+
+			for(let weapon of WeaponGenerator()) {
+			  assert(weapon !== undefined, weapon);
+			}
+      assert(null, 'Fail')
+      assert(false, 'Fail')
+      assert(true, 'true')
+		</script>
+	</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>使用派生类进行继承</title>
+</head>
+<body>
+
+<script>
+  // 使用派生类进行继承
+  function fun1 () {
+    // ES6之前实现继承
+    // rectangle
+    function Rectangle (width, height) {
+      this.width = width
+      this.height = height
+    }
+
+    Rectangle.prototype.getArea = function () {
+      return this.width * this.height
+    }
+
+    // square
+    function Square (length) {
+      Rectangle.call(this, length, length)
+    }
+
+    //
+    Square.prototype = Object.create(Rectangle.prototype, {
+      constructor: {
+        value: Square,
+        enumerable: true,
+        writable: true,
+        configurable: true
+      }
+    })
+
+    var square = new Square(3)
+    console.log(square.getArea())
+    console.log(square instanceof Rectangle)
+    console.log(square instanceof Square)
+  }
+  fun1()
+
+  // ES6 继承
+  function fun2 () {
+
+    class Rectangle {
+      constructor (width, height) {
+        this.width = width
+        this.height = height
+      }
+
+      getArea () {
+        return this.width * this.height
+      }
+    }
+
+    // extends
+    class Square extends Rectangle {
+      constructor (length) {
+        // super
+        super(length, length)
+      }
+
+      getArea () {
+        return this.width * this.width + 10
+      }
+
+      getAreaBase () {
+        return super.getArea()
+      }
+    }
+
+    var d = function () {
+      // 无构造器
+      class Square extends  Rectangle {
+        //
+      }
+      class Square extends  Rectangle {
+        // 等价于无构造器
+        constructor (...args) {
+          super(...args)
+
+        }
+      }
+    }
+
+    let square = new Square(9)
+    console.log(square.getArea())
+    console.log(square.getAreaBase()) // base class
+    console.log(square instanceof Square)
+    console.log(square instanceof Rectangle)
+  }
+  fun2()
+
+  // 继承静态类成员
+  function fun3 () {
+    class Rectangle {
+      constructor (width, height) {
+        this.width = width
+        this.height = height
+      }
+
+      getArea () {
+        return this.width * this.height
+      }
+
+      static create(width, height) {
+        return new Rectangle(width, height)
+      }
+    }
+
+    class Square extends Rectangle {
+      constructor (width, height) {
+        //	与Rectangle.call(this,	length,	length)	相同
+        super(width, height)
+      }
+    }
+
+    var rect = Square.create(4, 3)
+    console.log(rect.getArea())
+    console.log(rect instanceof Rectangle)
+  }
+  fun3()
+
+</script>
+
+</body>
+</html>

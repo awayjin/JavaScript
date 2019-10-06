@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assert.css">
+  <script src="../assert.js"></script>
+  <title>Promise</title>
+</head>
+<body>
+
+
+
+<section class="d">
+  <bar id="quadrangle">四边形 <div>33</div></bar>
+  <h3 id="circle">圆</h3>
+  <div id="triangle">三角形</div>
+</section>x
+
+<script>
+  // 仔细研究Promise的执行顺序
+  report('1 At code start')
+
+  // 延迟执行
+  var delayedPromise = new Promise(function (resolve, reject) {
+    report('2 delayedPromise executor')
+    setTimeout(() => {
+      report('8 resolving delayedPromise')
+      resolve('Hat')
+    }, 500)
+  })
+
+  assert(delayedPromise !== null, '3 After creating delayedPromise')
+
+  delayedPromise.then(data => {
+    assert(data === 'Hat', '9 delayedPromise resolve handled with Hat')
+  })
+
+  report('4 ---2--------------')
+
+  // 立即执行
+  var immediatePromise = new Promise((resolve, rejecte) => {
+    report('5 immediatePromise executor. Immediate resolve.')
+    resolve('Yoshi')
+  })
+
+  immediatePromise.then(data => {
+    assert(data === 'Yoshi', '7 immediatePromise resolve handled with Yoshi')
+  })
+
+  report('6 At code end')
+</script>
+
+</body>
+</html>

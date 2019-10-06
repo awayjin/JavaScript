@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<p id="capabilityDetection" title="cc"></p>
+<script>
+/*
+    1.0 能力检测
+        1.1 更可靠的能力检测
+
+*/
+
+//1.0能力检测
+    function getElement(id){
+        if(document.getElementById){
+            return document.getElementById(id);
+        }else if(document.all){
+            return document.all[id];
+        }else{
+            throw new Error("No way to retrieve element.!");
+        }
+    }
+
+//    alert( document.all['capabilityDetection']);
+
+//1.1 更可靠的能力检测
+    function isSortable(object){
+        return typeof object.sort == 'function'; //false
+        return !!object.sort; //true
+    }
+    var result = isSortable({sort: true});
+    console.log('1.1：', result)
+    console.log('1.1：', result)
+
+</script>
+</body>
+</html>

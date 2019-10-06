@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <style>
+        .mask{ background-color: #000; z-index: 3; position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; display: block; opacity: 0.5; filter:alpha(opacity=50);display: block;}
+
+    </style>
+</head>
+<body>
+<!--<link type="text/css" rel="stylesheet" href="./skins/green.css">-->
+
+
+<div class="base-dialog">
+    <div class="dialog-title">标题</div>
+    <div class="dialog-content">
+        内容
+    </div>
+    <div class="dialog-button">
+        <button class="button-text"><span>确定</span></button>
+        <button class="button-text"><span>取消</span></button>
+    </div>
+</div>
+
+<script>
+    var count = 2000;
+//    var testName = {};
+    for(var i=count; i>=0; i--){
+        eval("testName"+i + "="+ i );
+//         testName[i] = i ;
+    }
+
+
+    ;(function(window, undefined){
+        var start = +new Date();
+
+       for(var i=0; i<count; i++){
+           document.write("<br>"+window["testName"+i]);
+//           document.write("<br>"+window.testName[i]);
+       }
+
+        var end = +new Date();
+        console.log("时间1:", end- start);
+    })(window);
+
+
+    ;(function(){
+        var start = +new Date();
+
+        for(var i=0; i<count; i++){
+            document.write("<br>"+window["testName"+i]);
+//            document.write("<br>"+window.testName[i]);
+
+        }
+
+        var end = +new Date();
+        console.log("时间2:", end- start);
+    })();
+
+
+</script>
+
+<style type="text/css">
+    .base-dialog{ width: 270px; height: 170px; background-color: #fff; color: #fff; border: 1px solid #c0bfbf;}
+    .dialog-title{ height: 32px; line-height: 32px; text-indent: 1em; background-color: #000; }
+    .dialog-content{ height: 100px;}
+    .dialog-button{ height: 60px;}
+</style>
+
+<script>
+    (function(){
+
+        var $ = window.jan = function(){
+            return new $.prototype.constructor();
+        }
+        $.prototype = $.fn  = {
+            constructor: function(){
+
+            },
+
+            hasClass: function(){
+
+            }
+        }
+
+
+        var janDialog =  function(config, ok, cancle){
+
+            config = config || {};
+
+            if(typeof config === "string"){
+                config = {content: config};
+            }
+
+            var api, defaults = janDialog.defaults;
+
+
+            return new janDialog.prototype._create();
+        }
+
+
+        janDialog.prototype = janDialog.fn  = {
+            _create: function(){
+                var dom;
+
+                this.dom = dom = this.dom || this._innerHTML();
+
+                return this;
+
+                var div = document.createElement("div");
+                div.className = "dialogWrap";
+                div.innerHTML =  this._innerHTML()
+                document.body.appendChild(div);
+
+
+            },
+
+
+
+            _innerHTML: function(){
+                return janDialog._templates;
+            },
+
+            close: function(){
+
+            }
+        };
+
+        janDialog.fn._create.prototype = janDialog.fn;
+
+
+        janDialog._templates =
+                   '<div class="base-dialog">'
+                   +      '<div class="dialog-title">标题</div>'
+                   +      '<div class="dialog-content">'
+                   +            '内容'
+                   +      '</div>'
+                   +      '<div class="dialog-button">'
+                   +          '<button class="button-text"><span>确定</span></button>'
+                   +         '<button class="button-text"><span>取消</span></button>'
+                   +    '</div>'
+                   + '</div>';
+
+        //默认配置
+        janDialog.defaults = {
+
+        }
+
+        jan.dialog = janDialog;
+
+
+
+    })()
+
+
+    jan.dialog();
+    jan.dialog("好好的", function(){
+        alert(1111);
+    });
+</script>
+</body>
+</html>

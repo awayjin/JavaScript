@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <style>
+    .tab-navs {
+      text-align: center
+    }
+
+    .tab-navs .navs-slider {
+      display: inline-block
+    }
+
+    .tab-navs a {
+      float: left;
+      font-size: 18px;
+      width: 4em;
+      line-height: 35px;
+      color: #000000;
+      text-decoration: none;
+    }
+
+    .tab-navs a.active {
+      color: #0f88eb
+    }
+    .tab-navs .navs-slider .navs-slider-bar {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      margin: 0 .8em;
+      width: 2.4em;
+      height: 2px;
+      background: #0f88eb;
+    }
+    .tab-navs .navs-slider {
+      position: relative;
+      display: inline-block
+    }
+    .tab-navs .navs-slider .navs-slider-bar {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      margin: 0 .8em;
+      width: 2.4em;
+      height: 2px;
+      background: #0f88eb;
+    }
+    .tab-navs .navs-slider {
+      font-size: 18px;
+      position: relative;
+      display: inline-block
+    }
+    .tab-navs .navs-slider[data-active-index="1"] .navs-slider-bar {
+      left: 4em;
+      -webkit-transition: left .15s ease-in;
+      transition: left .15s ease-in
+    }
+  </style>
+</head>
+<body>
+<div class="tab-navs">
+  <div class="navs-slider">
+    <a href="#signup" class="active">注册</a>
+    <a href="#signin">登录</a>
+    <span class="navs-slider-bar"></span>
+  </div>
+</div>
+<script>
+
+
+  $(window).on("hashchange", function() {
+    var $arr = $(".tab-navs a");
+    var hash = window.location.hash || $arr.filter(".active").attr("href");
+    var $a = $arr.filter(function() {
+      return $(this).attr("href") === hash
+    });
+    $a.addClass("active").siblings().removeClass("active");
+    $a.parent().attr("data-active-index", $a.index());
+  })
+</script>
+
+
+<a href="https://blog.csdn.net/qq_28506819/article/details/71077788?utm_source=blogxgwz0">深度揭秘ES6代理Proxy</a>
+<a href="https://www.oschina.net/translate/use-cases-for-es6-proxies">6 个 ES6 代理使用案例 </a>
+<a href="https://zhuanlan.zhihu.com/p/25201287">tab切换跟随标签 </a>
+
+<pre>
+  1.代理是什么？
+  代理Proxy是一个构造函数，它可以接受两个参数：目标对象（target） 与句柄对象（handler） ，返回一个代理对象Proxy，
+  主要用于从外部控制对对象内部的访问.
+
+  2.代理对象可覆盖的14个方法
+    handler.get() 用于拦截对象的读取操作属性
+    handler.set() 方法用于拦截设置属性值的操作
+
+  3.代理使用的场景
+</pre>
+<pre>
+  1.1那么Proxy、target、handler这三者之间有什么关系呢？
+  Proxy的行为很简单：将Proxy的所有内部方法转发至target。
+  即调用Proxy的方法就会调用target上对应的方法。那么handler又是用来干嘛的？handler的方法可以覆写任意代理的内部方法。
+  外界每次通过Proxy访问target 对象的属性时，就会经过 handler 对象，因此，我们可以通过重写handler对象中的一些方法来做一些拦截的操作。以下是一个简单的代理使用例子。
+
+</pre>
+<script>
+  let target = {}
+  let proxy = new Proxy(target, {})
+  proxy.name = 'proxy'
+  // console.log(proxy.name) // 'proxy'
+  // console.log(target.name) // 'proxy'
+
+  proxy.name = 'target'
+  // console.log(proxy.name) // 'target'
+  // console.log(target.name) // 'target'
+
+  // 代理
+  var person = {
+    name: 'John',
+    age: 22
+  }
+
+  // 拦截器的作用
+  var p = new Proxy(person, {
+    get: function (target, prop, receiver) {
+      console.log(target)
+      console.log(prop)
+      console.log(receiver)
+      console.log('you have visited person of property.')
+      return target['name']
+    }
+  })
+  console.log(p.age)
+  <img src="../../../../../../jinwei/taobao/巧虎/qiaohu-2018-10.jpg"/></script>
+</body>
+</html>

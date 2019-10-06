@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script src="JSON-js-master/json2.js"></script>
+<script>
+//alert(Object.prototype.toString.call(JSON))
+</script>
+<script>
+/*1.0 语法
+ *	1.1 简单值
+ 	1.2 对象
+	1.3 数组
+ 
+  2.0 解析与序列化 stringify(param1, param2, param3)	
+  	2.1 JSON对象(子集、eval() json2.js) 
+	
+	2.2 序列化选项
+		 a.过滤结果 [] function(key, value)
+		 b.字符串缩进 JSON.stringify(book, null, 4)
+		 c. toJSON()方法
+	
+	2.3 解析选项	 
+		 a.JSON.parse(book);
+		 b. JSON.parse(book, function(key, value){});
+		
+  		
+ */
+
+//2.3 toJSON()方法
+var book = {
+	title: "toJSON title",
+	toJSON: function(){
+		return this.title;	
+	},
+	edition: 3	
+	
+};
+var jsonText = JSON.stringify(book);
+console.log(jsonText)
+
+
+var jsonString = {
+	"name": "json name",
+	"arr": [12, 31],
+	"attribute": {'cc': 'aa'}	
+}; 
+
+//2.2 a第二个参数是数组 
+//var stringJSON = JSON.stringify(jsonString, ["attribute", 'name']);
+//alert(stringJSON)
+
+//2.2 b第二个参数是函数
+var stringText = JSON.stringify(jsonString, function(key, value){
+		switch(key){ 
+			case "name":
+				return 'function param name';
+			default:
+				return value;
+		}
+		
+});
+//alert(stringText['name']); //undefined
+
+//2.3 param3控制字符串缩进
+var param3Text = JSON.stringify(jsonString, null, " *");
+//alert(param3Text);
+
+
+
+
+//3.0 Parse
+var parseString = JSON.parse(stringText);
+//alert(parseString['name'])
+
+
+</script>
+
+</body>
+</html>

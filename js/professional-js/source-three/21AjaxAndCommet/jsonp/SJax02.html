@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="./Sjax-2.0.js"></script>
+</head>
+<body>
+<button  onclick="btn()">click me</button>
+
+<p id="p1" class="selector">p1</p>
+
+<script>
+/*
+ 跨域请求之JSONP 二
+
+ 续上篇，加两个实用功能
+
+ 1，增加data属性，请求参数
+ 2，增加scope属性，可以让回调函数在指定的上下文中执行
+
+
+ 接口如下
+
+ ?
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ Sjax.load(url, {
+ data        // 请求参数 (键值对字符串或js对象)
+ success     // 成功后回调函数
+ scope       // 回调函数执行上下文
+ timestamp   // 是否加时间戳
+ });
+
+*/
+function btn(){
+//    window.print();
+
+    Sjax.load(
+        "jsonp.php?callback=jsonp",
+            {
+                data: {a:1, b:2, c: [11, 22]},
+                success: function(obj){
+                    document.getElementById("p1").innerHTML = obj.name;
+                },
+                timestamp: true
+            }
+    )
+}
+</script>
+</body>
+</html>

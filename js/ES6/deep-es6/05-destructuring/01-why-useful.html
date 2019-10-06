@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  let options = {
+    repeat: true,
+    save: false
+  }
+  // 从对象中提取数据
+  let repeat = options.repeat
+  let save = options.save
+
+  // 对象结构
+  let node = {
+    type: 'Identifier',
+    name: 'foo'
+  }
+  var { type, name } = node
+  console.log(type)
+  console.log(name)
+
+</script>
+</body>
+</html>

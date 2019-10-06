@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>adaptive-width自适应宽度布局</title>
+</head>
+<body>
+
+<div class="outer">
+  <div class="fixed">fixed</div>
+  <div class="auto">auto</div>
+</div>
+
+<br>
+<br>
+<br>
+<div style="clear: both" >
+  <!--<img src="http://www.w3school.com.cn/i/eg_cute.gif" alt="">-->
+  <span class="two">float</span>
+  Text TestText TestText TestText TestText TestText TestText TestText TestText TestText TestText TestText Test3Text TestText Test4Text Test5 Text TestText TestText TestText TestText TestText TestText TestText Test
+</div>
+
+<style>
+  .two { float: right; border: 1px solid green; padding: 50px; }
+
+
+  .outer { font-size: 0; }
+  .fixed {
+    width: 200px;
+    transform: translateZ(0);
+    background-color: darkgrey;
+  }
+  .fixed, .auto {
+    height: 300px;
+    outline: 1px solid;
+    display: inline-block;
+    font-size: 14px;
+  }
+  .auto {
+    margin-left: -200px;
+    padding-left: 200px;
+    box-sizing: border-box;
+    width: 100%;
+    vertical-align: top;
+    outline: 1px solid green;
+  }
+
+</style>
+</body>
+</html>

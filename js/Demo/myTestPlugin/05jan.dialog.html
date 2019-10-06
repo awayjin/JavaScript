@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link type="text/css" href="./skins/blue.css" rel="stylesheet">
+    <!--<script src="./janDialog/artDialog.js"></script>-->
+
+
+</head>
+<body>
+
+<script>
+    ;(function(window, undefined){
+        var $ = window.jan = function(selector){
+            return new $.prototype.constructor(selector);
+        };
+
+        $.fn = $.prototype = {
+            constructor: function(selector){
+                if(selector.nodeType == 1){
+
+                }
+            }
+        }
+        $.fn.constructor.protottype = $.fn;
+
+        if(window.$ === undefined){
+            window.$ = $
+        }
+
+        return $;
+
+    })(window);
+
+    ;(function(){
+
+        var _count = 0,
+                _expando = "janDialog" + (+new Date());
+
+        //入口位置
+        var janDialog = function(config, ok, cancle){
+
+            config = config || {};
+
+            var api, defaults = janDialog.defaults;
+
+            //合并默认配置
+            for(var i in defaults){
+                if(config[i] === undefined){
+                    config[i] = defaults[i];
+                }
+            }
+
+            config.id = _expando+_count;
+
+            return new janDialog.fn._create(config, ok, cancle);
+        }
+
+        janDialog.fn = janDialog.prototype = {
+            //创建实例
+            _create: function(config, ok, cancle){
+                var dom;
+
+                this.jinwei = "hello";
+                this.dom = dom = this.dom || this._innerHTML(config);
+
+                this.title(config.title);
+
+            },
+
+            _innerHTML: function(data){
+                var wrap;
+
+                wrap = document.createElement("div");
+                wrap.innerHTML = janDialog._templates.replace(/{([^}]+)}/g,
+                function(matches, $1, $2, $3){
+                    var value = data[$1];
+                    return typeof value == "string" ? value : "";
+                });
+
+                document.body.insertBefore(wrap, document.body.firstChild);
+
+                var dom = {},
+                        name,
+                        elsLen = wrap.getElementsByTagName("*");
+
+                return dom;
+            },
+
+            title: function(msg){
+                var dom = this.dom;
+
+            }
+
+        }
+
+        janDialog.fn._create.prototype = janDialog.fn;
+
+
+        janDialog.defaults = {
+            content: "",
+
+            lock: false,
+
+            skin: null,
+
+            title: "message"
+        };
+
+        janDialog._templates =
+                '<div class="d-outer" role="dialog" tabindex="-1" aria-labelledby="d-title-{id}" aria-describedby="d-content-{id}">'
+                        +	'<table class="d-border">'
+                        +		'<tbody>'
+                        +			'<tr>'
+                        +				'<td class="d-nw"></td>'
+                        +				'<td class="d-n"></td>'
+                        +				'<td class="d-ne"></td>'
+                        +			'</tr>'
+                        +			'<tr>'
+                        +				'<td class="d-w"></td>'
+                        +				'<td class="d-c">'
+                        +					'<div class="d-inner">'
+                        +					'<table class="d-dialog">'
+                        +						'<tbody>'
+                        +							'<tr>'
+                        +								'<td class="d-header">'
+                        +									'<div class="d-titleBar">'
+                        +										'<div id="d-title-{id}" class="d-title"></div>'
+                        +										'<a class="d-close" href="javascript:;">×</a>'
+                        +									'</div>'
+                        +								'</td>'
+                        +							'</tr>'
+                        +							'<tr>'
+                        +								'<td class="d-main">'
+                        +									'<div id="d-content-{id}" class="d-content"></div>'
+                        +								'</td>'
+                        +							'</tr>'
+                        +							'<tr>'
+                        +								'<td class="d-footer">'
+                        +									'<div class="d-buttons"></div>'
+                        +								'</td>'
+                        +							'</tr>'
+                        +						'</tbody>'
+                        +					'</table>'
+                        +					'</div>'
+                        +				'</td>'
+                        +				'<td class="d-e"></td>'
+                        +			'</tr>'
+                        +			'<tr>'
+                        +				'<td class="d-sw"></td>'
+                        +				'<td class="d-s"></td>'
+                        +				'<td class="d-se"></td>'
+                        +			'</tr>'
+                        +		'</tbody>'
+                        +	'</table>'
+                        +'</div>';
+
+        $.dialog = janDialog;
+
+    })();
+
+    $.dialog({
+        lock: true
+    })
+
+
+</script>
+
+
+<script>
+//    $.dialog("cc", function(){})
+
+</script>
+
+</body>
+</html>

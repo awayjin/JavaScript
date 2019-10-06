@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  var b;
+  void function(){
+    var env = {b:1};
+    b = 2;
+    console.log("In function b:", b);
+    with(env) {
+      var b = 3;
+      console.log("In with b:", b);
+    }
+  }();
+  console.log("Global b:", b);
+
+
+  // realm
+  var iframe = document.createElement('iframe')
+  document.documentElement.appendChild(iframe)
+  iframe.src="javascript:var b = {};"
+
+  var b1 = iframe.contentWindow.b;
+  var b2 = {};
+
+  console.log(iframe.contentWindow)
+  console.log(typeof b1, typeof b2); //object object
+
+  console.log(b1 instanceof Object, b2 instanceof Object); //false true
+
+</script>
+</body>
+</html>

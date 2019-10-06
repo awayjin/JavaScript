@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <script src="/js/jquery-1.7.2.js"></script>
+
+</head>
+<body>
+<nav>
+    <a href="javascript:;" onclick="jqXML()">jQ AjaxL</a>
+    <a href="javascript:;" onclick="originXML()">原生ajax</a>
+  </nav>
+
+
+<script>
+    //1.0 jQ加载XML
+    function jqXML(){
+        $.ajax({
+            type: "get",
+            url: "02response.php",
+            dataType: "xml",
+            success: function(msg){
+                 console.log( $(msg).find("title"))
+            }
+        });
+    }
+
+    //2.0 原生ajax
+    function originXML(){
+        var xhr = XHR();
+        xhr.open("post", "02response.php", true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if(xhr.status >=200 && xhr.status<300 || xhr.status == 304){
+                    console.log(xhr.responseText, xhr.responseXML);
+                }
+            }
+        }
+        xhr.overrideMimeType("text/xml");
+        xhr.send(null);
+
+
+
+    }
+
+    // xhr兼容性
+    function XHR(){
+        /*
+         0:未初始化。未调用open方法
+         1:启动。 已调用open方法，但未调用send方法
+         2:发送。 已调用send方法，但未收到响应
+         3:接收。	己接到部分响应数据
+         4:完成。 接到全部响应数据，且可以在客户端使用
+         */
+        if(typeof XMLHttpRequest !== 'undefined'){
+            return new XMLHttpRequest();
+        }else if(typeof ActiveXObject !== 'undefined'){
+            return new ActiveXObject("MSXML2.XMLHttp.6.0");
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assert.css">
+  <script src="../assert.js"></script>
+  <title>向生成器抛出异常</title>
+</head>
+<body>
+
+
+
+<section class="d">
+  <bar id="quadrangle">四边形 <div>33</div></bar>
+  <h3 id="circle">圆</h3>
+  <div id="triangle">三角形</div>
+</section>x
+
+<script>
+
+  function* NinjaGenerator() {
+    try {
+      yield 'Hat'
+      fail('The expected exception did not occur.')
+    } catch (e) {
+      assert(e === 'Catch this!', 'We caught an exception.')
+    }
+  }
+
+  const ninjaIterator = NinjaGenerator()
+
+  const result1 = ninjaIterator.next()
+  assert(result1.value === 'Hat', 'We got Hat!')
+
+  // 向生成器抛出一个异常
+  ninjaIterator.throw('Catch this!')
+</script>
+
+</body>
+</html>

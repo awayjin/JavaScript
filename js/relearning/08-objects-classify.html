@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>对象分类</title>
+</head>
+<body>
+
+<script>
+
+  var set = new Set();
+  var objects = [
+    eval,
+    isFinite,
+    isNaN,
+    parseFloat,
+    parseInt,
+    decodeURI,
+    decodeURIComponent,
+    encodeURI,
+    encodeURIComponent,
+    Array,
+    Date,
+    RegExp,
+    Promise,
+    Proxy,
+    Map,
+    WeakMap,
+    Set,
+    WeakSet,
+    Function,
+    Boolean,
+    String,
+    Number,
+    Symbol,
+    Object,
+    Error,
+    EvalError,
+    RangeError,
+    ReferenceError,
+    SyntaxError,
+    TypeError,
+    URIError,
+    ArrayBuffer,
+    SharedArrayBuffer,
+    DataView,
+    Float32Array,
+    Float64Array,
+    Int8Array,
+    Int16Array,
+    Int32Array,
+    Uint8Array,
+    Uint16Array,
+    Uint32Array,
+    Uint8ClampedArray,
+    Atomics,
+    JSON,
+    Math,
+    Reflect];
+  objects.forEach(o => set.add(o));
+
+  console.log('objects start:' + objects.length)
+  for(var i = 0; i < objects.length; i++) {
+    var o = objects[i]
+    for(var p of Object.getOwnPropertyNames(o)) {
+      var d = Object.getOwnPropertyDescriptor(o, p)
+      if( (d.value !== null && typeof d.value === "object") || (typeof d.value === "function"))
+        console.log('----d----:' + 'bool:' + typeof d.value)
+        console.log(d)
+        console.log('o:')
+        console.log(o)
+        // debugger
+      if(!set.has(d.value))
+          set.add(d.value), objects.push(d.value);
+      if( d.get )
+        // debugger
+        if(!set.has(d.get))
+          set.add(d.get), objects.push(d.get);
+      if( d.set )
+        if(!set.has(d.set))
+          set.add(d.set), objects.push(d.set);
+    }
+  }
+  console.log('objects End:' + objects.length);
+
+/**
+ * Object.getOwnPropertyNames()方法返回一个由指定对象的所有自身属性的属性名
+ * （包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组
+ * Object.getOwnPropertyDescriptor() 方法返回指定对象上一个自有属性对应的属性描述符
+ * */
+  (function () {
+    var arr = RegExp;
+    for (var value of Object.getOwnPropertyNames(arr)) {
+
+      var d = Object.getOwnPropertyDescriptor(arr, value)
+      console.log('------1...-------value:' + value + '----d.value:' + d.value + ', d.get:' + d.get)
+      console.log(d)
+      console.log('         \n')
+      if (d.get) break
+
+      // console.log(p)
+
+      // var op = Object.getOwnPropertyNames(RegExp);
+      // var d = Object.getOwnPropertyDescriptor(RegExp, 'input'); d.get
+    }
+  })()
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assert.css">
+  <script src="../assert.js"></script>
+  <title>通过迭代器对象控制生成器</title>
+</head>
+<body>
+
+<script>
+  // 定义生成器
+  function* WeaponGenerator() {
+    yield 'Kat'
+    yield 'Wild'
+  }
+
+  // 调用生成器得到一个迭代器，控制生成器的执行
+  const weaponIterator = WeaponGenerator()
+
+  const result1 = weaponIterator.next()
+  assert(typeof result1 === 'object'
+    && result1.value === 'Kat'
+    && !result1.done,
+    'Kat received.')
+
+  const result2 = weaponIterator.next()
+  const result3 = weaponIterator.next()
+  console.log(result1)
+  console.log(result2)
+  console.log(result3)
+
+
+</script>
+
+</body>
+</html>

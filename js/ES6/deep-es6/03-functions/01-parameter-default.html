@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Default Parameter Values in ECMAScript 6</title>
+</head>
+<body>
+
+<script>
+  function es5Func(timeout) {
+    timeout = timeout || 2000
+    console.log(timeout) // 2000
+    // timeout = (typeof timeout !== 'undefined') ? timeout : 2000 // ES5这种模式很常用
+    // console.log(timeout) // 0
+  }
+  es5Func(0)
+
+  // Default Parameter Values in ECMAScript 6
+  function makeRequest(url, timeout = 2000) {
+    console.log(url)
+    console.log(timeout)
+  }
+  makeRequest('example.com',  0)
+</script>
+
+</body>
+</html>

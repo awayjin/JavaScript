@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // function sleep (duration) {
+  //   return new Promise(function (resolve, rejected) {
+  //     setTimeout(resolve, duration)
+  //   })
+  // }
+  //
+  // async function foo() {
+  //   console.log('a')
+  //   await foo(2000)
+  //   console.log('b')
+  // }
+
+  function sleep(duration) {
+    return new Promise(function(resolve, reject) {
+      setTimeout(resolve, duration)
+    })
+  }
+  async function foo(name){
+    await sleep(2000)
+    console.log(name)
+  }
+  async function foo2(){
+    await foo("a");
+    await foo("b");
+  }
+  foo2()
+
+  async function f2() {
+    var y = await 20;
+    console.log(y); // 20
+  }
+  f2();
+
+</script>
+</body>
+</html>
