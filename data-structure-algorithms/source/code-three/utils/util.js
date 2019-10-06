@@ -11,3 +11,15 @@ export function defaultToString (item) {
   console.log(111, '--', item.toString())
   return item.toString()
 }
+
+// valuePair - 保存两个值:原始的 key 和 value
+export class ValuePair {
+  constructor (key, value) {
+    this.key = key
+    this.value = value
+  }
+
+  toString () {
+    return `[#${this.key}: ${this.value}]`
+  }
+}

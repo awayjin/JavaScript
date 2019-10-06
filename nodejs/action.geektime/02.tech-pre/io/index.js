@@ -32,7 +32,7 @@ async function asyncGlob () {
   let result = null
   console.time('glob')
   // 异步 I/O
-  // result = await glob(__dirname + '/**/*', function (err, files) { // 同步
+  // result = await glob(__dirname + '/**/*', function (err, files) {
   glob(__dirname + '/**/*', function (err, files) { // 同步
     return result = files
     // console.log(files)

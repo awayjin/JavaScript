@@ -56,26 +56,6 @@ export class Deque {
     return item
   }
 
-  removeFront2() {
-    if (this.isEmpty()) {
-      return undefined;
-    }
-    const result = this.items[this.lowestCount];
-    delete this.items[this.lowestCount];
-    this.lowestCount++;
-    return result;
-  }
-
-  removeBack2() {
-    if (this.isEmpty()) {
-      return undefined;
-    }
-    this.count--;
-    const result = this.items[this.count];
-    delete this.items[this.count];
-    return result;
-  }
-
   // peek
   peek () {
     if (this.isEmpty()) {

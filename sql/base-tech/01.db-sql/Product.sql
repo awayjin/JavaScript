@@ -26,7 +26,7 @@ COMMIT;
 
 INSERT INTO Product
 VALUES
-	( '0001', 'T恤衫', '衣服', 1000, 500, '2009-09-20' );
+	( '0004', '菜刀', '厨房用具', 2000, 500, '2009-09-20' );
 	
 	
 ALTER TABLE Product DROP COLUMN demo_alter;
@@ -34,6 +34,6 @@ ALTER TABLE Product DROP COLUMN demo_alter;
 rename table product to pro_demo;
 rename table pro_demo to Product;
 
-SELECT * from Product;
+SELECT * from Product where  product_type='厨房用具';
 
 

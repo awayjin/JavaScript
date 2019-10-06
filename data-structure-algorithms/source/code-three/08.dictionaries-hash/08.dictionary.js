@@ -1,22 +1,10 @@
-import { defaultToString } from '../utils/util'
+import { defaultToString, ValuePair } from '../utils/util'
 // console.log(defaultToString(3))
 // console.log(defaultToString('3'))
 // console.log(defaultToString(null))
 // console.log(defaultToString(undefined))
 // console.log(defaultToString({})) // "[object Object]"
 // console.log(defaultToString(new String(3)))
-
-// valuePair - 保存两个值:原始的 key 和 value
-class ValuePair {
-  constructor (key, value) {
-    this.key = key
-    this.value = value
-  }
-
-  toString () {
-    return `[#${this.key}: ${this.value}]`
-  }
-}
 
 // 字典
 export class Dictionary {

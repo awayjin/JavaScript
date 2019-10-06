@@ -1,4 +1,6 @@
 // 函数定义4种方式
+// 必选参数前需要传值
+// 函数重载 - 参数类型和个数不同
 
 console.log(
   Array(20).join('-'),
@@ -6,6 +8,7 @@ console.log(
   Array(20).join('-')
 )
 
+// 函数定义
 function add1Fun(x: number, y: number) {
   return x + y
 }
@@ -20,7 +23,7 @@ let add3Fun: (x: number, y: number) => number
 type add3Fun2 = (x: number, y: number) => number
 // console.log('add3Fun:', add3Fun(10, 5))
 
-// 通过接口定义函数类型
+// 通过接口定义 函数类型
 interface add4Func {
   readonly id: number;
   (x: number, y: number): number

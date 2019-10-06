@@ -86,5 +86,20 @@ C = Math.PI * d
   }
 </script>
 
+
+<script>
+  class Greeter {
+    greeting: string;
+    constructor (message: string) {
+      this.greeting = message
+    }
+    greet () {
+      return 'Hi, ' + this.greeting
+    }
+  }
+
+  let g = new Greeter()
+  console.log(g.greet())
+</script>
 </body>
 </html>

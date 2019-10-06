@@ -23,6 +23,7 @@
   - 分包2：预编译资源模块，将基础包打包成一个文件。方法使用 DLLPlugin 进行分包
   - 压缩3： 图片压缩, 用 loader，配置 image-webpack-loader
   - 优化4: tree shaking(摇树优化), css: purgecss-webpack-plugin
+  - code splitting 动态 import
 
 2. HMR 的实现原理-Hot Modules Replacement
    HMR Server 服务端(通过 WebSocket) -> HMR Runtime 浏览器(可看 hot-update.js) ->
@@ -47,7 +48,7 @@ webpack的原理, loader 和 plugin 是干什么的? 有自己手写过么 ?
 大致说了一下,webpack解析模块, loader和plugin的作用, 没有手写过, 看过一部分代码
 
 tree-shaking 的工作原理
-code splitting用的是什么插件
+code splitting 用的是什么插件
 如何提高 webpack 构件速度的
 
 利用 DllPlugin 预编译资源模块

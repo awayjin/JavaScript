@@ -1,1 +1,0 @@
-console.log('this is a script. from 26.script.js')

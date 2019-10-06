@@ -70,7 +70,7 @@ runLoaders({
 
 - pwd 命令用于显示工作目录
 
-## 3. 核心概念之 Loaders
+## 核心概念之 Loaders
 > 定义: 只是一个导出为函数的 JavaScript 模块。
 多个 loader 串行执行，顺序从后到前。
 
@@ -94,3 +94,6 @@ webpack 开箱即用只支持 JS 和 JSON 两种文件类型，通过 Loaders �
 本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图（和最终的 bundle）可以直接引用的模块。
 
 本身是一个函数，接受源文件作为参数，返回转换的结果。
+
+## 插件 
+复制目录: cp -r loader-order my-plugin

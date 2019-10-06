@@ -173,34 +173,39 @@ interface SquareConfig {
 
 
 // 3. 函数类型接口
-let add2 = (x: number, y: number) => x + y // 用一个变量定义函数类型
-// console.log('add3:', add3(4, 5))
+// 用一个变量定义函数类型
+// let add1: (x: number, y: number) => number = function(x: number, y: number): number {
+//   return x + y
+// }
+let add1: (x: number, y: number) => number = (x: number, y: number) => x +y
 
-// 函数类型接口
-interface Add3 {
+// 函数类型接口 -- 和 add1 等价
+interface add2 {
   (x: number, y: number): number
 }
 
-// 类型别名
-type Add4 = (x: number, y: number) => number
-//
-let add33: Add3 = (a, b) => a + b;
-let add44: Add4 = (a, b) => a + b;
-console.log('add2 add2:', add2(3, 5))
-console.log('函数类型接口 add33:', add33(4, 5))
-console.log('类型别名 add44:', add44(14, 15))
+// 类型别名 - 为这个函数起一个名字
+type add3 = (x: number, y: number) => number
 
-// 混合类型接口
+let add22: add2 = (a, b) => a + b;
+let add33: add3 = (a, b) => a + b;
+console.log('用一个变量定义函数类型 add11:', add1(2, 3))
+console.log('函数类型接口 add22:', add22(4, 5))
+console.log('类型别名 add33:', add33(14, 15))
+
+/*------------------------------------------------------------------*/
+// 4. 混合类型接口
 interface Lib {
   (): void;
   version: string;
-  doSomething(): void
+  doSomething (): void // 方法
 }
 
 // 创建多个实例
 function getLib () {
-  let lib: Lib = (() => {}) as Lib; // 类型断言 -- 全局单例
-  lib.version = '1.0.1'
+  // let lib: Lib = (() => {}) as Lib // 类型断言 -- 全局单例
+  let lib: Lib = <Lib>(() => {}) // 尖括号-类型断言
+  lib.version = '0.1.1'
   lib.doSomething = () => 'doSomething'
   return lib
 }

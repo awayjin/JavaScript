@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+<script type="module">
+  import { HashTableSeparateChaining } from './08-03.hash-table-separate-chaining.js'
+
+  let hash = new HashTableSeparateChaining()
+
+  // 散列值相同 - collision
+  hash.put('Jamie', 'Jamie@qq.com')
+  hash.put('Sue', 'Sue@qq.com')
+
+  console.log(hash)
+  console.log(hash.get('Sue'))
+  console.log(hash.get('dd'))
+  console.log(hash.get('Jamie'))
+  console.log(hash.remove('Jamie'))
+  console.log(hash.get('Jamie'))
+
+
+</script>
+</body>
+</html>
