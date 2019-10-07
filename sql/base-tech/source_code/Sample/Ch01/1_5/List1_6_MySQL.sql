@@ -1,12 +1,12 @@
 --MySQL
--- DML:²åÈëÊý¾Ý
+-- DML:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 START TRANSACTION;
-INSERT INTO Product VALUES ('0001', 'TÐô' ,'ÒÂ·þ', 1000, 500, '2009-09-20');
-INSERT INTO Product VALUES ('0002', '´ò¿×Æ÷', '°ì¹«ÓÃÆ·', 500, 320, '2009-09-11');
-INSERT INTO Product VALUES ('0003', 'ÔË¶¯TÐô', 'ÒÂ·þ', 4000, 2800, NULL);
-INSERT INTO Product VALUES ('0004', '²Ëµ¶', '³ø·¿ÓÃ¾ß', 3000, 2800, '2009-09-20');
-INSERT INTO Product VALUES ('0005', '¸ßÑ¹¹ø', '³ø·¿ÓÃ¾ß', 6800, 5000, '2009-01-15');
-INSERT INTO Product VALUES ('0006', '²æ×Ó', '³ø·¿ÓÃ¾ß', 500, NULL, '2009-09-20');
-INSERT INTO Product VALUES ('0007', '²Á²Ë°å', '³ø·¿ÓÃ¾ß', 880, 790, '2008-04-28');
-INSERT INTO Product VALUES ('0008', 'Ô²Öé±Ê', '°ì¹«ÓÃÆ·', 100, NULL, '2009-11-11');
+INSERT INTO Product VALUES ('0001', 'Tï¿½ï¿½' ,'ï¿½Â·ï¿½', 1000, 500, '2009-09-20');
+INSERT INTO Product VALUES ('0002', 'ï¿½ï¿½ï¿½ï¿½ï¿½', 'ï¿½ì¹«ï¿½ï¿½Æ·', 500, 320, '2009-09-11');
+INSERT INTO Product VALUES ('0003', 'ï¿½Ë¶ï¿½Tï¿½ï¿½', 'ï¿½Â·ï¿½', 4000, 2800, NULL);
+INSERT INTO Product VALUES ('0004', 'ï¿½Ëµï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ã¾ï¿½', 3000, 2800, '2009-09-20');
+INSERT INTO Product VALUES ('0005', 'ï¿½ï¿½Ñ¹ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ã¾ï¿½', 6800, 5000, '2009-01-15');
+INSERT INTO Product VALUES ('0006', 'ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ã¾ï¿½', 500, NULL, '2009-09-20');
+INSERT INTO Product VALUES ('0007', 'ï¿½ï¿½ï¿½Ë°ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ã¾ï¿½', 880, 790, '2008-04-28');
+INSERT INTO Product VALUES ('0008', 'Ô²ï¿½ï¿½ï¿½', 'ï¿½ì¹«ï¿½ï¿½Æ·', 100, NULL, '2009-11-11');
 COMMIT;
