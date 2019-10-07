@@ -1,6 +1,6 @@
 const path = require('path')
 // 自定义插件
-const MyPlugin = require('./plugins/my-plugin.js')
+const MyPlugin = require('./plugins/zip-plugin.js')
 
 module.exports = {
   entry: './src/index.js',
@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
     new MyPlugin({
       dd: 33,
-      name: 'my plugin.'
+      filename: 'offline'
     })
   ]
 }

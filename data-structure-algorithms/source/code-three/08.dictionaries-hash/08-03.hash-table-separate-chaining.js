@@ -41,6 +41,7 @@ export class HashTableSeparateChaining {
   }
 
   // put - 将键和值加入散列表
+  // 分离链接
   put (key, value) {
     if (key != null && value != null) {
       let position = this.hashCode(key)

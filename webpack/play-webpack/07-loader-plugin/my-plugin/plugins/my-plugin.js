@@ -9,3 +9,4 @@ module.exports = class MyPlugins {
     // console.log('compiler:', compiler)
   }
 }
+
