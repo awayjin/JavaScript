@@ -103,14 +103,22 @@ SELECT distinct product_type from Product;
 
 -- 2.2 算术运算符和比较运算符
 SELECT *, sale_price * 2 as 'sale_price_*2' FROM Product;
+SELECT sale_price * 3  FROM Product;
 
 SELECT *, (sale_price * 2 + 2 - 1 ) / 2 as 'sale_price_*2' FROM Product;
 
 SELECT *, sale_price * NULL as 'sale_price_*2' FROM Product;
 
+SELECT (200+100) * 3 AS calculation;
 
+-- 不等于
+select *, sale_price - 1000 FROM Product where sale_price <> 500;
 
-
+SELECT * FROM Product;
+SELECT * FROM Product
+WHERE product_type = '办公用品'
+AND (regist_date = '2009-09-11'
+OR regist_date = '2009-09-20');
 
 
  
