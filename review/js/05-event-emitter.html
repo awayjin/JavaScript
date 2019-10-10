@@ -44,7 +44,7 @@ microTask 早于 task 被执行。
         delete this._events[event]
       }
     }
-    // 只触发一次
+    // 只触发一次;
     once (event, ...args) {
       let callbacks = this._events[event]
       if (callbacks){

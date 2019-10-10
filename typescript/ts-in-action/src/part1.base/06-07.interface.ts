@@ -134,7 +134,9 @@ interface Names {
   // [zac: number]: number;
 }
 
-let stra: StringArray = ['3']
+let nam: Names = { a: '3'}
+let str2: StringArray = ['3']
+let str3: StringArray = { 2: '3'}
 // let nam: Names = ['a3', '3']
 // let namd2: Names = '3'
 

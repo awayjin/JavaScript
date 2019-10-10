@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+<script type="module">
+import { HashTable } from './08-02.hash-table.js'
+
+let hash = new HashTable()
+
+// 散列值相同 - collision
+hash.put('Jamie', 'Jamie@qq.com')
+hash.put('Sue', 'Sue@qq.com')
+hash.put('Sue', 'Sue2@qq.com')
+hash.put('Sue', 'Sue3@qq.com')
+
+hash.put('Athelstan', 'Athelstan@qq.com')
+
+hash.put('ASue', 'Sue@qq.com')
+hash.put('ASue', 'Sue@qq.com')
+hash.put('ASue', 'Sue@qq.com')
+
+console.log(hash)
+console.log('Jamie', hash.get('Jamie'))
+console.log('Sue',hash.get('Sue'))
+console.log('Athelstan',hash.get('Athelstan'))
+</script>
+</body>
+</html>

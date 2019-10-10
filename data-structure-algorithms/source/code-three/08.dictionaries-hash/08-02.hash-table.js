@@ -1,4 +1,4 @@
-import { defaultToString, ValuePair } from '../utils/util'
+import { defaultToString, ValuePair } from '../utils/util.js'
 
 // 散列表
 export class HashTable {
@@ -29,6 +29,19 @@ export class HashTable {
 
     // 为了得到比较小的数值，我们会使用 hash 值 和一个任意数做除法的余数(%)
     return hash % 37
+  }
+
+  // 创建更好的散列函数 - djb2HashCode
+  djb2HashCode (key) {
+    const tableKey = this.toStrFn(key)
+    // 赋值为一个质数
+    let hash = 5381
+
+    for (let i = 0; i < tableKey.length; i++) {
+      // 将 hash 与 33 相乘（用作一个幻数①）
+      hash = (hash * 33) + tableKey.charCodeAt(i)
+    }
+    return hash % 1013
   }
 
   // hashCode

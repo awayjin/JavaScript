@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  function factorial (n) {
+    // 在浏览器的控制台中查看结果
+    console.trace()
+    if (n === 0 || n === 1) {
+      return 1
+    }
+    return n * factorial(n - 1)
+  }
+  factorial(3)
+
+  function a () {
+    // debugger
+  }
+  a()
+</script>
+</body>
+</html>
