@@ -1,3 +1,5 @@
+
+
 drop table Product;
 CREATE TABLE Product
 (product_id      CHAR(4)      NOT NULL,

@@ -87,19 +87,39 @@ export class HashTableLinearProbling {
 
   // get - 从散列表中获取一个值
   get (key) {
-    const position = this.hashCode(key)
-    const linkedList = this.table[position]
+    // 线性探查 - linear probing
+    let position = this.hashCode(key)
+    if (this.table[position] != null) {
+      let valuePair = this.table[position]
+      if (valuePair.key === key) {
+        return valuePair.value
+      }
 
-    if (linkedList != null && !linkedList.isEmpty()) {
-      let current = linkedList.getHead()
-      while (current != null) {
-        if (current.element.key === key) {
-          return current.element.value
-        }
-        current = current.next
+      let index = position + 1
+      while (this.table[index] != null && this.table[index].key !== key) {
+        index++
+      }
+
+      if (this.table[index] != null && this.table[index].key  === key) {
+        return this.table[index].value
       }
     }
     return undefined
+
+    // 分离链接
+    // const position = this.hashCode(key)
+    // const linkedList = this.table[position]
+    //
+    // if (linkedList != null && !linkedList.isEmpty()) {
+    //   let current = linkedList.getHead()
+    //   while (current != null) {
+    //     if (current.element.key === key) {
+    //       return current.element.value
+    //     }
+    //     current = current.next
+    //   }
+    // }
+    // return undefined
 
     // const valuePair = this.table[this.hashCode(key)]
     // return valuePair != null ? valuePair.value : null

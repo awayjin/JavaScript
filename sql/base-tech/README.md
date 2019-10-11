@@ -26,3 +26,19 @@ https://www.jianshu.com/p/e5c9e8ef8ccb
 
 Mac navicat破解：
 https://www.52pojie.cn/thread-957406-1-1.html
+
+windows 安装可能的问题
+
+cdtMS7gurW+%
+
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码';
+
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER; #修改加密规则 
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'; #更新一下用户的密码 
+
+FLUSH PRIVILEGES; #刷新权限
+
+重置密码：alter user 'root'@'localhost' identified by 'xzx123456';
