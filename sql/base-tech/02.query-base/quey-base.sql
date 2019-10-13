@@ -53,3 +53,8 @@ INSERT INTO Chars VALUES('5');
 INSERT INTO Chars VALUES('3');
 INSERT INTO Chars VALUES('1');
 COMMIT;
+
+
+
+
+

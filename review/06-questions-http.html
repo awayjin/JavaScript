@@ -79,5 +79,30 @@ async + await => babel 后 的 generator 实现
 粘性定位元素
 
 
+<script>
+  var promise = new Promise(function (resolve, reject) {
+    // resolve('resolve')
+    reject('reject')
+  })
+
+  promise
+    .then(function (data) {
+      console.log('data:', data)
+    }, err1 => {
+      console.log('err1:', err1)
+      // throw new Error('1 err')
+      return new Promise(function (resolve, reject) {
+        resolve('resolve2')
+        // reject('reject2')
+      })
+    })
+    .then(data2 => {
+      console.log(data2)
+    })
+    .catch(err => {
+      console.log('err2:', err)
+    })
+</script>
+
 </body>
 </html>
