@@ -5,6 +5,8 @@
   <title>Title</title>
 </head>
 
+
+
 <pre>
 1. Promise 是否了解，如何实现一个 promise
   <a href="https://github.com/forthealllight/blog/issues/4">
@@ -51,6 +53,64 @@
 
 </pre>
 
+
+
+1. 为什么要有 Promise？
+解决回调地狱.
+
+2. Promise 概念.
+状态：pending, resolve, reject
+常用方法：then, catch, all, race
+
+3. 异步编程的终极解决方案: async - await
+语法糖。
+
+<script>
+  try {
+    interview(function (arg) {
+      console.log(arg)
+    })
+  } catch (e) {
+    console.log('error:', e)
+  }
+
+  function interview (callback) {
+    // setTimeout(function () {
+      if (Math.random() > 0.5) {
+        // console.log('succeed')
+        callback(null, 'succeed')
+      } else {
+        // console.log('cry')
+        // throw new Error('failed')
+        callback(new Error('failed'))
+      }
+    // }, 50)
+  }
+
+
+
+  interview(function (err, arg) {
+    if (err) {
+      return console.log('cry at 1st round:', err)
+    }
+    console.log('smile at 1st round.:', arg)
+
+    // 回调地狱
+    interview(function (err) {
+      if (err) {
+        return console.log('cry at 2nd round')
+      }
+
+      interview(function (err) {
+        if (err) {
+          return console.log('cry at 3rd round')
+        }
+        console.log('smile. I passed the interview at 3rd rounds.')
+      })
+
+    })
+  })
+</script>
 
 
 </body>

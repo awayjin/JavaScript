@@ -82,3 +82,57 @@ function identity13(arg: number) : number {
 function identity14 <T> (arg: T): T {
   return arg
 }
+
+
+// 1. 一个函数接受字符串数组
+// 函数重载
+function log1(value: string): string;
+function log1(value: number): number;
+function log1(value: string[]): string[];
+
+// 联合类型
+function log1(value: string | number |  string[]): string | number | string[] {
+  if (typeof value === 'string') return 'str'
+  if (typeof value === 'number') return 'number'
+  if (typeof value === 'object') return ['11', '22']
+  return value
+}
+
+// 泛型
+function log11<T>(value: T): T {
+  return value
+}
+
+// 泛型调用
+log11<string[]>(['1', '2']) // 字符串数组
+log11<number[]>([1, 2]) // 数值数组
+log11([1, 2]) // 类型推断
+log11(['1', '2'])
+
+// 2. 不仅可以用 泛型 定义函数，也可以用泛型定义函数类型
+// 类型别名
+type Log22 = (x: number, y: number) => number
+type Log222 = <T>(value: T) => T
+let myLog22: Log22 = function (value) { return value}
+let myLog222: Log222 = log11
+
+// 3. 泛型接口
+interface Log3 {
+  <T>(value: T): T
+}
+
+// 当泛型变量约束整个接口后，实现必须指定一个类型
+interface Log33<T> {
+  (value: T): T
+}
+let myLog33: Log33<string> = (value: string) => {
+  return '3'
+}
+let myLog333: Log33<number> = log11
+
+
+// 接口定义中指定一个默认类型
+interface Log333<T = string> {
+  (value: T): T
+}
+let myLog3333: Log333 = data => data
