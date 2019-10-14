@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // 斐波那契数列 - 从第三项开始, 每项等于前两项之和
+  function fibonacci(n) {
+    if (n <= 0) {
+      return 0
+    }
+    if (n <= 2) {
+      return 1
+    }
+
+    return fibonacci(n - 1) + fibonacci(n - 2)
+  }
+
+  // 记忆化是一种保存前一个结果的值的优化技术，类似于缓存
+  let fibonacciMemory = function (n) {
+    // const mem = [0, 1]
+    const mem = [0, 1]
+    const fibonacci = (n) => {
+      console.log('mem[n]:', mem[n], ', :n', n, ', mem:', mem)
+      // debugger
+      if (mem[n] !== undefined) return mem[n]
+      // return mem[n] = fibonacci(n - 1, mem) + fibonacci(n - 2, mem)
+      // console.trace()
+      return mem[n] = fibonacci(n - 1) + fibonacci(n - 2)
+    }
+    return fibonacci
+  }()
+  console.log(fibonacciMemory(3))
+</script>
+
+</body>
+</html>

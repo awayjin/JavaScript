@@ -21,6 +21,18 @@
     // debugger
   }
   a()
+
+  let i = 0
+  function recursiveFn () {
+    // console.log(i++)
+    i++
+    recursiveFn()
+  }
+  try {
+    recursiveFn()
+  } catch (e) {
+    console.log('i = ', i, ' e:', e)
+  }
 </script>
 </body>
 </html>
