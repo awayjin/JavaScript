@@ -52,3 +52,33 @@ void function () {
       console.log('err2:', err)
     })
 }()
+
+// 经过多轮的面试
+void function () {
+  // 经过多轮的面试 - promise
+  function interview (round) {
+    return new Promise(function (resolve, reject) {
+      let random = Math.random()
+      if (random > 0.1) {
+        resolve(round + ', r:' + random)
+      } else {
+        reject(new Error(`failed: at ${round} round, random:${random}`))
+      }
+    })
+  }
+
+  interview(1)
+    .then(() => {
+      return interview(2)
+    })
+    .then(() => {
+      return interview(3)
+    })
+    .then((data) => {
+      console.log('smile, data:', data)
+    })
+    .catch((err) => {
+      console.log('cry err:', err)
+    })
+
+}()
