@@ -128,6 +128,33 @@
       return this.then.call(this, null, cb)
     }
   }
+
+
+  // 经过多轮的面试
+  function interview (round) {
+    return new Promise(function (resolve, reject) {
+      let random = Math.random()
+      if (random > 0.1) {
+        resolve(round + ', r:' + random)
+      } else {
+        reject(new Error(`failed: at ${round} round, random:${random}`))
+      }
+    })
+  }
+
+  interview(1)
+    .then(() => {
+      return interview(2)
+    })
+    .then(() => {
+      return interview(3)
+    })
+    .then((data) => {
+      console.log('smile, data:', data)
+    })
+    .catch((err) => {
+      console.log('cry err:', err)
+    })
 </script>
 </body>
 </html>
