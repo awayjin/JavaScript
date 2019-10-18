@@ -21,7 +21,9 @@ app.get('/articles', (req, res, next) => {
 
 // create 创建一篇文章
 app.post('/articles', (req, res, next) => {
-  const article = { title: req.body.title }
+  const article = { title: req.body.title, b: req.body }
+  console.log('req.body:', req.body)
+  console.log('req.body.a:', req.body.data)
   articles.push(article)
   res.send(articles)
 })

@@ -62,45 +62,84 @@ Promise 必须处于三个状态:
 实现一个符合 `Promise/A+` 规范的基础 Promise:
 ```javascript
 class Promise {
-  constructor (fn) {
-    this.status = 'pending' // pending, resolved, rejected
-    this.value = null // 成功返回值
-    this.reason = null // 失败原因
-    
-    // 成功回调
-    let resolve = (value) => {
-      if (this.status === 'resolved') {
-        this.status = 'resolved'
-        this.value = value
+    constructor (fn) {
+      this.status = 'pending' // pending, resolved, rejected
+      this.value = null // 成功返回值
+      this.reason = null // 失败原因
+
+      // 成功回调
+      let resolve = (value) => {
+        if (this.status === 'pending') {
+          this.status = 'resolved'
+          this.value = value
+        }
+      }
+      // 失败回调
+      let reject = (value) => {
+        if (this.status === 'pending') {
+          this.status = 'rejected'
+          this.reason = value
+        }
+      }
+
+      try {
+        fn(resolve.bind(this), reject.bind(this))
+      } catch (e) {
+        reject.bind(this)
       }
     }
-    // 失败回调
-    let reject = () => {
-      if (this.status === 'rejected') {
-        this.status = 'rejected'
-        this.value = value
+    // then 方法
+    then (onResolved, onRejected) {
+      if (this.status === 'resolved' &&
+        this.getType(onResolved) === 'Function'
+      ) {
+        onResolved.call(this, this.value)
       }
+      if (this.status === 'rejected' &&
+        this.getType(onRejected) === 'Function'
+      ) {
+        onRejected.call(this, this.reason)
+      }
+      return this
     }
-    
-    try {
-      fn(resolve.bind(this), reject.bind(this))
-    } catch (e) {
-      reject.bind(this)
+    // 获取数据类型
+    getType (val) {
+      return Object.prototype.toString.call(val).slice(8, -1)
+    }
+    // 失败
+    catch (cb) {
+      // if (this.status === 'rejected') return this
+      return this.then.call(this, null, cb)
     }
   }
-  // then 方法
-  then (onResolved, onRejected) {
-    if (this.status === 'resolved') {
-      onResolved.call(this, this.value)
-    }
-    if (this.status === 'rejected') {
-      onRejected.call(this, this.value)
-    }
-    return this
-  }
-  // 失败
-  catch (cb) {
-    return this.then.call(this, null, cb)
-  }
-}
+
+  let p1 = new Promise(function (resolve, reject) {
+    // resolve(11)
+    reject('err-22')
+  })
+  p1
+    .then(
+      data =>  console.log(data), 
+      err1 => console.log('err1:', err1)
+     )
+    .catch(err2 => console.log('err2:', err2))
 ``` 
+
+## 异步编程 Promise 会出现的问题.
+如下例子, 会在全局抛出异常, try-catch 并未捕获到. 似乎出乎意料.
+```javascript
+// Uncaught (in promise) Error: err!!!
+void function() {
+   try {
+      new Promise((resolve, reject) => {
+        // reject('err!!!') // Uncaught (in promise) err!!!
+        throw new Error('err!!!')
+      })
+    } catch (e) {
+       console.log('e2:', e)
+    }
+}()
+```
+
+为什么未捕获到? 
+简单解释一下, 当函数调用时会形成一个全新的调用栈(call stack)

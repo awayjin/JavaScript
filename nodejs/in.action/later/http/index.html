@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+
+<button id="post"> post</button>
+
+<script>
+  let post = document.getElementById('post')
+  post.addEventListener('click', () => {
+    let json = JSON.stringify({
+      a: 1
+    })
+
+    console.log('json:', json)
+
+    let options = {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        // 内容类型
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'Jin',
+        value: 'this is a value.'
+      })
+    }
+    let url = `http://${location.host}/articles?action=rock`
+    fetch(url, options)
+      .then(data => data.text())
+      .then(res => {
+        console.log('res:', res)
+      })
+  })
+</script>
+
+</body>
+</html>

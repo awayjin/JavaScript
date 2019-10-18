@@ -75,6 +75,31 @@ curl -X DELETE http://localhost:3000/articles/0
 一般来说，它给出的是易于处理的 JSON 数据。只要网站上有涉及提交表单的请求，服务器端就肯定会有一个消息体解析器来参与这个请求的处理。
 
 JSON 消息体解析和表单编码消息体解析
+```javascript
+// 支持编码为 JSON 的请求消息体
+app.use(bodyParser.json())
+// 支持编码为表单的请求消息体
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
+```
 
-表单:
+创建一篇文章, 表单格式:
 curl --data 'title=til 3' http://localhost:3000/articles
+
+## 4. 添加数据库
+就往 Node 程序中添加数据库而言，一般会涉及下面几个步骤:
+- 决定想要用的数据库系统。
+-  在 npm 上看看那些实现了数据库驱动或对象关系映射（ORM）的热门模块。
+- 用 npm --save 将模块添加到项目中。
+- 创建模型，封装数据库访问 API。
+- 把这些模型添加到 Express 路由中。
+
+选哪个数据库?
+
+SQLite 是进程内数据库，所以很方便：你不需要在系统上安装一个后台运行的数据库。你添加的所有数据都会写到一个文件里，也就是说程序停掉后再起来时数据还在
+
+### 4.1 制作自己的模型 API
+
+ 
+ 

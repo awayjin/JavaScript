@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  class Promise {
+    constructor (fn) {
+      this.status = 'pending' // pending, resolved, rejected
+      this.value = null // 成功返回值
+      this.reason = null // 失败原因
+
+      // 成功回调
+      let resolve = (value) => {
+        if (this.status === 'pending') {
+          this.status = 'resolved'
+          this.value = value
+        }
+      }
+      // 失败回调
+      let reject = (value) => {
+        if (this.status === 'pending') {
+          this.status = 'rejected'
+          this.reason = value
+        }
+      }
+
+      try {
+        fn(resolve.bind(this), reject.bind(this))
+      } catch (e) {
+        reject.bind(this)
+      }
+    }
+    // then 方法
+    then (onResolved, onRejected) {
+      if (this.status === 'resolved' &&
+        this.getType(onResolved) === 'Function'
+      ) {
+        onResolved.call(this, this.value)
+      }
+      if (this.status === 'rejected' &&
+        this.getType(onRejected) === 'Function'
+      ) {
+        onRejected.call(this, this.reason)
+      }
+      return this
+    }
+    // 获取数据类型
+    getType (val) {
+      return Object.prototype.toString.call(val).slice(8, -1)
+    }
+    // 失败
+    catch (cb) {
+      // if (this.status === 'rejected') return this
+      return this.then.call(this, null, cb)
+    }
+  }
+
+  let p1 = new Promise(function (resolve, reject) {
+    // resolve(11)
+    reject('err-22')
+  })
+  p1
+    .then(data =>  console.log(data), err1 => console.log('err1:', err1))
+    .catch(err2 => console.log('err2:', err2))
+  console.log(p1)
+</script>
+
+
+<script>
+  function dd() {
+    try {
+      // return new Error('err--')
+      return 0
+    } catch(e) {
+      console.log(e)
+    } finally {
+      console.log('finally...')
+      return  11
+    }
+  }
+  dd()
+</script>
+
+</body>
+</html>
