@@ -35,4 +35,7 @@ select DISTINCT (purchase_price) FROM product;
 -- DISTINCT 必须写在括号中
 select COUNT(DISTINCT (product_type)) FROM product;
 
+-- 使不使用DISTINCT时的动作差异（SUM函数）
+SELECT SUM(sale_price), SUM(distinct sale_price) FROM product;
+
 

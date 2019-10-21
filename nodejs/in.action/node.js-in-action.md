@@ -102,4 +102,10 @@ SQLite 是进程内数据库，所以很方便：你不需要在系统上安装�
 ### 4.1 制作自己的模型 API
 
  
- 
+## 5. 让文章可读并把它存起来
+
+node-readability 这个模块提供了一个异步函数，可以下载指定 URL 的页面并将 HTML 转换成简化版.
+
+把任何网页变成一个干净的视图。
+
+curl --data "url=http://manning.com/cantelon2/" http://localhost:3000/articles

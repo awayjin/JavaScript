@@ -7,5 +7,5 @@
 
 当在客户端输入一个 URL, 经过 DNS 查询把 IP 返回给客户端, 客户端再拿这个 IP 请求真正的服务器.
 
-!['dns-ip']('./dns-ip.png')
+![dns-ip](dns-ip.png)
 

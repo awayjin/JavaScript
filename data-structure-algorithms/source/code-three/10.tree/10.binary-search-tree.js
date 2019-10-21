@@ -54,18 +54,30 @@ class BinarySearchTree {
       if (node.left === null) {
         node.left = new Node(key)
       } else {
-        console.log('node.left:', node.left)
         this.insertNode(node.left, key)
       }
     } else {
       if (node.right === null) {
         node.right = new Node(key)
       } else {
-        console.log('node.right:', node.right)
         this.insertNode(node.right, key)
       }
     }
   }
+
+  // 中序遍历
+  inOrderTraverse (cb) {
+    this.inOrderTraverseNode(this.root, cb)
+  }
+  // 中序遍历-递归
+  inOrderTraverseNode (node, cb) {
+    if (node != null) {
+      this.inOrderTraverseNode(node.left, cb)
+      cb(node.key)
+      this.inOrderTraverseNode(node.right, cb)
+    }
+  }
+
 }
 
 export default BinarySearchTree

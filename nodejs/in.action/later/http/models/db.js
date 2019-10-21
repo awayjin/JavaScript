@@ -3,6 +3,7 @@ const dbName = 'later.sqlite'
 const db = new sqlite3.Database(dbName)
 
 db.serialize(() => {
+  // db.run('drop table articles') // 删除表
   const sql = `
     CREATE TABLE IF NOT EXISTS articles
       (id integer primary key, title, content TEXT)
@@ -21,9 +22,12 @@ class Article {
     db.get('SELECT * FROM articles WHERE id = ?', id, cb)
   }
 
+  // 创建一篇文章
   static create(data, cb) {
-    const sql = 'INSERT INTO articles VALUES(?, ?)'
-    db.run(sql, data.title, data.content, cb)
+    // const sql = 'INSERT INTO articles VALUES(?, ?)'
+    // db.run(sql, data.title, data.content, cb)
+    const sql = 'INSERT INTO articles VALUES(?, ?, ?)'
+    db.run(sql, 333, data.title, data.content, cb)
   }
 
   static delete(id, cb) {
