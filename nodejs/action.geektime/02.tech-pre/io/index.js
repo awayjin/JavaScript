@@ -19,13 +19,17 @@ async function syncGlob () {
 }
 // syncGlob().then(data =>  console.log(data))
 
-// let result
-// console.time('glob')
-// // 阻塞I/O - 同步递归读取所有文件和文件夹
-// result =  glob.sync(__dirname + '/**/*.js')
-// // console.log('result:', result)
-// console.timeEnd('glob')
-// console.log('后面执行 1 + 1:', 1 + 1) //
+void function(){
+  let result
+  console.time('glob')
+  // 阻塞I/O - 同步递归读取所有文件和文件夹
+  result =  glob.sync(__dirname + '/**/*.js')
+  console.log('阻塞 I/0: result:', result)
+  console.timeEnd('glob')
+  console.log('后面执行 1 + 1:', 1 + 1) //
+}()
+
+console.log(Array(20).join('-'), '非阻塞 I/O')
 
 // 非阻塞I/O - 回调
 async function asyncGlob () {

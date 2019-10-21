@@ -1,0 +1,17 @@
+
+
+message Column {
+    required int32 id = 1;
+    required string name = 2;
+    required float price = 3;
+}
+
+enum FOO {
+    bar = 1;
+}
+
+message Test {
+    required float num = 1;
+    required string payload = 2;
+}
+

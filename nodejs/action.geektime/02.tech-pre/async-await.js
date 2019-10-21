@@ -1,16 +1,33 @@
 
 // async 是 Promise 的语法糖
-// console.log(async function f () {
-//   // return 33
-//   throw new Error(44)
-// }())
-//
-// console.log(function () {
-//   return new Promise(function (resolve, reject) {
-//     // resolve(33)
-//     reject(new Error(44))
-//   })
-// }())
+console.log(async function f () {
+  // return 33
+  throw new Error(44)
+}())
+
+console.log(function () {
+  return new Promise(function (resolve, reject) {
+    // resolve(33)
+    reject(new Error(44))
+  })
+}())
+
+!function() {
+  // 都返回 Promise {<resolved>: 11}
+  console.log(
+    async function() {
+      return 11
+    }()
+  )
+
+  console.log(
+    new Promise((resolve, reject) => {
+      resolve(11)
+    })
+  )
+
+}()
+
 
 
 !function () {
