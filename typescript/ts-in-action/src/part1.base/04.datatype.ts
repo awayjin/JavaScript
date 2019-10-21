@@ -158,10 +158,34 @@ function getLength (something: string | number): string {
 // 有时候你会遇到这样的情况，你会比TypeScript更了解某个值的详细信息
 // 类型断言有两种形式。 其一是“尖括号”语法：
 // 另一个为as语法：
-let someValue: any = 'this is a string.'
-let strLength: number = (<string>someValue).length
-someValue.length
-let strLengthTwo: number = (someValue as string).length
+let someValue: any = "this is a string";
+let strLength: number = (<string>someValue).length;
+// let strLength: number = (<string>someValue).length
+
+// let strAsset1: number = (<string>someValue).length
+// let strAsset2: number = someValue.length
+
+function getLengthAss(something: string | number): number {
+  if ((<string>something).length) {
+    return (something as string).length;
+  } else {
+    return something.toString().length;
+  }
+}
+
+
+interface FooAss {
+  bar: number
+}
+let fooAss = {} as FooAss
+fooAss.bar = 1
+let fooAss2: FooAss = {
+  bar: 3
+}
+
+
+
+// let strLengthTwo: number = (someValue as string).length
 
 // 泛型
 // 我们需要一种方法使返回值的类型与传入参数的类型是相同的。

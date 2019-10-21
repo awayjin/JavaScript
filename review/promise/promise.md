@@ -3,7 +3,7 @@
 本文大致内容：
 1. Promise 解决的问题. 为什么会出现 Promise？
 2. Promise 概念,状态,方法,实现
-3. 异步编程的终极方案
+3. 异步编程的终极方案 async-await
 
 ## 1. 为什么会出现 Promise？
 
@@ -126,8 +126,9 @@ class Promise {
 ``` 
 
 ## 异步编程 Promise 会出现的问题.
-如下例子, 会在全局抛出异常, try-catch 并未捕获到. 似乎出乎意料.
+如下例3：, 会在全局抛出异常, try-catch 并未捕获到. 似乎出乎意料.
 ```javascript
+// 例3：
 // Uncaught (in promise) Error: err!!!
 void function() {
    try {
@@ -142,4 +143,61 @@ void function() {
 ```
 
 为什么未捕获到? 
-简单解释一下, 当函数调用时会形成一个全新的调用栈(call stack)
+当函数调用时会形成一个全新的调用栈(call stack), new Promise 里抛出错误实际相当于执行了一个异步任务，在栈低后执行, 而 try-catch 是在栈顶先执行，所以报错。
+
+注：栈是一个后进先出的顺序数据结构。
+
+
+## 3. 异步编程的终极方案 async/await
+
+async/await：
+
+- async 是 Promise 的语法糖封装。如例4
+- 异步编程的终极方案 – 以同步的方式写异步。如例5
+    - await 关键字可以“暂停”async function的执行
+    - await 关键字可以以同步的写法获取 Promise 的执行结果
+    - try-catch 可以获取 await 所得到的错误. 平常的异步任务 try-catch 是捕捉不到的.
+
+例4:
+```javascript
+// 例4: async 是 Promise 的语法糖
+// 都返回 Promise {<resolved>: 11}
+  console.log(
+    async function() {
+      return 11
+    }()
+  )
+
+  console.log(
+    new Promise((resolve, reject) => {
+      resolve(11)
+    })
+  )
+```
+
+例5:
+```javascript
+
+void async function() {
+   try {
+      await new Promise((resolve, reject) => {
+        // reject('err!!!') // Uncaught (in promise) err!!!
+        throw new Error('err!!!')
+      })
+    } catch (e) {
+      // 能捕获到错误
+       console.log('e2:', e)
+    }
+    // e2: Error: err!!!****
+    
+    // 关键字可以以同步的写法获取 Promise 的执行结果
+    // 11
+    // 22
+    let p2 = await new Promise((resolve, reject) => {
+		resolve(11)
+	})
+    console.log(p2)
+    console.log(22)
+}()
+
+```
