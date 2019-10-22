@@ -108,4 +108,10 @@ node-readability 这个模块提供了一个异步函数，可以下载指定 UR
 
 把任何网页变成一个干净的视图。
 
+通过远程创建一篇文章：
 curl --data "url=http://manning.com/cantelon2/" http://localhost:3000/articles
+
+删除指定文章：
+ curl -X DELETE http://localhost:3000/articles/333
+
+## 6. 支持多种格式

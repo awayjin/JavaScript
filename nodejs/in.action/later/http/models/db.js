@@ -34,7 +34,7 @@ class Article {
     if (!id) {
       return cb(new Error('Please provide an ID'))
     }
-    db.run('DELETE FROM articles id = ?', id, cb)
+    db.run('DELETE FROM articles WHERE id = ?', id, cb)
   }
 }
 
