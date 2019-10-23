@@ -1,23 +1,30 @@
-const net = require('net')
+const net = require('net');
 
-
-// socket 一般代表网络通路的写入与取出的代理对象
+// 创建tcp服务器
 const server = net.createServer((socket) => {
-  // socket.write
-  socket.on('data', (buffer) => {
-    console.log(buffer, buffer.toString())
-    const lessonId = buffer.readInt32BE()
 
-    setTimeout(() => {
-      socket.write(
+  socket.on('data', function(buffer) {
+    console.log('同时发 100 个包:', buffer)
+    const seqBuffer = buffer.slice(0, 2)
+    // 从传来的buffer里读出一个int32
+    const lessonId = buffer.readInt32BE(2);
+
+    // 50毫秒后回写数据
+    setTimeout(()=> {
+      let buffer = Buffer.concat([
+        seqBuffer,
         Buffer.from(data[lessonId])
-      )
-    }, 1000)
+      ])
+      socket.write(
+        buffer
+      );
+    }, 1000 + Math.random() * 1000)
   })
-})
 
-server.listen(4000)
+});
 
+// 监听端口启动服务
+server.listen(4000);
 
 const data = {
   136797: "01 | 课程介绍",
