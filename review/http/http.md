@@ -1,8 +1,16 @@
 # 前端需要了解的 HTTP 协议
 
-在进入学习 HTTP 协议之前, 首先了解一下经典的五层网络模型(协议):
+## 概念介绍
+OSI 是七层模型，TCP/IP 协议分四层。
+[详细介绍](https://blog.csdn.net/qq_39521554/article/details/79894501)
 
-## 五层网络模型
+OSI（Open System Interconnect），即开放式系统互联。
+
+TCP/IP 指传输控制协议/网际协议 (Transmission Control Protocol / Internet Protocol)
+
+OSI是一种理论下的模型，而TCP/IP已被广泛使用，成为网络互联事实上的标准。
+
+## TCP/IP 协议族各层作用
 - 应用层 \
 向应用软件提供服务。如 FTP、DNS、HTTP 等。
 
@@ -16,10 +24,7 @@ HTTP 就是构建于 TCP/IP 协议之上。
 网络层所起的作用就是在众多的选项内选择一条传输路线。 IP (IPv4 · IPv6) 
 
 - 数据链路层 \
-数据链路层在通信的实体间建立数据链路连接。
-
-- 物理层 \
-物理层主要作用是定义物理设备如何传输数据。如：电脑的硬件、网卡、网线、光缆等
+用来处理连接网络的硬件部分。如：电脑的硬件、网卡、网线、光缆等。
 
 ## 引言
 > HTTP 协议（HyperText Transfer Protocol， 超文本传输协议). HTTP 协议是基于 TCP 协议出现的, 规定了 Request-Response 的模式。这个模式决定了通讯必定是由浏览器端首先发起的。
