@@ -1,14 +1,26 @@
 # 前端需要了解的 HTTP 协议
+- 网络协议7层、5层、4层是什么？
 
 ## 概念介绍
+各层对应图：
+![OSI-TCP/IP-Five](osi-tcpip-five.png)
+
+7层是指OSI七层协议模型，主要是：应用层（Application）、表示层（Presentation）、会话层（Session）、传输层（Transport）、网络层（Network）、数据链路层（Data Link）、物理层（Physical）。
+
+5层只是OSI和TCP/IP的综合，是业界产生出来的非官方协议模型。五层体系结构包括：应用层、运输层、网络层、数据链路层和物理层。 
+
+4层是指TCP/IP四层模型，主要包括：应用层、运输层、网际层和网络接口层。
+网络接口层（又名数据链路层，链路层）。
+
+OSI是一种理论下的模型，而 TCP/IP 已被广泛使用，成为网络互联事实上的标准。HTTP 是属于 TCP/IP 协议族的一个子集。
+
 OSI 是七层模型，TCP/IP 协议分四层。
 [详细介绍](https://blog.csdn.net/qq_39521554/article/details/79894501)
 
-OSI（Open System Interconnect），即开放式系统互联。
+> OSI（Open System Interconnect）：开放式系统互联。
+TCP/IP (Transmission Control Protocol / Internet Protocol)：指传输控制协议/网际协议。
+HTTP （HyperText Transfer Protocol)：超文本传输协议
 
-TCP/IP 指传输控制协议/网际协议 (Transmission Control Protocol / Internet Protocol)
-
-OSI是一种理论下的模型，而TCP/IP已被广泛使用，成为网络互联事实上的标准。
 
 ## TCP/IP 协议族各层作用
 - 应用层 \
