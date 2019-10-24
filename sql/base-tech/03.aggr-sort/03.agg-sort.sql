@@ -38,4 +38,83 @@ select COUNT(DISTINCT (product_type)) FROM product;
 -- 使不使用DISTINCT时的动作差异（SUM函数）
 SELECT SUM(sale_price), SUM(distinct sale_price) FROM product;
 
+-- 3-2 对表进行分组
+-- GROUP BY子句
+select product_type FROM Product;
+-- 商品种类来统计一下数据行数（= 商品数量）
+select product_type, count(*) FROM Product GROUP BY product_type;
+select avg(sale_price) FROM Product;
+select max(sale_price) FROM Product ;
+select regist_date, count(*) FROM product GROUP BY regist_date;
+
+-- 聚合键中包含NULL的情况
+select purchase_price, count(*) FROM product GROUP BY purchase_price;
+
+-- 使用WHERE子句时GROUP BY的执行结果
+SELECT purchase_price, count(*), product_type 
+FROM product where product_type='衣服' GROUP BY purchase_price;
+
+
+-- 常见错误1: 与聚合函数和GROUP BY子句有关的常见错误
+SELECT 
+'商品' AS string, product_id as p_id, product_name, 38 as dd
+FROM Product;
+
+SELECT product_id, product_type, count(*) 
+FROM product 
+GROUP BY product_type;
+
+-- 常见错误2 ——在GROUP BY子句中写了列的别名
+-- 这样的写法在其他 DBMS 中并不是通用的
+SELECT product_type AS pt, count(*)
+FROM Product
+GROUP BY pt;
+
+-- 常见错误3 —— GROUP BY子句的结果能排序吗
+-- 答案是：“随机的。”
+
+-- 常见错误4 ——在WHERE子句中使用聚合函数
+SELECT product_type, count(*)
+FROM Product
+-- 只有 SELECT 子句和 HAVING 子句中能够使用 COUNT 等聚合函数
+WHERE COUNT(*) = 2 -- 错误
+GROUP BY product_type;
+
+SELECT product_type, count(*) FROM product GROUP BY product_type having count(*) = 4;
+
+
+-- 在“想要删除选择结果中的重复记录”时使用 DISTINCT，
+-- 在“想要计算汇总结果”时使用 GROUP BY
+select distinct product_type FROM Product;
+select product_type FROM Product GROUP BY product_type;
+select product_type, count(*) FROM Product GROUP BY product_type;
+select purchase_price FROM Product GROUP BY purchase_price;
+select purchase_price, count(*) FROM Product GROUP BY purchase_price;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

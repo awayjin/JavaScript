@@ -1,7 +1,17 @@
-# 前端需要了解的 HTTP 协议
-- 网络协议7层、5层、4层是什么？
+# 程序员需要理解的 HTTP 协议
+- 网络协议7层、5层、4层是什么, 区别是啥？
+- TCP/IP 通信传输流是如何流转的?
 
-## 概念介绍
+## 前言
+> HTTP 协议（HyperText Transfer Protocol， 超文本传输协议). HTTP 协议是基于 TCP 协议出现的, 规定了 Request-Response 的模式。这个模式决定了通讯必定是由客户端首先发起的。
+
+计算机之间的通信是通过 IP 来实现的, 域名只是让大家更好的记住。
+
+当在在浏览器输入一个 URL, 经过 DNS 查询把 IP 返回给浏览器, 浏览器再拿这个 IP 请求真正的服务器.
+
+![dns-ip](dns-ip.png)
+
+## 一. 概念介绍
 各层对应图：
 ![OSI-TCP/IP-Five](osi-tcpip-five.png)
 
@@ -14,15 +24,12 @@
 
 OSI是一种理论下的模型，而 TCP/IP 已被广泛使用，成为网络互联事实上的标准。HTTP 是属于 TCP/IP 协议族的一个子集。
 
-OSI 是七层模型，TCP/IP 协议分四层。
-[详细介绍](https://blog.csdn.net/qq_39521554/article/details/79894501)
-
 > OSI（Open System Interconnect）：开放式系统互联。
 TCP/IP (Transmission Control Protocol / Internet Protocol)：指传输控制协议/网际协议。
 HTTP （HyperText Transfer Protocol)：超文本传输协议
+OSI（Open System Interconnect），即开放式系统互联。
 
-
-## TCP/IP 协议族各层作用
+## 二. TCP/IP 协议族各层作用
 - 应用层 \
 向应用软件提供服务。如 FTP、DNS、HTTP 等。
 
@@ -38,12 +45,17 @@ HTTP 就是构建于 TCP/IP 协议之上。
 - 数据链路层 \
 用来处理连接网络的硬件部分。如：电脑的硬件、网卡、网线、光缆等。
 
-## 引言
-> HTTP 协议（HyperText Transfer Protocol， 超文本传输协议). HTTP 协议是基于 TCP 协议出现的, 规定了 Request-Response 的模式。这个模式决定了通讯必定是由浏览器端首先发起的。
+## 三. TCP/IP 通信传输流
+![TCP/IP 通信传输流](img/tcp-ip-transfer.png)
 
-我们知道计算机之间的通信是通过 IP 来实现的, 域名只是让大家更好的记住.
+利用 TCP/IP 协议族进行网络通信时， 会通过分层顺序与对方进行通
+信。 发送端从应用层往下走， 接收端则往应用层往上走。
 
-当在在浏览器输入一个 URL, 经过 DNS 查询把 IP 返回给浏览器, 浏览器再拿这个 IP 请求真正的服务器.
+##
 
-![dns-ip](dns-ip.png)
+"内容安全策略"(Content Security Policy,缩写 CSP)
 
+
+### 文章参考
+- [一文读懂OSI七层模型与TCP/IP四层的区别/联系](https://blog.csdn.net/qq_39521554/article/details/79894501)
+- 图解 HTTP
