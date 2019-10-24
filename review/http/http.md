@@ -6,7 +6,7 @@ OSI 是七层模型，TCP/IP 协议分四层。
 
 OSI（Open System Interconnect），即开放式系统互联。
 
-TCP/IP 指传输控制协议/网际协议 (Transmission Control Protocol / Internet Protocol)
+TCP/IP 指传输控制协议/互联网协议 (Transmission Control Protocol / Internet Protocol)
 
 OSI是一种理论下的模型，而TCP/IP已被广泛使用，成为网络互联事实上的标准。
 
@@ -35,3 +35,4 @@ HTTP 就是构建于 TCP/IP 协议之上。
 
 ![dns-ip](dns-ip.png)
 
+"内容安全策略"(Content Security Policy,缩写 CSP)
