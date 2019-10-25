@@ -17,17 +17,21 @@
 
 7层是指OSI七层协议模型，主要是：应用层（Application）、表示层（Presentation）、会话层（Session）、传输层（Transport）、网络层（Network）、数据链路层（Data Link）、物理层（Physical）。
 
-5层只是OSI和TCP/IP的综合，是业界产生出来的非官方协议模型。五层体系结构包括：应用层、运输层、网络层、数据链路层和物理层。 
+5层只是OSI和TCP/IP的综合，是业界产生出来的非官方协议模型。五层体系结构包括：应用层、传输层、网络层、数据链路层和物理层。 
 
-4层是指TCP/IP四层模型，主要包括：应用层、运输层、网际层和网络接口层。
-网络接口层（又名数据链路层，链路层）。
+4层是指TCP/IP四层模型，主要包括：应用层、传输层、网络层和链路层。
+链路层（又名数据链路层，网络接口层）。
 
 OSI是一种理论下的模型，而 TCP/IP 已被广泛使用，成为网络互联事实上的标准。HTTP 是属于 TCP/IP 协议族的一个子集。
 
-> OSI（Open System Interconnect）：开放式系统互联。
-TCP/IP (Transmission Control Protocol / Internet Protocol)：指传输控制协议/网际协议。
-HTTP （HyperText Transfer Protocol)：超文本传输协议
-OSI（Open System Interconnect），即开放式系统互联。
+相关专业名词:
+- OSI（Open System Interconnect）：开放式系统互联。
+- TCP/IP (Transmission Control Protocol / Internet Protocol)：指传输控制协议/网际协议。
+- HTTP （HyperText Transfer Protocol)：超文本传输协议，位于应用层。
+- DNS(Domain Name System): 域名系统，位于应用层。
+- IP（ Internet Protocol）：网际协议，位于网络层。
+- UDP（ User Data Protocol）：用户数据报协议，位于传输层。
+- TCP（ Transmission Control Protocol）：传输控制协议，位于传输层。
 
 ## 二. TCP/IP 协议族各层作用
 - 应用层 \
@@ -43,16 +47,30 @@ HTTP 就是构建于 TCP/IP 协议之上。
 网络层所起的作用就是在众多的选项内选择一条传输路线。 IP (IPv4 · IPv6) 
 
 - 数据链路层 \
-用来处理连接网络的硬件部分。如：电脑的硬件、网卡、网线、光缆等。
+用来处理连接网络的硬件部分。如：Mac地址、电脑的硬件、网卡、网线、光缆等。
 
 ## 三. TCP/IP 通信传输流
 ![TCP/IP 通信传输流](img/tcp-ip-transfer.png)
 
-利用 TCP/IP 协议族进行网络通信时， 会通过分层顺序与对方进行通
-信。 发送端从应用层往下走， 接收端则往应用层往上走。
+利用 TCP/IP 协议族进行网络通信时，会通过分层顺序与对方进行通信。 发送端从应用层往下走，接收端则往应用层往上走。
 
-##
+## 四. 与 HTTP 关系密切的协议：IP、TCP 和 DNS
 
+- 负责传输的 IP 协议
+
+IP（ Internet Protocol） 网际协议位于网络层。
+
+IP 协议的作用是把各种数据包传送给对方。 而要保证确实传送到对方
+那里， 则需要满足各类条件。 其中两个重要的条件是 IP 地址和 MAC
+地址（ Media Access Control Address） 。
+
+IP 地址指明了节点被分配到的地址， MAC 地址是指网卡所属的固定
+地址。
+
+- 确保可靠性的 TCP 协议
+
+
+## 安全
 "内容安全策略"(Content Security Policy,缩写 CSP)
 
 
