@@ -6,7 +6,7 @@ module.exports = {
     filename: 'app.js'
   },
   devServer: {
-    port: 3005,
+    port: 3000,
     hot: true
   },
   // 3个扩展名
