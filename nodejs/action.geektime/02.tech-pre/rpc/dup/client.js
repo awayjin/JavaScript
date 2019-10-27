@@ -39,7 +39,7 @@ let lessonIds = [
 let id = Math.floor(Math.random() * lessonIds.length)
 let seq = 0;
 function encode(id) {
-  // 不停的修改
+  // 创建长度为 6 的 Buffer
   let buffer = Buffer.alloc(6) // 扩大 buffer 长度, 把 seq 编进去
   buffer.writeInt16BE(seq++)
   buffer.writeInt32BE(

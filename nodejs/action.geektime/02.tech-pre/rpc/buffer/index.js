@@ -1,33 +1,57 @@
-const buffer1 = Buffer.from('jin')
-const buffer2 = Buffer.from([1, 2, 3, 4, 55])
 
-const buffer3 = Buffer.alloc(5)
+// 创建一个 8 位长度的字符，每 1 位代表它的一个字符
+// 每一位都是 16 进制的数字
+// BE-LE 大端小端排布。高位跟低位的排布
+const buffer1 = Buffer.from('0123-4569') // 字符串
 
-console.log(buffer1)
-console.log(buffer2)
-console.log(buffer3)
+const buffer2 = Buffer.from([1, 2, 3, 4, 11, 55]) // 数字数组
 
-buffer2.writeInt8(12, 1) // 第二位写入12
-console.log(buffer2)
+const buffer3 = Buffer.alloc(5)  // 指定 buffer 长度
 
-buffer2.writeInt16BE(512, 2)
-console.log(buffer2)
+console.log('buffer1:', buffer1)
+console.log('buffer2:', buffer2)
+console.log('buffer3:', buffer3)
+
+buffer2.writeInt8(12, 1) // 第二位写入12, 占用一位
+console.log('writeInt8 buffer2:', buffer2)
+
+buffer2.writeInt16BE(512, 2) // 占用二位
+console.log('writeInt16BE buffer2:', buffer2)
+
+buffer2.writeInt16LE(512, 2) // 占用二位
+console.log('writeInt16LE buffer2:', buffer2)
+
 
 buffer2.writeInt16LE(512, 2)
 console.log(buffer2)
 
+// 创建一个长度为 10、且用零填充的 Buffer
+let buffer4 = Buffer.alloc(10)
+console.log('buffer4:', buffer4)
 
-const fs = require('fs')
-const protobuf = require('protocol-buffers')
+// 创建一个长度为 10、且用 0x1 填充的 Buffer
+let buffer5 = Buffer.alloc(10, 10)
+console.log('buffer5:', buffer5)
 
-const schema = protobuf(fs.readFileSync(__dirname + '/test.proto', 'utf-8'))
+let buffer6 = Buffer.from([1, 2, 3])
+console.log('buffer6:', buffer6)
+buffer6.writeInt16BE()
+console.log('buffer6:', buffer6)
 
-console.log(schema)
 
-const buf = schema.Column.encode({
-  id: 1,
-  name: 'Node.js',
-  price: 98.4
-})
-console.log('解码：', schema.Column.decode(buf))
+console.log(Buffer.from([1, 2, 3, 8, 9, 10, 'A']))
+
+// const fs = require('fs')
+// const protobuf = require('protocol-buffers')
+//
+// const schema = protobuf(fs.readFileSync(__dirname + '/test.proto', 'utf-8'))
+//
+// console.log('schema:', schema)
+//
+// const buf = schema.Column.encode({
+//   id: 1,
+//   name: 'Node.js',
+//   price: 98.4
+// })
+// console.log('解码：', schema.Column.decode(buf))
 
