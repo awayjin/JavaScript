@@ -39,8 +39,9 @@ function selectionSort (array) {
       }
       if (i !== indexMin) {
         // swap(array, i, indexMin)
-        // [array[i], array[indexMin]] = [array[indexMin], array[i]]
+        [array[i], array[indexMin]] = [array[indexMin], array[i]]
       }
+      console.log('i:', i, ', j:', j, ', array:', array)
     }
   }
   return array
