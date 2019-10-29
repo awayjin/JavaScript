@@ -1,4 +1,4 @@
-// JS字符串与二进制的相互转化 https://www.cnblogs.com/it-deepinmind/p/7430025.html
+// JS字符串与二进制的相互转化 https://www.cnblogs.com/i,t-deepinmind/p/7430025.html
 // 字符编码笔记：ASCII，Unicode 和 UTF-8:  http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html
 
 // 1. bit就是位，也叫比特位，是计算机表示数据最小的单位
