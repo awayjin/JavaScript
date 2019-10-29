@@ -25,28 +25,24 @@ let lessonIds = [
 const socket = new net.Socket({})
 
 socket.connect({
-  port: 4000
+  port: 4001
 })
 
 // 单工通信
 // socket.write('Hello Buffer. 单工通信')
 
 // 半双工通信
-let buffer = Buffer.alloc(4) // 返回一个指定大小的实例
-let index = Math.floor(lessonIds.length * Math.random())
-buffer.writeInt32BE(
-  lessonIds[index]
-)
-socket.write(buffer)
+let index
+function writeLessonId () {
+  index = Math.floor(Math.random() * lessonIds.length)
+  let buffer = Buffer.alloc(4)
+  buffer.writeInt32BE(lessonIds[index])
+  socket.write(buffer)
+  // console.log(buffer.readInt32BE())
+}
+writeLessonId()
 
 socket.on('data', (buffer) => {
-  console.log('buffer id:', lessonIds[index], buffer.toString())
-
-  // 不停的修改
-  buffer = Buffer.alloc(4)
-  index = Math.floor(Math.random() * lessonIds.length)
-  buffer.writeInt32BE(
-    lessonIds[index]
-  )
-  socket.write(buffer)
+  console.log('id', lessonIds[index], ' ts:', buffer.toString())
+  writeLessonId()
 })
