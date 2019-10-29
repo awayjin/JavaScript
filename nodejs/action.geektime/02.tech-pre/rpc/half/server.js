@@ -1,5 +1,5 @@
 const net = require('net')
-const PORT = 4000
+const PORT = 4001
 const data = {
   136797: "01 | 课程介绍",
   136798: "02 | 内容综述",
@@ -26,16 +26,14 @@ const data = {
 net.createServer( (socket) => {
   socket.on('data', (buffer) => {
     console.log(buffer, ', buffer.toString:', buffer.toString())
-
-    // 课程 ID
     let lessonId = buffer.readInt32BE()
-
     console.log('lessonId:', lessonId)
     setTimeout(() => {
       socket.write(
-        Buffer.from(data[lessonId]) // 因为是字符串
+        Buffer.from(data[lessonId])
       )
     }, 1000)
+
   })
 }).listen(PORT)
 

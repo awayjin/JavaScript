@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<button id="fetch">fetch</button>
+<button id="ajax">ajax</button>
+
+<script>
+  const $buttons = {
+    fetch: document.getElementById('fetch'),
+    ajax: document.getElementById('ajax')
+  }
+
+  let port = 3000
+  Object
+    .keys($buttons)
+    .map(key => {
+      console.log(key)
+      $buttons[key].addEventListener('click', (event) => {
+        if (key === 'ajax') {
+          port++
+        } else {
+          port = 3000
+        }
+
+        // fetch(`http://${location.host}/${key}`, {
+        //   method: 'get',
+        //   myHeader: 'my-header-1'
+        // }).then(res => res.text())
+        //   .then(res => console.log(res))
+        //   .catch(err => console.log('err:', err))
+
+        let xhr = new XMLHttpRequest()
+        xhr.open('get', `http://localhost:${port}/${key}`, false)
+        // xhr.open('get', `http://${location.host}/${key}`, false)
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200 || xhr.status === 304) {
+              console.log(xhr)
+              console.log('xhr:', xhr.responseText)
+            } else {
+              console.log('err:', xhr)
+            }
+          }
+        }
+        xhr.send(null)
+
+      }, false)
+    })
+
+
+</script>
+
+<script src="http://localhost:3001/"></script>
+
+</body>
+</html>
