@@ -4,6 +4,7 @@ let fs = require('fs')
 let server = http.createServer((req, res) => {
   let url = req.url
 
+  console.log('url:', url)
   if (url === '/favicon.ico') {
     res.writeHead(200)
     res.end()
