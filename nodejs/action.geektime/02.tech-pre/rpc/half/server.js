@@ -25,14 +25,18 @@ const data = {
 // Socket 代表网络通路的写入与取出的代理对象
 net.createServer( (socket) => {
   socket.on('data', (buffer) => {
-    console.log(buffer, ', buffer.toString:', buffer.toString())
-    let lessonId = buffer.readInt32BE()
-    console.log('lessonId:', lessonId)
+    console.log('1. buffer', buffer, ', buffer.toString:', buffer.toString())
+
+    let seqBuffer = buffer.slice(0, 2) // 取出包序号
+    let lessonId = buffer.readInt32BE(2)
+    console.log('2. seqBuffer:', seqBuffer.toString(), 'lessonId:', lessonId.toString())
     setTimeout(() => {
-      socket.write(
-        Buffer.from(data[lessonId])
-      )
-    }, 1000)
+      const buffer = Buffer.concat([
+          seqBuffer,
+          Buffer.from(data[lessonId])
+      ])
+      socket.write(buffer)
+    }, (10 + Math.random() * 5000)) //乱序返回
 
   })
 }).listen(PORT)

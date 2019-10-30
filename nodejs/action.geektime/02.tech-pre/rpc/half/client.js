@@ -33,16 +33,27 @@ socket.connect({
 
 // 半双工通信
 let index
+let seq = 0 // 包序号编入进来
 function writeLessonId () {
+  console.log(Array(30).join('--'))
   index = Math.floor(Math.random() * lessonIds.length)
-  let buffer = Buffer.alloc(4)
-  buffer.writeInt32BE(lessonIds[index])
+  let buffer = Buffer.alloc(6)
+  buffer.writeInt16BE(seq)
+  buffer.writeInt32BE(lessonIds[index], 2)
+  console.log('1. seq:', seq, lessonIds[index])
+  seq++
   socket.write(buffer)
   // console.log(buffer.readInt32BE())
 }
-writeLessonId()
+
+// 全双工通信
+setInterval(writeLessonId, 50)
 
 socket.on('data', (buffer) => {
-  console.log('id', lessonIds[index], ' ts:', buffer.toString())
+  console.log('2. id', lessonIds[index], ' ts:', buffer.toString())
+  const seqBuffer = buffer.slice(0, 2)
+  const titleBuffer = buffer.slice(2)
+
+  console.log('3. seqBuffer:', seqBuffer, 'titleBuffer:', titleBuffer.toString())
   writeLessonId()
 })
