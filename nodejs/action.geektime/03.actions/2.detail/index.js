@@ -1,25 +1,19 @@
-const user = {
-  name: 'detail.<script />'
-}
+const Koa = require('koa')
+const KoaRouter = require('koa-router')
+const KoaStatic = require('koa-static')
+const fs = require('fs')
 
-const result = `<h2>${user.name}</h2>`
+const app = new Koa()
+const router = new KoaRouter()
 
-const vm = require('vm')
+router.get('/', (ctx) => {
+  ctx.body = fs.readFileSync(__dirname + '/source/index.html', 'utf-8')
+})
 
-console.log(
-  vm.runInNewContext('`<h2>${_(user.name)}</h2>`', {
-    user,
-    _: function (markup) {
-      if (!markup) return
-      return String(markup)
-        .replace(/</g, '&lt;')
-    }
-  })
-)
+app.use(router.routes())
+app.use(KoaStatic(__dirname +'/source'))
 
-// console.log(vm.runInNewContext('`<h3>user.name ...</h3>`', { user }))
-
-
-// 用 ejs 渲染
-// let template = `<h2><%= user.name %></h2>`
-// ejs.render(template, user)
+const PORT = 3000
+app.listen(PORT, () => {
+  console.log(`App started at http://localhost:${PORT}`)
+})

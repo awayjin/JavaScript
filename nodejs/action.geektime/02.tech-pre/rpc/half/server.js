@@ -25,7 +25,7 @@ const data = {
 // Socket 代表网络通路的写入与取出的代理对象
 net.createServer( (socket) => {
   socket.on('data', (buffer) => {
-    console.log('1. buffer', buffer, ', buffer.toString:', buffer.toString())
+    console.log('1. buffer', buffer)
 
     let seqBuffer = buffer.slice(0, 2) // 取出包序号
     let lessonId = buffer.readInt32BE(2)

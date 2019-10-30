@@ -36,7 +36,7 @@ let index
 let seq = 0 // 包序号编入进来
 function writeLessonId () {
   console.log(Array(30).join('--'))
-  index = Math.floor(Math.random() * lessonIds.length)
+
   let buffer = Buffer.alloc(6)
   buffer.writeInt16BE(seq)
   buffer.writeInt32BE(lessonIds[index], 2)
@@ -46,11 +46,17 @@ function writeLessonId () {
   // console.log(buffer.readInt32BE())
 }
 
-// 全双工通信
-setInterval(writeLessonId, 50)
+// 全双工通信, 加了包序列，不会乱序
+// setInterval(writeLessonId, 50)
+// 同时发 100 个包
+for(let i = 0; i < 100; i++) {
+  index = Math.floor(Math.random() * lessonIds.length)
+  writeLessonId()
+}
 
 socket.on('data', (buffer) => {
   console.log('2. id', lessonIds[index], ' ts:', buffer.toString())
+  index = Math.floor(Math.random() * lessonIds.length)
   const seqBuffer = buffer.slice(0, 2)
   const titleBuffer = buffer.slice(2)
 
