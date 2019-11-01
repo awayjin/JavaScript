@@ -99,3 +99,26 @@ p3d = p2d // 成员个数多的兼容成员个数少的
 
 
 // 3）返回值类型要相同
+function overload (x: number, y: number): number;
+function overload (x: string, y: string): string;
+function overload(x: any, y: any): any {}
+overload(3, 4)
+overload('a', 'b')
+
+
+// 4. 枚举类型兼容性
+enum Num {
+  a = 10,
+  b
+}
+enum Dir22 {
+  realy,
+  up = 'up',
+  down = 'down',
+  left = 'left',
+  right = 'right'
+}
+enum dd {
+  a,
+  b
+}
