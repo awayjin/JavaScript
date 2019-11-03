@@ -13,7 +13,7 @@ router.get('/', (ctx) => {
 app.use(router.routes())
 app.use(KoaStatic(__dirname +'/source'))
 
-// const PORT = 3000
+const PORT = 3000
 // app.listen(PORT, () => {
 //   console.log(`App started at http://localhost:${PORT}`)
 // })

@@ -37,7 +37,7 @@ const buffer3 = Buffer.alloc(6)  // 指定 buffer 长度
 console.log('buffer3:', buffer3)
 buffer3.writeInt16BE(1)
 console.log('buffer3:', buffer3)
-buffer3.writeInt32BE(211311, 2)
+buffer3.writeInt32BE(24, 2)
 console.log('buffer3:', buffer3)
 console.log('readInt32BE buffer3:', buffer3.readInt32BE())
 
@@ -59,17 +59,17 @@ console.log('readInt32BE buffer3:', buffer3.readInt32BE())
 
 console.log(Buffer.from([1, 2, 3, 8, 9, 10, 'A']))
 
-// const fs = require('fs')
-// const protobuf = require('protocol-buffers')
-//
-// const schema = protobuf(fs.readFileSync(__dirname + '/test.proto', 'utf-8'))
-//
-// console.log('schema:', schema)
-//
-// const buf = schema.Column.encode({
-//   id: 1,
-//   name: 'Node.js',
-//   price: 98.4
-// })
-// console.log('解码：', schema.Column.decode(buf))
+const fs = require('fs')
+const protobuf = require('protocol-buffers')
+
+const schema = protobuf(fs.readFileSync(__dirname + '/test.proto', 'utf-8'))
+
+console.log('schema:', schema)
+
+const buf = schema.Column.encode({
+  id: 1,
+  name: 'Node.js',
+  price: 98.4
+})
+console.log('解码：', schema.Column.decode(buf))
 
