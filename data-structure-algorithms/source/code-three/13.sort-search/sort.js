@@ -41,13 +41,34 @@ function selectionSort (array) {
         // swap(array, i, indexMin)
         [array[i], array[indexMin]] = [array[indexMin], array[i]]
       }
-      console.log('i:', i, ', j:', j, ', array:', array)
+      // [array[i], array[indexMin]] = [array[indexMin], array[i]]
+      // console.log('i:', i, ', j:', j, ', array:', array)
     }
+  }
+  return array
+}
+
+// 插入排序
+// 如果有一个已经有序的数据序列，
+// 要求在这个已经排好的数据序列中插入一个数，但要求插入后此数据序列仍然有序
+function insertionSort (array) {
+  let { length } = array
+  let temp
+  for (let i = 1; i < length; i++) {
+    let j = i // 存储外循环的临时变量索引
+    temp = array[i] // 临时变量, 用来存储外循环的值
+    while(j > 0 && array[j - 1] > temp) {
+      array[j] = array[j - 1]
+      j--
+    }
+    array[j] = temp
+    console.log(array)
   }
   return array
 }
 
 export {
   bubbleSort,
-  selectionSort
+  selectionSort,
+  insertionSort
 }
