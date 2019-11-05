@@ -107,18 +107,57 @@ overload('a', 'b')
 
 
 // 4. 枚举类型兼容性
-enum Num {
-  a = 10,
-  b
+enum Fruit { Apple, Banana }
+enum Color { Red, Black}
+
+let fruit: Fruit.Apple = 2
+let banana: Fruit.Banana = 12
+
+// 枚举类型赋值给 number 类型
+let no: number = Fruit.Apple
+// 枚举之间不兼容
+// let color: Color.Red = Fruit.Apple
+
+// console.log('no:', no)
+// console.log('fruit:', fruit)
+// console.log('banana:', banana)
+// console.log('Fruit:', Fruit['Apple'])
+// console.log('Fruit:', Fruit['Banana'])
+
+// 5. 类之间兼容性 - 静态成员和构造函数不参与比较
+class ClassA {
+  constructor(p: number, q: number) {}
+  id: number = 1
+  private name: string = '' // 私有成员
 }
-enum Dir22 {
-  realy,
-  up = 'up',
-  down = 'down',
-  left = 'left',
-  right = 'right'
+class ClassB {
+  constructor(p: number) {}
+  id: number = 2
 }
-enum dd {
-  a,
-  b
+let classA = new ClassA(1, 2)
+let classB = new ClassB(1)
+// classA = classB
+// classB = classA
+
+class aSub extends ClassA {}
+
+// 6. 泛型接口兼容性
+interface Empty<T> {
+  // value: T
+} // 泛型接口
+let obj11: Empty<number> = {}
+let obj22: Empty<string> = {}
+obj11 = obj22
+
+// 泛型函数
+let log111 = <T>(x: T): T => {
+  return x
 }
+let log222 = <DD>(y: DD): DD => {
+  return y
+}
+log111 = log222
+
+// 7. 口诀
+// 结构之间兼容：成员少的兼容成员多的。
+// 函数之间兼容：参数多的兼容参数少的。

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<button id="cache">发起请求</button>
+<div>
+  this is a data. value: <span id="value"></span>
+</div>
+
+<script>
+  let index = 0
+  let cache = document.getElementById('cache')
+  let value = document.getElementById('value')
+  cache.onclick = function () {
+    value.innerText = ''
+    fetch('http://test.com:8886/data', {
+      headers: {
+        'x-test-cache': index++
+      }
+    })
+      .then(res => res.text())
+      .then((text) => value.innerText = text )
+      .catch(err => console.error('err3', err))
+  }
+
+  // let index = 0
+  // fetch('http://test.com:8886/data', {
+  //   headers: {
+  //     'x-test-cache': index++
+  //   }
+  // })
+  //   .then(res => res.text())
+  //   .then((text) => value.innerText = text )
+  //   .catch(err => console.error('err3', err))
+</script>
+
+</body>
+</html>

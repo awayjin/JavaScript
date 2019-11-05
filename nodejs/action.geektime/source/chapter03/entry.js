@@ -16,6 +16,6 @@ app.use(
     mount('/list', require('./4.list/node/index'))
 )
 
-app.listen(3000, ()=> {
-    console.log('listened 3000')
+app.listen(3004, ()=> {
+    console.log('listened 3004')
 });
