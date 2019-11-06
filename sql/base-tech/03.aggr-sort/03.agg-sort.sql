@@ -92,8 +92,21 @@ select purchase_price FROM Product GROUP BY purchase_price;
 select purchase_price, count(*) FROM Product GROUP BY purchase_price;
 
 
+-- 为3-3 为聚合结果指定条件
+-- 分组后取出结果为2行的结果
+SELECT product_type, COUNT(product_type) 
+FROM product 
+group by product_type
+having COUNT(*) = 2;
 
+-- 销售单价的平均值大于等于 2500 日元
+select product_type, avg(sale_price) 
+from Product 
+group by product_type 
+having avg(sale_price) >= 2500;
 
+select regist_date, sum(sale_price) FROM product GROUP BY regist_date;
+select regist_date, sum(sale_price) FROM product GROUP BY regist_date HAVING regist_date = '2009-09-11';
 
 
 
