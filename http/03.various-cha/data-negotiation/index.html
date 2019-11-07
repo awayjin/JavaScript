@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--<meta http-equiv="content-security-policy" content=" img-src https://*; connect-src http://baidu.com;">-->
+  <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';">-->
+ <!-- <meta http-equiv="Content-Security-Policy" content="
+   img-src https://ss3.bdstatic.com/;
+   connect-src 'self';
+  ">-->
+  <title>Document</title>
+</head>
+<body>
+<div>data negotiation</div>
+
+<!--<form action="/form" method="post" enctype="application/x-www-form-urlencoded">-->
+<form action="/form" id="form" method="post" enctype="multipart/form-data">
+  <input type="text" name="name">
+  <input type="password" name="password">
+  <INPUT type="file" name="pic">
+  <input type="submit" >
+</form>
+
+<script>
+  let form = document.getElementById('form')
+  form.addEventListener('submit', event => {
+    event.preventDefault()
+    let formData = new FormData(form)
+    fetch('/form', {
+      method: 'POST',
+      body: formData
+    }).then(res => res.data).then(data => {
+      console.log(data)
+    })
+  })
+</script>
+
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundarytIcAVyDi9bYPq3PY
+
+
+<FORM method="POST" action="/dd" enctype="multipart/form-data">
+  <INPUT type="text" name="city" value="Santa colo">
+  <INPUT type="text" name="desc">
+  <INPUT type="file" name="pic">
+  <input type="submit">
+</FORM>
+</body>
+</html>
