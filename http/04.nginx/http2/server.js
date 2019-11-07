@@ -1,22 +1,21 @@
 const fs = require('fs')
 const http = require('http')
-const zlip = require('zlib')
 
-// 数据协商
 http.createServer((req, res) => {
+  let html = fs.readFileSync(__dirname + '/index.html', 'utf-8')
 
   let url = req.url
   if (url === '/favicon.ico') {
     // res.writeHead(200)
-    res.end('')
+    res.end()
   }
 
   const host = req.headers.host
   console.log('host:', host, __dirname)
-  // console.log('zlip:', zlip)
 
+  if (url === '/') {
     res.writeHead(200, {
-      'Content-Type': 'text/html', // accept
+      'Content-Type': 'text/html',
       // 内容安全策略
       // 'Content-Security-Policy': 'default-src http: https:' // 限制行内脚本执行
       // 'Content-Security-Policy': 'default-src \'self\'' // 只是本域名下执行
@@ -29,18 +28,23 @@ http.createServer((req, res) => {
       // 'set-cookie': 'id=123' // 设置单个
       // 'set-cookie': ['id=123', 'name=jin'] // 通过数组设置多个值
       // 'set-cookie': ['id=123;max-age=5', 'name=456'] // 通过数组设置多个值, 设置过期时间 max=age
-      'set-cookie': ['id=123', 'bcd=789', 'name=456;domain=test.com'], // 通过数组设置多个值, 设置过期时间 max=age
+      // 'set-cookie': ['id=123', 'bcd=789', 'name=456;domain=test.com'] // 通过数组设置多个值, 设置过期时间 max=age
 
-      // keep-alive 长连接
-      // 'Connection': 'close',
+      'Connection': 'close', // keep-alive
 
-      // 内容协商：
-      // 请求头 accept-encoding 接受的内容编码压缩方式(如压缩算法gzip)对应响应头 content-encoding
-      // node 内置模块 zlip, zlip.gzipSync(html)
-      'content-encoding': 'gzip'
+      // http2 - 信道复用，分帧传输
+      'Link': '</cache.png>; as=image; rel=preload'
+
     })
-    let html = fs.readFileSync(__dirname + '/index.html')
-    res.end(zlip.gzipSync(html))
+    res.end(html)
+  } else {
+    let img  = fs.readFileSync(__dirname + '/cache.png')
+    res.writeHead(200, {
+      'content-type': 'image/png',
+      'Connection': 'close' // 关闭长连接，keep-alive
+    })
+    res.end(img)
+  }
 
 
-}).listen(3000)
+}).listen(8888)

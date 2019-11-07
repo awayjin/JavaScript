@@ -11,7 +11,6 @@ const Axios = require('axios')
 http.createServer((req, res) => {
   console.log(req.headers.host)
   console.log(req.headers.referer)
-<<<<<<< HEAD:review/http/04.nginx/server.js
   console.log('req.url:', req.url)
   res.writeHead(200, {
     'access-control-allow-origin': '*',
@@ -61,10 +60,8 @@ http.createServer((req, res) => {
     console.error(e);
   })
 
-=======
   console.log(req.url)
   res.writeHead(200)
   res.end('demo')
->>>>>>> 86866ee1df4107627ec20f1d6efaae40a84f67a3:http/04.nginx/server.js
 }).listen(8888)
 

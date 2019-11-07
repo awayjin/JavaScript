@@ -12,10 +12,13 @@ http.createServer((req, res) => {
   }
 
   const host = req.headers.host
-  console.log('host:', host, __dirname)
-  // console.log('zlip:', zlip)
+  console.log('host:', host)
+  console.log('url:', url)
 
-    res.writeHead(200, {
+  if (url === '/') {
+
+    // res.writeHead(302, {
+    res.writeHead(301, {
       'Content-Type': 'text/html', // accept
       // 内容安全策略
       // 'Content-Security-Policy': 'default-src http: https:' // 限制行内脚本执行
@@ -29,7 +32,7 @@ http.createServer((req, res) => {
       // 'set-cookie': 'id=123' // 设置单个
       // 'set-cookie': ['id=123', 'name=jin'] // 通过数组设置多个值
       // 'set-cookie': ['id=123;max-age=5', 'name=456'] // 通过数组设置多个值, 设置过期时间 max=age
-      'set-cookie': ['id=123', 'bcd=789', 'name=456;domain=test.com'], // 通过数组设置多个值, 设置过期时间 max=age
+      // 'set-cookie': ['id=123', 'bcd=789', 'name=456;domain=test.com'], // 通过数组设置多个值, 设置过期时间 max=age
 
       // keep-alive 长连接
       // 'Connection': 'close',
@@ -37,10 +40,20 @@ http.createServer((req, res) => {
       // 内容协商：
       // 请求头 accept-encoding 接受的内容编码压缩方式(如压缩算法gzip)对应响应头 content-encoding
       // node 内置模块 zlip, zlip.gzipSync(html)
-      'content-encoding': 'gzip'
+      // 'content-encoding': 'gzip'
+
+      // redirect 重定向
+      location: '/new'
     })
     let html = fs.readFileSync(__dirname + '/index.html')
     res.end(zlip.gzipSync(html))
+
+
+  } else if (url === '/new'){
+    res.end('<div>302 content</div>')
+  } else {
+    res.end('else')
+  }
 
 
 }).listen(3000)
