@@ -8,6 +8,26 @@
   <title>Document</title>
 </head>
 <body>
+<script>
+  function mergeSort(array) {
+    if (array.length > 1) {
+      let { length } = array
+      let middle = Math.floor(length / 2)
+      let left = mergeSort(array.slice(0, middle))
+      let right = mergeSort(array.slice(middle, length))
+      array = merge(left, right)
+    }
+    return array
+  }
+
+  function merge(left, right) {
+    console.log('left.concat(right):', left.concat(right))
+    return left.concat(right)
+  }
+
+  console.log(mergeSort([5, 4, 3, 2, 1]))
+</script>
+
 
 <script type="module">
   import {

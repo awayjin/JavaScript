@@ -62,7 +62,7 @@ function insertionSort (array) {
       j--
     }
     array[j] = temp
-    console.log(array)
+    // console.log(array)
   }
   return array
 }
