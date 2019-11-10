@@ -44,7 +44,9 @@
           // port = 3000
           // fetch(`http://${location.host}/${key}`, {
           fetch(`http://localhost:${port}/${key}`, {
-            method: 'put',
+            // 不是跨域请求的方法
+            method: 'get',
+            // method: 'put',
             headers: {
               'X-Test-CORS': 'my-header-1'
             }

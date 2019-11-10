@@ -30,7 +30,9 @@ http.createServer((req, res) => {
         // 'set-cookie': 'id=123' // 设置单个
         // 'set-cookie': ['id=123', 'name=jin'] // 通过数组设置多个值
         // 'set-cookie': ['id=123;max-age=5', 'name=456'] // 通过数组设置多个值, 设置过期时间 max=age
-        'set-cookie': ['id=123', 'bcd=789', 'name=456;domain=test.com'] // 通过数组设置多个值, 设置过期时间 max=age
+        // 通过数组设置多个值, 设置过期时间 max=age
+        'set-cookie': ['id=12', 'bcd=79;httpOnly', 'name=46;domain=test.com']
+
       })
     }
     res.end(html)

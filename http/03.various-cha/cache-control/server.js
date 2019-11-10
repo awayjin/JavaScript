@@ -24,6 +24,8 @@ http.createServer((req, res) => {
     res.end(html)
   }
 
+  console.log('req.headers:', req.headers)
+  console.log('req.headers.cookies:', req.headers.cookie)
 
   if (url === '/script.js') {
     const etag = req.headers['if-none-match']
