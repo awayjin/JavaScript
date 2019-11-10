@@ -106,7 +106,30 @@ group by product_type
 having avg(sale_price) >= 2500;
 
 select regist_date, sum(sale_price) FROM product GROUP BY regist_date;
-select regist_date, sum(sale_price) FROM product GROUP BY regist_date HAVING regist_date = '2009-09-11';
+select regist_date, sum(sale_price) FROM product 
+GROUP BY regist_date HAVING regist_date = '2009-09-11';
+
+-- 3-4 对查询结果进行排序
+SELECT product_id, product_name, sale_price, purchase_price 
+FROM Product
+order by sale_price, product_id desc;
+
+-- SELECT 语句末尾添加 ORDER BY 子句来明确指定排列顺序
+SELECT product_id, product_name, sale_price, purchase_price
+FROM Product
+ORDER BY purchase_price asc;
+
+-- 在 GROUP BY 子句中不能使用SELECT 子句中定义的别名，
+-- 但是在 ORDER BY 子句中却是允许使用别名的。
+SELECT product_id as id, sale_price as sp, purchase_price as pp
+FROM Product
+ORDER BY sp;
+
+--  GROUP BY 分组，为聚合结果指定条件 HAVING 
+SELECT product_type, count(*) FROM Product 
+GROUP BY product_type 
+HAVING count(*) = 4;
+
 
 
 

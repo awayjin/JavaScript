@@ -21,8 +21,19 @@
   }
 
   function merge(left, right) {
-    console.log('left.concat(right):', left.concat(right))
-    return left.concat(right)
+    console.log('concat:', left.concat(right), ', left:', left, ', right:', right)
+    let i = 0
+    let j = 0
+    let result = []
+    while (i < left.length && j < right.length) {
+      result.push(
+        left[i] < right[j] ? left[i++] : right[j++]
+      )
+    }
+    console.log('result:', result)
+    return result.concat(
+      i < left.length ? left.slice(i) : right.slice(j)
+    )
   }
 
   console.log(mergeSort([5, 4, 3, 2, 1]))

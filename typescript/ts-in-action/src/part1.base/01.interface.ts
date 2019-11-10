@@ -74,4 +74,13 @@ interface Point3d extends Point01{
 
 let point3d: Point3d = { x: 11, y: 22, z: 3}
 
-// 混合类型
+// 用接口定义一个对象
+interface Person1 {
+  name: string;
+  age: number;
+}
+let jin1: Person1 = {
+  name: 'jin',
+  age: 28
+}
+
