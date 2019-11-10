@@ -2,10 +2,10 @@ const connect = require('connect')
 const app = connect()
 
 app.use(function (req, res, next) {
-  res.end('Hello World!')
+  res.end('Hello connect module!')
 })
 
-app.listen(3000)
+app.listen(3001)
 
 // // http
 // const http = require('http')

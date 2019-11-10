@@ -10,7 +10,8 @@ const columnData = require('./mockdata/column')
 /**
  * 服务端的编解包逻辑
  */
-const server = require('./lib/geeknode-rpc-server')(schemas.ColumnRequest, schemas.ColumnResponse);
+const rpcServer = require('./lib/geeknode-rpc-server')
+const server = rpcServer(schemas.ColumnRequest, schemas.ColumnResponse);
 
 server
     .createServer((request, response) => {

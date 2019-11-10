@@ -45,12 +45,17 @@ easySock.decode = function(buffer) {
     const seq = buffer.readInt32BE();
     const body = messages.ColumnResponse.decode(buffer.slice(8));
 
+    console.log('decode seq:', seq)
+    // console.log('decode body:', body)
+    console.log('decode buffer:', buffer)
+
     return {
         result: body,
         seq
     }
 }
 
+// 判断当前数据包是否完整
 easySock.isReceiveComplete = function(buffer) {
     if (buffer.length < 8) {
         return 0

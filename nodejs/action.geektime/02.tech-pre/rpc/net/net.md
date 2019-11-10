@@ -4,7 +4,7 @@
 管道（pipe）.
 
 ## Net
-net 模块用于创建基于流的 TCP 服务器 与客户端（net.createConnection()）。
+net 模块用于创建基于流的 TCP 服务器与客户端（net.createConnection()）。
 
 http.Server继承了net.Server，此外，http客户端与http服务端的通信均依赖于socket（net.Socket）
 
