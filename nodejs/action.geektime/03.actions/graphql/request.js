@@ -1,3 +1,9 @@
-const request = require('./index')
+const query = require('./index')
 
-request('{ hello }').then(hello => console.log('hello:', hello))
+query('{ hello }').then(hello => console.log('hello:', hello))
+
+// 伪代码基于 koa
+// app.use(async ctx => {
+//   const res = await query(ctx.query)
+//   ctx.body = res
+// })
