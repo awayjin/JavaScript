@@ -60,16 +60,21 @@ HTTP 就是构建于 TCP/IP 协议之上。
 
 IP（ Internet Protocol） 网际协议位于网络层。
 
-IP 协议的作用是把各种数据包传送给对方。 而要保证确实传送到对方
-那里， 则需要满足各类条件。 其中两个重要的条件是 IP 地址和 MAC
-地址（ Media Access Control Address） 。
+IP 协议的作用是把各种数据包传送给对方。 而要保证确实传送到对方那里， 则需要满足各类条件。 其中两个重要的条件是 IP 地址和 MAC地址（ Media Access Control Address）。
 
 IP 地址指明了节点被分配到的地址， MAC 地址是指网卡所属的固定
 地址。
 
 - 确保可靠性的 TCP 协议
 
-按层次分， TCP 位于传输层， 提供可靠的字节流服务。
+按层次分，TCP 位于传输层，提供可靠的字节流服务。
+
+所谓的字节流服务（ Byte Stream Service） 是指， 为了方便传输， 将大块数据分割成以报文段（ segment） 为单位的数据包进行管理。而可靠的传输服务是指，能够把数据准确可靠地传给对方。
+
+确保数据能到达目标
+
+为了准确无误地将数据送达目标处，TCP 协议采用了三次握手
+（ three-way handshaking）策略。 
 
 ## 安全
 "内容安全策略"(Content Security Policy,缩写 CSP)
