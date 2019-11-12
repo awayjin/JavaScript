@@ -41,10 +41,18 @@ buffer3.writeInt32BE(24, 2)
 console.log('buffer3:', buffer3)
 console.log('readInt32BE buffer3:', buffer3.readInt32BE())
 
+const buffer4 = Buffer.alloc(6)
+console.log('buffer4:', buffer4)
+buffer4.writeInt16BE(1)
+console.log('buffer4:', buffer4)
+buffer4.writeInt32BE(136797, 2)
+console.log('buffer4:', buffer4)
+console.log('buffer4:', buffer4.slice(0, 2).readInt16BE(0,2))
+console.log('buffer4:', buffer4.readInt32BE(2))
 
 
 // 创建一个长度为 10、且用零填充的 Buffer
-// let buffer4 = Buffer.alloc(10)
+// let buffer4 = Buffer.alloc(10)r
 // console.log('buffer4:', buffer4)
 //
 // // 创建一个长度为 10、且用 0x1 填充的 Buffer
@@ -57,19 +65,19 @@ console.log('readInt32BE buffer3:', buffer3.readInt32BE())
 // console.log('buffer6:', buffer6)
 
 
-console.log(Buffer.from([1, 2, 3, 8, 9, 10, 'A']))
-
-const fs = require('fs')
-const protobuf = require('protocol-buffers')
-
-const schema = protobuf(fs.readFileSync(__dirname + '/test.proto', 'utf-8'))
-
-console.log('schema:', schema)
-
-const buf = schema.Column.encode({
-  id: 1,
-  name: 'Node.js',
-  price: 98.4
-})
-console.log('解码：', schema.Column.decode(buf))
+// console.log(Buffer.from([1, 2, 3, 8, 9, 10, 'A']))
+//
+// const fs = require('fs')
+// const protobuf = require('protocol-buffers')
+//
+// const schema = protobuf(fs.readFileSync(__dirname + '/test.proto', 'utf-8'))
+//
+// console.log('schema:', schema)
+//
+// const buf = schema.Column.encode({
+//   id: 1,
+//   name: 'Node.js',
+//   price: 98.4
+// })
+// console.log('解码：', schema.Column.decode(buf))
 
