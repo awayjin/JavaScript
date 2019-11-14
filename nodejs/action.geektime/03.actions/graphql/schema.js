@@ -10,17 +10,17 @@ const schema = buildSchema(
   }
   type Query {
     comment: [Comment]
+    person: [PersonType]
+  }
+  type PersonType {
+    id: Int
+    name: String
+    age: Int
+    sex: Boolean
   }
   `
 )
 
-schema.getQueryType().getFields().comment.resolve = () => {
-  return [{
-    id: 1,
-    avatar: 'https://static001.geekbang.org/account/avatar/00/19/19/a0/84f95280.jpg',
-    name: 'Junting'
-  }]
-}
 
 module.exports = schema
 
