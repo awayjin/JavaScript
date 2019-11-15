@@ -7,6 +7,7 @@ const schema = buildSchema(
     id: Int
     avatar: String
     name: String
+    praiseNum: Int
   }
   type Query {
     comment: [Comment]
@@ -18,9 +19,17 @@ const schema = buildSchema(
     age: Int
     sex: Boolean
   }
+  
+  type Mutation {
+    praise(id: Int): Int
+  }
+  
+  
   `
 )
 
+// 谷歌浏览器插件：restlet client 插件测试 post
+// http://localhost:3002/api
 
 module.exports = schema
 
