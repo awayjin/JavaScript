@@ -34,6 +34,7 @@ schema.getQueryType().getFields().comment.resolve = () => {
 }
 
 
+
 schema.getMutationType().getFields().praise.resolve = (arg0, { id }) => {
   mockData.praiseNum++
   return mockData[id].praiseNum
@@ -60,4 +61,4 @@ app.use(
 // http://localhost:5000/?query={comment{name}}
 
 
-app.listen(3001);
+app.listen(3002);
