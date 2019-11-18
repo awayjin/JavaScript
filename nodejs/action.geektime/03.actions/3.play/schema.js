@@ -16,8 +16,11 @@ const schema = buildSchema(`
     id: Int
     avatar: String
     name: String
+    isTop: Boolean
+    content: String
+    publishDate: String
+    commentNum: Int
     praiseNum: Int
-    age: Boolean 
   }
   
   type Mutation {
@@ -32,6 +35,7 @@ const mockData = {
     id: 1,
     avatar: 'url1',
     name: 'Lily',
+    content: 'content',
     praiseNum: 5,
     age: true
   },
