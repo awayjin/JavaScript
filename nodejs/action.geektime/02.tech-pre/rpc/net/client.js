@@ -36,11 +36,19 @@ let lessonIds = [
 
 // 半双工通信
 let index
+let seq = 0
 function writeLessonId () {
   index = Math.floor(Math.random() * lessonIds.length)
   let id = lessonIds[index]
-  client.write(lessonIds[index])
-  console.log('1. 发送的 id:', id)
+
+  let buffer = Buffer.alloc(6)
+  buffer.writeInt16BE(seq)
+  buffer.writeInt32BE(lessonIds[index], 2)
+
+  // Buffer.concat([head, body])
+  client.write(buffer)
+  seq++
+  console.log('\n ---- 1. 发送的 id:', id)
 }
 writeLessonId()
 
@@ -50,6 +58,12 @@ writeLessonId()
 // }
 
 client.on('data', (buffer) => {
-  console.log('2. 接收服务端数据. toString', buffer.toString(), ', buffer:', buffer)
+  console.log('\n 2. 接收服务端数据. toString:', buffer.toString(), ', buffer:', buffer)
+  let seqBuffer = buffer.slice(0, 2)
+  let titleBuffer = buffer.slice(2)
+  // let titleBuffer = buffer.readInt32BE(2)
+
+  console.log('\n 3. seqBuffer:', seqBuffer, 'titleBuffer:', titleBuffer.toString())
+
   writeLessonId()
 })
