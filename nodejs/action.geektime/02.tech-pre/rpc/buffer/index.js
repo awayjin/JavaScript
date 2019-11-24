@@ -17,6 +17,9 @@ const buffer2 = Buffer.from([1, 2, 3, 10, 11, 55]) // 数字数组
 
 
 console.log('buffer1:', buffer1)
+console.log('Buffer.from([]):', Buffer.from(['233']))
+console.log('Buffer.from():', Buffer.from('233'))
+console.log('buffer1 toString:', buffer1.toString())
 console.log('buffer2:', buffer2)
 
 buffer1.writeInt8(12)

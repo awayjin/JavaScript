@@ -1,8 +1,15 @@
-//  client.js
 let net = require('net')
-let socket = new net.Socket()
-socket.connect({ port: 4001 })
-socket.write('Hello Buffer. 单工通信')
-// let socket = net.connect({ port: 4001 }, (data) => {
-//   socket.write('Hello Buffer. 单工通信')
-// })
+
+let client = net.createConnection(
+  {
+    port: 4001
+  },
+  () => {
+    console.log('1. 已连接到服务器')
+    client.write('发送数据， 我来自 Client')
+  }
+)
+
+client.on('data', (buffer) => {
+  console.log('2. Client 接收数据 str: ', buffer.toString(), ', buffer:', buffer)
+})

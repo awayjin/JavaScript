@@ -61,9 +61,14 @@ client.on('data', (buffer) => {
   console.log('\n 2. 接收服务端数据. toString:', buffer.toString(), ', buffer:', buffer)
   let seqBuffer = buffer.slice(0, 2)
   let titleBuffer = buffer.slice(2)
-  // let titleBuffer = buffer.readInt32BE(2)
+  // let titleBuffer2 = buffer.readInt32BE(2)
 
   console.log('\n 3. seqBuffer:', seqBuffer, 'titleBuffer:', titleBuffer.toString())
+  // console.log('\n 4. titleBuffer2:', titleBuffer2)
 
   writeLessonId()
+  // 同时发送会导致粘包
+  // for (let i = 0; i < 100; i++) {
+  //   writeLessonId()
+  // }
 })
