@@ -31,17 +31,12 @@ http.createServer((req, res) => {
     const etag = req.headers['if-none-match']
     console.log('etag:', etag, ', type:', typeof etag)
     if (etag === '888') {
-      res.writeHead(304, {
-        'Content-type': 'text/javascript',
-        'Cache-control': 'max-age=2000, no-cache', // 客户端缓存
-        'Last-modified': '123',
-        'Etag': '888'
-      })
+      res.writeHead(304)
       res.end('3')
     } else {
       res.writeHead(200, {
         'Content-type': 'text/javascript',
-        'Cache-control': 'max-age=2000, no-cache', // 客户端缓存
+        'Cache-control': 'max-age=5, no-cache', // 客户端缓存
         'Last-modified': '123',
         'Etag': '888'
       })
