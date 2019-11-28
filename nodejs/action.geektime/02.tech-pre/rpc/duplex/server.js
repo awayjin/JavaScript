@@ -1,4 +1,5 @@
 let net = require('net')
+const iconv = require('iconv-lite');
 
 // 假数据
 let LESSON_DATA = {
@@ -32,8 +33,13 @@ let server = net.createServer(socket => {
     // console.log('3. ', id, LESSON_DATA[buffer.toString()])
 
     let seq = buffer.slice(0, 2)
-    let title = buffer.slice(2)
-    console.log('3. seq:', seq, ', title', title.toString())
+    let title = buffer.readInt32BE(2)
+    console.log('\n2. seq:', seq, ', title', title)
+    console.log('\n3. seq:', seq, ', buffer：', buffer)
+    console.log('\n4. seq:', seq, ', buffer：', buffer.readInt32BE(2, 6))
+    console.log('\n5. seq:', seq, ', buffer：', buffer.readInt16BE(6, 8))
+    console.log('\n6. seq:', seq, ', buffer：', buffer.readInt32BE(8, 12))
+    // console.log('\n3. seq:', seq, ', title', iconv.decode(title, 'utf-8'))
 
     setTimeout(() => {
       // socket.write(lesson)
@@ -46,5 +52,18 @@ const port = 4001
 server.listen(port, () => {
   console.log(`Server bound, port:${port}`)
 })
+
+
+// const iconv = require('iconv-lite');
+// const encoding = 'gbk';
+// const binaryEncoding = 'binary';
+//
+// tomcatProcess = childProcess.spawn(javaWExe, args, { cwd: getTomcatBase() });
+// tomcatProcess.stderr.on("data", (buf) => {
+//   //buf.toString("utf8")不好用还是会乱码
+//
+//   console.log(iconv.decode(new Buffer(mess, binaryEncoding), encoding));
+// })
+
 
 

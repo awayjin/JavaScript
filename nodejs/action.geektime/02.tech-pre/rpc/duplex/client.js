@@ -41,7 +41,9 @@ function writeLessonId () {
 
   let buffer = Buffer.alloc(6)
   buffer.writeInt16BE(seq)
-  buffer.writeInt32BE(id)
+  buffer.writeInt32BE(id, 2)
+  // let title = Buffer.from(id)
+
   client.write(buffer)
   // client.write(id)
   seq++
