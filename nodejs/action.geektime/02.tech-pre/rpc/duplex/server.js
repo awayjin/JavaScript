@@ -28,22 +28,31 @@ let server = net.createServer(socket => {
   console.log('1. server: 与客户端已连接')
   socket.on('data', buffer => {
     // console.log('\n2. Server接收数据。buffer str:', buffer.toString(), ', buffer:', buffer)
-    let id = buffer.toString()
-    let lesson = LESSON_DATA[id]
+    // let id = buffer.toString()
+    // let lesson = LESSON_DATA[id]
     // console.log('3. ', id, LESSON_DATA[buffer.toString()])
 
     let seq = buffer.slice(0, 2)
+    // 虽然有粘包，但是 readInt32BE 只度4位，
+    // readInt32BE(2) == readInt32BE(2, 6)
     let title = buffer.readInt32BE(2)
     console.log('\n2. seq:', seq, ', title', title)
     console.log('\n3. seq:', seq, ', buffer：', buffer)
-    console.log('\n4. seq:', seq, ', buffer：', buffer.readInt32BE(2, 6))
-    console.log('\n5. seq:', seq, ', buffer：', buffer.readInt16BE(6, 8))
-    console.log('\n6. seq:', seq, ', buffer：', buffer.readInt32BE(8, 12))
+    // console.log('\n4. seq:', seq, ', buffer：', buffer.readInt32BE(2, 6))
+    // console.log('\n5. seq:', seq, ', buffer：', buffer.readInt16BE(6, 8))
+    // console.log('\n6. seq:', seq, ', buffer：', buffer.readInt32BE(8, 12))
     // console.log('\n3. seq:', seq, ', title', iconv.decode(title, 'utf-8'))
 
+    // console.log(LESSON_DATA[title])
     setTimeout(() => {
+      let concatBuffer = Buffer.concat([
+          seq,
+          Buffer.from(LESSON_DATA[title])
+      ])
+      console.log('\n4. seq:', seq, ', buffer：', LESSON_DATA[title])
+      socket.write(concatBuffer)
       // socket.write(lesson)
-    }, 7000)
+    }, 5000)
     // socket.write('你好，client, 我来自 server')
   })
 })

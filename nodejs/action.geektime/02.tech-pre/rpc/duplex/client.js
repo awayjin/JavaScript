@@ -49,6 +49,7 @@ function writeLessonId () {
   seq++
 }
 
+// 粘包
 let k = 0
 while (k  < 100)  {
   writeLessonId()
@@ -56,9 +57,40 @@ while (k  < 100)  {
   k++
 }
 
+
+let oldBuffer = null
 client.on('data', (buffer) => {
-  console.log('\n2. Client 接收数据 str: ', buffer.toString(), ', buffer:', buffer)
-  writeLessonId()
+  console.log('\n2. Client 接收数据 str: ', buffer.slice(0, 2), ', buffer:', buffer.slice(2).toString())
+  // 把上一次data事件使用残余的buffer接上来
+  if (oldBuffer) {
+    Buffer.concat([
+      oldBuffer,
+      buffer
+    ])
+  }
+
+  let completeLength = 0
+  // 只要还存在可以解成完整包的包长
+  while (completeLength = checkComplete(buffer)) {
+
+  }
+
+  oldBuffer = buffer
+  // writeLessonId()
 })
 
 
+/**
+ * 检查一段buffer是不是一个完整的数据包。
+ * 具体逻辑是：判断header的bodyLength字段，看看这段buffer是不是长于header和body的总长
+ * 如果是，则返回这个包长，意味着这个请求包是完整的。
+ * 如果不是，则返回0，意味着包还没接收完
+ * @param {} buffer
+ */
+function checkComplete(buffer) {
+  if (buffer.length < 6) {
+    return 0;
+  }
+  const bodyLength = buffer.readInt32BE(2);
+  return 6 + bodyLength
+}
