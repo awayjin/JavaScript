@@ -54,6 +54,12 @@ console.log('buffer4:', buffer4.slice(0, 2).readInt16BE(0,2))
 console.log('buffer4:', buffer4.readInt32BE(2))
 
 
+
+const buffer5 = Buffer.alloc(4)
+buffer5.writeInt32BE('1368032223')
+console.log('buffer5.length:', buffer5.length, ', buffer5:', buffer5)
+
+
 // 创建一个长度为 10、且用零填充的 Buffer
 // let buffer4 = Buffer.alloc(10)r
 // console.log('buffer4:', buffer4)

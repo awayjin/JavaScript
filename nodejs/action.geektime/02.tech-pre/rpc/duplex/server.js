@@ -1,5 +1,4 @@
 let net = require('net')
-const iconv = require('iconv-lite');
 
 // 假数据
 let LESSON_DATA = {
@@ -26,34 +25,60 @@ let LESSON_DATA = {
 
 let server = net.createServer(socket => {
   console.log('1. server: 与客户端已连接')
+  let oldBuffer = null
   socket.on('data', buffer => {
+    // 把上一次data事件使用残余的buffer接上来
+    if (oldBuffer) {
+      buffer = Buffer.concat([oldBuffer, buffer])
+    }
+
+    let packageLength = 0
+    // 只要还存在可以解成完整包的包长
+    while (packageLength = checkComplete(buffer)) {
+      const package = buffer.slice(0, packageLength)
+      buffer = buffer.slice(packageLength)
+
+      // 把这个包解成数据和seq
+      const result = decode(package)
+
+      console.log('\n LESSON_DATA[result.data]:', result, 'seq:', result.seq)
+      // 计算得到要返回的结果，并write返回
+      // socket.write(
+      //   encode(LESSON_DATA[result.data], result.seq)
+      // )
+    }
+
+    // 把残余的buffer记下来
+    oldBuffer = buffer;
+
+
     // console.log('\n2. Server接收数据。buffer str:', buffer.toString(), ', buffer:', buffer)
     // let id = buffer.toString()
     // let lesson = LESSON_DATA[id]
     // console.log('3. ', id, LESSON_DATA[buffer.toString()])
 
-    let seq = buffer.slice(0, 2)
-    // 虽然有粘包，但是 readInt32BE 只度4位，
-    // readInt32BE(2) == readInt32BE(2, 6)
-    let title = buffer.readInt32BE(2)
-    console.log('\n2. seq:', seq, ', title', title)
-    console.log('\n3. seq:', seq, ', buffer：', buffer)
-    // console.log('\n4. seq:', seq, ', buffer：', buffer.readInt32BE(2, 6))
-    // console.log('\n5. seq:', seq, ', buffer：', buffer.readInt16BE(6, 8))
-    // console.log('\n6. seq:', seq, ', buffer：', buffer.readInt32BE(8, 12))
-    // console.log('\n3. seq:', seq, ', title', iconv.decode(title, 'utf-8'))
-
-    // console.log(LESSON_DATA[title])
-    setTimeout(() => {
-      let concatBuffer = Buffer.concat([
-          seq,
-          Buffer.from(LESSON_DATA[title])
-      ])
-      console.log('\n4. seq:', seq, ', buffer：', LESSON_DATA[title])
-      socket.write(concatBuffer)
-      // socket.write(lesson)
-    }, 5000)
-    // socket.write('你好，client, 我来自 server')
+    // let seq = buffer.slice(0, 2)
+    // // 虽然有粘包，但是 readInt32BE 只度4位，
+    // // readInt32BE(2) == readInt32BE(2, 6)
+    // let title = buffer.readInt32BE(2)
+    // console.log('\n2. seq:', seq, ', title', title)
+    // console.log('\n3. seq:', seq, ', buffer：', buffer)
+    // // console.log('\n4. seq:', seq, ', buffer：', buffer.readInt32BE(2, 6))
+    // // console.log('\n5. seq:', seq, ', buffer：', buffer.readInt16BE(6, 8))
+    // // console.log('\n6. seq:', seq, ', buffer：', buffer.readInt32BE(8, 12))
+    // // console.log('\n3. seq:', seq, ', title', iconv.decode(title, 'utf-8'))
+    //
+    // // console.log(LESSON_DATA[title])
+    // setTimeout(() => {
+    //   let concatBuffer = Buffer.concat([
+    //       seq,
+    //       Buffer.from(LESSON_DATA[title])
+    //   ])
+    //   console.log('\n4. seq:', seq, ', buffer：', LESSON_DATA[title])
+    //   socket.write(concatBuffer)
+    //   // socket.write(lesson)
+    // }, 5000)
+    // // socket.write('你好，client, 我来自 server')
   })
 })
 
@@ -62,6 +87,61 @@ server.listen(port, () => {
   console.log(`Server bound, port:${port}`)
 })
 
+
+/**
+ * 检查一段buffer是不是一个完整的数据包。
+ * 具体逻辑是：判断header的bodyLength字段，看看这段buffer是不是长于header和body的总长
+ * 如果是，则返回这个包长，意味着这个请求包是完整的。
+ * 如果不是，则返回0，意味着包还没接收完
+ * @param {} buffer
+ */
+function checkComplete (buffer) {
+  if (buffer.length < 6) {
+    return 0
+  }
+  const bodyLength = buffer.readInt32BE(2)
+  return 6 + bodyLength
+}
+
+
+/**
+ * 二进制包解码函数
+ * 在一段rpc调用里，服务端需要经常解码rpc调用时，业务数据的请求包
+ */
+function decode (buffer) {
+  const header = buffer.slice(0, 6)
+  const seq = header.readInt16BE()
+
+  // 正常情况下，这里应该是使用 protobuf 来decode一段代表业务数据的数据包
+  // 为了不要混淆重点，这个例子比较简单，就直接读一个Int32即可
+  const body = buffer.slice(6).readInt32BE()
+
+  // 这里把seq和数据返回出去
+  return {
+    seq,
+    body
+  }
+}
+
+/**
+ * 二进制包编码函数
+ * 在一段rpc调用里，服务端需要经常编码rpc调用时，业务数据的返回包
+ */
+function encode(data, seq) {
+  // 正常情况下，这里应该是使用 protobuf 来encode一段代表业务数据的数据包
+  // 为了不要混淆重点，这个例子比较简单，就直接把课程标题转buffer返回
+  const body = Buffer.from(data)
+
+  // 一般来说，一个rpc调用的数据包会分为定长的包头和不定长的包体两部分
+  // 包头的作用就是用来记载包的序号和包的长度，以实现全双工通信
+  const header = Buffer.alloc(6);
+  header.writeInt16BE(seq)
+  header.writeInt32BE(body.length, 2);
+
+  const buffer = Buffer.concat([header, body])
+
+  return buffer;
+}
 
 // const iconv = require('iconv-lite');
 // const encoding = 'gbk';

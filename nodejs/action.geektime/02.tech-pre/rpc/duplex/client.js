@@ -33,29 +33,14 @@ const LESSON_IDS = [
 ]
 
 
-let id = ''
-let seq = 0
-function writeLessonId () {
-  let index = Math.floor(Math.random() * LESSON_IDS.length)
-  id = LESSON_IDS[index]
-
-  let buffer = Buffer.alloc(6)
-  buffer.writeInt16BE(seq)
-  buffer.writeInt32BE(id, 2)
-  // let title = Buffer.from(id)
-
-  client.write(buffer)
-  // client.write(id)
-  seq++
-}
 
 // 粘包
-let k = 0
-while (k  < 100)  {
-  writeLessonId()
-  console.log(`${k} ${id}`)
-  k++
-}
+// let k = 0
+// while (k  < 100)  {
+//   writeLessonId()
+//   console.log(`${k} ${id}`)
+//   k++
+// }
 
 
 let oldBuffer = null
@@ -88,9 +73,42 @@ client.on('data', (buffer) => {
  * @param {} buffer
  */
 function checkComplete(buffer) {
-  if (buffer.length < 6) {
-    return 0;
+  if (buffer.length  < 6) {
+    return 0
   }
-  const bodyLength = buffer.readInt32BE(2);
+  const bodyLength = buffer.readInt32BE(2)
   return 6 + bodyLength
+}
+
+
+
+
+let seq = 0
+function encode (data) {
+  // 正常情况下，这里应该是使用 protobuf 来encode一段代表业务数据的数据包
+  // 为了不要混淆重点，这个例子比较简单，就直接把课程id转buffer发送
+  let body = Buffer.alloc(4)
+  body.writeInt32BE(LESSON_IDS[data.id])
+
+  // 一般来说，一个rpc调用的数据包会分为定长的包头和不定长的包体两部分
+  // 包头的作用就是用来记载包的序号和包的长度，以实现全双工通信
+  const header = Buffer.alloc(6)
+  header.writeInt16BE(seq)
+  header.writeInt32BE(body.length, 2)
+
+  // 包头和包体拼起来发送
+  const buffer = Buffer.concat([
+    header,
+    body
+  ])
+
+  console.log(`包seq: ${seq} 传输的课程 id 为:${LESSON_IDS[data.id]}`)
+  seq++
+  return buffer
+}
+
+let id
+for (let i = 0; i < 100; i++) {
+  id = Math.floor(Math.random() * LESSON_IDS.length)
+  client.write(encode({ id }))
 }
