@@ -49,7 +49,7 @@ let server = net.createServer(socket => {
     }
 
     // 把残余的buffer记下来
-    oldBuffer = buffer;
+    // oldBuffer = buffer;
 
 
     // console.log('\n2. Server接收数据。buffer str:', buffer.toString(), ', buffer:', buffer)
@@ -96,10 +96,11 @@ server.listen(port, () => {
  * @param {} buffer
  */
 function checkComplete (buffer) {
-  if (buffer.length < 6) {
+  if (buffer.length < 10) {
     return 0
   }
   const bodyLength = buffer.readInt32BE(2)
+  console.log('bodyLength:', bodyLength, ', buffer.length:', buffer.length)
   return 6 + bodyLength
 }
 
@@ -119,7 +120,7 @@ function decode (buffer) {
   // 这里把seq和数据返回出去
   return {
     seq,
-    body
+    data: body
   }
 }
 

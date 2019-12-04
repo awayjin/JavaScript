@@ -108,7 +108,7 @@ function encode (data) {
 }
 
 let id
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 3; i++) {
   id = Math.floor(Math.random() * LESSON_IDS.length)
   client.write(encode({ id }))
 }
