@@ -43,9 +43,9 @@ let server = net.createServer(socket => {
 
       console.log('\n LESSON_DATA[result.data]:', result, 'seq:', result.seq)
       // 计算得到要返回的结果，并write返回
-      // socket.write(
-      //   encode(LESSON_DATA[result.data], result.seq)
-      // )
+      socket.write(
+        encode(LESSON_DATA[result.data], result.seq)
+      )
     }
 
     // 把残余的buffer记下来
@@ -96,7 +96,7 @@ server.listen(port, () => {
  * @param {} buffer
  */
 function checkComplete (buffer) {
-  if (buffer.length < 10) {
+  if (buffer.length < 6) {
     return 0
   }
   const bodyLength = buffer.readInt32BE(2)
