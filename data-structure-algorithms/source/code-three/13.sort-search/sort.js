@@ -110,12 +110,16 @@ function quick(array, left, right) {
   let index
   if (array.length > 1) {
     index = partition(array, left, right)
+    console.log(index, ', array:', array)
+
     if (left < index - 1) {
       quick(array, left, index - 1)
     }
     if (index < right) {
+      // console.log(index, right)
       quick(array, index, right )
     }
+
   }
   return array
 }

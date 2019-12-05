@@ -12,10 +12,9 @@ http.createServer((req, res) => {
 
   const host = req.headers.host
   console.log('host:', host)
-  console.log('host:', req.headers.Host)
 
   if (url === '/') {
-    if (host === 'a.test.com:3000') {
+    if (host === 'localhost:3000') {
       res.writeHead(200, {
         'Content-Type': 'text/html',
         // 内容安全策略
@@ -31,7 +30,7 @@ http.createServer((req, res) => {
         // 'set-cookie': ['id=123', 'name=jin'] // 通过数组设置多个值
         // 'set-cookie': ['id=123;max-age=5', 'name=456'] // 通过数组设置多个值, 设置过期时间 max=age
         // 通过数组设置多个值, 设置过期时间 max=age
-        'set-cookie': ['id=12', 'bcd=79;httpOnly', 'name=46;domain=test.com']
+        'set-cookie': ['id=12', 'id=23;max-age=5', 'age=10', 'bcd=79;httpOnly', 'name=46;domain=test.com']
 
       })
     }
