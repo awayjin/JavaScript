@@ -17,6 +17,9 @@ const buffer2 = Buffer.from([1, 2, 3, 10, 11, 55]) // 数字数组
 
 
 console.log('buffer1:', buffer1)
+console.log('Buffer.from([]):', Buffer.from(['233']))
+console.log('Buffer.from():', Buffer.from('233'))
+console.log('buffer1 toString:', buffer1.toString())
 console.log('buffer2:', buffer2)
 
 buffer1.writeInt8(12)
@@ -49,6 +52,12 @@ buffer4.writeInt32BE(136797, 2)
 console.log('buffer4:', buffer4)
 console.log('buffer4:', buffer4.slice(0, 2).readInt16BE(0,2))
 console.log('buffer4:', buffer4.readInt32BE(2))
+
+
+
+const buffer5 = Buffer.alloc(4)
+buffer5.writeInt32BE('1368032223')
+console.log('buffer5.length:', buffer5.length, ', buffer5:', buffer5)
 
 
 // 创建一个长度为 10、且用零填充的 Buffer

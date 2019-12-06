@@ -1,0 +1,9 @@
+enum Foo {
+  BAR = 1;
+  dd = 2;
+}
+
+message Test {
+  required float num = 1;
+  required string payload = 2;
+}

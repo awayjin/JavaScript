@@ -103,15 +103,18 @@ function merge(left, right) {
 // 之前，而比主元大的值都排在主元之后。这一步叫作划分（partition）操作。
 // (3) 接着，算法对划分后的小数组（较主元小的值组成的子数组，以及较主元大的值组成的
 // 子数组）重复之前的两个步骤，直至数组已完全排序。
-function quickSort(array) {
+function quickSort (array) {
+  console.log('array', array)
   return quick(array, 0, array.length - 1)
 }
-function quick(array, left, right) {
+function quick (array, left, right) {
   let index
   if (array.length > 1) {
+    // console.log('array', array)
     index = partition(array, left, right)
     console.log(index, ', array:', array)
 
+    console.log('index:', index, left, right, array)
     if (left < index - 1) {
       quick(array, left, index - 1)
     }
@@ -123,10 +126,11 @@ function quick(array, left, right) {
   }
   return array
 }
-function partition(array, left, right) {
-  const pivot = array[Math.floor((right + left) / 2)]
+function partition (array, left, right) {
+  let pivot = array[Math.floor((left + right) / 2)]
   let i = left
   let j = right
+
   while (i <= j) {
     while (array[i] < pivot) {
       i++
@@ -136,13 +140,49 @@ function partition(array, left, right) {
     }
     if (i <= j) {
       [array[i], array[j]] = [array[j], array[i]]
-      // swap(array, i, j)
       i++
       j--
     }
   }
   return i
 }
+
+// function quickSort(array) {
+//   return quick(array, 0, array.length - 1)
+// }
+// function quick(array, left, right) {
+//   let index
+//   if (array.length > 1) {
+//     index = partition(array, left, right)
+//     if (left < index - 1) {
+//       quick(array, left, index - 1)
+//     }
+//     if (index < right) {
+//       quick(array, index, right )
+//     }
+//   }
+//   return array
+// }
+// function partition(array, left, right) {
+//   const pivot = array[Math.floor((right + left) / 2)]
+//   let i = left
+//   let j = right
+//   while (i <= j) {
+//     while (array[i] < pivot) {
+//       i++
+//     }
+//     while (array[j] > pivot) {
+//       j--
+//     }
+//     if (i <= j) {
+//       [array[i], array[j]] = [array[j], array[i]]
+//       // swap(array, i, j)
+//       i++
+//       j--
+//     }
+//   }
+//   return i
+// }
 
 export {
   bubbleSort,
@@ -151,3 +191,4 @@ export {
   mergeSort,
   quickSort
 }
+

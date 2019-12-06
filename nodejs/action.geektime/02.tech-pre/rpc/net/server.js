@@ -25,10 +25,21 @@ const data = {
 const server = net.createServer(function (socket) {
   // 每次客户端连接都会新建一个 socket
   socket.on('data', buffer => {
-    console.log('3. 服务端接收到数据, toString:', buffer.toString(), ', buffer:', buffer)
-    let lessonId = buffer.toString()
+    console.log('\n 4. 服务端接收到数据 buffer:', buffer)
+    // let lessonId = buffer.toString()
+
+    let seq = buffer.slice(0, 2)
+    let body = buffer.readInt32BE(2)
+    console.log('\n 5. 服务端接收到数据, seq:', seq, ', body:', body)
+
     setTimeout(() => {
-      socket.write(data[lessonId])
+      const concatBuffer = Buffer.concat([
+        seq,
+        Buffer.from(data[body])
+      ])
+      socket.write(concatBuffer)
+      // socket.write(Buffer.concat([seq, data[body]]))
+      // socket.write(data[lessonId])
       // socket.end(data[lessonId])
     }, 3000)
   })
