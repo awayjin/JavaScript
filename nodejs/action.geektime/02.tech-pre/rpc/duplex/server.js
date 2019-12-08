@@ -42,7 +42,7 @@ let server = net.createServer(socket => {
       // 把这个包解成数据和seq
       const result = decode(package)
 
-      console.log('\n LESSON_DATA[result.data]:', result, 'seq:', result.seq)
+      console.log('\n decode(package):', result, 'seq:', result.seq)
       // 计算得到要返回的结果，并write返回
       socket.write(
         encode(LESSON_DATA[result.data], result.seq)

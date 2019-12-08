@@ -69,7 +69,7 @@ function encode (data) {
 
 let id
 // 发送
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < 3; i++) {
   id = Math.floor(Math.random() * LESSON_IDS.length)
   client.write(encode({ id }))
 }
@@ -87,11 +87,13 @@ client.on('data', buffer => {
 
 // 检查是不是完整包
 function checkComplete(buffer) {
+  console.log('buffer.length:', buffer.length)
   if (buffer.length < 10) {
     return 0
   }
 
   let bodyLength = buffer.readInt32BE(2)
+  console.log('3. bodyLength:', bodyLength, ', buffer.length:', buffer.length)
   return 6 + bodyLength
 }
 
