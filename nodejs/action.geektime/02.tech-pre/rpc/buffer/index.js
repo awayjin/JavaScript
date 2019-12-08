@@ -55,9 +55,10 @@ console.log('buffer4:', buffer4.readInt32BE(2))
 
 
 
-const buffer5 = Buffer.alloc(4)
-buffer5.writeInt32BE('1368032223')
-console.log('buffer5.length:', buffer5.length, ', buffer5:', buffer5)
+const buffer5 = Buffer.alloc(8)
+buffer5.writeInt32BE(4)
+buffer5.writeInt32BE('1234567', 4)
+console.log('buffer5.length:', buffer5.length, ', buffer5:', buffer5.readInt32BE(4))
 
 
 // 创建一个长度为 10、且用零填充的 Buffer

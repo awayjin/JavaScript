@@ -48,11 +48,15 @@ LE-BE, 大小端问题 - 几个 Byte 里，高位与低位的编排顺序不同�
 
 处理方法与 string 接近。
 
+
+### protocol-buffers
+protocol-buffers 是Google研发的与语言无关，与平台无关的可扩展机制，用于对结构化数据进行序列化（例如XML），但更小，更快，更简单。
+
+
 Protocol Buffer
 - Google 研发的二进制协议编解码库
 - 通过协议文件控制 Buffer 的格式。 更直观，更好维护，更便于合作
 
-protocol-buffers
 ```javascript
 const fs = require('fs')
 const protobuf = require('protocol-buffers')
