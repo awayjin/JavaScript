@@ -28,9 +28,9 @@ let server = net.createServer(socket => {
   let oldBuffer = null
   socket.on('data', buffer => {
     // 把上一次data事件使用残余的buffer接上来
-    if (oldBuffer) {
-      buffer = Buffer.concat([oldBuffer, buffer])
-    }
+    // if (oldBuffer) {
+    //   buffer = Buffer.concat([oldBuffer, buffer])
+    // }
     console.log('1. buffer:', buffer)
 
     let packageLength = 0
@@ -42,7 +42,7 @@ let server = net.createServer(socket => {
       // 把这个包解成数据和seq
       const result = decode(package)
 
-      console.log('\n decode(package):', result, 'seq:', result.seq)
+      // console.log('\n decode(package):', result, 'seq:', result.seq)
       // 计算得到要返回的结果，并write返回
       socket.write(
         encode(LESSON_DATA[result.data], result.seq)
