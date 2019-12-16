@@ -1,0 +1,32 @@
+{
+  "apps":[
+    {
+      "name":"Website",  //项目名称
+      "script":"./server/app.js", //入口文件
+      "instance": "2", //// 多核
+      "env":{
+        "COMMON_VARIABLE": "true" // env, 传递外部变量进去
+      },
+      // 生产环境
+      "env_production" : {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy":{
+    "production":{
+      "user":"root",       // 服务器登录用户名
+      "host":["115.28.137.219"], //服务器ip
+      "port":"22",           //ssh 端口如果没改过为 22
+      "ref":"origin/master", // 哪个分支的代码
+      "repo":"git@github.com:awayjin/codegoing.git", //git仓库 项目ssh地址
+      "path":"/home/codegoing",//服务器部署地址 需要事先在服务器上将/www/website/ 新建出来
+      "ssh_options":"StrictHostKeyChecking=no",
+      "ssh_deploy": "npm install", //// 每次发布后安装依赖包
+      "pre-deploy-local": "echo 'Deploy done. away-!", //// 本地做一些工作
+      "env":{
+        "NODE_ENV":"production"
+      }
+    }
+  }
+}

@@ -6,11 +6,11 @@ const protobuf = require('protocol-buffers')
 const fs = require('fs')
 const messages = protobuf(fs.readFileSync(`${__dirname}/detail.proto`))
 
-const buf = messages.ColumnRequest.encode({
-  columnid: 2
-})
-console.log(buf)
-console.log(messages.ColumnRequest.decode(buf))
+// const buf = messages.ColumnRequest.encode({
+//   columnid: 12
+// })
+// console.log(buf)
+// console.log(messages.ColumnRequest.decode(buf))
 
 easySock.setConfig({
   ip : "127.0.0.1",
@@ -19,10 +19,13 @@ easySock.setConfig({
   timeout : 500	// 0 by default
 })
 
+
 // 发送的数据协议进行二进制编码
 easySock.encode = function (data, seq) {
   // 请求包的编码
   const body = messages.ColumnRequest.encode(data)
+  console.log('data:', data)
+  console.log('seq:', seq)
   // 请求体的编码
   const header = Buffer.alloc(8)
   header.writeInt32BE(seq)
@@ -55,7 +58,7 @@ easySock.isReceiveComplete = function(buffer) {
 
 
 easySock.write({
-  columnid: 24
+  columnid: 33
 }, (err, data) => {
   console.log('err:', err)
   console.log('data:', data)
