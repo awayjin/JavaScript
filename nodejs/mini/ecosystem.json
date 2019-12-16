@@ -1,0 +1,28 @@
+{
+  "apps": [{
+    "name": "codegoing-mini",
+    "script": "server.js",
+    "env": {
+      "COMMON_VARIABLE": "true"
+    },
+    "env_production": {
+      "NODE_ENV": "production"
+    }
+  }],
+  "deploy": {
+    "production": {
+      "user": "root",
+      "host": ["115.28.137.219"],
+      "port": "22",
+      "ref": "origin/master",
+      "repo": "git@github.com:awayjin/codegoing.git",
+      "path": "/home/codegoing/mini",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "ssh_deploy": "npm install",
+      "pre-deploy-local": "echo 'Deploy done. away-!'",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
