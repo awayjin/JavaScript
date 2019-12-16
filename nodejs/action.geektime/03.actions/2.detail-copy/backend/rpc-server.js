@@ -19,6 +19,8 @@ class RPC {
 
 let seq = 0
 const server = net.createServer((socket) => {
+  console.log('buffer:', socket)
+
   socket.on('data', (buffer) => {
     console.log('buffer:', buffer)
     console.log('buffer.readInt32BE:', buffer.readInt32BE())
@@ -27,7 +29,7 @@ const server = net.createServer((socket) => {
     const columnId = messages.ColumnRequest.decode(buffer.slice(8))
     console.log('messages.ColumnRequest.decode(buffer.slice(8)):', columnId)
 
-    const body = messages.Column.encode(columnData[0])
+    const body = messages.ColumnResponse.encode(columnData[0])
     const header = Buffer.alloc(8)
 
     header.writeInt32BE(seq)
@@ -41,10 +43,10 @@ const server = net.createServer((socket) => {
     socket.write(result)
   })
 
-})
+}).listen(4002)
 
 function encodeResponse () {
 
 }
 
-server.listen(4000)
+// server.listen(4000)

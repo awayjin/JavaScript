@@ -1,7 +1,6 @@
 // easy_sock帮你快速开发基于tcp协议的接口，
 // 快速打通nodejs跟其他私有协议server的交互。
 const EasySock = require('easy_sock')
-const easySock = new EasySock()
 const protobuf = require('protocol-buffers')
 const fs = require('fs')
 const messages = protobuf(fs.readFileSync(`${__dirname}/detail.proto`))
@@ -12,13 +11,21 @@ const messages = protobuf(fs.readFileSync(`${__dirname}/detail.proto`))
 // console.log(buf)
 // console.log(messages.ColumnRequest.decode(buf))
 
-easySock.setConfig({
-  ip : "127.0.0.1",
-  port : 4000,
-  keepAlive : false,
-  timeout : 500	// 0 by default
-})
+// const easySock = new EasySock()
+// easySock.setConfig({
+//   ip: "127.0.0.1",
+//   port: 4000,
+//   keepAlive: true,
+//   timeout: 500	// 0 by default
+// })
 
+let easySock = new EasySock({
+  ip: '127.0.0.1',
+  port: 4002,
+  timeout: 500,
+  // 是否全双工通信的
+  keepAlive: true
+})
 
 // 发送的数据协议进行二进制编码
 easySock.encode = function (data, seq) {
