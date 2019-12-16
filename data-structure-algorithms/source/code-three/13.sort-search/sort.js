@@ -184,7 +184,76 @@ function partition (array, left, right) {
 //   return i
 // }
 
+// 计数排序
+// function countingSort (array) {
+//   if (array.length < 2) {
+//     return array
+//   }
+//
+//   const maxValue = findMaxValue(array)
+//
+//   // const counts = [maxValue + 1]
+//   const counts = new Array(maxValue + 1)
+//   array.forEach(element => {
+//     if (!counts[element]) {
+//       counts[element] = 0
+//     }
+//     counts[element]++
+//   })
+//
+//   let sortedIndex = 0
+//   counts.forEach((count, i) => {
+//     while (count > 0) {
+//       array[sortedIndex++] = i
+//       count--
+//     }
+//   })
+//
+//   return array
+// }
+
+function countingSort (array) {
+  if (array.length < 2) {
+    return array;
+  }
+  const maxValue = findMaxValue(array);
+  let sortedIndex = 0;
+  const counts = new Array(maxValue + 1);
+  array.forEach(element => {
+    if (!counts[element]) {
+      counts[element] = 0;
+    }
+    counts[element]++;
+  });
+  // console.log('Frequencies: ' + counts.join());
+  counts.forEach((element, i) => {
+
+    while (element > 0) {
+      array[sortedIndex++] = i;
+      element--;
+
+      console.log('\n ---counts:', counts)
+      console.log('element:', element, ', i:', i)
+      console.log('sortedIndex:', sortedIndex)
+      console.log('array:', array)
+    }
+  });
+  return array;
+}
+
+// 找最大值
+function findMaxValue (array) {
+  let max = array[0]
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] > max) {
+      max = array[i]
+    }
+  }
+  return max
+}
+
 export {
+  countingSort,
   bubbleSort,
   selectionSort,
   insertionSort,
