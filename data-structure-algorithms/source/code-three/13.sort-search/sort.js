@@ -112,9 +112,8 @@ function quick (array, left, right) {
   if (array.length > 1) {
     // console.log('array', array)
     index = partition(array, left, right)
-    console.log(index, ', array:', array)
-
-    console.log('index:', index, left, right, array)
+    // console.log(index, ', array:', array)
+    // console.log('index:', index, left, right, array)
     if (left < index - 1) {
       quick(array, left, index - 1)
     }
@@ -226,6 +225,7 @@ function countingSort (array) {
     counts[element]++;
   });
   // console.log('Frequencies: ' + counts.join());
+  console.log(Array(20).join('-'), '...counts: ', counts);
   counts.forEach((element, i) => {
 
     while (element > 0) {
