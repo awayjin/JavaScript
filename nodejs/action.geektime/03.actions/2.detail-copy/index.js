@@ -17,3 +17,15 @@ const port = 4000
 app.listen(port , () => {
   console.log(`App started at http://localhost:${port}`)
 })
+
+const rpcClient = require('./rpc/rpc.js')
+
+rpcClient.write({
+  columnid: 122
+}, (err, data) => {
+  if (err) {
+    console.log('err:', err)
+  } else {
+    console.log('data:', data)
+  }
+})
