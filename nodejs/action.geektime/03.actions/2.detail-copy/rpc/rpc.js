@@ -21,17 +21,17 @@ const messages = protobuf(fs.readFileSync(`${__dirname}/detail.proto`))
 
 let easySock = new EasySock({
   ip: '127.0.0.1',
-  port: 4000,
+  port: 4001,
   timeout: 2000,
   // 是否全双工通信的
-  keepAlive: true
+  keepAlive: false
 })
 
 // 发送的数据协议进行二进制编码
 easySock.encode = function (data, seq) {
   // 请求包的编码
   const body = messages.ColumnRequest.encode(data)
-  console.log('data:', data)
+  console.log('\n encode data:', data)
   console.log('seq:', seq)
   // 请求体的编码
   const header = Buffer.alloc(8)
@@ -45,7 +45,7 @@ easySock.encode = function (data, seq) {
 easySock.decode = function (buffer) {
   const seq = buffer.readInt32BE()
   const body = messages.ColumnResponse.decode(buffer.slice(8))
-
+  // console.log('\n decode body:', body)
   return {
     seq,
     result: body
@@ -57,16 +57,20 @@ easySock.isReceiveComplete = function(buffer) {
   if (buffer.length  < 8) {
     return 0
   }
-  console.log('buffer::::', buffer)
+  console.log('\n isReceiveComplete buffer::::', buffer)
   let bodyLength = buffer.readInt32BE(4)
-  console.log('bodyLength::, ', bodyLength)
-  return 8 + bodyLength
+  console.log('bodyLength: ', bodyLength)
+  if (buffer.length >= bodyLength + 8) {
+    return 8 + bodyLength
+  } else {
+    return 0
+  }
 }
 
 easySock.write({
   columnid: 22
 }, (err, data) => {
-  console.log('err:', err)
+  console.log('\n callback err:', err)
   console.log('data:', data)
 })
 

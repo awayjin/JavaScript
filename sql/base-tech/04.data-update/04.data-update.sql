@@ -3,7 +3,7 @@ CREATE TABLE ProductIns(
 	product_id CHAR(4) NOT NULL,
 	product_name VARCHAR(100) NOT NULL,
 	product_type VARCHAR(32) NOT NULL,
-	sale_price INTEGER,
+	sale_price INTEGER DEFAULT 0,
 	purchase_price INTEGER,
 	regist_date DATE,
 	PRIMARY KEY (product_id)
@@ -36,7 +36,17 @@ CREATE TABLE DefaultProduct(
 INSERT INTO DefaultProduct VALUES(1, DEFAULT);
 SELECT * FROM DefaultProduct;
 
+SELECT * FROM ProductIns;
 
+INSERT INTO ProductIns
+(
+  product_id, product_name, product_type, sale_price
+)
+VALUES
+(
+  '0007', '擦菜板', '厨房用具', DEFAULT
+);
 
+select * from ProductIns WHERE product_id = '0007'
 
 
