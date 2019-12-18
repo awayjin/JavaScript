@@ -63,13 +63,13 @@ easySock.isReceiveComplete = function(buffer) {
   return 8 + bodyLength
 }
 
-easySock.write({
-  columnid: 22
-}, (err, data) => {
-  console.log('err:', err)
-  console.log('data:', data)
-})
+// easySock.write({
+//   columnid: 22
+// }, (err, data) => {
+//   console.log('err:', err)
+//   console.log('data:', data)
+// })
 
 
-// module.exports = easySock
+module.exports = easySock
 

@@ -37,7 +37,7 @@ const server = net.createServer((socket) => {
     })
     const header = Buffer.alloc(8)
 
-    header.writeInt32BE(seq)
+    header.writeInt32BE(buffer.readInt32BE())
     header.writeInt32BE(body.length, 4)
     seq++
 
