@@ -21,8 +21,8 @@ const messages = protobuf(fs.readFileSync(`${__dirname}/detail.proto`))
 
 let easySock = new EasySock({
   ip: '127.0.0.1',
-  port: 4001,
-  timeout: 2000,
+  port: 4004,
+  timeout: 1000,
   // 是否全双工通信的
   keepAlive: false
 })
@@ -31,7 +31,7 @@ let easySock = new EasySock({
 easySock.encode = function (data, seq) {
   // 请求包的编码
   const body = messages.ColumnRequest.encode(data)
-  console.log('\n encode data:', data)
+  console.log('\n ------> rpc.js encode data:', data)
   console.log('seq:', seq)
   // 请求体的编码
   const header = Buffer.alloc(8)
@@ -67,13 +67,13 @@ easySock.isReceiveComplete = function(buffer) {
   }
 }
 
-easySock.write({
-  columnid: 22
-}, (err, data) => {
-  console.log('\n callback err:', err)
-  console.log('data:', data)
-})
 
+// easySock.write({
+//   columnid: 22
+// }, (err, data) => {
+//   console.log('err:', err)
+//   console.log('data:', data)
+// })
 
-// module.exports = easySock
+module.exports = easySock
 

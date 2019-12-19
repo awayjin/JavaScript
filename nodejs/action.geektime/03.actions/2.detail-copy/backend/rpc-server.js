@@ -16,12 +16,11 @@ class RPC {
   }
 }
 
-let seq = 0
 const server = net.createServer((socket) => {
   // console.log('buffer:', socket)
 
   socket.on('data', (buffer) => {
-    console.log('\n buffer:', buffer)
+    console.log('\n ------- rpc-server.js buffer:', buffer)
     console.log('buffer.readInt32BE:', buffer.readInt32BE())
     console.log('buffer.readInt32BE(4):', buffer.readInt32BE(4))
     console.log('buffer.slice(8):', buffer.slice(8))
@@ -53,10 +52,5 @@ const server = net.createServer((socket) => {
   })
 
 })
-  // .listen(4002)
 
-function encodeResponse () {
-
-}
-
-server.listen(4001)
+server.listen(4004)

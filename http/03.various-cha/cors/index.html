@@ -9,8 +9,8 @@
 </head>
 <body>
 
-<button id="fetch">fetch</button>
 <button id="ajax">ajax</button>
+<button id="fetch">fetch</button>
 
 <script>
   const $buttons = {
@@ -18,7 +18,7 @@
     ajax: document.getElementById('ajax')
   }
 
-  let port = 3001
+  let port = 5000
   Object
     .keys($buttons)
     .map(key => {
@@ -27,7 +27,7 @@
         if (key === 'ajax') {
           // port++
           let xhr = new XMLHttpRequest()
-          xhr.open('get', `http://localhost:${port}/${key}`, false)
+          xhr.open('post', `http://localhost:${port + 1}/${key}`, false)
           // xhr.open('get', `http://${location.host}/${key}`, false)
           xhr.onreadystatechange = () => {
             if (xhr.readyState === 4) {
@@ -61,7 +61,7 @@
 
 </script>
 
-<script src="http://localhost:3001/"></script>
+<script src="http://localhost:5001/"></script>
 
 </body>
 </html>
