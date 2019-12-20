@@ -12,3 +12,14 @@ vm.runInThisContext('console.log("p:", p)')
 vm.runInThisContext('console.log(global.p)')
 
 console.log('p:', p)
+
+const user = {
+  // xss 过滤
+  name: 'ES6 template. <script />',
+  age: 22
+}
+
+const result = '`</h2>${ user.name }, age: ${ user.age }</h2>`'
+const vmResult = vm.runInNewContext(result, { user })
+
+console.log('vmResult:', vmResult)
