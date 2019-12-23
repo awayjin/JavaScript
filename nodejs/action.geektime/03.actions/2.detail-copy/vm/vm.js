@@ -23,3 +23,14 @@ const result = '`</h2>${ user.name }, age: ${ user.age }</h2>`'
 const vmResult = vm.runInNewContext(result, { user })
 
 console.log('vmResult:', vmResult)
+
+// xss 过滤
+const xssCode = '`<h2>${ _(user.name) }</h2>`'
+const vmResultXSS = vm.runInNewContext(xssCode, {
+  user,
+  _: function (markup) {
+    return String(markup)
+      .replace(/</g, '&lt;')
+  }
+})
+console.log('vmResultXSS:', vmResultXSS)
