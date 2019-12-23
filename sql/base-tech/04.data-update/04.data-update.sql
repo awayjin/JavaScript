@@ -49,4 +49,29 @@ VALUES
 
 select * from ProductIns WHERE product_id = '0007'
 
+-- 从其他表中复制数据
+DROP TABLE ProductCopy;
+CREATE TABLE ProductCopy(
+	product_id CHAR(4) NOT NULL,
+	product_name VARCHAR(100) NOT NULL,
+	product_type VARCHAR(32) NOT NULL,
+	sale_price INTEGER,
+	purchase_price INTEGER,
+	regist_date DATE,
+	PRIMARY KEY(product_id)
+)
+
+-- 将商品表中的数据复制到商品复制表中
+-- insert...select...from
+INSERT INTO 
+ProductCopy ( product_id, product_name, product_type, sale_price, purchase_price, regist_date ) 
+SELECT
+product_id, product_name, product_type, sale_price, purchase_price,regist_date 
+FROM Product;
+
+SELECT * FROM ProductCopy;
+
+SELECT * FROM product;
+
+
 
