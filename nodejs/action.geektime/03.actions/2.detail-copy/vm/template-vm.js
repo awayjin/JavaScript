@@ -25,3 +25,5 @@ function createTemplate(templatePath) {
 
 const result = vm.runInContext('a += 2', sandbox)
 console.log('result:', result)
+
+

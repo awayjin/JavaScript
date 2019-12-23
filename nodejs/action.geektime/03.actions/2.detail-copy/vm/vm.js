@@ -58,3 +58,11 @@ const result3 = vm.runInContext('p = 3; console.log(typeof gloabal)', window)
 console.log(window.p) // 3
 const util = require('util') // 3
 console.log('util:', util.inspect(window)) // 3
+
+
+
+
+// const templateResult = vm.runInNewContext(
+//   '`<h2>${include("subtemplatename")}</h2>`',
+//   templateContext
+// )
