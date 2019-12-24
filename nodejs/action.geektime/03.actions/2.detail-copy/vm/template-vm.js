@@ -1,29 +1,35 @@
 const vm = require('vm')
 const fs = require('fs')
+// const column = require('./mockdata/column')
+// const templatePath = `${__dirname}/mockdata/comment.js`
+const templatePath = __dirname + '/mockdata/comment.js'
+// const data = fs.readFileSync()
 
-const sandbox = {
-  a: 1,
-  include: function (name) {
-    const template = createTemplate
+// console.log('column:', column)
+const templateCache = {}
+// const templateContext = vm.createContext({
+//   include: function (name, data) {
+//     const template = templateCache[name] || createTemplate(name)
+//     return template(data)
+//   }
+// })
+const templateContext = {
+  include: function (name, data) {
+    const template = createTemplate(name)
+    return template(data)
   }
 }
-vm.createContext(sandbox)
 
-const templateContext = vm.createContext({
-  include: function (name, data) {
-    
-  }
-})
-
-const templateCache = {}
 function createTemplate(templatePath) {
-  templateCache[templatePath] = vm.runInContext(
-    `\`${fs.readFileSync(templatePath, 'utf-8')}\``,
+  templateCache[templatePath] = vm.runInNewContext(
+    `(function () {
+      return \`${fs.readFileSync(templatePath, 'utf-8')}\`
+    })`,
     templateContext
   )
+  return templateCache[templatePath]
 }
 
-const result = vm.runInContext('a += 2', sandbox)
-console.log('result:', result)
+console.log('createTemplate(templatePath):', createTemplate(templatePath))
 
-
+module.exports = createTemplate

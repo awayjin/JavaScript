@@ -13,19 +13,28 @@ const templateContext = {
 }
 Object.keys(templateMap).forEach(key => {
   const temp = templateMap[key] // 避免递归调用作暂存
-  templateMap[key] = vm.runInNewContext(`
+  templateMap[key] = vm.runInNewContext(
+    `
     (function () {
       return ${temp}
     })
-  `, templateContext)
+  `,
+    templateContext
+  )
 })
 console.log('templateMap:', templateMap['templateA']())
 
-const templateResult = vm.runInNewContext(`(function () {
-  return ${templateMap['templateA']}
-})`, {
-  include: function () {
-    return templateMap['templateA']
+const template = '`${include(" template-a11")}`'
+const templateResult = vm.runInNewContext(
+  // '`(function() { <h2>${include("  aa333")}</h2>)}`',
+  `(function () {
+    return ${template}
+  })`,
+  {
+    include: function f (name) {
+      return '433' + name
+    }
   }
-})
-// console.log('templateResult:', templateResult['templateA']())
+
+)
+console.log('templateResult:', templateResult())
