@@ -5,7 +5,8 @@ const templateCache = {};
 
 const templateContext = vm.createContext({
     include: function (name, data) {
-        const template = templateCache[name] || createTemplate(name)
+        // const template = templateCache[name] || createTemplate(name)
+        const template =  createTemplate(name)
         return template(data);
     }
 });

@@ -35,7 +35,7 @@ const server = net.createServer((socket) => {
     // })
     const body = messages.ColumnResponse.encode({
       column: columnData[0],
-      recommendColumns: [columnData[1]]
+      recommendColumns: [columnData[1], columnData[2]]
     })
 
     // console.log('body:', messages.ColumnResponse.decode(body))

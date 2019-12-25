@@ -5,7 +5,11 @@ const app = new Koa()
 // const KoaStatic = require('koa-static')
 const fs = require('fs')
 const rpcClient = require('./rpc/rpc.js')
+// const template = require('./vm/template-vm')
+// const detailTemplate = template(`${__dirname}/source/vue-index.html`)
 
+const template = require('./template')
+const detailTemplate = template(__dirname + '/template/index.html')
 
 // router.get('/', async ctx => {
 //   // const html = fs.readFileSync(__dirname + 'index.html', 'utf-8')
@@ -29,8 +33,9 @@ const rpcClient = require('./rpc/rpc.js')
 // })
 
 app.use(async (ctx) => {
-  console.log('ctx.query:', ctx.query)
-  console.log(ctx.query.query)
+  console.log('ctx.query:')
+  console.log(ctx.query)
+  console.log(ctx.query.columnid)
 
   if (ctx.url === '/favicon.ico') {
     ctx.body = ''
@@ -46,18 +51,17 @@ app.use(async (ctx) => {
   }
   const result = await new Promise((resolve, reject) => {
     rpcClient.write({
-      columnid: ctx.query.columnid || '444'
+      columnid: ctx.query.columnid
     }, (err, data) => {
       err ? reject(err) : resolve(data)
     })
   })
-
-  const html = await fs.readFileSync(`${__dirname}/source/vue-index.html`, 'utf-8')
-
   console.log('result:', result)
-  ctx.status = 200
-  // ctx.body = result
-  ctx.body = html
+  ctx.body = detailTemplate(result)
+
+  // const html = await fs.readFileSync(`${__dirname}/source/vue-index.html`, 'utf-8')
+  // ctx.body = html
+
 })
 
 // app.use(KoaStatic('./source')) // static

@@ -2,7 +2,6 @@ const vm = require('vm')
 const fs = require('fs')
 // const column = require('./mockdata/column')
 // const templatePath = `${__dirname}/mockdata/comment.js`
-const templatePath = __dirname + '/mockdata/comment.js'
 // const data = fs.readFileSync()
 
 // console.log('column:', column)
@@ -13,23 +12,31 @@ const templateCache = {}
 //     return template(data)
 //   }
 // })
+
 const templateContext = {
   include: function (name, data) {
-    const template = createTemplate(name)
+    // const template = templateCache[name] || createTemplate(name)
+    const template =  createTemplate(name)
     return template(data)
   }
 }
 
 function createTemplate(templatePath) {
   templateCache[templatePath] = vm.runInNewContext(
-    `(function () {
-      return \`${fs.readFileSync(templatePath, 'utf-8')}\`
+    `(function (data) {
+        with (data) {
+          return \`${fs.readFileSync(templatePath, 'utf-8')}\`
+        }
     })`,
     templateContext
   )
   return templateCache[templatePath]
 }
 
-console.log('createTemplate(templatePath):', createTemplate(templatePath))
+// const templatePath = __dirname + '/mockdata/comment.js'
+// console.log('createTemplate(templatePath):', createTemplate(templatePath))
 
 module.exports = createTemplate
+
+
+
