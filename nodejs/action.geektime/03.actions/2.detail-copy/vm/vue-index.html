@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+vue.
+
+${ column.id }
+
+app:
+<div id="app">
+  <ul>
+    <li v-for="item in items">
+      {{ item.id }}
+    </li>
+  </ul>
+  {{ a }}
+  <h1>ES6模板字符串改造成模板引擎：</h1>
+  ${
+    recommendColumns.map(item => {
+      return `
+        <div>
+          <h2>title: ${ item.column_title }</h2>
+          <p>name: ${ item.author_name }</p>
+        </div>
+      `
+    }).join('')
+  }
+</div>
+
+<br>
+<div id="cc"></div>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      a: 3333,
+      items: [{id: 11}, {id: 22}]
+    }
+  });
+
+  const recommendColumns = [ { author_name: 'a1' }, { author_name: 'a2'}];
+  const demo = 1
+
+  const results = recommendColumns.map(item => {
+    return item.author_name
+  })
+  console.log('results:', results)
+  document.getElementById('cc').innerHTML = results.join('----')
+</script>
+
+</body>
+</html>

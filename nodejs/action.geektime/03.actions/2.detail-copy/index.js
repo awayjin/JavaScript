@@ -5,11 +5,11 @@ const app = new Koa()
 // const KoaStatic = require('koa-static')
 const fs = require('fs')
 const rpcClient = require('./rpc/rpc.js')
-// const template = require('./vm/template-vm')
-// const detailTemplate = template(`${__dirname}/source/vue-index.html`)
+const template = require('./vm/template-vm')
+const detailTemplate = template(`${__dirname}/vm/vue-index.html`)
 
-const template = require('./template')
-const detailTemplate = template(__dirname + '/template/index.html')
+// const template = require('./template')
+// const detailTemplate = template(__dirname + '/template/index.html')
 
 // router.get('/', async ctx => {
 //   // const html = fs.readFileSync(__dirname + 'index.html', 'utf-8')
