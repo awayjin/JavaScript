@@ -7,6 +7,7 @@ const fs = require('fs')
 const rpcClient = require('./rpc/rpc.js')
 const template = require('./vm/template-vm')
 const detailTemplate = template(`${__dirname}/vm/vue-index.html`)
+// detailTemplate(result)
 
 // const template = require('./template')
 // const detailTemplate = template(__dirname + '/template/index.html')
@@ -57,6 +58,7 @@ app.use(async (ctx) => {
     })
   })
   console.log('result:', result)
+  // detailTemplate 是 runInNewContext 创建的一个返回函数
   ctx.body = detailTemplate(result)
 
   // const html = await fs.readFileSync(`${__dirname}/source/vue-index.html`, 'utf-8')

@@ -14,20 +14,18 @@ const templateCache = {}
 // })
 
 const templateContext = {
-  include: function (name, data) {
-    // const template = templateCache[name] || createTemplate(name)
-    const template =  createTemplate(name)
-    return template(data)
-  }
+  aa: 11
 }
 
 function createTemplate(templatePath) {
   templateCache[templatePath] = vm.runInNewContext(
     `(function (data) {
+        aa = aa + 3;
+        // with 语句指定 data 对象作为默认对象
         with (data) {
           return \`${fs.readFileSync(templatePath, 'utf-8')}\`
-        }
-    })`,
+        };
+    }); `,
     templateContext
   )
   return templateCache[templatePath]
