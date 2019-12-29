@@ -12,27 +12,6 @@ const detailTemplate = template(`${__dirname}/vm/vue-index.html`)
 // const template = require('./template')
 // const detailTemplate = template(__dirname + '/template/index.html')
 
-// router.get('/', async ctx => {
-//   // const html = fs.readFileSync(__dirname + 'index.html', 'utf-8')
-//   // ctx.body = html
-//   if (!ctx.query.columnid) {
-//     ctx.status = 400
-//     ctx.body = 'invalid columnid. Need a query columnid.'
-//     return
-//   }
-//   const result = await new Promise((resolve, reject) => {
-//     rpcClient.write({
-//       columnid: ctx.query.columnid
-//     }, (err, data) => {
-//       err ? reject(err) : resolve(data)
-//     })
-//   })
-//
-//   console.log('result:', result)
-//   ctx.status = 200
-//   ctx.body = '4444'
-// })
-
 app.use(async (ctx) => {
   console.log('ctx.query:')
   console.log(ctx.query)
