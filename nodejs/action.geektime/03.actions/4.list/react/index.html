@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://cdn.bootcss.com/babel-standalone/6.24.0/babel.min.js"></script>
+
+  <script src="./dist/main.js"></script>
+</head>
+<body>
+<!-- 加载我们的 React 组件。-->
+<div id="app"></div>
+
+<script type="text/babel">
+
+  class HelloMessage extends React.Component {
+    render () {
+      return (
+        <p>
+          hello { this.props.name }
+        </p>
+      )
+    }
+  }
+
+  ReactDOM.render(
+    <HelloMessage name="jin"></HelloMessage>,
+    document.getElementById('app')
+  )
+
+</script>
+</body>
+</html>
