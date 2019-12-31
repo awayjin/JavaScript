@@ -1,0 +1,11 @@
+<view>include common.wxml</view>
+<template name="common">
+  \n
+  <view>
+    <text>
+      common-page/common.wxml \t
+      text: {{ text }}, 来自
+
+    </text>
+  </view>
+</template>

@@ -1,0 +1,9 @@
+<template name="a">
+  <view>
+    This is a.wxml!
+  </view>
+  <view />
+</template>
+<view>import 引入的不会显示</view>
+
+

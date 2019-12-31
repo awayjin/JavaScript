@@ -1,2 +1,3 @@
-const a = 3
-console.log('const:', a)
+const a = 111
+console.log('const webpack-dev-server:', a)
+

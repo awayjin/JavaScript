@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+  <script src="vue-v2.5.17-beta.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+  <h1>Vue {{ msg }}</h1>
+  <div>
+    <ul>
+      <li v-for="(item, index) in [11, 22]" @click="toggleTab(index)">
+        tab1 -- {{ item }}
+      </li>
+    </ul>
+    <!--<div>content1</div>-->
+    <!--<div>content2</div>-->
+
+    <keep-alive>
+      <component :is="currentComponent"></component>
+    </keep-alive>
+  </div>
+  <!--<tab1></tab1>-->
+  <!--<tab2></tab2>-->
+</div>
+<script>
+
+  // https://yq.aliyun.com/articles/657626
+  Vue.component('tab1', {
+    // 一个组件的 data 选项必须是一个函数，
+    // 因此每个实例可以维护一份被返回对象的独立的拷贝
+    data: function f () {
+      return {
+        count: 20
+      }
+    },
+    template: '<button v-on:click="count++">tab1-component You clicked me {{ count }} times.</button>'
+  })
+  Vue.component('tab2', {
+    // 一个组件的 data 选项必须是一个函数，
+    // 因此每个实例可以维护一份被返回对象的独立的拷贝
+    data: function f () {
+      return {
+        count: 20
+      }
+    },
+    template: `<button v-on:click="count++">You clicked me {{ count }} times.</button>`
+  })
+
+  new Vue({
+    el: '#app',
+    data: {
+      msg: 'is',
+      currentComponent: 'tab1'
+    },
+    methods: {
+      toggleTab (index) {
+        this.currentComponent = `tab${index + 1}`
+      }
+    }
+  })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!-- item.wxml -->
+<view>import 引入的不会显示. item.wxml</view>
+<template name="item">
+  <view>
+    <text>
+      <view>item.wxml</view>
+      text:{{ text }}, 来自模板引用的
+    </text>
+  </view>
+  <view />
+</template>
+
+<!--<template name="item">-->
+  <!--<text>{{text}}</text>-->
+<!--</template>-->

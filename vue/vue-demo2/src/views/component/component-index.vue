@@ -14,7 +14,7 @@
     <br>
     <br>
     <keep-alive>
-      <component :is="showDemo == true ? 'two': 'one' "></component>
+      <component :is="showDemo == true ? 'two': 'One' "></component>
     </keep-alive>
   </div>
 </template>

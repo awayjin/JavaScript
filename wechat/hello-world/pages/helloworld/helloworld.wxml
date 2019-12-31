@@ -1,1 +1,58 @@
-<view>HelloWorld. AwayJin...</view>
+<view class='hello-world'>HelloWorld. AwayJin...</view>
+<view wx:if="{{ message ? false: true }}">
+{{ message }}
+</view>
+<view wx:else>message false</view>
+<br />
+<view 
+wx:for="{{ array }}" 
+wx:key='index'
+wx:for-item='itemName'
+>
+  {{ index }} --- {{ item.name }}
+  -> {{ itemName.name }}
+</view>
+
+<block 
+wx:for="{{[4, 5, 6]}}" 
+wx:for-index='idx' 
+wx:for-item="ite" 
+wx:key='idx'>
+  <view>{{ ite }} -- {{ idx }}</view>
+</block>
+
+<!-- 条件渲染 -->
+<view wx:if="{{ condition === 1}}">饺子</view>
+<view wx:elif="{{ condition === 2}}">面条</view>
+<view wx:else="{{ condition === 3}}">小米粥</view>
+
+
+<!-- 模板 -->
+<!-- 定义模板: 使用 name 属性，作为模板的名字。 -->
+<template name="msgItem">
+  <view>
+    <text>index:{{ index }} msg:{{ msg }}</text>
+  </view>
+  <view>
+    <text>{{ time }}</text>
+  </view>
+</template>
+
+<!--
+使用模板:
+使用 is 属性，声明需要的使用的模板，然后将模板所需要的 data 传入
+-->
+<template is="msgItem" data="{{ ...templateItem }}" />
+
+<!-- 模板引用
+WXML 提供两种文件引用方式import和include
+-->
+<import src="item.wxml"></import>
+<template is="item" data="{{ text: 'sd'}}"/>
+
+<import src="../common-page/common.wxml" />
+<template is="common" data="{{ text: '你好import' }}"></template>
+
+<!-- include -->
+<include src="a.wxml" />
+<template is="a" />
