@@ -15,7 +15,8 @@ module.exports = {
     contentBase: './dist',
     // 热更新， hot: true 自动引入 HotModuleReplacementPlugin
     hot: true,
-    port: 4000
+    port: 4000,
+    open: true
   },
   plugins: [
     new HTMLWebpackPlugin({
