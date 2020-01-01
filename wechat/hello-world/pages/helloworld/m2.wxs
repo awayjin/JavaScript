@@ -1,0 +1,3 @@
+module.exports = {
+  messages: 'm2.wxs value'
+}

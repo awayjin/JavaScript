@@ -54,5 +54,24 @@ WXML 提供两种文件引用方式import和include
 <template is="common" data="{{ text: '你好import' }}"></template>
 
 <!-- include -->
-<include src="a.wxml" />
-<template is="a" />
+<!--<include src="a.wxml" />-->
+<!--<template is="a" />-->
+
+<!-- wxs -->
+<wxs module="m1">
+  var msg = 'm1 hello wxs.'
+  module.exports.message = msg
+</wxs>
+
+<view wx:for="{{[11, 22, 33, 44]}}" wx:key="index">
+  <text>{{ m1.message }} -- {{ item }} \n</text>
+</view>
+
+<wxs src="./m2.wxs" module="m2"></wxs>
+<view>
+  {{ m2.messages }} ---
+</view>
+
+<wxs src="./tools.wxs" module="tools" />
+<view> {{tools.msg}} </view>
+<view> {{tools.bar(tools.FOO)}} </view>
