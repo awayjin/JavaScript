@@ -1,3 +1,6 @@
+import "@babel/polyfill";
+import "regenerator-runtime/runtime";
+
 import demoJson from './json/demo.json'
 
 console.log('demoJson:', demoJson)
@@ -10,3 +13,4 @@ const arrow = () => {
 }
 console.log('arrow:', arrow)
 
+// alert(a)
