@@ -12,5 +12,15 @@ Page({
       msg: 'template--emm',
       time: new Date().toLocaleDateString()
     }
+  },
+  onReady () {
+    console.log('小程序初始化')
+    this.load()
+  },
+  load () {
+    var object = { a: 11, b: 2 }
+    console.log('m3.wxs:', Object.values(object))
   }
 })
+
+

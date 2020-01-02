@@ -1,3 +1,4 @@
+// require 兼容 react 语法
 require('@babel/register')({
   presets: ['@babel/preset-react']
 })

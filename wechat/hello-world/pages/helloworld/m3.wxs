@@ -1,0 +1,6 @@
+var m2wxs = require('./m2.wxs');
+
+
+module.exports = {
+  m2Msg: 'wxs-msg.' + m2wxs.messages
+}

@@ -75,3 +75,10 @@ WXML 提供两种文件引用方式import和include
 <wxs src="./tools.wxs" module="tools" />
 <view> {{tools.msg}} </view>
 <view> {{tools.bar(tools.FOO)}} </view>
+
+<!-- wxs require -->
+<wxs src="./m3.wxs" module="m3m2"></wxs>
+<view>
+  <text>\n</text>
+  {{ m3m2.m3Msg }}
+</view>
