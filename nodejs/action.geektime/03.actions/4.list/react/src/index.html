@@ -4,33 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Title</title>
-  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://cdn.bootcss.com/babel-standalone/6.24.0/babel.min.js"></script>
+  <script>
+    // 加上这段话
+    window.Promise || document.write('<script src="//lib.baomitu.com/es6-promise/4.1.1/es6-promise.auto.min.js"><\/script>');
+  </script>
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/vConsole/3.3.4/vconsole.min.js"></script>-->
+<!--  <script>-->
+<!--    // 初始化-->
+<!--    var vConsole = new VConsole();-->
+<!--    console.log('Hello world');-->
+<!--  </script>-->
+  <script>
+    window.onerror = function (message, url, line, column, error) {
+      // console.log('log---onerror::::',message, url, line, column, error);
+      alert(message + ', url:' + url + ', line:' + line + ', column:' + column + ', error:' + error)
+      // alert(url)
+      // alert(line)
+      // alert(column)
+      // alert(error)
+    }
+  </script>
+
+<!--  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>-->
+<!--  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>-->
+<!--  <script src="https://cdn.bootcss.com/babel-standalone/6.24.0/babel.min.js"></script>-->
 
   <!--<script src="./build.js"></script>-->
 </head>
 <body>
 <!-- 加载我们的 React 组件。-->
-<div id="app"></div>
+<div id="app">app-div</div>
 
-<script type="text/babel">
+<!--<script type="text/babel">-->
 
-  class HelloMessage extends React.Component {
-    render () {
-      return (
-        <p>
-          React ReactDOM babel. Hello { this.props.name }
-        </p>
-      )
-    }
-  }
+<!--  class HelloMessage extends React.Component {-->
+<!--    render () {-->
+<!--      return (-->
+<!--        <p>-->
+<!--          React ReactDOM babel. Hello { this.props.name }-->
+<!--        </p>-->
+<!--      )-->
+<!--    }-->
+<!--  }-->
 
-  ReactDOM.render(
-    <HelloMessage name="jin"></HelloMessage>,
-    document.getElementById('app')
-  )
+<!--  ReactDOM.render(-->
+<!--    <HelloMessage name="jin"></HelloMessage>,-->
+<!--    document.getElementById('app')-->
+<!--  )-->
 
-</script>
+<!--</script>-->
 </body>
 </html>
