@@ -90,7 +90,14 @@ CREATE TABLE product_type(
 -- 插入其他表中数据合计值的INSERT ... SELECT语句
 INSERT INTO product_type(product_type, sum_sale_price, sum_purchase_price )
 SELECT product_type, sum(sale_price), sum(purchase_price) FROM productGROUP BY product_type;
+
 SELECT * FROM product_type;
+
+select * FROM product;
+-- 分组
+SELECT product_type, count(*) FROM product GROUP BY product_type;
+SELECT * FROM product ORDER BY purchase_price asc;
+SELECT * FROM product WHERE sale_price >= 1000;SELECT * FROM product WHERE regist_date IS NOT NULL;
 
 
 
