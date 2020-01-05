@@ -14,38 +14,35 @@
 
 // alert(a)
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from "react-dom";
+import Container from '../components/container.jsx'
+// const Container = require('./comp')
 
-
-class Counter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { number: 0 };
-    this.decrease = this.decrease.bind(this);
-    this.increase = this.increase.bind(this);
-  }
-  // 加1
-  increase() {
-    let self = this;
-    self.setState({ number: self.state.number + 1 })
-  }
-  // 减一
-  decrease() {
-    let self = this;
-    self.setState({ number: self.state.number - 1 })
-
+const title = <span>title, world.</span>
+class Welcome extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      name: 'Welcome Component name',
+      content: 'content Welcome.'
+    }
   }
 
-
-  render() {
+  render () {
     return (
-      <div>
-        <input type = "button" value = "减1"onClick = { this.decrease }/>
-        <span> { this.state.number } </span>
-        <input type = "button" value = "加1" onClick = { this.increase }/>
-      </div> )
+      <Container
+        name={ this.state.name }
+        content={ this.state.content }
+      >
+        <div>child, title: { title }</div>
+        <h2>child, { this.state.content }</h2>
+      </Container>
+    )
   }
 }
 
-ReactDOM.render(<Counter /> , document.getElementById('app'))
+ReactDOM.render(
+  <Welcome name='jin' />,
+  document.getElementById('app')
+)

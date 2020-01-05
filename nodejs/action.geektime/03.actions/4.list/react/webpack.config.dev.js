@@ -28,11 +28,15 @@ module.exports = {
   // 开发模式
   mode: 'development',
   // 配置入口文件
-  entry: './src/app.js',
+  entry: {
+    main: './src/app.js'
+  },
+  // entry: './src/app.js',
   // 出口文件目录为根目录下dist, 输出的文件名为main
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js'
+    // filename: 'main.js'
+    filename: '[name]-[hash:8].js'
   },
   // 配置开发服务器, 并配置自动刷新
   devServer: {
@@ -50,16 +54,16 @@ module.exports = {
   plugins: [htmlWebpackPlugin],
   module: {
     rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', "@babel/preset-react"]
-          }
-        }
-      },
+      // {
+      //   test: /\.m?js$/,
+      //   exclude: /(node_modules|bower_components)/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //     options: {
+      //       presets: ['@babel/preset-env', "@babel/preset-react"]
+      //     }
+      //   }
+      // },
       {
         test: /\.js|jsx$/,
         // use: 'babel-loader',
