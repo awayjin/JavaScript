@@ -1,3 +1,7 @@
+<navigator  url="../routes/routes">
+  go to routes.
+</navigator>
+
 <view class='hello-world'>HelloWorld. AwayJin...</view>
 <view wx:if="{{ message ? false: true }}">
 {{ message }}
