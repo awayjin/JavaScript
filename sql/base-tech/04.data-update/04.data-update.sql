@@ -99,5 +99,21 @@ SELECT product_type, count(*) FROM product GROUP BY product_type;
 SELECT * FROM product ORDER BY purchase_price asc;
 SELECT * FROM product WHERE sale_price >= 1000;SELECT * FROM product WHERE regist_date IS NOT NULL;
 
+show DATABASES;
+show tables;
+select * from product;
+DROP TABLE defaultproduct;
+delete FROM defaultproduct
+
+DELETE FROM product WHERE sale_price >= 4000;
+
+-- HAVING 选定特定组
+SELECT product_type, avg(sale_price), count(*) FROM product 
+GROUP BY product_type
+HAVING avg(sale_price) >= 1000;
+
+SELECT sale_price, sum(sale_price) FROM product 
+GROUP BY sale_price
+HAVING sale_price >= 200;
 
 

@@ -1,34 +1,24 @@
 const fs = require('fs')
 const net = require('net')
 const protocolBuffers = require('protocol-buffers')
-// const schemas = protocolBuffers(fs.readFileSync(`${__dirname}/../rpc/list.proto`))
-const schemas = protocolBuffers(fs.readFileSync(`${__dirname}/../rpc/detail.proto`))
-const mockData = require('./mockdata/column')
+const schemas = protocolBuffers(fs.readFileSync(`${__dirname}/../rpc/list.proto`))
+// const schemas = protocolBuffers(fs.readFileSync(`${__dirname}/../rpc/detail.proto`))
+const mockData = require('./mockdata/list.js')
 
-let rpcServer = function () {
-  class RPC {
-    constructor () {
-
-    }
-
-    createServer () {
-
-    }
-  }
-
-  return new RPC()
-}
-
-const server = rpcServer()
+const body = schemas.ListResponse.encode({
+  columns: [mockData[0]]
+})
+console.log('body3:', schemas.ListResponse.decode(body))
 
 net.createServer(function (socket) {
   socket.on('data', buffer => {
     const seq = buffer.readInt32BE()
-    const body = schemas.ColumnResponse.encode({
-      column: mockData[0],
-      recommendColumns: [mockData[0]]
+    console.log('seq:', seq)
+    // console.log('mockData:', mockData[0])
+    const body = schemas.ListResponse.encode({
+      columns: [mockData[0]]
     })
-    // console.log('body:', schemas.ColumnResponse.decode(body))
+    // console.log('body:', schemas.ListResponse.decode(body))
     const header = Buffer.alloc(8)
     header.writeInt32BE(buffer.readInt32BE())
     header.writeInt32BE(body.length, 4)
@@ -37,4 +27,4 @@ net.createServer(function (socket) {
     socket.write(result)
   })
 
-}).listen(4001)
+}).listen(4002)
