@@ -1,0 +1,109 @@
+<!--&lt;!&ndash;pages/scoll-view/scroll-view.wxml&ndash;&gt;-->
+<!--<text>pages/scoll-view/scroll-view.wxml</text>-->
+<!--<view>-->
+  <!--<h1>视图容器 scroll-view</h1>-->
+<!--</view>-->
+
+<!--<view class="container">-->
+  <!--<view class="page-body">-->
+
+    <!--<view class="page-section">-->
+      <!--<view class="page-section-title">-->
+        <!--<text>Vertical Scroll 纵向滚动</text>-->
+      <!--</view>-->
+      <!--<view class="page-section-spacing">-->
+        <!--&lt;!&ndash;<scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%" />&ndash;&gt;-->
+
+        <!--<scroll-view scroll-y="true" style="height: 300rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">-->
+
+        <!--&lt;!&ndash;<scroll-view&ndash;&gt;-->
+            <!--&lt;!&ndash;scroll-y="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;bindscrolltoupper="upper"&ndash;&gt;-->
+            <!--&lt;!&ndash;scroll-into-view="{{ toView }}"&ndash;&gt;-->
+            <!--&lt;!&ndash;style="height: 300rpx; background-color: #999;">&ndash;&gt;-->
+          <!--<view id="demo1" class="scroll-view-item demo-text1"></view>-->
+          <!--<view id="demo2" class="scroll-view-item demo-text2"></view>-->
+          <!--<view id="demo3" class="scroll-view-item demo-text3"></view>-->
+        <!--</scroll-view>-->
+
+      <!--</view>-->
+    <!--</view>-->
+
+    <!--<view class="page-section"></view>-->
+
+  <!--</view>-->
+<!--</view>-->
+
+
+<view class="section">
+  <view class="section__title">横向滚动</view>
+  <scroll-view class="scroll-view_H"
+               scroll-x >
+    <view id="green" class="scroll-view-item_H bc_green"></view>
+    <view id="red" class="scroll-view-item_H bc_red"></view>
+    <view id="yellow" class="scroll-view-item_H bc_yellow"></view>
+    <view id="blue" class="scroll-view-item_H bc_blue"></view>
+  </scroll-view>
+</view>
+
+
+<view class='index' >
+
+  <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex ; "  >
+    <view style="background: red; width: 450rpx; height: 100px; display: inline-block" ></view>
+    <view style="background: green; width: 450rpx; height: 100px; display: inline-block"></view>
+    <view style="background: blue; width: 450rpx; height: 100px; display: inline-block"></view>
+    <view style="background: yellow; width: 450rpx; height: 100px; display: inline-block"></view>
+    <view style="background: green; width: 150rpx; height: 100px; display: inline-block"></view>
+    <view style="background: blue; width: 150rpx; height: 100px; display: inline-block"></view>
+
+
+  </scroll-view>
+
+</view>
+
+
+<view class='classify_list'>
+   <view class="classify">分类1</view>
+   <view class="classify">分类1</view>
+   <view class="classify">分类1</view>
+   <view class="classify">分类1</view>
+   <view class="classify">分类1</view>
+   <view class="classify">分类1</view>
+   <view class="classify">分类1</view>
+   <view class="classify">分类1</view>
+   <view class="classify">分类1</view>
+   <view class="classify">分类1</view>
+   <view class="classify">分类31</view>
+</view>
+
+<view class="container">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-section-title">
+        <text>Vertical Scroll\n纵向滚动</text>
+      </view>
+      <view class="page-section-spacing">
+        <scroll-view scroll-y="true" style="height: 300rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+          <view id="demo1" class="scroll-view-item demo-text-1"></view>
+          <view id="demo2"  class="scroll-view-item demo-text-2"></view>
+          <view id="demo3" class="scroll-view-item demo-text-3"></view>
+        </scroll-view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="page-section-title">
+        <text>Horizontal Scroll\n横向滚动</text>
+      </view>
+      <view class="page-section-spacing-x" style="white-space: nowrap; display: flex ;">
+        <scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
+          <view id="demo1" class="scroll-view-item_H demo-text-1"></view>
+          <view id="demo2"  class="scroll-view-item_H demo-text-2"></view>
+          <view id="demo3" class="scroll-view-item_H demo-text-3"></view>
+          <view style="width:0; height:0;"></view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>
+

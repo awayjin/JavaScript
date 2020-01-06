@@ -1,7 +1,40 @@
 {
   "pages": [
+    "pages/swiper/swiper",
+    "pages/scoll-view/scroll-view",
     "pages/routes/routes",
     "pages/helloworld/helloworld"
   ],
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "window": {
+    "navigationBarTitleText": "Demo"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/swiper/swiper",
+        "selectedIconPath": "common/icon-selected.png",
+        "iconPath": "common/icon.png",
+        "text": "swiper"
+      },
+      {
+        "pagePath": "pages/scoll-view/scroll-view",
+        "selectedIconPath": "common/icon-selected.png",
+        "iconPath": "common/icon.png",
+        "text": "scroll-view"
+      },
+      {
+        "pagePath": "pages/routes/routes",
+        "iconPath": "common/icon.png",
+        "selectedIconPath": "common/icon-selected.png",
+        "text": "routesw"
+      },
+      {
+        "pagePath": "pages/helloworld/helloworld",
+        "iconPath": "common/icon.png",
+        "selectedIconPath": "common/icon-selected.png",
+        "text": "helloworld"
+      }
+    ]
+  }
 }
