@@ -10,6 +10,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "easy_sock": "^0.3.8",
+    "protocol-buffers": "^4.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
