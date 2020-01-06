@@ -1,5 +1,6 @@
 const Koa = require('koa')
 const app = new Koa()
+const getData = require('./get-data.js')
 
 require('@babel/register')({
   presets: ['@babel/preset-react']
@@ -11,6 +12,8 @@ const renderToString = ReactDOMServer.renderToString(
   indexJSX
 )
 console.log(renderToString)
+
+console.log('getData:', getData(3, 4))
 
 app.use(ctx => {
   ctx.body = renderToString

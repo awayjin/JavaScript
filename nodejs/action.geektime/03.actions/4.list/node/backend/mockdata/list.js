@@ -8,13 +8,13 @@ module.exports = [
     author_intro: 'author_intro',
     column_intro: 'column_intro',
     column_unit: 'column_unit',
-    sub_count: 'sub_count',
+    sub_count: 2920,
     update_frequency: 'update_frequency',
-    column_price: 'column_price',
-    type: 'type',
-    column_price_market: 'column_price_market',
+    column_price: 12981,
+    type: 2,
+    column_price_market: 298,
     articles: [
-      { id: 11, is_video_preview: 'is_video_preview', article_title: 'article_title 33' }
+      { id: 11, is_video_preview: false, article_title: 'article_title 33' }
     ]
   }
   // ,

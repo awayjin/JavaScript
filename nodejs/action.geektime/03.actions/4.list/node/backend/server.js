@@ -14,7 +14,18 @@ net.createServer(function (socket) {
   socket.on('data', buffer => {
     const seq = buffer.readInt32BE()
     console.log('seq:', seq)
+    // console.log('buffer.readInt32BE():', schemas.ListResponse.decode(buffer.slice(8)))
     // console.log('mockData:', mockData[0])
+    // console.log('buffer.slice(8):', buffer.slice(8).toString())
+
+    console.log('\n ------- server.js buffer:', buffer)
+    console.log('buffer.readInt32BE:', buffer.readInt32BE())
+    console.log('buffer.readInt32BE(4):', buffer.readInt32BE(4))
+    console.log('buffer.slice(8):', buffer.slice(8))
+    // 这应从数据库获取真实数据
+    // const columnId = schemas.ListRequest.decode(buffer.slice(8))
+    // console.log('messages.ListResponse.decode(buffer.slice(8)):', columnId)
+
     const body = schemas.ListResponse.encode({
       columns: [mockData[0]]
     })

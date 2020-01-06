@@ -1,9 +1,15 @@
 const rpcClient = require('./rpc/rpc-client.js')
 
-rpcClient.write({
-  sortType: 222,
-  filtType: 333,
-}, (err, data) => {
-  console.log('err:', err)
-  console.log('data:', data)
-})
+module.exports = async function (sortType = 0, filtType = 0) {
+
+  // 使用微服务拉取数据
+  const data = await new Promise((resolve, reject) => {
+    rpcClient.write({
+      sortType,
+      filtType,
+    }, (err, data) => {
+      err ?  reject(err) : resolve(data)
+    })
+  })
+  return data
+}
