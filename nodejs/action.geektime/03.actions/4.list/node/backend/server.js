@@ -23,8 +23,8 @@ net.createServer(function (socket) {
     console.log('buffer.readInt32BE(4):', buffer.readInt32BE(4))
     console.log('buffer.slice(8):', buffer.slice(8))
     // 这应从数据库获取真实数据
-    // const columnId = schemas.ListRequest.decode(buffer.slice(8))
-    // console.log('messages.ListResponse.decode(buffer.slice(8)):', columnId)
+    const listRequest = schemas.ListRequest.decode(buffer.slice(8))
+    console.log('listRequest:', listRequest)
 
     const body = schemas.ListResponse.encode({
       columns: [mockData[0]]

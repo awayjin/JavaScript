@@ -11,11 +11,14 @@ const indexJSX = require('./app.jsx')
 const renderToString = ReactDOMServer.renderToString(
   indexJSX
 )
+
 console.log(renderToString)
+console.log(333)
 
-console.log('getData:', getData(3, 4))
-
-app.use(ctx => {
+app.use(async ctx => {
+  const data = await getData(5, 14)
+  console.log('node/index.js getData:', data)
+  console.log(4444)
   ctx.body = renderToString
 })
 

@@ -101,7 +101,7 @@ SELECT * FROM product WHERE sale_price >= 1000;SELECT * FROM product WHERE regi
 
 show DATABASES;
 show tables;
-select * from product;
+
 DROP TABLE defaultproduct;
 delete FROM defaultproduct
 
@@ -116,4 +116,6 @@ SELECT sale_price, sum(sale_price) FROM product
 GROUP BY sale_price
 HAVING sale_price >= 200;
 
-
+-- 只能删除表中全部数据的TRUNCATE语句
+TRUNCATE chars;
+select * from chars;

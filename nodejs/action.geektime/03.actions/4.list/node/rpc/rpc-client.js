@@ -48,7 +48,7 @@ easySock.encode = function (data, seq) {
 easySock.decode = function (buffer) {
   const seq = buffer.readInt32BE()
   const body = messages.ListResponse.decode(buffer.slice(8))
-  console.log('\n decode body:', body)
+  // console.log('\n decode body:', body)
   return {
     seq,
     result: body
