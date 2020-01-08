@@ -14,7 +14,8 @@ module.exports = [
     type: 2,
     column_price_market: 298,
     articles: [
-      { id: 11, is_video_preview: false, article_title: 'article_title 33' }
+      { id: 11, is_video_preview: false, article_title: 'article_title 33' },
+      { id: 22, is_video_preview: true, article_title: '文章标题 22' }
     ]
   }
   // ,

@@ -1,20 +1,24 @@
 const vm = require('vm')
-const util = require('util')
+const fs = require('fs')
+
+const tempaltePath =  '/../index.html'
 function createTemplate(templatePath) {
-
+  return vm.runInNewContext(
+    `(function (data) {
+        with (data) {
+          return \`${fs.readFileSync(templatePath, 'utf-8')}\`
+        }
+    })`
+  )
 }
+// const template = createTemplate(__dirname + tempaltePath)
+// const data = {
+//   id: 2,
+//   articles: [11, 22, 33],
+//   column_title: '模板字符串改造为模板引擎'
+// }
+// console.log(template(data))
 
-const sandbox = {
-  count: 2,
-  animal: 'cat'
-}
-vm.runInNewContext('count += 1; name = "kitty"', sandbox)
+module.exports = createTemplate
 
-console.log('sandbox:', sandbox) // { animal: 'cat', count: 3, name: 'kitty' }
-// console.log(util.inspect(sandbox))
-
-const two = vm.runInNewContext('count = 1;c=11;name3 = "hello"')
-console.log('two:', two)
-
-const three = vm.runInNewContext('44;"b333"; "b12222cd"; "c3"')
-console.log('three:', three)
+// console.log(fs.readFileSync(__dirname + `${tempaltePath}`, 'utf-8'))

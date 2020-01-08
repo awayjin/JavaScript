@@ -37,12 +37,19 @@ class Welcome extends React.Component {
       >
         <div>child, title: { title }</div>
         <h2>child, { this.state.content }</h2>
+        <h2>name, { this.props.name }</h2>
+        <h3>obj: { this.props.obj.map( item => item.title ) }</h3>
       </Container>
     )
   }
 }
 
+let data = [{ id: 11, title: 'title'}]
+let obj = { id: 11, title: 'title'}
 ReactDOM.render(
-  <Welcome name='jin' />,
+  <Welcome
+    name='jin'
+    obj={ data }
+  />,
   document.getElementById('app')
 )

@@ -118,4 +118,66 @@ HAVING sale_price >= 200;
 
 -- 只能删除表中全部数据的TRUNCATE语句
 TRUNCATE chars;
-select * from chars;
+
+-- 4-3 数据的更新（UPDATE语句的使用方法）
+UPDATE product set regist_date = '2009-10-10';
+-- 将登记日期全部更新为“2009-10-10
+SELECT * FROM product ORDER BY product_id desc;
+
+-- 指定条件的UPDATE语句（搜索型UPDATE）
+-- 将商品种类为厨房用具的记录的销售单价更新为原来的10倍
+UPDATE product SET sale_price = sale_price * 10 
+WHERE product_type = '厨房用具';
+
+UPDATE product SET regist_date = null WHERE product_id = '0008';
+
+
+
+-- 多列更新
+UPDATE product SET purchase_price = null WHERE product_id = '0008';
+UPDATE product SET purchase_price = 790 WHERE product_id = '0007';
+
+UPDATE product SET
+sale_price = sale_price * 10, purchase_price = purchase_price / 10 / 2 
+WHERE product_type = '厨房用具';
+UPDATE product SET
+sale_price = sale_price * 2 WHERE product_type = '厨房用具';
+
+select * from product WHERE product_name = 'T恤衫';
+
+-- 创建事务
+START TRANSACTION;
+UPDATE product SET regist_date = '2005-08-08' WHERE product_id = '0004';
+COMMIT;
+
+START TRANSACTION;
+UPDATE product SET sale_price = sale_price - 1001 WHERE product_name = '运动T恤';
+UPDATE product SET sale_price = sale_price + 1002 WHERE product_name = 'T恤衫';
+COMMIT;
+
+START TRANSACTION;
+-- 将运动T恤的销售单价降低1000日元
+UPDATE Product
+SET sale_price = sale_price - 1000
+WHERE product_name = '运动T恤';
+-- 将T恤衫的销售单价上浮1000日元
+UPDATE Product
+SET sale_price = sale_price + 1000
+WHERE product_name = 'T恤衫';
+ROLLBACK;
+
+
+select * from product;
+select * from productcopy;
+
+TRUNCATE productcopy;
+-- 从其他表复制数据 insert...select...from
+INSERT INTO productcopy
+SELECT *
+FROM product
+WHERE product_type = '办公用品';
+
+INSERT INTO Product VALUES 
+('0003', '运动T恤', '衣服', 4000, 2800, NULL);
+
+
