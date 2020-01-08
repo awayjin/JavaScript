@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/routes/routes",
     "pages/swiper/swiper",
     "pages/scoll-view/scroll-view",
-    "pages/routes/routes",
     "pages/helloworld/helloworld"
   ],
   "sitemapLocation": "sitemap.json",

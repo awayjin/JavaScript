@@ -1,3 +1,7 @@
+<icon type="success" size="20"></icon>
+<icon type="success" size="30"></icon>
+<progress percent="20" show-info="true"></progress>
+
 <navigator url="../helloworld/helloworld">
   返回 hello world
 </navigator>

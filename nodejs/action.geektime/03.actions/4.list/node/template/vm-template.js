@@ -16,5 +16,5 @@ console.log('sandbox:', sandbox) // { animal: 'cat', count: 3, name: 'kitty' }
 const two = vm.runInNewContext('count = 1;c=11;name3 = "hello"')
 console.log('two:', two)
 
-const three = vm.runInNewContext('{ a: 331, b=1222222222222222224}')
+const three = vm.runInNewContext('44;"b333"; "b12222cd"; "c3"')
 console.log('three:', three)
