@@ -8,22 +8,11 @@
 <body>
 
 <div id="react-app">
-  <h1>  name: ${ column_title } </h1>
+  <h1>   </h1>
   <p>
-    id: ${ id }
+    ${ reactString }
   </p>
   <ul>
-    ${
-      articles.map(article => {
-        return `
-          <li>
-            <h2>title: ${ article.article_title }</h2>
-            id: ${ article.id },
-            is_video_preview: ${ article.is_video_preview },
-          </li>
-        `
-      }).join('')
-    }
 
   </ul>
 </div>

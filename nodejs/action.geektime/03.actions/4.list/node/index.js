@@ -17,7 +17,9 @@ app.use(async ctx => {
   const renderToString = ReactDOMServer.renderToString(
     indexJSX(reactData)
   )
-  ctx.body = renderToString
+  ctx.body = template({
+    reactString: renderToString
+  })
   // ctx.body = template(reactData.columns[0])
 })
 
