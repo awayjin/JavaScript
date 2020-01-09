@@ -1,0 +1,20 @@
+<!--pages/native-api/network/network.wxml-->
+<text>pages/native-api/network/network.wxml</text>
+
+<view>
+  <navigator url="../../swiper/swiper" bindtap="goToSwiper">
+    swiper
+  </navigator>
+
+  <navigator url="../detail/detail" >
+    detail
+  </navigator>
+
+  <navigator  url="../../routes/routes">
+    go to routes.
+  </navigator>
+
+  <view bindtap="fetchData">
+    发起请求
+  </view>
+</view>
