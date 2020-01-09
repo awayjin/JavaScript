@@ -1,14 +1,5 @@
-// require 兼容 react 语法
-require('@babel/register')({
-  presets: ['@babel/preset-react']
-})
+// const process = require('process')
+require('./node/index.js')
 
-const ReactDOMServer = require('react-dom/server')
+// process.cwd()
 
-ReactDOMServer.renderToString(
-  require('./index.jsx')
-)
-
-console.log(ReactDOMServer.renderToString(
-  require('./index.jsx')
-))

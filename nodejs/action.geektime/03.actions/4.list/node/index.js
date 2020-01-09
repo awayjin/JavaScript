@@ -2,7 +2,6 @@ const Koa = require('koa')
 const app = new Koa()
 const getData = require('./get-data.js')
 const template = require('./template/vm-template')(`${__dirname}/index.html`)
-
 require('@babel/register')({
   presets: ['@babel/preset-react']
 })
@@ -12,13 +11,13 @@ const indexJSX = require('./app.jsx')
 app.use(async ctx => {
   const reactData = await getData(5, 14)
   console.log('node/index.js reactData:', reactData)
-  console.log(4444)
 
   const renderToString = ReactDOMServer.renderToString(
     indexJSX(reactData)
   )
   ctx.body = template({
-    reactString: renderToString
+    reactString: renderToString,
+    reactData
   })
   // ctx.body = template(reactData.columns[0])
 })

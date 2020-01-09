@@ -6,11 +6,11 @@ const schemas = protocolBuffers(fs.readFileSync(`${__dirname}/../rpc/list.proto`
 const mockData = require('./mockdata/list.js')
 
 const body = schemas.ListResponse.encode({
-  columns: [mockData[0]]
+  columns: mockData
 })
 console.log('body3:', schemas.ListResponse.decode(body))
 
-net.createServer(function (socket) {
+const app = net.createServer(function (socket) {
   socket.on('data', buffer => {
     const seq = buffer.readInt32BE()
     console.log('seq:', seq)
@@ -27,7 +27,7 @@ net.createServer(function (socket) {
     console.log('listRequest:', listRequest)
 
     const body = schemas.ListResponse.encode({
-      columns: [mockData[0]]
+      columns: mockData
     })
     // console.log('body:', schemas.ListResponse.decode(body))
     const header = Buffer.alloc(8)
@@ -38,4 +38,9 @@ net.createServer(function (socket) {
     socket.write(result)
   })
 
-}).listen(4002)
+})
+
+const port = 4002
+app.listen(port, () => {
+  console.log('Backend server started at port:' + port)
+})

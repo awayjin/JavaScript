@@ -4,18 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Title</title>
+  <style>
+    body, html, p, ol, li, li { margin: 0; padding: 0;  }
+    body {
+      margin: 20px;
+    }
+    .filter-course a, .filter-sort a {
+      display: inline-block;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
 
 <div id="react-app">
-  <h1>   </h1>
-  <p>
-    ${ reactString }
-  </p>
-  <ul>
-
-  </ul>
+  ${ reactString }
 </div>
 
+<section>
+</section>
 </body>
+
+<script>
+  // 初始化数据
+  window.reactData = ${ reactData ? JSON.stringify(reactData.columns) : '' }
+</script>
 </html>

@@ -1,26 +1,51 @@
 const React = require('react')
+// 不知道为什么要在上层目录,
+// 运行 index.js 才能编译 require 过来的 jsx
+const Container = require('../components/container.jsx')
+// const Container = require(__dirname + '/../components/container.jsx')
+// const Container = require(__dirname + '/c.jsx')
 
-const title = <h1>react-dom/server app.jsx</h1>
-class App extends React.Component {
+class Container2 extends React.Component {
   render () {
     return (
       <div>
-        { title }
-        <p>44 </p>
-        name: { this.props.name }
-        <p>
-          columns:
-          { this.props.columns.map(item =>  item.column_title ) }
-        </p>
+        <div className="filter-course">
+          <span>课程:</span>
+          <a >全部</a>
+          <a >专栏</a>
+          <a >视频课程</a>
+          <a >微课</a>
+        </div>
+        <hr/>
+        <div>
+          <div  className="filter-sort">
+            <a >上新</a>
+            <a >订阅数</a>
+            <a >价格</a>
+          </div>
+          <ul>
+            { this.props.columns.map(item =>  {
+              return <li>
+                <h2>{ item.column_title }, id: { item.id }</h2>
+                <div className='column-subtitle'>{ item.column_subtitle }</div>
+                <ul>
+                  {
+                    item.articles.map(subItem => {
+                      return <li>article_title: { subItem.article_title }</li>
+                    })
+                  }
+                </ul>
+              </li>
+            }) }
+          </ul>
+        </div>
       </div>
     )
   }
 }
 
 module.exports = function (reactData) {
-  // console.log('app.jsx reactData:')
-  // console.log(reactData)
-  return <App
+  return <Container
     columns = { reactData.columns }
     name = 'jin'
   />
