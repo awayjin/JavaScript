@@ -2,7 +2,6 @@ Page({
   goToHello (event) {
     console.log('event:', event)
 
-    debugger
     wx.navigateBack({
       delta: 1
     })

@@ -1,9 +1,11 @@
 {
   "pages": [
+    "pages/native-api/network/network",
     "pages/routes/routes",
     "pages/swiper/swiper",
     "pages/scoll-view/scroll-view",
-    "pages/helloworld/helloworld"
+    "pages/helloworld/helloworld",
+    "pages/native-api/detail/detail"
   ],
   "sitemapLocation": "sitemap.json",
   "window": {
@@ -11,6 +13,12 @@
   },
   "tabBar": {
     "list": [
+      {
+        "pagePath": "pages/native-api/network/network",
+        "selectedIconPath": "common/icon-selected.png",
+        "iconPath": "common/icon.png",
+        "text": "network"
+      },
       {
         "pagePath": "pages/swiper/swiper",
         "selectedIconPath": "common/icon-selected.png",
