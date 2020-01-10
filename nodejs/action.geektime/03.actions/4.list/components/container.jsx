@@ -1,16 +1,23 @@
 const React = require('react');
+const ColumnItems = require('./column-items.jsx')
 
 module.exports = class Container extends React.Component {
+  constructor (props) {
+    super(props)
+  }
   render () {
+    const columns = this.props.columns
     return (
       <div>
         <div className="filter-course">
           <p>components/container.jsx</p>
           <span>课程:</span>
-          <a >全部</a>
-          <a >专栏</a>
-          <a >视频课程</a>
-          <a >微课</a>
+          <a onClick={ this.handleClick.bind(this, 0) }>全部</a>
+          <a  onClick={ this.handleClick.bind(this) }>专栏</a>
+          <a onClick={ this.props.filt.bind(this, 3)} >视频课程 3</a>
+          <a onClick={ this.props.sort.bind(this, 4)} >微课</a>
+          <a  href='?sort=33' >33 微课</a>
+          <a href='?sort=44' >44 微课</a>
         </div>
         <hr/>
         <div>
@@ -18,25 +25,19 @@ module.exports = class Container extends React.Component {
             <a >上新</a>
             <a >订阅数</a>
             <a >价格</a>
+            <span className={ 'columns-length'}>
+              { columns.length || '--' }个课程
+            </span>
           </div>
-          <ul>
-            { this.props.columns.map(item =>  {
-              return <li>
-                <h2>{ item.column_title }, id: { item.id }</h2>
-                <div className='column-subtitle'>{ item.column_subtitle }</div>
-                <ul>
-                  {
-                    item.articles.map(subItem => {
-                      return <li>article_title: { subItem.article_title }</li>
-                    })
-                  }
-                </ul>
-              </li>
-            }) }
-          </ul>
+          <ColumnItems
+            columns = { columns }
+          />
         </div>
       </div>
     )
+  }
+  handleClick (value) {
+    console.log('value:', value)
   }
 }
 

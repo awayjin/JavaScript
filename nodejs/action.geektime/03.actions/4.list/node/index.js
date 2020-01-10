@@ -12,6 +12,9 @@ app.use(async ctx => {
   const reactData = await getData(5, 14)
   console.log('node/index.js reactData:', reactData)
 
+  console.log('ctx filt:', ctx.query.filt)
+  console.log('ctx sort:', ctx.query.sort)
+
   const renderToString = ReactDOMServer.renderToString(
     indexJSX(reactData)
   )

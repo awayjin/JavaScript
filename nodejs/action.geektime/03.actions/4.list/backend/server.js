@@ -1,7 +1,7 @@
 const fs = require('fs')
 const net = require('net')
 const protocolBuffers = require('protocol-buffers')
-const schemas = protocolBuffers(fs.readFileSync(`${__dirname}/../rpc/list.proto`))
+const schemas = protocolBuffers(fs.readFileSync(`${__dirname}/../node/rpc/list.proto`))
 // const schemas = protocolBuffers(fs.readFileSync(`${__dirname}/../rpc/detail.proto`))
 const mockData = require('./mockdata/list.js')
 

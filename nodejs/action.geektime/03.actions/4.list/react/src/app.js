@@ -33,6 +33,10 @@ class Welcome extends React.Component {
     return (
       <Container
         name={ this.state.name }
+        sort = { (value) => {
+          console.log('sort value:', value)
+        }}
+
         content={ this.state.content }
       >
         <div>child, title: { title }</div>
