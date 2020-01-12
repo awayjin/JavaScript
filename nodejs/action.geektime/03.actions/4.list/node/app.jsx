@@ -6,12 +6,12 @@ module.exports = function (reactData) {
     columns = { reactData.columns }
     filt = {
       (value) => {
-        console.log('filt value:', value)
+        console.log('node/app.jsx filt value:', value)
       }
     }
     sort = {
       value => {
-        console.log('sort value:', value)
+        console.log('node/app.jsx sort value:', value)
       }
     }
     name = 'jin'

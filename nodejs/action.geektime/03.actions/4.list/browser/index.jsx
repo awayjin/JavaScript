@@ -21,6 +21,7 @@ class App extends React.Component {
           fetch(`./data?sort=${this.state.sortType}&filt=${filtType}`)
             .then(res => res.json())
             .then(json => {
+              console.log('browser/index.jsx. filt json', json)
               this.setState({
                 columns: json,
                 filtType: filtType
@@ -31,6 +32,7 @@ class App extends React.Component {
           fetch(`./data?sort=${sortType}&filt=${this.state.filtType}`)
             .then(res => res.json())
             .then(json => {
+              console.log('browser/index.jsx. sort json', json)
               this.setState({
                 columns: json,
                 sortType: sortType
