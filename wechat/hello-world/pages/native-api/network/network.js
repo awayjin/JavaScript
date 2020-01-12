@@ -1,3 +1,6 @@
+// 获取应用实例
+const app = getApp();
+
 // pages/native-api/network/network.js
 Page({
 
@@ -7,6 +10,7 @@ Page({
   data: {
 
   },
+ 
 
   fetchData (e) {
     // console.log('e:', e)
@@ -43,13 +47,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log('network.js onload 监听页面加载. app:', app)
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    console.log('network.js onReady-监听页面初次渲染完成 app:', app)
 
   },
 

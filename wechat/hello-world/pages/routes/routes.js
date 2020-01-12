@@ -1,4 +1,14 @@
+const app = getApp()
+
 Page({
+  // onLoad () {
+  onLoad: function () {
+    console.log('routes.js onload. app:', app)
+  },
+
+  onReady() {
+    console.log('routes.js onReady app:', app)
+  },
   goToHello (event) {
     console.log('event:', event)
 
