@@ -21,9 +21,7 @@
 </head>
 <body>
 
-<div id="react-app">
-  ${ reactString }
-</div>
+<div id="react-app">${ reactString }</div>
 
 <section>
 </section>
@@ -31,6 +29,11 @@
 
 <script>
   // 初始化数据
-  window.reactData = ${ reactData ? JSON.stringify(reactData.columns) : '' }
+  window.reactInitData = ${ reactData ? JSON.stringify(reactData.columns) : '' }
+  window.reactInitFiltType = ${ filtType }
+  window.reactInitSortType = ${ sortType }
 </script>
+
+<!--<script src="./main.js"></script>-->
+<script src="./main.js"></script>
 </html>

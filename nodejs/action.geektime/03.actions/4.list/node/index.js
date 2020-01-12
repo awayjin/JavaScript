@@ -1,5 +1,8 @@
 const Koa = require('koa')
 const app = new Koa()
+const KoaStatic = require('koa-static')
+app.use(KoaStatic(__dirname + '/source'))
+
 const getData = require('./get-data.js')
 const template = require('./template/vm-template')(`${__dirname}/index.html`)
 require('@babel/register')({
@@ -14,13 +17,17 @@ app.use(async ctx => {
 
   console.log('ctx filt:', ctx.query.filt)
   console.log('ctx sort:', ctx.query.sort)
+  const filtType = +(ctx.query.filt || 0)
+  const sortType = +(ctx.query.sortType || 0)
 
   const renderToString = ReactDOMServer.renderToString(
     indexJSX(reactData)
   )
   ctx.body = template({
     reactString: renderToString,
-    reactData
+    reactData,
+    filtType,
+    sortType
   })
   // ctx.body = template(reactData.columns[0])
 })

@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "node ./backend/server.js",
-    "dev": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack-dev-server --config ./browser/webpack.development.config.js",
+    "build": "webpack --config ./browser/webpack.production.config.js",
+    "rpc": "node ./backend/server.js",
+    "bff": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,9 @@
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
-    "@babel/register": "^7.7.7"
+    "@babel/register": "^7.7.7",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
   }
 }

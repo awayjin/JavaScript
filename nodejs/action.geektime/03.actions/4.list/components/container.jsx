@@ -13,11 +13,9 @@ module.exports = class Container extends React.Component {
           <p>components/container.jsx</p>
           <span>课程:</span>
           <a onClick={ this.handleClick.bind(this, 0) }>全部</a>
-          <a  onClick={ this.handleClick.bind(this) }>专栏</a>
-          <a onClick={ this.props.filt.bind(this, 3)} >视频课程 3</a>
-          <a onClick={ this.props.sort.bind(this, 4)} >微课</a>
-          <a  href='?sort=33' >33 微课</a>
-          <a href='?sort=44' >44 微课</a>
+          <a  onClick={ this.handleClick.bind(this, 1) }>专栏</a>
+          <a onClick={ this.props.filt.bind(this, 2)} >视频课程3</a>
+          <a onClick={ this.props.sort.bind(this, 3)} >微课</a>
         </div>
         <hr/>
         <div>
