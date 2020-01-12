@@ -1,7 +1,6 @@
 const Koa = require('koa')
 const app = new Koa()
 const KoaStatic = require('koa-static')
-app.use(KoaStatic(__dirname + '/source'))
 const KoaRouter = require('koa-router')
 const router = new KoaRouter()
 
@@ -46,6 +45,7 @@ app.use(async ctx => {
   // ctx.body = template(reactData.columns[0])
 })
 
+app.use(KoaStatic(__dirname + '/source'))
 app.use(router.routes())
 
 const port = 3000
