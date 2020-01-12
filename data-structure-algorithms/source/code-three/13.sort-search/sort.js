@@ -104,7 +104,7 @@ function merge(left, right) {
 // (3) 接着，算法对划分后的小数组（较主元小的值组成的子数组，以及较主元大的值组成的
 // 子数组）重复之前的两个步骤，直至数组已完全排序。
 function quickSort (array) {
-  console.log('array', array)
+  // console.log('array', array)
   return quick(array, 0, array.length - 1)
 }
 function quick (array, left, right) {

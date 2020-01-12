@@ -15,10 +15,16 @@
 
 <script type="module">
   import binarySearch from './binary-search.js'
+  import interpolation from './interpolation-search.js'
 
   const arr = [3, 25, 10, 14, 2]
   const searchIndex = binarySearch(arr, 14)
   console.log('查找到的索引:', searchIndex, ', value:', arr[searchIndex])
+
+
+  const arr2 = [3, 25, 10, 14, 2]
+  const interpolationIndex = interpolation(arr2, 14)
+  console.log('查找到的索引:', interpolationIndex, ', value:', arr[interpolationIndex])
 </script>
 
 </body>
