@@ -16,19 +16,16 @@ const indexJSX = require('./app.jsx')
 router.get('/data', async (ctx, next) => {
   const filt = +(isNaN(ctx.query.filt) || 0)
   const sort = +(isNaN(ctx.query.sort) || 0)
-  const getData = await getData(filt, sort)
+  let resData = await getData(filt, sort)
   console.log('node/index.js get /data. filt:', filt, ', sort:', sort)
-  console.log('getData:', getData)
-  ctx.body = 33
+  console.log('resData:', resData)
+  ctx.body = resData
 })
 
 
-app.use(async ctx => {
-  // console.log('node/index.js reactData:', reactData)
-
+router.get('/', async (ctx, next) => {
   console.log('node/index.js ctx filt:', ctx.query.filt)
   console.log('node/index.js ctx sort:', ctx.query.sort)
-
   const filtType = +(ctx.query.filt || 0)
   const sortType = +(ctx.query.sortType || 0)
   const reactData = await getData(filtType, sortType)
@@ -42,8 +39,26 @@ app.use(async ctx => {
     filtType,
     sortType
   })
-  // ctx.body = template(reactData.columns[0])
 })
+// app.use(async ctx => {
+//   // console.log('node/index.js reactData:', reactData)
+//   console.log('node/index.js ctx filt:', ctx.query.filt)
+//   console.log('node/index.js ctx sort:', ctx.query.sort)
+//   const filtType = +(ctx.query.filt || 0)
+//   const sortType = +(ctx.query.sortType || 0)
+//   const reactData = await getData(filtType, sortType)
+//
+//   const renderToString = ReactDOMServer.renderToString(
+//     indexJSX(reactData)
+//   )
+//   ctx.body = template({
+//     reactString: renderToString,
+//     reactData,
+//     filtType,
+//     sortType
+//   })
+//   // ctx.body = template(reactData.columns[0])
+// })
 
 app.use(KoaStatic(__dirname + '/source'))
 app.use(router.routes())

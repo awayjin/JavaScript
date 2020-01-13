@@ -27,6 +27,9 @@ class App extends React.Component {
                 filtType: filtType
               })
             })
+            .catch(err => {
+              console.log('filt err:', err)
+            })
         }}
         sort={(sortType) => {
           fetch(`./data?sort=${sortType}&filt=${this.state.filtType}`)
@@ -37,6 +40,9 @@ class App extends React.Component {
                 columns: json,
                 sortType: sortType
               })
+            })
+            .catch(err => {
+              console.log('sort err:', err)
             })
         }}
       />
