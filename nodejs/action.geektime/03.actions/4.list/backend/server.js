@@ -3,12 +3,8 @@ const net = require('net')
 const protocolBuffers = require('protocol-buffers')
 const schemas = protocolBuffers(fs.readFileSync(`${__dirname}/../node/rpc/list.proto`))
 // const schemas = protocolBuffers(fs.readFileSync(`${__dirname}/../rpc/detail.proto`))
+// 后端模拟数据
 const mockData = require('./mockdata/list.js')
-
-const body = schemas.ListResponse.encode({
-  columns: mockData
-})
-console.log('body3:', schemas.ListResponse.decode(body))
 
 const app = net.createServer(function (socket) {
   socket.on('data', buffer => {
@@ -19,15 +15,25 @@ const app = net.createServer(function (socket) {
     // console.log('buffer.slice(8):', buffer.slice(8).toString())
 
     console.log('\n ------- server.js buffer:', buffer)
-    console.log('buffer.readInt32BE:', buffer.readInt32BE())
-    console.log('buffer.readInt32BE(4):', buffer.readInt32BE(4))
-    console.log('buffer.slice(8):', buffer.slice(8))
+    // console.log('buffer.readInt32BE:', buffer.readInt32BE())
+    // console.log('buffer.readInt32BE(4):', buffer.readInt32BE(4))
+    // console.log('buffer.slice(8):', buffer.slice(8))
     // 这应从数据库获取真实数据
     const listRequest = schemas.ListRequest.decode(buffer.slice(8))
     console.log('listRequest:', listRequest)
 
+    const filtType = listRequest.filtType
+    console.log('filtType:', filtType)
+
     const body = schemas.ListResponse.encode({
-      columns: mockData
+      columns: mockData.filter((item) => {
+        // return item.type === 3
+        if (filtType === 0) {
+          return item
+        } else {
+          return item.type == filtType
+        }
+      })
     })
     // console.log('body:', schemas.ListResponse.decode(body))
     const header = Buffer.alloc(8)

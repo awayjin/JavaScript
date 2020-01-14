@@ -1,5 +1,5 @@
 const React = require('react');
-const ColumnItems = require('./column-items.jsx')
+const ColumnItems = require('./column-items.jsx');
 
 module.exports = class Container extends React.Component {
   constructor (props) {
@@ -15,7 +15,7 @@ module.exports = class Container extends React.Component {
           <a onClick={ this.props.filt.bind(this, 0) }>全部</a>
           <a  onClick={ this.props.filt.bind(this, 1) }>专栏</a>
           <a onClick={ this.props.filt.bind(this, 2)} >视频课程3</a>
-          <a onClick={ this.props.sort.bind(this, 3)} >微课</a>
+          <a onClick={ this.props.filt.bind(this, 3)} >微课</a>
         </div>
         <hr/>
         <div>
@@ -35,7 +35,7 @@ module.exports = class Container extends React.Component {
     )
   }
   handleClick (value) {
-    console.log('components/handleClick handleClick value:', value)
+    console.log('components/handleClick handleClick value:', value);
   }
 }
 

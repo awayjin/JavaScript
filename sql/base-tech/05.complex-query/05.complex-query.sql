@@ -75,3 +75,17 @@ SELECT product_type, cnt_product
 FROM ( SELECT product_type, COUNT(*) AS cnt_product
 FROM Product
 GROUP BY product_type ) AS ProductSum;
+
+-- 5-2 子查询
+select * from 
+(select product_type, count(*) from product GROUP BY product_type )
+as prod; -- as 不是必须的
+
+
+-- 增加子查询的层数
+SELECT
+	product_type,
+	cnt_product 
+FROM
+	( SELECT * FROM ( SELECT product_type, COUNT( * ) AS cnt_product FROM Product GROUP BY product_type ) AS ProductSum WHERE cnt_product = 4 ) AS ProductSum2;
+
