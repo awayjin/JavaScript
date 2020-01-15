@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config ./browser/webpack.development.config.js",
     "build": "webpack --config ./browser/webpack.production.config.js",
+    "build:list": "webpack --config ./4.list-true/browser/webpack.config.js",
     "rpc": "node ./backend/server.js",
     "bff": "nodemon index.js"
   },

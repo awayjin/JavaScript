@@ -1,5 +1,6 @@
 const React = require('react')
 const Container = require('../components/container.jsx')
+// const Container = require('../component/container.jsx')
 
 module.exports = function (reactData) {
   return <Container

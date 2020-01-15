@@ -1,3 +1,5 @@
+console.log('__dirname:', __dirname)
+
 module.exports = {
     mode: 'production',
     devtool: false,
