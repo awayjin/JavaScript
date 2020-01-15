@@ -23,19 +23,31 @@ const app = net.createServer(function (socket) {
     console.log('listRequest:', listRequest)
 
     const filtType = listRequest.filtType
-    console.log('filtType:', filtType)
+    const sortType = listRequest.sortType
+    console.log('filtType:', filtType, ', sortType:', sortType)
 
-    const body = schemas.ListResponse.encode({
-      columns: mockData.filter((item) => {
+    const resData = mockData
+      .sort((a, b) => {
+        if (sortType === 0) { // 上新
+          return a.id - b.id
+        } else if (sortType === 1) { // 订阅数
+          return a.sub_count - b.sub_count
+        } else if (sortType === 2) { // 价格
+          return a.column_price - b.column_price
+        }
+      })
+      .filter((item) => {
         // return item.type === 3
         if (filtType === 0) {
           return item
         } else {
           return item.type == filtType
         }
-      })
+      });
+    const body = schemas.ListResponse.encode({
+      columns: resData
     })
-    // console.log('body:', schemas.ListResponse.decode(body))
+    console.log('body:', resData)
     const header = Buffer.alloc(8)
     header.writeInt32BE(buffer.readInt32BE())
     header.writeInt32BE(body.length, 4)

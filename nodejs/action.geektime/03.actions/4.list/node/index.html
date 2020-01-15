@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Title</title>
+  <title>Title 3</title>
   <style>
     body, html, p, ol, li, li { margin: 0; padding: 0;  }
     body {
@@ -17,6 +17,7 @@
     .columns-length  {
       margin-left:30px; font-size: 14px; color:#999
     }
+    .current { color: red; }
   </style>
 </head>
 <body>
@@ -29,11 +30,11 @@
 
 <script>
   // 初始化数据
-  window.reactInitData = ${ reactData ? JSON.stringify(reactData.columns) : '' }
+  window.reactInitData = ${ reactData ? JSON.stringify(reactData) : '' }
   window.reactInitFiltType = ${ filtType }
   window.reactInitSortType = ${ sortType }
 </script>
 
 <!--<script src="./main.js"></script>-->
-<script src="./source/main.js"></script>
+<script src="./main.js"></script>
 </html>

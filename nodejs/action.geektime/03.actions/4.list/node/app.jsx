@@ -1,10 +1,9 @@
 const React = require('react')
 const Container = require('../components/container.jsx')
-// const Container = require('../component/container.jsx')
 
 module.exports = function (reactData) {
   return <Container
-    columns = { reactData.columns }
+    columns = { reactData }
     filt = {
       (value) => {
         console.log('node/app.jsx filt value:', value)
@@ -18,4 +17,4 @@ module.exports = function (reactData) {
     name = 'jin'
   />
 }
-// module.exports = App
+

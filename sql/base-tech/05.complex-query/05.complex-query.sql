@@ -87,5 +87,41 @@ SELECT
 	product_type,
 	cnt_product 
 FROM
-	( SELECT * FROM ( SELECT product_type, COUNT( * ) AS cnt_product FROM Product GROUP BY product_type ) AS ProductSum WHERE cnt_product = 4 ) AS ProductSum2;
+	( SELECT * FROM ( SELECT product_type, COUNT( * ) AS cnt_product FROM Product GROUP BY product_type ) AS ProductSum WHERE cnt_product = 3 ) AS ProductSum2;
+
+
+select 
+	*
+from
+	(
+		select * from 
+			(select product_type, count(*)  as count_pro_type from product GROUP BY product_type) as product_sum 
+		where count_pro_type = 2
+	)
+as aa;
+
+-- 作为别名, where 
+select * from 
+	(
+		select * from 
+		(
+			select product_type, count(*) as cnt from product group by product_type
+		) as product_sum2 where cnt = 3
+	)
+as product_sum;
+
+-- 在WHERE子句中使用标量子查询
+
+-- 查询出销售单价高于平均销售单价的商品
+select * from product 
+where sale_price > (select AVG(sale_price) from product);
+
+-- 标量子查询的书写位置
+-- 在SELECT子句中使用标量子查询
+select 
+product_id, product_name, sale_price
+, (select avg(sale_price)  from product) as avg_sale_price
+from product;
+
+select * from product;
 
