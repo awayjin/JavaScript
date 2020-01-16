@@ -1,6 +1,6 @@
 {
   "name": "large-number-away",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "大整数加法--away",
   "main": "index.js",
   "scripts": {

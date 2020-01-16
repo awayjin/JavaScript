@@ -1,0 +1,21 @@
+p#p-id #{name}的 Pug 代码！
+ul
+  li itemA
+
+- var arr = [44, 55, 66]
+#{arr}
+
+div
+  ul
+    each val in arr
+      li= val
+
+
+mixin list(id, ...items)
+  ul(id=id)
+     each item in items
+       li= item
+
+
++list('#my-list', [11,22])
+
