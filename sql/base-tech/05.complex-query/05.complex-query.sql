@@ -116,11 +116,28 @@ as product_sum;
 select * from product 
 where sale_price > (select AVG(sale_price) from product);
 
--- 标量子查询的书写位置
+-- -- 标量子查询的书写位置
+
 -- 在SELECT子句中使用标量子查询
 select 
 product_id, product_name, sale_price
 , (select avg(sale_price)  from product) as avg_sale_price
+from product;
+
+-- 在HAVING子句中使用标量子查询
+-- WHERE子句用来指定数据行的条件， HAVING子句用来指定分组的条件
+select product_type, count(*) as cnt from product GROUP BY product_type having cnt > 2;
+
+select product_type, avg(sale_price) from product
+GROUP BY product_type
+having avg(sale_price) > (select avg(sale_price) FROM product);
+
+
+-- 使用标量子查询时的注意事项
+select 
+product_id, product_name, sale_price, 
+(select sale_price FROM product)
+as avg_price
 from product;
 
 select * from product;

@@ -1,6 +1,7 @@
 module.exports = [
+
   {
-    id: 1,
+    id: 2,
     column_cover: 'xxx',
     column_title: 'title',
     column_subtitle: 'sub title',
@@ -8,7 +9,7 @@ module.exports = [
     author_intro: 'author_intro',
     column_intro: 'column_intro',
     column_unit: 'column_unit',
-    sub_count: 2920,
+    sub_count: 3000,
     update_frequency: 'update_frequency',
     column_price: 12981,
     type: 2,
@@ -20,7 +21,7 @@ module.exports = [
   }
   ,
   {
-    id: 2,
+    id: 1,
     column_cover: 'xxx',
     column_title: 'title',
     column_subtitle: 'sub title',
@@ -28,7 +29,7 @@ module.exports = [
     author_intro: 'author_intro',
     column_intro: 'column_intro',
     column_unit: 'column_unit',
-    sub_count: 2920,
+    sub_count: 4000,
     update_frequency: 'update_frequency',
     column_price: 12981,
     type: 2,
