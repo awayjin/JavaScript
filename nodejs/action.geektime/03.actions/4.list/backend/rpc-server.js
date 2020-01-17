@@ -1,56 +1,47 @@
-const net = require('net')
 const fs = require('fs')
-const protoBuffers = require('protocol-buffers')
-const messages = protoBuffers(fs.readFileSync('../rpc/detail.proto'))
+const protobuf = require('protocol-buffers');
+const schemas = protobuf(
+  fs.readFileSync(`${__dirname}/../4.list/node/list.proto`)
+);
 
 // 假数据
 const columnData = require('./mockdata/column')
 
-class RPC {
-  constructor ({ encodeResponse, decodeRequest, isCompleteRequest }) {
+/**
+ * 服务端的编解包逻辑
+ */
+const server = require('./lib/geeknode-rpc-server')(schemas.ListRequest, schemas.ListResponse);
 
-  }
+server
+  .createServer((request, response) => {
+    const { sortType, filtType } = request.body;
 
-  createServer  () {
+    // 直接返回假数据
+    response.end({
+      columns: columnData
+        .sort((a, b) => {
+          if (sortType == 1) {
+            return a.id - b.id
 
-  }
-}
+          } else if (sortType == 2) {
+            return a.sub_count - b.sub_count
 
-const server = net.createServer((socket) => {
-  // console.log('buffer:', socket)
+          } else if (sortType == 3) {
+            return a.column_price - b.column_price
 
-  socket.on('data', (buffer) => {
-    console.log('\n ------- rpc-server.js buffer:', buffer)
-    console.log('buffer.readInt32BE:', buffer.readInt32BE())
-    console.log('buffer.readInt32BE(4):', buffer.readInt32BE(4))
-    console.log('buffer.slice(8):', buffer.slice(8))
-    // 这应从数据库获取真实数据
-    const columnId = messages.ColumnRequest.decode(buffer.slice(8))
-    console.log('messages.ColumnRequest.decode(buffer.slice(8)):', columnId)
+          }
 
-    // 假数据
-    // const body = messages.ColumnResponse.encode({
-    //   column: columnData[0],
-    //   recommendColumns: [columnData[1], columnData[2]]
-    // })
-    const body = messages.ColumnResponse.encode({
-      column: columnData[0],
-      recommendColumns: [columnData[1], columnData[2]]
-    })
+        })
+        .filter((item) => {
+          if (filtType == 0) {
+            return item
 
-    // console.log('body:', messages.ColumnResponse.decode(body))
-    const header = Buffer.alloc(8)
-    header.writeInt32BE(buffer.readInt32BE())
-    header.writeInt32BE(body.length, 4)
-    // seq++
-
-    const result = Buffer.concat([
-      header,
-      body
-    ])
-    socket.write(result)
+          } else {
+            return item.type == filtType
+          }
+        })
+    });
   })
-
-})
-
-server.listen(4004)
+  .listen(4003, () => {
+    console.log('rpc server listened: 4003')
+  });

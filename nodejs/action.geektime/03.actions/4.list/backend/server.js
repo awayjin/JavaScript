@@ -14,13 +14,13 @@ const app = net.createServer(function (socket) {
     // console.log('mockData:', mockData[0])
     // console.log('buffer.slice(8):', buffer.slice(8).toString())
 
-    console.log('\n ------- server.js buffer:', buffer)
+    console.log('\n ------- server.js buffer:', buffer.length)
     // console.log('buffer.readInt32BE:', buffer.readInt32BE())
     // console.log('buffer.readInt32BE(4):', buffer.readInt32BE(4))
     // console.log('buffer.slice(8):', buffer.slice(8))
     // 这应从数据库获取真实数据
     const listRequest = schemas.ListRequest.decode(buffer.slice(8))
-    console.log('listRequest:', listRequest)
+    // console.log('listRequest:', listRequest)
 
     const filtType = listRequest.filtType
     const sortType = listRequest.sortType
@@ -58,7 +58,7 @@ const app = net.createServer(function (socket) {
 
 })
 
-const port = 4002
+const port = 4003
 app.listen(port, () => {
   console.log('Backend server started at port:' + port)
 })

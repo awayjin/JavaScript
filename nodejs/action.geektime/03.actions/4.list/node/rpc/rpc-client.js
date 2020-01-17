@@ -24,10 +24,10 @@ const messages = protobuf(fs.readFileSync(`${__dirname}/list.proto`))
 
 let easySock = new EasySock({
   ip: '127.0.0.1',
-  port: 4002,
+  port: 4003,
   timeout: 1000,
   // 是否全双工通信的
-  keepAlive: false
+  keepAlive: true
 })
 
 // 发送的数据协议进行二进制编码
