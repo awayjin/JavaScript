@@ -21,10 +21,12 @@ app.use(mount('/data', async (ctx) => {
   ctx.body = data
 }))
 
+
+const leak = []
 app.use(async ctx => {
   // console.log('node/index.js reactData:', reactData)
-  console.log('node/index.js ctx filt:', ctx.query.filt)
-  console.log('node/index.js ctx sort:', ctx.query.sort)
+  // console.log('node/index.js ctx filt:', ctx.query.filt)
+  // console.log('node/index.js ctx sort:', ctx.query.sort)
   const filtType = +(ctx.query.filt || 0)
   const sortType = +(ctx.query.sort || 0)
   const reactData = await getData(filtType, sortType)
@@ -32,13 +34,16 @@ app.use(async ctx => {
   const renderToString = ReactDOMServer.renderToString(
     indexJSX(reactData)
   )
-  ctx.body = template({
+  const html = template({
     reactString: renderToString,
     reactData,
     filtType,
     sortType
   })
+  ctx.body = html
   // ctx.body = template(reactData.columns[0])
+
+  leak.push(html)
 })
 
 // app.use(router.routes());

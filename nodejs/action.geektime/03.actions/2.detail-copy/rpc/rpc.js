@@ -21,7 +21,7 @@ const messages = protobuf(fs.readFileSync(`${__dirname}/detail.proto`))
 
 let easySock = new EasySock({
   ip: '127.0.0.1',
-  port: 4004,
+  port: 4001,
   timeout: 1000,
   // 是否全双工通信的
   keepAlive: false

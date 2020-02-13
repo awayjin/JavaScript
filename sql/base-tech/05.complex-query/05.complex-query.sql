@@ -140,5 +140,17 @@ product_id, product_name, sale_price,
 as avg_price
 from product;
 
+drop table Product;
 select * from product;
+select avg(sale_price) from product WHERE product_type = '厨房用具';
+select product_type, count(*) as cnt_product_type FROM Product
+GROUP BY product_type
+having count(*) = 2 ;
+
+-- 使用子查询就能选取出销售单价（ sale_price）高
+-- 于全部商品平均销售单价的商品
+select * from product WHERE sale_price > (select avg(sale_price) from product);
+
+
+
 

@@ -3,6 +3,8 @@ const Container = require('../components/container.jsx');
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+
+
 class App extends React.Component {
 
   constructor() {
@@ -21,15 +23,17 @@ class App extends React.Component {
         filtType = { this.state.filtType }
         filt={(filtType) => {
           this.setState({ filtType })
-          console.log('filtType:', filtType)
-          fetch(`./data?sort=${this.state.sortType}&filt=${filtType}`)
-            .then(res => res.json())
-            .then(json => {
-              this.setState({
-                columns: json,
-                filtType: filtType
+          console.log('filtType3:', filtType)
+          for (var i = 100; i > 0; i--) {
+            fetch(`./data?sort=${this.state.sortType}&filt=${filtType}`)
+              .then(res => res.json())
+              .then(json => {
+                this.setState({
+                  columns: json,
+                  filtType: filtType
+                })
               })
-            })
+          }
         }}
         sort={(sortType) => {
           fetch(`./data?sort=${sortType}&filt=${this.state.filtType}`)

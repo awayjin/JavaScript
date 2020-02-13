@@ -21,6 +21,7 @@ class Hello extends React.Component<Greeting, any> {
 
 interface Greeting3 {
   name: string;
+  d: number
   firstName?: string;
   lastName?: string
 }
@@ -39,7 +40,17 @@ Hello3.defaultProps = {
   lastName: ''
 }
 
-const Hello4 = (props: Greeting3) => <Button>{ props.name }</Button>
+
+interface Greeting4 {
+  name: string;
+  // d: number
+  firstName?: string;
+  lastName?: string;
+  // 任意属性
+  // 字符串索引签名, 用任意字符串来索引 List， 这样 List 就支持多个属性了
+  [x: string]: any
+}
+const Hello4 = (props: Greeting4) => <Button>{ props.name }</Button>
 
 // const Hello3: React.FC<Greeting> = (props) => {
 //   return <Button>{ props.name }</Button>

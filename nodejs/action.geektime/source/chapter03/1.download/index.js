@@ -17,4 +17,17 @@ app.use(
 
 
 // app.listen(4000);
-module.exports = app;
+// module.exports = app;
+
+const cluster = require('cluster')
+const os = require('os')
+if (cluster.isMaster) {
+  // 根据核数来启动多个子线程
+  for (let i = 0; i < os.cpus().length / 2; i++) {
+    console.log('fork')
+    cluster.fork()
+  }
+} else {
+  console.log('listen 4000')
+  app.listen(4000)
+}

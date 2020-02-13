@@ -34,8 +34,8 @@ let easySock = new EasySock({
 easySock.encode = function (data, seq) {
   // 请求包的编码
   const body = messages.ListRequest.encode(data)
-  console.log('\n ------> rpc-client.js encode data:', data)
-  console.log('seq:', seq)
+  // console.log('\n ------> rpc-client.js encode data:', data)
+  // console.log('seq:', seq)
   // 请求体的编码
   const header = Buffer.alloc(8)
   header.writeInt32BE(seq)
@@ -60,9 +60,9 @@ easySock.isReceiveComplete = function(buffer) {
   if (buffer.length  < 8) {
     return 0
   }
-  console.log('\n isReceiveComplete buffer::::', buffer)
+  // console.log('\n isReceiveComplete buffer::::', buffer)
   let bodyLength = buffer.readInt32BE(4)
-  console.log('bodyLength: ', bodyLength)
+  // console.log('bodyLength: ', bodyLength)
   if (buffer.length >= bodyLength + 8) {
     return 8 + bodyLength
   } else {

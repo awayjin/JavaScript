@@ -20,3 +20,4 @@ DigitalServiceAdmin/node_modules/
 *.git-credentials
 .git-credentials
 *.class
+*.log

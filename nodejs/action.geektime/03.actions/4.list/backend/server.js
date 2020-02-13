@@ -9,12 +9,12 @@ const mockData = require('./mockdata/list.js')
 const app = net.createServer(function (socket) {
   socket.on('data', buffer => {
     const seq = buffer.readInt32BE()
-    console.log('seq:', seq)
+    // console.log('seq:', seq)
     // console.log('buffer.readInt32BE():', schemas.ListResponse.decode(buffer.slice(8)))
     // console.log('mockData:', mockData[0])
     // console.log('buffer.slice(8):', buffer.slice(8).toString())
 
-    console.log('\n ------- server.js buffer:', buffer.length)
+    // console.log('\n ------- server.js buffer:', buffer.length)
     // console.log('buffer.readInt32BE:', buffer.readInt32BE())
     // console.log('buffer.readInt32BE(4):', buffer.readInt32BE(4))
     // console.log('buffer.slice(8):', buffer.slice(8))
@@ -47,7 +47,7 @@ const app = net.createServer(function (socket) {
     const body = schemas.ListResponse.encode({
       columns: resData
     })
-    console.log('body:', resData)
+    // console.log('body:', resData)
     const header = Buffer.alloc(8)
     header.writeInt32BE(buffer.readInt32BE())
     header.writeInt32BE(body.length, 4)

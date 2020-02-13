@@ -19,6 +19,7 @@ import ReactDOM from 'react-dom'
 
 // import { Hello } from './components/Hello'
 import Hello from './components/Hello'
+import HelloHooks from './components/HelloHooks'
 import About from './components/About'
 
 // console.log('Hello3:', Hello3)
@@ -27,7 +28,8 @@ console.log('Hello:', Hello)
 ReactDOM.render(
   <div>
     <Hello.Hello name='TypeScript JSX' />
-    { Hello.Hello4({name:'函数组件'}) }
+    <HelloHooks name={'name'} />
+    { Hello.Hello4({name:'函数组件', non: 3}) }
     <About title={'abt til 123'} msg={'abt msg'}></About>
   </div>,
   document.querySelectorAll('.app')[0]

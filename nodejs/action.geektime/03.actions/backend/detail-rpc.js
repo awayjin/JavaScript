@@ -1,7 +1,7 @@
 const net = require('net')
 const fs = require('fs')
 const protoBuffers = require('protocol-buffers')
-const messages = protoBuffers(fs.readFileSync('../rpc/detail.proto'))
+const messages = protoBuffers(fs.readFileSync(__dirname + '/protocol/detail.proto'))
 
 // 假数据
 const columnData = require('./mockdata/column')

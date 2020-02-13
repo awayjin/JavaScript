@@ -11,7 +11,7 @@ module.exports = [
     column_unit: 'column_unit',
     sub_count: 3000,
     update_frequency: 'update_frequency',
-    column_price: 12981,
+    column_price: 12581,
     type: 2,
     column_price_market: 298,
     articles: [
