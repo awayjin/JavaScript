@@ -151,6 +151,48 @@ having count(*) = 2 ;
 -- 于全部商品平均销售单价的商品
 select * from product WHERE sale_price > (select avg(sale_price) from product);
 
+select AVG(sale_price) FROM Product;
+select * FROM Product WHERE sale_price > (SELECT AVG(sale_price) FROM Product);
+
+SELECT AVG(sale_price) FROM Product GROUP BY product_type;
+SELECT * FROM Product GROUP BY product_type;
+SELECT count(regist_date) FROM Product;
+SELECT count(purchase_price) FROM Product;
+SELECT MAX(sale_price), min(purchase_price) FROM Product;
+SELECT count(distinct product_type) FROM Product;
+SELECT product_type, count(*) FROM Product GROUP BY product_type;
+SELECT sale_price, count(*) FROM Product GROUP BY sale_price;
+SELECT product_type, count(*) FROM Product group by product_type;
+select avg(sale_price) FROM Product;
+SELECT * FROM Product WHERE product_type='厨房用具';
+SELECT product_type, count(*) as pt FROM Product 
+WHERE product_type = '衣服'
+GROUP BY product_type HAVING pt = 2;
+
+-- 按照商品种类计算平均价格
+SELECT avg(sale_price) FROM Product GROUP BY product_type;
+select sum(sale_price) FROM Product GROUP BY regist_date;
+SELECT product_id, product_name, sale_price
+FROM Product
+WHERE sale_price > (SELECT AVG(sale_price)
+FROM Product
+GROUP BY product_type);
+
+-- 通过关联子查询按照商品种类对平均销售单价进行比较
+SELECT product_id, product_name, sale_price, product_type
+FROM Product as P1
+WHERE sale_price > (SELECT AVG(sale_price)
+FROM Product as P2
+-- 关键: 在同一商品种类中对各商品的销售单价和平均单价进行比较
+WHERE P1.product_type = P2.product_type
+GROUP BY product_type);
+-- 这样我们就能选取出办公用品、衣服和厨房用具三类商品中高于该类
+-- 商品的平均销售单价的商品了
+
+
+
+
+
 
 
 
