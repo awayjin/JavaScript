@@ -1,65 +1,55 @@
 const Koa = require('koa')
-const KoaRouter = require('koa-router')
-const KoaStatic = require('koa-static')
-const fs = require('fs')
-const mount = require('koa-mount')
-
 const app = new Koa()
-const router = new KoaRouter()
-const rpcClient = require('./client.js')
-const template = require('./template')
-const detailTemplate = template(__dirname + '/template/index.html')
+// const KoaRouter = require('koa-router')
+// const router = new KoaRouter()
+// const KoaStatic = require('koa-static')
+const fs = require('fs')
+const rpcClient = require('./rpc/rpc.js')
+const template = require('./vm/template-vm')
+const detailTemplate = template(`${__dirname}/vm/vue-index.html`)
+// detailTemplate(result)
 
-// router.get('/', async (ctx) => {
-//   ctx.body = fs.readFileSync(__dirname + '/source/index.html', 'utf-8')
-// })
+// const template = require('./template')
+// const detailTemplate = template(__dirname + '/template/index.html')
 
-// app.use(mount('/static', KoaStatic(`${__dirname}/source/static/`)))
-
-// app.use(function)
-// 将给定的中间件方法添加到此应用程序。
 app.use(async (ctx) => {
-  if (!ctx.query.columnid) {
-    ctx.status = 400;
-    ctx.body = 'invalid columnid';
+  console.log('ctx.query:')
+  console.log(ctx.query)
+  console.log(ctx.query.columnid)
+
+  if (ctx.url === '/favicon.ico') {
+    ctx.body = ''
     return
   }
 
-  // 浏览器访问： http://localhost:3000/?columnid=24
-  const result = await new Promise((resolve, rejected) => {
+  if (!ctx.query.columnid) {
+    ctx.status = 400
+    const invalidDes = 'invalid columnid. Need a query columnid.'
+    console.log(invalidDes)
+    ctx.body = invalidDes
+    return
+  }
+  const result = await new Promise((resolve, reject) => {
     rpcClient.write({
-      columnid: ctx.query.columnid || '24',
-    }, function (err, data) {
-      // console.log('err:', err)
-      // console.log('data:', data)
-      err ? rejected(err) : resolve(data)
+      columnid: ctx.query.columnid
+    }, (err, data) => {
+      err ? reject(err) : resolve(data)
     })
   })
-  // console.log('result:', result)
-
-  ctx.status = 200
-
-  // ctx.body = fs.readFileSync(__dirname + '/source/index.html', 'utf-8')
+  console.log('result:', result)
+  // detailTemplate 是 runInNewContext 创建的一个返回函数
   ctx.body = detailTemplate(result)
+
+  // const html = await fs.readFileSync(`${__dirname}/source/vue-index.html`, 'utf-8')
+  // ctx.body = html
+
 })
 
-
+// app.use(KoaStatic('./source')) // static
 // app.use(router.routes())
-// app.use(KoaStatic(__dirname +'/source'))
 
-const PORT = 3000
-app.listen(PORT, () => {
-  console.log(`App started at http://localhost:${PORT}`)
-})
-
-
-
-// rpcClient.write({
-//   columnid: 24,
-// }, function (err, data) {
-//   console.log('err:', err)
-//   console.log('data:', data)
+// const port = 3002
+// app.listen(port , () => {
+//   console.log(`App started at http://localhost:${port}`)
 // })
-
-
-
+module.exports = app

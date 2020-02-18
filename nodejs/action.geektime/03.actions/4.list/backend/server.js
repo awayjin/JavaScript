@@ -60,5 +60,5 @@ const app = net.createServer(function (socket) {
 
 const port = 4003
 app.listen(port, () => {
-  console.log('Backend server started at port:' + port)
+  console.log('Backend list server started at port:', port)
 })

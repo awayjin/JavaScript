@@ -1,6 +1,6 @@
 const Koa = require('koa')
 const app = new Koa()
-const KoaStatic = require('koa-static')
+const static = require('koa-static')
 // const KoaRouter = require('koa-router')
 // const router = new KoaRouter()
 const mount = require('koa-mount')
@@ -13,7 +13,10 @@ require('@babel/register')({
 const ReactDOMServer = require('react-dom/server')
 const indexJSX = require('./app.jsx')
 
-app.use(KoaStatic(__dirname + '/source'))
+// app.use(static(__dirname + '/source'))
+// app.use(static(__dirname + '/4.list'))
+app.use(mount('/static', static(__dirname + '/source')))
+console.log('list __dirname', __dirname)
 
 app.use(mount('/data', async (ctx) => {
   const data = await getData(+(ctx.query.filt || 0), +(ctx.query.sort || 0));
@@ -49,7 +52,9 @@ app.use(async ctx => {
 // app.use(router.routes());
 // app.use(router.allowedMethods());
 
-const port = 3000
-app.listen(port, () => {
-  console.log(`App started at http://localhost:${port}`)
-})
+// const port = 3000
+// app.listen(port, () => {
+//   console.log(`App started at http://localhost:${port}`)
+// })
+
+module.exports = app

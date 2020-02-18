@@ -1,5 +1,20 @@
 # typescript
 
+## *.d.ts和@types关系理解
+
+@types：是npm的一个分支
+
+*.d.ts：ts为了代码的可复用性，要声明一些静态类型文件，那些文件就是*.d.ts，这些静态类型文件类似 jQ 这种第三方库，就为了一次申明、多次复用。
+
+push 代码两种方式:
+- 把 *.d.ts 文件 push 到 npm 上，这种我们只要直接下载即可。
+
+- 另外是没有 push 到 npm 上，为了保证能使用从npm下载的ts，我们就必须往@types这个分支上push对应的*.d.ts文件，然后按照npm install -s @types/*** 下载。
+
+本地自己写ts文件申明，自己使用，不需要上传上去。比如我们在使用 ts 和 react 进行开发的时候，安装了路由 react-dom-router，同时还需要安装 @types/react-dom-router
+
+参考: (https://blog.csdn.net/zjscy666/article/details/81810551)
+
 ## webpack 配置
 
 创建 tsconfig.json, `tsc --init `. 帮助 `tsc -h`

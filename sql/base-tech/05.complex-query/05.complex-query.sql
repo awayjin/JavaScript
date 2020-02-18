@@ -189,7 +189,29 @@ GROUP BY product_type);
 -- 这样我们就能选取出办公用品、衣服和厨房用具三类商品中高于该类
 -- 商品的平均销售单价的商品了
 
+-- 销售单价高于平均销售价格
+SELECT avg(sale_price) FROM Product;
+SELECT * FROM Product WHERE sale_price > (SELECT avg(sale_price) FROM Product);
 
+SELECT * FROM Product WHERE product_type = '厨房用具';
+-- 厨房用具的平均销售单价
+SELECT avg(sale_price) FROM Product WHERE product_type = '厨房用具';
+SELECT * FROM Product as p1 
+WHERE product_type = '厨房用具' && sale_price > (
+	SELECT avg(sale_price) FROM Product as p2
+)
+-- 按照商品种类计算平均价格
+SELECT avg(sale_price) FROM Product GROUP BY product_type;
+-- 对商品种类进行分组并统计个数
+SELECT product_type, count(*) FROM Product GROUP BY product_type;
+
+SELECT * FROM Product as p1 
+WHERE
+sale_price > (
+SELECT avg(sale_price) FROM Product as p2 
+WHERE p1.product_type = p2.product_type
+GROUP BY product_type
+);
 
 
 

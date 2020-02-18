@@ -53,4 +53,6 @@ const server = net.createServer((socket) => {
 
 })
 
-server.listen(4001)
+const port = 4001
+console.log('detail server on port', port)
+server.listen(port)

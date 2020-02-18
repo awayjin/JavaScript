@@ -29,7 +29,8 @@
     "build": "react-app-rewired build",
     "test111": "react-scripts test",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "cd mock && hs -p 4000 -a localhost"
   },
   "eslintConfig": {
     "extends": "react-app"

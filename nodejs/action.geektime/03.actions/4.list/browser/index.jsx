@@ -24,8 +24,8 @@ class App extends React.Component {
         filt={(filtType) => {
           this.setState({ filtType })
           console.log('filtType3:', filtType)
-          for (var i = 100; i > 0; i--) {
-            fetch(`./data?sort=${this.state.sortType}&filt=${filtType}`)
+            // fetch(`./data?sort=${this.state.sortType}&filt=${filtType}`)
+            fetch(`./list/data?sort=${this.state.sortType}&filt=${filtType}`)
               .then(res => res.json())
               .then(json => {
                 this.setState({
@@ -33,10 +33,10 @@ class App extends React.Component {
                   filtType: filtType
                 })
               })
-          }
         }}
         sort={(sortType) => {
-          fetch(`./data?sort=${sortType}&filt=${this.state.filtType}`)
+          // fetch(`./data?sort=${sortType}&filt=${this.state.filtType}`)
+          fetch(`./list/data?sort=${sortType}&filt=${this.state.filtType}`)
             .then(res => res.json())
             .then(json => {
               this.setState({

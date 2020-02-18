@@ -1,3 +1,4 @@
+//
 export interface EmployeeRequest {
     name: string;
     departmentId: number | undefined;
