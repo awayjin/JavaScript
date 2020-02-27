@@ -151,24 +151,6 @@ having count(*) = 2 ;
 -- 于全部商品平均销售单价的商品
 select * from product WHERE sale_price > (select avg(sale_price) from product);
 
-select AVG(sale_price) FROM Product;
-select * FROM Product WHERE sale_price > (SELECT AVG(sale_price) FROM Product);
-
-SELECT AVG(sale_price) FROM Product GROUP BY product_type;
-SELECT * FROM Product GROUP BY product_type;
-SELECT count(regist_date) FROM Product;
-SELECT count(purchase_price) FROM Product;
-SELECT MAX(sale_price), min(purchase_price) FROM Product;
-SELECT count(distinct product_type) FROM Product;
-SELECT product_type, count(*) FROM Product GROUP BY product_type;
-SELECT sale_price, count(*) FROM Product GROUP BY sale_price;
-SELECT product_type, count(*) FROM Product group by product_type;
-select avg(sale_price) FROM Product;
-SELECT * FROM Product WHERE product_type='厨房用具';
-SELECT product_type, count(*) as pt FROM Product 
-WHERE product_type = '衣服'
-GROUP BY product_type HAVING pt = 2;
-
 -- 按照商品种类计算平均价格
 SELECT avg(sale_price) FROM Product GROUP BY product_type;
 select sum(sale_price) FROM Product GROUP BY regist_date;
@@ -205,15 +187,69 @@ SELECT avg(sale_price) FROM Product GROUP BY product_type;
 -- 对商品种类进行分组并统计个数
 SELECT product_type, count(*) FROM Product GROUP BY product_type;
 
-SELECT * FROM Product as p1 
-WHERE
-sale_price > (
-SELECT avg(sale_price) FROM Product as p2 
-WHERE p1.product_type = p2.product_type
+DROP VIEW product_type_sum;
+-- 创建一个视图
+CREATE VIEW product_sum(product_type, count_product_type) as
+(
+SELECT product_type, count(*) FROM Product
 GROUP BY product_type
 );
+-- 使用视图
+select * FROM product_type_sum;
+select * FROM Product;
+
+INSERT INTO Product VALUES('0010', '锅铲', '厨房用具', 200, NULL, NULL);
+
+-- 练习题
+START TRANSACTION;
+
+drop view view_practice5_1;
+	
+CREATE VIEW view_practice5_1 AS
+SELECT product_name, sale_price, regist_date
+	FROM Product 
+	WHERE
+		sale_price >= 1000 
+		AND
+		regist_date = '2009-09-20';
+
+SELECT * FROM view_practice5_1;
+
+INSERT INTO view_practice('刀子', 300, '2009-11-02');
+
+commit;
+
+SELECT * FROM Product;
+DELETE FROM Product WHERE product_id = '0009' OR product_id = '0010';
 
 
+
+SELECT 
+	sale_price, avg(sale_price)
+-- 	, (SELECT avg(sale_price) FROM Product) as avg_sale_price
+FROM Product 
+GROUP BY product_type;
+
+-- 关联子查询，计算出各商品种类的平均销售均价
+SELECT  
+	product_id, product_name, product_type, sale_price,
+	(
+		SELECT avg(sale_price) FROM product
+		WHERE p1.product_type = product_type
+		GROUP BY product_type
+	) as avg_sale_price
+FROM Product as p1
+;
+
+SELECT *, 
+(SELECT AVG(sale_price) FROM Product as p2
+WHERE p1.product_type = p2.product_type) as avg_sale_price
+FROM Product p1;
+
+
+
+
+SELECT avg(sale_price) FROM product GROUP BY product_type;
 
 
 
