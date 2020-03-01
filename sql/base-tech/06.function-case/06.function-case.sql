@@ -180,5 +180,129 @@ select * FROM Product
 WHERE product_id not in(select product_id FROM ShopProduct WHERE shop_id = '000c');
 
 
+select * FROM ShopProduct WHERE shop_name like '%大阪%';
+select * FROM ShopProduct WHERE shop_id='000c';
+
+-- 大阪店（ 000C）在售商品（ product_id）的销售单价（ sale_price）
+SELECT 
+product_name, sale_price,  
+ '000C大阪'
+FROM Product WHERE product_id
+in(
+-- 	'0003', 4
+	select product_id FROM ShopProduct WHERE shop_id = '000c'
+);
+
+-- exists 关联子查询
+SELECT product_name, sale_price
+FROM Product as P1 
+WHERE exists (
+	-- select 3 也可以
+	SELECT * FROM ShopProduct as SP
+	WHERE shop_id = '000C'
+	AND P1.product_id = Sp.product_id
+);
+
+SELECT *
+FROM Product as P1 
+WHERE not exists (
+	SELECT * FROM ShopProduct as SP
+	WHERE shop_id = '000C'
+	AND P1.product_id = Sp.product_id
+);
+
+-- 6-3 CASE表达式
+SELECT product_name,
+	CASE 
+		WHEN product_type = '衣服' THEN  concat('A ：', product_type) 
+		WHEN product_type = '办公用品' THEN concat('B ：', product_type) 
+		WHEN product_type = '厨房用具' THEN concat('C ：', product_type) 
+		ELSE NULL
+	END AS abc_product_type
+FROM Product;
+
+-- 计算出销售单价的合计值
+SELECT product_type, count(product_type), sum(sale_price) FROM Product 
+GROUP BY product_type;
+
+SELECT product_type, sum(sale_price)
+FROM Product 
+GROUP BY product_type;
+
+-- 对按照商品种类计算出的销售单价合计值进行行列转换
+SELECT 
+	sum(
+		case when product_type = '衣服' 
+		then sale_price 
+		else 0 end 
+	) as sum_price_clothes,
+	sum(
+		case when product_type = '厨房用具'
+		then sale_price
+		else 0 end 
+	) as sum_price_kitchen,
+	sum(
+		case when product_type = '办公用品'
+		then sale_price
+		else 0 end
+	) as sum_price_office
+FROM Product;
+
+-- -- 使用简单CASE表达式的情况
+SELECT 
+	product_name,
+	case product_type
+		when '衣服' then concat('A:', product_type)
+		when '厨房用具' then concat('B:', product_type)
+		when '办公用品' then concat('C:', product_type)
+	else 0
+	end
+FROM Product;
+
+-- MySQL 中的 IF 将字符串 A ～ C 添加到商品种
+
+SELECT product_name, purchase_price
+FROM Product
+WHERE purchase_price not in (500, 2800, 5000);
+
+SELECT product_id, product_name, purchase_price
+FROM Product
+-- WHERE purchase_price  is not null;
+WHERE purchase_price is null;
+
+ select length(NULL), length(''), length('1')
+
+SELECT 
+	sum(
+		case when sale_price <= 1000 
+		then 1
+		else 0 end
+	) as low_price_count,
+	sum(
+-- 		case when sale_price between  1000 and 3000
+		case when sale_price >  1000 and sale_price <= 3000
+		then 1
+		else 0 end
+	) as middle_price_count,
+	sum(
+		case when sale_price > 3000
+		then 1
+		else 0 end
+	) as high_price_count
+FROM Product;
+
+SELECT * FROM Product;
+
+SELECT count(sale_price between 1000 and 3000) FROM Product;
+
+
+
+
+
+
+
+
+
+
 
 

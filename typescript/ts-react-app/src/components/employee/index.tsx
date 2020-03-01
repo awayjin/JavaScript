@@ -32,7 +32,7 @@ import { EmployeeResponse } from '../../interface/employee';
 // }
 
 interface State {
-    employee: EmployeeResponse
+    employee: EmployeeResponse;
 }
 
 class Employee extends Component<{}, State> {
@@ -45,19 +45,28 @@ class Employee extends Component<{}, State> {
         });
     }
     getTotal() {
-        let total: number;
+        // let total: number;
+        // if (typeof this.state.employee !== 'undefined') {
+        //     total = this.state.employee.length
+        // } else {
+        //     total = 0
+        // }
+        // return <p>共 {total} 名员工</p>
+
+        // 类型保护
+        let total: number
         if (typeof this.state.employee !== 'undefined') {
             total = this.state.employee.length
         } else {
             total = 0
         }
-        return <p>共 {total} 名员工</p>
+        return <p>共 { total } 名员工</p>
     }
     render() {
         return (
             <>
                 <QueryForm onDataChange={this.setEmployee} />
-                {/* {this.getTotal()} */}
+                 {this.getTotal()}
                 <Table columns={employeeColumns} dataSource={this.state.employee} className="table" />
             </>
         )

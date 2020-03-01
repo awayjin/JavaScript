@@ -48,8 +48,8 @@ app.use(async (ctx) => {
 // app.use(KoaStatic('./source')) // static
 // app.use(router.routes())
 
-// const port = 3002
-// app.listen(port , () => {
-//   console.log(`App started at http://localhost:${port}`)
-// })
+const port = 3002
+app.listen(port , () => {
+  console.log(`App started at http://localhost:${port}`)
+})
 module.exports = app

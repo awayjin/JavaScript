@@ -23,11 +23,8 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start111": "react-scripts start",
     "start": "react-app-rewired start",
-    "build111": "react-scripts build",
     "build": "react-app-rewired build",
-    "test111": "react-scripts test",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "server": "cd mock && hs -p 4000 -a localhost"
