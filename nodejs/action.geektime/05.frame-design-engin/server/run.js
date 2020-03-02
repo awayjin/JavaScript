@@ -25,8 +25,8 @@ function server (appConfig) {
     console.log('dataConfig:', dataConfig)
 
     const requests = Object.keys(dataConfig).reduce((acc, curValue) => {
+      console.log('acc', acc, ', curValue:', curValue) // column
       acc[curValue] = requestFactory(dataConfig[curValue])
-      // console.log('curValue:', curValue) // column
       return acc
     }, {})
     console.log('requests:', requests)
@@ -40,10 +40,12 @@ function server (appConfig) {
           count: 100
         };
 
+        console.log('ctx.query:', ctx.query)
+
         const allR = await Promise.all(
           Object.keys(requests).map(key => {
             return requests[key](ctx.query).then((res) => {
-              console.log('res:', res)
+              // console.log('res:', res)
               result[key] = res;
               return res
             })
@@ -51,7 +53,7 @@ function server (appConfig) {
         ).catch((err) => {
           console.log('err:', err)
         })
-        console.log('allR:', allR)
+        // console.log('allR:', allR)
         console.log('result:', result)
 
         ctx.body = template(result)
@@ -63,7 +65,7 @@ function server (appConfig) {
 }
 
 const dataConfig = {
-  columndddd: {
+  column: {
     protocol: 'geek-rpc',
     ip: '127.0.0.1',
     port: 4000,
@@ -71,6 +73,10 @@ const dataConfig = {
     protobufFile: fs.readFileSync(__dirname + "/proto/detail.proto"),
     requestStruct: 'ColumnRequest',
     responseStruct: 'ColumnResponse',
+    before (res) {
+      res['ddd'] = 'ddd'
+      return res
+    },
     then(res) {
       return res.column;
     },

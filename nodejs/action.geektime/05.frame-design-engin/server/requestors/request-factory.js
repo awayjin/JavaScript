@@ -5,7 +5,7 @@ function factory (config) {
     console.log(`暂不支持的协议 22: ${config.protocol}`)
     throw new Error(`暂不支持的协议: ${config.protocol}`)
   }
-  console.log('forbidden')
+  // console.log('forbidden')
   config.before = config.before || (d => d)
   config.then = config.then
   config.catch = config.catch || (d => d);
