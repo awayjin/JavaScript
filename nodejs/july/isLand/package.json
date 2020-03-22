@@ -11,9 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^8.0.8",
-    "require-directory": "^2.1.1"
+    "require-directory": "^2.1.1",
+    "validator": "^13.0.0"
   }
 }
