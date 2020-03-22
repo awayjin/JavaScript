@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+index
+
+<button onclick="fetchSource()">Click Me</button>
+<script>
+  function fetchSource () {
+    fetch('http://codegoing.com')
+      .then(res => res.text())
+      .then(res => {
+        console.log('res')
+      })
+      .catch((err) => {
+        console.log('err:', err)
+      })
+  }
+
+</script>
+
+</body>
+</html>

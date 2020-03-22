@@ -12,10 +12,10 @@ requestFactory.registerProtocol(
   require('./requestors/geek-rpc')
 )
 // 注册 HTTP 协议
-requestFactory.registerProtocol(
-  'http',
-  require('./requestors/http')
-)
+// requestFactory.registerProtocol(
+//   'http',
+//   require('./requestors/http')
+// )
 
 function server (appConfig) {
   Object.keys(appConfig).forEach((routePath) => {
@@ -75,6 +75,7 @@ const dataConfig = {
     responseStruct: 'ColumnResponse',
     before (res) {
       res['ddd'] = 'ddd'
+      console.log('before res:', res)
       return res
     },
     then(res) {

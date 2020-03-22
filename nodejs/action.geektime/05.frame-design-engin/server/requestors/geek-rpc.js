@@ -1,5 +1,11 @@
 const EasySock = require('easy_sock');
-const protobuf = require('protocol-buffers')
+/**
+ *
+ protocol-buffers:
+ - Google 研发的二进制协议编解码库
+ - 通过协议文件控制 Buffer 的格式。 更直观，更好维护，更便于合作
+ */
+const protobuf = require('protocol-buffers');
 const fs = require('fs');
 
 let schemas = null;

@@ -52,3 +52,67 @@ ps -ef|grep nginx
 
 ```
 
+
+## 45 | 架构优化：动静分离
+- 静态内容
+  - 基本不会变动，也不会因为请求参数不同而变化
+  - -> CDN 分发，HTTP 缓存 等
+  
+- 动态内容
+  - 各种因为请求参数不同而变动，且变种的数量几乎不可枚举
+  - -> 用大量的源站机器承载，结合反向代理进行负载均衡
+  
+- Nginx 的静态服务能力和 Node.js 对比
+
+- Nginx 配置反向代理的方法
+
+查看端口占用情况:
+netstat -nlp | grep 80
+
+nginx 默认位置:
+vi /etc/nginx/nginx.conf
+
+压力测试工具 apache bench 在 linux 下的安装:
+yum install httpd-tools
+
+
+## 架构优化:反向代理与缓存服务
+
+域名配置添加A记录，解析
+
+- pm2 开启进程
+```js
+// m2 start index3003.js 启动
+http = require('http');
+http.createServer((req, res) => {
+  res.end('3003/' + req.url)
+}).listen(3003)
+```
+
+- nginx 配置
+(\d*) 正则表达式, 前端匹配到的$1
+```
+location ~ /node/(\d*) {
+    #proxy_pass http://localhost:3002/detail?columnid=$1
+    proxy_pass http://node.com/detail?columnid=$1
+    # proxy_cache 开启缓存
+}
+```
+
+负载均衡:
+```
+upstream node.com {
+    server 127.0.0.1:3002;
+    server 127.0.0.1:3003;
+}
+
+```
+
+nginx -s reload
+
+访问： http://upstream.codegoing.com/node/44
+
+- redis 来缓存 Node.js 方面的东西.
+
+nginx alias与root的区别
+http://www.siguoya.name/pc/home/article/260

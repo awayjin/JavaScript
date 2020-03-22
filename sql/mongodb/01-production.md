@@ -1,0 +1,122 @@
+## 1 mongodb
+MongoDB 是一款强大、灵活，且易于扩展的通用型数据库。
+
+掌握 MongoDB 最好的方式是创建 一个易扩展、灵活、 快速的功能完备的数据存储
+
+## 1.1 易于使用
+MongoDB 是一个面向文档 的数据库，而不是关系型数据库。
+不采用关系模型主要是为了获得更好的扩展性。
+
+## 1.2 易于扩展
+纵向扩展 （scale up) 和横向扩展 （scale out).
+
+面向文档的数据模型使它能很容易地在多台服务器之间进行数据分割。 
+
+## 1.3 丰富的功能
+
+## 1.4 卓越的性能
+
+## 2. MongoDB 基础知识
+
+- 文档是 MongoDB 中数据的基本单元，非常类似于关系型数据库管理系统中的行，但更具表现力
+
+- 似地，集合（collection) 可以看作是一个拥有动态模式（dynamic schema)的表。
+
+- MongoDB 的一个实例可以拥有多个相互独立的数据库（database), 每一个数据库都拥有自己的集合。
+
+- 一个文档都有一个特殊的键 " id",这个键在文档所属的集合中是唯一的。
+
+- MongoDB 自带了一个简单但功能强大的 JavaScript shell, 可用于管理 MongoDB的实例或数据操作。
+
+## 2.1 文档
+
+文档是 MongoDB 的核心概念。文档就是键值对的一个有序集。
+
+大多数编程语言都有一些相通的数据结构，比如映射 (map)、散列（hash) 或字典 （dictionary)。 
+
+在 JavaScript 里面，文档被表示为对象：
+`{"greeting" : "Hello, world!"}`
+
+
+文档中的键 / 值对是有序的：{"x" : 1, "y": 2} 与 { "y": 2, "x": 1} 是不同
+的。
+
+## 2.2 集合
+
+集合就是一组文档。如果将1�〇叩〇08 中的一个文档比喻为关系型数据库中的一行，那么一个集合就相当于一张表。
+
+### 2.2.1 动态模式
+
+- 子集合
+组织集合的一种惯例是使用 `"."` 分隔不同命名空间的子集合。
+
+## 2.3 数据库
+在 MongoDB 中，多个文档组成集合，而多个集合可以组成数据库。
+
+有一些数据库名是保留的，可以直接访问这些有特殊语义的数据库。
+
+- admin 
+从身份验证的角度来讲，这是 “root”数据库。
+
+- local 
+这个数据库永远都不可以复制， 且一台服务器上的所有本地集合都可以存储在这个数据库中。 
+
+- config
+MongoDB 于分片设置时 （ 参见第 13 章）， 分片信息会存储在 数据库中。
+
+## 2.4 启动 MongoDB
+
+下载 (http://www.mongodb.org/downloads) 并解压，运行 mongod 命令
+
+ 在启动 MongoDB，先创建数据目录（如 mkdir -p /data/db) 以确保对该目录有写权限
+ 
+ sudo mongod
+ 
+## 2.5 MongoDB 简介
+
+MongoDB 自带 JavaScript shell， 可在 shell 中使用命令行与 MongoDB 实例交互。
+
+- 运行 mongo 启动 shell.
+
+shell 是一个功能完备的 JavaScript 解释器，可运行任意 JavaScript 程序。  
+
+- 2.5.2 MongoDB客户端
+
+如果想要査看 db 当前指向哪个数据库，可以使用 db 命令:
+```
+> db
+test
+```
+
+选择数据库
+use foobar
+
+通过 db 变量，可访问其中的集合。例如，通过 db.baz 可返回当前数据库的 baz 集合。
+
+- 2.5.3 shell 中的基本操作
+
+在 shell 中査看或操作数据会用到 4 个基本操作：创建、读取、更新和删除（ 即通常所说的 CRUD 操作）。
+
+1.创建
+
+post = {
+  "title": 'til',
+  "content": 'blog',
+  "date": new Date() 
+}
+
+可以用 方法将其保存到 insert 集合中：
+db.blog.insert(post)
+
+可用调用集合的 find 方法:
+db.blog.find()
+
+2.读取
+
+find 和 findOne 方法可以用于査询集合里的文档。
+
+3.更新
+db.blog.update({ title: 'til'}, { title: '33til'})
+
+4. 删除
+db.blog.remove({ title: 'til'})
