@@ -82,6 +82,28 @@ error_code 详细，开发者自己定义的 10001 20003
 request_url 当前请求的 url
 
 ### 库
-validator.js
+validator 字符串验证程序和清理程序库
+
+### 查找所有方法和属性
+在原型链查找
 
 
+### 5-3 配置文件与在终端显示异常
+
+挂载全局配置文件
+
+###  5-4 关系型数据库与非关系型数据库
+
+通用型和针对小程序
+
+在线作图：
+https://processon.com/
+
+
+XAMPP 安装
+
+utf8mb4 utf8mb4_general_ci
+
+### 5-6 Sequelize 初始化配置与注意事项_batch
+
+Node的ORM框架 Sequelize 来操作数据库

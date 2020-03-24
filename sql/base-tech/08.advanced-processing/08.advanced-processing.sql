@@ -72,5 +72,39 @@ SELECT
 FROM Product;
 
 
+-- 两个ORDER BY
+select 
+	*,
+	rank() over(order by sale_price) as ranking
+FROM Product;
+
+
+SELECT product_name, product_type, sale_price,
+RANK () OVER (ORDER BY sale_price) AS ranking
+FROM Product
+order by ranking;
+
+-- 同时得到合计行
+SELECT product_type, sum(sale_price) FROM Product GROUP BY product_type;
+
+-- 分别计算出合计行和汇总结果再通过UNION ALL进行连接
+select '合计' as product_type, sum(sale_price)
+	FROM Product
+union all
+select product_type, sum(sale_price)
+	FROM Product 
+GROUP BY product_type;
+
+-- ROLLUP
+select product_type, sum(sale_price)
+	FROM Product
+-- GROUP BY rollup(product_type);
+GROUP BY product_type WITH ROLLUP;
+
+
+
+
+
+
 
 

@@ -14,6 +14,13 @@ const catchError = async (ctx, next) => {
     //   }
     //   ctx.status = 400
     // }
+
+    // 开发环境，抛出异常
+    if (config.environment === 'dev') {
+      throw e
+    }
+
+    // 已知异常
     if (e instanceof HttpException) {
       ctx.body = {
         message: e.msg,
