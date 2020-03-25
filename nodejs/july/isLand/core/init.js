@@ -6,6 +6,7 @@ class InitManager {
     InitManager.app = app
     InitManager.initLoadRouter()
     InitManager.loadHttpException()
+    InitManager.loadConfig()
   }
 
   // 导入路由
@@ -28,6 +29,14 @@ class InitManager {
     const errors = require('./http-exception')
     global.errors = errors
   }
+
+  // 配置文件
+  static loadConfig (argPath = '') {
+    const configPath = argPath || process.cwd() + '/config/config.js'
+    const config = require(configPath)
+    global.config = config
+  }
+
 }
 
 module.exports = InitManager
