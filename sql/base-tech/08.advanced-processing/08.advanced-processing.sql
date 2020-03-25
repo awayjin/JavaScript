@@ -72,5 +72,28 @@ SELECT
 FROM Product;
 
 
+-- rollup
+select 
+	product_type, sum(sale_price), avg(sale_price)
+FROM 
+	product 
+GROUP BY product_type with rollup;
+
+-- 将“登记日期”添加到聚合键当中
+select product_type, regist_date, sum(sale_price)
+FROM product
+GROUP BY product_type, regist_date with ROLLUP;
+
+SELECT * FROM product;
+
+
+
+
+
+
+
+
+
+
 
 
