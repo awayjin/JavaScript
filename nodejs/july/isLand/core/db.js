@@ -20,13 +20,18 @@ const sequelize = new Sequelize(dbName, user, password, {
 })
 
 // 测试连接是否成功
-// try {
-//   sequelize.authenticate();
-//   console.log('Connection has been established successfully.');
-// } catch (error) {
-//   console.error('Unable to connect to the database:', error);
-// }
+try {
+  sequelize.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
+
+
+// 自动同步所有模型
+sequelize.sync({ force: false })
+
 
 module.exports = {
-  db: sequelize
+  sequelize
 }
