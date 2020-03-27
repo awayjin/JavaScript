@@ -9,6 +9,8 @@ app.use(catchError)
 
 InitManager.init(app)
 
+require('./app/models/user')
+
 // const book = require('./api/v1/book')
 // const latest = require('./api/v1/classic')
 // app.use(latest.routes())
