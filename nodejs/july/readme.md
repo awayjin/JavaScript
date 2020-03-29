@@ -81,6 +81,13 @@ message
 error_code 详细，开发者自己定义的 10001 20003
 request_url 当前请求的 url
 
+```javascript
+const path = ctx.params
+const query = ctx.request.query
+const header = ctx.request.header
+const body = ctx.request.body // koa-bodyparser
+```
+  
 ### 库
 validator 字符串验证程序和清理程序库
 
@@ -99,9 +106,7 @@ validator 字符串验证程序和清理程序库
 在线作图：
 https://processon.com/
 
-
-XAMPP 安装
-
+MySQL 安装类型：
 utf8mb4 utf8mb4_general_ci
 
 ### 5-6 Sequelize 初始化配置与注意事项_batch

@@ -15,13 +15,15 @@ const catchError = async (ctx, next) => {
     //   ctx.status = 400
     // }
 
+    const isHttpException = e instanceof HttpException
+    const isDev = config.environment === 'dev'
     // 开发环境，抛出异常
-    if (config.environment === 'dev') {
+    if (isDev && !isHttpException) {
       throw e
     }
 
     // 已知异常
-    if (e instanceof HttpException) {
+    if (isHttpException) {
       ctx.body = {
         message: e.msg,
         error_code: e.errorCode,

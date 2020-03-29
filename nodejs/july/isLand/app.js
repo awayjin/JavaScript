@@ -7,9 +7,9 @@ app.use(bodyParser())
 const catchError = require('./middlewares/exception')
 app.use(catchError)
 
-InitManager.init(app)
+// require('./app/models/user')
 
-require('./app/models/user')
+InitManager.init(app)
 
 // const book = require('./api/v1/book')
 // const latest = require('./api/v1/classic')

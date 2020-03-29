@@ -28,9 +28,8 @@ router.post('/v1/:id/classic/latest', async (ctx, next) => {
   //   throw error
   // }
 
-  const v = new PositiveIntegerValidator()
+  const v = await new PositiveIntegerValidator()
   v.validate(ctx)
-
 
   ctx.body = {
     key: 'classic'

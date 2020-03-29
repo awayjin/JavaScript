@@ -72,6 +72,19 @@ MongoDB 于分片设置时 （ 参见第 13 章）， 分片信息会存储在 �
  
  sudo mongod
  
+## MongoDB 进程守护
+```
+dbpath=/data/db/  #数据存放路径
+
+logpath=/data/log/mongodb.log #日志存放路径
+
+fork=true #进程守护
+
+#auth=true #是否鉴权
+
+```
+
+ 
 ## 2.5 MongoDB 简介
 
 MongoDB 自带 JavaScript shell， 可在 shell 中使用命令行与 MongoDB 实例交互。
@@ -88,7 +101,7 @@ shell 是一个功能完备的 JavaScript 解释器，可运行任意 JavaScript
 test
 ```
 
-选择数据库
+选择数据库:
 use foobar
 
 通过 db 变量，可访问其中的集合。例如，通过 db.baz 可返回当前数据库的 baz 集合。
