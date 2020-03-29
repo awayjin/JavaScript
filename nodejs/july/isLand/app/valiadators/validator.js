@@ -1,6 +1,7 @@
 const { LinValidator, Rule } = require('../../core/lin-validator-v2')
 const { User } = require('../models/user')
 
+// 正整数校验
 class PositiveIntegerValidator extends LinValidator {
   constructor () {
     super();
@@ -54,7 +55,6 @@ class RegisterValidator extends LinValidator {
       throw new Error('email 已存在!')
     }
   }
-
 
 }
 
