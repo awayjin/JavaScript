@@ -115,3 +115,9 @@ utf8mb4 utf8mb4_general_ci
 ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是"对象-关系映射"（Object/Relational Mapping）
 
 模型是 Sequelize 的本质. 模型是代表数据库中表的抽象. 
+
+### 盐与密码加密
+```javascript
+const salt = bcrypt.genSaltSync(10)
+const pwd = bcrypt.hashSync(v.get('body.password2'), salt)
+```

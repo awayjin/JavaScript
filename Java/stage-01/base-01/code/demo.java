@@ -32,6 +32,29 @@ public class demo {
     float num3 = 4L;
     System.out.println(num3);
 
+    // 强制类型转换
+    float num4 = (float) 100L;
+    System.out.println(num4);
+
+
+    // 强制类型转换，注意事项
+    byte num5 = 50;
+    byte num6 = 60;
+//    byte result = num5 + num6;  // wrong
+    int result = num5 + num6;  // wrong
+    System.out.println(result);
+
+    char charA = 'A';
+    // charA 转换成数值了
+    System.out.println(charA + 0); // 65
+
+    char chara = 'a';
+    System.out.println(chara + 0); // 97
+
+    char char0 = '0';
+    System.out.println(char0 + 0); // 48
+
+
 
   }
 }

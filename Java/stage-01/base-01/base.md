@@ -88,3 +88,41 @@ float类型：建议数据后加F表示。
 
 ### 类型转换
 数据类型转换_自动转换: 数据范围从小到大。
+
+1. 强制类型转换一般不推荐使用，因为有可能发生精度损失、数据溢出。
+	
+2. byte/short/char这三种类型都可以发生数学运算，例如加法“+”.
+
+3. byte/short/char这三种类型在运算的时候，都会被首先提升成为int类型，然后再计算。
+
+4. boolean类型不能发生数据类型转换
+
+### ASCII 编码表
+
+48 > 0, 65 -> A, 97 -> a
+
+数字和字符的对照关系表（编码表）：
+
+ASCII码表：American Standard Code for Information Interchange，美国信息交换标准代码。
+
+Unicode码表：万国码。也是数字和符号的对照关系，开头0-127部分和ASCII完全一样，但是从128开始包含有更多字符。
+
+```
+// 强制类型转换，注意事项
+byte num5 = 50;
+byte num6 = 60;
+//    byte result = num5 + num6;  // wrong
+int result = num5 + num6;  // wrong
+System.out.println(result);
+
+char charA = 'A';
+// charA 转换成数值了
+System.out.println(charA + 0); // 65
+
+char chara = 'a';
+System.out.println(chara + 0); // 97
+
+char char0 = '0';
+System.out.println(char0 + 0); // 48
+
+```

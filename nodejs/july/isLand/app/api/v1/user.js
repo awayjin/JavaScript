@@ -3,7 +3,8 @@ const router = new Router({
   prefix: '/v1/user'
 })
 const { RegisterValidator } = require('../../valiadators/validator')
-const { User } = require('../../models/user')
+const { User } = require('../../models/user') // 模型， 创建表
+const bcrypt = require('bcryptjs') // 加密工具
 
 router.post('/register', async (ctx, next) => {
   console.log('ctx.body.email:', ctx.request.body.email)
@@ -17,9 +18,14 @@ router.post('/register', async (ctx, next) => {
 
   const v = await new RegisterValidator().validate(ctx)
 
+  // 位数，成本
+  // 明文，加密 不同，彩虹攻击
+  const salt = bcrypt.genSaltSync(10)
+  const pwd = bcrypt.hashSync(v.get('body.password2'), salt)
+
   const user = {
     email: v.get('body.email'),
-    password: v.get('body.password2'),
+    password: pwd,
     nickname: v.get('body.nickname')
   }
 
