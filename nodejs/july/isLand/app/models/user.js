@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs') // 加密工具
 // 数据迁移 SQL 更新 风险
 const { Sequelize, Model } = require('sequelize')
 const { sequelize } = require('../../core/db')
@@ -19,7 +20,16 @@ User.init({
     type: Sequelize.STRING(128),
     unique: true
   },
-  password: Sequelize.STRING,
+  password: {
+    type: Sequelize.STRING,
+    set (val) {
+      // 位数，成本
+      // 明文，加密 不同，彩虹攻击
+      const salt = bcrypt.genSaltSync(10)
+      const pwd = bcrypt.hashSync(val, salt)
+      this.setDataValue('password', pwd)
+    }
+  },
   openid: {
     type: Sequelize.STRING(64),
     unique: true

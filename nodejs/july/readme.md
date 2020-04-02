@@ -121,3 +121,5 @@ ORM 就是通过实例对象的语法，完成关系型数据库的操作的技�
 const salt = bcrypt.genSaltSync(10)
 const pwd = bcrypt.hashSync(v.get('body.password2'), salt)
 ```
+
+模型的set操作
