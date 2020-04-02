@@ -10,3 +10,7 @@
 git branch -r
 
 git checkout -b 本地分支名x origin/远程分支名x
+
+
+### Node.js 中 console 彩色
+ console.log('\033[42;30m DONE \033[40;32m C \033[0m')

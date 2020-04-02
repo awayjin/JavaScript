@@ -7,8 +7,31 @@
 </head>
 <body>
 
-<script>
+<a href="https://time.geekbang.org/column/article/80011"></a>
+js 对象分类(https://time.geekbang.org/column/article/80011)
 
+
+<script>
+  class Exception extends Error {
+    constructor (msg = 'why wrong', errorCode = '10001', code = '400') {
+      super()
+      this.msg = msg
+      this.errorCode = errorCode
+      this.code = code
+    }
+  }
+
+  try {
+    a
+  } catch (e) {
+    let e1 = new Exception()
+    console.log('e1:', e1)
+    throw e1
+  }
+</script>
+
+
+<script>
   var set = new Set();
   var objects = [
     eval,
@@ -61,20 +84,15 @@
   objects.forEach(o => set.add(o));
 
   console.log('objects start:' + objects.length)
+
   for(var i = 0; i < objects.length; i++) {
     var o = objects[i]
     for(var p of Object.getOwnPropertyNames(o)) {
       var d = Object.getOwnPropertyDescriptor(o, p)
       if( (d.value !== null && typeof d.value === "object") || (typeof d.value === "function"))
-        console.log('----d----:' + 'bool:' + typeof d.value)
-        console.log(d)
-        console.log('o:')
-        console.log(o)
-        // debugger
-      if(!set.has(d.value))
+        if(!set.has(d.value))
           set.add(d.value), objects.push(d.value);
       if( d.get )
-        // debugger
         if(!set.has(d.get))
           set.add(d.get), objects.push(d.get);
       if( d.set )
@@ -94,9 +112,9 @@
     for (var value of Object.getOwnPropertyNames(arr)) {
 
       var d = Object.getOwnPropertyDescriptor(arr, value)
-      console.log('------1...-------value:' + value + '----d.value:' + d.value + ', d.get:' + d.get)
-      console.log(d)
-      console.log('         \n')
+      // console.log('------1...-------value:' + value + '----d.value:' + d.value + ', d.get:' + d.get)
+      // console.log(d)
+      // console.log('         \n')
       if (d.get) break
 
       // console.log(p)
