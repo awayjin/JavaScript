@@ -1,5 +1,6 @@
 const { LinValidator, Rule } = require('../../core/lin-validator-v2')
 const { User } = require('../models/user')
+const { LoginType } = require('../lib/enum')
 
 // 正整数校验
 class PositiveIntegerValidator extends LinValidator {
@@ -55,10 +56,43 @@ class RegisterValidator extends LinValidator {
       throw new Error('email 已存在!')
     }
   }
-
 }
+
+// 令牌校验
+class TokenValidator extends LinValidator {
+  constructor () {
+    super();
+    this.account = [
+      new Rule('isLength', '不符合账号规则, 4到32个字符', {
+        min: 4,
+        max: 32
+      })
+    ]
+    // 密码可传可不传
+    this.secret = [
+      new Rule('isOptional'),
+      new Rule('isLength', '需要6-128个字符', {
+        min: 6,
+        max: 128
+      })
+    ]
+  }
+
+  // 校验是否我们定义的类型
+  validateLoginType (vals) {
+    if (!vals.body.type) {
+      throw new Error('type 是必须参数')
+    }
+
+    if (!LoginType.isThisType(vals.body.type)) {
+      throw new Error('type 参数不合法')
+    }
+  }
+}
+
 
 module.exports = {
   PositiveIntegerValidator,
-  RegisterValidator
+  RegisterValidator,
+  TokenValidator
 }
