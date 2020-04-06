@@ -4,7 +4,24 @@ const { Sequelize, Model } = require('sequelize')
 const { sequelize } = require('../../core/db')
 
 class User extends Model {
-
+  // 静态方法
+  static async verifyEmailPassword (email, plainPassword) {
+    const user = await User.findOne({
+      where: {
+        email
+      }
+    })
+    console.log('---> user:', user)
+    if (!user) {
+      throw new global.errors.AuthFailed('账号不存在')
+    }
+    // 对比密码
+    const correct = bcrypt.compareSync(String(plainPassword), user.password)
+    if (!correct) {
+      throw new global.errors.AuthFailed('密码不正确')
+    }
+    return user
+  }
 }
 
 // 模型相当于表

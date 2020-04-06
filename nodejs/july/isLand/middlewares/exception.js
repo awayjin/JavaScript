@@ -1,4 +1,4 @@
-const { HttpException, ParameterException } = require('../core/http-exception')
+const { HttpException } = require('../core/http-exception')
 
 // 全局异常处理中间件
 const catchError = async (ctx, next) => {

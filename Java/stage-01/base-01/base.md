@@ -97,6 +97,16 @@ float类型：建议数据后加F表示。
 
 4. boolean类型不能发生数据类型转换
 
+```
+char a = 48; // 0
+char b = 65; // A
+char c = 97; // a
+
+System.out.println(a);
+System.out.println(b);
+System.out.println(c);
+```
+
 ### ASCII 编码表
 
 48 > 0, 65 -> A, 97 -> a
@@ -126,3 +136,8 @@ char char0 = '0';
 System.out.println(char0 + 0); // 48
 
 ```
+
+### 语法
+switch后面小括号当中只能是下列数据类型：
+基本数据类型：byte/short/char/int
+引用数据类型：String字符串、enum枚举

@@ -70,7 +70,7 @@ class TokenValidator extends LinValidator {
     ]
     // 密码可传可不传
     this.secret = [
-      new Rule('isOptional'),
+      new Rule('isOptional'), // 可选
       new Rule('isLength', '需要6-128个字符', {
         min: 6,
         max: 128
