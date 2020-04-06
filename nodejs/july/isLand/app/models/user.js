@@ -11,7 +11,7 @@ class User extends Model {
         email
       }
     })
-    console.log('---> user:', user)
+    // console.log('---> user:', user)
     if (!user) {
       throw new global.errors.AuthFailed('账号不存在')
     }
@@ -60,7 +60,6 @@ User.init({
 
 // 定义的模型是类本身
 // console.log(User === sequelize.models.User); // true
-
 
 module.exports = {
   User

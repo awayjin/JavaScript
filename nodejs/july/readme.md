@@ -123,3 +123,8 @@ const pwd = bcrypt.hashSync(v.get('body.password2'), salt)
 ```
 
 模型的set操作
+
+
+### HttpBasicAuth传递令牌和验证令牌
+
+

@@ -27,9 +27,9 @@ router.post('/', async (ctx) => {
 
 async function emailLogin (account, secret) {
   // throw new global.errors.Success('email 登录', 0)
-  await User.verifyEmailPassword(account, secret)
+  const user = await User.verifyEmailPassword(account, secret)
   // 验证通过生成 token
-  return generateToken(User.id, 2)
+  return generateToken(user.id, 2)
 }
 
 module.exports = router

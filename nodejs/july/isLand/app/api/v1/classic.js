@@ -1,20 +1,17 @@
-const router = new (require('koa-router'))
+const Router = require('koa-router')
+const router = new Router({
+  prefix: '/v1/classic'
+})
 // const { HttpException, ParameterException } = require('../../../core/http-exception')
 const { PositiveIntegerValidator } = require('../../valiadators/validator')
+const { Auth } = require('../../../middlewares/auth')
 
 // router.get('/v1/classic/latest', async (ctx, next) => {
-router.post('/v1/:id/classic/latest', async (ctx, next) => {
-  const path = ctx.params
-  const query = ctx.request.query
-  const header = ctx.request.header
-  const body = ctx.request.body // koa-bodyparser
-
-  console.log('path:', path)
-  console.log('query:', query)
-  console.log('header:', header)
-  console.log('body:', body)
-  // throw new Error('API Exception')
-
+router.get('/latest', new Auth().m, async (ctx, next) => {
+  // const path = ctx.params
+  // const query = ctx.request.query
+  // const header = ctx.request.header
+  // const body = ctx.request.body // koa-bodyparser
   // if (true) {
   //   // const error = new Error('Why wrong?')
   //   // error.errorCode = 10001
@@ -28,12 +25,14 @@ router.post('/v1/:id/classic/latest', async (ctx, next) => {
   //   throw error
   // }
 
-  const v = await new PositiveIntegerValidator()
-  v.validate(ctx)
+  // const v = await new PositiveIntegerValidator()
+  // v.validate(ctx)
+  //
+  // ctx.body = {
+  //   key: 'classic'
+  // }
 
-  ctx.body = {
-    key: 'classic'
-  }
+  ctx.body = ctx.auth.uid
 
 })
 

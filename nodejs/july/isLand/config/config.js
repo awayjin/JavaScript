@@ -11,6 +11,6 @@ module.exports = {
   },
   security:{
     secretKey:"abcdefg",
-    expiresIn:60*60*24*30
+    expiresIn: 60 * 60
   }
 }
