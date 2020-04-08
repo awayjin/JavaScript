@@ -127,4 +127,18 @@ const pwd = bcrypt.hashSync(v.get('body.password2'), salt)
 
 ### HttpBasicAuth传递令牌和验证令牌
 
+// 原生 ctx.req
+      // koa 封装过 ctx.request
+      
+### 小程序openid登录系统
+code 
+openid
+appSecret
+
+AppID(小程序ID) 
+AppSecret(小程序密钥)
+
+auth.code2Session:
+通过 wx.login 接口获得临时登录凭证 code 后传到开发者服务器调用此接口完成登录流程。
+
 

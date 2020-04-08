@@ -3,6 +3,7 @@ const { TokenValidator } = require('../../valiadators/validator') // token 验�
 const { LoginType } = require('../../lib/enum') // 登录类型
 const { User } = require('../../models/user') // 模型数据表
 const { generateToken } = require('../../../core/util') // token 生成
+const { Auth } = require('../../../middlewares/auth')
 
 const router = new Router({
   prefix: '/v1/token'
@@ -13,7 +14,7 @@ router.post('/', async (ctx) => {
   let token
   switch (v.get('body.type')) {
     case LoginType.USER_EMAIL: // email 登录 - 101
-     token = await emailLogin(v.get('body.account'), v.get('body.secret'))
+      token = await emailLogin(v.get('body.account'), v.get('body.secret'))
       break
     case LoginType.USER_MINI_PROGRAM: // 小程序登录 - 100
       break
@@ -28,8 +29,9 @@ router.post('/', async (ctx) => {
 async function emailLogin (account, secret) {
   // throw new global.errors.Success('email 登录', 0)
   const user = await User.verifyEmailPassword(account, secret)
+  console.log('Auth.USER:', Auth.USER)
   // 验证通过生成 token
-  return generateToken(user.id, 2)
+  return generateToken(user.id, Auth.USER)
 }
 
 module.exports = router

@@ -48,6 +48,12 @@ Page({
    */
   onLoad: function (options) {
     console.log('network.js onload 监听页面加载. app:', app)
+    const code = wx.login({
+      success(res) {
+        console.log('success:', res)
+      }
+    })
+    console.log('aa:', code)
   },
 
 
