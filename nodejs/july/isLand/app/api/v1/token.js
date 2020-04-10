@@ -4,6 +4,7 @@ const { LoginType } = require('../../lib/enum') // 登录类型
 const { User } = require('../../models/user') // 模型数据表
 const { generateToken } = require('../../../core/util') // token 生成
 const { Auth } = require('../../../middlewares/auth')
+const { WXManger} = require('../../services/wx')
 
 const router = new Router({
   prefix: '/v1/token'
@@ -17,6 +18,8 @@ router.post('/', async (ctx) => {
       token = await emailLogin(v.get('body.account'), v.get('body.secret'))
       break
     case LoginType.USER_MINI_PROGRAM: // 小程序登录 - 100
+      // 代表微信小程序的 code
+      token = await WXManger.codeToToken(v.get('body.account'))
       break
     default:
       throw new global.errors.ParameterException('没有相应的处理函数')

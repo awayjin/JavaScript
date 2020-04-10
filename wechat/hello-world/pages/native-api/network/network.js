@@ -36,21 +36,43 @@ Page({
   },
 
   goToSwiper (e) {
-    console.log('e:', e)
+    // console.log('e:', e)
     wx.switchTab({
       url: '../../swiper/swiper'
     })
-
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('network.js onload 监听页面加载. app:', app)
+    // console.log('network.js onload 监听页面加载. app:', app)
     const code = wx.login({
       success(res) {
-        console.log('success:', res)
+        console.log('res.code:', res.code)
+        if (res.code) {
+          //发起网络请求
+          wx.request({
+            url: 'http://localhost:3000/v1/token',
+            data: {
+              account: res.code,
+              type: 100
+            },
+            header: {
+              'content-type': 'application/json' // 默认值
+            },
+            success (res) {
+              console.log('success:', res)
+            },
+            fail (res) {
+              console.log('fail:', res)
+            },
+            method: 'POST'
+          })
+          
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
       }
     })
     console.log('aa:', code)
@@ -61,7 +83,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log('network.js onReady-监听页面初次渲染完成 app:', app)
+    // console.log('network.js onReady-监听页面初次渲染完成 app:', app)
 
   },
 
