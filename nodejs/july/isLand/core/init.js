@@ -24,7 +24,7 @@ class InitManager {
     }
   }
 
-  // 挂载全局异常
+  // 挂载异常类
   static loadHttpException () {
     const errors = require('./http-exception')
     global.errors = errors

@@ -6,14 +6,14 @@ const { RegisterValidator } = require('../../valiadators/validator')
 const { User } = require('../../models/user') // 模型， 创建表
 
 router.post('/register', async (ctx, next) => {
-  console.log('ctx.body.email:', ctx.request.body.email)
-  // 查询 email
-  const email = await User.findOne({
-    where: {
-      email: ctx.request.body.email
-    }
-  })
-  console.log('email:', email)
+  // console.log('ctx.body.email:', ctx.request.body.email)
+  // // 查询 email
+  // const email = await User.findOne({
+  //   where: {
+  //     email: ctx.request.body.email
+  //   }
+  // })
+  // console.log('email:', email)
 
   const v = await new RegisterValidator().validate(ctx)
 
@@ -22,12 +22,11 @@ router.post('/register', async (ctx, next) => {
     password: v.get('body.password2'),
     nickname: v.get('body.nickname')
   }
-
-  console.log(v.get('body.email'))
-  console.log(v.get('query.email'))
+  // console.log(v.get('body.email'))
+  // console.log(v.get('query.email'))
   // console.log(v.data.body)
 
-  const r = await User.create(user)
+  await User.create(user)
 
   // 成功也抛出
   throw new global.errors.Success()

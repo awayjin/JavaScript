@@ -8,16 +8,18 @@ class HttpException extends Error {
   }
 }
 
+// 参数错误
 class ParameterException extends HttpException {
   constructor (msg = 'why wrong', errorCode = 10000) {
     super();
     this.msg = msg
-    this.errorCode = errorCode
+    this.errorCode = errorCode || '参数错误'
     this.code = 400
   }
 }
 
 // 成功
+// 201 Created 是一个代表成功的应答状态码，表示请求已经被成功处理，并且创建了新的资源
 class Success extends HttpException {
   constructor (msg, errorCode) {
     super();

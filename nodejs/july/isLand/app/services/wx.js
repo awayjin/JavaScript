@@ -19,9 +19,11 @@ class WXManger {
       throw new global.errors.AuthFailed('openid 获取失败')
     }
     const errcode = result.data.errcode
-    console.log('wx.js result.data:', result.data)
-    if (errcode !== 0) {
-      throw new global.errors.AuthFailed(`openid 获取失败: ${errcode}`)
+    const errmsg = result.data.errmsg
+    console.log('app/services/wx.js result.data:', result.data)
+    // if (errcode !== 0) { // 微信文档有点问题
+    if (errcode) {
+      throw new global.errors.AuthFailed(`openid 获取失败: ${errcode}, errmsg: ${errmsg}`)
     }
     // openid
     // 档案 user uid openid 长

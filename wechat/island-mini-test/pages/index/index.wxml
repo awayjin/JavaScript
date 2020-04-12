@@ -1,0 +1,16 @@
+<div class='block'>
+  <l-button size="long" bind:lintap="onGetToken">btn</l-button>
+</div>
+
+
+<div class='block'>
+<button bind:tap="onGetToken">获取 token</button>
+</div>
+
+<div class='block'>
+<button bind:tap="onVerifyToken">验证 token</button>
+</div>
+
+<div class='block'>
+<button bind:tap="onDemo">demo 方法</button>
+</div>

@@ -1,4 +1,4 @@
-
+// 枚举登录类型
 
 function isThisType (val) {
   for (let key in this) {

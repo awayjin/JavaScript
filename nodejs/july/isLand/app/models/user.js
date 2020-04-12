@@ -42,7 +42,7 @@ class User extends Model {
 
 }
 
-// 模型相当于表
+// 创建表，模型相当于表
 User.init({
   // 模型属性
   id: {
