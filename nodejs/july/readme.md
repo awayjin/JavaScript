@@ -128,7 +128,7 @@ const pwd = bcrypt.hashSync(v.get('body.password2'), salt)
 ### HttpBasicAuth传递令牌和验证令牌
 
 // 原生 ctx.req
-      // koa 封装过 ctx.request
+// koa 封装过 ctx.request
       
 ### 小程序openid登录系统
 code 

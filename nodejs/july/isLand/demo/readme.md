@@ -33,3 +33,7 @@ app.listen(3000)
 - Promise
     - async
     - await
+    
+## require-directory 遍历目录
+
+递归地遍历指定的目录，要求对每个文件使用（），并返回包含这些模块的嵌套哈希结构。
