@@ -12,8 +12,8 @@ class HttpException extends Error {
 class ParameterException extends HttpException {
   constructor (msg = 'why wrong', errorCode = 10000) {
     super();
-    this.msg = msg
-    this.errorCode = errorCode || '参数错误'
+    this.msg = msg || '参数错误'
+    this.errorCode = errorCode
     this.code = 400
   }
 }
