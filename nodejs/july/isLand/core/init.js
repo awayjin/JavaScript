@@ -4,9 +4,9 @@ const requireDirectory = require('require-directory')
 class InitManager {
   static init (app) {
     InitManager.app = app
+    InitManager.loadConfig()
     InitManager.initLoadRouter()
     InitManager.loadHttpException()
-    InitManager.loadConfig()
   }
 
   // 导入路由

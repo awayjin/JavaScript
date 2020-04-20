@@ -1,8 +1,5 @@
 const Router = require('koa-router')
-const {
-  TokenValidator,
-  NotEmptyValidator
-} = require('../../valiadators/validator') // token 验证
+const { TokenValidator,  NotEmptyValidator } = require('../../valiadators/validator') // token 验证
 const { LoginType } = require('../../lib/enum') // 登录类型
 const { User } = require('../../models/user') // 模型数据表
 const { generateToken } = require('../../../core/util') // token 生成
@@ -12,6 +9,7 @@ const { WXManger} = require('../../services/wx')
 const router = new Router({
   prefix: '/v1/token'
 })
+// 获取token
 router.post('/', async (ctx) => {
   const v = await new TokenValidator().validate(ctx)
 
@@ -47,6 +45,7 @@ async function emailLogin (account, secret) {
   // throw new global.errors.Success('email 登录', 0)
   const user = await User.verifyEmailPassword(account, secret)
   console.log('Auth.USER:', Auth.USER)
+  // console.log('实例user:', user)
   // 验证通过生成 token
   return generateToken(user.id, Auth.USER)
 }

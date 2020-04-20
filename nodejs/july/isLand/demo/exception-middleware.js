@@ -9,8 +9,8 @@ const exceptionMiddleware = async (ctx, next) => {
     console.log('e:', e)
     ctx.body = {
       message: e.message,
-      errorCode: e.errorCode,
-      code: e.code,
+      errorCode: e.errorCode || '0000',
+      code: e.code || '00',
       stack: e.stack
     }
   }
@@ -31,12 +31,12 @@ class HttpException extends Error {
   }
 }
 
-const e1 = new HttpException('router exception.')
-console.log(e1)
+// const e1 = new HttpException('router exception.')
+// console.log(e1)
 
 router.get('/exception', async ctx => {
-  // throw new Error('router exception.')
-  throw new HttpException('router exception.')
+  throw new Error('router exception.')
+  // throw new HttpException('router exception.')
 })
 
 app.use(router.routes())

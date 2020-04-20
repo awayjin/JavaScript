@@ -16,8 +16,8 @@ module.exports = {
   },
   // 微信
   wx: {
-    appId: 'wxf9ecb4f7a83b6bc7',
-    appSecret: '5d9e5f43dfe3613fd945ec2da8c9b3b5',
+    appId: 'wxf9ecb4f7a83b6bc7', // 小程序 appId
+    appSecret: '5d9e5f43dfe3613fd945ec2da8c9b3b5', // 小程序 appSecret
     loginUrl: 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code'
   }
 }

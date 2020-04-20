@@ -2,8 +2,8 @@ const Router = require('koa-router')
 const router = new Router({
   prefix: '/v1/user'
 })
-const { RegisterValidator } = require('../../valiadators/validator')
 const { User } = require('../../models/user') // 模型， 创建表
+const { RegisterValidator } = require('../../valiadators/validator')
 
 router.post('/register', async (ctx, next) => {
   // console.log('ctx.body.email:', ctx.request.body.email)
@@ -26,7 +26,7 @@ router.post('/register', async (ctx, next) => {
   // console.log(v.get('query.email'))
   // console.log(v.data.body)
 
-  await User.create(user)
+  await User.create(user) // 向表中插入一条数据
 
   // 成功也抛出
   throw new global.errors.Success()
