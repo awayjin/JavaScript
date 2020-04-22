@@ -1,4 +1,16 @@
 Page({
+  // 获取最新期刊
+  onGetLatest () {
+    wx.request({
+      url: 'http://localhost:3000/v1/classic/latest',
+      succes (res) {
+        console.log('res:', res)
+      },
+      fail (err) {
+        console.log('err:', err)
+      }
+    })
+  },
   onDemo () {
     console.log('new Set', new Set([11, 22, 22, 11]))
     console.log('startsWith', 'aabbcc'.startsWith('a'))

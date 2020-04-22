@@ -14,3 +14,7 @@
 <div class='block'>
 <button bind:tap="onDemo">demo 方法</button>
 </div>
+
+<div class='block'>
+<button bind:tap="onGetLatest">获取最新期刊</button>
+</div>

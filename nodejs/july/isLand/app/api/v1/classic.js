@@ -5,6 +5,7 @@ const router = new Router({
 // const { HttpException, ParameterException } = require('../../../core/http-exception')
 const { PositiveIntegerValidator } = require('../../valiadators/validator')
 const { Auth } = require('../../../middlewares/auth')
+const { Flow } = require('../../models/flow')
 
 // router.get('/v1/classic/latest', async (ctx, next) => {
 router.get('/latest', new Auth().m, async (ctx, next) => {
@@ -32,8 +33,12 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
   //   key: 'classic'
   // }
 
-  ctx.body = ctx.auth.uid
+  // ctx.body = ctx.auth.uid
 
+  const flow = Flow.findOne({
+    order: ['index', 'desc']
+  })
+  ctx.body = flow
 })
 
 module.exports = router
