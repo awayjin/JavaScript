@@ -5,7 +5,7 @@ const classicFields = {
   image: Sequelize.STRING,
   content: Sequelize.STRING,
   pubdate: Sequelize.DATEONLY,
-  fav_nums: INTEGER,
+  fav_nums: Sequelize.INTEGER,
   title: Sequelize.STRING,
   type: Sequelize.TINYINT
 }
@@ -15,7 +15,7 @@ class Movie extends Model {
 }
 Movie.init(classicFields, {
   sequelize,
-  tableName: 'movies',
+  tableName: 'movie',
   freezeTableName: true
 })
 
@@ -24,7 +24,7 @@ class Sentence extends Model {
 }
 Sentence.init(classicFields, {
   sequelize,
-  tableName: 'sentences',
+  tableName: 'sentence',
   freezeTableName: true
 })
 
@@ -37,6 +37,13 @@ const musicFields = Object.assign({
 }, classicFields)
 Sentence.init(musicFields, {
   sequelize,
-  tableName: 'musics',
+  tableName: 'music',
   freezeTableName: true
 })
+
+
+module.exports = {
+  Movie,
+  Sentence,
+  Music
+}

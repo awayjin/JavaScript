@@ -1,10 +1,23 @@
+import { Base64 } from 'js-base64'
+
 Page({
+  encodeBasic64() {
+    const token = wx.getStorageSync('token')
+    const base64 = Base64.encode(token + ':')
+    // Authorization:Basic base64(account:password)
+    return 'Basic ' + base64
+  },
   // 获取最新期刊
   onGetLatest () {
     wx.request({
       url: 'http://localhost:3000/v1/classic/latest',
-      succes (res) {
-        console.log('res:', res)
+      method: 'get',
+      header: {
+        Authorization: this.encodeBasic64()
+        // Authorization: this.onDemo()
+      },
+      success (res) {
+        console.log('res.data:', res.data)
       },
       fail (err) {
         console.log('err:', err)
@@ -14,6 +27,7 @@ Page({
   onDemo () {
     console.log('new Set', new Set([11, 22, 22, 11]))
     console.log('startsWith', 'aabbcc'.startsWith('a'))
+    return 444
   },
   // 获取 token
   onGetToken () {

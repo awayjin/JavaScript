@@ -18,3 +18,9 @@ SET GLOBAL sql_mode="STRICT_ALL_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ZERO_IN_DAT
 -- 重启数据库
 bash mysql.server restart
 
+SELECT `id`, `index`, `art_id`, `type` FROM `flow` AS `Flow` ORDER BY `Flow`.`index` DESC LIMIT 1
+
+
+SELECT * FROM `flow` AS `Flow` ORDER BY `Flow`.`index` LIMIT 1;
+
+

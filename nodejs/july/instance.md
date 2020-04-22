@@ -5,3 +5,18 @@
 - 实体表： user, 期刊：movie, sentence, music. 扩展性，相似性
 
 - 业务表：Flow. 抽象，记录业务，解决业务问题.
+
+## js-base64 认证: 小程序中携带令牌
+```
+{
+    header: {
+       Authorization: this._encode()
+     },
+     _encode () {
+       const token = wx.getStorageSync('token')
+       const base64 = Base64.encode(token + ':')
+       // Authorization:Basic base64(account:password)
+       return 'Basic ' + base64
+     }
+}
+```

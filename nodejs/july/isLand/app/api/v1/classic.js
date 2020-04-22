@@ -6,6 +6,7 @@ const router = new Router({
 const { PositiveIntegerValidator } = require('../../valiadators/validator')
 const { Auth } = require('../../../middlewares/auth')
 const { Flow } = require('../../models/flow')
+const { Art } = require('../../models/art')
 
 // router.get('/v1/classic/latest', async (ctx, next) => {
 router.get('/latest', new Auth().m, async (ctx, next) => {
@@ -35,10 +36,17 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
 
   // ctx.body = ctx.auth.uid
 
-  const flow = Flow.findOne({
-    order: ['index', 'desc']
+  const flow = await Flow.findOne({
+    order: [
+      ['index', 'desc']
+    ]
   })
-  ctx.body = flow
+  const art = await Art.getData(flow.art_id, flow.type)
+  // art.setDataValue('index', flow.index)
+  art.dataValues.index = flow.index
+  // console.log('flow:', flow)
+  // console.log('art:', art)
+  ctx.body = art
 })
 
 module.exports = router
