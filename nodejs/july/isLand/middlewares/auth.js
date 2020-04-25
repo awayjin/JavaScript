@@ -15,6 +15,7 @@ class Auth {
       // koa 封装过 ctx.request
       const userToken = basicAuth(ctx.req)
       // ctx.body = token
+      console.log('userToken:', userToken)
 
       let errorMsg = 'token 不合法'
       // 验证 token 合法性

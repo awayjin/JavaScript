@@ -18,3 +18,7 @@
 <div class='block'>
 <button bind:tap="onGetLatest">获取最新期刊</button>
 </div>
+
+<div class='block'>
+  <l-button bind:lintap="onLike">点赞</l-button>
+</div>

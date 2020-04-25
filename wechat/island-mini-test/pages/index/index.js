@@ -7,6 +7,23 @@ Page({
     // Authorization:Basic base64(account:password)
     return 'Basic ' + base64
   },
+  // 点赞
+  onLike() {
+    wx.request({
+      url: 'http://localhost:3000/v1/favor',
+      method: 'post',
+      header: {
+        Authorization: this.encodeBasic64()
+        // Authorization: this.onDemo()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
   // 获取最新期刊
   onGetLatest () {
     wx.request({

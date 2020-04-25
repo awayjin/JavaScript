@@ -22,5 +22,10 @@ public class array {
 
     long lon = arrLong[1];
     System.out.printf("num:" + lon);
+
+    int[] array = new int[3];
+    array[1] = 222;
+    array[2] = 111;
+    System.out.println("dd:" + array[0]);
   }
 }
