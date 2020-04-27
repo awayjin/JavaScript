@@ -1,5 +1,6 @@
 const { sequelize } = require('../../core/db')
 const { Sequelize, Model } = require('sequelize')
+const { Art } = require('./art')
 
 // 点赞业务表
 class Favor extends Model {
@@ -19,6 +20,29 @@ class Favor extends Model {
     if (favor) {
       throw new global.config.errors.LikeError()
     }
+
+    // 使用事务
+    const t = await sequelize.transaction()
+    try {
+      await Favor.create({
+        art_id,
+        type,
+        id
+      }, { transaction: t })
+      const art = await Art.getData(art_id, type)
+      // https://github.com/demopark/sequelize-docs-Zh-CN/blob/master/core-concepts/model-instances.md
+      art.increment('fav_nums', {
+        by: 1,
+        transaction: t
+      })
+    } catch (e) {
+      await t.rollback()
+    }
+    return t
+  }
+
+  static async dislike (art_id, type, id) {
+
   }
 }
 

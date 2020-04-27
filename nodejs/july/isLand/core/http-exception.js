@@ -69,6 +69,7 @@ class DislikeError extends HttpException {
     this.errorCode = errorCode || '60002'
   }
 }
+
 module.exports = {
   HttpException,
   ParameterException,
