@@ -41,5 +41,37 @@ public class demo02Array {
     arrayC = new int[8];
     System.out.println("arrayC " + arrayC.length);
 
+
+    int[] array = {10, 22, 33 , 44};
+    printArray(array);
+    int[] array2 = {55, 66, 77 };
+    printArray(array2);
+
+  }
+
+  static void printArray (int[] array) {
+    System.out.println("==========");
+    for (int i = 0; i < array.length; i++) {
+      System.out.println("array " + i + ", val:" + array[i]);
+    }
+
+    int maxTemp = array[0];
+    for (int i = 0; i < array.length; i++) {
+      if (array[i] > maxTemp) {
+        maxTemp = array[i];
+      }
+    }
+    System.out.println("最大值 " + maxTemp);
+    System.out.println("==========");
+
+    for (int min =0, max = array.length - 1; min < max; min++, max--) {
+      int temp = array[min];
+      array[min] = array[max];
+      array[max] = temp;
+    }
+    for (int i = 0; i < array.length; i++) {
+      System.out.println("array " + i + ", val:" + array[i]);
+    }
+
   }
 }

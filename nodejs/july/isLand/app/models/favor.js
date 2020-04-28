@@ -4,7 +4,7 @@ const { Art } = require('./art')
 
 // 点赞业务表
 class Favor extends Model {
-  static async like (art_id, type, id) {
+  static async like (art_id, type, uid) {
     // 1. 添加记录
     // 2. classic fav_nums
     // 数据库事务 - 数据一致性
@@ -13,36 +13,73 @@ class Favor extends Model {
       where: {
         art_id,
         type,
-        id
+        uid
       }
     })
 
     if (favor) {
-      throw new global.config.errors.LikeError()
+      throw new global.errors.LikeError()
     }
 
-    // 使用事务
-    const t = await sequelize.transaction()
-    try {
+    return sequelize.transaction(async t => {
       await Favor.create({
         art_id,
         type,
-        id
-      }, { transaction: t })
-      const art = await Art.getData(art_id, type)
-      // https://github.com/demopark/sequelize-docs-Zh-CN/blob/master/core-concepts/model-instances.md
-      art.increment('fav_nums', {
+        uid
+      }, {
+        transaction: t
+      })
+      const art = await Art.getData(art_id, type, false)
+      await art.increment('fav_nums', {
         by: 1,
         transaction: t
       })
-    } catch (e) {
-      await t.rollback()
-    }
-    return t
+    })
+
+    // 使用事务
+    // const t = await sequelize.transaction()
+    // try {
+    //   await Favor.create({
+    //     art_id,
+    //     type,
+    //     id
+    //   }, { transaction: t })
+    //   const art = await Art.getData(art_id, type)
+    //   // https://github.com/demopark/sequelize-docs-Zh-CN/blob/master/core-concepts/model-instances.md
+    //   await art.increment('fav_nums', {
+    //     by: 1,
+    //     transaction: t
+    //   })
+    //   return t
+    // } catch (e) {
+    //   await t.rollback()
+    // }
   }
 
-  static async dislike (art_id, type, id) {
-
+  // 取消点赞
+  static async dislike (art_id, type, uid) {
+    const favor = await Favor.findOne({
+      where: {
+        art_id,
+        type,
+        uid
+      }
+    })
+    if (!favor) {
+      throw new global.errs.DislikeError()
+    }
+    // Favor 表， favor 记录
+    return sequelize.transaction(async t => {
+      await favor.destroy({
+        force: true, // false 物理删除， true 还是软删除
+        transaction: t
+      })
+      const art = await Art.getData(art_id, type, false)
+      await art.decrement('fav_nums', {
+        by: 1,
+        transaction: t
+      })
+    })
   }
 }
 

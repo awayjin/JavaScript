@@ -9,6 +9,7 @@ function isThisType (val) {
   return false
 }
 
+// 登录类型
 const LoginType = {
   USER_MINI_PROGRAM: 100,
   USER_EMAIL: 101,
@@ -17,6 +18,17 @@ const LoginType = {
   isThisType
 }
 
+// 实体类型
+const ArtType = {
+  MOVIE:100,
+  MUSIC:200,
+  SENTENCE:300,
+  BOOK:400,
+  isThisType
+}
+
+
 module.exports = {
-  LoginType
+  LoginType,
+  ArtType
 }

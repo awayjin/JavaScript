@@ -1,6 +1,6 @@
 const { LinValidator, Rule } = require('../../core/lin-validator-v2')
 const { User } = require('../models/user')
-const { LoginType } = require('../lib/enum')
+const { LoginType, ArtType } = require('../lib/enum')
 console.log('validator', 22)
 
 // 正整数校验
@@ -113,7 +113,7 @@ function checkArtType(vals) {
   }
 }
 
-// 点赞验证
+// 点赞验证, art_id, type
 class LikeValidator extends PositiveIntegerValidator {
   constructor() {
     super()
