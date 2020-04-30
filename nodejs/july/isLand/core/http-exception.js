@@ -8,16 +8,18 @@ class HttpException extends Error {
   }
 }
 
+// 参数错误
 class ParameterException extends HttpException {
   constructor (msg = 'why wrong', errorCode = 10000) {
     super();
-    this.msg = msg
+    this.msg = msg || '参数错误'
     this.errorCode = errorCode
     this.code = 400
   }
 }
 
 // 成功
+// 201 Created 是一个代表成功的应答状态码，表示请求已经被成功处理，并且创建了新的资源
 class Success extends HttpException {
   constructor (msg, errorCode) {
     super();
@@ -47,10 +49,33 @@ class Forbidden extends HttpException {
   }
 }
 
+// 喜欢
+class LikeError extends HttpException {
+  constructor (msg, errorCode) {
+    super();
+    this.code = 403
+    this.msg = msg || '你已经点赞过'
+    this.errorCode = errorCode || '60001'
+  }
+}
+
+
+// 不喜欢
+class DislikeError extends HttpException {
+  constructor (msg, errorCode) {
+    super();
+    this.code = 403
+    this.msg = msg || '你取消了点赞'
+    this.errorCode = errorCode || '60002'
+  }
+}
+
 module.exports = {
   HttpException,
   ParameterException,
   Success,
   AuthFailed,
+  LikeError,
+  DislikeError,
   Forbidden
 }

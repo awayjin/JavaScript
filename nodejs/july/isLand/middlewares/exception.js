@@ -22,6 +22,8 @@ const catchError = async (ctx, next) => {
       throw e
     }
 
+    console.log('\033[40;32m isHttpException \033[0m:', isHttpException)
+    console.log('\033[40;32m exception 成功也抛出异常 \033[0m:', e)
     // 已知异常
     if (isHttpException) {
       ctx.body = {

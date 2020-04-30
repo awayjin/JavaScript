@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs') // 加密工具
 const { Sequelize, Model } = require('sequelize')
 const { sequelize } = require('../../core/db')
 
+console.log('user', 111)
+
 class User extends Model {
   // 静态方法
   static async verifyEmailPassword (email, plainPassword) {
@@ -22,9 +24,27 @@ class User extends Model {
     }
     return user
   }
+
+  // openid
+  static async getUserByOpenId (openid) {
+   const user = await User.findOne({
+      where: {
+        openid
+      }
+    })
+    return user
+  }
+
+  // register openid
+  static async registerByOpenid(openid) {
+    return await User.create({
+      openid
+    })
+  }
+
 }
 
-// 模型相当于表
+// 创建表，模型相当于表
 User.init({
   // 模型属性
   id: {
@@ -37,6 +57,7 @@ User.init({
     type: Sequelize.STRING(128),
     unique: true
   },
+  // 密码加密通过 bcrypt
   password: {
     type: Sequelize.STRING,
     set (val) {
@@ -54,8 +75,8 @@ User.init({
 }, {
   // 这是其他模型参数
   sequelize, // 我们需要传递连接实例
-  modelName: 'user' // 我们需要选择模型名称
-  // tableName: 'User' // 我们需要选择模型名称
+  modelName: 'users', // 模型名称
+  freezeTableName: true // 强制表名称等于模型名称, 停止 Sequelize 执行自动复数化
 })
 
 // 定义的模型是类本身

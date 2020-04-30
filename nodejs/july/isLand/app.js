@@ -4,7 +4,7 @@ const InitManager = require('./core/init')
 // post 的 body 解析
 const bodyParser = require('koa-bodyparser')
 app.use(bodyParser())
-// 全局异常中间件
+// 全局异常捕获中间件
 const catchError = require('./middlewares/exception')
 app.use(catchError)
 

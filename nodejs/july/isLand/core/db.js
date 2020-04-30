@@ -5,7 +5,7 @@ const {
   port,
   user,
   password
-} = require('../config/config').database
+} = global.config.database
 
 const sequelize = new Sequelize(dbName, user, password, {
   dialect: 'mysql',
@@ -15,7 +15,7 @@ const sequelize = new Sequelize(dbName, user, password, {
   logging: console.log,
   timezone: '+08:00',
   define: {
-
+    timestamps: false
   }
 })
 

@@ -4,9 +4,9 @@ const requireDirectory = require('require-directory')
 class InitManager {
   static init (app) {
     InitManager.app = app
+    InitManager.loadConfig()
     InitManager.initLoadRouter()
     InitManager.loadHttpException()
-    InitManager.loadConfig()
   }
 
   // 导入路由
@@ -24,7 +24,7 @@ class InitManager {
     }
   }
 
-  // 挂载全局异常
+  // 挂载全局异常类
   static loadHttpException () {
     const errors = require('./http-exception')
     global.errors = errors

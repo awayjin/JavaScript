@@ -3,6 +3,7 @@ const app = getApp()
 Page({
   // onLoad () {
   onLoad: function () {
+    
     console.log('routes.js onload. app:', app)
   },
 
