@@ -1,5 +1,4 @@
-
-## 洋葱模型
+## 1. 洋葱模型
 
 Koa.js 经典的 `洋葱模型` 中间件处理流程。
 
@@ -24,7 +23,7 @@ app.listen(3000)
 ```
 
 
-## 全局异常处理中间件
+## 2. 全局异常处理中间件
 
 - 异常处理
     - 已知异常
@@ -34,6 +33,17 @@ app.listen(3000)
     - async
     - await
     
-## require-directory 遍历目录
+### require-directory 遍历目录
 
 递归地遍历指定的目录，要求对每个文件使用（），并返回包含这些模块的嵌套哈希结构。
+
+## 3. 参数请求
+
+1. 路径 path, ctx.params
+2. 查询字符串 ctx.request.query
+3. 请求头 header: ctx.request.header
+4. 请求体 body json格式： ctx.request.body
+
+
+## 遗留问题：
+- http.IncomingMessage
