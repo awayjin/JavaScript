@@ -4,6 +4,7 @@ const chalk = require('chalk')
 const router = new KoaRouter({
   prefix: '/api/v1/user'
 })
+const { RegisterValidator } = require('./fe-validator.js')
 
 const exceptionMiddleware = async (ctx, next) => {
   try {
@@ -16,51 +17,10 @@ const exceptionMiddleware = async (ctx, next) => {
 }
 app.use(exceptionMiddleware)
 
-const validator = require('validator')
-class AwayValidator {
-  // take 4 request parameters in context
-  // 获取上下文中的4种请求参数 - paras
-  getContentReq (ctx) {
-    return {
-      path: ctx.params,
-      body: ctx.request.body,
-      query: ctx.request.query,
-      header: ctx.request.header,
-    }
-  }
-}
-class RegisterValidator extends AwayValidator {
-  constructor () {
-    super()
-    this.account = validator.isLength('str')
-    this.password1 = validator
-    this.password2 = this.password1
-  }
-  async validate (ctx) {
-    const params = await this.getContentReq(ctx)
-    const account = validator.isLength(params.body.account, {
-      min: 4,
-      max: 30
-    })
-    console.log('account:', chalk.bgCyanBright(account))
-    if (!account) {
-      throw new Error('4-30个字符')
-    }
-  }
-}
-
-//
+// 用户注册
 router.post('/:id/register', async (ctx, next) => {
-  console.log(chalk.bgCyan('ctx.request'))
-  console.log(ctx)
-  console.log(ctx.params)
-  console.log(ctx.request.body)
-  console.log(ctx.request.query)
-  console.log(ctx.request.header)
-  const v = new RegisterValidator().validate(ctx)
+  const v = await new RegisterValidator().validate(ctx)
   const query = ctx.request.query
-  // console.log(chalk.bgCyan(validator.isNumeric(query.type)))
-  // console.log('ctx.request.type: ', query.type)
   ctx.body = 'register'
 })
 
