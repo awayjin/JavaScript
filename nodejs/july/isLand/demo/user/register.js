@@ -10,6 +10,7 @@ const exceptionMiddleware = async (ctx, next) => {
   try {
     await next()
   } catch (e) {
+    ctx.status = 500
     ctx.body = {
       message: e.message
     }
@@ -20,7 +21,9 @@ app.use(exceptionMiddleware)
 // 用户注册
 router.post('/:id/register', async (ctx, next) => {
   const v = await new RegisterValidator().validate(ctx)
-  const query = ctx.request.query
+  console.log('v:', v)
+  console.log('body.account:', v.get('body.account'))
+  console.log('query.type:', v.get('query.type'))
   ctx.body = 'register'
 })
 
