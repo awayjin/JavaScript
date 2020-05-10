@@ -18,6 +18,15 @@ class ParameterException extends HttpException {
   }
 }
 
+class NotFound extends HttpException{
+  constructor(msg, errorCode) {
+    super()
+    this.msg = msg || '资源未找到'
+    this.errorCode = errorCode || 10000
+    this.code = 404
+  }
+}
+
 // 成功
 // 201 Created 是一个代表成功的应答状态码，表示请求已经被成功处理，并且创建了新的资源
 class Success extends HttpException {
@@ -77,5 +86,6 @@ module.exports = {
   AuthFailed,
   LikeError,
   DislikeError,
+  NotFound,
   Forbidden
 }

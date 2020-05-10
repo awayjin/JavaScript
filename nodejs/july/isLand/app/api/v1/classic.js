@@ -3,10 +3,11 @@ const router = new Router({
   prefix: '/v1/classic'
 })
 // const { HttpException, ParameterException } = require('../../../core/http-exception')
-const { PositiveIntegerValidator } = require('../../valiadators/validator')
+const { PositiveIntegerValidator, ClassicValidator } = require('../../valiadators/validator')
 const { Auth } = require('../../../middlewares/auth')
 const { Flow } = require('../../models/flow')
 const { Art } = require('../../models/art')
+const { Favor } = require('../../models/favor')
 
 // router.get('/v1/classic/latest', async (ctx, next) => {
 router.get('/latest', new Auth().m, async (ctx, next) => {
@@ -47,6 +48,26 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
   // console.log('flow:', flow)
   // console.log('art:', art)
   ctx.body = art
+})
+
+// 获取期刊点赞情况
+router.get('/:type/:id/favor', new Auth().m, async ctx => {
+  const v = await new ClassicValidator().validate(ctx)
+  const type = parseInt(v.get('path.type'))
+  // const type = v.get('path.type')
+  const id = v.get('path.id')
+  const art = await Art.getData(id, type)
+  console.log('art:', art)
+  console.log('type:', type)
+  console.log('id:', id)
+  if (!art) {
+    throw new global.errors.NotFound()
+  }
+  const like = await Favor.userLikeIt(id, type, ctx.auth.uid)
+  ctx.body = {
+    fav_nums: art.fav_nums,
+    like_status: like
+  }
 })
 
 module.exports = router

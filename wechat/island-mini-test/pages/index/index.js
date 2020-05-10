@@ -1,6 +1,22 @@
 import { Base64 } from 'js-base64'
 
 Page({
+  // 获取期刊点赞情况
+  onClassicLike () {
+    wx.request({
+      url: 'http://localhost:3000/v1/classic/100/1/favor',
+      header: {
+        Authorization: this.encodeBasic64()
+        // Authorization: this.onDemo()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
   encodeBasic64() {
     const token = wx.getStorageSync('token')
     const base64 = Base64.encode(token + ':')

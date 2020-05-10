@@ -81,6 +81,17 @@ class Favor extends Model {
       })
     })
   }
+
+  static async userLikeIt(art_id, type, uid) {
+    const favor = await Favor.findOne({
+      where: {
+        uid,
+        art_id,
+        type,
+      }
+    })
+    return favor ? true : false
+  }
 }
 
 Favor.init({

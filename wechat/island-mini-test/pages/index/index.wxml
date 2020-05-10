@@ -21,5 +21,8 @@
 
 <div class='block'>
   <l-button type="error" bind:lintap="onLike">点赞</l-button>
-   <l-button type="warning" size="long" bind:lintap="onDisLike">取消点赞</l-button>
+  <l-button type="warning" size="long" bind:lintap="onDisLike">
+    取消点赞           
+  </l-button>
+  <l-button bind:lintap="onClassicLike">获取期刊点赞情况</l-button>
 </div>
