@@ -32,15 +32,16 @@ class FEValidator {
     //   msg
     // } = this.email[0]
 
+    console.log('this:', this)
     // 校验
     for (let key in this) {
       let value  = this[key]
-      console.log('key: ', key, ', value:', value)
+      // console.log('key: ', key, ', value:', value)
       if (value.length) {
         value.map(item => {
           const par = item.params
           let rule = ''
-          console.log('params.body.account:', params.body.account)
+          // console.log('params.body.account:', params.body.account)
           if (par) {
             rule = validator[item.name](item.msg, par)
           } else {
@@ -54,7 +55,6 @@ class FEValidator {
       }
     }
 
-    // console.log('this:', this)
     // console.log('this keys:')
     // // console.log(Object.keys(this))
     // // console.log(Object.values(this))
