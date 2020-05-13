@@ -16,5 +16,16 @@ public class Demo01Phone {
     System.out.println("------------"); //
     p1.call("wade");
     p1.sendToMessage();
+
+    Phone two = p1;
+    two.price = 38888;
+    two.brand = "aiPhone";
+    two.color = "a silver";
+    System.out.println(two.brand); // d null
+    System.out.println(two.color); // null
+    System.out.println(two.price); // 0.0
+    System.out.println("------------"); //
+    two.call("a wade");
+    two.sendToMessage();
   }
 }

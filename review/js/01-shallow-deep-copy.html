@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <script crossorigin="anonymous" integrity="sha384-LNvm13nKpzI4wPZtxoqaIFPRhaA7/WA0Qy5saLyNnXreQ1E2A7jP7weohLUnYKDR" src="https://lib.baomitu.com/lodash.js/4.17.15/lodash.js"></script>
 </head>
 <body>
 <a href="https://github.com/ljianshu/Blog/issues/5">浅拷贝与深拷贝原理</a>
@@ -10,7 +11,7 @@
 <script>
   // 深拷贝与浅拷贝
 
-  console.log( Array(20).join('-'), '1. object assign value:', Array(20).join('-'))
+  // console.log( Array(20).join('-'), '1. object assign value:', Array(20).join('-'))
   void function () {
     var obj1 = {
       name: 'shallow and deep copy',
@@ -23,11 +24,11 @@
     obj2.age = 218
     obj2.name = 'assign name'
     obj2.language = ['ass2', 'ass3']
-    console.log('obj1:', obj1)
-    console.log('obj2:', obj2)
+    // console.log('obj1:', obj1)
+    // console.log('obj2:', obj2)
   }()
 
-  console.log(Array(20).join('-'), '2. shallow copy:', Array(20).join('-'))
+  // console.log(Array(20).join('-'), '2. shallow copy:', Array(20).join('-'))
   void function () {
     var obj1 = {
       name: 'shallow and deep copy',
@@ -48,14 +49,14 @@
     obj3.age = 218
     obj3.name = 'shallow name'
     obj3.language[1] = ['二', '三']
-    console.log('obj1:', obj1)
-    console.log('obj3:', obj3)
+    // console.log('obj1:', obj1)
+    // console.log('obj3:', obj3)
 
     var objAssign = Object.assign({}, obj1)
 
   }()
 
-  console.log( Array(20).join('-'), '3. Object.assign:', Array(20).join('-'))
+  // console.log( Array(20).join('-'), '3. Object.assign:', Array(20).join('-'))
   void function () {
     var obj1 = {
       age: 18,
@@ -67,8 +68,8 @@
     var objAssign = Object.assign({}, obj1)
     objAssign.language.a = 200
     objAssign.age = 218
-    console.log('obj1:', obj1)
-    console.log('objAssign:', objAssign)
+    // console.log('obj1:', obj1)
+    // console.log('objAssign:', objAssign)
 
     // 只有一层时是深拷贝
     let obj2 = {
@@ -76,12 +77,12 @@
     }
     let obj3 = Object.assign({}, obj2)
     obj3.username = 'shoes'
-    console.log('obj2:', obj2)
-    console.log('obj3:', obj3)
+    // console.log('obj2:', obj2)
+    // console.log('obj3:', obj3)
   }()
 
   // 深拷贝
-  console.log( Array(20).join('-'), '4. JSON.stringify:', Array(20).join('-'))
+  // console.log( Array(20).join('-'), '4. JSON.stringify:', Array(20).join('-'))
   void function () {
     var arr = [1, 32, function () {}, {
       username: 'away'
@@ -89,8 +90,8 @@
     // 深拷贝 JSON.stringify  function 不能处理，变成 null
     var arr1 = JSON.parse(JSON.stringify(arr))
     arr1[3].username = 'new away'
-    console.log('arr:', arr)
-    console.log('arr1:', arr1)
+    // console.log('arr:', arr)
+    // console.log('arr1:', arr1)
   }()
 
   // 深拷贝
@@ -125,7 +126,7 @@
     return result
   }
 
-  console.log( Array(20).join('-'), '5. 深拷贝-遍历:', Array(20).join('-'))
+  // console.log( Array(20).join('-'), '5. 深拷贝-遍历:', Array(20).join('-'))
   void (() => {
     var arr = [{
       username: 'away'
@@ -133,21 +134,134 @@
     var arr1 = deepClone(arr)
     arr1[0].username = 'jin'
     arr1[1] = 21
-    console.log('arr:', arr)
-    console.log('arr1:', arr1)
+    // console.log('arr:', arr)
+    // console.log('arr1:', arr1)
   })()
 </script>
 
 
-var obj1 = {
-age: 18,
-language: [1, 2, [33]],
-func: () => 'f1',
-}
-var obj2 = JSON.parse(JSON.stringify(obj1))
-obj2.language[2] = [44]
-obj2.func = () => 'f2'
-console.log('obj1:', obj1)
-console.log('obj2:', obj2)
+<script>
+  function shallowCopy (target) {
+    var clone = {}
+    for (let key in target) {
+      clone[key] = target[key]
+    }
+    return clone
+  }
+
+  var phone = {
+    name: 'hw',
+    area: [11, [22, 33], 44],
+    area2: [],
+  }
+  var copy1 = shallowCopy(phone)
+  copy1.name = 'iPhone'
+  copy1.area[1] = [222, 333]
+  copy1.area2[0] = [99]
+  console.log(phone)
+  console.log(copy1)
+  console.log(' --------------------- copy1 -----------------------------')
+
+  var phone2 = {
+    name: 'hw',
+    area: [11, [22, 33], 44],
+    area2: [],
+  }
+  var copy2 = Object.assign({}, phone2)
+  copy2.name = 'cp2 name'
+  copy2.area[1] = 'c2'
+  copy2.area2[1] = 'c2-1'
+  console.log('origin phone2', phone2)
+  console.log('copy2', copy2)
+  console.log(' --------------------- copy2 ----------------')
+
+
+  // JSON.parser
+  var phone3 = {
+    name: 'hw',
+    area: [11, [22, 33], 44],
+    area2: [],
+    call () {
+      return 'call met'
+    }
+  }
+  var copy3 = JSON.parse(JSON.stringify(phone3))
+  copy3.name = 'cp2 name'
+  copy3.area[1] = 'c2'
+  copy3.area2[1] = 'c2-1'
+  console.log('origin phone3', phone3)
+  console.log('copy3', copy3)
+  console.log(' --------------------- copy3 JSON.parser ----------------')
+
+  //定义检测数据类型的功能函数
+  function checkedType(target) {
+    return Object.prototype.toString.call(target).slice(8, -1)
+  }
+  //实现深度克隆---对象/数组
+  function clone(target) {
+    //判断拷贝的数据类型
+    //初始化变量result 成为最终克隆的数据
+    let result,
+      targetType = checkedType(target)
+    if (targetType === 'Object') {
+      result = {}
+    } else if (targetType === 'Array') {
+      result = []
+    } else {
+      return target
+    }
+    // debugger
+    //遍历目标数据
+    for (let i in target) {
+      //获取遍历数据结构的每一项值。
+      let value = target[i]
+      //判断目标结构里的每一值是否存在对象/数组
+      if (checkedType(value) === 'Object' || checkedType(value) === 'Array') {
+        //对象/数组里嵌套了对象/数组
+        //继续遍历获取到value值
+        result[i] = clone(value)
+      } else {
+        //获取到value值是基本的数据类型或者是函数。
+        result[i] = value
+      }
+    }
+    return result
+  }
+
+  // clone
+  var phone4 = {
+    name: 'hw',
+    area: [11, [22, 33], 44],
+    area2: [],
+    call () {
+      return 'call met'
+    }
+  }
+  var copy4 =clone(phone4)
+  copy4.name = 'cp2 name'
+  copy4.area[1] = 'c2'
+  copy4.area2[1] = 'c2-1'
+  console.log('origin phone4', phone4)
+  console.log('copy4', copy4)
+  console.log(' --------------------- copy4 ----------------')
+
+  // clone
+  var phone4 = {
+    name: 'hw',
+    area: [11, [22, 33], 44],
+    area2: [],
+    call () {
+      return 'call met'
+    }
+  }
+  var copy4 = _.cloneDeep(phone4)
+  copy4.name = 'cp2 name'
+  copy4.area[1] = 'c2'
+  copy4.area2[1] = 'c2-1'
+  console.log('origin phone4', phone4)
+  console.log('copy4', copy4)
+  console.log(' --------------------- copy2 ----------------')
+</script>
+
 </body>
 </html>
