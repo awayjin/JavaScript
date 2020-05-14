@@ -27,6 +27,7 @@
         }
         if (
           newAmount >= 0
+          // && (newMin.length < min.length - 1 || !min.length)
           && (newMin.length < min.length - 1 || !min.length)
           //&& (newMin.length || !newAmount)
         ) {
@@ -39,8 +40,8 @@
     return makeChange(amount);
   }
 
-  // minCoinChange([1, 5, 10], 6)
-  minCoinChange([1, 5], 3)
+  minCoinChange([1, 5, 10], 6)
+  // minCoinChange([1, 5], 3)
 </script>
 </body>
 </html>
