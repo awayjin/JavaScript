@@ -70,11 +70,10 @@ class LinValidator {
         let params = this._assembleAllParams(ctx)
         this.data = cloneDeep(params)
         this.parsed = cloneDeep(params)
-        console.log('params:', params)
+
         const memberKeys = findMembers(this, {
             filter: this._findMembersFilter.bind(this)
         })
-        console.log('memberKeys 2:', memberKeys)
 
         const errorMsgs = []
         // const map = new Map(memberKeys)

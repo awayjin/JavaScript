@@ -17,6 +17,12 @@ class PositiveIntegerValidator extends LinValidator {
 class RegisterValidator extends LinValidator {
   constructor () {
     super()
+    this.query = [
+      new Rule('isLength', '长度4个字符', {
+        min: 4,
+        max: 30
+      })
+    ]
     this.email = [
       new Rule('isEmail', '不符合Email规范')
     ]
@@ -34,6 +40,7 @@ class RegisterValidator extends LinValidator {
         max: 15
       })
     ]
+
   }
 
   validatePassword (vals) {

@@ -53,7 +53,7 @@ const bodyParser = require('koa-bodyparser')
 app.use(bodyParser())
 app.use(router.routes())
 
-const port = 3000
+const port = 3001
 app.listen(port, () => {
-  console.log(chalk.bgGreen(`App listened at port ${port}`))
+  console.log(chalk.bgCyanBright(`App listened at port ${port}`))
 })

@@ -23,8 +23,21 @@ class FEValidator {
     const key = keyValue[1]
     return this.data[req][key]
   }
+
+  findMembers (obj) {
+    const members = []
+    for (let key in obj) {
+      const value = obj[key]
+      if (value.length) {
+        members.push(key)
+      }
+    }
+    return members
+  }
+
   async validate (ctx) {
     const params = await this.getContentReq(ctx)
+
     this.data = params
 
     // const {
@@ -32,19 +45,25 @@ class FEValidator {
     //   msg
     // } = this.email[0]
 
+    // console.log('params:', params)
+    const members = this.findMembers(this)
+    console.log('members:', members)
+    console.log('this:', this)
     // 校验
     for (let key in this) {
       let value  = this[key]
-      console.log('key: ', key, ', value:', value)
+      // console.log('key: ', key, ', value:', value)
       if (value.length) {
         value.map(item => {
           const par = item.params
           let rule = ''
-          console.log('params.body.account:', params.body.account)
+          // console.log('params.body.account:', params.body.account)
           if (par) {
             rule = validator[item.name](item.msg, par)
           } else {
             // rule = validator[item.name](item.msg)
+            const validatorValue = this.getReqValue(params)
+            // console.log('validatorValue:', validatorValue)
             rule = validator[item.name](params.body.account)
           }
           if (!rule) {
@@ -54,7 +73,7 @@ class FEValidator {
       }
     }
 
-    // console.log('this:', this)
+
     // console.log('this keys:')
     // // console.log(Object.keys(this))
     // // console.log(Object.values(this))
@@ -67,6 +86,20 @@ class FEValidator {
     // }
     // ctx.v = this
     return this
+  }
+
+  getReqValue (params) {
+    const values = []
+    for (let key in params) {
+      let req = params[key]
+      for (let reqKey in req) {
+        // console.log('reqKey', reqKey)
+        if (req.hasOwnProperty && req.hasOwnProperty(reqKey)) {
+          values.push(req[reqKey])
+        }
+      }
+    }
+    return values
   }
 }
 class Rule {
