@@ -3,6 +3,7 @@ import com.codegoing.Phone;
 
 public class Demo04Params {
   String name;
+  private int age;
   public static void main(String[] args) {
 
     Phone one = new Phone();

@@ -22,7 +22,7 @@ app.use(exceptionMiddleware)
 router.post('/:id/register', async (ctx, next) => {
   const v = await new RegisterValidator().validate(ctx)
   // console.log('v:', v)
-  console.log('body.account:', v.get('body.account'))
+  console.log('body.account:', v.get('body.email'))
   console.log('query.type:', v.get('query.type'))
   console.log('path.id:', v.get('path.id'))
   console.log('header.auth:', v.get('header.auth'))

@@ -17,12 +17,6 @@ class FEValidator {
       header: ctx.request.header,
     }
   }
-  get (reqKey) {
-    const keyValue = reqKey.split('.')
-    const req = keyValue[0]
-    const key = keyValue[1]
-    return this.data[req][key]
-  }
 
   findMembers (obj) {
     const members = []
@@ -35,44 +29,48 @@ class FEValidator {
     return members
   }
 
+  get (reqKey) {
+    const keyValue = reqKey.split('.')
+    const req = keyValue[0]
+    const key = keyValue[1]
+    return this.data[req][key]
+  }
+
+  // 校验值
+  checkValue (member) {
+    let value
+    value = this.get('query.' + member)
+    if (value) {
+      return {
+        value
+      }
+    }
+    value = this.get('body.' + member)
+    if (value) {
+      return {
+        value
+      }
+    }
+    return {
+      value: null
+    }
+  }
   async validate (ctx) {
     const params = await this.getContentReq(ctx)
 
     this.data = params
-
-    // const {
-    //   name,
-    //   msg
-    // } = this.email[0]
-
-    // console.log('params:', params)
     const members = this.findMembers(this)
     console.log('members:', members)
     console.log('this:', this)
-    // 校验
-    for (let key in this) {
-      let value  = this[key]
-      // console.log('key: ', key, ', value:', value)
-      if (value.length) {
-        value.map(item => {
-          const par = item.params
-          let rule = ''
-          // console.log('params.body.account:', params.body.account)
-          if (par) {
-            rule = validator[item.name](item.msg, par)
-          } else {
-            // rule = validator[item.name](item.msg)
-            const validatorValue = this.getReqValue(params)
-            // console.log('validatorValue:', validatorValue)
-            rule = validator[item.name](params.body.account)
-          }
-          if (!rule) {
-            throw new Error(item.msg)
-          }
-        })
+    const errorMessage = []
+    for (let member of members) {
+      const result = this.checkValue(member)
+      console.log('result:', result)
+      if (!result.value) {
+        errorMessage.push(result)
       }
     }
-
+    console.log('errorMessage:', errorMessage)
 
     // console.log('this keys:')
     // // console.log(Object.keys(this))
@@ -100,6 +98,32 @@ class FEValidator {
       }
     }
     return values
+  }
+
+  demo () {
+    // 校验
+    for (let key in this) {
+      let value  = this[key]
+      // console.log('key: ', key, ', value:', value)
+      if (value.length) {
+        value.map(item => {
+          const par = item.params
+          let rule = ''
+          // console.log('params.body.account:', params.body.account)
+          if (par) {
+            rule = validator[item.name](item.msg, par)
+          } else {
+            // rule = validator[item.name](item.msg)
+            const validatorValue = this.getReqValue(params)
+            // console.log('validatorValue:', validatorValue)
+            rule = validator[item.name](params.body.account)
+          }
+          if (!rule) {
+            throw new Error(item.msg)
+          }
+        })
+      }
+    }
   }
 }
 class Rule {
