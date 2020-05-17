@@ -10,9 +10,11 @@ const exceptionMiddleware = async (ctx, next) => {
   try {
     await next()
   } catch (e) {
-    ctx.status = 500
+    console.log('e::', e)
+    ctx.status = e.status
     ctx.body = {
-      message: e.message
+      message: e.message,
+      errorCode: e.errorCode
     }
   }
 }
