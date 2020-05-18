@@ -1,6 +1,16 @@
 const validator = require('validator')
 const chalk = require('chalk')
 
+// http 请求异常
+class HttpException extends Error {
+  constructor (message = '请求错误', errorCode = 10000, status = 400) {
+    super()
+    this.message = message
+    this.errorCode = errorCode
+    this.status = status
+  }
+}
+
 // js 和 node 校验器，继承于 validator
 class FEValidator {
   constructor () {
@@ -17,12 +27,6 @@ class FEValidator {
       header: ctx.request.header,
     }
   }
-  get (reqKey) {
-    const keyValue = reqKey.split('.')
-    const req = keyValue[0]
-    const key = keyValue[1]
-    return this.data[req][key]
-  }
 
   findMembers (obj) {
     const members = []
@@ -35,56 +39,118 @@ class FEValidator {
     return members
   }
 
+  get (reqKey) {
+    const keyValue = reqKey.split('.')
+    const req = keyValue[0]
+    const key = keyValue[1]
+    return this.data[req][key]
+  }
+
+  // 验证字段是否已填
+  isKey (member) {
+    let value = ''
+    for (let key in this.data) {
+      const req = this.data[key]
+      for (let sub in req) {
+        if (sub === member) {
+          // 字段为空
+          if (!req[member].length) {
+            value = ''
+          } else {
+            return value = sub
+          }
+        }
+      }
+    }
+    if (!value) {
+      return `${member} 是必填字段`
+    }
+  }
+
+  // 验证值是否合法
+  validateValue (key, value) {
+    let msg = false
+    let result = {
+      value,
+      success: false
+    }
+    const rule = this[key]
+    if (rule.length) {
+      rule.some(item => {
+        // 验证值
+        const isPass = validator[item.name](value, item.params)
+        console.log('isPass:', isPass)
+        if (!isPass) {
+          // 验证没通过
+          msg = item.msg
+          result.value = `${key} ${item.msg}`
+          return result
+        } else {
+          result.success = true
+        }
+      })
+    }
+    return result
+  }
+  // 校验值
+  checkValue (member) {
+    const keyField = this.isKey(member) // 字段验证
+    if (keyField !== member) {
+      return {
+        value: keyField,
+        success: false
+      }
+    }
+
+    let value
+
+    // 查询字符串
+    value = this.get('query.' + member)
+    if (value) {
+      return this.validateValue(member, value)
+    }
+    // body 请求体-JSON
+    value = this.get('body.' + member)
+    if (value) {
+      return this.validateValue(member, value)
+    }
+
+    // path 路径
+    value = this.get('path.' + member)
+    if (value) {
+      return this.validateValue(member, value)
+    }
+
+    // header
+    value = this.get('header.' + member)
+    if (value) {
+      return this.validateValue(member, value)
+    }
+
+    return {
+      value: null,
+      success: false
+    }
+  }
   async validate (ctx) {
     const params = await this.getContentReq(ctx)
 
     this.data = params
-
-    // const {
-    //   name,
-    //   msg
-    // } = this.email[0]
-
-    // console.log('params:', params)
     const members = this.findMembers(this)
     console.log('members:', members)
     console.log('this:', this)
-    // 校验
-    for (let key in this) {
-      let value  = this[key]
-      // console.log('key: ', key, ', value:', value)
-      if (value.length) {
-        value.map(item => {
-          const par = item.params
-          let rule = ''
-          // console.log('params.body.account:', params.body.account)
-          if (par) {
-            rule = validator[item.name](item.msg, par)
-          } else {
-            // rule = validator[item.name](item.msg)
-            const validatorValue = this.getReqValue(params)
-            // console.log('validatorValue:', validatorValue)
-            rule = validator[item.name](params.body.account)
-          }
-          if (!rule) {
-            throw new Error(item.msg)
-          }
-        })
+    const errorMessage = []
+    for (let member of members) {
+      const result = this.checkValue(member)
+      if (!result.success) {
+        errorMessage.push(result.value)
       }
     }
+    // console.log('errorMessage:', errorMessage)
+    if (errorMessage.length) {
+      throw new HttpException(errorMessage)
+    }
 
-
-    // console.log('this keys:')
-    // // console.log(Object.keys(this))
-    // // console.log(Object.values(this))
-    // console.log('name:', name)
-    // console.log('params.body.account:', params.body.account)
-    // const email = validator[name](params.body.account)
-    // console.log('email:', email)
-    // if (!email) {
-    //   throw new Error(msg)
-    // }
-    // ctx.v = this
     return this
   }
 
@@ -101,6 +167,7 @@ class FEValidator {
     }
     return values
   }
+
 }
 class Rule {
   constructor (name, msg, params) {
@@ -122,11 +189,12 @@ class RegisterValidator extends FEValidator {
     ]
     this.password1 = [
       new Rule('isLength', '不符合长度规则', {
-        min: 8,
+        min: 4,
         max: 30
       }),
       new Rule('matches', '密码不符合规范', '^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]')
     ]
+    this.password2 = this.password1
   }
 
 }
