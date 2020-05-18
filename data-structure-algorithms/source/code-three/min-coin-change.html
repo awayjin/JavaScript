@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+11
+<script>
+  function minCoinChange(coins, amount) {
+    const cache = [];
+
+    const makeChange = (value) => {
+      if (!value) {
+        return [];
+      }
+      if (cache[value]) {
+        return cache[value];
+      }
+      let min = [];
+      let newMin;
+      let newAmount;
+      for (let i = 0; i < coins.length; i++) {
+        const coin = coins[i];
+        newAmount = value - coin;
+        if (newAmount >= 0) {
+          newMin = makeChange(newAmount);
+        }
+        if (
+          newAmount >= 0
+          && (newMin.length < min.length - 1 || !min.length)
+          // && (newMin.length || !newAmount)；
+        ) {
+          min = [coin].concat(newMin);
+          console.log('new Min: ', min + ' for: ', amount);
+        }
+      }
+      return (cache[value] = min);
+    };
+    return makeChange(amount);
+  }
+
+  // const result = minCoinChange([1, 5, 10, 25], 6)
+  // const result = minCoinChange([1, 5, 10, 25], 36)
+  console.log('最少找零：', minCoinChange([1, 5, 10], 6))
+  // console.log('最少找零：', minCoinChange([1, 5, 10, 25], 36))
+</script>
+
+</body>
+</html>
