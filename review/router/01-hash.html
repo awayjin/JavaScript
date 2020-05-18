@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+  <script type="text/typescript">
+        module Sayings {
+            export class Greeter {
+                greeting: string;
+                constructor (message: string) {
+                    this.greeting = message;
+                }
+                greet() {
+                    return "Hello, " + this.greeting;
+                }
+            }
+        }
+    </script>
+  <!-- You can add multiple TypeScript blocks: -->
+  <script type="text/typescript">
+        var greeter = new Sayings.Greeter('world');
+        var button = document.createElement('button')
+        button.innerHTML = "Say Hello"
+        button.onclick = function() {
+                alert(greeter.greet())
+        }
+        document.body.appendChild(button)
+    </script>
+  <!-- And you can load external TypeScripts (from the same domain): -->
+<!--  <script type="text/typescript" src="demo.ts"></script>-->
+  <!-- Don't forget to add these two JavaScripts at the end of the body: -->
+
+</head>
+<body>
+//首先我们要有个html
+<ul>
+  <li><a href="#luyou1">路由1</a></li>
+  <li><a href="#luyou2">路由2</a></li>
+  <li><a href="#luyou3">路由3</a></li>
+</ul>
+<div id="luyouid"></div>
+<script type="text/typescript" src="demo.ts"></script>
+<script type="text/javascript" src="./typescript.min.js"></script>
+<script type="text/javascript" src="./typescript.compile.min.js"></script>
+</body>
+</html>
