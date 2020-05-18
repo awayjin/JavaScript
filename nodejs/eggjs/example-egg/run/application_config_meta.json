@@ -1,0 +1,273 @@
+{
+  "keys": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/config/config.default.js",
+  "view": {
+    "defaultViewEngine": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/config/config.default.js",
+    "mapping": {
+      ".tpl": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/config/config.default.js"
+    },
+    "root": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-view/config/config.default.js",
+    "cache": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-view/config/config.local.js",
+    "defaultExtension": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-view/config/config.default.js"
+  },
+  "session": {
+    "maxAge": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-session/config/config.default.js",
+    "key": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-session/config/config.default.js",
+    "httpOnly": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-session/config/config.default.js",
+    "encrypt": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-session/config/config.default.js"
+  },
+  "security": {
+    "domainWhiteList": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+    "protocolWhiteList": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+    "defaultMiddleware": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+    "csrf": {
+      "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "type": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "ignoreJSON": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "useSession": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "cookieName": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "sessionName": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "headerName": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "bodyName": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "queryName": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "refererWhiteList": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    },
+    "xframe": {
+      "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "value": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    },
+    "hsts": {
+      "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.local.js",
+      "maxAge": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "includeSubdomains": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    },
+    "dta": {
+      "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    },
+    "methodnoallow": {
+      "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    },
+    "noopen": {
+      "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    },
+    "nosniff": {
+      "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    },
+    "referrerPolicy": {
+      "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "value": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    },
+    "xssProtection": {
+      "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "value": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    },
+    "csp": {
+      "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "policy": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    },
+    "ssrf": {
+      "ipBlackList": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js",
+      "checkAddress": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+    }
+  },
+  "helper": {
+    "shtml": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-security/config/config.default.js"
+  },
+  "jsonp": {
+    "limit": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-jsonp/config/config.default.js",
+    "callback": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-jsonp/config/config.default.js",
+    "csrf": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-jsonp/config/config.default.js"
+  },
+  "onerror": {
+    "errorPageUrl": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-onerror/config/config.default.js",
+    "appErrorFilter": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-onerror/config/config.default.js",
+    "templatePath": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-onerror/config/config.default.js"
+  },
+  "i18n": {
+    "defaultLocale": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-i18n/config/config.default.js",
+    "dirs": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-i18n/config/config.default.js",
+    "queryField": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-i18n/config/config.default.js",
+    "cookieField": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-i18n/config/config.default.js",
+    "cookieDomain": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-i18n/config/config.default.js",
+    "cookieMaxAge": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-i18n/config/config.default.js"
+  },
+  "watcher": {
+    "type": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-watcher/config/config.local.js",
+    "eventSources": {
+      "default": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-watcher/config/config.default.js",
+      "development": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-watcher/config/config.default.js"
+    }
+  },
+  "customLogger": {
+    "scheduleLogger": {
+      "consoleLevel": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-schedule/config/config.default.js",
+      "file": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-schedule/config/config.default.js"
+    }
+  },
+  "schedule": {
+    "directory": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-schedule/config/config.default.js"
+  },
+  "multipart": {
+    "mode": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "autoFields": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "defaultCharset": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "fieldNameSize": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "fieldSize": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "fields": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "fileSize": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "files": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "fileExtensions": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "whitelist": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "tmpdir": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js",
+    "cleanSchedule": {
+      "cron": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-multipart/config/config.default.js"
+    }
+  },
+  "development": {
+    "watchDirs": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-development/config/config.default.js",
+    "ignoreDirs": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-development/config/config.default.js",
+    "fastReady": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-development/config/config.default.js",
+    "reloadOnDebug": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-development/config/config.default.js",
+    "overrideDefault": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-development/config/config.default.js"
+  },
+  "logrotator": {
+    "filesRotateByHour": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-logrotator/config/config.default.js",
+    "hourDelimiter": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-logrotator/config/config.default.js",
+    "filesRotateBySize": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-logrotator/config/config.default.js",
+    "maxFileSize": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-logrotator/config/config.default.js",
+    "maxFiles": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-logrotator/config/config.default.js",
+    "rotateDuration": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-logrotator/config/config.default.js",
+    "maxDays": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-logrotator/config/config.default.js"
+  },
+  "static": {
+    "prefix": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-static/config/config.default.js",
+    "dir": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-static/config/config.default.js",
+    "dynamic": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-static/config/config.default.js",
+    "preload": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-static/config/config.default.js",
+    "buffer": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-static/config/config.default.js",
+    "maxFiles": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-static/config/config.default.js"
+  },
+  "nunjucks": {
+    "autoescape": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-view-nunjucks/config/config.default.js",
+    "throwOnUndefined": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-view-nunjucks/config/config.default.js",
+    "trimBlocks": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-view-nunjucks/config/config.default.js",
+    "lstripBlocks": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-view-nunjucks/config/config.default.js",
+    "cache": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg-view-nunjucks/config/config.local.js"
+  },
+  "env": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "name": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "cookies": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "proxy": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "maxIpsCount": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "maxProxyCount": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "protocolHeaders": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "ipHeaders": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "hostHeaders": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "pkg": {
+    "name": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "version": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "description": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "main": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "scripts": {
+      "dev": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "test": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+    },
+    "keywords": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "author": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "license": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "dependencies": {
+      "egg": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "egg-bin": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "egg-view-nunjucks": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+    }
+  },
+  "baseDir": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "HOME": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "rundir": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "dump": {
+    "ignore": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+  },
+  "confusedConfigurations": {
+    "bodyparser": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "notFound": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "sitefile": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "middlewares": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "httpClient": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+  },
+  "notfound": {
+    "pageUrl": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+  },
+  "siteFile": {
+    "/favicon.ico": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+  },
+  "bodyParser": {
+    "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "encoding": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "formLimit": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "jsonLimit": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "textLimit": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "strict": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "queryString": {
+      "arrayLimit": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "depth": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "parameterLimit": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+    },
+    "onerror": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+  },
+  "logger": {
+    "dir": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "encoding": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "env": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "level": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "consoleLevel": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "disableConsoleAfterReady": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "outputJSON": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "buffer": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "appLogName": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "coreLogName": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "agentLogName": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "errorLogName": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "coreLogger": {
+      "consoleLevel": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.local.js"
+    },
+    "allowDebugAtProd": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+  },
+  "httpclient": {
+    "enableDNSCache": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "dnsCacheLookupInterval": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "dnsCacheMaxLength": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "request": {
+      "timeout": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+    },
+    "httpAgent": {
+      "keepAlive": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "freeSocketTimeout": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "maxSockets": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "maxFreeSockets": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+    },
+    "httpsAgent": {
+      "keepAlive": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "freeSocketTimeout": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "maxSockets": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "maxFreeSockets": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+    }
+  },
+  "meta": {
+    "enable": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "logging": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+  },
+  "coreMiddleware": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "workerStartTimeout": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "serverTimeout": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+  "cluster": {
+    "listen": {
+      "path": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "port": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+      "hostname": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+    }
+  },
+  "clusterClient": {
+    "maxWaitTime": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js",
+    "responseTimeout": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+  },
+  "onClientError": "/Users/jinwei/www/nodejs/JavaScript/nodejs/eggjs/example-egg/node_modules/egg/config/config.default.js"
+}

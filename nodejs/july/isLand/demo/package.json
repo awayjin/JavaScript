@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
+    "babel-jest": "^24.8.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest": "^24.8.0"
+  },
+  "jest": {
+    "verbose": true
+  },
+  "scripts": {
+    "test4": "jest --config=jest.config.js",
+    "test2": "jest --watchAll --coverage",
+    "test3": "jest --reporters=\"default\" --reporters=\"jest-junit\"",
+    "test": "jest  --watchAll --coverage --reporters='default' "
+  }
+}

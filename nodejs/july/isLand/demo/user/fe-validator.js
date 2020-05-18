@@ -28,10 +28,11 @@ class FEValidator {
     }
   }
 
-  findMembers (obj) {
+  // 需要验证的字段
+  findMembers () {
     const members = []
-    for (let key in obj) {
-      const value = obj[key]
+    for (let key in this) {
+      const value = this[key]
       if (value.length) {
         members.push(key)
       }
@@ -46,8 +47,8 @@ class FEValidator {
     return this.data[req][key]
   }
 
-  // 验证字段是否已填
-  isKey (member) {
+  // 验证字段是否已填或值为空
+  validateKey (member) {
     let value = ''
     for (let key in this.data) {
       const req = this.data[key]
@@ -67,7 +68,8 @@ class FEValidator {
     }
   }
 
-  // 验证值是否合法
+  // 验证值是否合法, 通过第三方库 validator
+  // https://github.com/chriso/validator.js
   validateValue (key, value) {
     let msg = false
     let result = {
@@ -79,7 +81,7 @@ class FEValidator {
       rule.some(item => {
         // 验证值
         const isPass = validator[item.name](value, item.params)
-        console.log('isPass:', isPass)
+        // console.log('isPass:', isPass)
         if (!isPass) {
           // 验证没通过
           msg = item.msg
@@ -94,7 +96,7 @@ class FEValidator {
   }
   // 校验值
   checkValue (member) {
-    const keyField = this.isKey(member) // 字段验证
+    const keyField = this.validateKey(member) // 字段验证
     if (keyField !== member) {
       return {
         value: keyField,
@@ -121,7 +123,7 @@ class FEValidator {
       return this.validateValue(member, value)
     }
 
-    // header
+    // header 请求头
     value = this.get('header.' + member)
     if (value) {
       return this.validateValue(member, value)
@@ -132,11 +134,12 @@ class FEValidator {
       success: false
     }
   }
+  // 验证器，开始的方法
+  // ctx - 上下文
   async validate (ctx) {
     const params = await this.getContentReq(ctx)
-
     this.data = params
-    const members = this.findMembers(this)
+    const members = this.findMembers()
     console.log('members:', members)
     console.log('this:', this)
     const errorMessage = []
@@ -153,21 +156,6 @@ class FEValidator {
 
     return this
   }
-
-  getReqValue (params) {
-    const values = []
-    for (let key in params) {
-      let req = params[key]
-      for (let reqKey in req) {
-        // console.log('reqKey', reqKey)
-        if (req.hasOwnProperty && req.hasOwnProperty(reqKey)) {
-          values.push(req[reqKey])
-        }
-      }
-    }
-    return values
-  }
-
 }
 class Rule {
   constructor (name, msg, params) {
@@ -195,6 +183,10 @@ class RegisterValidator extends FEValidator {
       new Rule('matches', '密码不符合规范', '^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]')
     ]
     this.password2 = this.password1
+  }
+
+  validatePassword () {
+
   }
 
 }

@@ -11,7 +11,7 @@ const exceptionMiddleware = async (ctx, next) => {
     await next()
   } catch (e) {
     console.log('e::', e)
-    ctx.status = e.status
+    ctx.status = parseInt(e.status)
     ctx.body = {
       message: e.message,
       errorCode: e.errorCode
