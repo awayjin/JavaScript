@@ -28,16 +28,29 @@ class FEValidator {
     }
   }
 
-  // 需要验证的字段
-  findMembers () {
+  // 查找验证所需的成员属性和方法
+  findMembers (instance) {
     const members = []
-    for (let key in this) {
-      const value = this[key]
-      if (value.length) {
+    // properties
+    for (let key in instance) {
+      const property = instance[key]
+      if (property.length) {
         members.push(key)
       }
     }
+    // methods
+    const methods = Reflect.ownKeys(instance.__proto__)
+    for (let method of methods) {
+      if (this.validateCapitalReg().test(method)) {
+        members.push(method)
+      }
+    }
     return members
+  }
+
+  // validate + 首字母大写验证
+  validateCapitalReg () {
+    return /validate([A-Z])\w+/g
   }
 
   get (reqKey) {
@@ -50,6 +63,7 @@ class FEValidator {
   // 验证字段是否已填或值为空
   validateKey (member) {
     let value = ''
+
     for (let key in this.data) {
       const req = this.data[key]
       for (let sub in req) {
@@ -139,11 +153,16 @@ class FEValidator {
   async validate (ctx) {
     const params = await this.getContentReq(ctx)
     this.data = params
-    const members = this.findMembers()
+    const members = this.findMembers(this)
     console.log('members:', members)
     console.log('this:', this)
+    // console.log('Reflect.ownKeys:', Reflect.ownKeys(this))
     const errorMessage = []
     for (let member of members) {
+      // 实例方法暂不验证
+      if (!this.validateCapitalReg().test(member)) {
+        break
+      }
       const result = this.checkValue(member)
       if (!result.success) {
         errorMessage.push(result.value)
