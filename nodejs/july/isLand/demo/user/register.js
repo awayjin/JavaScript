@@ -4,7 +4,8 @@ const chalk = require('chalk')
 const router = new KoaRouter({
   prefix: '/api/v1/user'
 })
-const { RegisterValidator } = require('./fe-validator.js')
+const { RegisterValidator } = require('./validator.js')
+const cors = require('cors')
 
 const exceptionMiddleware = async (ctx, next) => {
   try {
@@ -22,6 +23,7 @@ app.use(exceptionMiddleware)
 
 // 用户注册
 router.post('/:id/register', async (ctx, next) => {
+
   const v = await new RegisterValidator().validate(ctx)
   // console.log('v:', v)
   console.log('body.account:', v.get('body.email'))
@@ -40,6 +42,13 @@ router.post('/:id/register', async (ctx, next) => {
  *
  * */
 router.get('/register/:id', async (ctx, next) => {
+  ctx.res.writeHead({
+    'access-control-allow-origin': 'http://localhost:3000',
+  // 允许自定义头
+  // 'access-control-allow-headers': 'X-Test-CORS',
+  // 允许的方法
+  'access-control-allow-methods': 'PUT, POST, Delete, GET',
+  })
   const params = ctx.params
   const query = ctx.request.query
   const header = ctx.request.header
@@ -54,6 +63,7 @@ router.get('/register/:id', async (ctx, next) => {
 const bodyParser = require('koa-bodyparser')
 app.use(bodyParser())
 app.use(router.routes())
+app.use(cors())
 
 const port = 3001
 app.listen(port, () => {

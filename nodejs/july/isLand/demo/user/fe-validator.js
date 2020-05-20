@@ -1,15 +1,5 @@
 const validator = require('validator')
-const chalk = require('chalk')
-
-// http 请求异常
-class HttpException extends Error {
-  constructor (message = '请求错误', errorCode = 10000, status = 400) {
-    super()
-    this.message = message
-    this.errorCode = errorCode
-    this.status = status
-  }
-}
+const { HttpException } = require('./http-exception')
 
 // js 和 node 校验器，继承于 validator
 class FEValidator {
@@ -160,7 +150,8 @@ class FEValidator {
     const errorMessage = []
     for (let member of members) {
       // 实例方法暂不验证
-      if (!this.validateCapitalReg().test(member)) {
+      if (this.validateCapitalReg().test(member)) {
+        this[member](this.data)
         break
       }
       const result = this.checkValue(member)
@@ -178,9 +169,6 @@ class FEValidator {
 }
 class Rule {
   constructor (name, msg, params) {
-    // console.log(name)
-    // console.log(msg)
-    // console.log(...params)
     this.name = name
     this.msg = msg
     this.params = params
@@ -188,28 +176,7 @@ class Rule {
 }
 // new Rule('isEmail', '不符合Email规则', [11, 22])
 
-class RegisterValidator extends FEValidator {
-  constructor () {
-    super()
-    this.email = [
-      new Rule('isEmail', '不符合Email规则')
-    ]
-    this.password1 = [
-      new Rule('isLength', '不符合长度规则', {
-        min: 4,
-        max: 30
-      }),
-      new Rule('matches', '密码不符合规范', '^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]')
-    ]
-    this.password2 = this.password1
-  }
-
-  validatePassword () {
-
-  }
-
-}
-
 module.exports = {
-  RegisterValidator
+  FEValidator,
+  Rule
 }

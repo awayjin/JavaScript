@@ -14,5 +14,8 @@
     "test2": "jest --watchAll --coverage",
     "test3": "jest --reporters=\"default\" --reporters=\"jest-junit\"",
     "test": "jest  --watchAll --coverage --reporters='default' "
+  },
+  "dependencies": {
+    "request": "^2.88.2"
   }
 }
