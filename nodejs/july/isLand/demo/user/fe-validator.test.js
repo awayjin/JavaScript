@@ -69,13 +69,13 @@ describe('注册验证', () => {
       port: 3001,
       method: 'POST'
     }, (res) => {
-      // res.resume();
-      console.log('-------> res:', res)
-      // res.on('end', () => {
-      //   if (!res.complete)
-      //     console.error(
-      //       '消息仍在发送时终止了连接');
-      // });
+      res.resume();
+      consoe
+      res.on('end', () => {
+        if (!res.complete)
+          console.error(
+            '消息仍在发送时终止了连接');
+      });
     });
 
     expect({ a: 2}).toEqual({ a: 2})
