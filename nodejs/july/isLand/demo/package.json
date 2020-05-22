@@ -16,6 +16,8 @@
     "test": "jest  --watchAll --coverage --reporters='default' "
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "koa2-cors": "^2.0.6",
     "request": "^2.88.2"
   }
 }

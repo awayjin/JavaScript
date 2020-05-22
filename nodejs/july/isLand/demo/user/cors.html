@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">
+  MDN fetch
+</a>
+<button onclick="onFetch()">fetch</button>
+
+<script>
+  function onFetch () {
+    const url = `http://localhost:3001/api/v1/user/path/register?type=111`
+    fetch(url, {
+      method: 'POST'
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('data:', data)
+      }, err => {
+        console.log('err:', err)
+      })
+  }
+</script>
+
+</body>
+</html>

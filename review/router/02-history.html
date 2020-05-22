@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+
+  <style>
+    .bg  { display: flex; }
+    .bg > div {
+      /*flex: 1;*/
+      float: left;
+      height: 22px;
+      margin: 0 2px;
+      background-color: darkgrey;
+    }
+    #low { width: 0; }
+    #middle { background-color: green; width: 100%;}
+    #high {  width: 0; }
+  </style>
+</head>
+<body>
+
+<section>
+  <h2>猜数字游戏， 有历史记录</h2>
+  <div>
+    <h3>请输入数字: <input type="input" placeholder="请输入数字" id="number"></h3>
+    <div class="bg">
+      <div id="low"></div>
+      <div id="middle"></div>
+      <div id="high"></div>
+    </div>
+  </div>
+</section>
+
+<script type="text/typescript" src="history.ts"></script>
+<script type="text/javascript" src="./typescript.min.js"></script>
+<script type="text/javascript" src="./typescript.compile.min.js"></script>
+</body>
+</html>
