@@ -1,6 +1,22 @@
 import { Base64 } from 'js-base64'
 
 Page({
+  // 期刊详细
+  getClassicDetail () {
+    wx.request({
+      url: 'http://localhost:3000/v1/classic/100/1',
+      header: {
+        Authorization: this.encodeBasic64()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
+
   // 获取期刊点赞情况
   onClassicLike () {
     wx.request({

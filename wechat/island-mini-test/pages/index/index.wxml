@@ -25,4 +25,7 @@
     取消点赞           
   </l-button>
   <l-button bind:lintap="onClassicLike">获取期刊点赞情况</l-button>
+  <button bind:tap="getClassicDetail">
+    获取期刊详细
+  </button>
 </div>

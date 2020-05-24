@@ -15,7 +15,7 @@ const sequelize = new Sequelize(dbName, user, password, {
   logging: console.log,
   timezone: '+08:00',
   define: {
-    timestamps: false
+    timestamps: true
   }
 })
 
@@ -29,7 +29,9 @@ try {
 
 
 // 自动同步所有模型
-sequelize.sync({ force: false })
+sequelize.sync({ alter: false })
+// sequelize.sync({ force: false })
+// sequelize.sync({ force: true })
 
 
 module.exports = {

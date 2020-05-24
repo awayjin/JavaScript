@@ -1,11 +1,15 @@
 const KoaRouter = require('koa-router')
 const app = new (require('koa'))
 const chalk = require('chalk')
+const cors = require('cors')
+
+const { DemoUser } = require('./db/user-model.js')
+
 const router = new KoaRouter({
   prefix: '/api/v1/user'
 })
 const { RegisterValidator } = require('./validator.js')
-const cors = require('cors')
+const { Success } = require('./http-exception')
 
 const exceptionMiddleware = async (ctx, next) => {
   try {
@@ -30,7 +34,13 @@ router.post('/:id/register', async (ctx, next) => {
   console.log('query.type:', v.get('query.type'))
   console.log('path.id:', v.get('path.id'))
   console.log('header.auth:', v.get('header.auth'))
-  ctx.body = 'register'
+  const user = {
+    email: v.get('body.email'),
+    password1: v.get('body.password1')
+  }
+  // ctx.body = 'register'
+  DemoUser.create(user)
+  ctx.body = new Success()
 })
 
 /**
