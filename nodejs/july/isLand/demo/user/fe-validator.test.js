@@ -44,6 +44,16 @@ describe('注册验证', () => {
   it('axios d', async () => {
     const data = await axios.post(`${url}`, {
       password1: 'a123'
+<<<<<<< HEAD
+    }).then(data => {
+      expect(data).toEqual({ a: 2})
+      // expect({ a: 2}).toEqual({ a: 2})
+    }, err => {
+      console.log('err.response.data:', err.response.data)
+      expect(err.response.data).toEqual({"message":"password2 值异常","errorCode":10000})
+      // console.log('err:', err)
+    })
+=======
     }).then(data => data, err => err)
     console.log('data:', data)
     // const req = await request({
@@ -77,8 +87,21 @@ describe('注册验证', () => {
             '消息仍在发送时终止了连接');
       });
     });
+>>>>>>> 199c3658cc1f0ce1059f24c3a2f385d68fe8ca59
 
-    expect({ a: 2}).toEqual({ a: 2})
+    // const req = http.request({
+    //   host: '127.0.0.1',
+    //   port: 3001,
+    //   method: 'POST'
+    // }, (res) => {
+    //   // res.resume();
+    //   console.log('-------> res:', res)
+    //   // res.on('end', () => {
+    //   //   if (!res.complete)
+    //   //     console.error(
+    //   //       '消息仍在发送时终止了连接');
+    //   // });
+    // });
   })
 })
 

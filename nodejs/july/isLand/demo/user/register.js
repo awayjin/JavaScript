@@ -10,6 +10,8 @@ const router = new KoaRouter({
 })
 const { RegisterValidator } = require('./validator.js')
 const { Success } = require('./http-exception')
+const cors = require('koa2-cors')
+// app.use(cors())
 
 const exceptionMiddleware = async (ctx, next) => {
   try {
@@ -70,10 +72,9 @@ router.get('/register/:id', async (ctx, next) => {
   ctx.body = `register params id: ${params.id}`
 })
 
-const bodyParser = require('koa-bodyparser')
+app.use(cors())
 app.use(bodyParser())
 app.use(router.routes())
-app.use(cors())
 
 const port = 3001
 app.listen(port, () => {
