@@ -26,5 +26,14 @@ public class ArrayListDemo01 {
 
     int num = listC.get(1);
     System.out.println("第1号元素是：" + num);
+
+    ArrayList<Boolean> listBl = new ArrayList<>();
+    listBl.add(false);
+    listBl.add(true);
+    listBl.add(false);
+    System.out.println("ArrayList listBl:" + listBl.get(0));
+    System.out.println("ArrayList listBl:" + listBl.get(1));
+    System.out.println("ArrayList listBl:" + listBl.get(2));
+
   }
 }

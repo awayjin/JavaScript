@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   {
     host: 'localhost',
     dialect: 'mysql',
-    timestamp: true,
+    timestamp: false,
     timezone: '+08:00'
   }
 )

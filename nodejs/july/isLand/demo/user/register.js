@@ -1,7 +1,7 @@
 const KoaRouter = require('koa-router')
 const app = new (require('koa'))
+const bodyParser = require('koa-bodyparser')
 const chalk = require('chalk')
-const cors = require('cors')
 
 const { DemoUser } = require('./db/user-model.js')
 
@@ -40,9 +40,8 @@ router.post('/:id/register', async (ctx, next) => {
     email: v.get('body.email'),
     password1: v.get('body.password1')
   }
-  // ctx.body = 'register'
-  DemoUser.create(user)
-  ctx.body = new Success()
+  await DemoUser.create(user)
+  ctx.body = new Success('ok', 200)
 })
 
 /**
