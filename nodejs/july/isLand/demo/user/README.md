@@ -23,3 +23,9 @@ yarn add --dev babel-jest @babel/core @babel/preset-env babel-plugin-transform-e
 
 关联文件类型:
 Preferences -> Editor -> File Types
+
+
+## curl 中文编码和输出格式化
+curl -G --data-urlencode 'q=韩寒&count=3'  http://localhost:3000/v1/book/search -s | json
+
+https://www.54im.com/article/linux/curl%E4%B8%AD%E5%8F%82%E6%95%B0%E6%9C%89%E4%B8%AD%E6%96%87%E8%BF%9B%E8%A1%8Curl%E7%BC%96%E7%A0%81/

@@ -1,18 +1,13 @@
-<div class='block'>
-  <l-button size="long" bind:lintap="onGetToken">btn</l-button>
-</div>
 
+  <div class='block'>
+  <button bind:tap="onGetToken">获取 token</button>
+  <div class='block'>
+  <button bind:tap="onVerifyToken">验证 token</button>
+  </div>
 
-<div class='block'>
-<button bind:tap="onGetToken">获取 token</button>
-</div>
-
-<div class='block'>
-<button bind:tap="onVerifyToken">验证 token</button>
-</div>
-
-<div class='block'>
-<button bind:tap="onDemo">demo 方法</button>
+  <div class='block'>
+  <button bind:tap="onDemo">demo 方法</button>
+  </div>
 </div>
 
 <div class='block'>
@@ -28,4 +23,11 @@
   <button bind:tap="getClassicDetail">
     获取期刊详细
   </button>
+  <l-button  type="success" bind:lintap="onHotBooks">获取热门书籍列表</l-button>
+ 
+  <l-button type="warining" bind:lintap="onBookDetail">获取书籍详细</l-button>
+  <l-button size="long" bind:lintap="onSearchBook">搜索书籍</l-button>
+  <l-button type="success"  bind:lintap="onHotBooks">获取热门书籍列表</l-button>
+  <l-button size="long" bind:lintap="onBookFavoriteCount">获取我喜欢的书籍数量</l-button>
+   <l-button type="success"  bind:lintap="onBookLikes">获取书籍点赞情况</l-button>
 </div>

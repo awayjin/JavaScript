@@ -10,6 +10,6 @@ const wx = {
 const url = util.format(wx.loginUrl, wx.appId, wx.appSecret, '33')
 
 console.log('url:', url)
-console.log(util.format('%s:%s', 'foo', 'ddd'))
+console.log(util.format('aa%s:%s', 'foo', 'ddd'))
 console.log(util.format([11, 22, 33]))
 console.log(util.format(1, 2, 3))

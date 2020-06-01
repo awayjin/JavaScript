@@ -1,5 +1,10 @@
 # typescript
 
+## 更新依赖包
+cnpm install -g npm-check-updates
+
+ncu -u
+
 ## *.d.ts和@types关系理解
 
 @types：是npm的一个分支
