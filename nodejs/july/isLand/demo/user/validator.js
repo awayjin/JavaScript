@@ -1,5 +1,6 @@
 const { FEValidator, Rule } = require('./fe-validator')
 const { HttpException } = require('./http-exception')
+const { DemoUser } = require('./db/user-model.js')
 
 class RegisterValidator extends FEValidator {
   constructor () {
@@ -30,6 +31,19 @@ class RegisterValidator extends FEValidator {
 
     if (pwd1 !== pwd2) {
       throw new HttpException('两个密码必须相同')
+    }
+  }
+
+  // 验证邮箱
+  async validateEmail (data) {
+    const email = data.body.email
+    const user = await DemoUser.findOne({ where: { email }})
+    console.log('user:', user)
+    if (user === null) {
+      console.log('not found. 可以注册')
+    } else {
+      console.log('has been found.')
+      throw new HttpException('邮箱已注册')
     }
   }
 

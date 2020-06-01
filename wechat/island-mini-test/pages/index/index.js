@@ -1,6 +1,99 @@
 import { Base64 } from 'js-base64'
 
 Page({
+  // onBookLikes
+  onBookLikes () {
+    wx.request({
+      url: 'http://localhost:3000/v1/book/1120/favor',
+      header: {
+        Authorization: this.encodeBasic64()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
+
+  // 我喜欢的书籍数量
+  onBookFavoriteCount () {
+    wx.request({
+      url: 'http://localhost:3000/v1/book/favor/count',
+      header: {
+        Authorization: this.encodeBasic64()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
+  // 搜索书籍
+  onSearchBook () {
+    wx.request({
+      url: 'http://localhost:3000/v1/book/search?q=韩寒&stat=30&count=6',
+      header: {
+        Authorization: this.encodeBasic64()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
+  // book detail
+  onBookDetail () {
+    wx.request({
+      url: 'http://localhost:3000/v1/book/1120/detail',
+      header: {
+        Authorization: this.encodeBasic64()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
+  // 获取热门书籍列表
+  onHotBooks () {
+    wx.request({
+      url: 'http://localhost:3000/v1/book/hot_list',
+      header: {
+        Authorization: this.encodeBasic64()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
+
+  // 期刊详细
+  getClassicDetail () {
+    wx.request({
+      url: 'http://localhost:3000/v1/classic/100/1',
+      header: {
+        Authorization: this.encodeBasic64()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
+
   // 获取期刊点赞情况
   onClassicLike () {
     wx.request({

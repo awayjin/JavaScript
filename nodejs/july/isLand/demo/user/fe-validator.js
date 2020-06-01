@@ -148,13 +148,14 @@ class FEValidator {
     console.log('this:', this)
     // console.log('Reflect.ownKeys:', Reflect.ownKeys(this))
     const errorMessage = []
+    let result = []
     for (let member of members) {
-      // 实例方法暂不验证
+      // 实例方法
       if (this.validateCapitalReg().test(member)) {
-        this[member](this.data)
-        break
+        await this[member](this.data)
+      } else {
+        result = this.checkValue(member)
       }
-      const result = this.checkValue(member)
       if (!result.success) {
         errorMessage.push(result.value)
       }

@@ -19,6 +19,10 @@ class Art {
     }
     return art
   }
+  // 下划线私有方法
+  _getDetail () {
+
+  }
 }
 
 module.exports = {

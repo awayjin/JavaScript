@@ -70,4 +70,17 @@ router.get('/:type/:id/favor', new Auth().m, async ctx => {
   }
 })
 
+// 获取期刊详细信息
+router.get('/:type/:id', new Auth().m, async ctx => {
+  const v = await new ClassicValidator().validate(ctx)
+  const type = parseInt(v.get('path.type'))
+  const id = v.get('path.id')
+  const artDetail = await Art.getData(id, type)
+  const like = await Favor.userLikeIt(id, type, ctx.auth.uid)
+  ctx.body = {
+    like_status: like,
+    ...artDetail.dataValues
+  }
+})
+
 module.exports = router

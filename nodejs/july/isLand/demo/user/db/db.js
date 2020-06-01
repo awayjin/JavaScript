@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize')
+const { Sequelize } = require('sequelize')
 
 const sequelize = new Sequelize(
   'island',
@@ -6,33 +6,15 @@ const sequelize = new Sequelize(
   '123456',
   {
     host: 'localhost',
-    dialect: 'mysql'
+    dialect: 'mysql',
+    timestamp: false,
+    timezone: '+08:00'
   }
 )
 
-// 创建模型
-class DemoUser extends Model {
-
-}
-
-DemoUser.init(
-  {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    age: {
-      type: DataTypes.INTEGER
-    }
-  },
-  {
-    sequelize,
-    modelName: 'demo_user',
-    freezeTableName: true
-  }
-)
 // 模型同步, 创建表
-DemoUser.sync()
+// sequelize.sync({ alter: true })
+sequelize.sync({ force: false })
 
 try {
   sequelize.authenticate()
