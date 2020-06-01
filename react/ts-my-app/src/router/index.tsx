@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-
 function Index() {
-  return <h2>Home</h2>;
+  const [count, setCount] = useState(10)
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    document.title = `${count} times have clicked by you.`
+  })
+  return (
+    <div>
+      <p>You clicke { count }</p>
+      <p>
+        <button onClick={ () => {
+          setCount(count + 1)
+        } }>
+          点击+1
+        </button>
+      </p>
+    </div>
+  )
+  // return <h2>Home</h2>;
 }
 
 function About() {
