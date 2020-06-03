@@ -1,6 +1,27 @@
 import { Base64 } from 'js-base64'
 
 Page({
+  // 增加短评
+  onAddShortComment () {
+    wx.request({
+      url: 'http://localhost:3000/v1/book/add/short_comment',
+      method: 'POST',
+      data: {
+        content: '春风十里不如你',
+        book_id: 1120
+      },
+      header: {
+        Authorization: this.encodeBasic64()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
+
   // onBookLikes
   onBookLikes () {
     wx.request({
@@ -35,7 +56,7 @@ Page({
   // 搜索书籍
   onSearchBook () {
     wx.request({
-      url: 'http://localhost:3000/v1/book/search?q=韩寒&stat=30&count=a6',
+      url: 'http://localhost:3000/v1/book/search?q=韩寒&stat=30&count=6',
       header: {
         Authorization: this.encodeBasic64()
       },
