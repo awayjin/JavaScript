@@ -35,7 +35,7 @@ Page({
   // 搜索书籍
   onSearchBook () {
     wx.request({
-      url: 'http://localhost:3000/v1/book/search?q=韩寒&stat=30&count=6',
+      url: 'http://localhost:3000/v1/book/search?q=韩寒&stat=30&count=a6',
       header: {
         Authorization: this.encodeBasic64()
       },

@@ -15,4 +15,7 @@ InitManager.init(app)
 // app.use(latest.routes())
 // app.use(book.routes())
 
-app.listen(3000)
+const port = 3000
+app.listen(port, () => {
+  console.log('---> App listened at port:' + port)
+})

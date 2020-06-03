@@ -8,7 +8,7 @@ const { DemoUser } = require('./db/user-model.js')
 const router = new KoaRouter({
   prefix: '/api/v1/user'
 })
-const { RegisterValidator } = require('./validator.js')
+const { RegisterValidator, SearchValidator } = require('./validator.js')
 const { Success } = require('./http-exception')
 const cors = require('koa2-cors')
 // app.use(cors())
@@ -26,6 +26,13 @@ const exceptionMiddleware = async (ctx, next) => {
   }
 }
 app.use(exceptionMiddleware)
+
+// 搜索
+router.get('/search', async (ctx, next) => {
+  const v = await new SearchValidator().validate(ctx)
+  console.log('----》 v：', v)
+  ctx.body = v
+})
 
 // 用户注册
 router.post('/:id/register', async (ctx, next) => {

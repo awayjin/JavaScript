@@ -2,6 +2,27 @@ const { FEValidator, Rule } = require('./fe-validator')
 const { HttpException } = require('./http-exception')
 const { DemoUser } = require('./db/user-model.js')
 
+// 搜索验证
+class SearchValidator extends FEValidator {
+  constructor (props) {
+    super(props)
+    this.q = [
+      new Rule('isLength', '关键字不能为空', {
+        min: 1,
+        max: 16
+      })
+    ]
+    // this.count = [
+    //   new Rule('isInt', '大于等于 1 的整数', {
+    //     min: 1,
+    //     max: 20
+    //   }),
+    //   new Rule('isOptional', '', 20)
+    // ]
+  }
+}
+
+// 注册验证
 class RegisterValidator extends FEValidator {
   constructor () {
     super()
@@ -37,6 +58,9 @@ class RegisterValidator extends FEValidator {
   // 验证邮箱
   async validateEmail (data) {
     const email = data.body.email
+    if (!email) {
+      throw new HttpException('不符合Email规则')
+    }
     const user = await DemoUser.findOne({ where: { email }})
     console.log('user:', user)
     if (user === null) {
@@ -50,5 +74,6 @@ class RegisterValidator extends FEValidator {
 }
 
 module.exports = {
-  RegisterValidator
+  RegisterValidator,
+  SearchValidator
 }

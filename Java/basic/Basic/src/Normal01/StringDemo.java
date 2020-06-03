@@ -39,6 +39,10 @@ public class StringDemo {
   }
 
   static void equalsStr () {
+
+
+    System.out.println("=======");
+
     String str1 = "abc";
     String str2=  "abc";
 
@@ -63,6 +67,36 @@ public class StringDemo {
     System.out.println(str1.charAt(1)); // b
     // { 97, 98, 65, 66, 48, 49}; // 字节数组 abAB01
     System.out.println(str1.codePointAt(1)); // 97
+
+
+    System.out.println("===String 装换相关方法====");
+
+    char[] chars = "hello".toCharArray();
+    byte[] bytes = "abcdef".getBytes();
+
+    System.out.println("getBytes:" + bytes[0]);
+    System.out.println("getBytes:" + bytes[2]);
+    System.out.println("getBytes:" + bytes[4]);
+
+    System.out.println("toCharArray:" + chars[0]);
+    System.out.println("toCharArray:" + chars[1]);
+    System.out.println("toCharArray:" + chars[3]);
+
+    System.out.println("字符串截取：" + "helloworld".substring(2));
+    System.out.println("替换：" + "hello world".replace('l', '*'));
+
+    String strSplit = "aa,bb,cc";
+    String[] strArr = strSplit.split(",");
+    for (int i = 0; i < strArr.length; i++) {
+      System.out.println("分割：" + strArr[i]);
+    }
+
+    String strStar = "xx.yy.zz";
+    String[] strStarArr = strStar.split("\\."); // 注意事项
+    System.out.println("长度：" + strStarArr.length);
+    for (int i = 0; i < strStarArr.length; i++) {
+      System.out.println("分割 xx.y.z：" + strArr[i]);
+    }
 
   }
 

@@ -1,5 +1,8 @@
 # typescript
 
+## ES6与CommonJS
+export == module.exports
+
 ## 更新依赖包
 cnpm install -g npm-check-updates
 
