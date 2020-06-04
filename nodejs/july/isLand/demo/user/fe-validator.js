@@ -54,6 +54,12 @@ class FEValidator {
   validateKey (member) {
     let value = ''
 
+    // 可选参数 isOptional
+    if (this[member] && this[member].length) {
+      const isOptional = this[member].find(element => element.name === 'isOptional')
+      console.log('isOptional', isOptional)
+      if (isOptional) return isOptional 
+    }
     for (let key in this.data) {
       const req = this.data[key]
       for (let sub in req) {
@@ -98,9 +104,27 @@ class FEValidator {
     }
     return result
   }
+
+  checkIsOptional (member) {
+    // 可选参数 isOptional
+    if (this[member] && this[member].length) {
+      const isOptional = this[member].find(element => element.name === 'isOptional')
+      console.log('isOptional', isOptional)
+      if (isOptional) return isOptional 
+    }
+  }
+  
   // 校验值
   checkValue (member) {
     const keyField = this.validateKey(member) // 字段验证
+    
+    if (this.checkIsOptional) {
+      return {
+        value: null,
+        success: true
+      }
+    }
+
     if (keyField !== member) {
       return {
         value: keyField,

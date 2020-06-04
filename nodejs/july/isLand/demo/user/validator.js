@@ -12,13 +12,13 @@ class SearchValidator extends FEValidator {
         max: 16
       })
     ]
-    // this.count = [
-    //   new Rule('isInt', '大于等于 1 的整数', {
-    //     min: 1,
-    //     max: 20
-    //   }),
-    //   new Rule('isOptional', '', 20)
-    // ]
+    this.count = [
+      new Rule('isInt', '大于 1 小于 20 的整数', {
+        min: 1,
+        max: 20
+      }),
+      new Rule('isOptional', '', 20)
+    ]
   }
 }
 
