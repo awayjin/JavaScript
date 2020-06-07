@@ -55,11 +55,12 @@ class FEValidator {
     let value = ''
 
     // 可选参数 isOptional
-    if (this[member] && this[member].length) {
+    if (this[member] && this[member].length > 1) {
       const isOptional = this[member].find(element => element.name === 'isOptional')
-      console.log('isOptional', isOptional)
+//       console.log('isOptional', isOptional)
       if (isOptional) return isOptional 
     }
+    
     for (let key in this.data) {
       const req = this.data[key]
       for (let sub in req) {
@@ -74,7 +75,7 @@ class FEValidator {
       }
     }
     if (!value) {
-      return `${member} 是必填字段`
+      throw new HttpException(`${member} 是必填字段`)
     }
   }
 
@@ -86,11 +87,27 @@ class FEValidator {
       value,
       success: false
     }
+
     const rule = this[key]
+    // console.log('--> value', value, ' rule:', rule)
     if (rule.length) {
       rule.some(item => {
-        // 验证值
-        const isPass = validator[item.name](value, item.params)
+        let isPass
+
+  
+        if (item.name === 'isOptional' && value !== '' && (!value || value == 0)) { // 可选
+          isPass = true
+
+        } else {
+          // 验证值
+          if (item.name === 'isOptional') {
+            isPass = true
+          } else {
+            isPass = validator[item.name](value, item.params)
+          }
+        
+        }
+        
         // console.log('isPass:', isPass)
         if (!isPass) {
           // 验证没通过
@@ -109,53 +126,55 @@ class FEValidator {
     // 可选参数 isOptional
     if (this[member] && this[member].length) {
       const isOptional = this[member].find(element => element.name === 'isOptional')
-      console.log('isOptional', isOptional)
-      if (isOptional) return isOptional 
+      if (isOptional) return isOptional
     }
   }
   
   // 校验值
   checkValue (member) {
     const keyField = this.validateKey(member) // 字段验证
-    
-    if (this.checkIsOptional) {
-      return {
-        value: null,
-        success: true
-      }
+ 
+
+    let value
+
+    // 查询字符串
+    value = this.get('query.' + member)
+    if (value || value === '') {
+      return this.validateValue(member, value)
+    }
+    // body 请求体-JSON
+    value = this.get('body.' + member)
+    if (value || value === '') {
+      return this.validateValue(member, value)
     }
 
+    // path 路径
+    value = this.get('path.' + member)
+    if (value || value === '') {
+      return this.validateValue(member, value)
+    }
+
+    // header 请求头
+    value = this.get('header.' + member)
+    if (value || value === '') {
+      return this.validateValue(member, value)
+    }
+
+  
+    
     if (keyField !== member) {
+      if (keyField.name === 'isOptional' && value !== '' && (!value || value == 0)) {
+        return {
+          value: null,
+          success: true
+        }
+      }
       return {
         value: keyField,
         success: false
       }
     }
 
-    let value
-
-    // 查询字符串
-    value = this.get('query.' + member)
-    if (value) {
-      return this.validateValue(member, value)
-    }
-    // body 请求体-JSON
-    value = this.get('body.' + member)
-    if (value) {
-      return this.validateValue(member, value)
-    }
-
-    // path 路径
-    value = this.get('path.' + member)
-    if (value) {
-      return this.validateValue(member, value)
-    }
-
-    // header 请求头
-    value = this.get('header.' + member)
-    if (value) {
-      return this.validateValue(member, value)
-    }
 
     return {
       value: null,
@@ -169,7 +188,6 @@ class FEValidator {
     this.data = params
     const members = this.findMembers(this)
     console.log('members:', members)
-    console.log('this:', this)
     // console.log('Reflect.ownKeys:', Reflect.ownKeys(this))
     const errorMessage = []
     let result = []
@@ -180,6 +198,10 @@ class FEValidator {
       } else {
         result = this.checkValue(member)
       }
+      // if (result.value === 'isOptional') {
+      //
+      // }
+      // console.log('--> result', result)
       if (!result.success) {
         errorMessage.push(result.value)
       }
