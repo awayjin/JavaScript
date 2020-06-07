@@ -27,6 +27,7 @@ class Comment extends Model{
     }
   }
 
+  // 获取短评
   static async getComments(bookID) {
     const comments = await Comment.findAll({
       where: {

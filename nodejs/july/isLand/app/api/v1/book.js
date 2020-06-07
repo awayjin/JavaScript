@@ -61,4 +61,17 @@ router.post('/add/short_comment', new Auth().m, async ctx => {
   success()
 })
 
+// 获取短评
+// router.get('/:book_id/short_comment', new Auth().m, async ctx => {
+router.get('/:id/short_comment', async ctx => {
+  const v = await new PositiveIntegerValidator().validate(ctx) // 不用别名
+  // const v = await new PositiveIntegerValidator().validate(ctx, {
+  //   id: 'book_id'
+  // })
+  console.log('---> v:', v)
+  // const comments = await Comment.getComments(v.get('path.book_id'))
+  const comments = await Comment.getComments(v.get('path.id'))
+  ctx.body = comments;
+})
+
 module.exports = router

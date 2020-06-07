@@ -1,5 +1,7 @@
 package Normal01;
 
+import java.util.Scanner;
+
 public class StringDemo {
   public static void main(String[] args) {
 
@@ -97,6 +99,42 @@ public class StringDemo {
     for (int i = 0; i < strStarArr.length; i++) {
       System.out.println("分割 xx.y.z：" + strArr[i]);
     }
+
+    countString();
+  }
+
+  // 统计字符串出现的次数
+  static void countString () {
+    // toCharArray 将此字符串转换为一个新的字符数组。
+    System.out.println("hello".toCharArray());
+
+    Scanner sc = new Scanner(System.in);
+    System.out.println("请输入一个字符串");
+
+    String input = sc.next();
+    int countUpper = 0;
+    int countLower = 0;
+    int countNumber = 0;
+    int countOther = 0;
+
+    char[] charArray = input.toCharArray();
+    for (int i = 0; i < charArray.length; i++) {
+      char ch = charArray[i];
+      if (ch >= 'A' && ch <= 'Z') {
+        countUpper++;
+      } else if (ch >= 'a' && ch <= 'z') {
+        countLower++;
+      } else if (ch >= '0' && ch <= '9') {
+        countNumber++;
+      } else {
+        countOther++;
+      }
+    }
+
+    System.out.println("大写字母出现的次数:" + countUpper);
+    System.out.println("小写字母出现的次数:" + countLower);
+    System.out.println("数字出现的次数:" + countNumber);
+    System.out.println("其他字符的次数:" + countOther);
 
   }
 

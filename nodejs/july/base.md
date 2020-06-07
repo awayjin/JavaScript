@@ -156,4 +156,20 @@ auth.code2Session:
 ## 数据来源
 python 爬虫工具 requests, BF4, Scrappy
 
-## 新增短评 - 别名
+## 新增短评和获取短评 - 别名
+
+## JSON序列化 - toJSON
+```javascript
+const person = {
+  name: 'my name',
+  age: 18,
+  toJSON () {
+    const ran = Math.random() * 10
+    if (ran > 5) {
+      return ran
+    }
+    return { 'name': 'look up sky'}
+  }
+}
+console.log(JSON.stringify(person))
+```
