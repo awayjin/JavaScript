@@ -37,11 +37,14 @@ class Comment extends Model{
     return comments
   }
 
+  // 序列化
   // toJSON(){
-  //     return {
-  //       content:this.getDataValue('content'),
-  //       nums:this.getDataValue('nums'),
-  //     }
+  //   return {
+  //     // getDataValue 拿到字段的值
+  //     // this.dataValues
+  //     content: this.getDataValue('content'),
+  //     nums: this.getDataValue('nums'),
+  //   }
   // }
 }
 

@@ -68,9 +68,17 @@ router.get('/:id/short_comment', async ctx => {
   // const v = await new PositiveIntegerValidator().validate(ctx, {
   //   id: 'book_id'
   // })
-  console.log('---> v:', v)
   // const comments = await Comment.getComments(v.get('path.book_id'))
   const comments = await Comment.getComments(v.get('path.id'))
+  ctx.body = comments;
+})
+
+// 获取书籍短评
+router.get('/:book_id/short_comment', new Auth().m, async ctx => {
+  const v = await new PositiveIntegerValidator().validate(ctx, {
+    id: 'book_id'
+  })
+  const comments = await Comment.getComments(v.get('path.book_id'))
   ctx.body = comments;
 })
 
