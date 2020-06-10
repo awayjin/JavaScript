@@ -173,3 +173,9 @@ const person = {
 }
 console.log(JSON.stringify(person))
 ```
+
+## 自动 无感知刷新令牌
+退出 短时间 二次重发机制
+
+获取 Mac IP
+ifconfig | grep "inet"
