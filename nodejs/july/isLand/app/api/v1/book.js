@@ -69,8 +69,14 @@ router.get('/:id/short_comment', async ctx => {
   //   id: 'book_id'
   // })
   // const comments = await Comment.getComments(v.get('path.book_id'))
-  const comments = await Comment.getComments(v.get('path.id'))
-  ctx.body = comments;
+
+  const book_id = v.get('path.id');
+  const comments = await Comment.getComments(book_id)
+  // ctx.body = comments;
+  ctx.body = {
+    comments: comments,
+    book_id
+  };
 })
 
 // 获取书籍短评

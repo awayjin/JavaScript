@@ -30,7 +30,7 @@ app.use(exceptionMiddleware)
 // 搜索
 router.get('/search', async (ctx, next) => {
   const v = await new SearchValidator().validate(ctx)
-  console.log('----》 v：', v)
+  // console.log('----》 v：', v)
   ctx.body = v
 })
 

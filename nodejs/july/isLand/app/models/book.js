@@ -5,11 +5,12 @@ const util = require('util')
 const { sequelize } = require('../../core/db')
 const { Favor } = require('./favor')
 
+// 自定义模型最好不要写 constructor
 class Book extends Model {
-  constructor(id) {
-    super()
-    this.id = id
-  }
+  // constructor(id) {
+  //   super()
+  //   this.id = id
+  // }
 
   async detail(id) {
     const url = util.format(global.config.yushu.detailUrl, id)

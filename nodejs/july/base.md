@@ -179,3 +179,9 @@ console.log(JSON.stringify(person))
 
 获取 Mac IP
 ifconfig | grep "inet"
+
+自定义模型最好不要写 constructor
+
+## 错误收集
+不要设置默认值
+Field 'created_at' doesn't have a default value sequelize

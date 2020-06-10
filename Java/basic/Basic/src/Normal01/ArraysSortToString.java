@@ -16,5 +16,15 @@ public class ArraysSortToString {
     Arrays.sort(arr2);
     System.out.println(Arrays.toString(arr2));
 
+    System.out.println("======");
+
+    // 升序排列字符串
+    String str = "abddzfs12392";
+    char[] chars = str.toCharArray(); // 字符串转为数组
+    Arrays.sort(chars);
+    for (int i = chars.length - 1; i >= 0; i--) {
+      System.out.println(chars[i]);
+    }
+
   }
 }
