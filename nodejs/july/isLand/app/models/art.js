@@ -1,5 +1,5 @@
 const { Movie, Music, Sentence } = require('./classic')
-
+const { flatten } = require('lodash')
 class Art {
   static async getData (art_id, type) {
     let art = null
@@ -26,11 +26,38 @@ class Art {
         }
         break
     }
+    // 图片加上 host
+    if (art && art.image) {
+        let imgUrl = art.dataValues.image
+        art.dataValues.image = global.config.host + imgUrl
+    }
     return art
   }
   // 下划线私有方法
   _getDetail () {
 
+  }
+  static async getList(artInfoList) {
+    const artInfoObj = {
+      100: [],
+      200: [],
+      300: [],
+    }
+    for (let artInfo of artInfoList) {
+      artInfoObj[artInfo.type].push(artInfo.art_id)
+    }
+    const arts = []
+    for (let key in artInfoObj) {
+      const ids = artInfoObj[key]
+      if (ids.length === 0) {
+        continue
+      }
+
+      key = parseInt(key)
+      arts.push(await Art._getListByType(ids, key))
+    }
+
+    return flatten(arts)
   }
 }
 

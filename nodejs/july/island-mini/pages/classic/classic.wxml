@@ -8,7 +8,7 @@
             </v-button>
         </view>
     </view>
-    <button bind:tap="onGetToken">获取token</button>
+    <button bind:tap="onGetToken">下一页 -DEMO</button>
     <v-movie hidden="{{classic.type!=100}}" img="{{classic.image}}" content="{{classic.content}}" />
     <v-music wx:if="{{classic.type==200}}" img="{{classic.image}}" content="{{classic.content}}" title="{{classic.title}}" src="{{classic.url}}" />
     <v-essay hidden="{{classic.type!=300}}" img="{{classic.image}}" content="{{classic.content}}" />

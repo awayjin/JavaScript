@@ -4,6 +4,7 @@ import {
 import {
     LikeModel
 } from '../../models/like.js'
+import { Base64 } from 'js-base64'
 
 const classicModel = new ClassicModel()
 const likeModel = new LikeModel()
@@ -61,58 +62,32 @@ Component({
     },
 
     methods: {
+    
+  encodeBasic64() {
+    // debugger
+    const token = wx.getStorageSync('token')
+    const base64 = Base64.encode(token + ':')
+    // Authorization:Basic base64(account:password)
+    return 'Basic ' + base64
+  },
         // 获取 token
   onGetToken () {
-    const code = wx.login({
+    
+    //发起网络请求
+    wx.request({
+      // url: 'http://localhost:3000/v1/classic/a5',
+      url: 'http://localhost:3000/v1/classic/8/previous',
+      header: {
+        Authorization: this.encodeBasic64()
+        // Authorization: this.onDemo()
+      },
       success(res) {
-        // console.log('res.code:', res.code)
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'http://192.168.0.101:3000/v1/token',
-            data: {
-              account: res.code,
-              type: 100
-            },
-            success(res) {
-              console.log('success res:', res)
-              const code = res.statusCode.toString()
-              // debugger
-              if (code.startsWith('2')) {
-              // if (code === '200') {
-                console.log('res.data.token:', res.data.token)
-                // debugger
-                wx.setStorage({
-                  'key': 'token',
-                  'data': res.data.token,
-                  success: function (res) {
-                    console.log('设置 token:', res)
-                  },
-                  fail: (res) => {
-                    console.log('fail 设置 token:', res)
-                  }
-                })
-                wx.getStorageSync({
-                  key: 'token',
-                  success: function (res) {
-                    console.log('从本地 获取token:', res)
-                  },
-                  fail: (res) => {
-                    console.log('fail 从本地 获取token:', res)
-                  }
-                })
-              }
-            },
-            fail(res) {
-              console.log('fail:', res)
-            },
-            method: 'POST'
-          })
-
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
-      }
+        console.log('success res:', res)
+      },
+      fail(res) {
+        console.log('fail:', res)
+      },
+      method: 'get'
     })
     // console.log('aa:', code)
   },
@@ -131,6 +106,7 @@ Component({
         },
 
         _updateClassic: function(nextOrPrevious) {
+          // debugger
             console.log(this.data.classic)
             const index = this.data.classic.index
             const classic = classicModel.getClassic(index, nextOrPrevious)

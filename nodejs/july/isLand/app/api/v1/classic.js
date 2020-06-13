@@ -2,12 +2,13 @@ const Router = require('koa-router')
 const router = new Router({
   prefix: '/v1/classic'
 })
-// const { HttpException, ParameterException } = require('../../../core/http-exception')
+const { HttpException, ParameterException } = require('../../../core/http-exception')
 const { PositiveIntegerValidator, ClassicValidator } = require('../../valiadators/validator')
 const { Auth } = require('../../../middlewares/auth')
 const { Flow } = require('../../models/flow')
 const { Art } = require('../../models/art')
 const { Favor } = require('../../models/favor')
+
 
 // router.get('/v1/classic/latest', async (ctx, next) => {
 router.get('/latest', new Auth().m, async (ctx, next) => {
@@ -81,6 +82,45 @@ router.get('/:type/:id', new Auth().m, async ctx => {
     like_status: like,
     ...artDetail.dataValues
   }
+})
+
+
+router.get('/favor', new Auth().m, async ctx => {
+  const uid = ctx.auth.uid
+  ctx.body = await Favor.getMyClassicFavors(uid)
+})
+
+
+router.get('/8/previous', ctx => {
+  ctx.body = 445;
+})
+
+router.get('/a18/3', ctx => {
+  ctx.body = 8;
+})
+
+// router.get('/:index/previous', new Auth().m, async (ctx) => {
+// router.get('/:index/previous', async (ctx) => {
+router.get('/8/previous3',async (ctx) => {
+  ctx.body = 44
+//   const v = await new PositiveIntegerValidator().validate(ctx, {
+//     id: 'index'
+//   })
+//   const index = v.get('path.index')
+//   const flow = await Flow.findOne({
+//     where: {
+//       index: index - 1
+//     }
+//   })
+//   if (!flow) {
+//     throw new global.errs.NotFound()
+//   }
+//   const art = await Art.getData(flow.art_id, flow.type)
+//   const likePrevious = await Favor.userLikeIt(
+//     flow.art_id, flow.type, ctx.auth.uid)
+//   art.setDataValue('index', flow.index)
+//   art.setDataValue('like_status', likePrevious)
+//   ctx.body = art
 })
 
 module.exports = router

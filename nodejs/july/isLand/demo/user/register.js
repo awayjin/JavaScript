@@ -28,6 +28,13 @@ const exceptionMiddleware = async (ctx, next) => {
 app.use(exceptionMiddleware)
 
 // 搜索
+router.get('/:id/demo', async (ctx, next) => {
+  const id = ctx.params // 路径
+  console.log('---> id:', id);
+  ctx.body = 'demo'
+})
+
+// 搜索
 router.get('/search', async (ctx, next) => {
   const v = await new SearchValidator().validate(ctx)
   // console.log('----》 v：', v)
