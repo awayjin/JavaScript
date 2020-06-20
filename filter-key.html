@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js"></script>
+</head>
+<body>
+PM2 Nginx-proxy-pass:300 Node.js
+
+
+<script>
+  // var data = [
+  //   {
+  //     "name": "apple",
+  //     "id": "cat_2",
+  //     children: [
+  //       { name: 'b'}
+  //     ]
+  //   }
+  // ]
+
+  // if(!_.find(data,{name: 'apple'})) {
+  //   data.push({name: 'apple2'});
+  // }
+  // console.log(_.find(data, { name: 'b'}))
+
+  var arr = [
+    {
+      'name': 'a',
+      'id': '1',
+      children: [
+        {
+          name: 'b1',
+          'id': '10',
+          children: [
+            { name: 'b1-1', 'id': '100', },
+            { name: 'b1-2', 'id': '101', },
+            { name: 'b1-3', 'id': '102', }
+          ]
+        },
+        { name: 'b2', 'id': '11', }
+      ]
+    }
+  ]
+
+  function f(arr, selectedKey) {
+    return arr.filter(item => item.id !== selectedKey).map(item => {
+      // item = Object.assign({}, item)
+      if (item.children) {
+        item.children = f(item.children, selectedKey)
+      }
+      return item
+    })
+  }
+
+  console.log(f(arr, '101'))
+  // console.log(fil)
+
+  // 菜单列表
+  const menuList = [
+    {
+      name: '系统管理',
+      code: 'system_manage',
+      children: [{
+        name: '用户管理',
+        code: 'user_manage',
+        children: [{
+          name: '添加用户',
+          code: 'add_user'
+        }, {
+          name: '编辑用户',
+          code: 'edit_user'
+        }, {
+          name: '删除用户',
+          code: 'del_user'
+        }]
+      }, {
+        name: '角色管理',
+        code: 'role_manage',
+        children: [{
+          name: '添加角色',
+          code: 'add_role'
+        }]
+      }]
+    },
+    {
+      name: '业务管理',
+      code: 'bus_manage',
+      children: [{
+        name: '流程管理',
+        code: 'process_manage'
+      }]
+    },
+    {
+      name: '订单管理',
+      code: 'order_manage'
+    }]
+
+  // 权限列表
+  const myMenuCode = ['system_manage', 'user_manage', 'add_user', 'order_manage']
+
+  const filterMenu = (menuList, menuCode) => {
+    return menuList.filter(item => {
+      // return menuCode.indexOf(item.code) > -1
+      return item.code != 'edit_user'
+    }).map(item => {
+      item = Object.assign({}, item)
+      if (item.children) {
+        item.children = filterMenu(item.children, menuCode)
+      }
+      return item
+    })
+  }
+
+  // 过滤后的菜单
+  const myMenu = filterMenu(menuList, myMenuCode)
+
+  console.log(myMenu)
+</script>
+
+<p></p>
+<script>
+  function clickMe (e) {
+    console.log(e)
+  }
+</script>
+<button onclick="clickMe(event)">Click me.</button>
+
+</body>
+</html>
