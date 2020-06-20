@@ -35,14 +35,14 @@ sequelize.sync({ alter: false })
 // sequelize.sync({ force: true })
 
 // 序列化排除
-Model.prototype.toJSON = function () {
-  let data = clone(this.dataValues);
-  unset(data, 'updated_at')
-  unset(data, 'created_at')
-  unset(data, 'deleted_at')
-  // unset(data, 'content')
-  return data
-}
+// Model.prototype.toJSON = function () {
+//   let data = clone(this.dataValues);
+//   unset(data, 'updated_at')
+//   unset(data, 'created_at')
+//   unset(data, 'deleted_at')
+//   // unset(data, 'content')
+//   return data
+// }
 
 module.exports = {
   sequelize
