@@ -33,14 +33,14 @@ export class Users extends React.Component<any, any> {
     })
   }
   render() {
-    const theme = this.state.theme;
-    const value = themes[theme];
+    const value = themes[this.state.theme];
     return (
       <ThemeContext.Provider value={value}>
         <div className="App">
-          <header className="App-header">
+          <header className="App-header3" style={{ height: 154}}>
             <h1 className="App-title">Welcome to React</h1>
             <a href="#theme-switcher" className="btn btn-light" onClick={()=>{this.changeTheme('light')}}>浅色主题</a>
+            <br/>
             <a href="#theme-switcher" className="btn btn-secondary" onClick={()=>{this.changeTheme('dark')}}>深色主题</a>
           </header>
           <ThemedBar></ThemedBar>
