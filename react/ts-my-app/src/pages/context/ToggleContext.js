@@ -5,6 +5,7 @@ import React, { createContext, useState } from 'react'
 // 1. 使用 createContext 创建上下文
 const ToggleContext = createContext({
   toggle: true,
+  title: 'title',
   handleToggle: () => {}
 })
 
@@ -18,6 +19,7 @@ export class ToggleProvider extends React.Component {
   // 2-1. 重写 state
   state = {
     toggle: true,
+    title: 'title2',
     handleToggle: this.handleToggle
   }
 
@@ -31,8 +33,6 @@ export class ToggleProvider extends React.Component {
   }
 }
 
-
-// function
 // export function ToggleProvider (props) {
 //   const [st, setSt] = useState({
 //     toggle: true,

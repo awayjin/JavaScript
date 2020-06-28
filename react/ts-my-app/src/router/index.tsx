@@ -8,33 +8,51 @@ function Index() {
   return <h2>Home</h2>;
 }
 
-function AppRouter() {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about/">About</Link>
-            </li>
-            <li>
-              <Link to="/users/">Users</Link>
-            </li>
-            <li>
-              <Link to="/context">Context</Link>
-            </li>
-          </ul>
-        </nav>
+interface IThemeProps {
+  [key: string]: { color: string, background: string }
+}
+const themes: IThemeProps = {
+  'light': {
+    color: '#000',
+    background: '#eee',
+  },
+  'dark': {
+    color: '#fff',
+    background: '#000',
+  },
+}
+export const ThemeContext = React.createContext(themes.light);
 
-        <Route path="/" exact component={Index} />
-        <Route path="/about/" component={About} />
-        <Route path="/users/" component={Users} />
-        <Route path="/context" component={Context} />
-      </div>
-    </Router>
+function AppRouter() {
+  console.log('themes.dark:', themes);
+  return (
+    <ThemeContext.Provider value={themes.dark}>
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/about/">About</Link>
+              </li>
+              <li>
+                <Link to="/users/">Users</Link>
+              </li>
+              <li>
+                <Link to="/context">Context</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <Route path="/" exact component={Index} />
+          <Route path="/about/" component={About} />
+          {/*<Route path="/users/" component={Users} />*/}
+          <Route path="/context" component={Context} />
+        </div>
+      </Router>
+    </ThemeContext.Provider>
   );
 }
 
