@@ -5,13 +5,14 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import {Home} from '../pages/index'
 import {About} from '../pages/about/about'
 import {Users} from '../pages/user/index'
 import {ContextPage} from '../pages/context/index'
 import {ReducerPage} from '../pages/reducer/index'
 
 interface IThemeProps {
-  [key: string]: { color: string, background: string }
+  [key: string]: { color: string, background: string, width?: any, }
 }
 const themes: IThemeProps = {
   'light': {
@@ -22,15 +23,21 @@ const themes: IThemeProps = {
     color: '#fff',
     background: '#000',
   },
+  'default': {
+    color: '#fff',
+    background: '#000',
+    width: 200,
+  }
 }
 export const ThemeContext = React.createContext(themes.light);
 
 function App() {
-  const [theme, setTheme] = useState();
+  const [theme, setTheme] = useState('default');
   const changeTheme = (changeTheme: string) => {
     console.log(changeTheme)
     setTheme(changeTheme);
   }
+  console.log('themes[theme]:', themes[theme]);
 
   return (
     <ThemeContext.Provider value={themes[theme]}>
@@ -70,19 +77,16 @@ function App() {
             </Route>
             <Route path="/">
               <Home />
+              <a href="#theme-switcher" className="btn btn-light" onClick={()=>{changeTheme('light')}}>浅色主题</a>
+              <br/>
+              <a href="#theme-switcher" className="btn btn-secondary" onClick={()=>{changeTheme('dark')}}>深色主题</a>
             </Route>
           </Switch>
         </div>
       </Router>
-      <a href="#theme-switcher" className="btn btn-light" onClick={()=>{changeTheme('light')}}>浅色主题</a>
-      <br/>
-      <a href="#theme-switcher" className="btn btn-secondary" onClick={()=>{changeTheme('dark')}}>深色主题</a>
     </ThemeContext.Provider>
   );
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
 
 export default App;
