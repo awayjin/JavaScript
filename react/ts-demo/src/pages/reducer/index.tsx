@@ -2,7 +2,8 @@ import React, {useReducer} from 'react';
 // 简介： https://juejin.im/post/5c87c1b4f265da2dc453b6d6
 import Buttons from './Buttons';
 import ShowArea from './ShowArea'
-import { Color } from './Color';   //引入Color组件
+import { Color } from './Color';   // 引入Color组件
+import {TreeContent} from "./treeContent";
 
 // export function ReducerPage () {
 //   const [count, dispatch] = useReducer((state: any, action: any) => {
@@ -24,11 +25,14 @@ import { Color } from './Color';   //引入Color组件
 
 export const ReducerPage = () => {
   return (
-    <div>
+    <>
       <Color>
         <Buttons />
         <ShowArea />
       </Color>
-    </div>
+      <TreeContent>
+
+      </TreeContent>
+    </>
   )
 }
