@@ -4,6 +4,8 @@ import Buttons from './Buttons';
 import ShowArea from './ShowArea'
 import { Color } from './Color';   // 引入Color组件
 import {TreeContent} from "./treeContent";
+import {ServiceLine} from "./components/serviceLine";
+import {StatInfo} from "./components/SateInfo";
 
 // export function ReducerPage () {
 //   const [count, dispatch] = useReducer((state: any, action: any) => {
@@ -30,9 +32,9 @@ export const ReducerPage = () => {
         <Buttons />
         <ShowArea />
       </Color>
-      <TreeContent>
-
-      </TreeContent>
+      <ServiceLine>
+        <TreeContent><></></TreeContent>
+      </ServiceLine>
     </>
   )
 }
