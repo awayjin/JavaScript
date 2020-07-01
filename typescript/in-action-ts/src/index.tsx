@@ -22,6 +22,10 @@ import Hello from './components/Hello'
 import HelloHooks from './components/HelloHooks'
 import About from './components/About'
 
+// import demo from './node/demo'
+const d = require('./node/demo')
+console.log('d:', d.hello())
+
 // console.log('Hello3:', Hello3)
 console.log('Hello:', Hello)
 

@@ -155,3 +155,33 @@ auth.code2Session:
 
 ## 数据来源
 python 爬虫工具 requests, BF4, Scrappy
+
+## 新增短评和获取短评 - 别名
+
+## JSON序列化 - toJSON
+```javascript
+const person = {
+  name: 'my name',
+  age: 18,
+  toJSON () {
+    const ran = Math.random() * 10
+    if (ran > 5) {
+      return ran
+    }
+    return { 'name': 'look up sky'}
+  }
+}
+console.log(JSON.stringify(person))
+```
+
+## 自动 无感知刷新令牌
+退出 短时间 二次重发机制
+
+获取 Mac IP
+ifconfig | grep "inet"
+
+自定义模型最好不要写 constructor
+
+## 错误收集
+不要设置默认值
+Field 'created_at' doesn't have a default value sequelize

@@ -5,8 +5,10 @@ const router = new Router({
 const { Book } = require('../../models/book')
 const { Favor } = require('../../models/favor')
 const { HotBook } = require('../../models/hot-book')
-const { PositiveIntegerValidator, SearchValidator } = require('../../valiadators/validator')
+const { Comment } = require('../../models/book-comment')
+const { PositiveIntegerValidator, SearchValidator, AddShortCommentValidator } = require('../../valiadators/validator')
 const { Auth } = require('../../../middlewares/auth')
+const { success } = require('../../lib/helper')
 
 // 热门书籍列表
 router.get('/hot_list', async (ctx, next) => {
@@ -47,6 +49,43 @@ router.get('/:book_id/favor', new Auth().m, async ctx => {
   const favor = await Favor.getBookFavor(
     ctx.auth.uid, v.get('path.book_id'))
   ctx.body = favor
+})
+
+// 增加短评
+router.post('/add/short_comment', new Auth().m, async ctx => {
+  const v = await new AddShortCommentValidator().validate(ctx,{
+    id: 'book_id'
+  })
+  console.log('----- >:', v)
+  Comment.addComment(v.get('body.book_id'),v.get('body.content'))
+  success()
+})
+
+// 获取短评
+// router.get('/:book_id/short_comment', new Auth().m, async ctx => {
+router.get('/:id/short_comment', async ctx => {
+  const v = await new PositiveIntegerValidator().validate(ctx) // 不用别名
+  // const v = await new PositiveIntegerValidator().validate(ctx, {
+  //   id: 'book_id'
+  // })
+  // const comments = await Comment.getComments(v.get('path.book_id'))
+
+  const book_id = v.get('path.id');
+  const comments = await Comment.getComments(book_id)
+  // ctx.body = comments;
+  ctx.body = {
+    comments: comments,
+    book_id
+  };
+})
+
+// 获取书籍短评
+router.get('/:book_id/short_comment', new Auth().m, async ctx => {
+  const v = await new PositiveIntegerValidator().validate(ctx, {
+    id: 'book_id'
+  })
+  const comments = await Comment.getComments(v.get('path.book_id'))
+  ctx.body = comments;
 })
 
 module.exports = router

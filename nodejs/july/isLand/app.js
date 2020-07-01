@@ -1,3 +1,5 @@
+const static = require('koa-static')
+const path = require('path')
 const app = new (require('koa'))
 // 自动导入路由，全局异常，配置文件
 const InitManager = require('./core/init')
@@ -14,5 +16,9 @@ InitManager.init(app)
 // const latest = require('./api/v1/classic')
 // app.use(latest.routes())
 // app.use(book.routes())
+app.use(static(path.join(__dirname + '/static')))
 
-app.listen(3000)
+const port = 3000
+app.listen(port, () => {
+  console.log('---> App listened at port:' + port)
+})

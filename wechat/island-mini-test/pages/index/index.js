@@ -1,6 +1,43 @@
 import { Base64 } from 'js-base64'
 
 Page({
+  // 获取短评
+  onGetComments () {
+    wx.request({
+      url: 'http://localhost:3000/v1/book/1120/short_comment',
+      method: 'get',
+      header: {
+        Authorization: this.encodeBasic64()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
+  // 增加短评
+  onAddShortComment () {
+    wx.request({
+      url: 'http://localhost:3000/v1/book/add/short_comment',
+      method: 'POST',
+      data: {
+        content: '天上一天地下十年',
+        book_id: 1121
+      },
+      header: {
+        Authorization: this.encodeBasic64()
+      },
+      success(res) {
+        console.log('res.data:', res.data)
+      },
+      fail(err) {
+        console.log('err:', err)
+      }
+    })
+  },
+
   // onBookLikes
   onBookLikes () {
     wx.request({

@@ -41,7 +41,11 @@ module.exports = (env, argv) => {
         {
           test: /\.tsx?$/i,
           use: [{
-            loader: 'ts-loader'
+            loader: 'ts-loader',
+            // 语言编译，类型检查
+            options: {
+              transpileOnly: true
+            }
           }],
           exclude: /node_modules/
         }
