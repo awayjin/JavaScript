@@ -10,6 +10,7 @@ import {About} from '../pages/about/about'
 import {Users} from '../pages/user/index'
 import {ContextPage} from '../pages/context/index'
 import {ReducerPage} from '../pages/reducer/index'
+import {UseEffectPage} from '../pages/useEffect/index'
 
 interface IThemeProps {
   [key: string]: { color: string, background: string, width?: any, }
@@ -49,6 +50,9 @@ function App() {
                 <Link to="/">Home</Link>
               </li>
               <li>
+                <Link to="/useEffect">useEffect</Link>
+              </li>
+              <li>
                 <Link to="/about">About</Link>
               </li>
               <li>
@@ -65,6 +69,9 @@ function App() {
           <Switch>
             <Route path="/reducer">
               <ReducerPage />
+            </Route>UseEffectPage
+            <Route path="/useEffect">
+              <UseEffectPage />
             </Route>
             <Route path="/context">
               <ContextPage />
