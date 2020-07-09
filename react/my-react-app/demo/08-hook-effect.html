@@ -25,11 +25,14 @@
   //   setCount(count + 1)
   // } }>
   function Home () {
-    const [count, setCount] = useState(10)
+    const [count, setCount] = useState(10);
+    const [toggle, setToggle] = useState(true);
+
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
       document.title = `${count} times have clicked by you.`
-    })
+      console.log(`${count}`)
+    }, [count])
     const changeCount = () => {
       setCount(count + 1)
     }
@@ -37,10 +40,15 @@
       <div>
         <p>You clicke { count }</p>
         <p>
-            <button onClick={ changeCount }>
+          <button onClick={ changeCount }>
             点击+1
           </button>
         </p>
+        <div>
+          <button onClick={ () => setToggle(!toggle)}>
+            toggle: { toggle ? '11' : '22' }
+          </button>
+        </div>
       </div>
     )
   }
