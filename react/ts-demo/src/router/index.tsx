@@ -11,6 +11,7 @@ import {Users} from '../pages/user/index'
 import {ContextPage} from '../pages/context/index'
 import {ReducerPage} from '../pages/reducer/index'
 import {UseEffectPage} from '../pages/useEffect/index'
+import { Compotion } from '../pages/composition'
 
 interface IThemeProps {
   [key: string]: { color: string, background: string, width?: any, }
@@ -50,6 +51,9 @@ function App() {
                 <Link to="/">Home</Link>
               </li>
               <li>
+                <Link to="/composition">component composition</Link>
+              </li>
+              <li>
                 <Link to="/useEffect">useEffect</Link>
               </li>
               <li>
@@ -67,12 +71,15 @@ function App() {
             </ul>
           </nav>
           <Switch>
+            <Route path="/composition">
+              <Compotion />
+            </Route>
             <Route path="/reducer">
               <ReducerPage />
             </Route>UseEffectPage
             <Route path="/useEffect">
               <UseEffectPage />
-            </Route>
+            </Route>composition
             <Route path="/context">
               <ContextPage />
             </Route>

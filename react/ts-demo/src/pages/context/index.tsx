@@ -1,47 +1,87 @@
-// 3@ts-nocheck
-import React from 'react'
+// @ts-nocheck
+import React, {useContext} from 'react'
+// https://zh-hans.reactjs.org/docs/context.html
 
-const ThemeContext = React.createContext('light3')
-export class ContextPage extends React.Component {
-  render () {
-    return (
-      <>
-        <ThemeContext.Provider value='dark2'>
-          <Toolbar  />
-          {/* <Toolbar theme="light" /> */}
-        </ThemeContext.Provider>
-      </>
-    )
-  }
-}
+import { ThemeContext, themes } from './themes/theme-context'
+import ThemeButoon from './themes/theme-button'
 
-type IProps = {
-  theme: string;
-}
-
-function Toolbar() {
+function Toolbar (props) {
   return (
-    <div>
-      <ThemeButoon></ThemeButoon>  
-      {/* <ThemeButoon theme={props.theme}></ThemeButoon>   */}
-    </div>
+    <ThemeButoon onClick={props.changeTheme}>
+      changeTheme
+    </ThemeButoon>
   )
 }
-// class ThemeButoon extends React.Component<IProps> {
-class ThemeButoon extends React.Component {
-  static contextType = ThemeContext;
+
+export class ContextPage extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      theme: themes.light
+    }
+    
+    this.toggleTheme = (state => {
+      theme: 
+        state.theme === themes.dark ?  themes.light : themes.dark
+    })
+  }
   render () {
+    // 在 ThemeProvider 内部的 ThemedButton 按钮组件使用 state 中的 theme 值，
+    // 而外部的组件使用默认的 theme 值
     return (
-      <>
-        b1 context: <Button theme={this.context} />
-        {/* <Button theme={this.props.theme}></Button> */}
-      </>
-    )
+      <Page>
+        <ThemeContext.Provider value={this.state.theme}>
+          <Toolbar changeTheme={this.toggleTheme} />
+        </ThemeContext.Provider>
+        <Section>
+          <ThemedButton />
+        </Section>
+      </Page>
+    );
   }
 }
-function Button (props: any) {
-  return <button>{ props.theme }</button>
-}
+
+// const ThemeContext = React.createContext('light3')
+// export class ContextPage extends React.Component {
+//   render () {
+//     return (
+//       <>
+//         <ThemeContext.Provider value='dark2'>
+//           <Toolbar  />
+//           {/* <Toolbar theme="light" /> */}
+//         </ThemeContext.Provider>
+//       </>
+//     )
+//   }
+// }
+
+// type IProps = {
+//   theme: string;
+// }
+
+// function Toolbar() {
+//   return (
+//     <div>
+//       <ThemeButoon></ThemeButoon>  
+//       {/* <ThemeButoon theme={props.theme}></ThemeButoon>   */}
+//     </div>
+//   )
+// }
+// // class ThemeButoon extends React.Component<IProps> {
+// class ThemeButoon extends React.Component {
+//   static contextType = ThemeContext;
+//   render () {
+//     return (
+//       <>
+//         b1 context: <Button theme={this.context} />
+//         {/* <Button theme={this.props.theme}></Button> */}
+//       </>
+//     )
+//   }
+// }
+// function Button (props: any) {
+//   return <button>{ props.theme }</button>
+// }
 
 
 // import React, {createContext, useState} from 'react';
