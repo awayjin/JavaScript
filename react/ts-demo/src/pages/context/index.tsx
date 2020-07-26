@@ -1,45 +1,92 @@
 // @ts-nocheck
-import React, {useContext} from 'react'
 // https://zh-hans.reactjs.org/docs/context.html
 
-import { ThemeContext, themes } from './themes/theme-context'
-import ThemeButoon from './themes/theme-button'
+// import React, {useContext} from 'react'
+// import { ThemeContext, themes } from './themes/theme-context'
+// import ThemeButton from './themes/theme-button'
+//
+// function Toolbar (props) {
+//   return (
+//     <ThemeButton onClick={props.changeTheme}>
+//       changeTheme
+//     </ThemeButton>
+//   )
+// }
+//
+// export class ContextPage extends React.Component {
+//   constructor (props) {
+//     super(props);
+//     this.state = {
+//       theme: themes.light
+//     }
+//
+//     // this.toggleTheme = (state => {
+//     //   state.theme === themes.dark ?  themes.light : themes.dark
+//     // })
+//     this.toggleTheme = () => {
+//       this.setState(state => ({
+//         theme:
+//           state.theme === themes.dark
+//             ? themes.light
+//             : themes.dark,
+//       }));
+//     };
+//   }
+//   render () {
+//     // 在 ThemeProvider 内部的 ThemedButton 按钮组件使用 state 中的 theme 值，
+//     // 而外部的组件使用默认的 theme 值
+//     return (
+//       // <div>dd</div>
+//       <div>
+//         <ThemeContext.Provider value={this.state.theme}>
+//           <Toolbar changeTheme={this.toggleTheme} />
+//         </ThemeContext.Provider>
+//         <section>
+//           <ThemeButton />
+//         </section>
+//       </div>
+//     );
+//   }
+// }
 
-function Toolbar (props) {
-  return (
-    <ThemeButoon onClick={props.changeTheme}>
-      changeTheme
-    </ThemeButoon>
-  )
-}
-
-export class ContextPage extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      theme: themes.light
-    }
-    
-    this.toggleTheme = (state => {
-      theme: 
-        state.theme === themes.dark ?  themes.light : themes.dark
-    })
-  }
-  render () {
-    // 在 ThemeProvider 内部的 ThemedButton 按钮组件使用 state 中的 theme 值，
-    // 而外部的组件使用默认的 theme 值
+import React, {useContext} from 'react'
+const ThemeContext = React.createContext('light')
+export class ContextPage extends React.Component<any, any> {
+  render() {
     return (
-      <Page>
-        <ThemeContext.Provider value={this.state.theme}>
-          <Toolbar changeTheme={this.toggleTheme} />
+      <div>
+        <ThemeContext.Provider value={"light3"}>
+          <Header />
         </ThemeContext.Provider>
-        <Section>
-          <ThemedButton />
-        </Section>
-      </Page>
+      </div>
     );
   }
 }
+function Header () {
+  return (
+    <ThemeButton />
+  )
+}
+// class 实现
+class ThemeButton extends React.Component<any, any> {
+  // 指定 contextType 读取当前的 theme context。
+  // React 会往上找到最近的 theme Provider，然后使用它的值。
+  static contextType = ThemeContext;
+  render() {
+    return (
+      <button theme={this.context}>{ this.context }</button>
+    );
+  }
+}
+// 函数实现
+function ThemeButton2(props, context) {
+  const value = useContext(ThemeContext)
+  return (
+    <button >{ value }</button>
+  )
+}
+
+
 
 // const ThemeContext = React.createContext('light3')
 // export class ContextPage extends React.Component {

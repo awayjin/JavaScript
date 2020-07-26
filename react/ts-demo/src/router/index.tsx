@@ -11,7 +11,7 @@ import {Users} from '../pages/user/index'
 import {ContextPage} from '../pages/context/index'
 import {ReducerPage} from '../pages/reducer/index'
 import {UseEffectPage} from '../pages/useEffect/index'
-import { Compotion } from '../pages/composition'
+import { Composition } from '../pages/composition'
 
 interface IThemeProps {
   [key: string]: { color: string, background: string, width?: any, }
@@ -36,10 +36,10 @@ export const ThemeContext = React.createContext(themes.light);
 function App() {
   const [theme, setTheme] = useState('default');
   const changeTheme = (changeTheme: string) => {
-    console.log(changeTheme)
+    // console.log(changeTheme)
     setTheme(changeTheme);
   }
-  console.log('themes[theme]:', themes[theme]);
+  // console.log('themes[theme]:', themes[theme]);
 
   return (
     <ThemeContext.Provider value={themes[theme]}>
@@ -72,7 +72,7 @@ function App() {
           </nav>
           <Switch>
             <Route path="/composition">
-              <Compotion />
+              <Composition />
             </Route>
             <Route path="/reducer">
               <ReducerPage />
