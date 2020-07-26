@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  {{ msg }}
+</div>
+
+<script>
+function updateView () {
+  console.log('update view')
+}
+
+// 重新定义数组原型
+const oldArrayPrototype = Array.prototype;
+// 创建新对象，原型指向 oldArrayPrototype，扩展的新方法不会影响原型
+const arrayProto = Object.create(oldArrayPrototype);
+['push', 'pop', 'unshift', 'shift'].forEach(methodName => {
+  arrayProto[methodName] = function () {
+    updateView()
+    oldArrayPrototype[methodName].call(this, ...arguments)
+    // Array.prototype.push.call(this, ...arguments)
+  }
+})
+
+function defineReactive (target, key, value) {
+  // 深度监听, 是对象或数组递归到底
+  observe(value)
+  Object.defineProperty(target, key, {
+    get () {
+      return value
+    },
+    set (newValue) {
+      if (newValue !== value) {
+        console.log('--> newValue:', newValue)
+        // 设置新值也需要深度监听
+        observe(newValue)
+
+        value = newValue
+        updateView()
+      }
+    }
+  })
+}
+// 监听
+function observe (target) {
+  if (typeof target !== 'object' || target === null) {
+    // 不是对象或数组
+    return target
+  }
+
+  // 是数组
+  if (Array.isArray(target)) {
+    // target.__proto__ = arrayProto // 废弃 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/proto
+    // target.prototype = arrayProto // wrong
+    Object.setPrototypeOf(target, arrayProto)
+  }
+
+  for (let key in target) {
+    defineReactive(target, key, target[key])
+  }
+}
+const data = {
+  name: 'earth',
+  age: 19,
+  info: {
+    dress: 'shenzhen' // 需要深度监听
+  },
+  list: [11, 22]
+}
+// data = ''
+observe(data)
+// data.name = 'moon' // update view
+// data.name = 'moon' // 值是一样，不会更新
+// data.info.dress = 'shanghai' // update view 深度监听
+// data.age = { number: 18 } // update view
+// data.age.number = 22 // 设置新值也需要深度监听
+
+data.list.push(33) // 不具备监听数组的能力
+
+// data.age = 18 // 新增属性，不会触发更新
+// delete data.age // 删除属性，不会触发更新
+</script>
+
+</body>
+</html>
