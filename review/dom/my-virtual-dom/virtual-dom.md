@@ -4,6 +4,8 @@
 
 对前端应用状态管理的思考, 都在解决同一个问题：`维护状态，更新视图`
 
+https://github.com/livoras/blog/issues/13
+
 ## 2. Virtual DOM算法
 
 DOM 很慢
