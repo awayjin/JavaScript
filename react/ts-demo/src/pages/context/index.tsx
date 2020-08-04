@@ -50,6 +50,7 @@
 // }
 
 import React, {useContext} from 'react'
+// 创建一个 Context 对象
 const ThemeContext = React.createContext('light')
 export class ContextPage extends React.Component<any, any> {
   render() {
@@ -69,14 +70,31 @@ function Header () {
 }
 // class 实现
 class ThemeButton extends React.Component<any, any> {
+  constructor() {
+    super();
+    this.state = {
+      update: 'update view'
+    }
+  }
   // 指定 contextType 读取当前的 theme context。
   // React 会往上找到最近的 theme Provider，然后使用它的值。
   static contextType = ThemeContext;
+  componentDidMount () {
+    console.log('-->componentDidMount', this)
+  }
+  componentDidUpdate () {
+    console.log('-->componentDidUpdate', this)
+  }
   render() {
     console.log('contextType:', this.contextType)
     console.log('ThemeContext:', ThemeContext)
     return (
-      <button theme={this.context}>{ this.context }</button>
+      <>
+        <button theme={this.context}>{ this.context }</button>
+        <button onClick={ () => {
+          this.setState({ update: 'go to update view' })
+        }}>{ this.state.update }</button>
+      </>
     );
   }
 }
