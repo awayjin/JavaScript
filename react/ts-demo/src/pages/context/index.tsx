@@ -73,6 +73,8 @@ class ThemeButton extends React.Component<any, any> {
   // React 会往上找到最近的 theme Provider，然后使用它的值。
   static contextType = ThemeContext;
   render() {
+    console.log('contextType:', this.contextType)
+    console.log('ThemeContext:', ThemeContext)
     return (
       <button theme={this.context}>{ this.context }</button>
     );
