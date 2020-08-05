@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-nocheck3
 // https://zh-hans.reactjs.org/docs/context.html
 
 // import React, {useContext} from 'react'
@@ -49,29 +49,61 @@
 //   }
 // }
 
-import React, {useContext} from 'react'
+
+import React, { useContext } from 'react'
 // 创建一个 Context 对象
 const ThemeContext = React.createContext('light')
 export class ContextPage extends React.Component<any, any> {
+  constructor (props: any) {
+    super(props)
+    this.state = {
+      value: 'light'
+    }
+  }
   render() {
     return (
       <div>
-        <ThemeContext.Provider value={"light3"}>
+        <ThemeContext.Provider value={this.state.value}>
           <Header />
+          <ThemeContext.Consumer>
+            {value => (<div>inner:{ value}</div>)}
+          </ThemeContext.Consumer>
         </ThemeContext.Provider>
+        <ThemeContext.Consumer>
+          {
+            value => (
+              <div 
+                onClick={() => {
+                  if (this.state.value === 'light') {
+                    return this.setState({ value: 'dark'})
+                  }
+                  this.setState({ value: 'light'})
+                }}
+              >
+                { 
+                   this.state.value === 'light' ?
+                <p>
+                  outer toggle value: {value}
+                </p>
+                : <div>theme consumer。 {value}</div>
+                }
+              </div>
+            )
+          }
+        </ThemeContext.Consumer>
       </div>
     );
   }
 }
-function Header () {
+function Header() {
   return (
     <ThemeButton />
   )
 }
 // class 实现
 class ThemeButton extends React.Component<any, any> {
-  constructor() {
-    super();
+  constructor(props: any) {
+    super(props);
     this.state = {
       update: 'update view'
     }
@@ -79,28 +111,31 @@ class ThemeButton extends React.Component<any, any> {
   // 指定 contextType 读取当前的 theme context。
   // React 会往上找到最近的 theme Provider，然后使用它的值。
   static contextType = ThemeContext;
-  componentDidMount () {
-    console.log('-->componentDidMount', this)
+  componentDidMount() {
+    // console.log('---> this.contextType:', this.contextType)
+    // console.log('ThemeButton.contextType:', ThemeButton.contextType)
+    console.log('ThemeContext:', ThemeContext)
   }
-  componentDidUpdate () {
+  componentDidUpdate() {
     console.log('-->componentDidUpdate', this)
   }
   render() {
     return (
       <>
-        <button theme={this.context}>{ this.context }</button>
-        <button onClick={ () => {
+        <button >{this.context}</button>
+        <button onClick={() => {
           this.setState({ update: 'go to update view' })
-        }}>{ this.state.update }</button>
+        }}>{this.state.update}</button>
       </>
     );
   }
 }
+// ThemeButton.contextType = ThemeContext // 静态属性
 // 函数实现
-function ThemeButton2(props, context) {
+function ThemeButton2(props: any, context: any) {
   const value = useContext(ThemeContext)
   return (
-    <button >{ value }</button>
+    <button >{value}</button>
   )
 }
 
