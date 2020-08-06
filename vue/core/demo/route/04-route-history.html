@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+
+</head>
+<body>
+
+<p>history API test</p>
+<button id="btn1">修改 url</button>
+<section id="triggerPopSate">
+  <h2>triggerPopSate</h2>
+  <button id="back">history.back()</button>
+  <button id="forward">history.forward()</button>
+  <button id="goOne">history.go(1)</button>
+  <button id="backOne">history.go(-1)</button>
+  <a href="/page1">history.forward()</a>
+</section>
+
+<script>
+
+window.addEventListener('popstate', (event) => {
+  console.log('--> event.state:', event.state)
+  console.log('--> event:', event)
+})
+
+function q (id) {
+  return document.getElementById(id)
+}
+
+q('btn1').addEventListener('click', () => {
+  const state = { 'page_id': 'page_id 11', 'user_id': 20 }
+  const title = 'route history'
+  const url = 'page1'
+  history.pushState(state, title, url)
+})
+
+q('back').addEventListener('click', () => {
+  history.back()
+})
+q('forward').addEventListener('click', () => {
+  history.forward()
+})
+q('goOne').addEventListener('click', () => {
+  history.go(1)
+})
+q('backOne').addEventListener('click', () => {
+  history.go(-1)
+})
+
+window.addEventListener('popstate', (event) => {
+  console.log('event:', event)
+})
+
+
+// 需要 server 端配合，可参考
+// https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90
+</script>
+
+</body>
+</html>
