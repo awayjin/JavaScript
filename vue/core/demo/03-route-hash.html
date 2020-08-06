@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+  <style>
+    .fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+  </style>
+</head>
+<body>
+<script>
+window.onhashchange = function (event) {
+  console.log('event:', event)
+  console.log('oldURL:', event.oldURL)
+  console.log('newURL:', event.newURL)
+  console.log('location:', location.hash)
+}
+
+window.onload = () => {
+  window.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded：', location.hash)
+  })
+
+  document.getElementById('changeHashBtn').addEventListener('click', () => {
+    location.hash = '#change'
+  })
+  document.getElementById('helloHashBtn').addEventListener('click', () => {
+    location.hash = '#hello'
+  })
+}
+
+</script>
+
+<div class="fixed">
+  <button id="changeHashBtn">change hash</button>
+  <button id="helloHashBtn">hello hash</button>
+  <a href="#changeHash">changeHash</a>
+  <a href="#helloHash">helloHash</a>
+</div>
+
+<br>
+<br>
+<br>
+<hr>华丽的分割线
+
+<div class="content">
+  <a  name="changeHash"></a>
+  <p style="height: 1300px;" >
+    changeHash
+  </p>
+  <p style="height: 1300px;"  >
+    <a name="helloHash"></a>
+    hello hash
+  </p>
+</div>
+
+</body>
+</html>
