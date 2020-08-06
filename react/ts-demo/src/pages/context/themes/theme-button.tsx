@@ -1,7 +1,7 @@
 import React from 'react'
 import { ThemeContext } from './theme-context'
 
-class ThemeButton extends React.Component {
+class ThemeButton extends React.Component<any, any> {
   render () {
     let props = this.props
     let theme = this.context
