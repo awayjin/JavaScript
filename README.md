@@ -12,13 +12,16 @@ git branch -r
 git checkout -b 本地分支名x origin/远程分支名x
 
 
-### Node.js 中 console 彩色
+## Node.js 中 console 彩色
  console.log('\033[42;30m DONE \033[40;32m C \033[0m')
 
 
-### github git clone 加速
+## github git clone 加速
 git clone https://github.com/firekylin/firenylin
 
 git clone https://github.com.cnpmjs.org/firekylin/firenylin
 
 www.github.com.cnpmjs.org/后面为代码库地址
+
+## VuePress的技术博客
+https://juejin.im/post/6844903805088186375
