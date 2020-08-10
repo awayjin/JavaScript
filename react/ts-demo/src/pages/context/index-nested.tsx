@@ -17,6 +17,22 @@ const ThemeContext = React.createContext({
   toggleTheme: () => {}
 })
 
+// ThemeButton
+class ThemeButton extends React.Component<any, any>{
+  render () {
+    const context = this.context
+    console.log('context:', context)
+    console.log('this.props:', this.props)
+    return (
+      <>
+        <button {...this.props} style={{ backgroundColor: context.background }} />
+        <p>background: { context.background }</p>
+      </>
+    );
+  }
+}
+ThemeButton.contextType = ThemeContext
+
 // ThemeToggleButton
 function ThemeToggleButton() {
   return (
@@ -35,6 +51,13 @@ function ThemeToggleButton() {
   )
 }
 
+
+function Toolbar(props: any) {
+  return (
+    <ThemeButton onClick={props.changeTheme}>Change Theme</ThemeButton>
+  )
+}
+
 // @ts-nocheck
 export class ContextPage extends React.Component<any, any> {
   constructor(props: any) {
@@ -48,24 +71,20 @@ export class ContextPage extends React.Component<any, any> {
     this.setState((state: any) => (
       {
         theme:
-          state.theme === themes.dark ? themes.light : themes.dark,
+          state.theme === themes.dark ? themes.light : themes.dark
       }
     ))
-  }
-  toggleLine (value)  {
-    console.log('value:', value)
   }
   render() {
     return (
       <>
         <h2>content</h2>
         <ThemeContext.Provider value={this.state}>
-          <p>
-            <button onClick={() => {this.toggleLine(1)}}>s1 line</button>
-            <button onClick={() =>this.toggleLine(2)}>2 line</button>
-          </p>
           <ThemeToggleButton />
         </ThemeContext.Provider>
+        {/* <ThemeContext.Provider value={this.state.theme}>
+          <Toolbar changeTheme={this.toggleTheme} />
+        </ThemeContext.Provider> */}
       </>
     );
   }
