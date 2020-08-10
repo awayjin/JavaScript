@@ -118,3 +118,10 @@ data.list.splice(0, 0, 10) // 不具备监听数组的能力，需要特殊处�
 // data.age = 18 // 新增属性，不会触发更新
 // delete data.age // 删除属性，不会触发更新
 ```
+
+## 继承与原型链(Inheritance and the prototype chain)
+> 当谈到继承时，JavaScript 只有一种结构：对象。每个实例对象（ object ）都有一个私有属性（称之为 `__proto__` ）指向它的构造函数的原型对象（prototype ）。该原型对象也有一个自己的原型对象( `__proto__ `) ，层层向上直到一个对象的原型对象为 null。根据定义，null 没有原型，并作为这个原型链中的最后一个环节。
+
+几乎所有 JavaScript 中的对象都是位于原型链顶端的 Object 的实例。
+
+![原型链](./img/prototype-chain.png)
