@@ -8,7 +8,9 @@ import {
 import {Home} from '../pages/index'
 import {About} from '../pages/about/about'
 import {Users} from '../pages/user/index'
-import {ContextPage} from '../pages/context/index'
+// import {ContextPage} from '../pages/context/index-nest' // 嵌套组件更新
+import {ContextPage} from '../pages/context/index-multiple' // 消费多个 Context
+// import {ContextPage} from '../pages/context/index-dynamic' // 动态 Context
 import {ReducerPage} from '../pages/reducer/index'
 import {UseEffectPage} from '../pages/useEffect/index'
 import { Composition } from '../pages/composition'

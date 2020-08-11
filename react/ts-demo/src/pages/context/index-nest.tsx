@@ -64,7 +64,15 @@ export class ContextPage extends React.Component<any, any> {
             <button onClick={() => {this.toggleLine(1)}}>s1 line</button>
             <button onClick={() =>this.toggleLine(2)}>2 line</button>
           </p>
-          <ThemeToggleButton />
+          {/* <ThemeToggleButton /> */}
+          <ThemeContext.Consumer>
+            { ({theme, toggleTheme }) => (
+              <>
+                <div>theme: {theme.background}</div>
+                <button onClick={toggleTheme}>Click me to swtich a theme.</button>
+              </>
+            )}  
+          </ThemeContext.Consumer>  
         </ThemeContext.Provider>
       </>
     );
