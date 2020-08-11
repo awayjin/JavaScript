@@ -21,10 +21,44 @@
   <a href="#/"># a /</a>
 </section>
 
+<div>
+  <pre>
+    // 创建一个支持冒泡且不能被取消的look事件
+  var ev = new Event("look", {"bubbles":true, "cancelable":false});
+  document.dispatchEvent(ev);
+
+  // 事件可以在任何元素触发，不仅仅是document
+  myDiv.dispatchEvent(ev);
+  </pre>
+  <script>
+    var ev = new Event('my-event', {"bubbles":true, "cancelable":false})
+    console.log('document.dispatchEvent(ev);', document.dispatchEvent(ev))
+  </script>
+
+  <button id="elem" onclick="alert('Click!');">Autoclick</button>
+  <script>
+    // 自动触发事件
+    let event = new Event("click");
+    elem.dispatchEvent(event);
+  </script>
+
+  <script>
+    // catch on document...
+    document.addEventListener("hello", function(event) { // (1)
+      alert("Hello from " + event.target.tagName); // Hello from H1
+    });
+
+    // ...dispatch on elem!
+    let eve = new Event("hello", {bubbles: true}); // (2)
+    elem.dispatchEvent(eve);
+    // the handler on document will activate and display the message.
+  </script>
+</div>
+
 <script>
 
 window.addEventListener('popstate', (event) => {
-  console.log('--> event.state:', event.state)
+  console.log('-->popstate event.state:', event.state)
   console.log('event:', event)
 })
 
@@ -36,7 +70,7 @@ function q (id) {
 q('btn1').addEventListener('click', () => {
   const state = { 'page_id': 'page_id 11', 'user_id': 20 }
   const title = 'route history'
-  const url = 'page1'
+  const url = 'page-1'
   history.pushState(state, title, url)
 })
 
@@ -44,7 +78,7 @@ q('btn1').addEventListener('click', () => {
 q('btn2').addEventListener('click', () => {
   const data = { 'page_id': 'page_id 11', 'user_id': 20 }
   const title = 'route history'
-  const url = 'page1'
+  const url = 'page-replace-1'
   history.replaceState(data, title, url)
 })
 
@@ -61,27 +95,63 @@ q('backOne').addEventListener('click', () => {
   history.go(-1)
 })
 
-//创建全局事件
+// 创建全局事件
 var _wr = function(type) {
   var orig = history[type];
   return function() {
-    var rv = orig.apply(this, arguments);
     var e = new Event(type);
-    e.arguments = arguments;
+    // e.arguments = arguments;
     window.dispatchEvent(e);
-    return rv;
+    orig.apply(this, arguments);
+    // console.log('rv:', rv)
   };
 };
-//重写方法
+// 重写方法
 history.pushState = _wr('pushState');
 history.replaceState = _wr('replaceState');
-//实现监听
+// 实现监听
 window.addEventListener('replaceState', function(e) {
-  console.log('THEY DID IT AGAIN! replaceState 111111');
+  console.log('replaceState 111111', e);
 });
 window.addEventListener('pushState', function(e) {
-  console.log('THEY DID IT AGAIN! pushState 2222222');
+  console.log('pushState 2222222', e);
 });
+
+// (function(history){
+//   var pushState = history.pushState;
+//   history.pushState = function(state) {
+//     console.log('history:', history)
+//     if (typeof history.onpushstate == "function") {
+//       history.onpushstate({state: state});
+//     }
+//     // ... whatever else you want to do
+//     // maybe call onhashchange e.handler
+//     return pushState.apply(history, arguments);
+//   };
+//
+//   // replaceState
+//   var replaceState = history.replaceState;
+//   history.replaceState = function(state) {
+//     if (typeof history.onpushstate == "function") {
+//       history.onreplacestate({state: state});
+//     }
+//     // ... whatever else you want to do
+//     // maybe call onhashchange e.handler
+//     return replaceState.apply(history, arguments);
+//   };
+// })(window.history);
+// // history.onpushstate = function(e) {
+// //   console.log('pushState trigger', e)
+// // }
+// // history.onreplacestate = function(e) {
+// //   console.log('replaceState trigger', e)
+// // }
+// window.addEventListener('pushstate', (e) => {
+//   console.log('1. pushState trigger', e) // no
+// })
+// window.addEventListener('replacestate', (e) => {
+//   console.log('2. replaceState trigger', e) // no
+// })
 
 
 // 需要 server 端配合，可参考
