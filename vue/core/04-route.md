@@ -67,6 +67,34 @@ const server = http.createServer((req, res) => {
 })
 server.listen(8001)
 ```
+## replaceState和pushState行为的监听
+history.replaceState 和 history.pushState 不会触发popstate事件, 那么如何监听？
+
+可以通过在方法里面主动的去触发popState事件。另一种就是在方法中创建一个新的全局事件。
+
+```javascript
+// 创建全局事件
+var _wr = function(type) {
+  var orig = history[type];
+  return function() {
+    var rv = orig.apply(this, arguments);
+    var e = new Event(type);
+    e.arguments = arguments;
+    window.dispatchEvent(e);
+    return rv;
+  };
+};
+// 重写方法
+history.pushState = _wr('pushState');
+history.replaceState = _wr('replaceState');
+// 实现监听
+window.addEventListener('replaceState', function(e) {
+  console.log('replaceState 111111', e);
+});
+window.addEventListener('pushState', function(e) {
+  console.log('pushState 2222222', e);
+});
+```
 
 ## vue-router 钩子函数
 - 全局的：beforeEach、beforeResolve、afterEach
@@ -85,27 +113,27 @@ server.listen(8001)
 ### Vue 完整的导航解析流程
 1. 导航被触发。
 
-2. 在失活的组件里调用 beforeRouteLeave 守卫。
+2. 在失活的组件里调用 `beforeRouteLeave` 守卫。
 
-3. 调用全局的 beforeEach 守卫。
+3. 调用全局的 `beforeEach` 守卫。
 
-4. 在重用的组件里调用 beforeRouteUpdate 守卫 (2.2+)。
+4. 在重用的组件里调用 `beforeRouteUpdate` 守卫 (2.2+)。
 
-5. 在路由配置里调用 beforeEnter。
+5. 在路由配置里调用 `beforeEnter`。
 
 6. 解析异步路由组件。
 
-7. 在被激活的组件里调用 beforeRouteEnter。
+7. 在被激活的组件里调用 `beforeRouteEnter`。
 
-8. 调用全局的 beforeResolve 守卫 (2.5+)。
+8. 调用全局的 `beforeResolve` 守卫 (2.5+)。
 
 9. 导航被确认。
 
-10. 调用全局的 afterEach 钩子。
+10. 调用全局的 `afterEach` 钩子。
 
 11. 触发 DOM 更新。
 
-12. 调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入。
+12. 调用 `beforeRouteEnter` 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入。
 
 ## 参考
 vue router钩子函数： https://zhuanlan.zhihu.com/p/70536937
@@ -117,3 +145,6 @@ vue router钩子函数： https://zhuanlan.zhihu.com/p/70536937
 
 如何监听URL的变化：
 https://juejin.im/post/6844903749421367303
+
+How to get notified about changes of the history via history.pushState?:
+https://stackoverflow.com/questions/4570093/how-to-get-notified-about-changes-of-the-history-via-history-pushstate
