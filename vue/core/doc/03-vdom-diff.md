@@ -128,3 +128,5 @@ https://www.jianshu.com/p/78f6e3ba6842
     ![tag不相同，则直接删除重建，不再深度比较](https://upload-images.jianshu.io/upload_images/10349654-8e74d765ac95fb5c.png)
     
     
+## 参考
+snabbdom源码解析： https://segmentfault.com/a/1190000017518948

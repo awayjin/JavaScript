@@ -74,26 +74,24 @@ history.replaceState 和 history.pushState 不会触发popstate事件, 那么如
 
 ```javascript
 // 创建全局事件
-var _wr = function(type) {
-  var orig = history[type];
-  return function() {
-    var rv = orig.apply(this, arguments);
-    var e = new Event(type);
-    e.arguments = arguments;
-    window.dispatchEvent(e);
-    return rv;
-  };
-};
+function eventDispatch (type) {
+  const _hr = history[type]
+  return function () {
+    const eve = new Event(type)
+    window.dispatchEvent(eve)
+    _hr.apply(this, arguments)
+  }
+}
 // 重写方法
-history.pushState = _wr('pushState');
-history.replaceState = _wr('replaceState');
+history.pushState = eventDispatch('pushState')
+history.replaceState = eventDispatch('replaceState')
 // 实现监听
-window.addEventListener('replaceState', function(e) {
-  console.log('replaceState 111111', e);
-});
-window.addEventListener('pushState', function(e) {
-  console.log('pushState 2222222', e);
-});
+window.addEventListener('pushState', (e) => {
+  console.log('pushState listener', e)
+})
+window.addEventListener('replaceState', (e) => {
+  console.log('replaceState listener', e)
+})
 ```
 
 ## vue-router 钩子函数

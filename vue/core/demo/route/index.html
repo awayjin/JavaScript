@@ -35,21 +35,26 @@
     console.log('document.dispatchEvent(ev);', document.dispatchEvent(ev))
   </script>
 
-  <button id="elem" onclick="alert('Click!');">Autoclick</button>
+  <button id="elem" onclick="console.log('Click!');">Autoclick</button>
+  <p><button id="autoClick" onclick="console.log('auto click')">可以自动 click</button></p>
   <script>
     // 自动触发事件
     let event = new Event("click");
     elem.dispatchEvent(event);
+
+    const autoEvent = new Event('click')
+    autoClick.dispatchEvent(autoEvent)
   </script>
 
   <script>
     // catch on document...
     document.addEventListener("hello", function(event) { // (1)
-      alert("Hello from " + event.target.tagName); // Hello from H1
+      console.log("Hello from " + event.target.tagName, event); // Hello from H1
     });
 
     // ...dispatch on elem!
     let eve = new Event("hello", {bubbles: true}); // (2)
+    document.dispatchEvent(eve);
     elem.dispatchEvent(eve);
     // the handler on document will activate and display the message.
   </script>
@@ -95,27 +100,46 @@ q('backOne').addEventListener('click', () => {
   history.go(-1)
 })
 
+function eventDispatch (type) {
+  const _hr = history[type]
+  return function () {
+    const eve = new Event(type)
+    window.dispatchEvent(eve)
+    _hr.apply(this, arguments)
+  }
+}
+history.pushState = eventDispatch('pushState')
+history.replaceState = eventDispatch('replaceState')
+
+window.addEventListener('pushState', (e) => {
+  console.log('pushState listener', e)
+})
+
+window.addEventListener('replaceState', (e) => {
+  console.log('replaceState listener', e)
+})
+
 // 创建全局事件
-var _wr = function(type) {
-  var orig = history[type];
-  return function() {
-    var e = new Event(type);
-    // e.arguments = arguments;
-    window.dispatchEvent(e);
-    orig.apply(this, arguments);
-    // console.log('rv:', rv)
-  };
-};
-// 重写方法
-history.pushState = _wr('pushState');
-history.replaceState = _wr('replaceState');
-// 实现监听
-window.addEventListener('replaceState', function(e) {
-  console.log('replaceState 111111', e);
-});
-window.addEventListener('pushState', function(e) {
-  console.log('pushState 2222222', e);
-});
+// var _wr = function(type) {
+//   var orig = history[type];
+//   return function() {
+//     var e = new Event(type);
+//     // e.arguments = arguments;
+//     window.dispatchEvent(e);
+//     orig.apply(this, arguments);
+//     // console.log('rv:', rv)
+//   };
+// };
+// // 重写方法
+// history.pushState = _wr('pushState');
+// history.replaceState = _wr('replaceState');
+// // 实现监听
+// window.addEventListener('replaceState', function(e) {
+//   console.log('replaceState 111111', e);
+// });
+// window.addEventListener('pushState', function(e) {
+//   console.log('pushState 2222222', e);
+// });
 
 // (function(history){
 //   var pushState = history.pushState;
