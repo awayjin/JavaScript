@@ -13,8 +13,8 @@ export class ContextPage extends React.Component<any, any> {
   }
   render() {
     // const { theme, singedInUser } = this.props
-    // const { theme, singedInUser } = { theme: 'dd', singedInUser: { name: 'guest3 '}}
-    const { theme, singedInUser } = { theme: 'dd', singedInUser: 'guest2' }
+    const { theme, singedInUser } = { theme: 'dd', singedInUser: { name: 'guest3 '}}
+    // const { theme, singedInUser } = { theme: 'dd', singedInUser: 'guest2' }
     return (
       <>
         <h2>multiple content</h2>
@@ -25,8 +25,9 @@ export class ContextPage extends React.Component<any, any> {
               <UserContext.Consumer>
                 {user => (
                   <div>
-                    { user}
-                   ---theme: { theme }
+                    { user.name } 
+                     { theme }
+                   ---theme:
                   </div>
                 )}
               </UserContext.Consumer>
