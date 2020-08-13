@@ -1,5 +1,4 @@
 import React, {useContext, useState, useEffect} from "react";
-import {ThemeContext} from "../../router";
 
 interface IProps {
   // 字符串索引签名

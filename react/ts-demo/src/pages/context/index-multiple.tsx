@@ -25,9 +25,8 @@ export class ContextPage extends React.Component<any, any> {
               <UserContext.Consumer>
                 {user => (
                   <div>
-                    { user.name } 
-                     { theme }
-                   ---theme:
+                    { user.name }
+                   ---theme: { theme }
                   </div>
                 )}
               </UserContext.Consumer>
