@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件系统 eventEmitter</title>
+</head>
+<body>
+<a href="https://blog.csdn.net/Gochan_Tao/article/details/90245233"></a>
+<a href="https://blog.csdn.net/u010582082/article/details/77244161">ES6</a>
+
+promise 的 executor（执行器） 里的代码是同步的
+promise 的回调是 microTask（微任务） 而 setTimeout 的回调是 task（任务/宏任务）
+microTask 早于 task 被执行。
+
+
+<script>
+  function transferTime (item) {
+    let secondTime = item // 秒
+    let minuteTime = 0 // 分
+    let hourTime = 0 // 小时
+    if (secondTime > 60) {
+      // 如果秒数大于60，将秒数转换成整数
+      // 获取分钟，除以60取整数，得到整数分钟
+      minuteTime = parseInt(String(secondTime / 60))
+      // 获取秒数，秒数取佘，得到整数秒数
+      secondTime = parseInt(String(secondTime % 60))
+      // 如果分钟大于60，将分钟转换成小时
+      if (minuteTime > 60) {
+        // 获取小时，获取分钟除以60，得到整数小时
+        hourTime = parseInt(String(minuteTime / 60))
+        // 获取小时后取佘的分，获取分钟除以60取佘的分
+        minuteTime = parseInt(String(minuteTime % 60))
+        console.log('minuteTime:', minuteTime)
+      }
+    }
+    let result
+    if (minuteTime >= 0) {
+      result = '' + parseInt(String(minuteTime)) + '分钟'
+    }
+    if (hourTime >= 0) {
+      result = '' + parseInt(String(hourTime)) + '小时' + result
+    }
+    return result
+  }
+
+  console.log('transferTime:', transferTime(28841))
+  console.log('transferTime:', transferTime(12631))
+</script>
+
+<script>
+  console.log(Array(30).join('--'))
+  // 事件系统
+  class Events {
+    constructor () {
+      this._events = {}
+    }
+    // 监听事件
+    on (event, callback) {
+      let arr = this._events[event] || []
+      arr.push(callback)
+      this._events[event] = arr
+      return this
+    }
+    // 触发事件
+    emit (event, ...args) {
+      let callbacks = this._events[event]
+      if (callbacks) {
+        callbacks.map(item => item.call(this, ...args))
+      }
+    }
+    // 删除事件
+    off (event, callback) {
+      let callbacks = this._events[event]
+
+      if (callbacks) {
+        delete this._events[event]
+      }
+    }
+    // 只触发一次;
+    once (event, ...args) {
+      let callbacks = this._events[event]
+      if (callbacks){
+        this.emit(event, ...args)
+        this.off(event)
+      }
+    }
+  }
+
+  let events = new Events()
+  events.on('test',  (data) => console.log('data-1:', data) )
+  events.on('test2',  (data) => console.log('second data-2:', data) )
+  events.on('test3',  (data) => console.log('second data-33:', data) )
+  events.emit('test', [333, 444])
+  events.emit('test2', 0, 1)
+  events.once('test3', '触发一次')
+  events.emit('test3', '不再触发')
+  events.off('test2')
+  events.emit('test2', 22)
+
+</script>
+
+
+<script>
+  class EventEmitter {
+    constructor () {
+      this.events = {}
+    }
+
+    on (eventName, callback) {
+      // 监听 event 事件,触发时调用 callback 函数
+      let arr = this.events[eventName] || []
+      arr.push(callback)
+      this.events[eventName] = arr
+      return this
+    }
+
+    emit (eventName, ...args) {
+      // 触发事件,并把参数传给事件的处理函数
+      let callbacks = this.events[eventName]
+      // this.events[eventName] = callbacks && callbacks.filter(fn => fn !== callback)
+      callbacks.forEach(fn => fn.apply(null, args))
+      return this
+    }
+
+    off (eventName, callback) {
+
+    }
+
+    once () {}
+
+  }
+
+  const eve = new EventEmitter()
+  eve.on('myEve1', (data) => {
+    console.log('my event1 trigger. data:', data)
+  })
+  eve.on('myEve1', (data) => {
+    console.log('my33 event1 trigger. data:', data)
+  })
+  eve.emit('myEve1', [11, 22])
+  eve.emit('myEve1', 55, 66)
+</script>
+
+</body>
+</html>

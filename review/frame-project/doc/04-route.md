@@ -138,8 +138,8 @@ vue router钩子函数： https://zhuanlan.zhihu.com/p/70536937
 
 前端路由原理： https://www.cnblogs.com/-constructor/p/12819098.html
 
-需要 server 端配合，可参考
-// https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90
+需要 server 端配合，可参考:s
+ https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90
 
 如何监听URL的变化：
 https://juejin.im/post/6844903749421367303
