@@ -14,6 +14,7 @@ import {ReducerPage} from '../pages/reducer/index'
 import {UseEffectPage} from '../pages/useEffect/index'
 import { Composition } from '../pages/composition'
 import { DomPage } from '../pages/dom'
+import { FormPage } from '../pages/form'
 
 
 function App() {
@@ -43,11 +44,17 @@ function App() {
             <li>
               <Link to="/dom">dom</Link>
             </li>
+            <li>
+              <Link to="/form">form</Link>
+            </li>
           </ul>
         </nav>
         <Switch>
           <Route path="/dom">
             <DomPage />
+          </Route>
+          <Route path="/form">
+            <FormPage />
           </Route>
           <Route path="/composition">
             <Composition />

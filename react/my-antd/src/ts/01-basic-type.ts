@@ -34,7 +34,7 @@ ut = true
 ut = 'str'
 
 // array
-const arr: number[] = [1, 2, 3, null, undefined]
+const arr: (string | number)[] = [1, 2, 3, null, undefined]
 const arr2: any[] = [1, 'str', 3]
 let arr3: [number, string] = [1, 'str'];
 arr3 = [2, 's']
