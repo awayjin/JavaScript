@@ -129,3 +129,8 @@ function connect(a: string, b: string): string {
 }
 const p1:IPlus = plus;
 const p2:IPlusGen<string> = connect;
+
+function sum(x: number, y: number) {
+  return x + y
+}
+const sumR1: (x: number, y: number) => number = sum

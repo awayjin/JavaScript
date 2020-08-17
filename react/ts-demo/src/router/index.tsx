@@ -6,7 +6,6 @@ import {
   Link
 } from "react-router-dom";
 import {Home} from '../pages/index'
-import {Users} from '../pages/user/index'
 // import {ContextPage} from '../pages/context/index-nest' // 嵌套组件更新
 import {ContextPage} from '../pages/context/index-multiple' // 消费多个 Context
 // import {ContextPage} from '../pages/context/index-dynamic' // 动态 Context
@@ -15,6 +14,7 @@ import {UseEffectPage} from '../pages/useEffect/index'
 import { Composition } from '../pages/composition'
 import { DomPage } from '../pages/dom'
 import { FormPage } from '../pages/form'
+import {RefsDOM} from '../pages/refs/index'
 
 
 function App() {
@@ -33,9 +33,6 @@ function App() {
               <Link to="/useEffect">useEffect</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
-            </li>
-            <li>
               <Link to="/context">Context Page</Link>
             </li>
             <li>
@@ -46,6 +43,9 @@ function App() {
             </li>
             <li>
               <Link to="/form">form</Link>
+            </li>
+            <li>
+              <Link to="/refs">refs</Link>
             </li>
           </ul>
         </nav>
@@ -68,8 +68,8 @@ function App() {
           <Route path="/context">
             <ContextPage />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/refs">
+            <RefsDOM />
           </Route>
           <Route path="/">
             <Home />

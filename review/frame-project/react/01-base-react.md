@@ -75,6 +75,14 @@ class EventDemo {
 受控输入空值:
 在受控组件上指定 value 的 prop 会阻止用户更改输入。如果你指定了 value，但输入仍可编辑，则可能是你意外地将value 设置为 undefined 或 null。
 
+## 4. Refs and the DOM
+Refs 提供了一种方式，允许我们访问 DOM 节点或在 render 方法中创建的 React 元素
+
+何时使用 Refs
+- 管理焦点，文本选择或媒体播放。
+- 触发强制动画。
+- 集成第三方 DOM 库。
+
 
 ## 参考
 react相关知识汇总：
