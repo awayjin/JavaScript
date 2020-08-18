@@ -1,5 +1,5 @@
 // @ts-nocheck3
-import React, { useState, createContext, useContext, Component } from "react";
+import React, { useState, createContext, useContext, Component, useRef } from "react";
 // https://github.com/CruxF/IMOOC/tree/master/React?1549967840861
 
 export class RefsDOM extends React.Component<any, any> {
@@ -23,11 +23,40 @@ export class RefsDOM extends React.Component<any, any> {
         <p>
           <button onClick={ () => this.childRefFocus()}>获得子节点焦点</button>
         </p>
+        <UseRefFunc title="useRef fc component"></UseRefFunc>
+        <br/>
         <Refs ref={this.textInputParRef} />
       </div>
     )
   }
 }
+
+interface IUseRef {
+  title: string;
+}
+const UseRefFunc2: React.FC<IUseRef> = props => {
+  return (
+    <>
+      <h2>{ props.title }</h2>
+    </>
+  )
+}
+function UseRefFunc (props: IUseRef) {
+  const inputEl: any = useRef(null)
+  const focusFc = (e: any) => {
+    console.log('inputEl:', inputEl)
+    console.log('e:', e)
+    inputEl.current.focus()
+  }
+  return (
+    <>
+      <h2>{ props.title }</h2>
+      <input type="text" ref={inputEl} />
+      <button onClick={ focusFc}>函数组件 useRef 获得焦点</button>
+    </>
+  )
+}
+
 
 class Refs extends React.Component<any, any> {
   myRef: any = React.createRef();

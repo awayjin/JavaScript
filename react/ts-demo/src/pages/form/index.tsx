@@ -9,7 +9,7 @@ export function FormPage () {
     <>
       <h2>表单 form </h2>
       <NameForm name={'class form'}></NameForm>
-      <NameFormFC name={'fc'} />
+      <NameFormFC name={'fc 非受控组件'} />
     </>
   )
 }
@@ -19,9 +19,22 @@ interface IFCProps {
   age?: number;
 }
 const NameFormFC: React.FC<IFCProps> = (props) => {
+  const input: any = React.createRef()
+  const  handleSubmit = (event: any) => {
+    console.log('A name was submitted: ', input.current.value);
+    event.preventDefault();
+  }
+  const [value, setValue] = useState('defaultValue 333')
   return (
     <>
       <h2>Function Component. { props.name }</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input type="text" ref={input} defaultValue={value}  />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     </>
   )
 };
@@ -104,6 +117,8 @@ class NameForm extends React.Component<any, any> {
         </label>
 
         <input type="submit" value="提交" />
+
+        <hr/>
       </form>
     )
   }
