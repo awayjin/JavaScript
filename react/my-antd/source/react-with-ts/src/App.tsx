@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-nocheck
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -13,11 +15,11 @@ interface IThemeProps {
   [key: string]: {color: string; background: string;}
 }
 const themes: IThemeProps = {
- 'light': {
-   color: '#000',
-   background: '#eee',
- },
- 'dark': {
+  'light': {
+    color: '#000',
+    background: '#eee',
+  },
+  'dark': {
     color: '#fff',
     background: '#222',
   }
@@ -28,22 +30,22 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <ThemeContext.Provider value={themes.dark}>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <LikeButton />
-        <Hello />
-        <p>
-          <button onClick={() => {setShow(!show)}}>Refresh dog photo</button>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <LikeButton />
+          <Hello />
+          <p>
+            <button onClick={() => {setShow(!show)}}>Refresh dog photo</button>
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
       </ThemeContext.Provider>
     </div>
   );

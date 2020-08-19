@@ -83,6 +83,13 @@ Refs 提供了一种方式，允许我们访问 DOM 节点或在 render 方法�
 - 触发强制动画。
 - 集成第三方 DOM 库。
 
+## 5. React组件生命周期
+https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+https://g.yuque.com/atrue/at/rvqm1u?language=zh-cn
+
+Vue:
+http://cn.vuejs.org/images/lifecycle.png
 
 ## 参考
 react相关知识汇总：

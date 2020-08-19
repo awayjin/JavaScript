@@ -19,7 +19,7 @@ export class RefsDOM extends React.Component<any, any> {
   render() {
     return (
       <div className="App">
-        <h2>refs and the DOM</h2>
+        <h2>refs and the DOM. toLocaleTimeString:{ new Date().toLocaleTimeString() }</h2>
         <p>
           <button onClick={ () => this.childRefFocus()}>获得子节点焦点</button>
         </p>

@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import './index.css'
-
 // 组件组合： https://zh-hans.reactjs.org/docs/composition-vs-inheritance.html
 
 export function DomPage () {
@@ -17,6 +15,7 @@ export function DomPage () {
   return (
     <>
       <h2>dom </h2>
+      <Hello message={'hello FunctionComponent'}></Hello>
       { html }
       <div>
         <input type="checkbox" defaultChecked={true}/>
@@ -29,6 +28,16 @@ export function DomPage () {
       <EventDemo title={'event demo'} />
     </>
   )
+}
+
+interface IProps {
+  message: string
+}
+const Hello2: React.FunctionComponent<IProps> = (props) => {
+  return <h2>{props.message}</h2>
+}
+const Hello: React.FC<IProps> = function Hello3(props) {
+  return <h2>{props.message}</h2>
 }
 
 interface IEvent {
