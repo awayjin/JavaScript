@@ -34,14 +34,7 @@ export class RefsDOM extends React.Component<any, any> {
 interface IUseRef {
   title: string;
 }
-const UseRefFunc2: React.FC<IUseRef> = props => {
-  return (
-    <>
-      <h2>{ props.title }</h2>
-    </>
-  )
-}
-function UseRefFunc (props: IUseRef) {
+const UseRefFunc: React.FC<IUseRef> = props => {
   const inputEl: any = useRef(null)
   const focusFc = (e: any) => {
     console.log('inputEl:', inputEl)
@@ -53,6 +46,14 @@ function UseRefFunc (props: IUseRef) {
       <h2>{ props.title }</h2>
       <input type="text" ref={inputEl} />
       <button onClick={ focusFc}>函数组件 useRef 获得焦点</button>
+    </>
+  )
+
+}
+function UseRefFunc2 (props: IUseRef) {
+  return (
+    <>
+      <h2>{ props.title }</h2>
     </>
   )
 }

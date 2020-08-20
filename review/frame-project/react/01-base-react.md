@@ -84,12 +84,16 @@ Refs 提供了一种方式，允许我们访问 DOM 节点或在 render 方法�
 - 集成第三方 DOM 库。
 
 ## 5. React组件生命周期
+react 生命周期:
 https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 
 https://g.yuque.com/atrue/at/rvqm1u?language=zh-cn
 
-Vue:
+Vue 生命周期:
 http://cn.vuejs.org/images/lifecycle.png
+
+## 6. setState
+不可变值，可能是异步更新，可能会被合并
 
 ## 参考
 react相关知识汇总：

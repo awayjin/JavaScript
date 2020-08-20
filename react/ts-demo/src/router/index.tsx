@@ -15,6 +15,7 @@ import { Composition } from '../pages/composition'
 import { DomPage } from '../pages/dom'
 import { FormPage } from '../pages/form'
 import {RefsDOM} from '../pages/refs/index'
+import {StateLife} from '../pages/state-life/index'
 
 
 function App() {
@@ -47,9 +48,15 @@ function App() {
             <li>
               <Link to="/refs">refs</Link>
             </li>
+            <li>
+              <Link to="/state-life">state lifeCycle</Link>
+            </li>
           </ul>
         </nav>
         <Switch>
+          <Route path="/state-life">
+            <StateLife />
+          </Route>
           <Route path="/dom">
             <DomPage />
           </Route>
