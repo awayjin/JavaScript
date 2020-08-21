@@ -95,6 +95,26 @@ http://cn.vuejs.org/images/lifecycle.png
 ## 6. setState
 不可变值，可能是异步更新，可能会被合并
 
+## 7. 高级特性
+- 函数组件
+- Portals
+- context
+- 异步组件
+
+- 非受控组件
+  - 优先使用受控组件，符合React设计原则；
+  - 必须操作DOM时，再使用非受控组件；
+  - eg: ref,
+    defaultValue-defaultChecked,
+    手动操作DOM元素
+    
+    
+- react 的性能优化
+  shouldComponentUpdate(简称SCU)
+  PureComponent 和 React.memo
+  不可变值 immutable.js
+
+
 ## 参考
 react相关知识汇总：
 https://www.cnblogs.com/xiaozhumaopao/p/12716280.html
