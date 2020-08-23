@@ -17,6 +17,7 @@ import { FormPage } from '../pages/form'
 import {RefsDOM} from '../pages/refs/index'
 import {StateLife} from '../pages/state-life/index'
 import {Portals} from '../pages/portals/index'
+import {Antd} from '../pages/antd/index'
 
 
 function App() {
@@ -55,9 +56,15 @@ function App() {
             <li>
               <Link to="/portals">Portals</Link>
             </li>
+            <li>
+              <Link to="/antd">antd-mobile</Link>
+            </li>
           </ul>
         </nav>
         <Switch>
+          <Route path="/antd">
+            <Antd />
+          </Route>
           <Route path="/portals">
             <Portals title={'Portals 非父节点'} demo={'demo'} />
           </Route>

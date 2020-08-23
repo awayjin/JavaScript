@@ -114,6 +114,15 @@ http://cn.vuejs.org/images/lifecycle.png
   PureComponent 和 React.memo
   不可变值 immutable.js
 
+## 8. 什么场景需要用React Portals
+- 组件默认会按照既定层次嵌套渲染；
+- 如何让组件渲染到父组件以外？
+    PS : this.props.children相当于vue的slot,可以获取父组件中两个标签中的内容
+
+- 父组件使用了 oveflow:hidden；
+  联想起在PC端plus会员的react中，头部卡片的气泡，使用position超出了本身的层级，使用 Portals 可以轻松外迁移该气泡组件。
+- 父组件z-index值太小
+- fixed 需要放在 body 第一层
 
 ## 参考
 react相关知识汇总：

@@ -21,7 +21,8 @@ interface IProps {
 
 // These two containers are siblings in the DOM
 const appRoot: any = document.getElementById('app-root');
-const modalRoot: any = document.getElementById('modal-root');
+// const modalRoot: any = document.getElementById('modal-root');
+const modalRoot: any = document.querySelector('body');
 
 // Let's create a Modal component that is an abstraction around
 // the portal API.
