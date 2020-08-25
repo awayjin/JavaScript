@@ -9,6 +9,11 @@ export const routes = [
     component: '@/pages/portals/index',
     wrappers: ['@/layouts/index'],
   },
+  {
+    path: '/context',
+    component: '@/pages/context',
+    wrappers: ['@/layouts/index'],
+  },
 ]
 
 

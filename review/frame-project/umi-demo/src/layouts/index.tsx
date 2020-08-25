@@ -8,6 +8,7 @@ export default (props: any) => {
         <div>
           <Link to="/">index </Link>
           <Link to="/portals">portals </Link>
+          <Link to="/context">context </Link>
         </div>
       </div>
       <div style={{ padding: 20 }}>{ props.children }</div>

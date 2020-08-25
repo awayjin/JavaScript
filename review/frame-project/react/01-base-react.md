@@ -124,6 +124,15 @@ http://cn.vuejs.org/images/lifecycle.png
 - 父组件z-index值太小
 - fixed 需要放在 body 第一层
 
+## 9. Context
+- 公共信息（语言、主题）如何传递给各个组件？
+  用props 太繁琐
+  用 redux 小题大做 ，本身没有什么逻辑，只是一些变量的传递
+
+- createContext
+- Context.Provider
+- 函数式组件-Context.Consumer, 类-this.context
+
 ## 参考
 react相关知识汇总：
 https://www.cnblogs.com/xiaozhumaopao/p/12716280.html

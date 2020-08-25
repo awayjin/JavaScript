@@ -6,5 +6,6 @@ export default defineConfig({
   },
   routes: [
     { path: '/', component: '@/pages/index' },
+    { path: '/useEffect', component: '@/pages/useEffect' },
   ],
 });
