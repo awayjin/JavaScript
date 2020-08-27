@@ -9,6 +9,8 @@ export default (props: any) => {
           <Link to="/">index </Link>
           <Link to="/portals">portals </Link>
           <Link to="/context">context </Link>
+          <Link to="/lazy">lazy </Link>
+          <Link to="/optimizing">optimizing </Link>
         </div>
       </div>
       <div style={{ padding: 20 }}>{ props.children }</div>

@@ -133,6 +133,8 @@ http://cn.vuejs.org/images/lifecycle.png
 - Context.Provider
 - 函数式组件-Context.Consumer, 类-this.context
 
+
+
 ## 参考
 react相关知识汇总：
 https://www.cnblogs.com/xiaozhumaopao/p/12716280.html

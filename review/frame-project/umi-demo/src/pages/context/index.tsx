@@ -5,38 +5,13 @@ import ReactDOM from 'react-dom';
 const lines = [
   { line: 'line1', id: '01'},
   { line: 'line2', id: '02'},
+  { line: 'line3', id: '03'},
 ];
-
-
-// class ToggleLine extends React.Component<any, any> {
-//   static contextType = LineContext;
-//   componentDidMount() {
-//     console.log('this.context:', this.context)
-//     console.log('this.props:', this.props)
-//   }
-//   render() {
-//     const props = this.props;
-//     const context = this.context;
-//     return (
-//       <>
-//         <ul>
-//           { lines.map(item => {
-//             return <li key={item.id}> { item.line}</li>
-//           })}
-//         </ul>
-//         <p>
-//           { this.context.line }
-//         </p>
-//         <button {...this.props} />
-//       </>
-//     )
-//   }
-// }
 
 const LineContext = createContext({
   line: lines[1],
   list: [],
-  toggleLine: () => {},
+  toggleLine: (item: any) => {},
 });
 function LineToggleButton() {
   return (
@@ -72,20 +47,18 @@ export default class ContextPage extends React.Component<any, any> {
   }
   toggleLine = (item: any) => {
     console.log('item:', item)
-    const cur = item === lines[0]
-      ? lines[1]
-      : lines[0]
     this.setState({
-      line: cur,
+      line: item,
       toggleLine: this.toggleLine,
     })
   }
   componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
-    // console.log('this.state:', this.state)
+    // console.log('this.state')
   }
 
   render () {
     const el = (
+      // @ts-ignore
       <LineContext.Provider value={this.state}>
         <LineToggleButton />
       </LineContext.Provider>
@@ -95,7 +68,7 @@ export default class ContextPage extends React.Component<any, any> {
         {/*<LineContext.Provider value={this.state.cur}>*/}
         {/*  <Toolbar toggleLine={this.toggleLine} />*/}
         {/*</LineContext.Provider>*/}
-        { el }33
+        { el }
       </>
     )
   }
@@ -112,22 +85,3 @@ export default class ContextPage extends React.Component<any, any> {
 //   );
 // }
 
-
-// (props: any) => {
-//   const [list, setList] = useState(lines);
-//   const [currentLine, setCurrentLine] = useState(lines[0]);
-//   const bool = true
-//   const toggleList = (item: any) => {
-//     console.log(item)
-//     setCurrentLine(bool ? lines[1] : lines[0])
-//   }
-//   return (
-//     <>
-//       <h2> context </h2>
-//       <LineContext.Provider value={currentLine}>
-//         {/*<ToggleLine />*/}
-//         <Toolbar toggleList={() => toggleList} />
-//       </LineContext.Provider>
-//     </>
-//   );
-// }

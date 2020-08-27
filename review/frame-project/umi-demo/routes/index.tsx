@@ -14,6 +14,16 @@ export const routes = [
     component: '@/pages/context',
     wrappers: ['@/layouts/index'],
   },
+  {
+    path: '/lazy',
+    component: '@/pages/lazy',
+    wrappers: ['@/layouts/index'],
+  },
+  {
+    path: '/optimizing',
+    component: '@/pages/optimize',
+    wrappers: ['@/layouts/index'],
+  },
 ]
 
 
