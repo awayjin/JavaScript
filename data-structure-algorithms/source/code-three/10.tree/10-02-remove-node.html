@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script type="module">
+  import BinarySearchTree from './10.binary-search-tree.js'
+  // import BinarySearchTree from './binary-search-tree.js'
+
+  const bst = new BinarySearchTree()
+  bst.insert(9)
+  bst.insert(7)
+  bst.insert(5)
+  bst.insert(11)
+
+  console.log('before', bst)
+  setTimeout(()=>{
+    bst.remove(7)
+    console.log('after', bst)
+  })
+
+  const arr = []
+  // 中序遍历
+  bst.inOrderTraverse((value) => {
+    // console.log(value)
+    arr.push(value)
+  })
+  console.log(arr)
+</script>
+
+</body>
+</html>
