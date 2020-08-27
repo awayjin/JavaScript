@@ -11,6 +11,7 @@ export default (props: any) => {
           <Link to="/context">context </Link>
           <Link to="/lazy">lazy </Link>
           <Link to="/optimizing">optimizing </Link>
+          <Link to="/scu">scu </Link>
         </div>
       </div>
       <div style={{ padding: 20 }}>{ props.children }</div>

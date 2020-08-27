@@ -24,6 +24,11 @@ export const routes = [
     component: '@/pages/optimize',
     wrappers: ['@/layouts/index'],
   },
+  {
+    path: '/scu',
+    component: '@/pages/scu',
+    wrappers: ['@/layouts/index'],
+  },
 ]
 
 
