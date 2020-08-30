@@ -8,10 +8,10 @@ export const useMousePosition = () => {
       console.log('inner:', position);
       setPosition({x: e.clientX, y: e.clientY});
     }
-    document.addEventListener('mousemove', mouseEvent)
+    window.addEventListener('click', mouseEvent)
     return () => {
       console.log('remove', position.x)
-      document.removeEventListener('mousemove', mouseEvent)
+      window.removeEventListener('click', mouseEvent)
     }
   });
   return position
