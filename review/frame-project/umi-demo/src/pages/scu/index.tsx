@@ -1,4 +1,5 @@
 import React, {createContext, useState, useContext, Suspense} from 'react';
+import _ from 'lodash'
 
 export default class Demo extends React.Component<any, any> {
   constructor(props: React.Component) {
@@ -7,11 +8,12 @@ export default class Demo extends React.Component<any, any> {
   state = {
     text: 20,
     list: [
-      { id: '01', title:  'til 01'},
-      { id: '02', title:  'til 02'},
+      { id: '01', title:  'til 01', detail: { name: 'name 1' }},
+      { id: '02', title:  'til 02', detail: { name: 'name 2' }},
     ],
     footer: 'footer info',
   };
+
   // shouldComponentUpdate(s: any, nextState: any): any {
   //   console.log('nextState:', nextState)
   //   if (nextState.list !== this.state.list) {
@@ -20,9 +22,40 @@ export default class Demo extends React.Component<any, any> {
   //   return false // 不重复渲染
   // }
 
+  // shouldComponentUpdate(nextProps: Readonly<any>, nextState: Readonly<any>, nextContext: any): boolean {
+  //   return true
+  // }
+
+  shouldComponentUpdate (nextProps: any, nextState: any): boolean {
+    console.log('nextProps:', nextProps)
+    console.log('nextState:', nextState)
+    console.log('this.state:', this.state)
+    if (nextState.list !== this.state.list) {
+      console.log('to render')
+      return true
+    }
+    console.log('no render')
+    return false
+  }
+
   onSubmitTitle = (title: any) => {
+    // 为了演示 SCU ，故意写的错误用法
+    // this.state.list.push({
+    //   id: `id-${Date.now()}`,
+    //   title
+    // })
+    // this.setState({
+    //   list: this.state.list
+    // })
     this.setState({
-      list: [...this.state.list, { id: +new Date() + Math.random(), title }]
+      list: [
+        ...this.state.list,
+        {
+          id: +new Date() + Math.random(),
+          title,
+          detail: { name: `name ${Math.floor(Math.random() * 10)}`}
+        }
+      ]
     })
   }
   render() {
@@ -40,6 +73,7 @@ export default class Demo extends React.Component<any, any> {
 interface IList {
   id: string;
   title: string;
+  detail: any;
 }
 class List extends React.Component<any, any> {
   render() {
@@ -48,7 +82,7 @@ class List extends React.Component<any, any> {
       <ul>
         {
           list.map((item: IList) => {
-            return <li key={item.id}>{ item.title }</li>
+            return <li key={item.id}>{ item.title }, { item.detail.name }</li>
           })
         }
       </ul>

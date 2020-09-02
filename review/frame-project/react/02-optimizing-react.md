@@ -21,6 +21,17 @@ shouldComponentUpdate(nextProps,nextState){
 scu 一定要每次都用吗？ --scu 需要时才优化
 
 
+## SCU 使用总结
+- SCU 默认返回 true, 即 React 默认重新渲染所有子组件
+- 必须配合 '不可变值' 一起使用
+- 可先不用 SCU, 有性能问题时再考虑使用
+
+## PureComponent 和 memo
+因为在SCU中中使用深度比较，会带来性能问题，所以react推荐使用浅比较，用户的数据对应的也要设置成简单的数据；
+   
+- PureComponent，在SCU中实现了浅比较
+- memo，函数组件中的PureComponent
+- 浅比较已使用大部分情况，数据做扁平化处理
 
 ## 参考
 react相关知识汇总：

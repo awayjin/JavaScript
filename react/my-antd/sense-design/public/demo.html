@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/0.1.0/lodash.js"></script>
+</head>
+<body>
+
+<script>
+  const d = () => {};
+  const obj1 = { a: 10, b: 20, c: [11, 22], d }
+  const obj2 = { a: 10, b: 20, c: [11, 22], d }
+  // const obj2 = { a: 10, b: 20, c: [11, 22], d: ()=> {} }
+  console.log('_.isEqual', _.isEqual(obj1, obj2))
+  console.log('equ', obj1 == obj2)
+</script>
+</body>
+</html>
