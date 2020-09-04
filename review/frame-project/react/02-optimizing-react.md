@@ -33,6 +33,22 @@ scu 一定要每次都用吗？ --scu 需要时才优化
 - memo，函数组件中的PureComponent
 - 浅比较已使用大部分情况，数据做扁平化处理
 
+## immutable.js
+- 彻底拥抱"不可变值"
+- 基于共享数据，但不是深拷贝（深拷贝性能不好），速度好
+- 有一定学习和迁移成本，按需使用
+```
+const map1 = Immutable.Map({a:1,b:2});
+const map2 = map1.set('b',50)
+map1.get('b'); //2
+map2.get('b'); //50
+```
+
+## 性能优化总结
+- 面试重点，且涉及 React 设计理念
+- SCU PureComponent immutable.js
+- 按需使用 & state 层级
+
 ## 参考
 react相关知识汇总：
 https://www.cnblogs.com/xiaozhumaopao/p/12716280.html

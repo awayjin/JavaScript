@@ -29,6 +29,11 @@ export const routes = [
     component: '@/pages/scu',
     wrappers: ['@/layouts/index'],
   },
+  {
+    path: '/hoc',
+    component: '@/pages/hoc',
+    wrappers: ['@/layouts/index'],
+  },
 ]
 
 
