@@ -13,6 +13,7 @@ export default (props: any) => {
           <Link to="/optimizing">optimizing </Link>
           <Link to="/scu">scu </Link>
           <Link to="/hoc">hoc </Link>
+          <Link to="/render-props">render-props </Link>
         </div>
       </div>
       <div style={{ padding: 20 }}>{ props.children }</div>

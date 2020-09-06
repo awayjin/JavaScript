@@ -8,3 +8,22 @@
 
 - 组件公共逻辑抽离
 HOC 和 render props、mixin不推荐使用
+
+## render props
+通过一个函数将 class 组件的 state 作为 props 传递给纯函数组件。
+
+HOC 和 render props: 两个方式都是抽离公共逻辑
+
+- HOC: 模式简单，但会增加组件层级。 
+- Render props: 代码简洁，学习成本较高
+- 按需使用
+
+## 参考
+react相关知识汇总：
+https://www.cnblogs.com/xiaozhumaopao/p/12716280.html
+
+[译] 理解 React Render Props 和 HOC：
+https://juejin.im/post/6844903745747173390
+
+【React深入】从Mixin到HOC再到Hook：
+https://juejin.im/post/6844903815762673671

@@ -34,6 +34,11 @@ export const routes = [
     component: '@/pages/hoc',
     wrappers: ['@/layouts/index'],
   },
+  {
+    path: '/render-props',
+    component: '@/pages/render-props',
+    wrappers: ['@/layouts/index'],
+  },
 ]
 
 

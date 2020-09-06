@@ -5,7 +5,7 @@ import { CommentList } from './CommentList'
 export default () => {
   return (
     <div>
-      33
+      <h2>HOC</h2>
       <HocDemoClass a={44} onClick={() => console.log('click')} />
       <CommentList />
       <Demo ></Demo>

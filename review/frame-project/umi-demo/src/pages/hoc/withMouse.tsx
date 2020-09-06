@@ -17,7 +17,7 @@ const withMouse = (Component: any) => {
     }
 
     render() {
-      console.log('withMouseComponent this.props:', this.props)
+      // console.log('withMouseComponent this.props:', this.props)
       const { x, y} = this.state
       const a = this.props.a
       return (
@@ -41,7 +41,7 @@ const withMouse = (Component: any) => {
 const App = (props: any) => {
   const { x, y } = props.mouse
   const a = props.a
-  console.log('props:', props)
+  // console.log('props:', props)
   return (
     <div>
       <h2>The mouse position is {x}, {y}</h2>
