@@ -1,4 +1,16 @@
 ## Redux 使用
+- 和 Vuex 作用相同，但比 Vuex 学习成本高
+- 不可变值，纯函数
+
+## 基本概念
+- store state
+- action
+- reducer
+
+单项数据流概述
+- dispatch(action)
+- reducer -> newState
+- subscripe 触发通知
 
 ## React高级特性总结
 - 函数组件
