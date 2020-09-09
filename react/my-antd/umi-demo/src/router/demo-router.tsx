@@ -3,4 +3,5 @@ export default [
   { path: '/useEffect', component: '@/pages/useEffect' },
   { path: '/hoc', component: '@/pages/hoc' },
   { path: '/useRef', component: '@/pages/useRef' },
+  { path: '/antd', component: '@/pages/antd' },
 ]

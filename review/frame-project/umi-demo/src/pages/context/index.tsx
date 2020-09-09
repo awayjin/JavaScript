@@ -1,5 +1,5 @@
 import React, {createContext, useState, useContext} from 'react';
-import styles from './index.less';
+// import styles from './index.less';
 import ReactDOM from 'react-dom';
 
 const lines = [
