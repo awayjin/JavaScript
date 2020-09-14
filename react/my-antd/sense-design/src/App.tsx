@@ -1,6 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 
 function App() {
   const a = 1;
@@ -11,8 +9,13 @@ function App() {
   }
   return (
     <div className="App">
+      <h1>hello world</h1>
+      <h2>hello world</h2>
+      <h3>hello world</h3>
+      <button>button</button>
+      <hr />
+      <code>const a = 'b';</code>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
