@@ -24,6 +24,12 @@ components/
     style.scss 组件单独的样式
 ```
 
+#### @mixin 与 @include
+@mixin 指令允许我们定义一个可以在整个样式表中重复使用的样式。
+
+@include 指令可以将混入（mixin）引入到文档中。
+
+
 ## 色彩体系
 系统色板： 基础色板 + 中性色板
 

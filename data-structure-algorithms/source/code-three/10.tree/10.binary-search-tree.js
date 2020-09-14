@@ -78,6 +78,14 @@ class BinarySearchTree {
     }
   }
 
+  minNode(node) {
+    let current = node;
+    while (current != null && current.left != null) {
+      current = current.left;
+    }
+    return current;
+  }
+
   remove(key) {
     this.root = this.removeNode(this.root, key);
   }
