@@ -13,7 +13,14 @@ nvm install 10.15.0 //安装指定的版本的nodejs nvm use 10.15.0 //使用指
 npm install -g cnpm --registry=https://registry.npm.taobao.org //使用淘宝镜
 ```
 
-## umi 相关
+## 3. umi 相关
 安装 脚手架： `yarn create umi`
 
 创建页面： npx umi g page demo
+
+### 3.1 嵌套路由
+目录下创建 `_layout.tsx`，然后 `props.children`
+
+### 3.2 动态路由
+ umi 2: [id] 动态路由 创建 React 组件
+ umi 3: $id 动态路由 创建 React 组件
