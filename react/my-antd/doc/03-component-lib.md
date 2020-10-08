@@ -6,14 +6,17 @@
 - 代码打包输出和发布
 - CI/CD, 文档生成等
 
+## 1.0 代码结构
 
-## 样式解决方案
+## 2.0 样式解决方案
 - inline css
 - CSS-in-JS
 - Styled Component
 - Sass/Less
 
-样式系统文件结构
+官方： https://zh-hans.reactjs.org/docs/faq-styling.html#how-do-i-add-css-classes-to-components
+
+### 2.1 样式系统文件结构
 ```
 styles/
  _variables.scss 各种变量以及可配置设置
@@ -24,13 +27,12 @@ components/
     style.scss 组件单独的样式
 ```
 
-#### @mixin 与 @include
+### 2.2 @mixin 与 @include
 @mixin 指令允许我们定义一个可以在整个样式表中重复使用的样式。
 
 @include 指令可以将混入（mixin）引入到文档中。
 
-
-## 色彩体系
+## 2.3 色彩体系
 系统色板： 基础色板 + 中性色板
 
 中性色板： 品牌色 + 功能色板
@@ -46,7 +48,16 @@ $white:    #fff !default;
 
 中国色： http://zhongguose.com/
 
-## 更多样式变量 - 添加字体变量解决方案
+## 3.0 更多样式变量 - 添加字体变量解决方案
+
+### 组件库样式变量分类
+- 基础色彩系统
+- 字体系统
+- 表单
+- 按钮
+- 边框和阴影
+- 可配置开关
+
 ```
 // 中性色板
 $white:    #fff !default;

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Title</title>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+<!--  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>-->
+<!--  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>-->
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+ class Tick extends React.Component {
+   constructor (props) {
+     super(props);
+     this.state = {
+       date: new Date(),
+       tips: 'hello',
+       counter: 10,
+     }
+     console.log(11)
+   }
+   componentDidMount () {
+     console.log(33)
+     this.timerId = setInterval(() => {
+       this.setState({ date: new Date()})
+     }, 1000)
+     this.state.tips = 'world'
+   }
+   componentWillUnmount () {
+     console.log(44, this.timerId)
+     this.clearInterval(this.timerId)
+   }
+
+   increment (arg) {
+     // 可能是异步更新
+     // this.setState({
+     //   counter: arg + this.state.counter
+     // })
+
+     // function
+     this.setState((state, props) => ({
+       counter: arg + state.counter
+     }))
+
+     // this.setState(function (state, props) {
+     //   return {
+     //     counter: arg + state.counter
+     //   };
+     // });
+
+     this.setState(function (state, props) {
+       counter: arg + state.counter;
+     });
+
+     // a: 3;
+   }
+
+   render () {
+     console.log(22)
+     return <div>
+       <h2>tick</h2>
+       <p>It is { this.state.date.toLocaleTimeString() }</p>
+       <p>tips: { this.state.tips }</p>
+       <p>
+         counter: { this.state.counter }
+         <button onClick={() => this.increment(1)}>increment</button>
+       </p>
+     </div>
+   }
+ }
+
+ function element(){
+   return <Tick />
+ }
+ ReactDOM.render(<Tick />, document.getElementById('root'));
+</script>
+</body>
+</html>
