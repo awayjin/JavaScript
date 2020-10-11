@@ -6,6 +6,7 @@ class Lifecycle extends PureComponent<any, any> {
     super(props);
     this.state = {
       text: 'demo-old',
+      count: 10,
       obj: {id: 1}
     }
   }
@@ -34,21 +35,37 @@ class Lifecycle extends PureComponent<any, any> {
     this.setState({ text: 'demo-new' })
     // this.setState({ obj: { id: 2} }) // 浅比较
   };
+
+  increase = () => {
+    this.state.count++; // wrong, 只读的，直接修改违反不可变值
+    // this.setState({count: this.state.count + 1})
+    this.setState({count: this.state.count})
+  }
+  componentDidMount() {
+    // this.state.count++
+  }
+
   render() {
     const { text, obj } = this.state
     const arr: string[] = ['11', '22', '33'];
     const arr2: Array<number> = [11, 22, 33]
-    console.log('render', arr, arr2)
+    // console.log('render', arr, arr2)
     // 泛型
     function add<T>(arg: T): T {
       return arg
     }
-    console.log(add(123).toFixed(2))
-    console.log(add('123').charCodeAt(2))
+    // this.state.text = 'Hello'; // wrong
+    // console.log(add(123).toFixed(2))
+    // console.log(add('123').charCodeAt(2))
     return (
       <>
-        <div>{ text }</div>
-        <div>{ obj.id }</div>
+        <div>
+          count: { this.state.count },
+          <button onClick={()=>this.increase()}>add ++</button>
+          <button onClick={()=>this.setState({count: this.state.count - 1})}>minus --</button>
+        </div>
+        <div>{ this.state.text }</div>
+        <div>{ this.state.obj.id }</div>
         <button onClick={() => this.updateDate()}>click</button>
       </>
     );
