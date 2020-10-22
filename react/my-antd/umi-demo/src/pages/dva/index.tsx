@@ -23,9 +23,16 @@ class Dva extends React.Component<any, any> {
 }
 
 // @ts-ignore
-export default connect(({ search }) => ({
-  search
-}))(Dva);
-// export default connect(({search})=>({
+// export default connect(({ search }) => ({
 //   search
-// }))(Dva)
+// }))(Dva);
+
+const instance = connect(function (_ref: any) {
+  console.log('_ref', _ref)
+  var search = _ref.search;
+  return {
+    search: search
+  };
+})(Dva);
+console.log('instance:', instance)
+export default instance;

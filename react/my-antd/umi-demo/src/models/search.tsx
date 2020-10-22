@@ -3,11 +3,28 @@ export default {
   state: {
     text: 'dva',
     lists: [
-      { value: 1, id: 1}
+      11, 22
     ]
   },
   // 同步
-  reducers: {},
+  reducers: {
+    getList (state: any, action: any) {
+      console.log('action:', action)
+      return {
+        ...state,
+        // payload 自定义
+        lists: Array(10).fill(action.payload)
+      }
+    }
+  },
   // 异步
-  effects: {}
+  effects: {
+    // @ts-ignore
+    *getListAsync ({ payload }, { call, put}) {
+      yield put({
+        type: 'getList',
+        payload
+      })
+    }
+  }
 }

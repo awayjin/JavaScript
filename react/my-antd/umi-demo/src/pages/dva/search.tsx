@@ -15,6 +15,14 @@ export class Search extends React.Component<any, any> {
 
   onSubmit = () => {
     console.log('value', this.state.value)
+    this.props.dispatch({
+      type: 'search/getListAsync',
+      payload: this.state.value
+    })
+    // this.props.dispatch({
+    //   type: 'search/getList',
+    //   payload: this.state.value
+    // })
   }
 
   render() {

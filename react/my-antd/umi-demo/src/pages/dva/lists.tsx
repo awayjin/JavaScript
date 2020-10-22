@@ -9,9 +9,11 @@ class Lists extends React.Component<any, any> {
     }
   }
 
+  componentDidMount() {
+    console.log('this.props:', this.props)
+  }
 
   render() {
-    console.log('this.props:', this.props)
     const { text, lists } = this.props.search
     return <div>
       <div>
@@ -19,7 +21,7 @@ class Lists extends React.Component<any, any> {
         <List>
           {
             lists.map((item: any, index: any) => (
-              <List.Item key={index}>{ item.value }</List.Item>
+              <List.Item key={index}>{ item }</List.Item>
             ))
           }
         </List>
