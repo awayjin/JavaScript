@@ -11,6 +11,9 @@ class Dva extends React.Component<any, any> {
     }
   }
 
+  componentDidMount() {
+    console.log('index this.props:', this.props)
+  }
 
   render() {
     return <div>
