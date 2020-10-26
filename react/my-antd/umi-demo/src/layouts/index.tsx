@@ -1,4 +1,4 @@
-console.log('from index.tsx')
+// console.log('from index.tsx')
 import { IRouteComponentProps } from 'umi'
 import { history } from 'umi';
 

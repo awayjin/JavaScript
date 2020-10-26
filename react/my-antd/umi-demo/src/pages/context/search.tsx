@@ -1,7 +1,9 @@
 import React from "react";
 import { SearchBar } from 'antd-mobile'
+import SearchContext from "./search-context";
 
 export default class Search extends React.Component<any, any> {
+  static contextType = SearchContext;
   constructor (props: any) {
     super(props)
     this.state = {
@@ -14,15 +16,14 @@ export default class Search extends React.Component<any, any> {
   }
 
   onSubmit = () => {
-    // 异步
-    this.props.dispatch({
-      type: 'search/getListAsync',
+    this.context.dispatch({
+      type: 'TEXT',
       payload: this.state.value
     })
-    // this.props.dispatch({
-    //   type: 'search/getList',
-    //   defMy: this.state.value
-    // })
+    this.context.dispatch({
+      type: 'LISTS',
+      payload: this.state.value
+    })
   }
 
   render() {

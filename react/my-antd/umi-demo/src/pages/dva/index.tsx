@@ -1,5 +1,5 @@
 import React from "react";
-import { Search } from './search'
+import Search from './search'
 import Lists from './lists'
 import { connect } from 'dva'
 
@@ -12,7 +12,7 @@ class Dva extends React.Component<any, any> {
   }
 
   componentDidMount() {
-    console.log('index this.props:', this.props)
+    console.log('2 index this.props:', this.props)
   }
 
   render() {
@@ -30,12 +30,13 @@ class Dva extends React.Component<any, any> {
 //   search
 // }))(Dva);
 
+// connect 绑定 state 到 view
 const instance = connect(function (_ref: any) {
-  console.log('_ref', _ref)
+  console.log('--> 1 _ref', _ref)
   var search = _ref.search;
   return {
     search: search
   };
 })(Dva);
-console.log('instance:', instance)
+// console.log('instance:', instance)
 export default instance;
