@@ -9,6 +9,11 @@ export default class Search extends React.Component<any, any> {
     this.state = {
       value: ''
     }
+    const list: number[] = [11];
+    const list2: Array<string> = ['11']
+    let x: [string, number]; // 元组
+    // x = [10, '11'] // error
+    x = ['10', 11] // ok
   }
 
   onChange = (value: any) => {
