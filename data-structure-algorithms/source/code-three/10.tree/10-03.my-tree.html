@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+// 二叉搜索树
+class Node {
+  constructor(key) {
+    this.key = key
+    this.left = null
+    this.right = null
+  }
+}
+
+// 二叉搜索树
+/**
+ * 二叉搜索树
+ * 插入
+ * 遍历 - 先序遍历
+ */
+class BinarySearchTree {
+  constructor() {
+    this.root = null
+  }
+  insert (key) {
+    if (this.root === null) {
+      this.root = new Node(key)
+    } else {
+      this.insertNode(this.root, key)
+    }
+  }
+  insertNode (node, key) {
+    // console.log(node, key)
+    if (node.key > key) {
+      if (node.left === null) {
+        node.left = new Node(key)
+      } else {
+        this.insertNode(node.left, key)
+      }
+    } else {
+      if (node.right === null) {
+        node.right = new Node(key)
+      } else {
+        this.insertNode(node.right, key)
+      }
+    }
+  }
+  // 中序遍历
+  inOrderTravel (callback) {
+    this.inOrderTravelNode(this.root, callback)
+  }
+  inOrderTravelNode (node, callback) {
+    if (node !== null) {
+      this.inOrderTravelNode(node.left, callback)
+      callback(node.key)
+      this.inOrderTravelNode(node.right, callback)
+    }
+  }
+}
+
+const bst = new BinarySearchTree();
+bst.insert(9)
+bst.insert(5)
+bst.insert(4)
+bst.insert(10)
+bst.insert(13)
+bst.insert(5)
+bst.insert(4)
+console.log(bst)
+
+bst.inOrderTravel((value) => console.log(value))
+
+</script>
+
+</body>
+</html>
