@@ -5,6 +5,8 @@ import java.util.Arrays;
 
 public class SystemDmo {
   public static void main(String[] args) {
+
+
     long start = System.currentTimeMillis();
     for (int i = 0; i < 999; i++) {
       System.out.println(i);
@@ -13,6 +15,7 @@ public class SystemDmo {
     System.out.println("执行多少" + (end - start) + "毫秒.");
 
     demo();
+
   }
 
   private static void demo() {

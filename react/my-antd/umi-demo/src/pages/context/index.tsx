@@ -47,6 +47,7 @@ export default class Context extends React.Component<any, any> {
     }
     return <div>
       {/*{ house.info.id }*/}
+      <button onClick={() => house.info }>btn</button>
       <h2>Context </h2>
       { searchContextFunc() }
     </div>;

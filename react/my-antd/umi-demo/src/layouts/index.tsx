@@ -6,6 +6,6 @@ import React from "react";
 
 export default function Layout({ children, location, route, history, match }: IRouteComponentProps) {
   // return children
-  console.log('history:', history)
+  // console.log('history:', history)
   return <ErrorBoundary>{ children }</ErrorBoundary>
 }
