@@ -3,18 +3,7 @@ import { connect } from 'dva'
 
 function Dva (props: any) {
   const [count, setCount] = useState(10);
-
-
   const [text, setText] = useState('text-demo');
-
-  const noCacheText = ()=> {
-    console.log('text changed')
-    return text
-  }
-  const memoText = useMemo(() => {
-    console.log('memoText')
-    return text
-  }, [text]);
 
   async function demo() {
     console.log('demo')
@@ -28,6 +17,17 @@ function Dva (props: any) {
   // demo();
   // console.log(22)
 
+  const noCacheText = ()=> {
+    console.log('text changed')
+    return text
+  }
+  const memoText = useMemo(() => {
+    console.log('memoText')
+    return text
+  }, [text]);
+
+  // 引用相等
+  // 昂贵的计算
   const handleCountCB = useCallback(() => {
     console.log('log changed useCallback')
     setCount(count+ 1)
@@ -48,8 +48,7 @@ function Dva (props: any) {
   </>
 }
 
-// @ts-ignore
-export default connect(({ search }) => ({
+export default connect(({ search }: any) => ({
   search
 }))(Dva);
 

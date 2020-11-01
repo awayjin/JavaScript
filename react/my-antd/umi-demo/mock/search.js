@@ -5,7 +5,7 @@ export default {
   // }
   // func
   'GET /api/getList': (req, res) => {
-    console.log('-----> req:', req)
+    // console.log('-----> req:', req)
     setTimeout(() => {
       res.json({
         lists: Array(2).fill(req.query.value)

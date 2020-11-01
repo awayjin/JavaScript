@@ -37,7 +37,7 @@ class Lifecycle extends PureComponent<any, any> {
   };
 
   increase = () => {
-    this.state.count++; // wrong, 只读的，直接修改违反不可变值
+    // this.state.count++; // wrong, 只读的，直接修改违反不可变值
     // this.setState({count: this.state.count + 1})
     this.setState({count: this.state.count})
   }
