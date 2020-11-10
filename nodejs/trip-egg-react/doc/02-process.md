@@ -10,3 +10,5 @@
 
 ## 参考
 https://github.com/chyingp/nodejs-learning-guide
+
+http://nodejs.cn/api/cluster.html
