@@ -26,3 +26,45 @@ cluster 模块可以创建共享服务器端口的子进程。
 - cluster.isWorker 该进程不是主进程，则为 true
 - cluster.fork() 衍生出一个新的工作进程。
 - process.pid 属性返回进程的 PID
+
+```
+const cluster = require('cluster')
+const http = require('http')
+const os = require('os')
+
+const numCPUs = os.cpus().length
+
+if (cluster.isMaster) {
+  console.log(`主进程 ${process.pid} 正在运行`);
+  
+  // 衍生工作进程
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork()
+  }
+} else if (cluster.isWorker) {
+  // 工作进程可以共享任何 TCP 连接。
+  // 在本例子中，共享的是 HTTP 服务器。
+  http.createServer((req, res) => {
+    res.writeHead(200)
+    res.end('hello cluster')
+  }).listen(8000)
+
+  console.log(`工作进程 ${process.pid} 已经启动`);
+}
+
+```
+
+## 参考
+https://github.com/chyingp/nodejs-learning-guide
+
+子进程： http://nodejs.cn/api/child_process.html#child_process_child_process
+
+cluster: http://nodejs.cn/api/cluster.html
+
+
+深入理解Node.js 中的进程与线程: https://juejin.cn/post/6844903908385488903
+
+video: https://www.bilibili.com/video/av85982999?p=13
+
+
+blog: https://github.com/koala-coding/goodBlog
