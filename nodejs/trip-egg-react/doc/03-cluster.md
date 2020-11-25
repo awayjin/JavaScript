@@ -2,9 +2,11 @@
 
 单个 Node.js 实例运行在单个线程中. 为了充分利用多核系统，有时需要启用一组 Node.js 进程去处理负载任务。
 
-在服务端编程中，通常会创建多个node实例来处理客户端的请求，以此提升系统的吞吐率。对这样多个node实例，我们称之为cluster（集群)
-
 cluster 模块可以创建共享服务器端口的子进程。
+
+在服务端编程中，通常会创建多个node实例来处理客户端的请求，以此提升系统的吞吐率。对这样多个node实例，我们称之为cluster（集群)。
+
+> 一般使用单位时间内服务器处理的请求数来描述其并发处理能力。称之为吞吐率（Throughput），单位是 “req/s”。吞吐率特指 Web 服务器单位时间内处理的请求数
 
 集群有以下两种常见的实现方案，而node自带的cluster模块，采用了方案二:
 
@@ -55,7 +57,8 @@ if (cluster.isMaster) {
 ```
 
 ## 参考
-https://github.com/chyingp/nodejs-learning-guide
+github cluster:
+https://github.com/chyingp/nodejs-learning-guide/blob/master/%E6%A8%A1%E5%9D%97/cluster.md
 
 子进程： http://nodejs.cn/api/child_process.html#child_process_child_process
 

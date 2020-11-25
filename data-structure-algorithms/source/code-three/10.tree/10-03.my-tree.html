@@ -52,15 +52,15 @@ class BinarySearchTree {
       }
     }
   }
-  // 中序遍历
-  inOrderTravel (callback) {
-    this.inOrderTravelNode(this.root, callback)
+  // 中序遍历, 顺序遍历-从小到大
+  inOrderTraverse (callback) {
+    this.inOrderTraverseNode(this.root, callback)
   }
-  inOrderTravelNode (node, callback) {
+  inOrderTraverseNode (node, callback) {
     if (node !== null) {
-      this.inOrderTravelNode(node.left, callback)
+      this.inOrderTraverseNode(node.left, callback)
       callback(node.key)
-      this.inOrderTravelNode(node.right, callback)
+      this.inOrderTraverseNode(node.right, callback)
     }
   }
 }
@@ -71,11 +71,9 @@ bst.insert(5)
 bst.insert(4)
 bst.insert(10)
 bst.insert(13)
-bst.insert(5)
-bst.insert(4)
 console.log(bst)
 
-bst.inOrderTravel((value) => console.log(value))
+bst.inOrderTraverse((value) => console.log(value))
 
 </script>
 
