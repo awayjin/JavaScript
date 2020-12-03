@@ -17,5 +17,19 @@ describe('user text', () => {
       .expect(200)
       .expect('[{"text":"user demo"}]');
   });
+  // 详情
+  it('user detail', async () => {
+    await app.httpRequest()
+      .get('/user/detail?id=123')
+      .expect(200)
+      .expect('123');
+  });
+  // detail2
+  it('user detail2', async () => {
+    await app.httpRequest()
+      .get('/user/detail2/str')
+      .expect(200)
+      .expect('str');
+  });
 });
 
