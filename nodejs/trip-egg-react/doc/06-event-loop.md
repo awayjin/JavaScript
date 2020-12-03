@@ -15,3 +15,6 @@ JavaScript执行（一）：Promise里的代码为什么比setTimeout先执行�
 Node.js 事件循环，定时器和 process.nextTick()： https://nodejs.org/zh-cn/docs/guides/event-loop-timers-and-nexttick/
 
 blog node事件循环： https://www.taopoppy.cn/node/one_eventLoop.html#%E5%85%AD%E4%B8%AA%E9%98%B6%E6%AE%B5
+
+并发模型与事件循环:
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop

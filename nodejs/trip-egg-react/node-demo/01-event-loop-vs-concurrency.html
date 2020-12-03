@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+function calls form a stack of frames.
+<script>
+  function foo(b) {
+    let a = 10
+    return a + b + 11
+  }
+
+  function bar(x) {
+    let y = 3
+    return foo(x * y)
+  }
+
+  console.log(bar(7)) // returns 42
+</script>
+
+</body>
+</html>
