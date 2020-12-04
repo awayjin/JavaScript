@@ -24,12 +24,30 @@ describe('user text', () => {
       .expect(200)
       .expect('123');
   });
-  // detail2
+  // user/detail2 动态路由
   it('user detail2', async () => {
     await app.httpRequest()
       .get('/user/detail2/str')
       .expect(200)
       .expect('str');
+  });
+  // user/add post
+  it('user add', async () => {
+    await app.httpRequest()
+      .post('/user/add')
+      .send({
+        name: 'csrf',
+        age: 18,
+      })
+      .expect(200)
+      .expect({
+        status: 200,
+        body: {
+          name: 'csrf',
+          age: 18,
+        },
+        me: 'user add',
+      });
   });
 });
 
