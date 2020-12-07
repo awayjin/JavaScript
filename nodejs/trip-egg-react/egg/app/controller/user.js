@@ -26,14 +26,31 @@ class UserController extends Controller {
   }
   async detail() {
     const { ctx } = this;
-    console.log('ctx.query:', ctx.query);
+    const detailInfo = await ctx.service.user.detail(ctx.query.id);
+    console.log('detailInfo:', detailInfo);
+    // console.log('ctx.query:', ctx.query);
     // ctx.body = 'detail';
-    ctx.body = ctx.query.id;
+    // ctx.body = ctx.query.id;
+    ctx.body = detailInfo;
   }
   async detail2() {
     const { ctx } = this;
     console.log('detail2 动态传参 ctx.params:', ctx.params);
     ctx.body = ctx.params.id;
+  }
+  async detail3() {
+    const { ctx } = this;
+    await ctx.render(
+      'user.html',
+      {
+        data: 'ejs world',
+        list: [
+          { id: 1, text: 'js' },
+          { id: 2, text: 'vue' },
+          { id: 3, text: 'react' },
+        ],
+      }
+    );
   }
   // add
   async add() {

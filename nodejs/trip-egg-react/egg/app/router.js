@@ -13,6 +13,7 @@ module.exports = app => {
 
   router.get('/user/detail', controller.user.detail);
   router.get('/user/detail2/:id', controller.user.detail2);
+  router.get('/user/detail3', controller.user.detail3);
 
   // post
   router.post('/user/add', controller.user.add);

@@ -1,7 +1,7 @@
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
-
+const path = require('path');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -23,6 +23,21 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
+  };
+
+  // ejs
+  config.view = {
+    mapping: {
+      // '.ejs': 'ejs',
+      '.html': 'ejs',
+    },
+  };
+  config.ejs = {};
+
+  // static
+  config.static = {
+    prefix: '/public/',
+    dir: path.join(appInfo.baseDir, 'app/public'),
   };
 
   // add your user config here
