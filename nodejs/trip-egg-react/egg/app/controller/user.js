@@ -3,6 +3,12 @@
 const { Controller } = require('egg');
 
 class UserController extends Controller {
+  encode(str) {
+    return new Buffer(str).toString('base64');
+  }
+  decode(str) {
+    return new Buffer(str, 'base64').toString();
+  }
   async index() {
     const { ctx } = this;
     ctx.body = 'user index 1';
@@ -40,6 +46,21 @@ class UserController extends Controller {
   }
   async detail3() {
     const { ctx } = this;
+    // get
+    const user = ctx.cookies.get('user');
+    // 中文加密才能解析
+    ctx.cookies.set('zh', '中文', {
+      encrypt: true,
+    });
+    const zh = ctx.cookies.get('zh', {
+      encrypt: true,
+    });
+    console.log('zh:', zh);
+
+    ctx.cookies.set('base64', this.encode('中文base64'));
+    const base64 = this.decode(ctx.cookies.get('base64'));
+    console.log('base64:', base64);
+
     await ctx.render(
       'user.html',
       {
@@ -49,8 +70,33 @@ class UserController extends Controller {
           { id: 2, text: 'vue' },
           { id: 3, text: 'react' },
         ],
+        user: user ? JSON.parse(user) : null,
+        zh,
+        base64,
       }
     );
+  }
+  // login
+  async login() {
+    const { ctx } = this;
+    const { body } = ctx.request;
+    ctx.cookies.set('user', JSON.stringify(body), {
+      maxAge: 1000 * 60 * 10,
+      httpOnly: false,
+    });
+    console.log('body:', body);
+    ctx.body = {
+      status: 200,
+      data: body,
+    };
+  }
+  async logout() {
+    const { ctx } = this;
+    ctx.cookies.set('user', null);
+    ctx.body = {
+      status: 200,
+      data: 'logout',
+    };
   }
   // add
   async add() {

@@ -6,11 +6,30 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="/public/css/user.css">
+  <link rel="stylesheet" href="../public/css/user.css">
 </head>
 <body>
 <%- include user-header.html %>
-hello <%= data %>
+
+<section>
+  <p><button onclick="login()">login</button></p>
+  <p><button onclick="logout()">注销</button></p>
+</section>
+
+<section class="color">
+  <% if(user) { %>
+  已经登录：<%= user.name %>
+  <% } else { %>
+  未登录
+  <% } %>
+  <p>中文: <%= zh %></p>
+  <p>base64: <%= base64 %></p>
+</section>
+
+<p>
+  hello <%= data %>
+</p>
+
 <ul id="user">
   <% list.forEach((item) => { %>
     <li>
@@ -19,5 +38,7 @@ hello <%= data %>
     </li>
   <% }) %>
 </ul>
+
+<script src="/public/js/user.js"></script>
 </body>
 </html>
