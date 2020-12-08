@@ -21,6 +21,21 @@ function calls form a stack of frames.
   }
 
   console.log(bar(7)) // returns 42
+
+  !function () {
+
+  }();
+  const s = new Date().getSeconds();
+  setTimeout(() => {
+    // 输出 "2"，表示回调函数并没有在 500 毫秒之后立即执行
+    console.log(`ran after ${new Date().getSeconds() - s} seconds`)
+  }, 500);
+  while(true) {
+    if (new Date().getSeconds() - s >= 6) {
+      console.log('Good, looped for 2 seconds. 循环2秒');
+      break;
+    }
+  }
 </script>
 
 </body>
