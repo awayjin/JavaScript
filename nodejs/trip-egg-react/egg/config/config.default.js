@@ -34,6 +34,16 @@ module.exports = appInfo => {
   };
   config.ejs = {};
 
+  // session
+  config.session = {
+    key: 'JIMU_SESSION',
+    // 是否能通过js获取, document.cookie
+    httpOnly: true,
+    maxAge: 1000 * 3,
+    // 发现当用户 Session 的有效期仅剩下最大有效期一半的时候，重置 Session 的有效期
+    renew: true,
+  };
+
   // static
   config.static = {
     prefix: '/public/',

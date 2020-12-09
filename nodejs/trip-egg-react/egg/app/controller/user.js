@@ -3,15 +3,51 @@
 const { Controller } = require('egg');
 
 class UserController extends Controller {
-  encode(str) {
+  encode(str = '') {
     return new Buffer(str).toString('base64');
   }
-  decode(str) {
+  decode(str = '') {
     return new Buffer(str, 'base64').toString();
   }
   async index() {
     const { ctx } = this;
-    ctx.body = 'user index 1';
+
+    // 获取session
+    const session = ctx.session.user;
+    const zhSession = ctx.session.zh;
+    console.log(session);
+    console.log(zhSession);
+
+    ctx.cookies.set('zh', '测试', {
+      encrypt: true,
+    });
+    const zh = ctx.cookies.get('zh', {
+      encrypt: true,
+    });
+    // console.log(zh)
+
+    ctx.cookies.set('base64', this.encode('中文base64'));
+    const base64 = this.decode(ctx.cookies.get('base64'));
+
+    // ctx.body = 'user index';
+    const user = ctx.cookies.get('user');
+    await ctx.render('user.html', {
+      id: 100,
+      name: 'admin',
+      data: 'ejs world',
+      list: [
+        { id: 1, text: 'js' },
+        { id: 2, text: 'vue' },
+        { id: 3, text: 'react' },
+      ],
+      user: user ? JSON.parse(user) : null,
+      zh,
+      base64,
+    }, {
+      delimiter: '%',
+    });
+    // const { ctx } = this;
+    // ctx.body = 'user index 1';
   }
   async lists() {
     const { ctx } = this;
@@ -44,8 +80,15 @@ class UserController extends Controller {
     console.log('detail2 动态传参 ctx.params:', ctx.params);
     ctx.body = ctx.params.id;
   }
+
+  // cookies
   async detail3() {
     const { ctx } = this;
+
+    // 获取 session
+    // const session = ctx.session.user;
+    // console.log('session', session);
+
     // get
     const user = ctx.cookies.get('user');
     // 中文加密才能解析
@@ -57,6 +100,7 @@ class UserController extends Controller {
     });
     console.log('zh:', zh);
 
+    // base64
     ctx.cookies.set('base64', this.encode('中文base64'));
     const base64 = this.decode(ctx.cookies.get('base64'));
     console.log('base64:', base64);
@@ -85,6 +129,10 @@ class UserController extends Controller {
       httpOnly: false,
     });
     console.log('body:', body);
+
+    // 保存 session
+    ctx.session.user = body;
+
     ctx.body = {
       status: 200,
       data: body,
@@ -93,6 +141,8 @@ class UserController extends Controller {
   async logout() {
     const { ctx } = this;
     ctx.cookies.set('user', null);
+    // 清除 session
+    ctx.session.user = null;
     ctx.body = {
       status: 200,
       data: 'logout',
