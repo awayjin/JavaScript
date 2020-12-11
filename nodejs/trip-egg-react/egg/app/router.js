@@ -20,4 +20,8 @@ module.exports = app => {
 
   // post
   router.post('/user/add', controller.user.add);
+
+  // curl
+  router.get('/curl/get', controller.curl.curlGet);
+  router.post('/curl/post', controller.curl.curlPost);
 };
