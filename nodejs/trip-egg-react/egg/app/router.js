@@ -6,6 +6,11 @@
 module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
+  router.get('/newApp', controller.home.newApp); // app 方法的扩展
+  router.get('/newCtx', controller.home.newCtx); // ctx
+  router.post('/newCtx2', controller.home.newCtx); // ctx
+  router.get('/newRequest', controller.home.newRequest); // request
+  router.get('/newResponse', controller.home.newResponse); // response
   router.get('/demo', controller.home.demo);
 
   router.get('/user', controller.user.index);

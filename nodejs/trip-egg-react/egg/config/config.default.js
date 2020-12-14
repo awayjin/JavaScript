@@ -16,7 +16,8 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1604804121998_9024';
 
   // add your middleware config here
-  config.middleware = [];
+  // config.middleware = [ 'm1', 'm2' ];
+  config.middleware = [ 'httpLog' ];
 
   // csrf
   config.security = {
@@ -48,6 +49,10 @@ module.exports = appInfo => {
   config.static = {
     prefix: '/public/',
     dir: path.join(appInfo.baseDir, 'app/public'),
+  };
+  // egg-auth 自定义
+  config.auth = {
+    exclude: [ '/home', '/user', '/login', '/logout' ],
   };
 
   // add your user config here
