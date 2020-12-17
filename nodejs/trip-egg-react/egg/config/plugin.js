@@ -33,3 +33,10 @@ exports.auth = {
   // package: 'egg-auth', // package 表示安装了某些依赖包
   path: path.join(__dirname, '../lib/plugin/egg-auth'),
 };
+
+// mysql
+exports.mysql = {
+  enable: true,
+  package: 'egg-mysql',
+};
+
