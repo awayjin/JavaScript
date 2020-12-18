@@ -88,6 +88,7 @@ class BinarySearchTree {
 
   remove(key) {
     this.root = this.removeNode(this.root, key);
+    // this.removeNode(this.root, key)
   }
 
   removeNode(node, key) {

@@ -13,15 +13,29 @@
   import BinarySearchTree from './10.binary-search-tree.js'
 
   const bst = new BinarySearchTree()
+  // bst.insert(5)
+  // bst.insert(3)
+  // bst.insert(4)
+  // bst.insert(14)
+  // bst.insert(8)
+  // bst.insert(9)
+  // bst.insert(8)
+  bst.insert(9)
+  bst.insert(7)
+  bst.insert(177)
   bst.insert(5)
   bst.insert(3)
-  bst.insert(4)
-  bst.insert(14)
+  bst.insert(11)
   bst.insert(8)
-  bst.insert(9)
-  bst.insert(8)
+  bst.insert(13)
 
   console.log(bst)
+  // bst.remove(5)
+  // bst.remove(5)
+  // bst.remove(9)
+  console.log('bst.remove(9)', bst.remove(9))
+  console.log(bst)
+
   // 中序遍历
   bst.inOrderTraverse((value) => {
     console.log(value)
