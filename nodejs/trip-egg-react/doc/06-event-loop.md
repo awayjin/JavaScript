@@ -22,3 +22,5 @@ blog node事件循环： https://www.taopoppy.cn/node/one_eventLoop.html#%E5%85%
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop
 
 浏览器与Node的事件循环(Event Loop)有何区别?: https://juejin.cn/post/6844903761949753352
+
+浏览器和Node 事件循环的区别: https://juejin.cn/post/6844904050761154574

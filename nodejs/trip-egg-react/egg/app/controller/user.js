@@ -10,13 +10,17 @@ class UserController extends Controller {
     return new Buffer(str, 'base64').toString();
   }
   async index() {
-    const { ctx } = this;
+    const { ctx, app } = this;
+    // console.log('mysql:', app.mysql);
+    // const sql = `select * from user`;
+    const userTable = await app.mysql.select('user');
+    console.log('userTable:', userTable);
 
     // 获取session
-    const userSession = ctx.session.user;
-    const zhSession = ctx.session.zh;
-    console.log('--> userSession:', userSession);
-    console.log('zhSession:', zhSession);
+    // const userSession = ctx.session.user;
+    // const zhSession = ctx.session.zh;
+    // console.log('--> userSession:', userSession);
+    // console.log('zhSession:', zhSession);
 
     ctx.cookies.set('zh', '测试', {
       encrypt: true,
