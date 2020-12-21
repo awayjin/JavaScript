@@ -65,6 +65,11 @@ Egg 和 Koa 的中间件形式是一样的，都是基于洋葱模型(the onion 
 
 可视化工具： MySQL Workbench 
 
+## ORM Sequelize
+> ORM 一般指对象关系映射。对象关系映射（英语：Object Relational Mapping，简称ORM
+
+egg-sequelize mysql2
+
 ## Web 安全概念
 Web 应用中存在很多安全风险，这些风险会被黑客利用，轻则篡改网页内容，重则窃取网站内部数据，更为严重的则是在网页中植入恶意代码，使得用户受到侵害。常见的安全漏洞如下：
 

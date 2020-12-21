@@ -17,9 +17,9 @@ class UserController extends Controller {
     console.log('userTable:', userTable);
 
     // 获取session
-    // const userSession = ctx.session.user;
+    const userSession = ctx.session.user;
     // const zhSession = ctx.session.zh;
-    // console.log('--> userSession:', userSession);
+    console.log('--> userSession:', userSession);
     // console.log('zhSession:', zhSession);
 
     ctx.cookies.set('zh', '测试', {
@@ -55,18 +55,28 @@ class UserController extends Controller {
   }
   async lists() {
     const { ctx } = this;
-    // eslint-disable-next-line no-unused-vars
-    const r = await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const random = (Math.random() * 10 % 2);
-        resolve(random);
-      }, 1500);
+    // const r = await new Promise(resolve => {
+    //   setTimeout(() => {
+    //     const random = (Math.random() * 10 % 2);
+    //     resolve(random);
+    //   }, 1500);
+    // });
+    // console.log('r', r);
+    // ctx.body = '22';
+    console.log('ctx.model:', ctx.model);
+    console.log('ctx.model.User:', ctx.model.User);
+    const res = await ctx.model.User.findAll({
+      // where: {
+      //   id: 2,
+      // },
+      limit: 3,
+      offset: 1,
     });
-    console.log('r', r);
+    console.log('res:', res);
     ctx.body = [
       {
         text: 'user demo',
-        // r,
+        data: res,
       },
     ];
   }
@@ -74,10 +84,12 @@ class UserController extends Controller {
     const { ctx } = this;
     const detailInfo = await ctx.service.user.detail(ctx.query.id);
     console.log('detailInfo:', detailInfo);
+    // 获取单条数据
+    const res = await ctx.model.User.findByPk(ctx.query.id);
     // console.log('ctx.query:', ctx.query);
     // ctx.body = 'detail';
     // ctx.body = ctx.query.id;
-    ctx.body = detailInfo;
+    ctx.body = res;
   }
   async detail2() {
     const { ctx } = this;
@@ -136,6 +148,7 @@ class UserController extends Controller {
 
     // 保存 session
     ctx.session.user = body;
+    ctx.session.user2 = body;
     ctx.session.zh = '中文测试';
     ctx.session.test = 'test';
 
@@ -154,21 +167,52 @@ class UserController extends Controller {
       data: 'logout',
     };
   }
-  // add
+  // 编辑
+  async edit() {
+    const { ctx } = this;
+    const user = await ctx.model.User.findByPk(ctx.request.body.id);
+    if (!user) {
+      ctx.body = {
+        status: 404,
+        errorMsg: 'id not exists',
+      };
+      return;
+    }
+    const res = await user.update(ctx.request.body);
+    ctx.body = { data: res, status: 200 };
+  }
+  // 删除
+  async remove() {
+    const { ctx } = this;
+    const user = await ctx.model.User.findByPk(ctx.request.body.id);
+    if (!user) {
+      ctx.body = {
+        status: 404,
+        errorMsg: 'id not exists',
+      };
+      return;
+    }
+    const res = await user.destroy(ctx.request.body.id);
+    ctx.body = { data: res, status: 201 };
+  }
+  // 添加 add
   async add() {
     const { ctx } = this;
-    console.log('body:', ctx.request.body);
-    // 定义创建接口的请求参数规则
-    const rules = {
-      name: 'string',
-      age: 'number',
-    };
+    // console.log('body:', ctx.request.body);
+    // // 定义创建接口的请求参数规则
+    // const rules = {
+    //   name: 'string',
+    //   age: 'number',
+    // };
     // 校验 `ctx.request.body` 是否符合我们预期的格式
     // 如果参数校验未通过，将会抛出一个 status = 422 的异常
-    ctx.validate(rules, ctx.request.body);
+    // ctx.validate(rules, ctx.request.body);
+    // model 添加数据
+    const res = await ctx.model.User.create(ctx.request.body);
     ctx.body = {
       status: 200,
-      body: ctx.request.body,
+      data: res,
+      // body: ctx.request.body,
       me: 'user add',
     };
   }

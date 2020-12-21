@@ -40,3 +40,9 @@ exports.mysql = {
   package: 'egg-mysql',
 };
 
+// sequelize
+exports.sequelize = {
+  enable: true,
+  package: 'egg-sequelize',
+};
+

@@ -40,7 +40,7 @@ module.exports = appInfo => {
     key: 'JIMU_SESSION',
     // 是否能通过js获取, document.cookie
     httpOnly: true,
-    maxAge: 1000 * 12,
+    maxAge: 1000 * 60 * 60 * 24,
     // 发现当用户 Session 的有效期仅剩下最大有效期一半的时候，重置 Session 的有效期
     renew: true,
   };
@@ -52,7 +52,12 @@ module.exports = appInfo => {
   };
   // egg-auth 自定义
   config.auth = {
-    exclude: [ '/home', '/user/', '/user', '/login', '/logout' ],
+    exclude: [
+      '/home', '/user/', '/user', '/login', '/logout',
+      '/user/add',
+      '/user/edit',
+      '/user/remove',
+    ],
   };
 
   // mysql
@@ -64,6 +69,20 @@ module.exports = appInfo => {
       user: 'root',
       password: '123456',
       database: 'egg_trip',
+    },
+  };
+
+  // sequelize
+  config.sequelize = {
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    port: '3306',
+    user: 'root',
+    password: '123456',
+    database: 'egg_trip',
+    define: {
+      timestamps: false, // 不需要添加时间
+      freezeTableName: true, // 不需要自动处理表名
     },
   };
 

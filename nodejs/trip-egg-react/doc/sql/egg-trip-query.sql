@@ -12,11 +12,12 @@ create table if not exists user(
 )engine=INNODB charset=utf8;
 
 show tables;
-drop table user;
+#drop table user;
 
 SELECT * FROM user;
 
 insert into user(username, pwd) VALUES('admin', 123);
+insert into user(username, pwd) VALUES('admin', 123456);
 
 desc user;
 
@@ -26,7 +27,7 @@ UPDATE  user set pwd=123456 WHERE id=2;
 
 
 
-
+SELECT `id`, `name`, `pwd` FROM `user` AS `user`
 
 
 

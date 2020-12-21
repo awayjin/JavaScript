@@ -14,7 +14,11 @@ module.exports = app => {
   router.get('/demo', controller.home.demo);
 
   router.get('/user', controller.user.index);
+  router.post('/user/edit', controller.user.edit);
+  router.post('/user/remove', controller.user.remove);
   router.get('/user/lists', controller.user.lists);
+  // post
+  router.post('/user/add', controller.user.add);
 
   router.get('/user/detail', controller.user.detail);
   router.get('/user/detail2/:id', controller.user.detail2);
@@ -22,9 +26,6 @@ module.exports = app => {
   // login
   router.post('/login', controller.user.login);
   router.post('/logout', controller.user.logout);
-
-  // post
-  router.post('/user/add', controller.user.add);
 
   // curl
   router.get('/curl/get', controller.curl.curlGet);
