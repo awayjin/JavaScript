@@ -25,8 +25,6 @@ desc user;
 UPDATE  user set pwd=123456 WHERE id=2;
 
 
-
-
 SELECT `id`, `name`, `pwd` FROM `user` AS `user`
 
 
