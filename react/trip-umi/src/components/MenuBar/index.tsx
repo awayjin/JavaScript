@@ -1,11 +1,38 @@
 import React from "react";
 import './index.less'
 import { TabBar } from 'antd-mobile'
+import PropTypes from 'prop-types'
+import { SmileTwoTone, HomeOutlined, CheckCircleTwoTone } from '@ant-design/icons';
+import { history } from 'umi'
+import './index.less';
 
 export default class MenuBar extends React.Component<any, any> {
+  static defaultProps: {};
+  static propTypes: {};
   constructor(props: any) {
     super(props);
-    this.state = {}
+    this.state = {
+      items: [
+        {
+          title: '首页',
+          icon: <HomeOutlined twoToneColor="#eb2f96" />,
+          selectedIcon: <HomeOutlined />,
+          link: '/'
+        },
+        {
+          title: '订单',
+          icon: <SmileTwoTone twoToneColor="#eb2f96" />,
+          selectedIcon: <SmileTwoTone />,
+          link: '/orders'
+        },
+        {
+          title: '我的',
+          icon: <CheckCircleTwoTone twoToneColor="#eb2f96" />,
+          selectedIcon: <CheckCircleTwoTone />,
+          link: '/users'
+        }
+      ]
+    }
   }
 
   handleClose = () => {
@@ -14,45 +41,34 @@ export default class MenuBar extends React.Component<any, any> {
   }
 
   render() {
-    const { show } = this.props;
+    const { show, pathname } = this.props;
     return <>
-      <TabBar>
-        <TabBar.Item
-          title={'menu-bar'}
-          icon={<div style={{
-            width: '22px',
-            height: '22px',
-            background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
-          />
-          }
-          selectedIcon={<div style={{
-            width: '22px',
-            height: '22px',
-            background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
-          />
-          }
-        >
-        </TabBar.Item>
-        <TabBar.Item
-          icon={
-            <div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat' }}
-            />
-          }
-          selectedIcon={
-            <div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat' }}
-            />
-          }
-          title="Koubei"
-        >
-
-        </TabBar.Item>
+      <TabBar hidden={!show}>
+        {
+          this.state.items.map((item: any, index: number) => {
+            return (
+              <TabBar.Item
+                key={item.link}
+                title={item.title}
+                icon={item.icon}
+                selectedIcon={item.selectedIcon}
+                selected={pathname === item.link }
+                onPress={() => history.push(item.link)}
+              />
+            )
+          })
+        }
       </TabBar>
     </>;
   }
+}
+
+MenuBar.defaultProps = {
+  show: false,
+  pathname: ''
+}
+
+MenuBar.propTypes = {
+  show: PropTypes.bool,
+  pathname: PropTypes.string
 }

@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { MenuBar } from '@/components'
+// @ts-ignore
+import { MenuBar } from "@/components"
+import { useLocation } from 'umi'
 
 export default (props: any) => {
+  const location = useLocation();
+  const paths = ['/', '/orders', '/users']
   return (
-    <div style={{ padding: 20 }}>
-      <header>header layout</header>
-      <section>
+    <div className={'menu-bar'}>
+      <div>
         { props.children }
-      </section>
-      <MenuBar />
+      </div>
+      33
+      <MenuBar
+        show={paths.includes(location.pathname)}
+        pathname={location.pathname}
+      >
+      </MenuBar>
+
+      {/*<header>header layout</header>*/}
+      {/*<section>*/}
+      {/*  { props.children }*/}
+      {/*</section>*/}
+      {/*<MenuBar />*/}
     </div>
   );
 }
+
