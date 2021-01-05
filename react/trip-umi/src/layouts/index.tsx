@@ -11,7 +11,6 @@ export default (props: any) => {
       <div>
         { props.children }
       </div>
-      33
       <MenuBar
         show={paths.includes(location.pathname)}
         pathname={location.pathname}

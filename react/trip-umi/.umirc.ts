@@ -12,8 +12,8 @@ export default defineConfig({
       component: '@/layouts/index',
       routes: [
         { path: '/', component: '@/pages/home', title: '首页' },
-        { path: '/order', component: '@/pages/order', title: '订单' },
-        { path: '/user', component: '@/pages/user', title: '我的' },
+        { path: '/orders', component: '@/pages/order', title: '订单' },
+        { path: '/users', component: '@/pages/user', title: '我的' },
       ]
     }
   ],
