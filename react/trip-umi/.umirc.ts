@@ -4,7 +4,11 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+<<<<<<< HEAD
+  layout: {},
+=======
   // layout: {},
+>>>>>>> de3b7cd7ba23e9a1bb6e648d66b731da7167405d
   routes: [
     {
       path: '/',
