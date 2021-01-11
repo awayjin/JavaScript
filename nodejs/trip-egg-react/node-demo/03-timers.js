@@ -13,5 +13,5 @@ setTimeout(() => {
 
 someAsyncOperation(() => {
   const startCb = Date.now()
-  while (Date.now() - startCb < 10) {}
+  while (Date.now() - startCb < 200) {}
 })

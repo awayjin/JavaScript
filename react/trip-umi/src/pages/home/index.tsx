@@ -7,7 +7,7 @@ import './index.less'
 export default (props: any) => {
   console.log('home props', props)
   return (
-    <div>
+    <div className={'home'}>
       <Header></Header>
       <Hot></Hot>
       <Search></Search>

@@ -9,8 +9,7 @@ export default (props: any) => {
         名宿
       </div>
       <div className="header-login">
-        <Link to={'/login'}>登录</Link> |
-        <Link to={'/register'}>注册</Link>
+        <Link to={'/login'}>登录</Link> | <Link to={'/register'}>注册</Link>
       </div>
     </div>
   )
