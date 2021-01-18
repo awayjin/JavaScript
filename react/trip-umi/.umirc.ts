@@ -4,11 +4,7 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-<<<<<<< HEAD
-  layout: {},
-=======
   // layout: {},
->>>>>>> de3b7cd7ba23e9a1bb6e648d66b731da7167405d
   routes: [
     {
       path: '/',
@@ -17,6 +13,9 @@ export default defineConfig({
         { path: '/', component: '@/pages/home', title: '首页' },
         { path: '/orders', component: '@/pages/order', title: '订单' },
         { path: '/users', component: '@/pages/user', title: '我的' },
+        { path: '/search', component: '@/pages/search', title: '搜索' },
+        { path: '/demo', component: '@/pages/demo', title: 'demo-til' },
+        { path: '/observer', component: '@/pages/observer', title: 'observer' },
       ]
     }
   ],
