@@ -8,6 +8,7 @@ package-lock.json*
 *node_modules
 /coverage/*
 coverage/
+/vue/job-handover-mobile
 
 # Editor directories and files
 .idea
