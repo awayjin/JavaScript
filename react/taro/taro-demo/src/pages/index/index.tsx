@@ -8,6 +8,8 @@ import './index.less'
 
 import { ThreadList } from '../../components/thread_list'
 import api from '../../utils/api'
+import Child from './Child'
+import Head from '../../components/head/head'
 
 // #region 书写注意
 //
@@ -59,20 +61,60 @@ class Index extends Component {
     console.log(this.props, nextProps)
   }
 
+  state = {
+    name: 'default name',
+    parentName: 'parent name',
+    count: 1
+  }
+
   componentWillUnmount () { }
 
   componentDidShow () { }
 
   componentDidHide () { }
 
+  componentDidMount(): void {
+    // this.setState({
+    //   name: 'sam'
+    // })
+  }
+
+  change () {
+    console.log('this.', this.state.parentName)
+    this.setState({ parentName: '通过子组件调用 1'})
+  }
   render () {
+    // @ts-ignore
+    const { name, count } = this.state
     return (
       <View className='index'>
+        <Head />
         <Button className='add_btn' onClick={this.props.add}>+</Button>
         <Button className='dec_btn' onClick={this.props.dec}>-</Button>
         <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
         <View><Text>{this.props.counter.num}</Text></View>
         <View><Text>Hello, World， demo</Text></View>
+        <Button
+          onClick={() => {
+            this.setState({
+              name: 'lily',
+              parentName: 'change parentName',
+              count: count + 1
+            }, () => {
+              console.log('name1:', this.state.name)
+            })
+            console.log('异步 name2:', this.state.name)
+          }}
+        >
+          change name
+        </Button>
+        <View>
+          <Child
+            name={this.state.parentName}
+            onchange={this.change.bind(this)}
+          />
+          <Text>{name} {count}</Text>
+        </View>
       </View>
     )
   }
