@@ -230,6 +230,7 @@ Page({
               account: res.code,
               type: 100
             },
+            method: 'POST',
             success(res) {
               console.log('success res:', res)
               const code = res.statusCode.toString()
@@ -261,8 +262,7 @@ Page({
             },
             fail(res) {
               console.log('fail:', res)
-            },
-            method: 'POST'
+            }
           })
 
         } else {

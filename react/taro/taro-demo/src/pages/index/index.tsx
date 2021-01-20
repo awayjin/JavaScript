@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Button, Text } from '@tarojs/components'
-
+import Taro from '@tarojs/taro'
 import { add, minus, asyncAdd } from '../../actions/counter'
 
 import './index.less'
-
-import { ThreadList } from '../../components/thread_list'
-import api from '../../utils/api'
-import Child from './Child'
 import Head from '../../components/head/head'
+import Food from '../../components/food/food'
 
 // #region 书写注意
 //
@@ -34,8 +31,6 @@ type PageDispatchProps = {
 }
 
 type PageOwnProps = {}
-
-type PageState = {}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
@@ -89,32 +84,15 @@ class Index extends Component {
     return (
       <View className='index'>
         <Head />
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World， demo</Text></View>
+        <Food />
         <Button
           onClick={() => {
-            this.setState({
-              name: 'lily',
-              parentName: 'change parentName',
-              count: count + 1
-            }, () => {
-              console.log('name1:', this.state.name)
-            })
-            console.log('异步 name2:', this.state.name)
+            Taro.redirectTo({url: '/pages/demo/index'})
           }}
+          style={{marginTop: '40px'}}
         >
-          change name
+          go to demo
         </Button>
-        <View>
-          <Child
-            name={this.state.parentName}
-            onchange={this.change.bind(this)}
-          />
-          <Text>{name} {count}</Text>
-        </View>
       </View>
     )
   }

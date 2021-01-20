@@ -1,7 +1,7 @@
 const app = new (require('koa'))
 const KoaRouter = require('koa-router')
 const router = new KoaRouter({
-  prefix: '/api/v1/token'
+  prefix: '/v1/token'
 })
 const basicAuth = require('basic-auth')
 const chalk = require('chalk')

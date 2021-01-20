@@ -23,18 +23,25 @@ class Head extends Component {
     this.props.onchange()
   }
   render () {
+    // @ts-ignore
     const {store}=this.state;
     return (
-      <View className={'head'}>
+      <View className='head'>
         <Top />
-        <Image className="back" src={require('../../assets/img/back.jpg')} />
-        <View className="store">
-          <Image className="store_img" src={require('../../assets/img/store.jpg')} />
-          <View className="store_text">
-            <Text className="title">{store.title}</Text>
+        <Image className='back' src={require('../../assets/img/back.jpg')} />
+        <View className='store'>
+          <Image className='store_img' src={require('../../assets/img/store.jpg')} />
+          <View className='store_text'>
+            <Text className='title'>{store.title}</Text>
             <Text>{store.notice}</Text>
             <View>
-              {store.tags.map((item,index)=><Text className="tags_text" key={index}>{item}</Text>)}
+              {
+                store.tags.map((item,index)=>{
+                  return (
+                    <Text className='tags_text' key={index}>{item}</Text>
+                  )
+                })
+              }
             </View>
           </View>
         </View>
