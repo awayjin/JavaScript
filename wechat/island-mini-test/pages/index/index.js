@@ -24,7 +24,7 @@ Page({
       method: 'POST',
       data: {
         content: '天上一天地下十年',
-        book_id: 1121
+        book_id: 11213
       },
       header: {
         Authorization: this.encodeBasic64()
