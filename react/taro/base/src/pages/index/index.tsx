@@ -4,6 +4,9 @@ import taro from '@tarojs/taro'
 import './index.less'
 // import { AtButton } from 'taro-ui'
 import Child from './child'
+import { setDate, getDate } from '../utils/index';
+import Dialog from "../dialog/index";
+import DemoEvent from "../demoEvent/index";
 
 export default class Index extends Component {
 
@@ -81,17 +84,37 @@ export default class Index extends Component {
     // console.log('this.config', this.config)
     return (
       <View className='index'>
+        <DemoEvent />
+        <Dialog />
         <Child name={name} obj={obj} ontest={this.test.bind(this)} />
+        <View className='flex'>
+          <Button
+            onClick={() => {
+              taro.navigateTo({url: '/pages/list/index?id=2&name=wang'})
+              // taro.redirectTo({url: '/pages/list/index'})
+            }}
+          >
+            go to list
+          </Button>
+          <Button
+            onClick={() => {
+              taro.navigateTo({url: '/pages/hook/index?id=2&name=wang'})
+            }}
+          >
+            go to hook
+          </Button>
+          <Button
+            onClick={() => {
+              getDate();
+              setDate();
+            }}
+          >
+            utils
+          </Button>
+        </View>
         <Button onClick={this.handleClick.bind(this)}>更新name</Button>
         <Text>{ name }, { age }</Text>
         <View>2.{ this.config.navigationBarTitleText }</View>
-        <Button
-          onClick={() => {
-            taro.navigateTo({url: '/pages/list/index'})
-          }}
-        >
-          go to list
-        </Button>
       </View>
     )
   }
