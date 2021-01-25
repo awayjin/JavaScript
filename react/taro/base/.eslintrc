@@ -1,0 +1,17 @@
+{
+  "extends": ["taro/react", "eslint:recommended", "plugin:react/recommended" ],
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["off"],
+    "@typescript-eslint/no-unused-vars3": [
+      "off",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": true,
+        "varsIgnorePattern": "^Taro",
+        "argsIgnorePattern": "^_"
+      }
+    ]
+  }
+}
