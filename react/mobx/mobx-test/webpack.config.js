@@ -10,15 +10,18 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        // test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         // use: ['babel-loader?cacheDirectory=true'],
         use: {
           loader: 'babel-loader',
           options: {
             "presets": [["@babel/preset-env", { "targets": "defaults" }]],
+            // "presets": ["env"],
             // "plugins": ['@babel/plugin-syntax-class-properties']
-            "plugins": ['transform-class-properties']
+            // "plugins": ['transform-decorators-legacy', 'transform-class-properties']
+            "plugins": [["@babel/plugin-proposal-decorators", { "legacy": true }], 'transform-class-properties']
           }
           // options: {
           //   presets: ['env']

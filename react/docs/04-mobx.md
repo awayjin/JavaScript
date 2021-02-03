@@ -22,3 +22,11 @@ yarn add -D webpack wepack-cli babel-core babel-preset-env babel-loader
 @babel/preset-env
 
 babel-plugin-transform-class-properties
+
+yarn add -D babel-plugin-transform-decorators-legacy
+
+## decorator修饰器语法
+
+Decorator 是在声明阶段实现类与类成员注解的一种方法
+
+https://github.com/sharebetter/Mobx

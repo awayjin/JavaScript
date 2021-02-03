@@ -1,9 +1,9 @@
 import './class-proto';
+import './decorator-demo';
 
 console.log('------------')
-document.write('hello world')
-
-console.log('Hello MobX')
+document.write('hello Mobx')
+// console.log('Hello MobX')
 
 // Dog.prototype.__proto__ === Animal.prototype
 
