@@ -1,8 +1,9 @@
 import './class-proto';
 import './decorator-demo';
+import './observable'
 
 console.log('------------')
-document.write('hello Mobx')
+// document.write('hello Mobx')
 // console.log('Hello MobX')
 
 // Dog.prototype.__proto__ === Animal.prototype
@@ -42,6 +43,6 @@ Dog.prototype = Object.create(Animal.prototype, {
 })
 
 const dog1 = new Dog()
-console.log(dog1 instanceof Animal)
-console.log(dog1.say())
-console.log(dog1.constructor)
+// console.log(dog1 instanceof Animal)
+// console.log(dog1.say())
+// console.log(dog1.constructor)

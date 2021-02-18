@@ -15,5 +15,5 @@ class Dog extends Animal {
 }
 
 const dog1 = new Dog();
-console.log('dog1:', dog1.food)
-console.log('dog1:', dog1 instanceof Animal)
+// console.log('dog1:', dog1.food)
+// console.log('dog1:', dog1 instanceof Animal)

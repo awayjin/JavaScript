@@ -25,8 +25,38 @@ babel-plugin-transform-class-properties
 
 yarn add -D babel-plugin-transform-decorators-legacy
 
-## decorator修饰器语法
+## decorator 修饰器语法
+
+JavaScript中，装饰器是一种用于修饰类(class)、方法、属性的装饰
 
 Decorator 是在声明阶段实现类与类成员注解的一种方法
 
-https://github.com/sharebetter/Mobx
+## MobX 常用的API
+- 可观察的数据 Observable
+- 对观察的数据做出反应
+
+## Observable
+Observable 是一种让数据的变化可以被观察的方法
+
+哪些数据类型可以被观察
+- 原始类型 String, Number, Boolean, Symbol
+- 对象
+- 数组
+
+npm install mobx --save
+
+原始类型值用 observable.box
+
+## 对观察的数据做出反应
+- computed
+- autorun 自动运行
+- when
+- reaction
+
+
+
+## 参考
+Mobx小案例： https://github.com/sharebetter/Mobx
+
+JavaScript装饰器(Decorator)：它是什么以及如何使用
+https://zhuanlan.zhihu.com/p/189960001
