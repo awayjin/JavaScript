@@ -34,8 +34,10 @@ Decorator 是在声明阶段实现类与类成员注解的一种方法
 ## MobX 常用的API
 - 可观察的数据 Observable
 - 对观察的数据做出反应
+- 修改可观察的数据（action）
+- 使用 mobx-react
 
-## Observable
+## 1. Observable
 Observable 是一种让数据的变化可以被观察的方法
 
 哪些数据类型可以被观察
@@ -47,13 +49,25 @@ npm install mobx --save
 
 原始类型值用 observable.box
 
-## 对观察的数据做出反应
+## 2. 对观察的数据做出反应
 - computed
 - autorun 自动运行
 - when
-- reaction
+- reaction autorun 的变种
 
+直接赋值带来副作用，每次修改会自动触发
 
+## 3. 修改可观察的数据（action）
+- action 建议对任何修改 observables 或具有副作用的函数使用 (@)action
+- action.bound 可以用来自动地将动作绑定到目标对象
+- runInAction 是个简单的工具函数，它接收代码块并在(异步的)动作中执行
+
+对于很多重复调用的逻辑用action, 否则用 runInAction
+
+## 4. 使用 mobx-react
+npm i react react-dom prop-types mobx-react
+
+npm i -D babel-preset-react
 
 ## 参考
 Mobx小案例： https://github.com/sharebetter/Mobx
