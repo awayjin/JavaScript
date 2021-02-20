@@ -58,6 +58,11 @@ npm install mobx --save
 直接赋值带来副作用，每次修改会自动触发
 
 ## 3. 修改可观察的数据（action）
+
+应该永远只对修改状态的函数使用动作。 只执行查找，过滤器等函数不应该被标记为动作，以允许 MobX 跟踪它们的调用
+
+“强制动作” 强制所有状态变更都必须通过动作来完成。
+
 - action 建议对任何修改 observables 或具有副作用的函数使用 (@)action
 - action.bound 可以用来自动地将动作绑定到目标对象
 - runInAction 是个简单的工具函数，它接收代码块并在(异步的)动作中执行
@@ -67,7 +72,7 @@ npm install mobx --save
 ## 4. 使用 mobx-react
 npm i react react-dom prop-types mobx-react
 
-npm i -D babel-preset-react
+npm i -D @babel/preset-react
 
 ## 参考
 Mobx小案例： https://github.com/sharebetter/Mobx

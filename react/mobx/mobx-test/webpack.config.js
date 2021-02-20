@@ -18,7 +18,10 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            "presets": [["@babel/preset-env", { "targets": "defaults" }], "@babel/preset-react"],
+            "presets": [
+              ["@babel/preset-env", { "targets": "defaults" }],
+              "@babel/preset-react"
+            ],
             // "presets": ["env"],
             // "plugins": ['@babel/plugin-syntax-class-properties']
             // "plugins": ['transform-decorators-legacy', 'transform-class-properties']
