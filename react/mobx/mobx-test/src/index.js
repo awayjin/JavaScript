@@ -1,5 +1,5 @@
 import './class-proto';
-import './decorator-demo';
+// import './decorator-demo';
 import './observable'
 
 console.log('------------')
