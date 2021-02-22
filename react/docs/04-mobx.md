@@ -74,6 +74,42 @@ npm i react react-dom prop-types mobx-react
 
 npm i -D @babel/preset-react
 
+## 5. 常用工具函数
+- observe, observe 和 intercept 可以用来监测单个 observable(它们不追踪嵌套的 observable) 的变化。 observe 允许你在 observable 变化之后拦截改变
+    
+- intercept,  intercept 可以在变化作用于 observable 之前监测和修改变化。
+
+- spy(listener). 注册一个全局间谍监听器，用来监听所有 MobX 中的事件
+
+- toJS 递归地将一个(observable)对象转换为 javascript 结构。
+
+- trace 是一个小工具，它能帮助你查找为什么计算值、 reactions 或组件会重新计算。
+
+## 6. 提升性能
+三法则
+- 细粒度拆分视图组件
+- 使用专用组件处理列表
+- 尽可能晚地结构可观察数据
+
+## mobx视图不自动更新的问题
+因为mobx为6.0.0以上的版本，mobx的将属性变为可观察的语法变了。
+由原来的使用@observable注解变成了使用makeAutoObservable
+
+```javascript
+// 5.0
+class Test{
+    @observable name="";
+}
+
+// 6.0
+class Test{
+    name;
+    constructor(){
+        makeAutoObservable(this)
+    }
+}
+```
+
 ## 参考
 Mobx小案例： https://github.com/sharebetter/Mobx
 
