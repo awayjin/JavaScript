@@ -89,11 +89,28 @@ npm i -D @babel/preset-react
 三法则
 - 细粒度拆分视图组件
 - 使用专用组件处理列表
-- 尽可能晚地结构可观察数据
+- 尽可能晚地解构可观察数据
 
-## mobx视图不自动更新的问题
-因为mobx为6.0.0以上的版本，mobx的将属性变为可观察的语法变了。
-由原来的使用@observable注解变成了使用makeAutoObservable
+## 7. 总结
+
+7.1 使用 MobX 的必要条件
+- ES2015 class
+- ES2017 decorator
+
+7.2 MobX 常用 API
+- observable 可观察数据
+- computed/autorun/when/reaction 对可观察数据做出反应
+- action 修改可观察的数据
+
+7.3 利用 mobx-react 工具库让 mobx 维护 react 项目状态
+
+7.4 提升开发体验，优化渲染性能
+- observe/toJS/trace/spy
+- 优化 react
+
+## mobx 视图不自动更新的问题
+因为 mobx 为6.0.0以上的版本，mobx的将属性变为可观察的语法变了。
+由原来的使用 @observable 注解变成了使用makeAutoObservable
 
 ```javascript
 // 5.0
