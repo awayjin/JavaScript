@@ -14,6 +14,7 @@
   http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html
 
   <script>
+    const ADD_TODO = 'ADD_TODO'
     // Action Creator
     function addTodo(text) {
       return {
@@ -22,7 +23,7 @@
       }
     }
 
-    const reducer = (state = 0, action) => {
+    const reducer = (state = 'default state ', action) => {
       console.log('--> 1. state:', state, ', action:', action);
       // console.log('action:', action);
       if (action.type === 'ADD_TODO') {

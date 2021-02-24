@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import Store from './store'
+import StoreDemo from './storeDemo'
+import TodoList from './todoList'
 
 function App() {
   return (
     <div className="App2">
-     <Store />
+    <TodoList />
+    <StoreDemo />
     </div>
   );
 }
