@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/redux/4.0.5/redux.js"></script>
+</head>
+<body>
+  http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html
+
+  <script>
+    // Action Creator
+    function addTodo(text) {
+      return {
+        type: ADD_TODO,
+        text
+      }
+    }
+
+    const reducer = (state = 0, action) => {
+      console.log('--> 1. state:', state, ', action:', action);
+      // console.log('action:', action);
+      if (action.type === 'ADD_TODO') {
+        return state + action.payload 
+      }
+      return state 
+    }
+
+    const store = Redux.createStore(reducer)
+
+    store.dispatch({
+      type: 'ADD_TODO',
+      payload: 'learn redux 3'
+    })
+    // action creator 2
+    store.dispatch(addTodo('learn redux 4'))
+    
+    const state = store.getState()
+    console.log('2. state:', state);
+</script>
+
+</body>
+</html>
