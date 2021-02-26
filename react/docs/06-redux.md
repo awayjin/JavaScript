@@ -1,5 +1,7 @@
 # Redux
 
+React 只是 DOM 的一个抽象层，并不是 Web 应用的完整解决方案。
+
 Redux是一个用来管理管理数据状态和UI状态的JavaScript应用工具
 
 
