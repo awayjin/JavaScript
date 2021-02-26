@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css'
-import { Input , Button , List } from 'antd'
+import { Input , Button , List, message } from 'antd'
 import store from "../store"
+import { CHANGE_INPUT , ADD_ITEM , DELETE_ITEM } from '../store/actionTypes'
+import { changeInputAction, addItemAction, deleteItemAction } from '../store/actionCreators'
 
 class TodoList extends Component {
   constructor (props) {
@@ -16,6 +18,7 @@ class TodoList extends Component {
     this.changeInputValue = this.changeInputValue.bind(this)
     this.clickBtn = this.clickBtn.bind(this)
     this.storeChange = this.storeChange.bind(this)
+    // 订阅 Redux 的状态
     store.subscribe(this.storeChange)
   }
   componentDidMount () {
@@ -28,25 +31,37 @@ class TodoList extends Component {
     const obj = JSON.parse(JSON.stringify(store.getState()))
     this.setState(obj)
   }
+
+  // input change
   changeInputValue(e) {
     // console.log(e.target.value)
-    const action = {
-      type: 'change_input_value',
-      value: e.target.value
-    }
+    // const action = {
+    //   type: CHANGE_INPUT,
+    //   value: e.target.value
+    // }
+    const value = e.target.value;
+    const action = changeInputAction(value)
     store.dispatch(action)
   }
-  clickBtn(index){
-    const action = {
-      type: 'addItem'
+
+  clickBtn() {
+    // const action = {
+    //   type: ADD_ITEM
+    // }
+    console.log('this.state.inputValue:', this.state.inputValue, typeof this.state.inputValue)
+    if (this.state.inputValue) {
+      store.dispatch(addItemAction())
+    } else {
+      message.info('值是空的')
     }
-    store.dispatch(action)
   }
   deleteItem(index) {
-    const action = {
-      type: 'deleteItem',
-      index
-    }
+    // const action = {
+    //   type: DELETE_ITEM,
+    //   index
+    // }
+
+    const action = deleteItemAction(index)
     store.dispatch(action)
   }
   render() {

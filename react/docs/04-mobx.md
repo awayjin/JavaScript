@@ -88,8 +88,20 @@ npm i -D @babel/preset-react
 ## 6. 提升性能
 三法则
 - 细粒度拆分视图组件
-- 使用专用组件处理列表
+
+- 使用专用组件处理列表。
+
+   React 在渲染大型数据集合时表现非常糟糕，因为协调器必须评估每个集合变化的集合所产生的组件。
+   
 - 尽可能晚地解构可观察数据
+```
+快的:
+<DisplayName person={person} />
+
+慢的:
+<DisplayName name={person.name} />
+```
+
 
 ## 7. 总结
 
