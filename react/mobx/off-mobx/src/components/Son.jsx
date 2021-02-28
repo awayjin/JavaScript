@@ -1,7 +1,8 @@
 import React from 'react';
+import { trace } from 'mobx'
 import { observer, inject } from 'mobx-react'
 
-@inject('StyleStore', 'UserStore')
+@inject('StyleStore', 'UserStore', 'TodoStore')
 @observer
 class Son extends React.Component {
   constructor(props) {
@@ -17,16 +18,18 @@ class Son extends React.Component {
     if (StyleStore.color === 'red') {
       color = 'green'
     }
-    console.log('this.props 2:', this.props);
+    // console.log('this.props 2:', this.props);
     StyleStore.changeColor(color)
   }
   render () {
-    const { StyleStore, UserStore } = this.props
-    console.log('this.props:', this.props);
+    const { StyleStore, UserStore, TodoStore } = this.props
+    // console.log('this.props:', this.props);
+    trace()
     return (
       <div>
         <h2 style={{ 'color': StyleStore.color}}>son</h2>
         <button onClick={this.handleChangeColor}>change color</button>
+        <p>todo store number: {TodoStore.number}</p>
         <hr/>
         <ul>
           {

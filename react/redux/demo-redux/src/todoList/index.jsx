@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css'
-import { Input , Button , List, message } from 'antd'
+import { message } from 'antd'
+import axios from "axios"
 import store from "../store"
-import { CHANGE_INPUT , ADD_ITEM , DELETE_ITEM } from '../store/actionTypes'
-import { changeInputAction, addItemAction, deleteItemAction } from '../store/actionCreators'
+// import { CHANGE_INPUT , ADD_ITEM , DELETE_ITEM } from '../store/actionTypes'
+import {
+  changeInputAction,
+  addItemAction,
+  deleteItemAction,
+  getListAction,
+  getTodoList,
+  getMyListAction,
+} from '../store/actionCreators'
+import TodoListUI from './TodoListUI'
 
 class TodoList extends Component {
   constructor (props) {
@@ -17,18 +26,34 @@ class TodoList extends Component {
     // console.log('store:', store.getState())
     this.changeInputValue = this.changeInputValue.bind(this)
     this.clickBtn = this.clickBtn.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
+
     this.storeChange = this.storeChange.bind(this)
     // 订阅 Redux 的状态
     store.subscribe(this.storeChange)
   }
   componentDidMount () {
-    // console.log('store.getState():', store.getState())
-    // this.setState({
-    //   ...store.getState()
-    // })
+    // axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList')
+    // axios.get('http://localhost:3003/getUserInfo')
+    //   .then(async (res)=>{
+    //     // console.log('res:', res)
+    //     const action = await getListAction(res.data)
+    //     store.dispatch(action)
+    //   }, (err) => {
+    //     return message.error(err)
+    //   })
+
+    // const action = getTodoList()
+    // store.dispatch(action)
+
+    const action = getMyListAction()
+    store.dispatch(action)
+    console.log(action)
   }
+
   storeChange() {
     const obj = JSON.parse(JSON.stringify(store.getState()))
+    console.log('obj:', obj)
     this.setState(obj)
   }
 
@@ -39,59 +64,34 @@ class TodoList extends Component {
     //   type: CHANGE_INPUT,
     //   value: e.target.value
     // }
+
     const value = e.target.value;
     const action = changeInputAction(value)
     store.dispatch(action)
   }
 
   clickBtn() {
-    // const action = {
-    //   type: ADD_ITEM
-    // }
-    console.log('this.state.inputValue:', this.state.inputValue, typeof this.state.inputValue)
     if (this.state.inputValue) {
       store.dispatch(addItemAction())
     } else {
       message.info('值是空的')
     }
   }
-  deleteItem(index) {
-    // const action = {
-    //   type: DELETE_ITEM,
-    //   index
-    // }
 
+  deleteItem(index) {
     const action = deleteItemAction(index)
     store.dispatch(action)
   }
   render() {
     return (
-      <div style={{margin:'10px'}}>
-        <div>
-          <Input
-            placeholder='write someting'
-            style={{ width:'250px', marginRight:'10px'}}
-            value={this.state.inputValue}
-            onChange={this.changeInputValue}
-          /><Button type="primary" onClick={this.clickBtn}>增加</Button>
-          <h3>{ this.state.inputValue }</h3>
-
-        </div>
-        <div style={{margin:'10px',width:'300px'}}>
-          <List
-            bordered
-            dataSource={this.state.list}
-            renderItem={(item, index) => (
-              <List.Item
-                key={index}
-                onClick={this.deleteItem.bind(this, index)}
-              >
-                {item}
-              </List.Item>
-            )}
-
-          />
-        </div>
+      <div>
+        <TodoListUI
+          inputValue={this.state.inputValue}
+          list={this.state.list}
+          changeInputValue={this.changeInputValue}
+          clickBtn={this.clickBtn}
+          deleteItem={this.deleteItem}
+        />
       </div>
     );
   }

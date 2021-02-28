@@ -74,10 +74,6 @@ const Index = () => {
       <Provider store={store}>
         <AddSub />
       </Provider>
-      <p>
-        <button onClick={()=>store.dispatch('increment')}>add</button>
-        <button onClick={()=>store.dispatch('decrement')}>sub</button>
-      </p>
     </div>
   )
 }

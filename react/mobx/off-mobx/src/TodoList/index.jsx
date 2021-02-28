@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react"
 import { observe, observable, action, autorun, computed, trace } from "mobx"
 import {PropTypes} from "prop-types";
-import {observer, PropTypes as ObservablePropTypes } from 'mobx-react'
+import {observer, PropTypes as ObservablePropTypes, inject } from 'mobx-react'
 import Store from './store'
 import TodoItem from './todoItem'
 import './index.css'
@@ -60,8 +60,9 @@ class TodoFooter extends Component {
   }
 }
 
+@inject('TodoStore', 'StyleStore')
 @observer
-class Index extends Component {
+class TodoListIndex extends Component {
   id = Math.random();
   @observable title = 'til';
   @observable finished = false;
@@ -81,14 +82,14 @@ class Index extends Component {
     isGoing: false
   }
 
-
   handleAdd = () => {
-    this.props.store.add()
+    // this.props.store.add()
+    this.props.TodoStore.add()
   }
   render () {
     trace()
     const { number, todos } = this.props.store
-    const { store } = this.props
+    const { store, TodoStore, StyleStore } = this.props
     // console.log('todos', todos)
     // console.log('number', number)
     return (
@@ -108,7 +109,8 @@ class Index extends Component {
 
         <div>
           <p>
-            <button onClick={this.handleAdd}>add + 1</button> -{ number }
+            {StyleStore.color}
+            <button onClick={this.handleAdd}>add + 1</button>  { TodoStore.number }
           </p>
           <hr/>
           demo: <input
@@ -128,6 +130,6 @@ class Index extends Component {
 
 const store = new Store()
 export default {
-  view: <Index store={store} />
+  view: <TodoListIndex store={store} />
 }
 
