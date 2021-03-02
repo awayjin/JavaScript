@@ -2,6 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import store from './index'
 
+const stateToProps = (state) => {
+  return {
+    inputValue: state.inputValue,
+    list: state.list
+  }
+}
+
+const dispatchToProps = (dispatch) => {
+  return {
+    inputChange(e) {
+      console.log('dispatchToProps target:', e.target.value)
+      let action = {
+        type:'change_input',
+        value:e.target.value
+      }
+      dispatch(action)
+    },
+    clickButton(){
+      // console.log('111111111')
+      let action = { type:'add_item' }
+      dispatch(action)
+    }
+  }
+}
+
+@connect(stateToProps, dispatchToProps)
 class TodoList extends Component {
   constructor(props){
     super(props)
@@ -29,30 +55,6 @@ class TodoList extends Component {
   }
 }
 
-const stateToProps = (state) => {
-  return {
-    inputValue: state.inputValue,
-    list: state.list
-  }
-}
 
-const dispatchToProps = (dispatch) => {
-  return {
-    inputChange(e) {
-      console.log('dispatchToProps target:', e.target.value)
-      let action = {
-        type:'change_input',
-        value:e.target.value
-      }
-      dispatch(action)
-    },
-    clickButton(){
-      // console.log('111111111')
-      let action = { type:'add_item' }
-      dispatch(action)
-    }
-  }
-}
-
-export default connect(stateToProps, dispatchToProps)(TodoList);
-// export default TodoList;
+export default TodoList;
+// export default connect(stateToProps, dispatchToProps)(TodoList);
