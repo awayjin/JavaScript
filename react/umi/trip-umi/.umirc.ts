@@ -19,4 +19,16 @@ export default defineConfig({
       ]
     }
   ],
+  proxy: {
+    '/backend': {
+      target: 'http://localhost:3003/',
+      changeOrigin: true,
+      pathRewrite: { '^/backend': '/backend'}
+    },
+    // '/api': {
+    //   'target': 'http://jsonplaceholder.typicode.com/',
+    //   'changeOrigin': true,
+    //   'pathRewrite': { '^/api' : '/api' },
+    // }
+  }
 });

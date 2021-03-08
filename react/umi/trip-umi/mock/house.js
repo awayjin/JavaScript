@@ -2,8 +2,8 @@ export default {
   'post /api/house/search': (req, res) => {
     setTimeout(() => {
       let data;
-      // if(req.body.pageNum < 4){
-      if(0 < 4){
+      if(req.body.pageNum < 4){
+      // if(0 < 4){
         data =  [
           {
             id: 1,

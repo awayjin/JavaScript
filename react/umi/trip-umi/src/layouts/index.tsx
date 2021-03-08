@@ -6,7 +6,7 @@ import { useLocation } from 'umi'
 export default (props: any) => {
   const location = useLocation();
   const paths = ['/', '/orders', '/users']
-  console.log('location', location)
+  // console.log('location', location)
   return (
     <div className={'menu-bar'}>
       <div>
