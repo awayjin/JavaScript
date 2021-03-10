@@ -23,12 +23,12 @@ export default () => {
     // body: {}
     body: {
       ...page,
-      // houseName,
-      // code: query?.code,
-      // startTime: query?.startTime + ' 00:00:00',
-      // endTime: query?.endTime + ' 23:59:59'
+      houseName,
+      code: query?.code,
+      startTime: query?.startTime + ' 00:00:00',
+      endTime: query?.endTime + ' 23:59:59'
     },
-    watch: [page.pageNum]
+    watch: [page.pageNum, houseSubmitName]
   });
 
   /**
@@ -38,8 +38,9 @@ export default () => {
    * 4. 监听 loading 变化, 拼接数据
    *
    * */
-  useObserverHook('#loading', (entries) => {
+  useObserverHook('#loading', (entries: any) => {
     console.log('entries:', entries)
+    // if (!loading && entries[0].isIntersecting) {
     if (!loading && entries[0].isIntersecting) {
       setPage({
         ...page,
@@ -57,7 +58,12 @@ export default () => {
     setHouseName(value);
     setHouseSubmitName(value);
     // setPage(CommonEnum.PAGE);
+    setPage({
+      pageSize: 8,
+      pageNum: 1,
+    });
     setHouseLists([]);
+    setShowLoading(true);
   };
 
   const handleCancel = () => {
@@ -65,7 +71,7 @@ export default () => {
   };
 
   const handleSubmit = (value: any) => {
-    // console.log(value)
+    console.log(value)
     _handleSubmit(value);
   };
 
@@ -81,7 +87,7 @@ export default () => {
             </div>
           </div>
         ))}
-        { showLoading ? <div id="loading">loading</div>: <div>没有数据了</div>}
+        { showLoading ? <div id="loading">loading...</div>: <div>没有数据了</div>}
 
         {/*<div className='item' >*/}
         {/*  <img alt='img' className='item-img' src={require('../../assets/blank.png')} data-title={33} />*/}
