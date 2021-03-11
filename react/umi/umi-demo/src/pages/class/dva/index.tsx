@@ -32,10 +32,9 @@ class Dva extends React.Component<any, any> {
 
 // connect 绑定 state 到 view
 const instance = connect(function (_ref: any) {
-  console.log('--> 1 _ref', _ref)
-  var search = _ref.search;
+  // console.log('--> 1 _ref', _ref)
   return {
-    search: search
+    search: _ref.search
   };
 })(Dva);
 // console.log('instance:', instance)
