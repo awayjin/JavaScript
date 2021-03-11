@@ -22,7 +22,11 @@ const DemoService = (props: any) => {
   // const [demo3Data, demo3Loading, demo3Error] = useRequestDemo3(userId)
   // console.log('demo3Data:', demo3Data, demo3Loading, demo3Error)
 
+  // const { user } = useModel('demo')
+
   useEffect(() => {
+    // console.log('--- user:', user)
+
     // demo2('d5').then((res) => {
     //   console.log('res:', res)
     // }, err => {
@@ -30,6 +34,7 @@ const DemoService = (props: any) => {
     // })
     console.log('--> props:', props)
     console.log('this.props.search:', props.demo)
+    console.log('this.props.demoSearch:', props.demoSearch)
     // console.log('props:', props.dispatch)
     props.dispatch({
       type: 'demo/getList',
@@ -90,9 +95,11 @@ const instance = connect(function (_ref: any) {
   console.log('--> 1 _ref', _ref)
   var demo = _ref.demo;
   return {
-    demo
+    // demo
+    ..._ref
   };
 })(DemoService);
 
-// export default connect()(DemoService);
+
+
 export default instance;
