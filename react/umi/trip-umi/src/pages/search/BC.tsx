@@ -7,11 +7,11 @@ import { CommonEnum } from '@/enums';
 
 import './index.less';
 
-export default function (prop: any) {
-  const { query }:any = useLocation();
+export default function (props) {
+  const { query } = useLocation();
   const [houseName, setHouseName] = useState('');
   const [page, setPage] = useState(CommonEnum.PAGE);
-  const [houseLists, setHouseLists]: any = useState([]);
+  const [houseLists, setHouseLists] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
   const [houseSubmitName, setHouseSubmitName] = useState('');
 
@@ -33,7 +33,7 @@ export default function (prop: any) {
    * 3，监听分页数据的修改，发送接口，请求下一页的数据；
    * 4，监听loading变化，拼装数据
    */
-  useObserverHook('#' + CommonEnum.LOADING_ID, (entries: any) => {
+  useObserverHook('#' + CommonEnum.LOADING_ID, (entries) => {
     // console.log(entries)
     if (!loading && entries[0].isIntersecting) {
       setPage({
@@ -44,14 +44,14 @@ export default function (prop: any) {
 
   }, null);
 
-  useImgHook('.item-img', (enties: any)=>{}, null);
+  useImgHook('.item-img', (enties)=>{}, null);
 
-  const handleChange = (value: any) => {
+  const handleChange = (value) => {
     // console.log(value)
     setHouseName(value);
   };
 
-  const _handleSubmit = (value: any) => {
+  const _handleSubmit = (value) => {
     setHouseName(value);
     setHouseSubmitName(value);
     setPage(CommonEnum.PAGE);
@@ -62,7 +62,7 @@ export default function (prop: any) {
     _handleSubmit('');
   };
 
-  const handleSubmit = (value: any) => {
+  const handleSubmit = (value) => {
     // console.log(value)
     _handleSubmit(value);
   };
@@ -94,9 +94,9 @@ export default function (prop: any) {
       {!houseLists.length
         ? <ActivityIndicator toast />
         : <div className='result'>
-          {houseLists.map((item: any, index: any) => (
-            <div className='item' key={item.id}>
-              <img alt='img' className='item-img' src={require('../../assets/blank.png')} data-src={item.img} />
+          {houseLists.map((item, index) => (
+            <div className='item' key={index}>
+              <img alt='img' className='item-img' src={require('../../assets/blank.png')}  />
               <div className='item-right'>
                 <div className='title'>{item.title}</div>
                 <div className='price'>{item.price}</div>

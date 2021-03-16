@@ -14,7 +14,7 @@ export default function (props) {
   const [houseLists, setHouseLists] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
   const [houseSubmitName, setHouseSubmitName] = useState('');
-  
+
   const [houses, loading] = useHttpHook({
     url: '/house/search',
     body: {
@@ -94,8 +94,8 @@ export default function (props) {
       {!houseLists.length
         ? <ActivityIndicator toast />
         : <div className='result'>
-          {houseLists.map(item => (
-            <div className='item' key={item.id}>
+          {houseLists.map((item, index) => (
+            <div className='item' key={index}>
               <img alt='img' className='item-img' src={require('../../assets/blank.png')} data-src={item.img} />
               <div className='item-right'>
                 <div className='title'>{item.title}</div>

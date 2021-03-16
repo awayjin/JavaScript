@@ -5,9 +5,8 @@ import { SearchBar, ActivityIndicator } from 'antd-mobile'
 // @ts-ignore
 import { useHttpHook, useObserverHook } from '@/hooks'
 import './index.less'
-import { ShowLoading } from '@/components';
 
-// window.scrollTo(0, 0)
+window.scrollTo(0, 0)
 // window.location.reload();
 export default () => {
   const { query }: any = useLocation();
@@ -41,8 +40,7 @@ export default () => {
    * 4. 监听 loading 变化, 拼接数据
    *
    * */
-  // useObserverHook('#loading', (entries: any) => {
-  useObserverHook('#loading-change', (entries: any) => {
+  useObserverHook('#loading', (entries: any) => {
     console.log('entries:', entries)
     // if (!loading && entries[0].isIntersecting) {
     if (!loading && entries[0].isIntersecting) {
@@ -52,7 +50,7 @@ export default () => {
       })
     }
   }, null)
-
+  
 
   const handleChange = (value: any) => {
     console.log(value)
@@ -92,7 +90,7 @@ export default () => {
             </div>
           </div>
         ))}
-        { showLoading ? <div id="loading-change">loading...</div>: <div>没有数据了</div>}
+        { showLoading ? <div id="loading">loading...</div>: <div>没有数据了</div>}
 
         {/*<div className='item' >*/}
         {/*  <img alt='img' className='item-img' src={require('../../assets/blank.png')} data-title={33} />*/}
@@ -126,7 +124,8 @@ export default () => {
       />
 
       {/**搜索结果 */}
-      <div>
+      <div
+        style={{ minHeight: '600px', backgroundColor: 'red'}}>
         {
           !houseLists.length
             ? <ActivityIndicator toast />

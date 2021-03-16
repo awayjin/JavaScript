@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+// @ts-ignore
 import { CommonEnum } from '@/enums';
 
 import './index.less';
 
-export default function ShowLoading(props) {
+export default function ShowLoading(props: any) {
   const [state, setState] = useState()
 
   useEffect(() => {

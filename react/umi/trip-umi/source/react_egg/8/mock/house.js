@@ -69,7 +69,7 @@ export default {
         data
       });
     }, 500);
-    
+
   },
   'post /api/house/detail': (req, res) => {
     res.json({

@@ -45,8 +45,9 @@ export default function Http(
         }
       })
       .catch(err => {
-        Toast.fail(err);
-        reject(err);
+        // Toast.fail(err);
+        // reject(err);
+        reject('err');
       })
       .finally(() => {
         setLoading && setLoading(false);
