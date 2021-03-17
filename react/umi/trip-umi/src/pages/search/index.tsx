@@ -5,7 +5,7 @@ import { SearchBar, ActivityIndicator } from 'antd-mobile'
 // @ts-ignore
 import { useHttpHook, useObserverHook } from '@/hooks'
 import './index.less'
-import { ShowLoading } from '@/components';
+// import { ShowLoading } from '@/components';
 
 // window.scrollTo(0, 0)
 // window.location.reload();
@@ -20,7 +20,7 @@ export default () => {
   const [houseLists, setHouseLists]: any = useState([]);
   const [showLoading, setShowLoading] = useState(true);
 
-
+  // 请求
   const [houses, loading] = useHttpHook({
     url: '/house/search',
     // body: {}
@@ -52,6 +52,16 @@ export default () => {
       })
     }
   }, null)
+
+  useEffect(() => {
+    if (!loading && houses) {
+      if (houses?.length) {
+        setHouseLists([...houseLists, ...houses])
+      } else {
+        setShowLoading(false)
+      }
+    }
+  }, [loading])
 
 
   const handleChange = (value: any) => {
@@ -87,33 +97,15 @@ export default () => {
           <div className='item' key={index}>
             <img alt='img' className='item-img' src={item.img} data-src={item.img} />
             <div className='item-right'>
-              <div className='title'>{item.title}</div>
+              <div className='title'>{index + item.title}</div>
               <div className='price'>{item.price}</div>
             </div>
           </div>
         ))}
         { showLoading ? <div id="loading-change">loading...</div>: <div>没有数据了</div>}
-
-        {/*<div className='item' >*/}
-        {/*  <img alt='img' className='item-img' src={require('../../assets/blank.png')} data-title={33} />*/}
-        {/*  <div className='item-right'>*/}
-        {/*    <div className='title'>2</div>*/}
-        {/*    <div className='price'>3</div>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
       </div>
     )
   }
-
-  useEffect(() => {
-    if (!loading && houses) {
-      if (houses?.length) {
-        setHouseLists([...houseLists, ...houses])
-      } else {
-        setShowLoading(false)
-      }
-    }
-  }, [loading])
   return (
     <div className={'search-page'}>
       {/**顶部搜索栏 */}
