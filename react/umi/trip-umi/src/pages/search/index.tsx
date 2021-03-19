@@ -3,7 +3,7 @@ import styles from './index.less';
 import { useLocation } from 'umi'
 import { SearchBar, ActivityIndicator } from 'antd-mobile'
 // @ts-ignore
-import { useHttpHook, useObserverHook } from '@/hooks'
+import { useHttpHook, useObserverHook, useImgHook } from '@/hooks'
 import './index.less'
 // import { ShowLoading } from '@/components';
 
@@ -53,6 +53,10 @@ export default () => {
     }
   }, null)
 
+  useImgHook('.item-img', (entries: IntersectionObserver) => {
+    console.log('entries:', entries)
+  }, null)
+
   useEffect(() => {
     if (!loading && houses) {
       if (houses?.length) {
@@ -95,7 +99,7 @@ export default () => {
       <div className='result'>
         {houseLists?.map((item: any, index: any) => (
           <div className='item' key={index}>
-            <img alt='img' className='item-img' src={item.img} data-src={item.img} />
+            <img alt='img' className='item-img' src={require('@/assets/blank.png')} data-src={item.img} />
             <div className='item-right'>
               <div className='title'>{index + item.title}</div>
               <div className='price'>{item.price}</div>
