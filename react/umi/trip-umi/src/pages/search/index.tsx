@@ -3,17 +3,28 @@ import styles from './index.less';
 import { useLocation } from 'umi'
 import { SearchBar, ActivityIndicator } from 'antd-mobile'
 // @ts-ignore
-import { useHttpHook, useObserverHook, useImgHook } from '@/hooks'
+import {
+  useHttpHook,
+  useObserverHook,
+  useIntersectionObserverHook,
+  useImgHook,
+  useImagesHook,
+// @ts-ignore
+} from '@/hooks';
+// @ts-ignore
 import './index.less'
-// import { ShowLoading } from '@/components';
+// @ts-ignore
+import { ShowLoading } from '@/components';
+// @ts-ign3ore3
+import { CommonEnum } from '@/enums/index';
+
 
 // window.scrollTo(0, 0)
-// window.location.reload();
 export default () => {
   const { query }: any = useLocation();
   const [houseName, setHouseName] = useState('');
   const [houseSubmitName, setHouseSubmitName] = useState('');
-  const [page, setPage] = useState({
+  const [page, setPage]: any = useState({
     pageSize: 8,
     pageNum: 1
   })
@@ -41,8 +52,8 @@ export default () => {
    * 4. 监听 loading 变化, 拼接数据
    *
    * */
-  // useObserverHook('#loading', (entries: any) => {
-  useObserverHook('#loading-change', (entries: any) => {
+  // useObserverHook('#loading-info', (entries: any) => {
+  useIntersectionObserverHook(CommonEnum.LOADING_ID, (entries: any) => {
     console.log('entries:', entries)
     // if (!loading && entries[0].isIntersecting) {
     if (!loading && entries[0].isIntersecting) {
@@ -53,7 +64,8 @@ export default () => {
     }
   }, null)
 
-  useImgHook('.item-img', (entries: IntersectionObserver) => {
+  useImagesHook('.item-img', (entries: IntersectionObserver) => {
+  // useImgHook('.item-img', (entries: IntersectionObserver) => {
     console.log('entries:', entries)
   }, null)
 
@@ -106,7 +118,8 @@ export default () => {
             </div>
           </div>
         ))}
-        { showLoading ? <div id="loading-change">loading...</div>: <div>没有数据了</div>}
+        <ShowLoading showLoading={showLoading} />
+        {/*{ showLoading ? <div id="loading-change">loading...</div>: <div>没有数据了</div>}*/}
       </div>
     )
   }

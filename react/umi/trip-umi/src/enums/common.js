@@ -1,4 +1,4 @@
-export const LOADING_ID = 'mk-loading';
+export const LOADING_ID = 'loading-info';
 
 export const PAGE = {
   pageSize: 8,
