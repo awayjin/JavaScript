@@ -3,7 +3,7 @@ import { history } from 'umi'
 
 export default (props: any) => {
   // const [houses, setHouses] = useState([]);
-  console.log('home props', props)
+  // console.log('home props', props)
   const handleClick = (id: any) => {
     // @ts-ignore
     history.push({

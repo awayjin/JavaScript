@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './index.less';
-import { useLocation } from 'umi'
+import { useLocation, useModel } from 'umi'
 import { SearchBar, ActivityIndicator } from 'antd-mobile'
 // @ts-ignore
 import {
@@ -15,12 +15,18 @@ import {
 import './index.less'
 // @ts-ignore
 import { ShowLoading } from '@/components';
-// @ts-ign3ore3
+// @ts-ignore
 import { CommonEnum } from '@/enums/index';
 
 
 // window.scrollTo(0, 0)
-export default () => {
+let element = () => {
+  const { user, signIn, signOut } = useModel('useUserModel');
+  useEffect(() => {
+    // signIn('jw',  'pwd')
+    console.log('user: 2', user)
+  }, [])
+
   const { query }: any = useLocation();
   const [houseName, setHouseName] = useState('');
   const [houseSubmitName, setHouseSubmitName] = useState('');
@@ -65,7 +71,7 @@ export default () => {
   }, null)
 
   useImagesHook('.item-img', (entries: IntersectionObserver) => {
-  // useImgHook('.item-img', (entries: IntersectionObserver) => {
+    // useImgHook('.item-img', (entries: IntersectionObserver) => {
     console.log('entries:', entries)
   }, null)
 
@@ -81,7 +87,7 @@ export default () => {
 
 
   const handleChange = (value: any) => {
-    console.log(value)
+    // console.log(value)
     setHouseName(value);
   };
 
@@ -102,7 +108,7 @@ export default () => {
   };
 
   const handleSubmit = (value: any) => {
-    console.log(value)
+    // console.log(value)
     _handleSubmit(value);
   };
 
@@ -147,4 +153,5 @@ export default () => {
 
     </div>
   );
-}
+};
+export default element
