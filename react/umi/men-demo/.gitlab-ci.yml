@@ -1,0 +1,105 @@
+## 使用说明： https://git.vankeservice.com/CS/backend/platform/cs-k8s-config/gitlab-ci-templates/blob/master/README.md
+include:
+  - project: 'cs-public/gitlab-ci-templates'
+    ref: master
+    ## 测试阶段, 暂时使用master分支
+    ## ref: v1.0.0 
+    file: '.gitlab-ci-template.yml'
+
+## 定义变量, 供后面的任务使用, 请仔细核对
+variables:
+  ## 项目名称, 由小写和-组成， 作为镜像名和helm包名
+  NAME: "men-demo"        ##  必填
+  ## k8s命名空间, 前端:cs-front, 美居:cs-meiju, 朴邻：cs-renovation, 商业：cs-business / cs-common, 业务组：cs-zhuzher, 平台： cs-platform
+  NAMESPACE: "cs-front"   ##  必填
+  ## harbor组， 登录查看 https://harbor.vankeservice.com/harbor/projects
+  GROUP: "vsc-front"       ##  必填
+  ## 会判断当前是否是生产分支， 添加一个ENV环境变量
+  ## 如果是生产环境分支， 则ENV=prod, 其他情况默认 ENV=test
+  ## ENV环境变量仅在CI/CD周期可用，不影响运行环境
+  ## 但会通过命令行参数传递给dockerfile, (docker build --build-arg ENV=${ENV} ......)
+  ## 生产环境分支, master 或 production
+  PROD_BRANCH: master       ##  必填
+  ## 测试环境分支, test 或 master
+  TEST_BRANCH: test           ##  必填
+
+  ## sonar代码检测相关变量，首次使用/新建项目， 需要到https://sonar.bu6.io/projects注册项目, 获取token
+  ## 选填， 不填不做sonar扫描
+  SONAR_LOGIN: ""        # sonar提供的token
+  # SONAR_PROJ: ""       # 注册项目名, 默认是项目名称(NAME)
+  # SONAR_PATH: "."
+  
+  ## 企业微信机器人通知key
+  # TEST_WECHAT_KEY: ""      ## 选填,不填不会通知
+  # PROD_WECHAT_KEY: ""      ## 选填,不填不会通知
+
+  ## 测试/生产环境访问地址
+  # TEST_URL: ""       ## 选填  
+  # PROD_URL: ""       ## 选填
+
+  ## 使用的chart template version
+  ## https://git.vankeservice.com/CS/backend/platform/cs-k8s-config/helm-chart-template/-/tags
+  ## 使用新版本，需要在部署job页面检查diff， 查看变换是否符合预期
+  # CHART_TEMP_VERSION: "v0.3"       ## 选填
+ 
+  ## helm chart 路径， 默认是项目根目录下的chart/
+  # CHART_PATH: chart/    ## 选填，默认是chart/ 
+
+  ## Dockerfile名称， 默认是Dockerfile
+  ## Dockerfile路径， 默认是项目根目录
+  # DOCKERFILE_NAME: Dockerfile    ## 选填, 默认是Dockerfile
+  # DOCKERFILE_PATH: .             ## 选填, 默认是项目根目录
+  
+  ## submodule名称, 项目有使用submodule才填写, 没使用不理会, 如果使用需填写path
+  # SUBMODULE: ""         ## 选填
+  ## eg: git.vankeservice.com/zhuzher/vs/zhuzher_common.git
+  # SUBMODULE_PATH: ""    ## 选填
+  
+  ## 本来Canary是指金丝雀发布，我们暂时借用k8s的ingress controller的这种功能
+  ## 在测试环境作为第二测试环境， 来解决争抢测试环境的问题
+  ## 生产环境的Canary， 依然指的是金丝雀发布
+  ## 通过header访问不同的环境
+  ## 使用方法: https://git.vankeservice.com/snippets/61
+  # TEST_CANARY: enable     ## 选填, 默认不开启
+  # PROD_CANARY: enable     ## 选填, 默认不开启
+  
+  ## ATS 接口测试id
+
+  # TEST_ATS_PRODUCT_ID: ""    ## 选填, 默认不开启
+  # PROD_ATS_PRODUCT_ID: ""    ## 选填, 默认不开启
+
+## 用来缓存artifactory, 需要配置正确路径, 例如java maven编译生成的文件
+## 把下行的 "." 去掉可以开启
+.cache:
+  paths:
+  - example-service/target
+
+## 单元测试，各项目开发自行编写
+## 把下行的 "." 去掉可以开启
+.unittest:
+  stage: unittest
+  interruptible: true
+  retry: 2
+  image: 
+    name: ${REGISTER}/${GROUP}/${NAME}:unittest
+    entrypoint: [""]
+  # services:
+  #   - name: postgres
+  #     alias: db-postgres
+  #     entrypoint: ["/usr/local/bin/db-postgres"]
+  #     command: ["start"]
+  tags:
+    - docker
+  variables:
+    foo: bar
+    # POSTGRES_USER: test
+    # POSTGRES_PASSWORD: test
+  script:
+    - echo test
+  rules:
+    - if: '$CI_PROJECT_NAMESPACE !~ /^CS\// && $CI_PROJECT_NAMESPACE !~ /^zhuzher\//'
+      when: never
+    - if: '$CI_COMMIT_REF_NAME == $PROD_BRANCH || $CI_COMMIT_REF_NAME == $TEST_BRANCH'
+      when: on_success
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: on_success

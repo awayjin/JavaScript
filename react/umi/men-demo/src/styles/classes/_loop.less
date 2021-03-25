@@ -1,0 +1,53 @@
+.m-p-loops(@n, @i : 0) when(@i =< @n) {
+  .p@{i} {
+    padding: (@i+0px);
+  }
+  .pl@{i} {
+    padding-left: (@i+0px);
+  }
+  .pr@{i} {
+    padding-right: (@i+0px);
+  }
+  .pt@{i} {
+    padding-top: (@i+0px);
+  }
+  .pb@{i} {
+    padding-bottom: (@i+0px);
+  }
+  .m@{i} {
+    margin: (@i+0px);
+  }
+  .mt@{i} {
+    margin-top: (@i+0px);
+  }
+  .ml@{i} {
+    margin-left: (@i+0px);
+  }
+  .mb@{i} {
+    margin-bottom: (@i+0px);
+  }
+  .mr@{i} {
+    margin-right: (@i+0px);
+  }
+  .m-p-loops(@n, (@i + 5));
+}
+.m-p-loops(40);
+
+.f-loops(@n, @i : 10) when(@i =< @n) {
+  .f@{i} {
+    font-size: (@i+0px);
+  }
+  .f-loops(28, (@i + 1));
+}
+.f-loops(28);
+
+.w-h-loop(@n, @i : 50) when (@i <= @n) {
+  .w@{i} {
+    width: (@i+0px);
+  }
+  .h@{i} {
+    height: (@i+0px);
+  }
+  .w-h-loop(400, @i + 50);
+}
+.w-h-loop(400);

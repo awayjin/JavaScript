@@ -1,0 +1,8 @@
+[defaults]
+//url = http://10.39.35.86:9000
+url = http://sentry.vankeservice.com
+org = sentry
+project = tyrael
+[auth]
+//token = ee3ecfd3e6a941648c074b8b680a61fcdb1bbbba987a4cf382fb9744ef696016
+token =

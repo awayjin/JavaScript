@@ -33,3 +33,7 @@ this.state.count++; 错的，直接修改违反不可变值
 
 ## 参考
 React 生命周期方法图: https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+
+深入 React 生命周期：
+https://github.com/sisterAn/blog/issues/34

@@ -1,0 +1,140 @@
+@import '../mixins/hairline.less';
+.border {
+  // border: 1px solid rgba(234, 234, 234, 1);
+  .hairline('all', @color-border);
+  &-left {
+    .hairline('left', @color-border);
+  }
+  &-right {
+    .hairline('right', @color-border);
+  }
+  &-top {
+    .hairline('top', @color-border);
+    // border-top: .1rem solid rgba(234,234,234,1);
+  }
+  &-bottom {
+    .hairline('bottom', @color-border);
+  }
+}
+
+.pa {
+  position: absolute;
+}
+.pr {
+  position: relative;
+}
+.pf {
+  position: fixed;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.tc {
+  text-align: center;
+}
+.tl {
+  text-align: left;
+}
+.tr {
+  text-align: right;
+}
+.df {
+  display: flex;
+}
+.di {
+  display: inline;
+}
+.db {
+  display: block;
+}
+.ib {
+  display: inline-block;
+}
+.vm {
+  vertical-align: middle;
+}
+.vb {
+  vertical-align: bottom;
+}
+.vt {
+  vertical-align: top;
+}
+.cb {
+  clear: both;
+}
+.cl {
+  clear: left;
+}
+.cr {
+  clear: right;
+}
+.fb {
+  font-weight: bold;
+}
+.fw500 {
+  font-weight: 500;
+}
+.for-bold {
+  .fw500 {
+    font-weight: bold;
+  }
+}
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.space-between {
+  justify-content: space-between;
+}
+.space-around {
+  justify-content: space-around;
+}
+.flexbox {
+  display: flex;
+}
+.flex1 {
+  flex: 1;
+}
+.flex2 {
+  flex: 2;
+}
+.flex3 {
+  flex: 2;
+}
+.f0 {
+  font-size: 0;
+}
+.half-w {
+  width: 50%;
+}
+.half-h {
+  height: 50%;
+}
+.quarter-w {
+  width: 25%;
+}
+.quarter-h {
+  height: 25%;
+}
+.w {
+  width: 100%;
+}
+.wp30 {
+  width: 30%;
+}
+.h {
+  height: 100%;
+}
+.align-items {
+  align-items: center;
+}
+.board-crmi {
+  padding-bottom: 2rem;
+}
+.one-third {
+  width: 33.3%;
+}

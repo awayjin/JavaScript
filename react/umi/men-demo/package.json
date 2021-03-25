@@ -1,0 +1,84 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "build:test": "cross-env UMI_ENV=staging  umi build",
+    "build:prod": "cross-env UMI_ENV=prod umi build",
+    "upload:prod": "sense-tools upload --bucket vanke-app --target dist",
+    "upload:test": "sense-tools upload --bucket fg-test --target dist",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:watch": "umi-test --watch",
+    "test:coverage": "umi-test --coverage",
+    "build:analyze": "UMI_ENV=prod ANALYZE=1 umi build"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@huse/immer": "^1.0.2",
+    "@sense/utils": "^0.1.1",
+    "@sentry/browser": "^5.15.0",
+    "@sentry/cli": "^1.49.0",
+    "@types/redux-logger": "^3.0.7",
+    "@umijs/preset-react": "^1.5.17",
+    "@umijs/test": "^3.2.14",
+    "ahooks": "^2.4.0",
+    "ali-oss": "^6.7.0",
+    "browser-image-compression": "^1.0.8",
+    "cross-env": "^7.0.2",
+    "dayjs": "^1.8.23",
+    "immer": "^6.0.8",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
+    "query-string": "^6.11.1",
+    "randomatic": "^3.1.1",
+    "rc-form": "^2.4.11",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-loading-skeleton": "^2.0.1",
+    "react-use": "^13.27.1",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "sense-jsbridge": "^0.1.8",
+    "sense-tools": "^0.1.7",
+    "umi": "^3.2.14",
+    "uuid": "^7.0.3",
+    "vconsole": "^3.3.4",
+    "yorkie": "^2.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^3.2.1",
+    "@types/ali-oss": "^6.0.5",
+    "@types/jest": "^25.1.4",
+    "@types/uuid": "^7.0.2",
+    "@types/wx-js-sdk-dt": "^1.4.3",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "consola": "^2.12.1",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "react-test-renderer": "^16.13.1",
+    "stylelint": "^13.2.1",
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-prettier": "^1.1.2",
+    "typescript": "^3.8.3"
+  }
+}
