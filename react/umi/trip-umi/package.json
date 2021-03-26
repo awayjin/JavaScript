@@ -29,8 +29,10 @@
     "prettier": "^1.19.1",
     "project-libs": "^1.1.5",
     "react": "^16.12.0",
+    "react-awesome-swiper": "^1.4.16",
     "react-dom": "^16.12.0",
     "react-icons": "^4.1.0",
+    "think-react-store": "^1.6.71",
     "umi": "^3.2.16",
     "yorkie": "^2.0.0"
   }

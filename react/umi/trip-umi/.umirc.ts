@@ -16,6 +16,7 @@ export default defineConfig({
         { path: '/search', component: '@/pages/search', title: '搜索' },
         { path: '/demo', component: '@/pages/demo', title: 'demo-til' },
         { path: '/observer', component: '@/pages/observer', title: 'observer' },
+        { path: '/house', component: '@/pages/house', title: 'house' },
       ]
     }
   ],
