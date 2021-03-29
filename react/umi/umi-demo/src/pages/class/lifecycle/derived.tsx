@@ -19,13 +19,13 @@ class Lifecycle extends Component<any, any> {
   handleChange = (event: any) => {
     console.log('this.inputRef:', this.inputRef);
     // console.log('resetEmailForNewUser:', this.inputRef.current.resetEmailForNewUser);
-    
+
     // this.setState({
     //   email: event.target.value
     // })
 
     const _this = this
-    const value =  event.target.value 
+    const value =  event.target.value
     this.setState({ email: value }, () => {
       // console.log('event?.target:', event?.target, event);
       if (value) {
@@ -47,15 +47,15 @@ class Lifecycle extends Component<any, any> {
             value={this.state.email}
           />
           -- { email }
-          <button 
+          <button
             onClick={() => {
               this.setState({ email: 'd' })
             }}
           >reset</button>
         </div>
         <EmailInput
-          email={this.state.email} 
-          handleChange={this.handleChange} 
+          email={this.state.email}
+          handleChange={this.handleChange}
          />
          <EmailInput2
            key={this.state.email}
@@ -66,7 +66,7 @@ class Lifecycle extends Component<any, any> {
            defaultEmail = {this.state.email}
          />
 
-         <EmailInput4 
+         <EmailInput4
            list = {
             [
               { id: 1, text: 'memoization'},
@@ -75,7 +75,7 @@ class Lifecycle extends Component<any, any> {
               { id: 4, text: 'lifecycle getDerivedStateFromProps'},
               { id: 5, text: 'lifecycle render'},
               { id: 6, text: 'lifecycle componentDidMount'},
-            ] 
+            ]
            }
          />
       </>
@@ -84,9 +84,8 @@ class Lifecycle extends Component<any, any> {
 }
 
 class EmailInput4 extends Component<any, any> {
-  state = { 
+  state: any = {
     filterText: '',
-    
   };
 
   // *******************************************************
@@ -105,7 +104,7 @@ class EmailInput4 extends Component<any, any> {
       return {
         prevPropsList: props.list,
         prevFilterText: state.filterText,
-        filteredList: props.list?.filter(item => item.text.includes(state.filterText))
+        filteredList: props.list?.filter((item: any) => item.text.includes(state.filterText))
       };
     }
     return null;
@@ -122,7 +121,7 @@ class EmailInput4 extends Component<any, any> {
       <React.Fragment>
         EmailInput4: <input onChange={this.handleChange} value={this.state.filterText} />
         <ul>
-          { 
+          {
             this.state?.filteredList?.map(
               (item: any) => <li key={item.id}>{item.text}</li>
             )

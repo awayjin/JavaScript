@@ -1,8 +1,8 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import AwesomeSwiper from 'react-awesome-swiper';
 
-export default function (props: any) {
-  const [swiperRef, setSwiperRef] = useState(null);
+export default function (props) {
   const [config, setConfig] = useState({
     loop: true,
     autoplay: {
@@ -18,24 +18,15 @@ export default function (props: any) {
   }, [])
 
   return (
-    <>
-      <AwesomeSwiper className='banner3'  config={config}>
-        <div className="swiper-wrapper">
-          <div className="swiper-slide">
-            <img src={'http://img3.mukewang.com/szimg/5d1032ab08719e0906000338-360-202.jpg'} alt=""/>
+    <AwesomeSwiper className='banner' config={config}>
+      <div className='swiper-wrapper'>
+        {props?.banner?.map((item, index) => (
+          <div className='swiper-slide' key={index}>
+            <img alt='banner' src={item} />
           </div>
-          <div className="swiper-slide">
-            <img src={'http://img3.mukewang.com/szimg/5d1032ab08719e0906000338-360-202.jpg'} alt=""/>
-          </div>
-          <div className="swiper-slide">
-            <img src={'http://img3.mukewang.com/szimg/5d1032ab08719e0906000338-360-202.jpg'} alt=""/>
-          </div>
-        </div>
-        <div className='swiper-pagination'></div>
-      </AwesomeSwiper>
-    </>
-
+        ))}
+      </div>
+      <div className='swiper-pagination'></div>
+    </AwesomeSwiper>
   )
 }
-
-

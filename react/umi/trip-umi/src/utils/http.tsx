@@ -1,23 +1,21 @@
-/* eslint-disable */
+// @ts-nocheck
 import { Toast } from 'antd-mobile';
 
-export default function Http(
-  {
-    url = '',
-    method = 'post',
-    headers = '',
-    body = {},
-    // @ts-ignore
-    setLoading,
-    setResult ='',
-  }
-) {
+export default function Http({
+ url,
+ method = 'post',
+ headers,
+ body = {},
+ setLoading,
+ setResult,
+}) {
   setLoading && setLoading(true);
 
   const defaultHeader = {
     'Content-type': 'application/json'
   };
-  let params: any;
+
+  let params;
   if(method.toUpperCase() === 'GET'){
     params = undefined;
   }else {
@@ -37,7 +35,6 @@ export default function Http(
       .then(res => {
         if(res.status === 200){
           resolve(res.data);
-          // @ts-ignore
           setResult && setResult(res.data);
         }else {
           Toast.fail(res.errMsg);
@@ -45,9 +42,8 @@ export default function Http(
         }
       })
       .catch(err => {
-        // Toast.fail(err);
-        // reject(err);
-        reject('err');
+        Toast.fail(err);
+        reject(err);
       })
       .finally(() => {
         setLoading && setLoading(false);

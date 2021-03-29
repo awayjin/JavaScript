@@ -5,11 +5,17 @@
 > 注意
 下面所有的反面模式中，componentWillReceiveProps 和 getDerivedStateFromProps 都是通用的。
 
+这篇blog包含以下主题：
 - 什么时候使用派生 state
+- 派生 state 的常见 bug
+  - 反面模式 [1]：直接复制 props 到 state 上
+  - 反面模式：在 props 变化后修改 state
+- 建议的模式
+- 尝试一下 memoization ？
 
 ## 什么时候使用派生 state
 
-getDerivedStateFromProps 的存在只有一个目的：让组件在 props 变化时更新 state。
+getDerivedStateFromProps 的存在只有一个目的：`让组件在 props 变化时更新 state`。
 
 大部分使用派生 state 导致的问题，不外乎两个原因：1，直接复制 props 到 state 上；2，如果 props 和 state 不一致就更新 state。下面的示例包含了这两种情况。
 

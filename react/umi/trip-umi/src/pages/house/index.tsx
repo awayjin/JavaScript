@@ -3,7 +3,7 @@ import Banner from './components/Banner';
 import Info from './components/Info';
 import Lists from './components/Lists';
 import Footer from './components/Footer';
-// import { useStoreHook } from 'think-react-store';
+import { useStoreHook } from 'think-react-store';
 // import { useObserverHook } from '@/hooks';
 // import { CommonEnum } from '@/enums';
 import { useLocation } from 'umi';
@@ -23,7 +23,15 @@ export default function (props: any) {
   //     resetData
   //   }
   // } = useStoreHook();
+  const { house:  {
+    detail,
+    getDetailAsync
+  }} = useStoreHook()
   const { query }: any = useLocation();
+  useEffect(() => {
+    console.log('house:', detail)
+    getDetailAsync({})
+  }, [])
 
   /**
    * 1，监听loading是否展示出来
@@ -36,7 +44,7 @@ export default function (props: any) {
   return (
     <div className='house-page'>
       {/**banner */}
-      <Banner  />
+      <Banner banner={detail?.banner} />
       {/**房屋信息 */}
       <Info  />
       {/**评论列表 */}
